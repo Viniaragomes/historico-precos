@@ -421,8 +421,9 @@ def main(argv: list[str] | None = None) -> int:
     cs.add_argument("--limite", type=int, default=100, help="páginas lidas por termo e por loja")
 
     cd = sub.add_parser("ceasa-df", help="preço no atacado da CEASA-DF (R$/kg por dia), pela página pública de cotações")
-    cd.add_argument("--produtos", help="separados por vírgula (padrão: ceasa_df.json)")
-    cd.add_argument("--meses", type=int, default=1, help="quantos meses para trás, incluindo o atual (padrão 1)")
+    cd.add_argument("--produtos", help="produtos do formulário (com --historico), separados por vírgula (padrão: ceasa_df.json)")
+    cd.add_argument("--historico", type=int, default=0,
+                    help="também lê o formulário de preços (R$/kg por dia) destes últimos N meses; o portal parou em 01/06/2026")
     cd.add_argument("--exportar", help="grava as séries em JSON para o app (ex.: site/dados/ceasa-df.json)")
 
     ci = sub.add_parser("conferencia-impostos", help="gera o checklist de conferência das leis de impostos")
@@ -459,22 +460,32 @@ def main(argv: list[str] | None = None) -> int:
         from .mapa_df.agente import ultimos_meses
         from .modelo import agora_iso
 
-        nomes = [n.strip() for n in args.produtos.split(",")] if args.produtos else \
-            json.loads(Path("ceasa_df.json").read_text(encoding="utf-8"))["produtos"]
-        r = ceasa_df.coletar(nav, banco.con, nomes, ultimos_meses(args.meses))
-        print(f"Portal com {r['no_portal']} produtos; {r['produtos']} acompanhados, {r['series']} classificação(ões), "
-              f"{r['cotacoes']} cotação(ões) diárias gravadas.")
-        if r["nao_achados"]:
-            print("Não achados no portal (confira o nome):", ", ".join(r["nao_achados"]))
-        series = ceasa_df.series(banco.con)
-        for s_ in series[:40]:
+        try:
+            import io
+
+            from pypdf import PdfReader
+        except ImportError:
+            print("Instale o leitor de PDF: pip install -r requirements-ceasa.txt")
+            return 1
+        texto_pdf = lambda dados: "\n".join(p.extract_text() or "" for p in PdfReader(io.BytesIO(dados)).pages)  # noqa: E731
+        r = ceasa_df.coletar_boletim(nav, banco.con, texto_pdf)
+        print(f"Boletim 'Preço no Atacado': {r.get('data') or ''} {r['linhas']} produto(s) gravado(s). {r.get('nota') or ''}")
+        if args.historico:
+            nomes = [n.strip() for n in args.produtos.split(",")] if args.produtos else \
+                json.loads(Path("ceasa_df.json").read_text(encoding="utf-8"))["produtos"]
+            h = ceasa_df.coletar(nav, banco.con, nomes, ultimos_meses(args.historico))
+            print(f"Histórico do formulário: {h['produtos']} produto(s), {h['cotacoes']} cotação(ões) (o portal parou em 01/06/2026).")
+        series = ceasa_df.series_boletim(banco.con)
+        for s_ in sorted(series, key=lambda x: -abs(x["variacao_pct"] or 0))[:25]:
             v = f"{s_['variacao_pct']:+.1f}%" if s_["variacao_pct"] is not None else "—"
-            print(f"  {s_['produto']:<24} {s_['classificacao']:<10} {s_['ultimo']['data']} R$ {s_['ultimo']['preco_kg']:>6.2f}/kg  {v}")
+            kg = f" (R$ {s_['ultimo']['preco_kg']:.2f}/kg)" if s_["ultimo"]["preco_kg"] else ""
+            print(f"  {s_['produto']:<30} {s_['ultimo']['data']} R$ {s_['ultimo']['preco']:>7.2f} {s_['unidade'][:22]:<22}{kg} {v}")
         if args.exportar:
             Path(args.exportar).parent.mkdir(parents=True, exist_ok=True)
             Path(args.exportar).write_text(json.dumps({
-                "fonte": "CEASA-DF, preço mais comum no atacado (portal.ceasadf.com.br/precos)",
-                "evidencia": ceasa_df.PAGINA, "atualizado_em": agora_iso(), "series": series}, ensure_ascii=False), encoding="utf-8")
+                "fonte": "CEASA-DF, boletim 'Cotações de preços no atacado' (preço mais comum)",
+                "evidencia": ceasa_df.INFORMACAO_MERCADO, "atualizado_em": agora_iso(), "series": series},
+                ensure_ascii=False), encoding="utf-8")
             print(f"Exportado em {args.exportar}")
         return 0
     if args.comando == "catalogo-sitemap":

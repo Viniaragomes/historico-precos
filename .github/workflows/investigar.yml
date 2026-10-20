@@ -36,7 +36,9 @@ jobs:
       - name: CEASA-DF, preço no atacado (teste real, 3 produtos)
         continue-on-error: true
         timeout-minutes: 5
-        run: python -m historico_precos --banco /tmp/ceasa.db ceasa-df --produtos "TOMATE,BANANA PRATA,CEBOLA" > relatorios/investigacao/ceasa-df.txt 2>&1 || true
+        run: |
+          pip install -q -r requirements-ceasa.txt
+          python -m historico_precos --banco /tmp/ceasa.db ceasa-df --historico 1 --produtos "TOMATE,BANANA PRATA,CEBOLA" > relatorios/investigacao/ceasa-df.txt 2>&1 || true
       - name: Guardar no repositório
         run: |
           git config user.name "github-actions[bot]"

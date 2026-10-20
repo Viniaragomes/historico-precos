@@ -21,7 +21,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Dependências de diagnóstico (leitura de PDF)
-        run: pip install -q pypdf==5.1.0
+        run: pip install -q -r requirements-ceasa.txt
       - name: Rodar
         env:
           SCRIPT: ${{ inputs.script }}

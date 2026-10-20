@@ -452,8 +452,8 @@ function secaoAtacado() {
     if (!series.length) return;
     const fmtVar = (v) => `${v > 0 ? "+" : ""}${String(v).replace(".", ",")}%`;
     const linha = (x) => el("li", { class: "linha-atacado" },
-      el("span", { class: "nome" }, x.produto.toLowerCase(), x.classificacao ? el("small", {}, ` ${x.classificacao}`) : null),
-      el("span", { class: "valor" }, `${brl.format(x.ultimo.preco_kg)}/kg`),
+      el("span", { class: "nome" }, x.produto, el("small", {}, ` ${brl.format(x.ultimo.preco)} · ${x.unidade}`)),
+      el("span", { class: "valor" }, x.ultimo.preco_kg ? `${brl.format(x.ultimo.preco_kg)}/kg` : brl.format(x.ultimo.preco)),
       x.variacao_pct != null && Math.abs(x.variacao_pct) >= 1
         ? el("span", { class: `etiqueta ${x.variacao_pct > 0 ? "alta" : "baixa"}` }, fmtVar(x.variacao_pct))
         : el("span", { class: "etiqueta neutra" }, "estável"));
@@ -463,7 +463,7 @@ function secaoAtacado() {
     secao.replaceChildren(
       el("div", { class: "titulo-secao entrar entrar-3" }, el("h2", {}, "Atacado de hortifrúti no DF")),
       el("section", { class: "cartao entrar entrar-3" },
-        el("p", { class: "sub" }, `Preço mais comum na CEASA-DF em ${dataBR(ultimo)}. As maiores mudanças da semana primeiro.`),
+        el("p", { class: "sub" }, `Preço mais comum na CEASA-DF no boletim de ${dataBR(ultimo)}. As maiores mudanças desde o boletim anterior primeiro.`),
         el("ul", { class: "lista lista-atacado" }, ordem.slice(0, 6).map(linha)),
         ordem.length > 6 ? el("details", { class: "expansivel" },
           el("summary", {}, `Ver os ${ordem.length} produtos`, icone("seta")),

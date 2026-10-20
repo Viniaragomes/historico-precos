@@ -85,7 +85,9 @@ jobs:
       - name: CEASA-DF, preço no atacado (R$/kg do dia)
         continue-on-error: true
         timeout-minutes: 20
-        run: python -m historico_precos ceasa-df --exportar site/dados/ceasa-df.json | tail -30
+        run: |
+          pip install -q -r requirements-ceasa.txt
+          python -m historico_precos ceasa-df --exportar site/dados/ceasa-df.json | tail -30
 
       - uses: actions/upload-pages-artifact@v3
         with:
