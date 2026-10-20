@@ -420,6 +420,11 @@ def main(argv: list[str] | None = None) -> int:
     cs.add_argument("--termos", required=True, help="separados por vírgula, ex.: cafe,arroz (procurados no endereço da página)")
     cs.add_argument("--limite", type=int, default=100, help="páginas lidas por termo e por loja")
 
+    cd = sub.add_parser("ceasa-df", help="preço no atacado da CEASA-DF (R$/kg por dia), pela página pública de cotações")
+    cd.add_argument("--produtos", help="separados por vírgula (padrão: ceasa_df.json)")
+    cd.add_argument("--meses", type=int, default=1, help="quantos meses para trás, incluindo o atual (padrão 1)")
+    cd.add_argument("--exportar", help="grava as séries em JSON para o app (ex.: site/dados/ceasa-df.json)")
+
     ci = sub.add_parser("conferencia-impostos", help="gera o checklist de conferência das leis de impostos")
     ci.add_argument("--saida", default="docs/conferencia-impostos.md")
 
@@ -449,6 +454,29 @@ def main(argv: list[str] | None = None) -> int:
     banco = Banco(args.banco)
     nav = Navegador(intervalo=args.intervalo)
 
+    if args.comando == "ceasa-df":
+        from .fontes import ceasa_df
+        from .mapa_df.agente import ultimos_meses
+        from .modelo import agora_iso
+
+        nomes = [n.strip() for n in args.produtos.split(",")] if args.produtos else \
+            json.loads(Path("ceasa_df.json").read_text(encoding="utf-8"))["produtos"]
+        r = ceasa_df.coletar(nav, banco.con, nomes, ultimos_meses(args.meses))
+        print(f"Portal com {r['no_portal']} produtos; {r['produtos']} acompanhados, {r['series']} classificação(ões), "
+              f"{r['cotacoes']} cotação(ões) diárias gravadas.")
+        if r["nao_achados"]:
+            print("Não achados no portal (confira o nome):", ", ".join(r["nao_achados"]))
+        series = ceasa_df.series(banco.con)
+        for s_ in series[:40]:
+            v = f"{s_['variacao_pct']:+.1f}%" if s_["variacao_pct"] is not None else "—"
+            print(f"  {s_['produto']:<24} {s_['classificacao']:<10} {s_['ultimo']['data']} R$ {s_['ultimo']['preco_kg']:>6.2f}/kg  {v}")
+        if args.exportar:
+            Path(args.exportar).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.exportar).write_text(json.dumps({
+                "fonte": "CEASA-DF, preço mais comum no atacado (portal.ceasadf.com.br/precos)",
+                "evidencia": ceasa_df.PAGINA, "atualizado_em": agora_iso(), "series": series}, ensure_ascii=False), encoding="utf-8")
+            print(f"Exportado em {args.exportar}")
+        return 0
     if args.comando == "catalogo-sitemap":
         from .fontes import pagina_produto
 

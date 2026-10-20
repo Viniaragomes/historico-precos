@@ -1,0 +1,7 @@
+{
+  "_leia": "Produtos acompanhados no portal de preços da CEASA-DF (nome exatamente como aparece na lista do portal). Preço mais comum no atacado, R$/kg, por classificação. Verificado em 20/10/2026: 170 produtos no portal.",
+  "produtos": ["TOMATE", "BATATA LISA", "CEBOLA", "CENOURA", "BANANA PRATA", "BANANA NANICA", "LARANJA PERA",
+               "MACA GALA", "MAMAO FORMOSA", "ALHO NACIONAL", "ALFACE LISA/CRESPA", "CHUCHU", "PIMENTAO VERDE",
+               "MANDIOCA AIPIM", "LIMAO TAHITI", "OVO DE GALINHA BRANCO", "OVO DE GALINHA VERMELHO", "BATATA DOCE",
+               "REPOLHO", "ABOBRINHA ITALIANA"]
+}

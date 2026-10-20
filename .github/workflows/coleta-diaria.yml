@@ -86,6 +86,11 @@ jobs:
         with:
           path: site
 
+      - name: CEASA-DF, preço no atacado (R$/kg do dia)
+        continue-on-error: true
+        timeout-minutes: 20
+        run: python -m historico_precos ceasa-df --exportar site/dados/ceasa-df.json | tail -30
+
       - name: Guardar o banco no ramo "dados"
         run: |
           git config user.name "github-actions[bot]"

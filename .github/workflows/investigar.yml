@@ -33,6 +33,10 @@ jobs:
         run: |
           python -m historico_precos --banco /tmp/c.db catalogo-sitemap --termos cafe --limite 15 > relatorios/investigacao/carrefour-sitemap.txt 2>&1 || true
           sqlite3 /tmp/c.db "SELECT ean, loja, preco, data_observada, descricao, url_evidencia FROM precos" >> relatorios/investigacao/carrefour-sitemap.txt 2>&1 || true
+      - name: CEASA-DF, preço no atacado (teste real, 3 produtos)
+        continue-on-error: true
+        timeout-minutes: 5
+        run: python -m historico_precos --banco /tmp/ceasa.db ceasa-df --produtos "TOMATE,BANANA PRATA,CEBOLA" > relatorios/investigacao/ceasa-df.txt 2>&1 || true
       - name: Guardar no repositório
         run: |
           git config user.name "github-actions[bot]"
