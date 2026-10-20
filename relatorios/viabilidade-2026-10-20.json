@@ -1,26 +1,11 @@
 {
   "data": "2026-10-20",
-  "duracao_min": 4.6,
+  "duracao_min": 16.4,
   "sondas": [
     {
-      "fonte": "Loja VTEX: Carrefour Mercado",
-      "ok": false,
-      "detalhe": "mercado.carrefour.com.br — HTTP 503 Service Unavailable"
-    },
-    {
       "fonte": "Loja VTEX: Atacadão",
-      "ok": false,
-      "detalhe": "www.atacadao.com.br — HTTP 206"
-    },
-    {
-      "fonte": "Loja VTEX: Pão de Açúcar",
-      "ok": false,
-      "detalhe": "www.paodeacucar.com — HTTP 404 Not Found"
-    },
-    {
-      "fonte": "Loja VTEX: Comper",
-      "ok": false,
-      "detalhe": "www.comper.com.br — robots.txt não permite"
+      "ok": true,
+      "detalhe": "www.atacadao.com.br"
     },
     {
       "fonte": "Open Food Facts",
@@ -29,8 +14,8 @@
     },
     {
       "fonte": "Wayback Machine (CDX)",
-      "ok": true,
-      "detalhe": "lista de cópias arquivadas"
+      "ok": false,
+      "detalhe": "lista de cópias arquivadas — falha de rede: <urlopen error _ssl.c:993: The handshake operation timed out>"
     },
     {
       "fonte": "Open Prices",
@@ -39,8 +24,8 @@
     },
     {
       "fonte": "IBGE SIDRA (IPCA)",
-      "ok": false,
-      "detalhe": "metadados da tabela 7060 — resposta não é JSON"
+      "ok": true,
+      "detalhe": "metadados da tabela 7060"
     },
     {
       "fonte": "Banco Central (SGS)",
@@ -49,8 +34,8 @@
     },
     {
       "fonte": "GDELT (notícias)",
-      "ok": false,
-      "detalhe": "busca de notícias — HTTP 429 Too Many Requests"
+      "ok": true,
+      "detalhe": "busca de notícias"
     },
     {
       "fonte": "Diário Oficial da União",
@@ -59,25 +44,626 @@
     },
     {
       "fonte": "Mapa de Preços do DF",
-      "ok": false,
-      "detalhe": "0 formulário(s), 2 endereço(s) de consulta"
+      "ok": true,
+      "detalhe": "1 formulário(s), 12 endereço(s) de consulta"
     }
   ],
-  "produtos": [],
+  "produtos": [
+    {
+      "ean": "7896348301724",
+      "nome": "Café Melitta Descafeinado Vácuo 250g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896005807668",
+      "nome": "Café Solúvel 3 Corações Liofilizado 100g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "8711000421703",
+      "nome": "Café em Cápsula L'OR Espresso Colombia 104g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896045113972",
+      "nome": "Café em Cápsulas 3 Corações Espresso Colômbia 10x5,6g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896045114108",
+      "nome": "Café em Cápsulas 3 Corações Cappuccino Paçoca 10x11g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7898152992129",
+      "nome": "Arroz Arbóreo Paganini 1kg",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7899567238260",
+      "nome": "Arroz Carreteiro Swift 300g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7899567239526",
+      "nome": "Arroz Branco Swift 170g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896038360192",
+      "nome": "Flocão de Arroz Urbano 500g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7908625605040",
+      "nome": "Arroz Carreteiro Swift 500g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7908625605071",
+      "nome": "Feijão Tropeiro Swift 500g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7898960982718",
+      "nome": "Feijão Branco Da Terrinha Premium 500g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896006797920",
+      "nome": "Feijão Pronto Camil Carioca 380g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896116910202",
+      "nome": "Feijão Carioca Bulnez Tipo 1 1kg",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896116910219",
+      "nome": "Feijão Preto Bulnez Tipo 1 1kg",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7898969803540",
+      "nome": "Leite Semidesnatado Leite + 8g de Proteína 200ml",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896523182759",
+      "nome": "Doce de Soro de Leite Sabordê Sabor Doce de Leite 200g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896003740240",
+      "nome": "Biscoito Marilan Leite 300g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7898080640765",
+      "nome": "Doce de Leite Italac 350g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7622202273452",
+      "nome": "Chocolate Milka Ao Leite 90g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896279600538",
+      "nome": "Óleo de Soja Coamo 900ml",
+      "pontos": 0,
+      "lojas_hoje": 0,
+      "dias_historico": 0,
+      "dias_desde_ultimo": null,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7898917173381",
+      "nome": "Óleo de Soja Comigo 900ml",
+      "pontos": 0,
+      "lojas_hoje": 0,
+      "dias_historico": 0,
+      "dias_desde_ultimo": null,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7892300030060",
+      "nome": "Óleo de Soja Sinhá 900ml",
+      "pontos": 0,
+      "lojas_hoje": 0,
+      "dias_historico": 0,
+      "dias_desde_ultimo": null,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7891080803673",
+      "nome": "Óleo de Soja Primor 900ml",
+      "pontos": 0,
+      "lojas_hoje": 0,
+      "dias_historico": 0,
+      "dias_desde_ultimo": null,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "23155908",
+      "nome": "Óleo de Soja Liza 18L",
+      "pontos": 0,
+      "lojas_hoje": 0,
+      "dias_historico": 0,
+      "dias_desde_ultimo": null,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896534405779",
+      "nome": "Açúcar Refinado Bulnez 1kg",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896072649215",
+      "nome": "Açúcar Mavalério Confeiteiro 500g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896534405731",
+      "nome": "Açúcar Cristal Bulnez 5kg",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7898080666178",
+      "nome": "Energético sem Açúcar Baly Tropical 1L",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7898080666222",
+      "nome": "Energético sem Açúcar Baly Melancia 1L",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896232111286",
+      "nome": "Macarrão com Ovos Floriani Espaguete 500g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896024210128",
+      "nome": "Macarrão com Ovos Camil Penne 500g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "8004690050507",
+      "nome": "Macarrão La Molisana Fettuccine 500g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "8004690051573",
+      "nome": "Macarrão La Molisana Spaguetti 500g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7898234850774",
+      "nome": "Farinha de Trigo Nita Para Pizza 5kg",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896659600011",
+      "nome": "Farinha de Trigo Sananduva 5kg",
+      "pontos": 0,
+      "lojas_hoje": 0,
+      "dias_historico": 0,
+      "dias_desde_ultimo": null,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896984900015",
+      "nome": "Farinha de Trigo Buriti 1kg",
+      "pontos": 0,
+      "lojas_hoje": 0,
+      "dias_historico": 0,
+      "dias_desde_ultimo": null,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896005251027",
+      "nome": "Farinha de Trigo Soberana 25kg",
+      "pontos": 0,
+      "lojas_hoje": 0,
+      "dias_historico": 0,
+      "dias_desde_ultimo": null,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "18745968",
+      "nome": "Farinha de Trigo Invencível 50kg",
+      "pontos": 0,
+      "lojas_hoje": 0,
+      "dias_historico": 0,
+      "dias_desde_ultimo": null,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896024720382",
+      "nome": "Biscoito Piraquê Presuntinho 100g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896003741674",
+      "nome": "Biscoito Bulnez Maisena 270g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896003740233",
+      "nome": "Biscoito Marilan Coco 300g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896003740325",
+      "nome": "Biscoito Marilan Maizena 140g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896003741650",
+      "nome": "Biscoito Bulnez Leite 270g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896003740264",
+      "nome": "Biscoito Marilan Manteiga 300g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896066804361",
+      "nome": "Manteiga Teixeira Com Sal 500g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896066804354",
+      "nome": "Manteiga Teixeira Com Sal 200g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7898932702443",
+      "nome": "Manteiga Tourinho Sem sal 200g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896003740172",
+      "nome": "Biscoito Marilan Cracker Manteiga 300g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896098909720",
+      "nome": "Sabão em Pó Tixan Ypê Primavera 400g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896098909744",
+      "nome": "Sabão em Pó Tixan Ypê Primavera 800g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896055510242",
+      "nome": "Sabão em Pó Tixan Power Act 1,6Kg",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896098909850",
+      "nome": "Sabão em Pó Tixan Ypê Primavera 2,4kg",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896055510273",
+      "nome": "Sabão em Pó Tixan Power Act Sachê 2,4Kg",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896104990704",
+      "nome": "Papel Higiênico Bulnez Folha Dupla 30m 12 rolos",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7891172523601",
+      "nome": "Papel Higiênico Neve Folha Dupla 40m 6 rolos",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "17681954",
+      "nome": "Papel Higiênico Neve Folha Dupla 40m 6 rolos",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896104990698",
+      "nome": "Papel Higiênico Bulnez Folha Dupla 30m 24 rolos",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7891172523472",
+      "nome": "Papel Higiênico Neve Leve 12 Pague 11 rolos FTAQ 20m",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7500435243858",
+      "nome": "Creme Dental Oral-B Extra Branco 180g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    }
+  ],
   "metricas": {
-    "produtos_na_amostra": 0,
-    "preco_qualquer_fonte": null,
-    "preco_atual_2_lojas": null,
-    "historico_6_meses": null,
-    "preco_recente": null,
-    "mediana_dias_historico": null,
+    "produtos_na_amostra": 60,
+    "preco_qualquer_fonte": 0.85,
+    "preco_atual_2_lojas": 0.0,
+    "historico_6_meses": 0.0,
+    "preco_recente": 0.85,
+    "mediana_dias_historico": 0.0,
     "mudancas_analisadas": 0,
     "mudancas_com_evidencia": null
   },
   "veredito": {
-    "preco_atual_2_lojas": "sem dados",
-    "historico_6_meses": "sem dados",
-    "preco_recente": "sem dados",
+    "preco_atual_2_lojas": "ABAIXO DA META",
+    "historico_6_meses": "ABAIXO DA META",
+    "preco_recente": "VIÁVEL",
     "mudancas_com_evidencia": "sem dados"
   }
 }

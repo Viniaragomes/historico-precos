@@ -11,7 +11,7 @@
     ]
   },
   "api.gdeltproject.org": {
-    "falhas": 3,
+    "falhas": 2,
     "exemplos": [
       {
         "url": "https://api.gdeltproject.org/robots.txt",
@@ -24,107 +24,84 @@
         "status": 429,
         "motivo": "HTTP 429 Too Many Requests",
         "trecho": "Please limit requests to one every 5 seconds or contact kalev.leetaru5@gmail.com for larger queries. All high-traffic users should switch to our ngrams dataset: https://blog.gdeltproject.org/using-the-new-web-ngrams-dataset-to-find-relevant-coverage/. For trend analysis, please see our daily newslet"
-      },
-      {
-        "url": "https://api.gdeltproject.org/api/v2/doc/doc?query=caf%C3%A9%20sourcecountry%3ABR&mode=artlist&format=json&maxrecords=5",
-        "status": 429,
-        "motivo": "HTTP 429 Too Many Requests",
-        "trecho": "Please limit requests to one every 5 seconds or contact kalev.leetaru5@gmail.com for larger queries. All high-traffic users should switch to our ngrams dataset: https://blog.gdeltproject.org/using-the-new-web-ngrams-dataset-to-find-relevant-coverage/. For trend analysis, please see our daily newslet"
-      }
-    ]
-  },
-  "mercado.carrefour.com.br": {
-    "falhas": 28,
-    "exemplos": [
-      {
-        "url": "https://mercado.carrefour.com.br/api/catalog_system/pub/products/search?_from=0&_to=0",
-        "status": 503,
-        "motivo": "HTTP 503 Service Unavailable",
-        "trecho": ""
-      },
-      {
-        "url": "https://mercado.carrefour.com.br/api/catalog_system/pub/products/search?_from=0&_to=0",
-        "status": 503,
-        "motivo": "HTTP 503 Service Unavailable",
-        "trecho": ""
-      },
-      {
-        "url": "https://mercado.carrefour.com.br/api/catalog_system/pub/products/search?ft=caf%C3%A9&_from=0&_to=4",
-        "status": 503,
-        "motivo": "HTTP 503 Service Unavailable",
-        "trecho": ""
-      },
-      {
-        "url": "https://mercado.carrefour.com.br/api/catalog_system/pub/products/search?ft=caf%C3%A9&_from=0&_to=4",
-        "status": 503,
-        "motivo": "HTTP 503 Service Unavailable",
-        "trecho": ""
-      },
-      {
-        "url": "https://mercado.carrefour.com.br/api/catalog_system/pub/products/search?ft=arroz&_from=0&_to=4",
-        "status": 503,
-        "motivo": "HTTP 503 Service Unavailable",
-        "trecho": ""
       }
     ]
   },
   "servicodados.ibge.gov.br": {
-    "falhas": 2,
+    "falhas": 1,
     "exemplos": [
       {
         "url": "https://servicodados.ibge.gov.br/robots.txt",
         "status": 0,
         "motivo": "falha de rede: The read operation timed out",
         "trecho": ""
-      },
-      {
-        "url": "https://servicodados.ibge.gov.br/api/v3/agregados/7060/metadados",
-        "status": 200,
-        "motivo": "resposta não é JSON",
-        "trecho": "�\b\u0000\u0000\u0000\u0000\u0000\u0000\u0003�]͎�F�~�B\u0003��\u0000\u0012]d&�|kɒ���d_\u0006s�beUS ��$Y\u0010d�a `O�\u000f��9 d@'�^|�mD�Օ\u0019 uGy�\u0003����ufDd�g��W���|�� ]u��W_\\}s��z�x������6�լZ���y�R�؎�ڪUgV�3�Ot��\u0013��^�+�:��LvPV��j��m�J����O�v<��Ѫ 7�/�\u0001(�\u001a~4�\u0005$k��`܏�=������\u0014�\u000e���x�:][�y�N��zt�����.n������}��*�7{ ��1���\u0007�э� � � +�i�{\u0005$�� �NU��T��7V����������Ʈ��Cc�X��"
       }
     ]
   },
   "web.archive.org": {
-    "falhas": 1,
+    "falhas": 24,
     "exemplos": [
       {
         "url": "https://web.archive.org/robots.txt",
-        "status": 404,
-        "motivo": "HTTP 404 Not Found",
-        "trecho": "<html> <head><title>404 Not Found</title></head> <body> <center><h1>404 Not Found</h1></center> <hr><center>nginx</center> </body> </html>"
+        "status": 0,
+        "motivo": "falha de rede: <urlopen error timed out>",
+        "trecho": ""
+      },
+      {
+        "url": "https://web.archive.org/cdx/search/cdx?url=www.carrefour.com.br&output=json&fl=timestamp%2Coriginal%2Cstatuscode&filter=statuscode%3A200&collapse=digest&limit=3",
+        "status": 0,
+        "motivo": "falha de rede: <urlopen error _ssl.c:993: The handshake operation timed out>",
+        "trecho": ""
+      },
+      {
+        "url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fsecure.atacadao.com.br%2Fflocao-de-arroz-urbano-pacote-com-500g-63063%2Fp&output=json&fl=timestamp%2Coriginal%2Cstatuscode&filter=statuscode%3A200&collapse=digest&limit=500",
+        "status": 0,
+        "motivo": "falha de rede: <urlopen error timed out>",
+        "trecho": ""
+      },
+      {
+        "url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fsecure.atacadao.com.br%2Farroz-carreteiro-swift-2639%2Fp&output=json&fl=timestamp%2Coriginal%2Cstatuscode&filter=statuscode%3A200&collapse=digest&limit=500",
+        "status": 0,
+        "motivo": "falha de rede: <urlopen error timed out>",
+        "trecho": ""
+      },
+      {
+        "url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fsecure.atacadao.com.br%2Ffeijao-tropeiro-swift-2877%2Fp&output=json&fl=timestamp%2Coriginal%2Cstatuscode&filter=statuscode%3A200&collapse=digest&limit=500",
+        "status": 0,
+        "motivo": "falha de rede: <urlopen error timed out>",
+        "trecho": ""
       }
     ]
   },
   "world.openfoodfacts.org": {
-    "falhas": 14,
+    "falhas": 62,
     "exemplos": [
       {
-        "url": "https://world.openfoodfacts.org/cgi/search.pl?search_terms=caf%C3%A9&tagtype_0=countries&tag_contains_0=contains&tag_0=brazil&json=1&page_size=3&fields=code,product_name",
+        "url": "https://world.openfoodfacts.org/api/v2/search?countries_tags_en=brazil&categories_tags_en=coffees&fields=code,product_name&page_size=3",
         "status": -1,
         "motivo": "robots.txt não permite",
         "trecho": ""
       },
       {
-        "url": "https://world.openfoodfacts.org/cgi/search.pl?search_terms=caf%C3%A9&tagtype_0=countries&tag_contains_0=contains&tag_0=brazil&json=1&page_size=15&fields=code,product_name",
+        "url": "https://world.openfoodfacts.org/api/v2/search?countries_tags_en=brazil&categories_tags_en=pastas&fields=code,product_name&page_size=15",
         "status": -1,
         "motivo": "robots.txt não permite",
         "trecho": ""
       },
       {
-        "url": "https://world.openfoodfacts.org/cgi/search.pl?search_terms=arroz&tagtype_0=countries&tag_contains_0=contains&tag_0=brazil&json=1&page_size=15&fields=code,product_name",
+        "url": "https://world.openfoodfacts.org/api/v2/product/7896348301724.json?fields=product_name,product_name_pt,brands,quantity",
         "status": -1,
         "motivo": "robots.txt não permite",
         "trecho": ""
       },
       {
-        "url": "https://world.openfoodfacts.org/cgi/search.pl?search_terms=feij%C3%A3o&tagtype_0=countries&tag_contains_0=contains&tag_0=brazil&json=1&page_size=15&fields=code,product_name",
+        "url": "https://world.openfoodfacts.org/api/v2/product/7896005807668.json?fields=product_name,product_name_pt,brands,quantity",
         "status": -1,
         "motivo": "robots.txt não permite",
         "trecho": ""
       },
       {
-        "url": "https://world.openfoodfacts.org/cgi/search.pl?search_terms=leite&tagtype_0=countries&tag_contains_0=contains&tag_0=brazil&json=1&page_size=15&fields=code,product_name",
+        "url": "https://world.openfoodfacts.org/api/v2/product/8711000421703.json?fields=product_name,product_name_pt,brands,quantity",
         "status": -1,
         "motivo": "robots.txt não permite",
         "trecho": ""
@@ -132,72 +109,19 @@
     ]
   },
   "www.atacadao.com.br": {
-    "falhas": 14,
+    "falhas": 2,
     "exemplos": [
       {
-        "url": "https://www.atacadao.com.br/api/catalog_system/pub/products/search?_from=0&_to=0",
-        "status": 206,
-        "motivo": "HTTP 206",
-        "trecho": "[{\"productId\":\"57679\",\"productName\":\"Lã de Aço Bombril 45g\",\"brand\":\"Bombril\",\"brandId\":932,\"brandImageUrl\":null,\"linkText\":\"la-de-aco-bombril-5624\",\"productReference\":\"5624\",\"productReferenceCode\":\"5624\",\"categoryId\":\"442\",\"productTitle\":\"Lã de Aço Bombril 45g\",\"metaTagDescription\":\"Lã de Aço Bombr"
+        "url": "https://www.atacadao.com.br/api/checkout/pub/regions?country=BRA&postalCode=70040010",
+        "status": 429,
+        "motivo": "HTTP 429 Too Many Requests",
+        "trecho": "Too Many Requests"
       },
       {
-        "url": "https://www.atacadao.com.br/api/catalog_system/pub/products/search?ft=caf%C3%A9&_from=0&_to=4",
-        "status": 206,
-        "motivo": "HTTP 206",
-        "trecho": "[{\"productId\":\"117802\",\"productName\":\"Café Melitta Descafeinado Vácuo 250g\",\"brand\":\"Melitta\",\"brandId\":633,\"brandImageUrl\":null,\"linkText\":\"cafe-melitta-descafeinado-vacuo-13769\",\"productReference\":\"13769\",\"productReferenceCode\":\"13769\",\"categoryId\":\"32\",\"productTitle\":\"Café Melitta Descafeinado Vá"
-      },
-      {
-        "url": "https://www.atacadao.com.br/api/catalog_system/pub/products/search?ft=arroz&_from=0&_to=4",
-        "status": 206,
-        "motivo": "HTTP 206",
-        "trecho": "[{\"productId\":\"13522\",\"productName\":\"Arroz Arbóreo Paganini 1kg\",\"brand\":\"Paganini\",\"brandId\":3622,\"brandImageUrl\":null,\"linkText\":\"arroz-arboreo-paganini-74185\",\"productReference\":\"74185\",\"productReferenceCode\":\"74185\",\"categoryId\":\"24\",\"productTitle\":\"Arroz Arbóreo Paganini 1kg\",\"metaTagDescriptio"
-      },
-      {
-        "url": "https://www.atacadao.com.br/api/catalog_system/pub/products/search?ft=feij%C3%A3o&_from=0&_to=4",
-        "status": 206,
-        "motivo": "HTTP 206",
-        "trecho": "[{\"productId\":\"56263\",\"productName\":\"Feijão Tropeiro Swift 500g\",\"brand\":\"Swift\",\"brandId\":3157,\"brandImageUrl\":null,\"linkText\":\"feijao-tropeiro-swift-2877\",\"productReference\":\"2877\",\"productReferenceCode\":\"2877\",\"categoryId\":\"4897\",\"productTitle\":\"Feijão Tropeiro Swift 500g\",\"metaTagDescription\":\"F"
-      },
-      {
-        "url": "https://www.atacadao.com.br/api/catalog_system/pub/products/search?ft=leite&_from=0&_to=4",
-        "status": 206,
-        "motivo": "HTTP 206",
-        "trecho": "[{\"productId\":\"182273\",\"productName\":\"Leite Semidesnatado Leite + 8g de Proteína 200ml\",\"brand\":\"Leite +\",\"brandId\":9347,\"brandImageUrl\":null,\"linkText\":\"leite-semidesnatado-leite---8g-de-proteina-17250\",\"productReference\":\"17250\",\"productReferenceCode\":\"17250\",\"categoryId\":\"79\",\"productTitle\":\"Leit"
-      }
-    ]
-  },
-  "www.comper.com.br": {
-    "falhas": 15,
-    "exemplos": [
-      {
-        "url": "https://www.comper.com.br/robots.txt",
-        "status": 403,
-        "motivo": "HTTP 403 Forbidden",
-        "trecho": "<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scal"
-      },
-      {
-        "url": "https://www.comper.com.br/api/catalog_system/pub/products/search?_from=0&_to=0",
-        "status": -1,
-        "motivo": "robots.txt não permite",
-        "trecho": ""
-      },
-      {
-        "url": "https://www.comper.com.br/api/catalog_system/pub/products/search?ft=caf%C3%A9&_from=0&_to=4",
-        "status": -1,
-        "motivo": "robots.txt não permite",
-        "trecho": ""
-      },
-      {
-        "url": "https://www.comper.com.br/api/catalog_system/pub/products/search?ft=arroz&_from=0&_to=4",
-        "status": -1,
-        "motivo": "robots.txt não permite",
-        "trecho": ""
-      },
-      {
-        "url": "https://www.comper.com.br/api/catalog_system/pub/products/search?ft=feij%C3%A3o&_from=0&_to=4",
-        "status": -1,
-        "motivo": "robots.txt não permite",
-        "trecho": ""
+        "url": "https://www.atacadao.com.br/api/checkout/pub/regions?country=BRA&postalCode=70040010",
+        "status": 429,
+        "motivo": "HTTP 429 Too Many Requests",
+        "trecho": "Too Many Requests"
       }
     ]
   },
@@ -215,41 +139,6 @@
         "status": 0,
         "motivo": "falha de rede: Remote end closed connection without response",
         "trecho": ""
-      }
-    ]
-  },
-  "www.paodeacucar.com": {
-    "falhas": 14,
-    "exemplos": [
-      {
-        "url": "https://www.paodeacucar.com/api/catalog_system/pub/products/search?_from=0&_to=0",
-        "status": 404,
-        "motivo": "HTTP 404 Not Found",
-        "trecho": "<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no\"/><title>Título da página</title><meta name=\"description\" content=\"default\"/><link rel=\"canonical\" href=\"https://www.paodeacucar.co"
-      },
-      {
-        "url": "https://www.paodeacucar.com/api/catalog_system/pub/products/search?ft=caf%C3%A9&_from=0&_to=4",
-        "status": 404,
-        "motivo": "HTTP 404 Not Found",
-        "trecho": "<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no\"/><title>Título da página</title><meta name=\"description\" content=\"default\"/><link rel=\"canonical\" href=\"https://www.paodeacucar.co"
-      },
-      {
-        "url": "https://www.paodeacucar.com/api/catalog_system/pub/products/search?ft=arroz&_from=0&_to=4",
-        "status": 404,
-        "motivo": "HTTP 404 Not Found",
-        "trecho": "<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no\"/><title>Título da página</title><meta name=\"description\" content=\"default\"/><link rel=\"canonical\" href=\"https://www.paodeacucar.co"
-      },
-      {
-        "url": "https://www.paodeacucar.com/api/catalog_system/pub/products/search?ft=feij%C3%A3o&_from=0&_to=4",
-        "status": 404,
-        "motivo": "HTTP 404 Not Found",
-        "trecho": "<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no\"/><title>Título da página</title><meta name=\"description\" content=\"default\"/><link rel=\"canonical\" href=\"https://www.paodeacucar.co"
-      },
-      {
-        "url": "https://www.paodeacucar.com/api/catalog_system/pub/products/search?ft=leite&_from=0&_to=4",
-        "status": 404,
-        "motivo": "HTTP 404 Not Found",
-        "trecho": "<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no\"/><title>Título da página</title><meta name=\"description\" content=\"default\"/><link rel=\"canonical\" href=\"https://www.paodeacucar.co"
       }
     ]
   }
