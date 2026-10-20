@@ -39,6 +39,14 @@ ALVOS = {
     "Mapa de Preços DF (script do painel)": ["https://paineis.fazenda.df.gov.br/mapadeprecos/assets/js/app.js"],
     "Servidor Qlik da Fazenda DF": ["https://qap.fazenda.df.gov.br/paineis/resources/assets/external/requirejs/require.js"],
     "Receita do DF": ["https://www.receita.fazenda.df.gov.br/"],
+    # preços que chegam antes ao mercado (atacado, produtor, frete), com frequência diária ou semanal
+    "CEPEA (indicadores agro)": ["https://www.cepea.org.br/br/indicador/cafe.aspx", "https://www.cepea.org.br/br/indicador/boi-gordo.aspx",
+                                 "https://www.cepea.org.br/br/indicador/arroz.aspx"],
+    "CEASA-DF (atacado de hortifrúti)": ["https://www.ceasa.df.gov.br/"],
+    "Conab Prohort (preços diários das Ceasas)": ["https://prohort.conab.gov.br/"],
+    "Conab Portal de Informações (downloads)": ["https://portaldeinformacoes.conab.gov.br/download-arquivos.html"],
+    "ANP (preço do diesel, frete)": ["https://www.gov.br/anp/pt-br/assuntos/precos-e-defesa-da-concorrencia/precos/levantamento-de-precos-de-combustiveis-ultimas-semanas-pesquisadas"],
+    "IPE-DF (índices do DF)": ["https://www.ipe.df.gov.br/"],
 }
 
 # sites em que vale procurar páginas de produto pelo sitemap
@@ -251,6 +259,8 @@ def analisar(resposta: dict) -> dict:
         "antirrobo": [nome for nome, sinais in SINAIS_ANTIROBO.items() if any(s in baixo for s in sinais)],
         "tecnologia": [nome for nome, sinais in TECNOLOGIAS.items() if any(s in baixo for s in sinais)],
         "tem_json_ld": "application/ld+json" in baixo,
+        "arquivos_de_dados": sorted({urljoin(resposta["url"], h) for h in re.findall(
+            r'href=["\']([^"\']+\.(?:csv|xlsx?|txt|zip|json|ods)(?:\?[^"\']*)?)["\']', texto, re.I)})[:25],
         "enderecos_de_dados": hosts[:15],
         "inicio_do_texto": " ".join(re.sub(r"<[^>]+>", " ", texto).split())[:400],
     }

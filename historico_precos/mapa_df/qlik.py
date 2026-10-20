@@ -276,8 +276,22 @@ def precos_por_gtin(motor: Motor, doc: int, gtins: list[str], altura: int = 1000
     if not gtins:
         return []
     campo = motor.chamar(doc, "GetField", {"qFieldName": "cean"})["qReturn"]["qHandle"]
-    motor.chamar(campo, "SelectValues", {"qFieldValues": [{"qText": g, "qIsNumeric": False} for g in gtins],
-                                         "qToggleMode": False, "qSoftLock": False})
+    # o GTIN pode estar guardado como texto ou como número: manda as duas formas
+    valores = [{"qText": g, "qIsNumeric": False} for g in gtins] + [{"qText": g, "qIsNumeric": True, "qNumber": int(g)} for g in gtins]
+    motor.chamar(campo, "SelectValues", {"qFieldValues": valores, "qToggleMode": False, "qSoftLock": False})
+    # trava de segurança: se a seleção não pegou, a consulta cobriria o painel inteiro (centenas de milhares de
+    # produtos) e pesaria no servidor do governo. Nesse caso, para aqui.
+    selecionados = motor.chamar(doc, "Evaluate", {"qExpression": "=Count(DISTINCT cean)"}).get("qReturn", "")
+    try:
+        n_sel = int(float(str(selecionados).replace(".", "").replace(",", ".")))
+    except ValueError:
+        n_sel = -1
+    if n_sel < 0 or n_sel > len(gtins):
+        motor.chamar(doc, "ClearAll", {"qLockedAlso": False})
+        raise ErroQlik(f"seleção de GTIN não aplicada (Count(DISTINCT cean) = {selecionados!r}); consulta cancelada")
+    if n_sel == 0:
+        motor.chamar(doc, "ClearAll", {"qLockedAlso": False})
+        return []
     definicao = {
         "qInfo": {"qType": "precos-historico"},
         "qHyperCubeDef": {
@@ -288,6 +302,9 @@ def precos_por_gtin(motor: Motor, doc: int, gtins: list[str], altura: int = 1000
     }
     h = motor.chamar(doc, "CreateSessionObject", [definicao])["qReturn"]["qHandle"]
     total = motor.chamar(h, "GetLayout")["qLayout"]["qHyperCube"]["qSize"]["qcy"]
+    if total > n_sel * 400:  # ~3 meses de dias x unidades: mais que isso indica consulta fora do esperado
+        motor.chamar(doc, "ClearAll", {"qLockedAlso": False})
+        raise ErroQlik(f"resultado grande demais ({total} linhas para {n_sel} GTIN); consulta cancelada")
     largura = len(DIMENSOES) + len(MEDIDAS)
     linhas = []
     for topo in range(0, total, altura):

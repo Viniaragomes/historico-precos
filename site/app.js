@@ -912,7 +912,7 @@ function grafico(caixa, series, t0, t1) {
     for (const h of serie.pts.slice(1)) d += ` H${x(h.t)} V${y(h.preco)}`;
     svg.append(s("path", { d, fill: "none", stroke: serie.cor, "stroke-width": 2.5, "stroke-linejoin": "round", "stroke-linecap": "round" }));
     for (const h of serie.pts) {
-      if (h.ancora) continue;
+      if (h.ancora || serie.pts.length > 40) continue; // série diária longa: só a linha
       svg.append(s("circle", { cx: x(h.t), cy: y(h.preco), r: 4, fill: serie.cor, stroke: "var(--superficie)", "stroke-width": 2 }));
     }
   }

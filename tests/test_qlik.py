@@ -128,6 +128,8 @@ def respostas_precos(msg):
             dims = [d["qDef"]["qFieldDefs"][0] for d in msg["params"][0]["qHyperCubeDef"]["qDimensions"]]
             assert not any("cpf" in d or "cnpj" in d for d in dims)  # nunca pede dado de pessoa
         return {"qReturn": {"qHandle": 3}}
+    if m == "Evaluate":
+        return {"qReturn": "1"}
     if m == "GetLayout":
         return {"qLayout": {"qHyperCube": {"qSize": {"qcx": 10, "qcy": 3}}}}
     if m == "GetHyperCubeData":
@@ -152,7 +154,7 @@ class TestPrecosQlik(unittest.TestCase):
         self.assertEqual(len(linhas), 1)
         self.assertEqual((linhas[0]["data"], linhas[0]["mediana"], linhas[0]["itens"]), ("2026-10-15", 18.5, 12))
         selecao = next(p for p in pedidos[1:] if p["method"] == "SelectValues")
-        self.assertEqual([v["qText"] for v in selecao["params"]["qFieldValues"]], ["7891"])
+        self.assertEqual({v["qText"] for v in selecao["params"]["qFieldValues"]}, {"7891"})
         self.assertEqual(pedidos[-1]["method"], "ClearAll")  # deixa a sessão limpa
 
         con = sqlite3.connect(":memory:")
@@ -175,3 +177,19 @@ class TestPrecosQlik(unittest.TestCase):
         t = qlik.tendencia(pontos)
         self.assertEqual(t["variacao_pct"], 10.0)
         self.assertIsNone(qlik.tendencia(pontos[-3:])["variacao_pct"])  # poucas notas
+
+
+class TestTravaQlik(unittest.TestCase):
+    def test_selecao_que_nao_pega_cancela(self):
+        def resp(msg):
+            if msg["method"] == "Evaluate":
+                return {"qReturn": "860647"}  # seleção não aplicou: o painel todo
+            return respostas_precos(msg)
+
+        url, pedidos = servidor_qlik_falso(resp)
+        motor = qlik.Motor("app", url=url)
+        doc = motor.abrir_app()
+        with self.assertRaisesRegex(qlik.ErroQlik, "não aplicada"):
+            qlik.precos_por_gtin(motor, doc, ["7891"])
+        motor.fechar()
+        self.assertNotIn("CreateSessionObject", [p.get("method") for p in pedidos[1:]])
