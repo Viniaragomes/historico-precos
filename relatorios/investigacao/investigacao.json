@@ -10,7 +10,7 @@
       {
         "url": "https://mercado.carrefour.com.br/",
         "status": 200,
-        "ms": 264,
+        "ms": 105,
         "titulo": "Mercado Carrefour | Ofertas de Supermercado Delivery",
         "servidor": "cloudflare",
         "tipo": "text/html",
@@ -40,7 +40,7 @@
       {
         "url": "https://mercado.carrefour.com.br/api/catalog_system/pub/products/search?_from=0&_to=0",
         "status": 503,
-        "ms": 466,
+        "ms": 280,
         "titulo": null,
         "servidor": "cloudflare",
         "tipo": null,
@@ -168,7 +168,7 @@
       "analise": {
         "url": "https://www.carrefour.com.br/robots.txt",
         "status": 403,
-        "ms": 251,
+        "ms": 103,
         "titulo": "Acesso Bloqueado",
         "servidor": "cloudflare",
         "tipo": "text/html; charset=UTF-8",
@@ -202,7 +202,7 @@
       {
         "url": "https://www.paodeacucar.com/",
         "status": 200,
-        "ms": 1048,
+        "ms": 941,
         "titulo": "Pão de Açúcar | Supermercado Online",
         "servidor": null,
         "tipo": "text/html; charset=utf-8",
@@ -317,7 +317,7 @@
       "analise": {
         "url": "https://www.comper.com.br/robots.txt",
         "status": 403,
-        "ms": 224,
+        "ms": 207,
         "titulo": "Just a moment...",
         "servidor": "cloudflare",
         "tipo": "text/html; charset=UTF-8",
@@ -352,13 +352,13 @@
         "url": "https://www.in.gov.br/",
         "status": 0,
         "erro": "Remote end closed connection without response",
-        "ms": 78
+        "ms": 55
       },
       {
         "url": "https://www.in.gov.br/consulta/-/buscar/dou?q=ICMS",
         "status": 0,
         "erro": "Remote end closed connection without response",
-        "ms": 133
+        "ms": 312
       }
     ],
     "scripts": []
@@ -374,7 +374,7 @@
       {
         "url": "https://www.lexml.gov.br/sru?operation=searchRetrieve&version=1.1&query=urn%3D%22lei%22%20and%20description%3Dicms&maximumRecords=3",
         "status": 404,
-        "ms": 1020,
+        "ms": 1463,
         "titulo": "HTTP Status 404 – Not Found",
         "servidor": "nginx",
         "tipo": "text/html;charset=utf-8",
@@ -411,7 +411,7 @@
         "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios",
         "status": 0,
         "erro": "<urlopen error timed out>",
-        "ms": 45029
+        "ms": 45482
       }
     ],
     "scripts": [],
@@ -433,7 +433,7 @@
       {
         "url": "https://paineis.fazenda.df.gov.br/",
         "status": 200,
-        "ms": 1470,
+        "ms": 1070,
         "titulo": "Secretaria de Economia do Distrito Federal",
         "servidor": "Apache/2.4.39 (Win64) OpenSSL/1.1.1b PHP/7.3.5",
         "tipo": "text/html; charset=UTF-8",
@@ -454,7 +454,7 @@
       {
         "url": "https://paineis.fazenda.df.gov.br/mapadeprecos/",
         "status": 200,
-        "ms": 1206,
+        "ms": 1478,
         "titulo": "Mapa de Preço",
         "servidor": "Apache/2.4.39 (Win64) OpenSSL/1.1.1b PHP/7.3.5",
         "tipo": "text/html",
@@ -656,7 +656,7 @@
       {
         "url": "https://paineis.fazenda.df.gov.br/mapadeprecos/assets/js/app.js",
         "status": 200,
-        "ms": 544,
+        "ms": 546,
         "titulo": null,
         "servidor": "Apache/2.4.39 (Win64) OpenSSL/1.1.1b PHP/7.3.5",
         "tipo": "application/javascript",
@@ -829,7 +829,7 @@
       "analise": {
         "url": "https://qap.fazenda.df.gov.br/robots.txt",
         "status": 404,
-        "ms": 1091,
+        "ms": 1090,
         "titulo": "404 - The requested resource cannot be found. - Qlik Sense",
         "servidor": null,
         "tipo": "text/html",
@@ -847,7 +847,7 @@
       {
         "url": "https://qap.fazenda.df.gov.br/paineis/resources/assets/external/requirejs/require.js",
         "status": 200,
-        "ms": 1326,
+        "ms": 1617,
         "titulo": null,
         "servidor": "Microsoft-HTTPAPI/2.0",
         "tipo": "application/javascript;charset=utf-8",
@@ -882,7 +882,7 @@
       {
         "url": "https://www.receita.fazenda.df.gov.br/",
         "status": 200,
-        "ms": 2534,
+        "ms": 2407,
         "titulo": "Portal da Receita DF ? IPVA, IPTU e Serviços Tributários | SEEC",
         "servidor": "Microsoft-IIS/8.5",
         "tipo": "text/html;charset=UTF-8",
@@ -941,7 +941,7 @@
       {
         "url": "https://www.cepea.org.br/br/widget.aspx",
         "status": 200,
-        "ms": 272,
+        "ms": 354,
         "titulo": "Cotações do Cepea no seu site - Centro de Estudos Avançados em Economia Aplicada - CEPEA-Esalq/USP",
         "servidor": "cloudflare",
         "tipo": "text/html; charset=UTF-8",
@@ -998,7 +998,7 @@
       {
         "url": "https://www.cepea.org.br/br/indicador/cafe.aspx",
         "status": 200,
-        "ms": 270,
+        "ms": 241,
         "titulo": "Café - Centro de Estudos Avançados em Economia Aplicada - CEPEA-Esalq/USP",
         "servidor": "cloudflare",
         "tipo": "text/html; charset=UTF-8",
@@ -1023,7 +1023,7 @@
       {
         "url": "https://www.cepea.org.br/br/indicador/boi-gordo.aspx",
         "status": 200,
-        "ms": 231,
+        "ms": 240,
         "titulo": "Boi gordo - Centro de Estudos Avançados em Economia Aplicada - CEPEA-Esalq/USP",
         "servidor": "cloudflare",
         "tipo": "text/html; charset=UTF-8",
@@ -1048,7 +1048,7 @@
       {
         "url": "https://www.cepea.org.br/br/indicador/arroz.aspx",
         "status": 200,
-        "ms": 245,
+        "ms": 246,
         "titulo": "Arroz - Centro de Estudos Avançados em Economia Aplicada - CEPEA-Esalq/USP",
         "servidor": "cloudflare",
         "tipo": "text/html; charset=UTF-8",
@@ -1106,7 +1106,7 @@
         "url": "https://www.ceasa.df.gov.br/",
         "status": 0,
         "erro": "<urlopen error _ssl.c:993: The handshake operation timed out>",
-        "ms": 45583
+        "ms": 45377
       }
     ],
     "scripts": [],
@@ -1128,7 +1128,7 @@
       {
         "url": "https://www.portal.ceasadf.com.br/precos",
         "status": 200,
-        "ms": 1136,
+        "ms": 1098,
         "titulo": "Preços - Portal de Serviços",
         "servidor": "Apache",
         "tipo": "text/html; charset=UTF-8",
@@ -1151,7 +1151,7 @@
       {
         "url": "https://www.portal.ceasadf.com.br/storage/files/2026/08/sima.pdf",
         "status": 200,
-        "ms": 1456,
+        "ms": 1580,
         "titulo": null,
         "servidor": "Apache",
         "tipo": "application/pdf",
@@ -1206,7 +1206,7 @@
         "url": "https://prohort.conab.gov.br/",
         "status": 0,
         "erro": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'prohort.conab.gov.br'. (_ssl.c:1010)>",
-        "ms": 674
+        "ms": 678
       }
     ],
     "scripts": []
@@ -1222,7 +1222,7 @@
       {
         "url": "https://portaldeinformacoes.conab.gov.br/download-arquivos.html",
         "status": 403,
-        "ms": 861,
+        "ms": 532,
         "titulo": "Conab - Erro no acesso",
         "servidor": "Apache",
         "tipo": "text/html",
@@ -1254,7 +1254,7 @@
       {
         "url": "https://www.gov.br/anp/pt-br/assuntos/precos-e-defesa-da-concorrencia/precos/levantamento-de-precos-de-combustiveis-ultimas-semanas-pesquisadas",
         "status": 200,
-        "ms": 1041,
+        "ms": 950,
         "titulo": "Levantamento de Preços de Combustíveis (últimas semanas pesquisadas) — Agência Nacional do Petróleo, Gás Natural e Bioco",
         "servidor": "Zope/(2.13.28, python 2.7.16, linux2) ZServer/1.1",
         "tipo": "text/html;charset=utf-8",
@@ -1342,7 +1342,7 @@
         "url": "https://www.ipe.df.gov.br/",
         "status": 0,
         "erro": "<urlopen error _ssl.c:993: The handshake operation timed out>",
-        "ms": 46230
+        "ms": 45583
       }
     ],
     "scripts": [],
@@ -1365,19 +1365,19 @@
         "url": "https://dados.df.gov.br/",
         "status": 0,
         "erro": "<urlopen error _ssl.c:993: The handshake operation timed out>",
-        "ms": 45713
+        "ms": 45909
       },
       {
         "url": "https://dados.df.gov.br/api/3/action/package_search?q=ceasa&rows=20",
         "status": 0,
         "erro": "<urlopen error _ssl.c:993: The handshake operation timed out>",
-        "ms": 45239
+        "ms": 46008
       },
       {
         "url": "https://dados.df.gov.br/api/3/action/package_search?q=pre%C3%A7os&rows=20",
         "status": 0,
         "erro": "<urlopen error _ssl.c:993: The handshake operation timed out>",
-        "ms": 45588
+        "ms": 45902
       }
     ],
     "scripts": [],
