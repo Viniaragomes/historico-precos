@@ -1,0 +1,386 @@
+{
+  "sites": {
+    "CEPEA": {
+      "rede": {
+        "host": "www.cepea.org.br",
+        "ips": [
+          "104.21.59.235",
+          "172.67.185.109",
+          "2606:4700:3030::6815:3beb",
+          "2606:4700:3033::ac43:b96d"
+        ],
+        "dns_ms": 142,
+        "tcp_443": "ok em 9 ms",
+        "tcp_80": "ok em 2 ms",
+        "tls": "handshake ok em 37 ms (TLSv1.3)",
+        "nomes_no_certificado": [
+          "*.cepea.org.br",
+          "cepea.org.br"
+        ],
+        "certificado_pem_inicio": "-----BEGIN CERTIFICATE-----\nMIIDfjCCAyWgAwIBAgIQCgPhss3kfrwOefvuuooOYDAKBggqhkjO",
+        "tls_verificado": "certificado válido para o nome"
+      },
+      "paginas": [
+        {
+          "url": "https://www.cepea.org.br/br/licenca-de-uso-de-dados.aspx",
+          "status": 403,
+          "ms": 1519,
+          "titulo": "Um momento…",
+          "desafio_antirrobo": true,
+          "texto_inicio": "www.cepea.org.br Executando verificação de segurança Este site utiliza um serviço de segurança para proteção contra bots maliciosos. Esta página é exibida enquanto o site verifica se você não é um bot. Ray ID: a4db2b137b5b4263 Desempenho e segurança da Cloudflare Privacidade",
+          "links_de_dados": [],
+          "pedidos_de_dados": [
+            {
+              "url": "https://www.cepea.org.br/cdn-cgi/challenge-platform/h/b/fo/3082852521:1792530018:UyRvWhL3aBe4ECxi0lVDHzUD2ZRPXzsBEuBv9w5kJYM/a4db2b137b5b4263/6Kr2od7ONQK8kWgYmY.kRX5E4CvgLmrVCBOkGMAScMA-1792532293-1.2.1.1-CgiBH8DTLnWBwNeTYpIe9UxDFYUTiud9yaI9m4jRbRIlwFK7ut4ZD9bW4Ge32Xnf",
+              "status": 200,
+              "tipo": "xhr",
+              "conteudo": "text/plain; charset=UTF-8"
+            },
+            {
+              "url": "https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/b/fo/2126114248:1792530023:dUe12xuOxhGQAdicMiARHKdZeA1e4n7hzWJPemHd6CA/a4db2b15ae2dc4c8/TwisBC2AR3IC132eozKy53GQO.jblgNtCW7cKLbJyIc-1792532294-1.2.1.1-6xDY3_bQlm8tKxfgAf0rBejGTBKoiGiWYE48nMKfDtTnE.4vADVDnJEVXJ4FtV5g",
+              "status": 200,
+              "tipo": "xhr",
+              "conteudo": "text/plain; charset=UTF-8"
+            },
+            {
+              "url": "https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/b/pat/a4db2b15ae2dc4c8/1792532294430/0a85c7168452d3a6ea41633f6784b3d2538824018d9072d1507ab0a4beed2707/ooKoZbWwbPnn_DrsI0tSAcAy5mCSoIHc1LeEjn1lptw-1792532294-1.3.1.1-1OALoT9sW5tifpXEhoYDu83sUJxiHJab9Rl46j_hSkb.6T2gBtpQuUw7ugMY3szm8v.GlhAxfVabfChGO6vuKWKZqnJMqwJlJ9Qj7mMpSe2BWeZuK4j7sI1gsvoIC4.zDzl9wZ5xaQ3RiDu6j9sFRKfnoMjRo4eoZ77ghFaKZuSuJFbeHmhTEItb_C32c49Z0AvPcdx7FzhjUc_7.Z6mmekIQr8VRroi0TtWw9R6mkutu..NWtZbEfc9trqYwUHaMX43RyDPj5vJX2GldKfTZko96ZbYuWGuRtdM4vJHuY09yH62zeQJqtOYKpOdbneB_4W8vCXWVjMeAI9_A7sOy2Wxnkcy9tWz4lUZ8hngPrJ7SN1R9r45vtFGUObd.JNDwQSeRRYKP25TI1g6kFqCxns7Oah_vT0ZdgjYd3hetwoog9TXCefjPTMWIkeJLIvCmBFeKVKLcGNTqOEdDARpl_wIdN7pH69cgEVbCHcazysTNCEtBgZbC0PeipA.PrP6r8whs1BEzpb9T3ITTtHIWpzNMS06uLfhNAs1WirxMR7BaW2KZp6rg2koN9b7n_jwpQI6PKCR4ErCRCTrszUh3XvvOPKIaaLThpekknl._uPCvHzLUIk1uNDAT00.onR4NDbVGjlyL3z2D5FDXQ3S9KeoaiV_afKf1f1eECJTCM7oq3U7So4BK4MsqFR2ruz747yNgZMmgIq9PmFe0aI7G6Wye6STxtkKZaXWUTxhL3V_yqB76t133oIIapBhcYRWDP3lqeDQuTkZdUDoBz.ypoHTxhA9mV5gaA3Ftcz5RoRiuTVyia6_sUHEIO4KnrZB",
+              "status": 401,
+              "tipo": "fetch",
+              "conteudo": "text/plain; charset=utf-8"
+            }
+          ],
+          "robots": 200,
+          "nota": "desafio anti-robô na página: parado aqui, sem tentar passar"
+        },
+        {
+          "url": "https://cepea.esalq.usp.br/br/licenca-de-uso-de-dados.aspx",
+          "status": 200,
+          "ms": 1613,
+          "titulo": "Licença de uso de Dados - Centro de Estudos Avançados em Economia Aplicada - CEPEA-Esalq/USP",
+          "desafio_antirrobo": false,
+          "texto_inicio": "English CONTATO IMPRENSA INSTITUCIONAL PREÇOS AGROPECUÁRIOS CUSTOS E GESTÃO EXPORTAÇÃO IPPA PIB AGRO MERCADO DE TRABALHO POLÍTICA AGROPECUÁRIA E AMBIENTAL açúcar algodão arroz bezerro boi café citros etanol feijão florestal frango hortifrúti leite mandioca milho ovinos ovos soja suíno tilápia trigo LICENÇA DE USO DE DADOS LICENÇA DE USO DE DADOS NÃO COMERCIAL – SITE CEPEA Todo o conteúdo (textos, relatórios, dados e quaisquer informações) no site do CEPEA (https://www.cepea.esalq.usp.br) é disponibilizado de acordo com a licença de uso pública padrão, o Creative Commons (CC BY NC, https://creativecommons.org/licenses/by-nc/4.0/deed.pt-br). Essa licença permite que todo o conteúdo publicado no site do Cepea seja utilizado para fins não-comerciais e que seja atribuído o devido crédito ao(s) autor(es) e proprietário(s). São proibidas reproduções, armazenamentos, transmissões, cópias, distribuições ou quaisquer outras formas de utilização para fins comerciais do conteúdo do Site do CEPEA, salvo quando expressamente autorizado pelo CEPEA. PARA MAIS INFORMAÇÕES, ESCREVA PARA: onetoone@cepea.org.br VOLTAR CONTATO cepea@usp.br SÉRIES DE PREÇOS CONSULTA AO BANCO DE DADOS Cotações do Cepea no seu site Participe da Comunidade Cepea CEPEA - Centro de Estudos Avançados em Economia Aplicada Departamento de Economia, Administração e Sociologia ESALQ - Escola Superior de Agricultura Luiz de Queiroz USP - Universidade de São Paulo Piracicaba, SP + 55 (19) 3429 8800 cepea@usp.br Como Chegar ao",
+          "links_de_dados": [],
+          "pedidos_de_dados": [
+            {
+              "url": "https://www.cepea.org.br/cdn-cgi/challenge-platform/h/b/jsd/oneshot/d2d3316b729e/0.853061049047498:1792530026:c3AU-E5INMWHqBWD98q5eThb3ii8qlWcGWWu1rCq-Ns/a4db2b3e7e0809a2",
+              "status": 200,
+              "tipo": "xhr",
+              "conteudo": "text/plain; charset=UTF-8"
+            },
+            {
+              "url": "https://www.cepea.org.br/cdn-cgi/rum?",
+              "status": 204,
+              "tipo": "xhr",
+              "conteudo": "text/plain"
+            },
+            {
+              "url": "https://www.cepea.org.br/cdn-cgi/challenge-platform/h/b/jsd/oneshot/d2d3316b729e/0.853061049047498:1792530026:c3AU-E5INMWHqBWD98q5eThb3ii8qlWcGWWu1rCq-Ns/a4db2b3e7e0809a2",
+              "status": 200,
+              "tipo": "xhr",
+              "conteudo": "text/plain; charset=UTF-8"
+            },
+            {
+              "url": "https://analytics.google.com/g/collect?v=2&tid=G-XR6QKV0FLF&gtm=45je6aj1v9125933916za208zd9125933916xf1&_p=1792532300986&em=tv.1~em.FJepNv1EcOyd9X0ZFD1q73QSN6LMENtwEmYTq0MxwQ4&emd=tvd.1~i1.fem.ma.r12.n12.lDIV.s!b64!I2ltYWdlbmV0LWNvbnRlbnQ-LmltYWdlbmV0LXdyYXAtY29udGVudDpudGgtY2hpbGQ&_gaz=1&gcd=13l3l3l3l1l1&npa=0&dma=0&ecid=1454220590&_eu=AAAAAGA&are=1&cid=411761490.1792532301&ec_mode=a&frm=0&pscdl=noapi&rcb=14&sr=1280x720&uaa=x64&uab=64&uafvl=Chromium%3B130.0.6723.31%7CHeadlessChrome%3B130.0.6723.31%7CNot%253FA_Brand%3B99.0.0.0&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=pt-br&gaf=2&_s=1&tag_exp=115938465~115938469~118897920~118897930~120213116~120385423~120469145~120469153~121246026~121246034&sid=1792532301&sct=1&seg=0&dl=https%3A%2F%2Fwww.cepea.org.br%2Fbr%2Flicenca-de-uso-de-dados.aspx&dt=Licen%C3%A7a%20de%20uso%20de%20Dados%20-%20Centro%20de%20Estudos%20Avan%C3%A7ados%20em%20Economia%20Aplicada%20-%20CEPEA-Esalq%2FUSP&en=page_view&_fv=1&_ss=1&_ee=1&tfd=1063",
+              "status": 204,
+              "tipo": "fetch",
+              "conteudo": "text/plain"
+            }
+          ],
+          "robots": 200
+        },
+        {
+          "url": "https://www.cepea.org.br/br/indicador/cafe.aspx",
+          "status": 403,
+          "ms": 2795,
+          "titulo": "Um momento…",
+          "desafio_antirrobo": true,
+          "texto_inicio": "www.cepea.org.br Executando verificação de segurança Este site utiliza um serviço de segurança para proteção contra bots maliciosos. Esta página é exibida enquanto o site verifica se você não é um bot. Ray ID: a4db2b60ed1c09a2 Desempenho e segurança da Cloudflare Privacidade",
+          "links_de_dados": [],
+          "pedidos_de_dados": [
+            {
+              "url": "https://www.cepea.org.br/cdn-cgi/challenge-platform/h/b/fo/3082852521:1792530018:UyRvWhL3aBe4ECxi0lVDHzUD2ZRPXzsBEuBv9w5kJYM/a4db2b60ed1c09a2/XP.sfPOfOXjpmd7VplWMxcLdD7wl_boax8o3vgdFmZA-1792532306-1.2.1.1-2gEk0Dn94J9VZMluOADVpoorvbkwbQ.P02MVwerHZ1933_sUheVjC9XvY1RvHihO",
+              "status": 200,
+              "tipo": "xhr",
+              "conteudo": "text/plain; charset=UTF-8"
+            },
+            {
+              "url": "https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/b/fo/2126114248:1792530023:dUe12xuOxhGQAdicMiARHKdZeA1e4n7hzWJPemHd6CA/a4db2b62d803c4c8/YB0IAWVdXS7ZGr05S4ol8nm.HcL1p2Gzu8dl4Rl7Mr4-1792532306-1.2.1.1-2dKJknuMPfRxC0rux7JW7jfK71sx01U3xxHb91iOPaeXla.PIit5AwFWjgfrf0DD",
+              "status": 200,
+              "tipo": "xhr",
+              "conteudo": "text/plain; charset=UTF-8"
+            },
+            {
+              "url": "https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/b/pat/a4db2b62d803c4c8/1792532306837/028b73bda38e35d7887987fa79aab93a951bc7d25a3b07d2fee52e125b2a8e4a/.u51Wj4bUh_DfHx5TWRM4vJUmXGzz530MLPeoZJBz_Q-1792532306-1.3.1.1-PKvmR2mOQ35pxrvRX1ByOFMHdfb3VlnKFLhNo4Q4mdaj7lQjOZqYN264iiHqHr9QDLCxoaHnSvYqIAWTYaK.bMFo2IfYDq6afgQVMnn9Z3SRtCJQuCCz7Hve_kG15q3AywHqDyVFzi4SifKjm0imnA8dYZTAGx60XSCoivwwv.7nDl8VrSTlznq7TuhR1mAJ6Eycy2cEGJrgGQ1DIjdUThnvXiUCAgB5mumREKMWYNJeQtNH7RETEdGbo1.KnsGuR7cemCadCUuYrtVwVLE9n8zyAyZBN7l7.33CjMHPuHC.APo1ZClHbYMpTm2ur1BuLDgVzDEJczj6dxci7rUrwduJhPxFmATCNfzPQQ2_QrscefIa6ABuGYeHgwaveGxYXSb_4WOvv1Es.Aika3pvqnIX5Rq4n2OJODR_uJUxAVPfJnqJtyPMJTpdcIfrIubjMsJKSh2T7SFMam0HZI8xT16GOntEZN9h.iyy5g9CsFzt8vgOvwaVOCwVOLUU7GEAYJhn9aWXKzdgx0pykDucH66UZ9RzFMwE5GjrO7Wo9QzA36I4zC8rhJ8xKoVztN25ilVBBKxAaBNbTA0fDeLcS2ll.5oh4N_5AlZgSUBTr9XDJhYHRlwFeJRZdeT55V3DQEnYRUGvHZI.V.RvTqDKarikwwe6cAvUXRUwaqN1A5yCnFEtF9uyVmWaFmZ4DYzNRyf4GodOl4uKim5v9f1codv5Z._9ggHQiWaaCa0QZ373_TNBsDECymQWz4b3HMT6bOv8hehrVWigWFk7bSxl3XMitvB.u8QzB1htfzNnkrUJpwXFlhdESdZu6931jN5Y",
+              "status": 401,
+              "tipo": "fetch",
+              "conteudo": "text/plain; charset=utf-8"
+            },
+            {
+              "url": "https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/b/fo/2126114248:1792530023:dUe12xuOxhGQAdicMiARHKdZeA1e4n7hzWJPemHd6CA/a4db2b62d803c4c8/YB0IAWVdXS7ZGr05S4ol8nm.HcL1p2Gzu8dl4Rl7Mr4-1792532306-1.2.1.1-2dKJknuMPfRxC0rux7JW7jfK71sx01U3xxHb91iOPaeXla.PIit5AwFWjgfrf0DD",
+              "status": 200,
+              "tipo": "xhr",
+              "conteudo": "text/plain; charset=UTF-8"
+            }
+          ],
+          "robots": 200,
+          "nota": "desafio anti-robô na página: parado aqui, sem tentar passar"
+        },
+        {
+          "url": "https://www.cepea.org.br/br/indicador/series/cafe.aspx?id=23",
+          "status": 403,
+          "ms": 2787,
+          "titulo": "Um momento…",
+          "desafio_antirrobo": true,
+          "texto_inicio": "www.cepea.org.br Executando verificação de segurança Este site utiliza um serviço de segurança para proteção contra bots maliciosos. Esta página é exibida enquanto o site verifica se você não é um bot. Ray ID: a4db2b8caf9c09a2 Desempenho e segurança da Cloudflare Privacidade",
+          "links_de_dados": [],
+          "pedidos_de_dados": [
+            {
+              "url": "https://www.cepea.org.br/cdn-cgi/challenge-platform/h/b/fo/3082852521:1792530018:UyRvWhL3aBe4ECxi0lVDHzUD2ZRPXzsBEuBv9w5kJYM/a4db2b8caf9c09a2/XX3uDJJj42cTrqx57tQqiIwHnCtTxizgiZ3XIIkeacE-1792532313-1.2.1.1-.lTlKaB4AXuL0nh7RJsWk1hI9hHIXPs7APbRVwvXCnS1jCUJkSm.SGeh0QvYRx_m",
+              "status": 200,
+              "tipo": "xhr",
+              "conteudo": "text/plain; charset=UTF-8"
+            },
+            {
+              "url": "https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/b/fo/2126114248:1792530023:dUe12xuOxhGQAdicMiARHKdZeA1e4n7hzWJPemHd6CA/a4db2b8e9c91c4c8/efbBqOTzliAEZpOROCRNcVXHhQX8AhOhmcYXyAo1OHs-1792532313-1.2.1.1-gEQh6B5h_YWMrMIUyWt3.0jn6Q2uyUk5TQUYdoh8nezZfxUxnC81ZHztzl9AmekX",
+              "status": 200,
+              "tipo": "xhr",
+              "conteudo": "text/plain; charset=UTF-8"
+            },
+            {
+              "url": "https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/b/pat/a4db2b8e9c91c4c8/1792532313805/52fd69348f659e84ad3fed6373107702cff05cca3883cf79658c4c4676535138/KXDssnliRKPuPS9S_cdholArbSGtjJP8kxGH7wuHVEc-1792532313-1.3.1.1-h4tool3eed14QBf05aeQv.oQmm1eYIROeuiflhTi2EU5Jan4YSAaMXDDUQZHrMMwBcY.myv_Rk3QRjBEgIrY.XS9K2xctTJYeRKBLKE2l_YJlqcvXxmCClkkssPaovLYFDPjLlRUSq9r7NA33AEAuzWcGGgvCaGkFbj9UvN_zSdj2kfbS.RE6MSsPFHUa_JwsPIKioBHWzsUTWPpIGfTbEp5lDvTZ9UCh3iuZmIEUuF4o4GXjrU8q3GPHVeSdrdNtvvCM49S4XC9TZ3_n6rFi9I3H0aW_LtHhcbW6IoVzl644fLyA0cwyGezbJ9zulW1bMVeEN_AFkbi0Mav7YWY0AhqVLfGVSxUMsJv_MYj63aAUnxDX3P2v9tfOoEU_VsIwf5YhaCceavfVESUMeVj.S0b9xVtR4Be1o5Lws9zqs92sRN8zma.hnD1w1t7wihwJNtGkf4nu6rN5_WQCErwjanL_I9I0WW3_qhYBuLIGI2vn6aU9MbiEzMGo5KQRRgYGcDdEU81Se0VemJVGvSQ9mxsAa1yuYmFt_GSnizlzfMZyjaGP4iWybX4jgQGTmGrLLzagDqy3JnbpVtpyMUyrOG.SJvRB0JiX.v31_cFZtKnHEyrzPdIbpeREnagICHjCn7TRxWisJsjDmNHj3ReMl9RdbJSZz1X_MXqbDp7oRgEpzL25dpV7tQjw2twQVQKo4ZLItZOCoObYiSx.qAZYeU2lgTeyGgR2bI9ZTA7kOua4gorZI57ECLI.D_vNt6YuTDmUdc2yjahSHyklVjmzLxQIhMq3fxWl6KnIqz.KHH2zlx.5mt0qMDmdauw..AH",
+              "status": 401,
+              "tipo": "fetch",
+              "conteudo": "text/plain; charset=utf-8"
+            },
+            {
+              "url": "https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/b/fo/2126114248:1792530023:dUe12xuOxhGQAdicMiARHKdZeA1e4n7hzWJPemHd6CA/a4db2b8e9c91c4c8/efbBqOTzliAEZpOROCRNcVXHhQX8AhOhmcYXyAo1OHs-1792532313-1.2.1.1-gEQh6B5h_YWMrMIUyWt3.0jn6Q2uyUk5TQUYdoh8nezZfxUxnC81ZHztzl9AmekX",
+              "status": 200,
+              "tipo": "xhr",
+              "conteudo": "text/plain; charset=UTF-8"
+            }
+          ],
+          "robots": 200,
+          "nota": "desafio anti-robô na página: parado aqui, sem tentar passar"
+        }
+      ]
+    },
+    "CEASA-DF": {
+      "rede": {
+        "host": "www.ceasa.df.gov.br",
+        "ips": [
+          "131.72.220.94"
+        ],
+        "dns_ms": 555,
+        "tcp_443": "ok em 855 ms",
+        "tcp_80": "ok em 650 ms",
+        "tls": "falhou: _ssl.c:993: The handshake operation timed out",
+        "tls_verificado": "inválido: _ssl.c:993: The handshake operation timed out"
+      },
+      "paginas": [
+        {
+          "url": "https://www.ceasa.df.gov.br/",
+          "erro": "Page.goto: net::ERR_TIMED_OUT at https://www.ceasa.df.gov.br/",
+          "robots": 0
+        },
+        {
+          "url": "http://www.ceasa.df.gov.br/",
+          "status": 503,
+          "ms": 940,
+          "titulo": "Aplicação bloqueada",
+          "desafio_antirrobo": false,
+          "texto_inicio": "Página bloqueada. O acesso a página solicitada foi bloqueado de acordo com a política de segurança em vigor. Acione o suporte técnico caso precise acessar a página para sua atividade profissional, informando o tipo de aplicação descrita abaixo e o motivo. +55 (61) 3342-1740 centraldeservicos@gdfnet.df.gov.br Aplicação: web-browsing IP: 57.152.36.198 Referências normativas: Política de Segurança da Informação e Comunicação do Governo do Distrito Federal (PoSIC/GDF) Lei 12.965/14 Lei 12.735/12 Lei Complementar 840/11 Decreto n° 25.750/05 Lei n° 2.572/00",
+          "links_de_dados": [],
+          "pedidos_de_dados": [],
+          "robots": 503
+        }
+      ]
+    },
+    "IPE-DF": {
+      "rede": {
+        "host": "www.ipe.df.gov.br",
+        "ips": [
+          "131.72.220.94"
+        ],
+        "dns_ms": 1138,
+        "tcp_443": "ok em 1792 ms",
+        "tcp_80": "falhou: timed out",
+        "tls": "falhou: _ssl.c:993: The handshake operation timed out",
+        "tls_verificado": "inválido: _ssl.c:993: The handshake operation timed out"
+      },
+      "paginas": [
+        {
+          "url": "https://www.ipe.df.gov.br/",
+          "erro": "Page.goto: net::ERR_TIMED_OUT at https://www.ipe.df.gov.br/",
+          "robots": 0
+        },
+        {
+          "url": "http://www.ipe.df.gov.br/",
+          "status": 503,
+          "ms": 806,
+          "titulo": "Aplicação bloqueada",
+          "desafio_antirrobo": false,
+          "texto_inicio": "Página bloqueada. O acesso a página solicitada foi bloqueado de acordo com a política de segurança em vigor. Acione o suporte técnico caso precise acessar a página para sua atividade profissional, informando o tipo de aplicação descrita abaixo e o motivo. +55 (61) 3342-1740 centraldeservicos@gdfnet.df.gov.br Aplicação: web-browsing IP: 57.152.36.198 Referências normativas: Política de Segurança da Informação e Comunicação do Governo do Distrito Federal (PoSIC/GDF) Lei 12.965/14 Lei 12.735/12 Lei Complementar 840/11 Decreto n° 25.750/05 Lei n° 2.572/00",
+          "links_de_dados": [],
+          "pedidos_de_dados": [],
+          "robots": 503
+        }
+      ]
+    },
+    "Conab Prohort": {
+      "rede": {
+        "host": "prohort.conab.gov.br",
+        "ips": [
+          "160.238.29.73"
+        ],
+        "dns_ms": 591,
+        "tcp_443": "ok em 356 ms",
+        "tcp_80": "ok em 360 ms",
+        "tls": "handshake ok em 537 ms (TLSv1.3)",
+        "nomes_no_certificado": [
+          "acesseleiloes.conab.gov.br"
+        ],
+        "certificado_pem_inicio": "-----BEGIN CERTIFICATE-----\nMIIFDjCCA/agAwIBAgISBqM8fCZGmQczCeCPfc6e/RfTMA0GCSqG",
+        "tls_verificado": "inválido: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'prohort.conab.gov.br'. (_ssl.c:1010)"
+      },
+      "paginas": [
+        {
+          "url": "https://prohort.conab.gov.br/",
+          "erro": "Page.goto: net::ERR_CERT_COMMON_NAME_INVALID at https://prohort.conab.gov.br/",
+          "robots": 0
+        },
+        {
+          "url": "https://www.conab.gov.br/info-agro/hortigranjeiros-prohort",
+          "status": 200,
+          "ms": 6330,
+          "titulo": "Home — Companhia Nacional de Abastecimento",
+          "desafio_antirrobo": false,
+          "texto_inicio": "IR PARA O CONTEÚDO 1 IR PARA A PÁGINA INICIAL 2 IR PARA O MENU DE NAVEGAÇÃO 3 IR PARA A BUSCA 4 IR PARA O MAPA DO SITE 5 Abrir menu principal de navegação Companhia Nacional de Abastecimento Serviços recomendados para você Serviços mais acessados do govbr Serviços em destaque do govbr Saiba mais sobre Saiba mais sobre Saiba mais sobre Saiba mais sobre Saiba mais sobre Saiba mais sobre Saiba mais sobre Saiba mais sobre Saiba mais sobre Saiba mais sobre Saiba mais sobre Saiba mais sobre Saiba mais sobre Saiba mais sobre Saiba mais sobre Saiba mais sobre Saiba mais sobre Notícias SAFRA DE GRÃOS Primeiro levantamento da safra de grãos 2026/27 estima produção acima de 367 milhões de toneladas Projeção para o novo ciclo indica crescimento de 1,4% no volume a ser colhido e ampliação de 2,3% na área a ser semeada, que pode alcançar 85,4 milhões de hectares 15/10/2026 08h59 Conab detalha operação para comercialização de farelo de soja O Mais Farelo - Soja utiliza a estrutura da Companhia para armazenagem, enquanto negociação ocorre diretamente entre produtores e compradores 02/10/2026 10h00 SAFRA DE CAFÉ 2026 Produção de café é estimada em 67,6 milhões de sacas, influenciada por bienalidade positiva em 2026 O resultado estimado para a produção de café para este ano é influenciado tanto pela melhor produtividade média como pelo aumento de área e se configura como o maior da série histórica da Conab 24/09/2026 09h12 Nota Oficial – Conab atualiza informações sobre instabilidade em sistem",
+          "links_de_dados": [
+            "//cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css",
+            "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css",
+            "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+          ],
+          "pedidos_de_dados": [
+            {
+              "url": "https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css",
+              "status": 200,
+              "tipo": "stylesheet",
+              "conteudo": "text/css; charset=utf-8"
+            },
+            {
+              "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css",
+              "status": 200,
+              "tipo": "stylesheet",
+              "conteudo": "text/css; charset=utf-8"
+            },
+            {
+              "url": "https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.min.js",
+              "status": 200,
+              "tipo": "script",
+              "conteudo": "application/javascript; charset=utf-8"
+            },
+            {
+              "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/webfonts/fa-solid-900.woff2",
+              "status": 200,
+              "tipo": "font",
+              "conteudo": "application/octet-stream; charset=utf-8"
+            },
+            {
+              "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/webfonts/fa-brands-400.woff2",
+              "status": 200,
+              "tipo": "font",
+              "conteudo": "application/octet-stream; charset=utf-8"
+            },
+            {
+              "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css",
+              "status": 200,
+              "tipo": "stylesheet",
+              "conteudo": "text/css; charset=utf-8"
+            },
+            {
+              "url": "https://barra.sistema.gov.br/v1/assets/icons/th-solid.svg",
+              "status": 200,
+              "tipo": "fetch",
+              "conteudo": "image/svg+xml"
+            },
+            {
+              "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/webfonts/fa-brands-400.woff2",
+              "status": 200,
+              "tipo": "font",
+              "conteudo": "application/octet-stream; charset=utf-8"
+            },
+            {
+              "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/webfonts/fa-solid-900.woff2",
+              "status": 200,
+              "tipo": "font",
+              "conteudo": "application/octet-stream; charset=utf-8"
+            },
+            {
+              "url": "https://www.gov.br/conab/pt-br/@@configuracoes_view",
+              "status": 200,
+              "tipo": "fetch",
+              "conteudo": "application/json; charset=utf-8"
+            }
+          ],
+          "robots": 200
+        }
+      ]
+    },
+    "Conab Portal de Informações": {
+      "rede": {
+        "host": "portaldeinformacoes.conab.gov.br",
+        "ips": [
+          "160.238.29.73"
+        ],
+        "dns_ms": 368,
+        "tcp_443": "ok em 130 ms",
+        "tcp_80": "ok em 128 ms",
+        "tls": "handshake ok em 521 ms (TLSv1.3)",
+        "nomes_no_certificado": [
+          "portaldeinformacoes.conab.gov.br"
+        ],
+        "certificado_pem_inicio": "-----BEGIN CERTIFICATE-----\nMIIFGTCCBAGgAwIBAgISBQwLaPAebroK4mMb7Ta9OM6aMA0GCSqG",
+        "tls_verificado": "certificado válido para o nome"
+      },
+      "paginas": [
+        {
+          "url": "https://portaldeinformacoes.conab.gov.br/",
+          "status": 403,
+          "ms": 1560,
+          "titulo": "Conab - Erro no acesso",
+          "desafio_antirrobo": false,
+          "texto_inicio": "403 - Acesso proibido O acesso a esta página não é permitido.",
+          "links_de_dados": [],
+          "pedidos_de_dados": [],
+          "robots": 200
+        },
+        {
+          "url": "https://portaldeinformacoes.conab.gov.br/download-arquivos.html",
+          "status": 403,
+          "ms": 1293,
+          "titulo": "Conab - Erro no acesso",
+          "desafio_antirrobo": false,
+          "texto_inicio": "403 - Acesso proibido O acesso a esta página não é permitido.",
+          "links_de_dados": [],
+          "pedidos_de_dados": [],
+          "robots": 200
+        }
+      ]
+    }
+  },
+  "portais": {
+    "Dados abertos do DF (CEASA)": {
+      "erro": "<urlopen error _ssl.c:993: The handshake operation timed out>"
+    },
+    "Dados abertos do DF (IPE-DF)": {
+      "erro": "<urlopen error _ssl.c:993: The handshake operation timed out>"
+    },
+    "Dados abertos do DF (preços)": {
+      "erro": "<urlopen error _ssl.c:993: The handshake operation timed out>"
+    },
+    "Dados abertos federal (Conab)": {
+      "erro": "HTTP Error 401: Unauthorized"
+    }
+  },
+  "user_agent_usado": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.6723.31 Safari/537.36 HistoricoPrecosBot/0.1 (pesquisa de precos ao consumidor; respeita robots.txt)"
+}

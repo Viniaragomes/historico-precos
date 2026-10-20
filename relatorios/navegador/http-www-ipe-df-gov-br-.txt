@@ -1,0 +1,19 @@
+ Página bloqueada.
+
+O acesso a página solicitada foi bloqueado de acordo com a política de segurança em vigor. Acione o suporte técnico caso precise acessar a página para sua atividade profissional, informando o tipo de aplicação descrita abaixo e o motivo.
+
+ +55 (61) 3342-1740
+ centraldeservicos@gdfnet.df.gov.br
+
+
+Aplicação: web-browsing
+
+IP: 57.152.36.198
+
+Referências normativas:
+Política de Segurança da Informação e Comunicação do Governo do Distrito Federal (PoSIC/GDF)
+Lei 12.965/14
+Lei 12.735/12
+Lei Complementar 840/11
+Decreto n° 25.750/05
+Lei n° 2.572/00
