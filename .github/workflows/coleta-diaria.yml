@@ -63,19 +63,6 @@ jobs:
             python -m historico_precos mapa-df coletar
           fi
 
-      - name: Encartes DF (só roda se houver a credencial ANTHROPIC_API_KEY nos segredos do repositório)
-        continue-on-error: true
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: |
-          python -m historico_precos encarte encartesdf --dias 2 --listar | tail -40
-          if [ -n "$ANTHROPIC_API_KEY" ]; then
-            pip install -q -r requirements-encartes.txt
-            python -m historico_precos encarte encartesdf --dias 2 --max-imagens 30
-          else
-            echo "Sem ANTHROPIC_API_KEY: encartes só listados, não lidos."
-          fi
-
       - name: Checagem de qualidade (bloqueios não vão para o app)
         run: python -m historico_precos qualidade | tail -50
 
