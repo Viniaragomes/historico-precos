@@ -1,0 +1,27 @@
+classificações do TOMATE: {'2': 'ESPECIAL', '3': 'EXTRA', '6': 'PRIMEIRA'}
+
+== classificação 2 10/2026 urlencoded:
+{"message":"<div class='message info '><i class='ti ti-info-circle'><\/i>Sua pesquisa n&atilde;o retornou resultados. Escolha outro per&iacute;odo e tente novamente.<\/div>"}
+
+== classificação 2 10/2026 multipart:
+{"message":"<div class='message info '><i class='ti ti-info-circle'><\/i>Sua pesquisa n&atilde;o retornou resultados. Escolha outro per&iacute;odo e tente novamente.<\/div>"}
+
+== classificação 2 09/2026 urlencoded:
+{"message":"<div class='message info '><i class='ti ti-info-circle'><\/i>Sua pesquisa n&atilde;o retornou resultados. Escolha outro per&iacute;odo e tente novamente.<\/div>"}
+
+== classificação 2 09/2026 multipart:
+{"message":"<div class='message info '><i class='ti ti-info-circle'><\/i>Sua pesquisa n&atilde;o retornou resultados. Escolha outro per&iacute;odo e tente novamente.<\/div>"}
+
+== classificação 3 10/2026 urlencoded:
+{"message":"<div class='message info '><i class='ti ti-info-circle'><\/i>Sua pesquisa n&atilde;o retornou resultados. Escolha outro per&iacute;odo e tente novamente.<\/div>"}
+
+== classificação 3 10/2026 multipart:
+{"message":"<div class='message info '><i class='ti ti-info-circle'><\/i>Sua pesquisa n&atilde;o retornou resultados. Escolha outro per&iacute;odo e tente novamente.<\/div>"}
+
+== classificação 3 09/2026 urlencoded:
+{"message":"<div class='message info '><i class='ti ti-info-circle'><\/i>Sua pesquisa n&atilde;o retornou resultados. Escolha outro per&iacute;odo e tente novamente.<\/div>"}
+
+== classificação 3 09/2026 multipart:
+{"message":"<div class='message info '><i class='ti ti-info-circle'><\/i>Sua pesquisa n&atilde;o retornou resultados. Escolha outro per&iacute;odo e tente novamente.<\/div>"}
+
+registro de falhas: []
