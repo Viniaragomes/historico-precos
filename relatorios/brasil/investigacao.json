@@ -1,27 +1,4 @@
 {
-  "Diário Oficial da União": {
-    "robots": {
-      "status": 0,
-      "erro": "Remote end closed connection without response",
-      "conteudo": null,
-      "analise": null
-    },
-    "paginas": [
-      {
-        "url": "https://www.in.gov.br/",
-        "status": 0,
-        "erro": "Remote end closed connection without response",
-        "ms": 80
-      },
-      {
-        "url": "https://www.in.gov.br/consulta/-/buscar/dou?q=ICMS",
-        "status": 0,
-        "erro": "Remote end closed connection without response",
-        "ms": 95
-      }
-    ],
-    "scripts": []
-  },
   "Confaz (convênios ICMS)": {
     "robots": {
       "status": 200,
@@ -33,7 +10,7 @@
       {
         "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios",
         "status": 200,
-        "ms": 229,
+        "ms": 247,
         "titulo": "Convênios ICMS — Conselho Nacional de Política Fazendária CONFAZ",
         "servidor": "Zope/(2.13.22, python 2.7.3, linux2) ZServer/1.1",
         "antirrobo": [],
@@ -72,7 +49,189 @@
         "enderecos": [],
         "qlik": null
       }
-    ]
+    ],
+    "temas": {
+      "sitemaps_lidos": [
+        {
+          "url": "https://www.confaz.fazenda.gov.br/sitemap.xml.gz",
+          "status": 200,
+          "erro": null
+        }
+      ],
+      "candidatos": 7774,
+      "exemplos": [
+        "https://www.confaz.fazenda.gov.br/legislacao/convenios",
+        "https://www.confaz.fazenda.gov.br/legislacao/convenios/2025",
+        "https://www.confaz.fazenda.gov.br/legislacao/convenios/2026",
+        "https://www.confaz.fazenda.gov.br/legislacao/convenios-ecf",
+        "https://www.confaz.fazenda.gov.br/legislacao/convenios_arrecadacao",
+        "https://www.confaz.fazenda.gov.br/legislacao/Convenios-de-cooperacao-outros2",
+        "https://www.confaz.fazenda.gov.br/legislacao/convenios/1966/conveniosicms_1966",
+        "https://www.confaz.fazenda.gov.br/legislacao/convenios/1967/conveniosicms_1967",
+        "https://www.confaz.fazenda.gov.br/legislacao/convenios/1968/conveniosicms_1968",
+        "https://www.confaz.fazenda.gov.br/legislacao/convenios/1969/conveniosicms_1969",
+        "https://www.confaz.fazenda.gov.br/legislacao/convenios/1970/conveniosicms_1970",
+        "https://www.confaz.fazenda.gov.br/legislacao/convenios/1971/conveniosicms_1971",
+        "https://www.confaz.fazenda.gov.br/legislacao/convenios/1972/conveniosicms_1972",
+        "https://www.confaz.fazenda.gov.br/legislacao/convenios/1973/conveniosicms_1973",
+        "https://www.confaz.fazenda.gov.br/legislacao/convenios/1974/conveniosicms_1974",
+        "https://www.confaz.fazenda.gov.br/legislacao/convenios/1975/conveniosicms_1975",
+        "https://www.confaz.fazenda.gov.br/legislacao/convenios/1976/conveniosicms_1976",
+        "https://www.confaz.fazenda.gov.br/legislacao/convenios/1977/conveniosicms_1977",
+        "https://www.confaz.fazenda.gov.br/legislacao/convenios/1978/conveniosicms_1978",
+        "https://www.confaz.fazenda.gov.br/legislacao/convenios/1979/conveniosicms_1979",
+        "https://www.confaz.fazenda.gov.br/legislacao/convenios/1980/conveniosicms_1980",
+        "https://www.confaz.fazenda.gov.br/legislacao/convenios/1981/conveniosicms_1981",
+        "https://www.confaz.fazenda.gov.br/legislacao/convenios/1982/conveniosicms_1982",
+        "https://www.confaz.fazenda.gov.br/legislacao/convenios/1983/conveniosicms_1983",
+        "https://www.confaz.fazenda.gov.br/legislacao/convenios/1984/conveniosicms_1984",
+        "https://www.confaz.fazenda.gov.br/legislacao/convenios/1985/conveniosicms_1985",
+        "https://www.confaz.fazenda.gov.br/legislacao/convenios/1986/conveniosicms_1986",
+        "https://www.confaz.fazenda.gov.br/legislacao/convenios/1987/conveniosicms_1987",
+        "https://www.confaz.fazenda.gov.br/legislacao/convenios/1988/conveniosicms_1988",
+        "https://www.confaz.fazenda.gov.br/legislacao/convenios/1989/conveniosicms_1989"
+      ],
+      "paginas": [
+        {
+          "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios",
+          "status": 200,
+          "ms": 237,
+          "titulo": "Convênios ICMS — Conselho Nacional de Política Fazendária CONFAZ",
+          "servidor": "Zope/(2.13.22, python 2.7.3, linux2) ZServer/1.1",
+          "antirrobo": [],
+          "tecnologia": [],
+          "tem_json_ld": false,
+          "arquivos_de_dados": [],
+          "inicio_do_texto": "@import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%20Theme/resourceplone.formwidget.autocompletejquery.autocomplete-cachekey-8a1ada68d10450ed014103370f01e143.css); @import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%20Theme/resourcecalendar_stylescalendar-cachekey-ab87c47333464a5f1d4a22f5f4f9f144.css); @import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%2"
+        },
+        {
+          "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios/2025",
+          "status": 200,
+          "ms": 1043,
+          "titulo": "2025 — Conselho Nacional de Política Fazendária CONFAZ",
+          "servidor": "Zope/(2.13.22, python 2.7.3, linux2) ZServer/1.1",
+          "antirrobo": [],
+          "tecnologia": [],
+          "tem_json_ld": false,
+          "arquivos_de_dados": [],
+          "inicio_do_texto": "@import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%20Theme/resourceplone.formwidget.autocompletejquery.autocomplete-cachekey-8a1ada68d10450ed014103370f01e143.css); @import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%20Theme/resourcecalendar_stylescalendar-cachekey-ab87c47333464a5f1d4a22f5f4f9f144.css); @import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%2"
+        },
+        {
+          "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios/2026",
+          "status": 200,
+          "ms": 301,
+          "titulo": "2026 — Conselho Nacional de Política Fazendária CONFAZ",
+          "servidor": "Zope/(2.13.22, python 2.7.3, linux2) ZServer/1.1",
+          "antirrobo": [],
+          "tecnologia": [],
+          "tem_json_ld": false,
+          "arquivos_de_dados": [],
+          "inicio_do_texto": "@import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%20Theme/resourceplone.formwidget.autocompletejquery.autocomplete-cachekey-8a1ada68d10450ed014103370f01e143.css); @import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%20Theme/resourcecalendar_stylescalendar-cachekey-ab87c47333464a5f1d4a22f5f4f9f144.css); @import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%2"
+        },
+        {
+          "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios-ecf",
+          "status": 200,
+          "ms": 473,
+          "titulo": "Convênios ECF — Conselho Nacional de Política Fazendária CONFAZ",
+          "servidor": "Zope/(2.13.22, python 2.7.3, linux2) ZServer/1.1",
+          "antirrobo": [],
+          "tecnologia": [],
+          "tem_json_ld": false,
+          "arquivos_de_dados": [],
+          "inicio_do_texto": "@import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%20Theme/resourceplone.formwidget.autocompletejquery.autocomplete-cachekey-8a1ada68d10450ed014103370f01e143.css); @import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%20Theme/resourcecalendar_stylescalendar-cachekey-ab87c47333464a5f1d4a22f5f4f9f144.css); @import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%2"
+        },
+        {
+          "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios_arrecadacao",
+          "status": 200,
+          "ms": 447,
+          "titulo": "Convênios Arrecadação — Conselho Nacional de Política Fazendária CONFAZ",
+          "servidor": "Zope/(2.13.22, python 2.7.3, linux2) ZServer/1.1",
+          "antirrobo": [],
+          "tecnologia": [],
+          "tem_json_ld": false,
+          "arquivos_de_dados": [],
+          "inicio_do_texto": "@import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%20Theme/resourceplone.formwidget.autocompletejquery.autocomplete-cachekey-8a1ada68d10450ed014103370f01e143.css); @import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%20Theme/resourcecalendar_stylescalendar-cachekey-ab87c47333464a5f1d4a22f5f4f9f144.css); @import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%2"
+        },
+        {
+          "url": "https://www.confaz.fazenda.gov.br/legislacao/Convenios-de-cooperacao-outros2",
+          "status": 200,
+          "ms": 458,
+          "titulo": "Página principal - OUTROS — Conselho Nacional de Política Fazendária CONFAZ",
+          "servidor": "Zope/(2.13.22, python 2.7.3, linux2) ZServer/1.1",
+          "antirrobo": [],
+          "tecnologia": [],
+          "tem_json_ld": false,
+          "arquivos_de_dados": [],
+          "inicio_do_texto": "@import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%20Theme/resourceplone.formwidget.autocompletejquery.autocomplete-cachekey-8a1ada68d10450ed014103370f01e143.css); @import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%20Theme/resourcecalendar_stylescalendar-cachekey-ab87c47333464a5f1d4a22f5f4f9f144.css); @import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%2"
+        },
+        {
+          "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios/1966/conveniosicms_1966",
+          "status": 0,
+          "erro": "The read operation timed out",
+          "ms": 45205
+        },
+        {
+          "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios/1967/conveniosicms_1967",
+          "status": 200,
+          "ms": 517,
+          "titulo": "CONVÊNIOS ICMS 1967 — Conselho Nacional de Política Fazendária CONFAZ",
+          "servidor": "Zope/(2.13.22, python 2.7.3, linux2) ZServer/1.1",
+          "antirrobo": [],
+          "tecnologia": [],
+          "tem_json_ld": false,
+          "arquivos_de_dados": [],
+          "inicio_do_texto": "@import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%20Theme/resourceplone.formwidget.autocompletejquery.autocomplete-cachekey-8a1ada68d10450ed014103370f01e143.css); @import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%20Theme/resourcecalendar_stylescalendar-cachekey-ab87c47333464a5f1d4a22f5f4f9f144.css); @import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%2"
+        },
+        {
+          "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios/1968/conveniosicms_1968",
+          "status": 200,
+          "ms": 480,
+          "titulo": "CONVÊNIOS ICMS 1968 — Conselho Nacional de Política Fazendária CONFAZ",
+          "servidor": "Zope/(2.13.22, python 2.7.3, linux2) ZServer/1.1",
+          "antirrobo": [],
+          "tecnologia": [],
+          "tem_json_ld": false,
+          "arquivos_de_dados": [],
+          "inicio_do_texto": "@import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%20Theme/resourceplone.formwidget.autocompletejquery.autocomplete-cachekey-8a1ada68d10450ed014103370f01e143.css); @import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%20Theme/resourcecalendar_stylescalendar-cachekey-ab87c47333464a5f1d4a22f5f4f9f144.css); @import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%2"
+        },
+        {
+          "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios/1969/conveniosicms_1969",
+          "status": 200,
+          "ms": 479,
+          "titulo": "CONVÊNIO ICMS 1969 — Conselho Nacional de Política Fazendária CONFAZ",
+          "servidor": "Zope/(2.13.22, python 2.7.3, linux2) ZServer/1.1",
+          "antirrobo": [],
+          "tecnologia": [],
+          "tem_json_ld": false,
+          "arquivos_de_dados": [],
+          "inicio_do_texto": "@import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%20Theme/resourceplone.formwidget.autocompletejquery.autocomplete-cachekey-8a1ada68d10450ed014103370f01e143.css); @import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%20Theme/resourcecalendar_stylescalendar-cachekey-ab87c47333464a5f1d4a22f5f4f9f144.css); @import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%2"
+        },
+        {
+          "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios/1970/conveniosicms_1970",
+          "status": 200,
+          "ms": 505,
+          "titulo": "CONVÊNIOS ICMS 1970 — Conselho Nacional de Política Fazendária CONFAZ",
+          "servidor": "Zope/(2.13.22, python 2.7.3, linux2) ZServer/1.1",
+          "antirrobo": [],
+          "tecnologia": [],
+          "tem_json_ld": false,
+          "arquivos_de_dados": [],
+          "inicio_do_texto": "@import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%20Theme/resourceplone.formwidget.autocompletejquery.autocomplete-cachekey-8a1ada68d10450ed014103370f01e143.css); @import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%20Theme/resourcecalendar_stylescalendar-cachekey-ab87c47333464a5f1d4a22f5f4f9f144.css); @import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%2"
+        },
+        {
+          "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios/1971/conveniosicms_1971",
+          "status": 200,
+          "ms": 515,
+          "titulo": "CONVÊNIOS ICMS 1971 — Conselho Nacional de Política Fazendária CONFAZ",
+          "servidor": "Zope/(2.13.22, python 2.7.3, linux2) ZServer/1.1",
+          "antirrobo": [],
+          "tecnologia": [],
+          "tem_json_ld": false,
+          "arquivos_de_dados": [],
+          "inicio_do_texto": "@import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%20Theme/resourceplone.formwidget.autocompletejquery.autocomplete-cachekey-8a1ada68d10450ed014103370f01e143.css); @import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%20Theme/resourcecalendar_stylescalendar-cachekey-ab87c47333464a5f1d4a22f5f4f9f144.css); @import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%2"
+        }
+      ]
+    }
   },
   "CEASA-DF (atacado de hortifrúti)": {
     "robots": {
@@ -86,41 +245,16 @@
         "url": "https://www.ceasa.df.gov.br/",
         "status": 0,
         "erro": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1144)>",
-        "ms": 154
+        "ms": 234
       }
     ],
-    "scripts": []
-  },
-  "Conab Portal de Informações (downloads)": {
-    "robots": {
-      "status": 200,
-      "erro": null,
-      "conteudo": "User-agent: *\nAllow: /\n",
-      "analise": null
-    },
-    "paginas": [
-      {
-        "url": "https://portaldeinformacoes.conab.gov.br/download-arquivos.html",
-        "status": 403,
-        "ms": 43,
-        "titulo": "Conab - Erro no acesso",
-        "servidor": "Apache",
-        "antirrobo": [],
-        "tecnologia": [],
-        "tem_json_ld": false,
-        "arquivos_de_dados": [],
-        "enderecos_de_dados": [],
-        "inicio_do_texto": "Conab - Erro no acesso 403 - Acesso proibido O acesso a esta página não é permitido.",
-        "dados_embutidos": {
-          "json_ld_tipos": [],
-          "produtos_json_ld": [],
-          "estados_embutidos": {},
-          "outros_json_em_script": [],
-          "meta_preco": []
-        }
-      }
-    ],
-    "scripts": []
+    "scripts": [],
+    "temas": {
+      "sitemaps_lidos": [],
+      "candidatos": 0,
+      "exemplos": [],
+      "paginas": []
+    }
   },
   "IPE-DF (índices do DF)": {
     "robots": {
@@ -133,7 +267,7 @@
       {
         "url": "https://www.ipe.df.gov.br/",
         "status": 200,
-        "ms": 721,
+        "ms": 762,
         "titulo": "Instituto de Pesquisa e Estatística do Distrito Federal",
         "servidor": null,
         "antirrobo": [],
@@ -178,7 +312,54 @@
         "enderecos": [],
         "qlik": null
       }
-    ]
+    ],
+    "temas": {
+      "sitemaps_lidos": [
+        {
+          "url": "https://ipe.df.gov.br/sitemap.xml",
+          "status": 200,
+          "erro": null
+        },
+        {
+          "url": "https://ipe.df.gov.br/sitemap.xml?p_l_id=29655&amp;layoutUuid=31b44e0a-842b-3211-e79e-3197b31cb7bd&amp;groupId=9915964&amp;privateLayout=false",
+          "status": 200,
+          "erro": null
+        },
+        {
+          "url": "https://ipe.df.gov.br/sitemap.xml?p_l_id=29669&amp;layoutUuid=fc208f04-9c95-923f-a31f-286ea3c09d0f&amp;groupId=9915964&amp;privateLayout=false",
+          "status": 200,
+          "erro": null
+        },
+        {
+          "url": "https://ipe.df.gov.br/sitemap.xml?p_l_id=37333&amp;layoutUuid=264be4b4-7782-2325-d6e2-05f3a9641dff&amp;groupId=9915964&amp;privateLayout=false",
+          "status": 200,
+          "erro": null
+        },
+        {
+          "url": "https://ipe.df.gov.br/sitemap.xml?p_l_id=29500&amp;layoutUuid=4e715ee9-ba4c-8a82-ecde-04a1de60b614&amp;groupId=9915964&amp;privateLayout=false",
+          "status": 200,
+          "erro": null
+        },
+        {
+          "url": "https://ipe.df.gov.br/sitemap.xml?p_l_id=29501&amp;layoutUuid=e1189795-4e1b-1ea5-e88e-9c3082d9eb72&amp;groupId=9915964&amp;privateLayout=false",
+          "status": 200,
+          "erro": null
+        },
+        {
+          "url": "https://ipe.df.gov.br/sitemap.xml?p_l_id=29502&amp;layoutUuid=9b3f9a40-4ee9-dcb1-0ff9-cf1cc600322e&amp;groupId=9915964&amp;privateLayout=false",
+          "status": 200,
+          "erro": null
+        },
+        {
+          "url": "https://ipe.df.gov.br/sitemap.xml?p_l_id=29504&amp;layoutUuid=71729dd5-7618-d127-3b2b-5bf4333aa296&amp;groupId=9915964&amp;privateLayout=false",
+          "status": 200,
+          "erro": null
+        }
+      ],
+      "candidatos": 0,
+      "exemplos": [],
+      "paginas": []
+    }
   },
   "Dados abertos do DF": {
     "robots": {
@@ -191,7 +372,7 @@
       {
         "url": "https://dados.df.gov.br/",
         "status": 200,
-        "ms": 430,
+        "ms": 328,
         "titulo": "Início - Portal de Dados Abertos - GDF",
         "servidor": null,
         "antirrobo": [],
@@ -213,7 +394,7 @@
       {
         "url": "https://dados.df.gov.br/api/3/action/package_search?q=ceasa&rows=20",
         "status": 404,
-        "ms": 661,
+        "ms": 601,
         "titulo": "",
         "servidor": null,
         "antirrobo": [],
@@ -233,7 +414,7 @@
       {
         "url": "https://dados.df.gov.br/api/3/action/package_search?q=pre%C3%A7os&rows=20",
         "status": 404,
-        "ms": 228,
+        "ms": 164,
         "titulo": "",
         "servidor": null,
         "antirrobo": [],
@@ -258,22 +439,69 @@
         "qlik": null
       },
       {
-        "url": "https://dados.df.gov.br/combo?browserId=other&minifierType=js&languageId=pt_BR&t=1743048005394&/o/frontend-js-aui-web/aui/aui/aui-min.js&/o/frontend-js-aui-web/liferay/modules.js&/o/frontend-js-aui-web/liferay/aui_sandbox.js&/o/frontend-js-aui-web/aui/attribute-base/attribute-base-min.js&/o/frontend-js-aui-web/aui/attribute-complex/attribute-complex-min.js&/o/frontend-js-aui-web/aui/attribute-core/attribute-core-min.js&/o/frontend-js-aui-web/aui/attribute-observable/attribute-observable-min.js&/o/frontend-js-aui-web/aui/attribute-extras/attribute-extras-min.js&/o/frontend-js-aui-web/aui/event-custom-base/event-custom-base-min.js&/o/frontend-js-aui-web/aui/event-custom-complex/event-custom-complex-min.js&/o/frontend-js-aui-web/aui/oop/oop-min.js&/o/frontend-js-aui-web/aui/aui-base-lang/aui-base-lang-min.js&/o/frontend-js-aui-web/liferay/dependency.js&/o/frontend-js-aui-web/liferay/util.js&/o/oauth2-provider-web/js/liferay.js&/o/frontend-js-web/liferay/dom_task_runner.js&/o/frontend-js-web/liferay/events.js&/o/frontend-js-web/liferay/lazy_load.js&/o/frontend-js-web/liferay/liferay.js&/o/frontend-js-web/liferay/global.bundle.js&/o/frontend-js-web/liferay/portlet.js&/o/frontend-js-web/liferay/workflow.js",
+        "url": "https://dados.df.gov.br/combo?browserId=other&minifierType=js&languageId=pt_BR&t=1743048032465&/o/frontend-js-aui-web/aui/aui/aui-min.js&/o/frontend-js-aui-web/liferay/modules.js&/o/frontend-js-aui-web/liferay/aui_sandbox.js&/o/frontend-js-aui-web/aui/attribute-base/attribute-base-min.js&/o/frontend-js-aui-web/aui/attribute-complex/attribute-complex-min.js&/o/frontend-js-aui-web/aui/attribute-core/attribute-core-min.js&/o/frontend-js-aui-web/aui/attribute-observable/attribute-observable-min.js&/o/frontend-js-aui-web/aui/attribute-extras/attribute-extras-min.js&/o/frontend-js-aui-web/aui/event-custom-base/event-custom-base-min.js&/o/frontend-js-aui-web/aui/event-custom-complex/event-custom-complex-min.js&/o/frontend-js-aui-web/aui/oop/oop-min.js&/o/frontend-js-aui-web/aui/aui-base-lang/aui-base-lang-min.js&/o/frontend-js-aui-web/liferay/dependency.js&/o/frontend-js-aui-web/liferay/util.js&/o/oauth2-provider-web/js/liferay.js&/o/frontend-js-web/liferay/dom_task_runner.js&/o/frontend-js-web/liferay/events.js&/o/frontend-js-web/liferay/lazy_load.js&/o/frontend-js-web/liferay/liferay.js&/o/frontend-js-web/liferay/global.bundle.js&/o/frontend-js-web/liferay/portlet.js&/o/frontend-js-web/liferay/workflow.js",
         "enderecos": [
           "/api/jsonws/invoke"
         ],
         "qlik": null
       },
       {
-        "url": "https://dados.df.gov.br/o/contadores/js/main.CSQAnIYa.js?t=1790294978157",
+        "url": "https://dados.df.gov.br/o/contadores/js/main.CSQAnIYa.js?t=1790294778865",
         "enderecos": [],
         "qlik": null
       },
       {
-        "url": "https://dados.df.gov.br/o/mais-populares/js/main.BAEIoo2U.js?t=1790294978262",
+        "url": "https://dados.df.gov.br/o/mais-populares/js/main.BAEIoo2U.js?t=1790294779076",
         "enderecos": [],
         "qlik": null
       }
-    ]
+    ],
+    "temas": {
+      "sitemaps_lidos": [
+        {
+          "url": "https://dados.df.gov.br:443/sitemap.xml",
+          "status": 200,
+          "erro": null
+        },
+        {
+          "url": "https://dados.df.gov.br/sitemap.xml?p_l_id=45153&amp;layoutUuid=bac035fd-cb62-c198-147c-307ef8926422&amp;groupId=42497158&amp;privateLayout=false",
+          "status": 200,
+          "erro": null
+        },
+        {
+          "url": "https://dados.df.gov.br/sitemap.xml?p_l_id=45142&amp;layoutUuid=b1dc029b-6609-ca0c-a3f9-5840ac98dc86&amp;groupId=42497158&amp;privateLayout=false",
+          "status": 200,
+          "erro": null
+        },
+        {
+          "url": "https://dados.df.gov.br/sitemap.xml?p_l_id=45147&amp;layoutUuid=8ca1e522-ed86-9207-523f-94de02ac6758&amp;groupId=42497158&amp;privateLayout=false",
+          "status": 200,
+          "erro": null
+        },
+        {
+          "url": "https://dados.df.gov.br/sitemap.xml?p_l_id=45148&amp;layoutUuid=60b76705-2778-22cc-4744-a111b46c98f7&amp;groupId=42497158&amp;privateLayout=false",
+          "status": 200,
+          "erro": null
+        },
+        {
+          "url": "https://dados.df.gov.br/sitemap.xml?p_l_id=45145&amp;layoutUuid=64530440-01bf-9cbe-6afe-459a2fa908b8&amp;groupId=42497158&amp;privateLayout=false",
+          "status": 200,
+          "erro": null
+        },
+        {
+          "url": "https://dados.df.gov.br/sitemap.xml?p_l_id=45144&amp;layoutUuid=d7f842e0-4fa9-9efc-4079-c2e2d01e6785&amp;groupId=42497158&amp;privateLayout=false",
+          "status": 200,
+          "erro": null
+        },
+        {
+          "url": "https://dados.df.gov.br/sitemap.xml?p_l_id=45141&amp;layoutUuid=af925d42-1946-ebeb-d041-f12846e9f472&amp;groupId=42497158&amp;privateLayout=false",
+          "status": 200,
+          "erro": null
+        }
+      ],
+      "candidatos": 0,
+      "exemplos": [],
+      "paginas": []
+    }
   }
 }
