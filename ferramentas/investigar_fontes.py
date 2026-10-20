@@ -113,20 +113,22 @@ def _produtos_json_ld(no, saida: list) -> None:
                 _produtos_json_ld(v, saida)
 
 
-def _chaves_com(no, alvos: tuple, caminho: str = "", achados: list | None = None, prof: int = 0) -> list:
-    """Caminhos de chaves que parecem preço/GTIN dentro de um JSON (para saber onde o dado está)."""
+def _chaves_com(no, alvos: tuple, caminho: str = "", achados: list | None = None, prof: int = 0, dentro: bool = False) -> list:
+    """Caminhos de chaves que parecem preço/GTIN dentro de um JSON (para saber onde o dado está).
+    Se a chave é um objeto (ex.: price: {value: 9.99}), os valores dentro dele também entram."""
     achados = [] if achados is None else achados
     if prof > 12 or len(achados) >= 25:
         return achados
     if isinstance(no, dict):
         for k, v in no.items():
             c = f"{caminho}.{k}"
-            if any(a in str(k).lower() for a in alvos) and not isinstance(v, (dict, list)):
+            casa = dentro or any(a in str(k).lower() for a in alvos)
+            if casa and not isinstance(v, (dict, list)):
                 achados.append(f"{c} = {str(v)[:60]}")
-            _chaves_com(v, alvos, c, achados, prof + 1)
+            _chaves_com(v, alvos, c, achados, prof + 1, casa)
     elif isinstance(no, list):
         for i, v in enumerate(no[:5]):
-            _chaves_com(v, alvos, f"{caminho}[{i}]", achados, prof + 1)
+            _chaves_com(v, alvos, f"{caminho}[{i}]", achados, prof + 1, dentro)
     return achados
 
 
