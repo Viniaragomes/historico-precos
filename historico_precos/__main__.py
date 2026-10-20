@@ -416,6 +416,10 @@ def main(argv: list[str] | None = None) -> int:
     cw.add_argument("--termos", required=True, help="separados por vírgula, ex.: cafe,arroz")
     cw.add_argument("--limite", type=int, default=20, help="páginas por termo e por loja")
 
+    cs = sub.add_parser("catalogo-sitemap", help="acha páginas de produto pelo sitemap das lojas (tipo 'sitemap') e lê nome, GTIN e preço")
+    cs.add_argument("--termos", required=True, help="separados por vírgula, ex.: cafe,arroz (procurados no endereço da página)")
+    cs.add_argument("--limite", type=int, default=100, help="páginas lidas por termo e por loja")
+
     ci = sub.add_parser("conferencia-impostos", help="gera o checklist de conferência das leis de impostos")
     ci.add_argument("--saida", default="docs/conferencia-impostos.md")
 
@@ -445,6 +449,16 @@ def main(argv: list[str] | None = None) -> int:
     banco = Banco(args.banco)
     nav = Navegador(intervalo=args.intervalo)
 
+    if args.comando == "catalogo-sitemap":
+        from .fontes import pagina_produto
+
+        for loja in [l for l in carregar_lojas(args.lojas) if l.get("tipo") == "sitemap"]:
+            arquivo = [loja["arquivo"]] if loja.get("arquivo") else []
+            for termo in [t.strip() for t in args.termos.split(",") if t.strip()]:
+                r = pagina_produto.catalogar(nav, banco, loja, [termo], limite=args.limite, lojas_arquivo=arquivo)
+                print(f"{loja['nome']} · {termo}: {r['no_sitemap']} página(s) novas no sitemap, {r['lidas']} lida(s), "
+                      f"{r['com_gtin']} com GTIN, {r['precos']} preço(s) novo(s)")
+        return 0
     if args.comando == "catalogo-wayback":
         from .viabilidade import catalogar_arquivo
 

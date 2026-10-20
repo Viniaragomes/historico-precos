@@ -97,7 +97,7 @@ class Navegador:
                               "trecho": " ".join(trecho.split())[:300]})
 
     # sites que pedem mais espaço entre consultas do que o padrão
-    INTERVALO_MINIMO = {"api.gdeltproject.org": 6.0}
+    INTERVALO_MINIMO = {"api.gdeltproject.org": 6.0, "mercado.carrefour.com.br": 3.0}
 
     def _intervalo_do(self, host: str) -> float:
         """O maior entre: o padrão, o mínimo conhecido do site e o Crawl-delay que o robots.txt pede."""

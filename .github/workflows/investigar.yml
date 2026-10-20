@@ -27,6 +27,12 @@ jobs:
         run: |
           head -5 relatorios/amostra.tsv > /tmp/cinco.tsv
           python -m historico_precos --banco /tmp/t.db mapa-df precos --arquivo /tmp/cinco.tsv > relatorios/investigacao/mapa-df-precos.txt 2>&1 || true
+      - name: Carrefour pelo sitemap e páginas de produto (teste real, 15 páginas)
+        continue-on-error: true
+        timeout-minutes: 8
+        run: |
+          python -m historico_precos --banco /tmp/c.db catalogo-sitemap --termos cafe --limite 15 > relatorios/investigacao/carrefour-sitemap.txt 2>&1 || true
+          sqlite3 /tmp/c.db "SELECT ean, loja, preco, data_observada, descricao, url_evidencia FROM precos" >> relatorios/investigacao/carrefour-sitemap.txt 2>&1 || true
       - name: Guardar no repositório
         run: |
           git config user.name "github-actions[bot]"

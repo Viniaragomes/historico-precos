@@ -63,6 +63,14 @@ jobs:
             python -m historico_precos mapa-df coletar
           fi
 
+      - name: Catálogo pelo sitemap das lojas (domingos)
+        continue-on-error: true
+        timeout-minutes: 40
+        run: |
+          if [ "$(date -u +%u)" = "7" ]; then
+            python -m historico_precos catalogo-sitemap --termos "cafe,arroz,feijao,leite,oleo-de-soja,acucar,macarrao,farinha-de-trigo,manteiga,biscoito,sabao,papel-higienico,creme-dental" --limite 40
+          fi
+
       - name: Preço de compra no DF (Mapa de Preços, NF-e; o painel recarrega todo dia)
         continue-on-error: true
         timeout-minutes: 15

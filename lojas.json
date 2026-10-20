@@ -7,7 +7,18 @@
       "cidade": "Brasília",
       "tipo": "vtex",
       "ativa": false,
-      "verificacao": "HTTP 503 em todas as consultas a partir dos servidores do GitHub (provável proteção contra robôs). Tentar de novo mais tarde; não burlar."
+      "verificacao": "A API de catálogo responde HTTP 503 aos servidores do GitHub (proteção contra robôs). Não é burlada: o preço vem da página pública do produto (loja 'Carrefour Mercado (site)')."
+    },
+    {
+      "nome": "Carrefour Mercado (site)",
+      "dominio": "mercado.carrefour.com.br",
+      "cidade": null,
+      "tipo": "sitemap",
+      "sitemap": "https://mercado.carrefour.com.br/sitemap.xml",
+      "padrao_produto": "/p$",
+      "ativa": true,
+      "arquivo": "Carrefour Mercado (arquivo)",
+      "verificacao": "Em 20/10/2026: o robots.txt libera as páginas de produto e indica o sitemap; cada página traz nome, GTIN e preço em JSON-LD. O preço é o da região padrão do site (sem CEP), por isso não é marcado como preço de Brasília."
     },
     {
       "nome": "Atacadão",
@@ -50,7 +61,7 @@
       "tipo": "arquivo",
       "padrao_produto": "/p$",
       "ativa": true,
-      "verificacao": "Só cópias arquivadas no Internet Archive: o site da loja não é acessado, porque ele bloqueia robôs. Serve para histórico, não para o preço de hoje."
+      "verificacao": "Cópias arquivadas no Internet Archive das páginas de produto achadas no sitemap da loja. Serve para o histórico."
     }
   ]
 }

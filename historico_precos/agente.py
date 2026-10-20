@@ -7,7 +7,7 @@ from dataclasses import dataclass, field
 from itertools import groupby
 
 from .armazenamento import Banco
-from .fontes import openfoodfacts, openprices, vtex, wayback
+from .fontes import openfoodfacts, openprices, pagina_produto, vtex, wayback
 from .modelo import PontoDePreco, Produto
 from .rede import Navegador
 
@@ -93,6 +93,16 @@ class AgenteHistorico:
             paginas += [(loja["nome"], link) for link in links]
             if not pontos and not links:
                 avisos.append(f"{loja['nome']}: produto não encontrado (ou loja fora do ar / não é VTEX)")
+
+        # lojas lidas pela página pública do produto (JSON-LD), achada no sitemap (comando catalogo-sitemap)
+        por_pagina = {l["nome"]: l for l in self.lojas if l.get("tipo") == "sitemap"}
+        for loja, url in self.banco.paginas(ean):
+            if loja in por_pagina:
+                _, ponto = pagina_produto.ler(self.nav, url, loja, por_pagina[loja].get("cidade"))
+                if ponto and ponto.ean == ean:
+                    coletados.append(ponto)
+                else:
+                    avisos.append(f"{loja}: sem preço na página {url} (fora de estoque ou fora do ar)")
 
         # lojas que bloqueiam robôs: só cópias arquivadas, já catalogadas (comando catalogo-wayback)
         arquivo = {l["nome"] for l in self.lojas if l.get("tipo") == "arquivo"}
