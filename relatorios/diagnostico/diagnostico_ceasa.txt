@@ -1,27 +1,21 @@
-classificações do TOMATE: {'2': 'ESPECIAL', '3': 'EXTRA', '6': 'PRIMEIRA'}
-ESPECIAL   06/2026: 1 dias, de 2026-06-01 a 2026-06-01, último R$ 4.00/kg
-ESPECIAL   05/2026: 8 dias, de 2026-05-04 a 2026-05-28, último R$ 3.50/kg
-ESPECIAL   04/2026: 8 dias, de 2026-04-02 a 2026-04-30, último R$ 5.50/kg
-ESPECIAL   03/2026: 9 dias, de 2026-03-02 a 2026-03-30, último R$ 3.75/kg
-ESPECIAL   02/2026: 8 dias, de 2026-02-02 a 2026-02-26, último R$ 3.50/kg
-ESPECIAL   01/2026: 8 dias, de 2026-01-05 a 2026-01-29, último R$ 3.50/kg
-ESPECIAL   12/2025: 8 dias, de 2025-12-01 a 2025-12-29, último R$ 2.75/kg
-ESPECIAL   09/2025: 10 dias, de 2025-09-01 a 2025-09-29, último R$ 2.00/kg
-ESPECIAL   06/2025: 8 dias, de 2025-06-04 a 2025-06-30, último R$ 4.50/kg
-ESPECIAL   03/2025: 20 dias, de 2025-03-03 a 2025-03-31, último R$ 4.75/kg
-ESPECIAL   06/2024: 20 dias, de 2024-06-03 a 2024-06-28, último R$ 7.50/kg
 
-EXTRA      06/2026: 1 dias, de 2026-06-01 a 2026-06-01, último R$ 6.50/kg
-EXTRA      05/2026: 8 dias, de 2026-05-04 a 2026-05-28, último R$ 5.00/kg
-EXTRA      04/2026: 8 dias, de 2026-04-02 a 2026-04-30, último R$ 7.50/kg
-EXTRA      03/2026: 9 dias, de 2026-03-02 a 2026-03-30, último R$ 5.50/kg
-EXTRA      02/2026: 8 dias, de 2026-02-02 a 2026-02-26, último R$ 5.00/kg
-EXTRA      01/2026: 8 dias, de 2026-01-05 a 2026-01-29, último R$ 5.50/kg
-EXTRA      12/2025: 8 dias, de 2025-12-01 a 2025-12-29, último R$ 4.50/kg
-EXTRA      09/2025: 10 dias, de 2025-09-01 a 2025-09-29, último R$ 3.00/kg
-EXTRA      06/2025: 8 dias, de 2025-06-04 a 2025-06-30, último R$ 6.00/kg
-EXTRA      03/2025: 20 dias, de 2025-03-03 a 2025-03-31, último R$ 6.50/kg
-EXTRA      06/2024: 20 dias, de 2024-06-03 a 2024-06-28, último R$ 9.00/kg
+/: Portal de Serviços - CEASA-DF | 24206 bytes | 0 PDF(s)
+   links: ['https://www.portal.ceasadf.com.br/2a-via-boleto', 'https://www.portal.ceasadf.com.br/cadastrar', 'https://www.portal.ceasadf.com.br/catalogo', 'https://www.portal.ceasadf.com.br/entrar', 'https://www.portal.ceasadf.com.br/faq', 'https://www.portal.ceasadf.com.br/informacao-mercado', 'https://www.portal.ceasadf.com.br/politica-de-privacidade', 'https://www.portal.ceasadf.com.br/precos', 'https://www.portal.ceasadf.com.br/shared/styles/app.min.css', 'https://www.portal.ceasadf.com.br/themes/portalweb/assets/css/styles.css', 'https://www.portal.ceasadf.com.br/themes/portalweb/assets/img/favicon.webp']
 
+/sitemap.xml: Portal de Serviços - CEASA - DF | 2192 bytes | 0 PDF(s)
 
-PDFs na página inicial: []
+/boletins: Portal de Serviços - CEASA - DF | 2192 bytes | 0 PDF(s)
+
+/boletim: Portal de Serviços - CEASA - DF | 2192 bytes | 0 PDF(s)
+
+/sima: Portal de Serviços - CEASA - DF | 2192 bytes | 0 PDF(s)
+
+/publicacoes: Portal de Serviços - CEASA - DF | 2192 bytes | 0 PDF(s)
+
+/documentos: Portal de Serviços - CEASA - DF | 2192 bytes | 0 PDF(s)
+
+/precos: Preços - Portal de Serviços | 51487 bytes | 0 PDF(s)
+
+/blog: Portal de Serviços - CEASA - DF | 2192 bytes | 0 PDF(s)
+
+/noticias: Portal de Serviços - CEASA - DF | 2192 bytes | 0 PDF(s)
