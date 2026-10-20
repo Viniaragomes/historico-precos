@@ -10,7 +10,7 @@
       {
         "url": "https://mercado.carrefour.com.br/",
         "status": 200,
-        "ms": 64,
+        "ms": 251,
         "titulo": "Mercado Carrefour | Ofertas de Supermercado Delivery",
         "servidor": "cloudflare",
         "antirrobo": [
@@ -31,7 +31,7 @@
       {
         "url": "https://mercado.carrefour.com.br/api/catalog_system/pub/products/search?_from=0&_to=0",
         "status": 503,
-        "ms": 90,
+        "ms": 358,
         "titulo": null,
         "servidor": "cloudflare",
         "antirrobo": [
@@ -52,7 +52,7 @@
       "analise": {
         "url": "https://www.carrefour.com.br/robots.txt",
         "status": 403,
-        "ms": 160,
+        "ms": 249,
         "titulo": "Acesso Bloqueado",
         "servidor": "cloudflare",
         "antirrobo": [
@@ -83,7 +83,7 @@
       {
         "url": "https://www.paodeacucar.com/",
         "status": 200,
-        "ms": 1154,
+        "ms": 1226,
         "titulo": "Pão de Açúcar | Supermercado Online",
         "servidor": null,
         "antirrobo": [],
@@ -109,7 +109,7 @@
       "analise": {
         "url": "https://www.comper.com.br/robots.txt",
         "status": 403,
-        "ms": 153,
+        "ms": 254,
         "titulo": "Just a moment...",
         "servidor": "cloudflare",
         "antirrobo": [
@@ -141,13 +141,13 @@
         "url": "https://www.in.gov.br/",
         "status": 0,
         "erro": "Remote end closed connection without response",
-        "ms": 87
+        "ms": 173
       },
       {
         "url": "https://www.in.gov.br/consulta/-/buscar/dou?q=ICMS",
         "status": 0,
         "erro": "Remote end closed connection without response",
-        "ms": 294
+        "ms": 99
       }
     ]
   },
@@ -160,9 +160,20 @@
     },
     "paginas": [
       {
-        "url": "https://www.lexml.gov.br/busca/SRU?operation=searchRetrieve&version=1.1&query=urn%3D%22lei%22%20and%20description%3Dicms&maximumRecords=3",
-        "status": null,
-        "nota": "robots.txt não permite: não acessado"
+        "url": "https://www.lexml.gov.br/sru?operation=searchRetrieve&version=1.1&query=urn%3D%22lei%22%20and%20description%3Dicms&maximumRecords=3",
+        "status": 404,
+        "ms": 1599,
+        "titulo": "HTTP Status 404 – Not Found",
+        "servidor": "nginx",
+        "antirrobo": [
+          "captcha"
+        ],
+        "tecnologia": [
+          "qlik"
+        ],
+        "tem_json_ld": false,
+        "enderecos_de_dados": [],
+        "inicio_do_texto": "HTTP Status 404 – Not Found body {font-family:Tahoma,Arial,sans-serif;} h1, h2, h3, b {color:white;background-color:#525D76;} h1 {font-size:22px;} h2 {font-size:16px;} h3 {font-size:14px;} p {font-size:12px;} a {color:black;} .line {height:1px;background-color:#525D76;border:none;} HTTP Status 404 – Not Found Type Status Report Description The origin server did not find a current representation fo"
       }
     ]
   },
@@ -178,7 +189,7 @@
         "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios",
         "status": 0,
         "erro": "<urlopen error timed out>",
-        "ms": 30942
+        "ms": 30195
       }
     ]
   },
@@ -193,7 +204,7 @@
       {
         "url": "https://paineis.fazenda.df.gov.br/",
         "status": 200,
-        "ms": 791,
+        "ms": 1498,
         "titulo": "Secretaria de Economia do Distrito Federal",
         "servidor": "Apache/2.4.39 (Win64) OpenSSL/1.1.1b PHP/7.3.5",
         "antirrobo": [],
@@ -205,7 +216,7 @@
       {
         "url": "https://paineis.fazenda.df.gov.br/mapadeprecos/",
         "status": 200,
-        "ms": 2670,
+        "ms": 644,
         "titulo": "Mapa de Preço",
         "servidor": "Apache/2.4.39 (Win64) OpenSSL/1.1.1b PHP/7.3.5",
         "antirrobo": [],
@@ -231,7 +242,7 @@
       {
         "url": "https://www.receita.fazenda.df.gov.br/",
         "status": 200,
-        "ms": 1916,
+        "ms": 2421,
         "titulo": "Portal da Receita DF ? IPVA, IPTU e Serviços Tributários | SEEC",
         "servidor": "Microsoft-IIS/8.5",
         "antirrobo": [],
@@ -243,6 +254,76 @@
           "www.receita.fazenda.df.gov.br"
         ],
         "inicio_do_texto": "var states = [ ' NF-e - Obter Informações', ' NFC-e - Obter Informações', ' CT-e - Obter Informações', ' NFC-e - Consultar e Efetuar Credenciamento para Emissão ou Descredenciamento', ' NFC-e - Gerar Código de Segurança do Contribuinte-CSC', ' CT-e OS - Obter informações', ' NF-e - Consultar e Efetuar Credenciamento para Emissão ou Descredenciamento', ' NFC-e - Consultar Documento Pela Chave de Ac"
+      }
+    ]
+  },
+  "Encartes DF": {
+    "robots": {
+      "status": 200,
+      "erro": null,
+      "conteudo": "# START YOAST BLOCK\n# ---------------------------\nUser-agent: *\nDisallow:\n\nSitemap: https://encartesdf.com.br/sitemap_index.xml\n# ---------------------------\n# END YOAST BLOCK",
+      "analise": null
+    },
+    "paginas": [
+      {
+        "url": "https://encartesdf.com.br/",
+        "status": 200,
+        "ms": 1155,
+        "titulo": "Encartes DF - Ofertas de Supermercados do Distrito Federal",
+        "servidor": "LiteSpeed",
+        "antirrobo": [],
+        "tecnologia": [
+          "wordpress"
+        ],
+        "tem_json_ld": true,
+        "enderecos_de_dados": [
+          "api.w.org"
+        ],
+        "inicio_do_texto": "Encartes DF - Ofertas de Supermercados do Distrito Federal {\"@context\":\"https:\\/\\/schema.org\",\"@graph\":[{\"@type\":\"WebPage\",\"@id\":\"https:\\/\\/encartesdf.com.br\\/\",\"url\":\"https:\\/\\/encartesdf.com.br\\/\",\"name\":\"Encartes DF - Ofertas de Supermercados do Distrito Federal\",\"isPartOf\":{\"@id\":\"https:\\/\\/encartesdf.com.br\\/#website\"},\"primaryImageOfPage\":{\"@id\":\"https:\\/\\/encartesdf.com.br\\/#primaryimage\"},"
+      },
+      {
+        "url": "https://encartesdf.com.br/wp-json/wp/v2/posts?per_page=5",
+        "status": 200,
+        "ms": 1138,
+        "titulo": null,
+        "servidor": "LiteSpeed",
+        "antirrobo": [],
+        "tecnologia": [
+          "wordpress"
+        ],
+        "tem_json_ld": false,
+        "enderecos_de_dados": [],
+        "inicio_do_texto": "[{\"id\":45370,\"date\":\"2026-10-20T09:54:28\",\"date_gmt\":\"2026-10-20T12:54:28\",\"guid\":{\"rendered\":\"https:\\/\\/encartesdf.com.br\\/supermercado-mais-economico-ate-26-10-2026\\/\"},\"modified\":\"2026-10-20T10:13:40\",\"modified_gmt\":\"2026-10-20T13:13:40\",\"slug\":\"supermercado-mais-economico-ate-26-10-2026\",\"status\":\"publish\",\"type\":\"post\",\"link\":\"https:\\/\\/encartesdf.com.br\\/supermercado-mais-economico-ate-26-10"
+      },
+      {
+        "url": "https://encartesdf.com.br/feed/",
+        "status": 200,
+        "ms": 778,
+        "titulo": "Encartes DF",
+        "servidor": "LiteSpeed",
+        "antirrobo": [],
+        "tecnologia": [
+          "wordpress"
+        ],
+        "tem_json_ld": false,
+        "enderecos_de_dados": [
+          "search.yahoo.com"
+        ],
+        "inicio_do_texto": "Encartes DF https://encartesdf.com.br/ Confira as melhores ofertas, encartes e promoções de supermercados nas principais cidades do Distrito Federal. Tue, 20 Oct 2026 13:13:40 +0000 pt-BR hourly 1 https://wordpress.org/?v=7.1.3 https://encartesdf.com.br/wp-content/uploads/2021/12/cropped-logo-favicon2-32x32.png Encartes DF https://encartesdf.com.br/ 32 32 Supermercado Mais Econômico até 26-10-2026"
+      },
+      {
+        "url": "https://encartesdf.com.br/sitemap.xml",
+        "status": 200,
+        "ms": 1472,
+        "titulo": null,
+        "servidor": "LiteSpeed",
+        "antirrobo": [],
+        "tecnologia": [
+          "wordpress"
+        ],
+        "tem_json_ld": false,
+        "enderecos_de_dados": [],
+        "inicio_do_texto": "https://encartesdf.com.br/post-sitemap.xml 2026-10-20T13:13:40+00:00 https://encartesdf.com.br/post-sitemap2.xml 2023-09-19T17:23:43+00:00 https://encartesdf.com.br/post-sitemap3.xml 2024-09-04T16:24:02+00:00 https://encartesdf.com.br/post-sitemap4.xml 2025-09-01T13:37:12+00:00 https://encartesdf.com.br/post-sitemap5.xml 2026-02-24T11:21:07+00:00 https://encartesdf.com.br/post-sitemap6.xml 2026-07"
       }
     ]
   }
