@@ -34,7 +34,7 @@ jobs:
       - name: Testes
         run: |
           python -m unittest discover -s tests
-          node --test tests/impostos.test.mjs
+          node --test tests/*.test.mjs
 
       - name: As fontes respondem?
         run: python -m historico_precos viabilidade --so-fontes | tee fontes.txt

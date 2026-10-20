@@ -118,6 +118,25 @@ python -m historico_precos servir            # abre em http://localhost:8000
 - **Sobre e privacidade** (`#/sobre`): de onde vêm os dados, como lemos as causas, o que fica no aparelho e um botão para apagar tudo.
 - **Ainda não tem (precisa de servidor):** consulta ao vivo de produto não acompanhado, alertas no celular e "reportar preço errado".
 
+## Comunidade (confirmação de preços, no estilo do Waze)
+
+Quem está na loja confirma ou corrige o preço, diz se uma explicação de causa ajudou e envia evidências. Cada preço ganha uma **confiança da comunidade** de 0 a 5 estrelas (`site/confianca.js`). Ela parte da qualidade da fonte, sobe com confirmações e cai com contestações. O voto de quem tem mais reputação pesa mais, e votos antigos perdem força. Quem colabora ganha pontos e sobe de nível, de *Iniciante* a *Guardião do preço*.
+
+**Regras que separam opinião de prova:** votos nunca mudam o nível de prova de uma causa, e evidências enviadas são conferidas antes de aparecer.
+
+**Compliance (LGPD):** login anônimo, sem e-mail, CPF ou localização; consentimento pedido só na primeira contribuição; o público vê só totais; botão para apagar tudo; votos apagados em 12 meses; limite de 60 contribuições por hora e um voto por item por dia; pontos sem valor econômico. A minuta dos termos e da política está em `site/legal/` e **precisa de revisão jurídica e dos campos entre colchetes preenchidos** antes de ligar para o público.
+
+**Modos:**
+- **Teste (padrão):** sem configuração, tudo fica só no aparelho, para experimentar.
+- **Online (Supabase, plano gratuito):**
+  1. Crie um projeto em supabase.com (região São Paulo).
+  2. No *SQL Editor*, rode `supabase/schema.sql`.
+  3. Em *Authentication > Sign In / Providers*, ative *Allow anonymous sign-ins*.
+  4. (Opcional) Ative a extensão `pg_cron` e agende `select public.limpar_dados_antigos()` todo mês.
+  5. Preencha `url` e `chave_publica` (a chave *anon*, que é pública) em `site/config.json`.
+
+Testes: `node --test tests/*.test.mjs`.
+
 ## Rodando no GitHub (recomendado)
 
 O GitHub Actions roda os agentes com internet liberada e de graça, dentro dos limites do plano.

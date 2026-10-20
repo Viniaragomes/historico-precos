@@ -1,0 +1,9 @@
+{
+  "_leia": "Para ligar a comunidade online, crie um projeto no Supabase, rode supabase/schema.sql, ative o login anônimo e preencha url e chave_publica (a chave 'anon', que é pública por definição). Enquanto estiver vazio, o app usa o modo de teste, com tudo guardado só no aparelho.",
+  "comunidade": {
+    "provedor": "supabase",
+    "url": null,
+    "chave_publica": null
+  },
+  "contato": null
+}

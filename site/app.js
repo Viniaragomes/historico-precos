@@ -1,5 +1,7 @@
 // Preço com Prova: escaneia o código de barras e mostra onde está mais barato, o histórico e por que o preço mudou.
 import { calcular, categoria } from "./impostos.js";
+import { confiancaPreco, nivelPorPontos, precoSugerido, utilidade, chavePreco, chaveCausa, PONTOS, NIVEIS as NIVEIS_COMUNIDADE } from "./confianca.js";
+import { criarComunidade, consentimento, ErroComunidade } from "./comunidade.js";
 
 const conteudo = document.getElementById("conteudo");
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
@@ -33,6 +35,11 @@ const ICONES = {
   info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/>',
   lixeira: '<path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>',
   cadeado: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+  estrela: '<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>',
+  polegarCima: '<path d="M7 11v9H4v-9zM7 11l4-8a2 2 0 0 1 2 2v4h5a2 2 0 0 1 2 2.3l-1.2 7A2 2 0 0 1 16.8 20H7"/>',
+  polegarBaixo: '<path d="M17 13V4h3v9zM17 13l-4 8a2 2 0 0 1-2-2v-4H6a2 2 0 0 1-2-2.3l1.2-7A2 2 0 0 1 7.2 4H17"/>',
+  usuario: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+  documento: '<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/>',
 };
 
 function icone(nome) {
@@ -160,6 +167,90 @@ const favoritos = {
     this.salvar(this.ler().map((f) => (f.ean === p.ean ? { ...f, nome: p.nome, preco_visto: preco } : f)));
   },
 };
+
+let configCache = null;
+async function config() {
+  if (!configCache) {
+    try { configCache = (await carregarJSON("config.json")) || {}; } catch { configCache = {}; }
+  }
+  return configCache;
+}
+
+let comunidadeCache = null;
+async function comunidade() {
+  if (!comunidadeCache) comunidadeCache = criarComunidade(await config());
+  return comunidadeCache;
+}
+
+// janela que sobe de baixo, como nos apps de banco
+function abrirFolha(titulo, ...filhos) {
+  const fundo = el("div", { class: "folha-modal-fundo" });
+  const fechar = () => { fundo.remove(); document.removeEventListener("keydown", aoTeclar); };
+  const aoTeclar = (ev) => { if (ev.key === "Escape") fechar(); };
+  fundo.addEventListener("click", (ev) => { if (ev.target === fundo) fechar(); });
+  const painel = el("div", { class: "folha-modal", role: "dialog", "aria-modal": "true", "aria-label": titulo },
+    el("div", { class: "puxador", "aria-hidden": "true" }),
+    el("div", { class: "folha-modal-topo" }, el("h2", {}, titulo),
+      el("button", { class: "botao-fechar", type: "button", "aria-label": "Fechar", onclick: fechar }, icone("fechar"))),
+    ...filhos);
+  fundo.append(painel);
+  document.body.append(fundo);
+  document.addEventListener("keydown", aoTeclar);
+  setTimeout(() => painel.querySelector("button.principal, input, textarea")?.focus(), 50);
+  return fechar;
+}
+
+function fecharFolhas() {
+  document.querySelectorAll(".folha-modal-fundo").forEach((f) => f.remove());
+}
+
+// consentimento pedido no primeiro voto, nunca ao abrir o app
+async function garantirConsentimento() {
+  if (consentimento.valido()) return true;
+  const modo = (await comunidade()).modo;
+  return new Promise((resolver) => {
+    let decidido = false;
+    const decidir = (sim) => { if (!decidido) { decidido = true; resolver(sim); } fechar(); };
+    const caixa = el("input", { type: "checkbox", id: "aceite" });
+    const botao = el("button", { class: "botao-principal", type: "button", disabled: true, onclick: () => { consentimento.dar(); decidir(true); } },
+      "Concordo e quero colaborar");
+    caixa.addEventListener("change", () => { botao.disabled = !caixa.checked; });
+    const fechar = abrirFolha("Antes de colaborar",
+      modo === "teste" ? el("p", { class: "faixa-teste" }, "Modo de teste: por enquanto, suas contribuições ficam só neste aparelho.") : null,
+      el("p", { class: "texto-folha" }, "Sua confirmação ajuda todo mundo a saber se a informação está certa. Para isso, guardamos:"),
+      el("ul", { class: "lista-consentimento" },
+        el("li", {}, "um identificador anônimo deste aparelho (sem e-mail, telefone, CPF ou localização);"),
+        el("li", {}, "o que você confirmou ou informou, com data, e seus pontos;"),
+        el("li", {}, "um apelido, só se você quiser aparecer no ranking.")),
+      el("p", { class: "texto-folha" }, "Os outros só veem totais, sem saber quem votou. Tudo é apagado em 12 meses, e você pode apagar antes, a qualquer hora, no seu perfil."),
+      el("label", { class: "checagem", for: "aceite" }, caixa,
+        el("span", {}, "Tenho 18 anos ou mais e li os ", el("a", { href: "#/termos", target: "_blank" }, "termos de uso"), " e a ",
+          el("a", { href: "#/privacidade", target: "_blank" }, "política de privacidade"), ".")),
+      botao,
+      el("button", { class: "botao-texto", type: "button", onclick: () => decidir(false) }, "Agora não"));
+    const observador = new MutationObserver(() => { if (!document.body.contains(botao)) { observador.disconnect(); if (!decidido) { decidido = true; resolver(false); } } });
+    observador.observe(document.body, { childList: true });
+  });
+}
+
+// executa uma contribuição com consentimento, aviso de pontos e tratamento de erro
+async function contribuir(acao) {
+  if (!(await garantirConsentimento())) return false;
+  try {
+    const { ganho } = await acao(await comunidade());
+    avisar(ganho ? `Obrigado! +${ganho} ponto${ganho > 1 ? "s" : ""}` : "Obrigado! Vamos conferir antes de publicar.");
+    return true;
+  } catch (e) {
+    avisar(e instanceof ErroComunidade ? e.message : "Não deu certo agora. Tente de novo.");
+    return false;
+  }
+}
+
+function estrelas(n, rotulo) {
+  return el("span", { class: "estrelas", role: "img", "aria-label": rotulo || `${String(n).replace(".", ",")} de 5 estrelas` },
+    el("span", { class: "estrelas-fundo", "aria-hidden": "true" }, "★★★★★"),
+    el("span", { class: "estrelas-cheias", "aria-hidden": "true", style: `width:${(n / 5) * 100}%` }, "★★★★★"));
+}
 
 let tabelaImpostos = null;
 async function impostos() {
@@ -321,7 +412,9 @@ async function telaInicio() {
     el("header", { class: "hero" },
       el("div", { class: "hero-barra" },
         el("span", { class: "marca-logo" }, el("img", { src: "icone.svg", alt: "" }), "Preço com Prova"),
-        el("a", { class: "botao-redondo", href: "#/sobre", "aria-label": "Sobre e privacidade" }, icone("info"))),
+        el("span", { class: "acoes-hero" },
+          el("a", { class: "botao-redondo", href: "#/perfil", "aria-label": "Seu perfil e pontos" }, icone("usuario")),
+          el("a", { class: "botao-redondo", href: "#/sobre", "aria-label": "Sobre e privacidade" }, icone("info")))),
       el("h1", {}, "Quanto custa de verdade?"),
       el("p", {}, "Escaneie um produto e veja onde está mais barato, quanto ele já custou e por que mudou."),
       el("button", { class: "botao-escanear-grande", type: "button", onclick: abrirLeitor }, icone("escanear"), "Escanear produto")),
@@ -454,10 +547,17 @@ async function telaProduto(ean) {
   recentes.guardar(p);
   favoritos.visto(p);
   document.title = `${p.nome || ean} · Preço com Prova`;
+  const votos = await (await comunidade()).votos(ean).catch(() => []);
+  const contexto = { p, votos, ean };
+  contexto.atualizar = async (chaveAberta) => {
+    contexto.votos = await (await comunidade()).votos(ean).catch(() => contexto.votos);
+    document.querySelector('[data-cartao="onde"]')?.replaceWith(cartaoOndeComprar(contexto));
+    document.querySelector('[data-cartao="causas"]')?.replaceWith(cartaoCausas(contexto, chaveAberta));
+  };
   conteudo.replaceChildren(heroProduto(p, aberto?.foto), el("div", { class: "folha" },
-    cartaoOndeComprar(p),
+    cartaoOndeComprar(contexto),
     cartaoHistorico(p),
-    cartaoCausas(p),
+    cartaoCausas(contexto),
     cartaoImpostos(tabela, [p.nome, aberto?.nome], p.ofertas[0]?.preco ?? null),
     el("p", { class: "rodape-nota" }, p.aviso, ` Atualizado ${idade(p.atualizado_em)}.`)));
 }
@@ -471,7 +571,8 @@ async function telaNaoAcompanhado(ean, aberto, tabela) {
         el("button", { class: "botao-redondo", type: "button", "aria-label": "Voltar", onclick: voltar }, icone("voltar"))),
       el("div", { class: "produto-topo entrar" },
         aberto?.foto ? el("img", { class: "foto-produto", src: aberto.foto, alt: "" }) : null,
-        el("p", { class: "produto-nome" }, nome || "Produto não identificado", el("small", {}, subtitulo || `Código ${ean}`))),
+        el("p", { class: "produto-nome" }, nome || "Produto não identificado", el("small", {}, subtitulo || `Código ${ean}`),
+          aberto?.foto || aberto?.nome ? creditoFoto(ean) : null)),
       el("p", { class: "rotulo entrar" }, "Ainda não acompanhamos o preço deste produto"),
       el("p", { class: "onde entrar" }, "A lista de produtos cresce a cada coleta.")),
     el("div", { class: "folha" },
@@ -507,7 +608,8 @@ function heroProduto(p, foto) {
         el("button", { class: "botao-redondo", type: "button", "aria-label": "Compartilhar", onclick: () => compartilhar(p) }, icone("compartilhar")))),
     el("div", { class: "produto-topo entrar" },
       foto ? el("img", { class: "foto-produto", src: foto, alt: "" }) : null,
-      el("p", { class: "produto-nome" }, p.nome || "Produto sem nome", subtitulo ? el("small", {}, subtitulo) : null)),
+      el("p", { class: "produto-nome" }, p.nome || "Produto sem nome", subtitulo ? el("small", {}, subtitulo) : null,
+        foto ? creditoFoto(p.ean) : null)),
     melhor ? [
       el("p", { class: "rotulo entrar" }, "Menor preço agora"),
       el("p", { class: "preco-hero entrar" }, brl.format(melhor.preco)),
@@ -520,6 +622,12 @@ function heroProduto(p, foto) {
       economia > 0.004 ? el("span", { class: "pilula" }, icone("economia"), `Economize até ${brl.format(economia)}`) : null,
       tend ? el("span", { class: "pilula" }, icone(tend.variacao >= 0 ? "sobe" : "desce"), `${pct(tend.variacao)} ${tend.periodo}`) : null,
       melhor?.em_promocao ? el("span", { class: "pilula" }, "Em promoção") : null));
+}
+
+// licença das fotos e dados do Open Food Facts: CC BY-SA (fotos) e ODbL (dados), com crédito obrigatório
+function creditoFoto(ean) {
+  return el("a", { class: "credito", href: `https://world.openfoodfacts.org/product/${ean}`, target: "_blank", rel: "noopener" },
+    "Foto e dados: Open Food Facts (CC BY-SA / ODbL)");
 }
 
 function botaoFavorito(p) {
@@ -550,8 +658,47 @@ async function compartilhar(p) {
   } catch { /* compartilhamento cancelado */ }
 }
 
-function cartaoOndeComprar(p) {
-  const cartao = el("section", { class: "cartao entrar" }, el("h2", {}, "Onde comprar"));
+function linhaConfianca(p, o, votos, atualizar) {
+  const meus = votos.filter((v) => v.alvo === "preco" && v.chave === chavePreco(o));
+  const c = confiancaPreco({ fonte: o.fonte, data: o.data }, meus);
+  const sugerido = precoSugerido(meus);
+  const partes = [c.rotulo];
+  if (c.confirmacoes) partes.push(c.confirmacoes === 1 ? "1 pessoa confirmou" : `${c.confirmacoes} confirmaram`);
+  if (c.contestacoes) partes.push(c.contestacoes === 1 ? "1 pessoa contestou" : `${c.contestacoes} contestaram`);
+  return el("div", { class: "confianca" },
+    el("div", { class: "confianca-linha" },
+      estrelas(c.estrelas, `Confiança da comunidade: ${String(c.estrelas).replace(".", ",")} de 5`),
+      el("span", {}, partes.join(" · "))),
+    sugerido ? el("div", { class: "sugerido" }, `${sugerido.informantes} pessoas informaram ${brl.format(sugerido.preco)}`) : null,
+    el("button", { class: "botao-pilula", type: "button", onclick: () => confirmarPreco(p, o, atualizar) }, "Está certo?"));
+}
+
+function confirmarPreco(p, o, atualizar) {
+  const chave = chavePreco(o);
+  const enviar = async (valor, preco = null) => {
+    fechar();
+    if (await contribuir((com) => com.votar({ ean: p.ean, alvo: "preco", chave, valor, preco_informado: preco }))) await atualizar();
+  };
+  const entrada = el("input", { inputmode: "decimal", placeholder: "0,00", "aria-label": "Preço que você viu, em reais" });
+  const correcao = el("div", { class: "correcao", hidden: true },
+    el("label", { class: "campo-preco" }, el("span", {}, "Qual preço você viu?"), el("span", { class: "entrada" }, "R$ ", entrada)),
+    el("button", { class: "botao-principal", type: "button", onclick: () => {
+      const n = parseFloat(entrada.value.replace(/\./g, "").replace(",", "."));
+      enviar(false, Number.isFinite(n) ? n : null);
+    } }, "Enviar correção"),
+    el("button", { class: "botao-texto", type: "button", onclick: () => enviar(false) }, "Está diferente, mas não sei o valor"));
+  const fechar = abrirFolha("Confirme o preço",
+    el("p", { class: "texto-folha" }, `${p.nome || "Este produto"} em ${o.loja} está custando `, el("strong", {}, brl.format(o.preco)), "?"),
+    el("p", { class: "minusculo" }, "Responda só se você viu o preço hoje, na loja ou no site."),
+    el("div", { class: "botoes-lado" },
+      el("button", { class: "botao-principal", type: "button", onclick: () => enviar(true) }, icone("polegarCima"), "Sim, está certo"),
+      el("button", { class: "botao-secundario-neutro", type: "button", onclick: () => { correcao.hidden = false; entrada.focus(); } },
+        icone("polegarBaixo"), "Não, está diferente")),
+    correcao);
+}
+
+function cartaoOndeComprar({ p, votos, atualizar }) {
+  const cartao = el("section", { class: "cartao", "data-cartao": "onde" }, el("h2", {}, "Onde comprar"));
   if (!p.ofertas.length) {
     cartao.append(el("p", { class: "sub", style: "margin:0" }, "Nenhuma loja com preço nos últimos 30 dias."));
     return cartao;
@@ -569,7 +716,8 @@ function cartaoOndeComprar(p) {
         el("div", { class: "valor" }, brl.format(o.preco)),
         el("div", { class: "diferenca" }, i === 0
           ? (o.em_promocao && o.preco_de ? `era ${brl.format(o.preco_de)}` : "")
-          : `+${brl.format(o.diferenca_rs)}`)))))));
+          : `+${brl.format(o.diferenca_rs)}`))),
+    linhaConfianca(p, o, votos, atualizar)))));
   if (p.ofertas_antigas.length) {
     cartao.append(el("p", { class: "minusculo", style: "margin:10px 0 0" }, "Preços antigos, fora da comparação: ",
       p.ofertas_antigas.map((o) => `${o.loja} ${brl.format(o.preco)} em ${dataBR(o.data)}`).join("; ")));
@@ -708,8 +856,8 @@ function seloNivel(nivel) {
   return el("span", { class: `nivel ${n.classe}` }, icone(n.icone), n.texto.toUpperCase());
 }
 
-function cartaoCausas(p) {
-  const cartao = el("section", { class: "cartao entrar entrar-3" }, el("h2", {}, "Por que o preço mudou"));
+function cartaoCausas({ p, votos, atualizar }, chaveAberta = null) {
+  const cartao = el("section", { class: "cartao", "data-cartao": "causas" }, el("h2", {}, "Por que o preço mudou"));
   if (!p.mudancas.length) {
     cartao.append(el("div", { class: "vazio-curto" }, "Nenhuma mudança de preço registrada ainda."));
     return cartao;
@@ -728,7 +876,8 @@ function cartaoCausas(p) {
           ? el("a", { href: f, target: "_blank", rel: "noopener" }, icone("fonte"), mesmoSite ? ["Fonte antes", "Fonte depois"][j] : host(f))
           : el("span", { class: "minusculo" }, f))) : null);
     });
-    cartao.append(el("details", { class: "mudanca", open: i === aberta },
+    const chave = chaveCausa(m);
+    cartao.append(el("details", { class: "mudanca", open: chaveAberta ? chave === chaveAberta : i === aberta },
       el("summary", {},
         el("span", { class: `seta-var ${sobe ? "sobe" : "desce"}` }, icone(sobe ? "sobe" : "desce")),
         el("span", { class: "meio" },
@@ -745,7 +894,8 @@ function cartaoCausas(p) {
         : el("p", { class: "minusculo", style: "margin:0 14px 14px" }, "Ainda não encontramos evidências para este período."),
       m.comprovado_pct
         ? el("p", { class: "resumo-prova" }, `Imposto comprovado explica ${pct(m.comprovado_pct)}. O restante (${pct(m.nao_explicado_pct)}) ainda não tem causa comprovada.`)
-        : null));
+        : null,
+      blocoComunidadeCausa(p, chave, votos.filter((v) => v.alvo === "causa" && v.chave === chave), atualizar)));
   });
   if (p.mudancas.length > 8) cartao.append(el("p", { class: "minusculo", style: "margin:12px 0 0" }, `E mais ${p.mudancas.length - 8} mudanças anteriores.`));
 
@@ -756,6 +906,35 @@ function cartaoCausas(p) {
       "Comprovado: fato documentado, com efeito que dá para calcular. A confirmar: encontramos, mas a lei ainda não foi conferida. ",
       "Declarado: alguém afirmou publicamente. Associado e Referência: aconteceram no mesmo período, mas não provam a causa.")));
   return cartao;
+}
+
+function blocoComunidadeCausa(p, chave, votosCausa, atualizar) {
+  const u = utilidade(votosCausa);
+  const avaliar = async (valor) => {
+    if (await contribuir((com) => com.votar({ ean: p.ean, alvo: "causa", chave, valor }))) await atualizar(chave);
+  };
+  return el("div", { class: "comunidade-causa" },
+    el("div", { class: "pergunta" },
+      el("span", {}, "Essa explicação ajudou?"),
+      el("span", { class: "botoes-voto" },
+        el("button", { class: "voto", type: "button", "aria-label": "Sim, ajudou", onclick: () => avaliar(true) }, icone("polegarCima")),
+        el("button", { class: "voto", type: "button", "aria-label": "Não ajudou", onclick: () => avaliar(false) }, icone("polegarBaixo")))),
+    u.total ? el("p", { class: "minusculo", style: "margin:4px 0 0" },
+      `${u.total === 1 ? (u.uteis ? "1 pessoa achou útil" : "1 pessoa não achou útil") : `${u.uteis} de ${u.total} pessoas acharam útil`}. Opinião não muda o nível de prova.`)
+      : el("p", { class: "minusculo", style: "margin:4px 0 0" }, "A opinião da comunidade não muda o nível de prova."),
+    el("button", { class: "botao-texto alinhado", type: "button", onclick: () => sugerirEvidencia(p, chave) }, icone("documento"), "Tenho uma evidência"));
+}
+
+function sugerirEvidencia(p, chave) {
+  const url = el("input", { type: "url", placeholder: "https://", "aria-label": "Link da evidência", class: "campo-texto" });
+  const descricao = el("textarea", { rows: 3, maxlength: 500, placeholder: "O que esse link mostra? (opcional)", "aria-label": "Descrição", class: "campo-texto" });
+  const fechar = abrirFolha("Enviar uma evidência",
+    el("p", { class: "texto-folha" }, "Uma notícia, um comunicado do fabricante, uma lei ou um dado oficial que ajude a explicar esta mudança de preço."),
+    url, descricao,
+    el("p", { class: "minusculo" }, "Vamos conferir antes de publicar. Não envie dados pessoais nem acusações sem fonte."),
+    el("button", { class: "botao-principal", type: "button", onclick: async () => {
+      if (await contribuir((com) => com.sugerirEvidencia({ ean: p.ean, chave, url: url.value.trim(), descricao: descricao.value.trim() }))) fechar();
+    } }, "Enviar para conferência"));
 }
 
 function cartaoImpostos(tabela, nomes, precoInicial) {
@@ -838,9 +1017,10 @@ function calcularFontes(tabela, cat) {
 // ---------- sobre e privacidade ----------
 
 function telaSobre() {
-  const apagar = () => {
+  const apagar = async () => {
     try { localStorage.removeItem("recentes"); localStorage.removeItem("favoritos"); } catch { /* nada salvo */ }
-    avisar("Pronto. Apagamos o que estava guardado neste aparelho.");
+    try { await (await comunidade()).apagarTudo(); } catch { /* sem conexão: tente de novo */ }
+    avisar("Pronto. Apagamos seus dados e suas contribuições.");
   };
   const bloco = (nomeIcone, titulo, ...texto) => el("section", { class: "cartao entrar" },
     el("div", { class: "passo" }, el("span", { class: "icone-passo" }, icone(nomeIcone)),
@@ -861,15 +1041,94 @@ function telaSobre() {
         "Não há cadastro nem conta. A câmera funciona só no seu aparelho: nenhuma imagem é enviada.",
         "Os produtos que você viu e os que acompanha ficam guardados só neste aparelho.",
         "Para mostrar nome e foto, o aparelho consulta o código do produto na base aberta Open Food Facts. No iPhone, o leitor de código é baixado do serviço jsDelivr."),
+      bloco("documento", "Licenças e créditos",
+        "Nomes e fotos de produtos: Open Food Facts (dados ODbL, fotos CC BY-SA). Preços colaborativos: Open Prices (ODbL). Cópias antigas de páginas: Internet Archive. Índices: IBGE e Banco Central. Notícias: GDELT. Marcas pertencem aos seus titulares."),
+      el("section", { class: "cartao entrar lista-links" },
+        el("a", { href: "#/termos" }, icone("documento"), "Termos de uso", icone("seta")),
+        el("a", { href: "#/privacidade" }, icone("cadeado"), "Política de privacidade", icone("seta"))),
       el("section", { class: "cartao entrar" },
-        el("button", { class: "botao-secundario", type: "button", onclick: apagar }, icone("lixeira"), "Apagar meus dados deste aparelho")),
+        el("button", { class: "botao-secundario", type: "button", onclick: apagar }, icone("lixeira"), "Apagar meus dados e contribuições")),
       el("p", { class: "rodape-nota" }, "Projeto em teste. Os números são estimativas com fonte; confira sempre o link.")));
+}
+
+// ---------- perfil e ranking ----------
+
+async function telaPerfil() {
+  const com = await comunidade();
+  const perfil = await com.perfil().catch(() => ({ apelido: null, pontos: 0 }));
+  const n = nivelPorPontos(perfil.pontos);
+  const ranking = await com.ranking().catch(() => null);
+
+  const apelido = el("input", { class: "campo-texto", value: perfil.apelido || "", maxlength: 24, placeholder: "Ex.: Maria do Guará", "aria-label": "Apelido" });
+  const salvarApelido = async () => {
+    if (!(await garantirConsentimento())) return;
+    try { await com.definirApelido(apelido.value); avisar("Apelido salvo."); }
+    catch (e) { avisar(e instanceof ErroComunidade ? e.message : "Não deu certo agora."); }
+  };
+  const apagar = async () => {
+    await com.apagarTudo().catch(() => {});
+    avisar("Pronto. Suas contribuições e seus pontos foram apagados.");
+    telaPerfil();
+  };
+
+  conteudo.replaceChildren(
+    el("header", { class: "hero" },
+      el("div", { class: "hero-barra" },
+        el("button", { class: "botao-redondo", type: "button", "aria-label": "Voltar", onclick: voltar }, icone("voltar"))),
+      el("p", { class: "rotulo" }, perfil.apelido || "Seu perfil"),
+      el("h1", {}, n.nome),
+      el("div", { class: "nivel-estrelas" }, estrelas(n.nivel, `Nível ${n.nivel} de 5`), el("span", {}, `${perfil.pontos} pontos`)),
+      el("div", { class: "progresso", role: "progressbar", "aria-valuemin": 0, "aria-valuemax": 100, "aria-valuenow": Math.round(n.progresso * 100) },
+        el("span", { style: `width:${n.progresso * 100}%` })),
+      el("p", {}, n.proximo ? `Faltam ${n.proximo.min - perfil.pontos} pontos para ${n.proximo.nome}.` : "Você chegou ao nível mais alto.")),
+    el("div", { class: "folha" },
+      com.modo === "teste" ? el("p", { class: "faixa-teste cartao" }, "Modo de teste: a comunidade ainda não está ligada. Seus pontos e contribuições ficam só neste aparelho.") : null,
+      el("section", { class: "cartao entrar" },
+        el("h2", {}, "Como ganhar pontos"),
+        el("ul", { class: "lista-pontos" },
+          el("li", {}, el("span", {}, "Confirmar um preço que você viu"), el("strong", {}, `+${PONTOS.confirmar}`)),
+          el("li", {}, el("span", {}, "Corrigir um preço informando o valor"), el("strong", {}, `+${PONTOS.corrigir}`)),
+          el("li", {}, el("span", {}, "Dizer se uma explicação ajudou"), el("strong", {}, `+${PONTOS.avaliar_causa}`)),
+          el("li", {}, el("span", {}, "Evidência aceita depois da conferência"), el("strong", {}, `+${PONTOS.evidencia}`))),
+        el("p", { class: "minusculo" }, "Quanto maior o nível, mais o seu voto pesa. Pontos não valem dinheiro, prêmios nem descontos.")),
+      el("section", { class: "cartao entrar entrar-2" },
+        el("h2", {}, "Níveis"),
+        el("ul", { class: "lista-pontos" }, NIVEIS_COMUNIDADE.map((x) => el("li", { class: x.nivel === n.nivel ? "atual" : null },
+          el("span", {}, estrelas(x.nivel, `Nível ${x.nivel}`), ` ${x.nome}`), el("strong", {}, `${x.min}+`))))),
+      el("section", { class: "cartao entrar entrar-3" },
+        el("h2", {}, "Ranking"),
+        ranking && ranking.length
+          ? el("ol", { class: "ranking" }, ranking.map((r) => el("li", {}, el("span", {}, r.apelido), el("strong", {}, `${r.pontos} pts`))))
+          : el("p", { class: "sub", style: "margin:0" }, com.modo === "teste" ? "O ranking aparece quando a comunidade estiver ligada." : "Ainda não há ninguém no ranking."),
+        el("label", { class: "rotulo-campo" }, "Seu apelido no ranking (opcional)"),
+        el("div", { class: "linha-campo" }, apelido, el("button", { class: "botao-principal compacto", type: "button", onclick: salvarApelido }, "Salvar")),
+        el("p", { class: "minusculo" }, "Sem apelido, você não aparece no ranking.")),
+      el("section", { class: "cartao entrar entrar-4" },
+        el("button", { class: "botao-secundario", type: "button", onclick: apagar }, icone("lixeira"), "Apagar minhas contribuições e pontos"))));
+}
+
+async function telaLegal(arquivo, titulo) {
+  const corpo = el("div", { class: "texto-legal" }, el("p", { class: "carregando" }, "Carregando…"));
+  conteudo.replaceChildren(
+    el("header", { class: "hero" },
+      el("div", { class: "hero-barra" },
+        el("button", { class: "botao-redondo", type: "button", "aria-label": "Voltar", onclick: voltar }, icone("voltar"))),
+      el("h1", {}, titulo)),
+    el("div", { class: "folha" }, el("section", { class: "cartao" }, corpo)));
+  try {
+    const r = await fetch(`legal/${arquivo}.html`, { cache: "no-cache" });
+    if (!r.ok) throw new Error();
+    corpo.innerHTML = await r.text(); // arquivo estático do próprio app
+  } catch {
+    corpo.replaceChildren(el("p", {}, "Não foi possível carregar agora."));
+  }
 }
 
 // ---------- rotas ----------
 
 async function rotear() {
   fecharLeitor();
+  fecharFolhas();
   document.getElementById("aviso-rapido").classList.remove("visivel");
   const hash = location.hash || "#/";
   const produto = hash.match(/^#\/p\/(\d{8,14})$/);
@@ -880,6 +1139,9 @@ async function rotear() {
   if (produto) await telaProduto(produto[1]);
   else if (lista) await telaProdutos(decodeURIComponent(lista[1] || ""));
   else if (hash === "#/sobre") telaSobre();
+  else if (hash === "#/perfil") await telaPerfil();
+  else if (hash === "#/termos") await telaLegal("termos", "Termos de uso");
+  else if (hash === "#/privacidade") await telaLegal("privacidade", "Política de privacidade");
   else await telaInicio();
   conteudo.focus({ preventScroll: true });
   window.scrollTo(0, 0);
