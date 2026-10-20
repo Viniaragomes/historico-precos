@@ -100,6 +100,23 @@ python -m historico_precos mapa-df consultar CAFE --filtro 500G --detalhe
 - Se o painel for um dashboard embutido (Power BI, Qlik), o `descobrir` avisa, e a coleta por formulário não funciona.
 - As descrições são digitadas por cada empresa, então use `--filtro` para separar tamanhos e marcas.
 
+## Encartes e tabloides (preço de loja física)
+
+O agente de encartes lê o tabloide de ofertas (imagem ou PDF) com IA de visão (`claude-opus-5-5`, saída em JSON validado por esquema) e extrai produto, preço, preço "de", condição e validade.
+
+```bash
+pip install -r requirements-encartes.txt      # precisa de ANTHROPIC_API_KEY ou `ant auth login`
+python -m historico_precos encarte ler encarte.pdf --loja "Mercado X" --fonte "https://mercadox.com.br/ofertas"
+python -m historico_precos encarte pendentes
+python -m historico_precos encarte vincular <id> <EAN>
+```
+
+- A IA é instruída a **não incluir preço ilegível** e a **nunca inventar** código de barras.
+- Preço com condição (leve 3 pague 2, cartão ou clube da loja) é guardado, mas **fica fora do comparativo**.
+- Um item só vira preço de um produto quando o nome e o **tamanho** batem com segurança. O resto fica pendente para uma pessoa vincular.
+- Preços de encarte entram com confiança inicial menor nas estrelas (0,55), porque a leitura por IA pode errar, e passam pelo agente de qualidade como qualquer outro preço.
+- Cada leitura custa uma chamada à API. O fallback automático (`fallbacks: "default"`) está ligado: se o pedido for recusado por um classificador, a API tenta outro modelo recomendado.
+
 ## Qualidade dos dados
 
 Antes de exportar, o agente de qualidade (`historico_precos/qualidade.py`) analisa cada produto:

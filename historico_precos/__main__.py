@@ -349,6 +349,21 @@ def main(argv: list[str] | None = None) -> int:
     bl.add_argument("--sem-wayback", action="store_true")
     bl.add_argument("--max-capturas", type=int, default=10)
 
+    en = sub.add_parser("encarte", help="lê encartes e tabloides com IA de visão (precisa de credencial da API)")
+    esub = en.add_subparsers(dest="acao", required=True)
+    el_ = esub.add_parser("ler", help="lê um encarte (arquivo ou URL: PNG, JPG, WEBP, GIF ou PDF)")
+    el_.add_argument("origem")
+    el_.add_argument("--loja", required=True)
+    el_.add_argument("--cidade", default="Brasília")
+    el_.add_argument("--data", help="AAAA-MM-DD, se o encarte não trouxer a validade")
+    el_.add_argument("--fonte", help="página onde o encarte foi publicado (vira o link de prova)")
+    esub.add_parser("pendentes", help="itens que não foram associados a um produto com segurança")
+    ev = esub.add_parser("vincular", help="associa um item pendente a um EAN, depois de conferir")
+    ev.add_argument("id")
+    ev.add_argument("ean")
+    ed = esub.add_parser("descartar", help="descarta um item pendente")
+    ed.add_argument("id")
+
     ci = sub.add_parser("conferencia-impostos", help="gera o checklist de conferência das leis de impostos")
     ci.add_argument("--saida", default="docs/conferencia-impostos.md")
 
@@ -378,6 +393,30 @@ def main(argv: list[str] | None = None) -> int:
     banco = Banco(args.banco)
     nav = Navegador(intervalo=args.intervalo)
 
+    if args.comando == "encarte":
+        from .encartes import AgenteEncartes, ErroEncarte
+
+        agente = AgenteEncartes(banco, nav=nav)
+        try:
+            if args.acao == "ler":
+                r = agente.processar(args.origem, loja=args.loja, cidade=args.cidade, data_coleta=args.data, fonte=args.fonte)
+                print(f"{r['itens']} itens lidos (validade {r['validade'][0] or '?'} a {r['validade'][1] or '?'}): "
+                      f"{r['vinculados']} viraram preço, {r['pendentes']} pendentes, {r['condicionais']} com condição.")
+                if r["pendentes"]:
+                    print("Veja e vincule: python -m historico_precos encarte pendentes")
+            elif args.acao == "pendentes":
+                for it in agente.itens("pendente"):
+                    print(f"[{it.id}] {it.data} {it.loja:<18} R$ {it.preco:>7.2f}  {it.descricao}")
+                print("Para vincular: python -m historico_precos encarte vincular <id> <EAN>")
+            elif args.acao == "vincular":
+                print(f"{agente.vincular(args.id, args.ean)} preço(s) criado(s).")
+            else:
+                agente.descartar(args.id)
+                print("Descartado.")
+        except ErroEncarte as e:
+            print(f"Não deu certo: {e}")
+            return 1
+        return 0
     if args.comando == "qualidade":
         eans = [args.ean] if args.ean else [l[0] for l in banco.con.execute("SELECT DISTINCT ean FROM precos ORDER BY ean")]
         total = 0

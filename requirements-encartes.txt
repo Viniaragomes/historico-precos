@@ -1,0 +1,2 @@
+# Só para o agente de encartes (o resto do projeto não tem dependências)
+anthropic>=1.16,<2

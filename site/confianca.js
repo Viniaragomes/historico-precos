@@ -2,7 +2,8 @@
 // Isto NÃO é nível de prova: votos confirmam o que se vê (preço, promoção), nunca provam uma causa.
 
 // quanto cada fonte já merece de confiança antes de qualquer voto (0 a 1)
-export const CONFIANCA_DA_FONTE = { vtex: 0.6, wayback: 0.7, open_prices: 0.5, usuario: 0.35 };
+// encarte: lido por IA, pode ter erro de leitura; por isso começa abaixo das páginas das lojas
+export const CONFIANCA_DA_FONTE = { vtex: 0.6, wayback: 0.7, encarte: 0.55, open_prices: 0.5, usuario: 0.35 };
 const FORCA_DA_FONTE = 2; // a fonte vale como 2 votos
 const MEIA_VIDA_FONTE_DIAS = 14; // preço sem confirmação vai ficando incerto
 const MEIA_VIDA_VOTO_DIAS = 7; // voto antigo pesa menos: preço muda

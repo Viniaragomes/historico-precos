@@ -29,6 +29,7 @@ class Navegador:
         respeitar_robots: bool = True,
         abrir: Abridor | None = None,
         dormir: Callable[[float], None] = time.sleep,
+        abrir_bytes: Callable[[str], bytes | None] | None = None,
     ):
         self.user_agent = user_agent
         self.intervalo = intervalo
@@ -36,6 +37,7 @@ class Navegador:
         self.respeitar_robots = respeitar_robots
         self._abrir = abrir or self._abrir_urllib
         self._dormir = dormir
+        self._abrir_bytes = abrir_bytes
         self._ultimo_acesso: dict[str, float] = {}
         self._robots: dict[str, RobotFileParser | None] = {}
         # guarda cookies de sessão entre requisições (painéis em PHP costumam exigir)
@@ -89,6 +91,22 @@ class Navegador:
                 self._robots[base] = rp
         rp = self._robots[base]
         return rp is not None and rp.can_fetch(self.user_agent, url)
+
+    def get_bytes(self, url: str) -> bytes | None:
+        """Baixa um arquivo (imagem, PDF) respeitando robots.txt e o intervalo entre acessos."""
+        if not self.permitido(url):
+            log.info("robots.txt não permite: %s", url)
+            return None
+        self._esperar_vez(urlsplit(url).netloc)
+        if self._abrir_bytes:
+            return self._abrir_bytes(url)
+        req = urllib.request.Request(url, headers={"User-Agent": self.user_agent, "Accept": "*/*"})
+        try:
+            with self._opener.open(req, timeout=self.timeout) as resp:
+                return resp.read() if resp.status == 200 else None
+        except (urllib.error.URLError, TimeoutError, ConnectionError) as e:
+            log.warning("falha ao baixar %s: %s", url, e)
+            return None
 
     def get_texto(self, url: str, tentativas: int = 2) -> str | None:
         return self._requisitar(url, None, tentativas)
