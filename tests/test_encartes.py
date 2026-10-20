@@ -148,6 +148,7 @@ class TestEncartesDF(unittest.TestCase):
 
         self.assertEqual(encartesdf.separar_titulo("Supermercado União até 22-10-2026"), ("Supermercado União", "2026-10-22"))
         self.assertEqual(encartesdf.separar_titulo("Dicas"), ("Dicas", None))
+        self.assertEqual(encartesdf.separar_titulo("Encarte Vencido Assaí Atacadista até 18-10-2026"), ("Assaí Atacadista", "2026-10-18"))
         encs = encartesdf.listar(self.nav, dias=7, hoje=__import__("datetime").date(2026, 10, 20))
         self.assertEqual(len(encs), 1)  # o post sem imagem fica de fora
         self.assertEqual(encs[0].mercado, "Supermercado União")

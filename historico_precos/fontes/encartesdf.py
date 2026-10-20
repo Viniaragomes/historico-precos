@@ -43,6 +43,7 @@ def _limpar(html: str) -> str:
 
 def separar_titulo(titulo: str) -> tuple[str, str | None]:
     """'Supermercado União até 22-10-2026' -> ('Supermercado União', '2026-10-22')."""
+    titulo = re.sub(r"^\s*encarte\s+vencido\s*[-–:]?\s*", "", titulo, flags=re.I)  # o site marca assim os antigos
     achado = _RE_ATE.search(titulo)
     if not achado:
         return titulo.strip(), None
