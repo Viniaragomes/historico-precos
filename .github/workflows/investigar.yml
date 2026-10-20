@@ -18,6 +18,9 @@ jobs:
           python-version: "3.12"
       - name: Investigar
         run: python ferramentas/investigar_fontes.py relatorios/investigacao
+      - name: Mapa de Preços do DF pelo Qlik (como a página pública)
+        continue-on-error: true
+        run: python -m historico_precos --banco /tmp/t.db mapa-df qlik --saida relatorios/investigacao/mapa-df-qlik.json --linhas 25
       - name: Guardar no repositório
         run: |
           git config user.name "github-actions[bot]"

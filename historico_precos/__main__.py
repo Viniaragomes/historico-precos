@@ -187,6 +187,21 @@ def _leis(args, nav: Navegador, banco: Banco) -> int:
 
 def _mapa_df(args, nav: Navegador, banco: Banco) -> int:
     agente = AgenteMapaDF(nav, banco)
+    if args.acao == "qlik":
+        from .mapa_df import qlik
+
+        r = qlik.explorar(linhas=args.linhas)
+        Path(args.saida).parent.mkdir(parents=True, exist_ok=True)
+        Path(args.saida).write_text(json.dumps(r, ensure_ascii=False, indent=2), encoding="utf-8")
+        if not r["ok"]:
+            print(f"Não abriu o app Qlik: {r.get('erro') or r.get('tentativas')}")
+            return 1
+        print(f"{r['titulo']} (última carga {r['ultima_carga']}): {len(r['campos'])} campos")
+        print("Campos:", ", ".join(r["campos"][:80]))
+        for t in r["tabelas"]:
+            print(f"  {t['elemento']} {t['titulo'] or ''}: {t['dimensoes']} | {t['medidas']} | {t['linhas_total']} linhas {t['erro'] or ''}")
+        print(f"Detalhes em {args.saida}")
+        return 0
     if args.acao == "descobrir":
         desc = agente.descobrir(Path(args.bruto))
         if desc is None:
@@ -332,6 +347,9 @@ def main(argv: list[str] | None = None) -> int:
     mdc.add_argument("--termos", help="separados por vírgula (padrão: termos_padrao do mapa_df.json)")
     mdc.add_argument("--meses", help="AAAA-MM separados por vírgula (padrão: últimos meses)")
     mdc.add_argument("--bruto", help="salva as respostas nesta pasta (útil para ajustar o agente)")
+    mdx = msub.add_parser("qlik", help="abre o app Qlik do painel como a página pública e descreve campos e tabelas")
+    mdx.add_argument("--saida", default="relatorios/mapa-df-qlik.json")
+    mdx.add_argument("--linhas", type=int, default=20, help="linhas de amostra por tabela")
     mdq = msub.add_parser("consultar", help="mostra o histórico mensal guardado de um termo")
     mdq.add_argument("termo")
     mdq.add_argument("--filtro", help="só descrições que contenham este texto (ex.: '500G')")
