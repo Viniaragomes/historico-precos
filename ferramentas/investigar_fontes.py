@@ -16,6 +16,8 @@ from __future__ import annotations
 import gzip
 import json
 import re
+import socket
+import ssl
 import sys
 import time
 import urllib.error
@@ -76,15 +78,52 @@ ESTADOS_EMBUTIDOS = ["__NEXT_DATA__", "__NUXT__", "__APOLLO_STATE__", "__PRELOAD
                      "__STATE__", "__RUNTIME__", "__REDUX_STATE__"]
 
 
-def baixar(url: str, limite: int = 3_000_000) -> dict:
+_CONTEXTOS: dict[str, ssl.SSLContext] = {}
+
+
+def _contexto_com_intermediario(host: str) -> ssl.SSLContext | None:
+    """Servidor que não envia o certificado intermediário: busca-o no endereço que o próprio certificado indica
+    (campo AIA), como fazem os navegadores. A verificação continua inteira: o intermediário só vale se ele mesmo
+    for assinado por uma autoridade raiz confiável do sistema (sem aceitar cadeia parcial)."""
+    if host in _CONTEXTOS:
+        return _CONTEXTOS[host]
+    try:
+        leitura = ssl.create_default_context()
+        leitura.check_hostname = False
+        leitura.verify_mode = ssl.CERT_NONE  # só para LER o endereço do intermediário; nada é baixado por esta conexão
+        with socket.create_connection((host, 443), timeout=30) as sk, leitura.wrap_socket(sk, server_hostname=host) as tls:
+            der = tls.getpeercert(binary_form=True)
+        enderecos = re.findall(rb"http://[\x21-\x7e]+?\.(?:crt|cer|der|p7c)", der)
+        if not enderecos:
+            return None
+        with urllib.request.urlopen(urllib.request.Request(enderecos[0].decode(), headers={"User-Agent": USER_AGENT}), timeout=30) as r:
+            bruto = r.read(200_000)
+        pem = bruto.decode() if b"BEGIN CERTIFICATE" in bruto else ssl.DER_cert_to_PEM_cert(bruto)
+        ctx = ssl.create_default_context()
+        ctx.load_verify_locations(cadata=pem)
+        if hasattr(ssl, "VERIFY_X509_PARTIAL_CHAIN"):
+            ctx.verify_flags &= ~ssl.VERIFY_X509_PARTIAL_CHAIN  # o intermediário não vira raiz de confiança
+        _CONTEXTOS[host] = ctx
+        return ctx
+    except Exception:
+        return None
+
+
+def baixar(url: str, limite: int = 3_000_000, contexto: ssl.SSLContext | None = None) -> dict:
     req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": "*/*", "Accept-Encoding": "gzip"})
     inicio = time.monotonic()
+    host = urlsplit(url).hostname or ""
+    contexto = contexto or _CONTEXTOS.get(host)
     try:
-        with urllib.request.urlopen(req, timeout=45) as r:
+        with urllib.request.urlopen(req, timeout=45, context=contexto) as r:
             corpo, status, cab = r.read(limite), r.status, dict(r.headers)
     except urllib.error.HTTPError as e:
         corpo, status, cab = e.read(200_000), e.code, dict(e.headers or {})
     except Exception as e:  # rede, TLS, tempo esgotado
+        if "unable to get local issuer" in str(e) and contexto is None and (ctx := _contexto_com_intermediario(host)):
+            r = baixar(url, limite, ctx)
+            r["nota_tls"] = "o servidor não envia o certificado intermediário; completado pelo endereço indicado no certificado (AIA), com verificação"
+            return r
         return {"url": url, "status": 0, "erro": str(e)[:300], "ms": int((time.monotonic() - inicio) * 1000)}
     if url.endswith(".gz") and corpo[:2] == b"\x1f\x8b":
         corpo = gzip.decompress(corpo)
@@ -243,6 +282,47 @@ def explorar_sitemap(robots_txt: str, base: str, rp: RobotFileParser, pasta: Pat
             "exemplos": produtos[:5], "amostras": amostras, "avisos": avisos}
 
 
+def explorar_temas(robots_txt: str, base: str, rp: RobotFileParser, pasta: Path, html_inicio: str, palavras: list[str],
+                   max_sitemaps: int = 8, max_paginas: int = 12) -> dict:
+    """Páginas cujo endereço ou texto do link tem uma das palavras: do sitemap e da página inicial."""
+    from historico_precos.fontes.wayback import normalizar_slug
+
+    def casa(t: str) -> bool:
+        t = normalizar_slug(t).replace(" ", "-")
+        return any(p in t for p in palavras)
+
+    candidatos: list[str] = []
+    for href, texto in re.findall(r'<a\s[^>]*href=["\']([^"\'#]+)["\'][^>]*>(.*?)</a>', html_inicio or "", re.S | re.I):
+        u = urljoin(base + "/", href)
+        if urlsplit(u).hostname == urlsplit(base).hostname and (casa(u) or casa(re.sub(r"<[^>]+>", " ", texto))):
+            candidatos.append(u)
+    fila = re.findall(r"(?im)^\s*sitemap:\s*(\S+)", robots_txt or "")
+    lidos = []
+    while fila and len(lidos) < max_sitemaps:
+        url = fila.pop(0)
+        if not rp.can_fetch(USER_AGENT, url):
+            continue
+        time.sleep(3)
+        r = baixar(url, limite=20_000_000)
+        lidos.append({"url": url, "status": r["status"], "erro": r.get("erro")})
+        locs = re.findall(r"<loc>\s*([^<\s]+)\s*</loc>", r.get("texto") or "")
+        if "<sitemapindex" in (r.get("texto") or ""):
+            fila += locs
+        else:
+            candidatos += [u for u in locs if casa(u)]
+    candidatos = list(dict.fromkeys(candidatos))
+    paginas = []
+    for url in [u for u in candidatos if rp.can_fetch(USER_AGENT, u)][:max_paginas]:
+        time.sleep(3)
+        r = baixar(url)
+        info = analisar(r)
+        info.pop("enderecos_de_dados", None)
+        paginas.append(info)
+        if r.get("texto"):
+            (pasta / _arquivo(url, ".html")).write_text(r["texto"][:400000], encoding="utf-8")
+    return {"sitemaps_lidos": lidos, "candidatos": len(candidatos), "exemplos": candidatos[:30], "paginas": paginas}
+
+
 # ---------------- análise geral ----------------
 
 def analisar(resposta: dict) -> dict:
@@ -270,8 +350,16 @@ def analisar(resposta: dict) -> dict:
 
 
 # sites que, em 20/10/2026, recusaram os servidores do GitHub (fora do Brasil): rodar de uma conexão no Brasil
-SO_DO_BRASIL = ["CEASA-DF (atacado de hortifrúti)", "IPE-DF (índices do DF)", "Dados abertos do DF",
-                "Conab Portal de Informações (downloads)", "Diário Oficial da União", "Confaz (convênios ICMS)"]
+# a Conab ("403 - Acesso proibido") e o DOU (conexão encerrada) recusaram também a partir do Brasil: ficam de fora
+SO_DO_BRASIL = ["CEASA-DF (atacado de hortifrúti)", "IPE-DF (índices do DF)", "Dados abertos do DF", "Confaz (convênios ICMS)"]
+
+# o que procurar em cada site (no sitemap e nos links da página inicial)
+TEMAS = {
+    "CEASA-DF (atacado de hortifrúti)": ["cotac", "preco", "boletim", "mercado", "estatistic", "informativo", "prohort"],
+    "IPE-DF (índices do DF)": ["icdf", "preco", "cesta", "inflac", "ipca", "custo", "indice", "atacado"],
+    "Dados abertos do DF": ["preco", "ceasa", "cesta", "abastecimento", "nota-fiscal", "nfe", "ipe"],
+    "Confaz (convênios ICMS)": ["convenio", "2026"],
+}
 
 
 def investigar(pasta: Path, so: list[str] | None = None) -> dict:
@@ -313,6 +401,10 @@ def investigar(pasta: Path, so: list[str] | None = None) -> dict:
             time.sleep(2)
             r = baixar(s)
             item["scripts"].append({"url": s, **pistas_do_script(r["texto"])} if r["status"] == 200 else {"url": s, "status": r["status"]})
+        if nome in TEMAS and not bloqueado_robots:
+            inicio = next((p for p in item["paginas"] if p.get("status") == 200), None)
+            html_inicio = (pasta / _arquivo(inicio["url"], ".html")).read_text(encoding="utf-8") if inicio else ""
+            item["temas"] = explorar_temas(robots.get("texto") if robots["status"] == 200 else "", base, rp, pasta, html_inicio, TEMAS[nome])
         if nome in EXPLORAR_SITEMAP and not bloqueado_robots and robots["status"] == 200:
             item["sitemap"] = explorar_sitemap(robots["texto"], base, rp, pasta)
         resultado[nome] = item

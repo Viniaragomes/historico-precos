@@ -42,6 +42,11 @@ def main() -> int:
             print(f"   {p.get('status')} {p['url'][:90]} {p.get('titulo') or ''} {p.get('nota') or p.get('erro') or ''}")
             if p.get("arquivos_de_dados"):
                 print(f"      arquivos de dados: {p['arquivos_de_dados'][:5]}")
+        temas = item.get("temas")
+        if temas:
+            print(f"   páginas sobre o tema: {temas['candidatos']} encontradas, {len(temas['paginas'])} lidas")
+            for p in temas["paginas"]:
+                print(f"      {p.get('status')} {p['url'][:90]} {p.get('titulo') or ''} {len(p.get('arquivos_de_dados') or [])} arquivo(s)")
     print(f"\nRelatório: {pasta / 'investigacao.json'}")
     if args.publicar:
         subprocess.run(["git", "-C", str(RAIZ), "add", "relatorios/brasil"], check=True)
