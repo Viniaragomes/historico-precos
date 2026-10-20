@@ -20,6 +20,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Dependências de diagnóstico (leitura de PDF)
+        run: pip install -q pypdf==5.1.0
       - name: Rodar
         env:
           SCRIPT: ${{ inputs.script }}
