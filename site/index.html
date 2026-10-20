@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Preço com Prova</title>
+  <meta name="description" content="Aponte a câmera para o código de barras e veja onde está mais barato, o histórico do preço e por que ele mudou, com a fonte de cada número.">
+  <meta name="theme-color" content="#2a78d6">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icone.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icone-192.png">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <header class="topo">
+    <a href="#/" class="marca" aria-label="Início">
+      <img src="icone.svg" alt="" width="28" height="28">
+      <span>Preço com Prova</span>
+    </a>
+    <nav>
+      <a href="#/" data-rota="leitor">Ler código</a>
+      <a href="#/lista" data-rota="lista">Produtos</a>
+    </nav>
+  </header>
+
+  <main id="conteudo" tabindex="-1"></main>
+
+  <template id="tpl-leitor">
+    <section class="leitor">
+      <h1>Aponte para o código de barras</h1>
+      <div class="camera" id="camera">
+        <video id="video" playsinline muted></video>
+        <div id="leitor-alternativo"></div>
+        <div class="mira" aria-hidden="true"></div>
+        <button class="botao principal" id="abrir-camera" type="button">Abrir câmera</button>
+      </div>
+      <p class="estado" id="estado-camera" role="status"></p>
+      <form class="manual" id="form-manual">
+        <label for="codigo">Ou digite o código</label>
+        <div class="linha">
+          <input id="codigo" inputmode="numeric" pattern="[0-9]{8,14}" placeholder="7891000100103" autocomplete="off" required>
+          <button class="botao" type="submit">Ver</button>
+        </div>
+      </form>
+    </section>
+  </template>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>

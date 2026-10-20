@@ -8,6 +8,8 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 concurrency:
   group: coleta
@@ -61,6 +63,13 @@ jobs:
             python -m historico_precos mapa-df coletar
           fi
 
+      - name: Gerar os dados do app
+        run: python -m historico_precos exportar --saida site/dados
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
       - name: Guardar o banco no ramo "dados"
         run: |
           git config user.name "github-actions[bot]"
@@ -75,3 +84,16 @@ jobs:
           git add precos.db
           git commit -m "Coleta $(date -u +%F)" || exit 0
           git push origin dados
+
+  # Publica o app no GitHub Pages. Ative em Settings > Pages > Source: GitHub Actions.
+  # Em repositório privado, o Pages exige plano pago; sem ele, este passo falha e a coleta continua normal.
+  publicar-app:
+    needs: coleta
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4

@@ -20,6 +20,15 @@ log = logging.getLogger(__name__)
 CATEGORIAS_PADRAO = Path(__file__).resolve().parents[2] / "categorias.json"
 
 
+def _pct(v: float) -> str:
+    """+2,5% (vírgula decimal, como se lê no Brasil)."""
+    return f"{v:+.1f}%".replace(".", ",")
+
+
+def _aliq(v: float) -> str:
+    return f"{v:g}".replace(".", ",")
+
+
 @dataclass
 class Evidencia:
     nivel: str
@@ -105,14 +114,16 @@ class AgenteCausas:
 
         # 1. Imposto: lei com data de vigência dentro do período -> efeito calculável
         for e in tributos.no_periodo(self.eventos, uf, categoria, ini, fim):
+            if e.calculo == "sem_efeito":  # ex.: teste da reforma em 2026, compensado; não explica mudança de preço
+                continue
             nivel = COMPROVADO if e.verificado else A_CONFIRMAR
             alcance = "" if categoria in e.categorias else f" Vale para: {e.abrangencia}."
             evidencias.append(
                 Evidencia(
                     nivel,
                     "imposto",
-                    f"{e.tributo} ({e.uf}) passou de {e.aliquota_anterior:g}% para {e.aliquota_nova:g}% "
-                    f"em {e.vigencia:%d/%m/%Y}. Se repassado por inteiro, explica {e.efeito_pct():+.1f}% do preço."
+                    f"{e.tributo} ({e.uf}) passou de {_aliq(e.aliquota_anterior)}% para {_aliq(e.aliquota_nova)}% "
+                    f"em {e.vigencia:%d/%m/%Y}. Se repassado por inteiro, explica {_pct(e.efeito_pct())} do preço."
                     f"{alcance} {e.observacao}".strip(),
                     e.efeito_pct(),
                     e.fontes,
@@ -128,8 +139,8 @@ class AgenteCausas:
                     COMPROVADO,
                     "embalagem",
                     f"A embalagem mudou de {qa:g}{un} para {qd:g}{un}. O preço por {'kg' if un == 'g' else 'litro'} "
-                    f"variou {var_unit:+.1f}%, "
-                    f"contra {m.variacao_pct:+.1f}% no preço da prateleira.",
+                    f"variou {_pct(var_unit)}, "
+                    f"contra {_pct(m.variacao_pct)} no preço da prateleira.",
                     var_unit,
                     [antes.url_evidencia, depois.url_evidencia],
                 )
@@ -151,7 +162,7 @@ class AgenteCausas:
                 Evidencia(
                     ASSOCIADO,
                     "indicador",
-                    f"{s['nome']} variou {var:+.1f}% no período{quando}.",
+                    f"{s['nome']} variou {_pct(var)} no período{quando}.",
                     None,
                     [f"https://www3.bcb.gov.br/sgspub/ (série {s['codigo']})"],
                 )
@@ -185,8 +196,8 @@ class AgenteCausas:
                 Evidencia(
                     REFERENCIA,
                     "categoria",
-                    f"IPCA de '{nome}' ({rotulo}) acumulou {var:+.1f}% de {ini:%m/%Y} a {fim:%m/%Y}. "
-                    f"Este produto variou {diferenca:+.1f} pontos em relação à categoria.",
+                    f"IPCA de '{nome}' ({rotulo}) acumulou {_pct(var)} de {ini:%m/%Y} a {fim:%m/%Y}. "
+                    f"Este produto variou {_pct(diferenca)[:-1]} pontos em relação à categoria.",
                     var,
                     [f"https://sidra.ibge.gov.br/tabela/{series.TABELA_IPCA}"],
                 )

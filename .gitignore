@@ -3,3 +3,4 @@ __pycache__/
 *.db
 mapa_df_bruto/
 fontes.txt
+site/dados/

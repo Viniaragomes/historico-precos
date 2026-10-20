@@ -27,6 +27,7 @@ from .agente import AgenteHistorico, Relatorio, detectar_mudancas
 from .armazenamento import Banco
 from .causas.analise import AgenteCausas, carregar_categorias
 from .comparativo import comparar
+from .exportar import exportar
 from .fontes import vtex
 from .causas.series import normalizar
 from .leis.monitor import MonitorLeis
@@ -245,6 +246,24 @@ def _mapa_df(args, nav: Navegador, banco: Banco) -> int:
     return 0
 
 
+def _servir(args) -> int:
+    import functools
+    import http.server
+
+    pasta = Path(args.pasta).resolve()
+    if not (pasta / "index.html").exists():
+        print(f"Não achei {pasta}/index.html")
+        return 1
+    handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=str(pasta))
+    with http.server.ThreadingHTTPServer(("127.0.0.1", args.porta), handler) as srv:
+        print(f"App em http://localhost:{args.porta}  (Ctrl+C para parar)")
+        try:
+            srv.serve_forever()
+        except KeyboardInterrupt:
+            pass
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(prog="historico_precos", description="Varre fontes públicas de preço por EAN.")
     ap.add_argument("--banco", default="precos.db")
@@ -329,11 +348,27 @@ def main(argv: list[str] | None = None) -> int:
     bl.add_argument("--sem-wayback", action="store_true")
     bl.add_argument("--max-capturas", type=int, default=10)
 
+    ex = sub.add_parser("exportar", help="gera os arquivos JSON que o app lê")
+    ex.add_argument("--saida", default="site/dados")
+    ex.add_argument("--sem-causas", action="store_true", help="não consulta IBGE/Banco Central (mais rápido)")
+    ex.add_argument("--com-noticias", action="store_true", help="inclui notícias (GDELT) nas causas")
+
+    sv = sub.add_parser("servir", help="abre o app no computador em http://localhost:8000")
+    sv.add_argument("--porta", type=int, default=8000)
+    sv.add_argument("--pasta", default="site")
+
     args = ap.parse_args(argv)
     logging.basicConfig(level=logging.INFO if args.verbose else logging.WARNING, format="%(message)s")
+    if args.comando == "servir":
+        return _servir(args)
     banco = Banco(args.banco)
     nav = Navegador(intervalo=args.intervalo)
 
+    if args.comando == "exportar":
+        causas = None if args.sem_causas else AgenteCausas(nav, banco, usar_noticias=args.com_noticias)
+        n = exportar(banco, Path(args.saida), causas)
+        print(f"{n} produto(s) exportado(s) para {args.saida}")
+        return 0
     if args.comando == "viabilidade":
         agente = AgenteViabilidade(nav, banco, carregar_lojas(args.lojas))
         if args.so_fontes:

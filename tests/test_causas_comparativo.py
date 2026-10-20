@@ -115,7 +115,7 @@ class TestAgenteCausas(unittest.TestCase):
         self.assertEqual(por_tipo["categoria"].nivel, REFERENCIA)
         self.assertAlmostEqual(por_tipo["categoria"].efeito_pct, (1.02 * 1.03 - 1) * 100, places=4)
         self.assertEqual(por_tipo["indicador"].nivel, ASSOCIADO)
-        self.assertIn("+10.0%", por_tipo["indicador"].descricao)
+        self.assertIn("+10,0%", por_tipo["indicador"].descricao)
         noticias_ok = [e for e in ex.evidencias if e.tipo == "noticia"]
         self.assertEqual(len(noticias_ok), 1)
         self.assertEqual(noticias_ok[0].nivel, DECLARADO)

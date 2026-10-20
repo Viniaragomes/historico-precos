@@ -100,6 +100,20 @@ python -m historico_precos mapa-df consultar CAFE --filtro 500G --detalhe
 - Se o painel for um dashboard embutido (Power BI, Qlik), o `descobrir` avisa, e a coleta por formulário não funciona.
 - As descrições são digitadas por cada empresa, então use `--filtro` para separar tamanhos e marcas.
 
+## O app (Preço com Prova)
+
+App web instalável (PWA) na pasta `site/`: o usuário aponta a câmera para o código de barras e vê onde o produto está mais barato, o gráfico do histórico e as causas de cada mudança de preço por nível de prova, com o link de cada fonte. Não precisa de servidor: o app lê os arquivos que o comando `exportar` gera.
+
+```bash
+python -m historico_precos exportar          # gera site/dados/*.json a partir do banco
+python -m historico_precos servir            # abre em http://localhost:8000
+```
+
+- **Câmera:** usa o leitor nativo do navegador (Android/Chrome). No iPhone, carrega a biblioteca `html5-qrcode` só quando precisa. A câmera roda só no aparelho; nenhuma imagem é enviada.
+- **Instalar no celular:** abra o endereço do app e use "Adicionar à tela inicial".
+- **Publicação:** a coleta diária gera os dados e publica o app no GitHub Pages (ative em *Settings > Pages > Source: GitHub Actions*). O Pages é gratuito em repositório público.
+- **Ainda não tem:** o cálculo do imposto embutido (a tela avisa que está em construção) e a consulta de produtos que ainda não são acompanhados.
+
 ## Rodando no GitHub (recomendado)
 
 O GitHub Actions roda os agentes com internet liberada e de graça, dentro dos limites do plano.
