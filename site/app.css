@@ -536,3 +536,14 @@ textarea.campo-texto { resize: vertical; }
 .selo-breve.conferido { color: var(--comprovado); background: var(--comprovado-fundo); }
 .conferida { display: flex; gap: 8px; align-items: flex-start; margin: 12px 0 0; font-size: 13px; color: var(--comprovado); }
 .conferida .ic { width: 18px; height: 18px; flex: none; margin-top: 1px; }
+
+/* atacado da CEASA-DF */
+.lista-atacado { list-style: none; margin: 0; padding: 0; }
+.linha-atacado { display: grid; grid-template-columns: 1fr auto auto; gap: 10px; align-items: center; padding: 10px 0; border-top: 1px solid var(--linha); }
+.linha-atacado:first-child { border-top: 0; }
+.linha-atacado .nome { text-transform: capitalize; }
+.linha-atacado .nome small { color: var(--texto-2); text-transform: none; }
+.linha-atacado .valor { font-variant-numeric: tabular-nums; font-weight: 600; }
+.etiqueta.alta { background: var(--sobe-fundo); color: var(--sobe); }
+.etiqueta.baixa { background: var(--desce-fundo); color: var(--desce); }
+.etiqueta.neutra { background: var(--superficie-2); color: var(--texto-2); }

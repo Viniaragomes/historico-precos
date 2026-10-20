@@ -431,6 +431,7 @@ async function telaInicio() {
             el("span", { class: "valor" }, r.preco != null ? brl.format(r.preco) : "—"),
             el("span", { class: "loja" }, r.loja ? `em ${r.loja}` : "sem preço recente")))),
       ] : null,
+      secaoAtacado(),
       el("div", { class: "titulo-secao entrar entrar-3" }, el("h2", {}, "Como funciona")),
       el("section", { class: "cartao passos entrar entrar-3" },
         passo("fonte", "Preço com fonte", "Cada preço tem o link de onde veio."),
@@ -441,6 +442,37 @@ async function telaInicio() {
         el("section", { class: "cartao entrar entrar-4" }, listaProdutos(produtos.slice(0, 5))),
       ] : null,
       el("p", { class: "rodape-nota" }, "Preços coletados de fontes públicas. A câmera funciona só no seu aparelho.")));
+}
+
+// atacado de hortifrúti da CEASA-DF: preço mais comum do dia, R$/kg (carrega depois, sem travar a tela)
+function secaoAtacado() {
+  const secao = el("div", { hidden: true });
+  carregarJSON("dados/ceasa-df.json").then((d) => {
+    const series = (d?.series || []).filter((x) => x.ultimo);
+    if (!series.length) return;
+    const fmtVar = (v) => `${v > 0 ? "+" : ""}${String(v).replace(".", ",")}%`;
+    const linha = (x) => el("li", { class: "linha-atacado" },
+      el("span", { class: "nome" }, x.produto.toLowerCase(), x.classificacao ? el("small", {}, ` ${x.classificacao}`) : null),
+      el("span", { class: "valor" }, `${brl.format(x.ultimo.preco_kg)}/kg`),
+      x.variacao_pct != null && Math.abs(x.variacao_pct) >= 1
+        ? el("span", { class: `etiqueta ${x.variacao_pct > 0 ? "alta" : "baixa"}` }, fmtVar(x.variacao_pct))
+        : el("span", { class: "etiqueta neutra" }, "estável"));
+    const ordem = [...series].sort((a, b) => Math.abs(b.variacao_pct ?? 0) - Math.abs(a.variacao_pct ?? 0));
+    const ultimo = series.map((x) => x.ultimo.data).sort().pop();
+    secao.hidden = false;
+    secao.replaceChildren(
+      el("div", { class: "titulo-secao entrar entrar-3" }, el("h2", {}, "Atacado de hortifrúti no DF")),
+      el("section", { class: "cartao entrar entrar-3" },
+        el("p", { class: "sub" }, `Preço mais comum na CEASA-DF em ${dataBR(ultimo)}. As maiores mudanças da semana primeiro.`),
+        el("ul", { class: "lista lista-atacado" }, ordem.slice(0, 6).map(linha)),
+        ordem.length > 6 ? el("details", { class: "expansivel" },
+          el("summary", {}, `Ver os ${ordem.length} produtos`, icone("seta")),
+          el("ul", { class: "lista lista-atacado" }, ordem.slice(6).map(linha))) : null,
+        el("p", { class: "minusculo", style: "margin:10px 0 0" },
+          "Atacado não é o preço da feira ou do mercado, mas costuma andar antes dele. Fonte: ",
+          el("a", { href: d.evidencia, target: "_blank", rel: "noopener" }, "CEASA-DF"), ".")));
+  }).catch(() => {});
+  return secao;
 }
 
 function secaoSeusProdutos(produtos) {
