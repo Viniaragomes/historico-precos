@@ -989,6 +989,10 @@ function cartaoImpostos(tabela, nomes, precoInicial) {
   const cartao = el("section", { class: "cartao entrar entrar-4" });
   const cabecalho = el("div", { class: "cabecalho-impostos" },
     el("h2", {}, "Impostos no preço"), el("span", { class: "selo-breve" }, "ESTIMATIVA"));
+  const seloConferido = (cat) => {
+    if (!cat.conferencia?.conferido_em) return;
+    cabecalho.querySelector(".selo-breve").replaceWith(el("span", { class: "selo-breve conferido" }, "LEI CONFERIDA"));
+  };
   if (!tabela) {
     cartao.append(cabecalho, el("p", { class: "sub", style: "margin:0" }, "Não foi possível carregar a tabela de impostos agora."));
     return cartao;
@@ -1000,6 +1004,7 @@ function cartaoImpostos(tabela, nomes, precoInicial) {
     return cartao;
   }
 
+  seloConferido(cat);
   const resultado = el("div");
   const desenhar = (preco) => {
     if (!(preco > 0)) {
@@ -1047,6 +1052,9 @@ function cartaoImpostos(tabela, nomes, precoInicial) {
     el("p", { class: "sub" }, `Categoria: ${cat.nome}. ${precoInicial != null ? "Calculado sobre o menor preço de hoje." : ""}`),
     entradaPreco, resultado,
     cat.pendente ? el("p", { class: "pendente" }, icone("duvida"), el("span", {}, `A confirmar: ${cat.pendente}`)) : null,
+    cat.conferencia?.conferido_em
+      ? el("p", { class: "conferida" }, icone("escudo"), el("span", {}, `Leis desta categoria conferidas no texto oficial em ${dataBR(cat.conferencia.conferido_em)}.`))
+      : null,
     el("details", { class: "expansivel" },
       el("summary", {}, "Leis usadas no cálculo", icone("seta")),
       el("ul", { class: "fontes-lei" }, calcularFontes(tabela, cat).map((id) => {

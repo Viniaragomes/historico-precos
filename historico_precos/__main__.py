@@ -349,6 +349,9 @@ def main(argv: list[str] | None = None) -> int:
     bl.add_argument("--sem-wayback", action="store_true")
     bl.add_argument("--max-capturas", type=int, default=10)
 
+    ci = sub.add_parser("conferencia-impostos", help="gera o checklist de conferência das leis de impostos")
+    ci.add_argument("--saida", default="docs/conferencia-impostos.md")
+
     q = sub.add_parser("qualidade", help="lista preços suspeitos (todos os produtos ou um EAN)")
     q.add_argument("ean", nargs="?")
 
@@ -365,6 +368,13 @@ def main(argv: list[str] | None = None) -> int:
     logging.basicConfig(level=logging.INFO if args.verbose else logging.WARNING, format="%(message)s")
     if args.comando == "servir":
         return _servir(args)
+    if args.comando == "conferencia-impostos":
+        from .conferencia import gerar
+
+        Path(args.saida).parent.mkdir(parents=True, exist_ok=True)
+        Path(args.saida).write_text(gerar(), encoding="utf-8")
+        print(f"Checklist salvo em {args.saida}")
+        return 0
     banco = Banco(args.banco)
     nav = Navegador(intervalo=args.intervalo)
 

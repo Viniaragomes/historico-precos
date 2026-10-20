@@ -49,3 +49,14 @@ test("Reforma: redução de 60% e imposto por fora", () => {
   perto(r.reforma.aliquota, a);
   perto(r.reforma.valor, 10 * (a / 100) / (1 + a / 100));
 });
+
+test("categoria conferida exige data, responsável, três links e nenhuma pendência", () => {
+  for (const c of tabela.categorias) {
+    if (!c.conferencia) continue;
+    assert.match(c.conferencia.conferido_em, /^\d{4}-\d{2}-\d{2}$/, `${c.id}: data`);
+    assert.ok(c.conferencia.por, `${c.id}: quem conferiu`);
+    assert.equal(c.conferencia.links?.length, 3, `${c.id}: um link para ICMS, PIS/Cofins e Reforma`);
+    assert.ok(c.conferencia.links.every((l) => /^https?:\/\//.test(l)), `${c.id}: links`);
+    assert.ok(!c.pendente, `${c.id}: conferida mas ainda com pendência`);
+  }
+});
