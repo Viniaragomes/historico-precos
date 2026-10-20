@@ -1,0 +1,83 @@
+{
+  "data": "2026-10-20",
+  "duracao_min": 4.2,
+  "sondas": [
+    {
+      "fonte": "Loja VTEX: Carrefour Mercado",
+      "ok": false,
+      "detalhe": "mercado.carrefour.com.br"
+    },
+    {
+      "fonte": "Loja VTEX: Atacadão",
+      "ok": false,
+      "detalhe": "www.atacadao.com.br"
+    },
+    {
+      "fonte": "Loja VTEX: Pão de Açúcar",
+      "ok": false,
+      "detalhe": "www.paodeacucar.com"
+    },
+    {
+      "fonte": "Loja VTEX: Comper",
+      "ok": false,
+      "detalhe": "www.comper.com.br"
+    },
+    {
+      "fonte": "Open Food Facts",
+      "ok": false,
+      "detalhe": "busca de produtos do Brasil"
+    },
+    {
+      "fonte": "Wayback Machine (CDX)",
+      "ok": true,
+      "detalhe": "lista de cópias arquivadas"
+    },
+    {
+      "fonte": "Open Prices",
+      "ok": true,
+      "detalhe": "API de preços"
+    },
+    {
+      "fonte": "IBGE SIDRA (IPCA)",
+      "ok": false,
+      "detalhe": "metadados da tabela 7060"
+    },
+    {
+      "fonte": "Banco Central (SGS)",
+      "ok": true,
+      "detalhe": "série 1 (dólar)"
+    },
+    {
+      "fonte": "GDELT (notícias)",
+      "ok": true,
+      "detalhe": "busca de notícias"
+    },
+    {
+      "fonte": "Diário Oficial da União",
+      "ok": false,
+      "detalhe": "0 publicações sobre ICMS nos últimos 30 dias"
+    },
+    {
+      "fonte": "Mapa de Preços do DF",
+      "ok": false,
+      "detalhe": "0 formulário(s), 2 endereço(s) de consulta"
+    }
+  ],
+  "produtos": [],
+  "metricas": {
+    "produtos_na_amostra": 0,
+    "preco_qualquer_fonte": null,
+    "preco_atual_2_lojas": null,
+    "historico_6_meses": null,
+    "preco_recente": null,
+    "mediana_dias_historico": null,
+    "mudancas_analisadas": 0,
+    "mudancas_com_evidencia": null
+  },
+  "veredito": {
+    "preco_atual_2_lojas": "sem dados",
+    "historico_6_meses": "sem dados",
+    "preco_recente": "sem dados",
+    "mudancas_com_evidencia": "sem dados"
+  }
+}
