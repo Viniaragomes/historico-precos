@@ -1,0 +1,28 @@
+Boletim 'Preço no Atacado': 2026-10-15 178 produto(s) gravado(s). 
+Histórico do formulário: 2 produto(s), 0 cotação(ões) (o portal parou em 01/06/2026).
+  Abacate especial               2026-10-15 R$   60.00 Cx- 18 a 20 kg.        (R$ 3.16/kg) —
+  Abacate extra                  2026-10-15 R$  110.00 Cx- 18 a 20 kg.        (R$ 5.79/kg) —
+  Abacaxi pérola (graúdo)        2026-10-15 R$    9.00 Unidade - 1,5 kg.      —
+  Abacaxi pérola (médio)         2026-10-15 R$    7.00 Unidade 1 kg.          —
+  Abobrinha italiana especial    2026-10-15 R$   40.00 Cx- 17 a 19 kg         (R$ 2.22/kg) —
+  Abobrinha italiana extra       2026-10-15 R$   85.00 Cx- 17 a 19 kg.        (R$ 4.72/kg) —
+  Abobrinha menina especial      2026-10-15 R$   45.00 Cx- 17 a 19 kg.        (R$ 2.50/kg) —
+  Abobrinha menina extra         2026-10-15 R$   90.00 Cx- 17 a 19 kg.        (R$ 5.00/kg) —
+  Abóbora japonesa               2026-10-15 R$   40.00 Sc- 20 kg.             (R$ 2.00/kg) —
+  Abóbora moranga                2026-10-15 R$    4.00 Sc- 18 kg.             (R$ 0.22/kg) —
+  Abóbora seca ou madura         2026-10-15 R$    5.00 1 kg.                  (R$ 5.00/kg) —
+  Acelga                         2026-10-15 R$    4.00 Und. 0,7 a 1,2 kg.     (R$ 4.21/kg) —
+  Acerola                        2026-10-15 R$   85.00 1 kg.                  (R$ 85.00/kg) —
+  Agrião                         2026-10-15 R$    4.00 Mç- 0,4 a 0,6 kg.      (R$ 8.00/kg) —
+  Alcachofra                     2026-10-15 R$  156.00 Cxta - 4 a 5 kg.       (R$ 34.67/kg) —
+  Alecrim                        2026-10-15 R$    3.50 Mç- 0,05 a 0,10 kg.    (R$ 46.67/kg) —
+  Alface americana               2026-10-15 R$   40.00 Cx. 4 a 5 kg.          (R$ 8.89/kg) —
+  Alface lisa/crespa             2026-10-15 R$   40.00 Cx. 2 a 3 kg.          (R$ 16.00/kg) —
+  Alho nacional (TP 5 a 6)       2026-10-15 R$  210.00 Cx/Sc 10 kg.           (R$ 21.00/kg) —
+  Alho porró                     2026-10-15 R$   45.00 Dúzia - 2,7 a 3,3 kg.  (R$ 15.00/kg) —
+  Almeirão                       2026-10-15 R$    2.00 Mç- 0,30 a 0,40 kg.    (R$ 5.71/kg) —
+  Ameixa                         2026-10-15 R$  150.00 Cxta- 9 kg.            (R$ 16.67/kg) —
+  Amendoim com casca             2026-10-15 R$  500.00 Sc- 25 kg.             (R$ 20.00/kg) —
+  Amendoim sem casca             2026-10-15 R$  450.00 Sc- 25 kg.             (R$ 18.00/kg) —
+  Amora                          2026-10-15 R$   95.00 Cxta- 1 kg.            (R$ 95.00/kg) —
+Exportado em /tmp/tmpp7mtqqer/ceasa-df.json
