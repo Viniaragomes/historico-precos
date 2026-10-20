@@ -1059,9 +1059,9 @@
       "jsonrpc": "2.0",
       "method": "OnAuthenticationInformation",
       "params": {
-        "userId": "anonymous217aa199-09fe-450b-b48f-668bcb2da6c7",
+        "userId": "anonymousb305f5b2-48cc-4817-84aa-ae2a6aef734f",
         "userDirectory": "NONE",
-        "loginUri": "https://qap.fazenda.df.gov.br:443/paineis/internal_forms_authentication/?targetId=82b0214f-b011-4b08-a991-71ea72375c01",
+        "loginUri": "https://qap.fazenda.df.gov.br:443/paineis/internal_forms_authentication/?targetId=41ea49bc-3361-462e-929c-bdc412021525",
         "mustAuthenticate": false
       }
     },

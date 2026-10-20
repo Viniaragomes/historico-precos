@@ -10,9 +10,10 @@
       {
         "url": "https://mercado.carrefour.com.br/",
         "status": 200,
-        "ms": 321,
+        "ms": 264,
         "titulo": "Mercado Carrefour | Ofertas de Supermercado Delivery",
         "servidor": "cloudflare",
+        "tipo": "text/html",
         "antirrobo": [
           "cloudflare"
         ],
@@ -39,9 +40,10 @@
       {
         "url": "https://mercado.carrefour.com.br/api/catalog_system/pub/products/search?_from=0&_to=0",
         "status": 503,
-        "ms": 115,
+        "ms": 466,
         "titulo": null,
         "servidor": "cloudflare",
+        "tipo": null,
         "antirrobo": [
           "cloudflare"
         ],
@@ -166,9 +168,10 @@
       "analise": {
         "url": "https://www.carrefour.com.br/robots.txt",
         "status": 403,
-        "ms": 116,
+        "ms": 251,
         "titulo": "Acesso Bloqueado",
         "servidor": "cloudflare",
+        "tipo": "text/html; charset=UTF-8",
         "antirrobo": [
           "cloudflare"
         ],
@@ -199,9 +202,10 @@
       {
         "url": "https://www.paodeacucar.com/",
         "status": 200,
-        "ms": 714,
+        "ms": 1048,
         "titulo": "Pão de Açúcar | Supermercado Online",
         "servidor": null,
+        "tipo": "text/html; charset=utf-8",
         "antirrobo": [],
         "tecnologia": [
           "next.js"
@@ -313,9 +317,10 @@
       "analise": {
         "url": "https://www.comper.com.br/robots.txt",
         "status": 403,
-        "ms": 229,
+        "ms": 224,
         "titulo": "Just a moment...",
         "servidor": "cloudflare",
+        "tipo": "text/html; charset=UTF-8",
         "antirrobo": [
           "cloudflare"
         ],
@@ -347,13 +352,13 @@
         "url": "https://www.in.gov.br/",
         "status": 0,
         "erro": "Remote end closed connection without response",
-        "ms": 116
+        "ms": 78
       },
       {
         "url": "https://www.in.gov.br/consulta/-/buscar/dou?q=ICMS",
         "status": 0,
         "erro": "Remote end closed connection without response",
-        "ms": 172
+        "ms": 133
       }
     ],
     "scripts": []
@@ -369,9 +374,10 @@
       {
         "url": "https://www.lexml.gov.br/sru?operation=searchRetrieve&version=1.1&query=urn%3D%22lei%22%20and%20description%3Dicms&maximumRecords=3",
         "status": 404,
-        "ms": 763,
+        "ms": 1020,
         "titulo": "HTTP Status 404 – Not Found",
         "servidor": "nginx",
+        "tipo": "text/html;charset=utf-8",
         "antirrobo": [
           "captcha"
         ],
@@ -405,10 +411,16 @@
         "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios",
         "status": 0,
         "erro": "<urlopen error timed out>",
-        "ms": 45170
+        "ms": 45029
       }
     ],
-    "scripts": []
+    "scripts": [],
+    "temas": {
+      "sitemaps_lidos": [],
+      "candidatos": 0,
+      "exemplos": [],
+      "paginas": []
+    }
   },
   "Painéis da Secretaria de Economia do DF": {
     "robots": {
@@ -421,9 +433,10 @@
       {
         "url": "https://paineis.fazenda.df.gov.br/",
         "status": 200,
-        "ms": 832,
+        "ms": 1470,
         "titulo": "Secretaria de Economia do Distrito Federal",
         "servidor": "Apache/2.4.39 (Win64) OpenSSL/1.1.1b PHP/7.3.5",
+        "tipo": "text/html; charset=UTF-8",
         "antirrobo": [],
         "tecnologia": [],
         "tem_json_ld": false,
@@ -441,9 +454,10 @@
       {
         "url": "https://paineis.fazenda.df.gov.br/mapadeprecos/",
         "status": 200,
-        "ms": 987,
+        "ms": 1206,
         "titulo": "Mapa de Preço",
         "servidor": "Apache/2.4.39 (Win64) OpenSSL/1.1.1b PHP/7.3.5",
+        "tipo": "text/html",
         "antirrobo": [],
         "tecnologia": [
           "qlik"
@@ -642,9 +656,10 @@
       {
         "url": "https://paineis.fazenda.df.gov.br/mapadeprecos/assets/js/app.js",
         "status": 200,
-        "ms": 823,
+        "ms": 544,
         "titulo": null,
         "servidor": "Apache/2.4.39 (Win64) OpenSSL/1.1.1b PHP/7.3.5",
+        "tipo": "application/javascript",
         "antirrobo": [],
         "tecnologia": [
           "qlik"
@@ -814,9 +829,10 @@
       "analise": {
         "url": "https://qap.fazenda.df.gov.br/robots.txt",
         "status": 404,
-        "ms": 1137,
+        "ms": 1091,
         "titulo": "404 - The requested resource cannot be found. - Qlik Sense",
         "servidor": null,
+        "tipo": "text/html",
         "antirrobo": [],
         "tecnologia": [
           "qlik"
@@ -831,9 +847,10 @@
       {
         "url": "https://qap.fazenda.df.gov.br/paineis/resources/assets/external/requirejs/require.js",
         "status": 200,
-        "ms": 1225,
+        "ms": 1326,
         "titulo": null,
         "servidor": "Microsoft-HTTPAPI/2.0",
+        "tipo": "application/javascript;charset=utf-8",
         "antirrobo": [],
         "tecnologia": [
           "qlik"
@@ -865,9 +882,10 @@
       {
         "url": "https://www.receita.fazenda.df.gov.br/",
         "status": 200,
-        "ms": 2181,
+        "ms": 2534,
         "titulo": "Portal da Receita DF ? IPVA, IPTU e Serviços Tributários | SEEC",
         "servidor": "Microsoft-IIS/8.5",
+        "tipo": "text/html;charset=UTF-8",
         "antirrobo": [],
         "tecnologia": [],
         "tem_json_ld": false,
@@ -923,9 +941,10 @@
       {
         "url": "https://www.cepea.org.br/br/widget.aspx",
         "status": 200,
-        "ms": 293,
+        "ms": 272,
         "titulo": "Cotações do Cepea no seu site - Centro de Estudos Avançados em Economia Aplicada - CEPEA-Esalq/USP",
         "servidor": "cloudflare",
+        "tipo": "text/html; charset=UTF-8",
         "antirrobo": [
           "cloudflare"
         ],
@@ -979,9 +998,10 @@
       {
         "url": "https://www.cepea.org.br/br/indicador/cafe.aspx",
         "status": 200,
-        "ms": 223,
+        "ms": 270,
         "titulo": "Café - Centro de Estudos Avançados em Economia Aplicada - CEPEA-Esalq/USP",
         "servidor": "cloudflare",
+        "tipo": "text/html; charset=UTF-8",
         "antirrobo": [
           "cloudflare"
         ],
@@ -1003,9 +1023,10 @@
       {
         "url": "https://www.cepea.org.br/br/indicador/boi-gordo.aspx",
         "status": 200,
-        "ms": 241,
+        "ms": 231,
         "titulo": "Boi gordo - Centro de Estudos Avançados em Economia Aplicada - CEPEA-Esalq/USP",
         "servidor": "cloudflare",
+        "tipo": "text/html; charset=UTF-8",
         "antirrobo": [
           "cloudflare"
         ],
@@ -1027,9 +1048,10 @@
       {
         "url": "https://www.cepea.org.br/br/indicador/arroz.aspx",
         "status": 200,
-        "ms": 238,
+        "ms": 245,
         "titulo": "Arroz - Centro de Estudos Avançados em Economia Aplicada - CEPEA-Esalq/USP",
         "servidor": "cloudflare",
+        "tipo": "text/html; charset=UTF-8",
         "antirrobo": [
           "cloudflare"
         ],
@@ -1084,10 +1106,93 @@
         "url": "https://www.ceasa.df.gov.br/",
         "status": 0,
         "erro": "<urlopen error _ssl.c:993: The handshake operation timed out>",
-        "ms": 45356
+        "ms": 45583
       }
     ],
-    "scripts": []
+    "scripts": [],
+    "temas": {
+      "sitemaps_lidos": [],
+      "candidatos": 0,
+      "exemplos": [],
+      "paginas": []
+    }
+  },
+  "CEASA-DF Portal de Serviços (preços)": {
+    "robots": {
+      "status": 200,
+      "erro": null,
+      "conteudo": "<!DOCTYPE html>\n<html lang=\"pt-br\">\n    <head>\n        <meta charset=\"UTF-8\"/>\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\n        <link rel=\"stylesheet\" href=\"https://www.portal.ceasadf.com.br/shared/styles/app.min.css\">\n        <link rel=\"stylesheet\" href=\"https://www.portal.ceasadf.com.br/themes/portalweb/assets/css/style.min.css\"/>\n        <link rel=\"icon\" href=\"https://www.portal.ceasadf.com.br/themes/portalweb/assets/img/logo-icon-green.png\" type=\"image/png\">\n        <title>Portal de Serviços - CEASA - DF</title>\n    </head>\n    <body>\n        <div class=\"ajax_load\">\n            <div class=\"ajax_load_box\">\n                <div class=\"ajax_load_box_circle\"></div>\n                <p class=\"ajax_load_box_title\">Aguarde, carregando...</p>\n            </div>\n        </div>\n\n        <header class=\"header\" id=\"top\">\n            <nav class=\"header-content\">\n                <a href=\"https://www.portal.ceasadf.com.br/\" class=\"logo\">\n                    <img class=\"logo-header\" src=\"https://www.portal.ceasadf.com.br/themes/portalweb/assets/img/logo-text-green.png\" alt=\"\"/>\n                </a>\n            </nav>\n        </header>\n\n        <div class=\"ajax_response\"></div>\n        \n<section class=\"main-container\">\n    <div class=\"container error\">\n        <div class=\"split-container\">\n            <img src=\"https://www.portal.ceasadf.com.br/themes/portalweb/assets/img/logo-icon-green.webp\" alt=\"imagem de Erro\" class=\"error-image\">\n            <div class=\"content\">\n              <h1 class=\"error-code\">404</h1>\n              <h2 class=\"error-title\">Ooops. Conteúdo indisponível :/</h2>\n              <p>Sentimos muito, mas o conteúdo que você tentou acessar não existe, está indisponível no momento ou foi removido :/</p>\n              \n          </div>\n      </div>\n    </div>\n</section> \n       \n\n        <script src=\"https://www.portal.ceasadf.com.br/shared/scripts/vanilla-masker.min.js\"></script>    \n        <script src=\"https://www.portal.ceasadf.com.br/shared/scripts/message-all.js\"></script>\n\n        <script src=\"https://www.portal.ceasadf.com.br/themes/portalweb/assets/js/script.js\"></script>\n\n            \n    </body>\n</html>",
+      "analise": null
+    },
+    "paginas": [
+      {
+        "url": "https://www.portal.ceasadf.com.br/precos",
+        "status": 200,
+        "ms": 1136,
+        "titulo": "Preços - Portal de Serviços",
+        "servidor": "Apache",
+        "tipo": "text/html; charset=UTF-8",
+        "antirrobo": [],
+        "tecnologia": [],
+        "tem_json_ld": false,
+        "arquivos_de_dados": [],
+        "enderecos_de_dados": [
+          "www.portal.ceasadf.com.br"
+        ],
+        "inicio_do_texto": "Preços - Portal de Serviços Aguarde, carregando... Início Buscar Cadastre-se Entrar Cotação de Preços Acompanhe e consulte a variação de preços dos principais produtos comercializados. Variação de preços diária e mensal do preço mais comum praticado no mercado atacadista da CEASA/DF. Mês Janeiro Fevereiro Março Abril Maio Junho Julho Agosto Setembro Outubro Novembro Dezembro Ano 2026 2025 2024 202",
+        "dados_embutidos": {
+          "json_ld_tipos": [],
+          "produtos_json_ld": [],
+          "estados_embutidos": {},
+          "outros_json_em_script": [],
+          "meta_preco": []
+        }
+      },
+      {
+        "url": "https://www.portal.ceasadf.com.br/storage/files/2026/08/sima.pdf",
+        "status": 200,
+        "ms": 1456,
+        "titulo": null,
+        "servidor": "Apache",
+        "tipo": "application/pdf",
+        "antirrobo": [],
+        "tecnologia": [],
+        "tem_json_ld": false,
+        "arquivos_de_dados": [],
+        "enderecos_de_dados": [],
+        "inicio_do_texto": "%PDF-1.5 %µµµµ 1 0 obj >>> endobj 2 0 obj > endobj 3 0 obj > endobj 4 0 obj >/ExtGState >/XObject >/ProcSet[/PDF/Text/ImageB/ImageC/ImageI] >>/Annots[ 11 0 R 12 0 R] /MediaBox[ 0 0 595.2 841.8] /Contents 5 0 R/Group >/Tabs/S/StructParents 0>> endobj 5 0 obj > stream xí[ÜFvÇß\u0005è;\u0010û4½ðÈ\"Y$Å\"3#=4ÒFÊÂÞ ØÐ¨)ÛKCm ® ¸éø\u0006T\u001b5¬ÃQ÷û-uQD×hÏ#©8À£Ã{&n\u0003\u00173NÄ¹\u000føìÆÛXoíÚÍÓMgûápRÙ?ªk þ Öb^nzwÊc:·zèM¹÷'9k;",
+        "dados_embutidos": {
+          "json_ld_tipos": [],
+          "produtos_json_ld": [],
+          "estados_embutidos": {},
+          "outros_json_em_script": [],
+          "meta_preco": []
+        }
+      }
+    ],
+    "scripts": [
+      {
+        "url": "https://www.portal.ceasadf.com.br/shared/scripts/scripts.min.js",
+        "enderecos": [],
+        "qlik": null
+      },
+      {
+        "url": "https://www.portal.ceasadf.com.br/shared/scripts/highcharts.js",
+        "enderecos": [],
+        "qlik": null
+      },
+      {
+        "url": "https://www.portal.ceasadf.com.br/themes/portalweb/assets/scripts.min.js",
+        "enderecos": [],
+        "qlik": null
+      }
+    ],
+    "temas": {
+      "sitemaps_lidos": [],
+      "candidatos": 0,
+      "exemplos": [],
+      "paginas": []
+    }
   },
   "Conab Prohort (preços diários das Ceasas)": {
     "robots": {
@@ -1101,7 +1206,7 @@
         "url": "https://prohort.conab.gov.br/",
         "status": 0,
         "erro": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'prohort.conab.gov.br'. (_ssl.c:1010)>",
-        "ms": 604
+        "ms": 674
       }
     ],
     "scripts": []
@@ -1117,9 +1222,10 @@
       {
         "url": "https://portaldeinformacoes.conab.gov.br/download-arquivos.html",
         "status": 403,
-        "ms": 484,
+        "ms": 861,
         "titulo": "Conab - Erro no acesso",
         "servidor": "Apache",
+        "tipo": "text/html",
         "antirrobo": [],
         "tecnologia": [],
         "tem_json_ld": false,
@@ -1148,9 +1254,10 @@
       {
         "url": "https://www.gov.br/anp/pt-br/assuntos/precos-e-defesa-da-concorrencia/precos/levantamento-de-precos-de-combustiveis-ultimas-semanas-pesquisadas",
         "status": 200,
-        "ms": 829,
+        "ms": 1041,
         "titulo": "Levantamento de Preços de Combustíveis (últimas semanas pesquisadas) — Agência Nacional do Petróleo, Gás Natural e Bioco",
         "servidor": "Zope/(2.13.28, python 2.7.16, linux2) ZServer/1.1",
+        "tipo": "text/html;charset=utf-8",
         "antirrobo": [],
         "tecnologia": [],
         "tem_json_ld": true,
@@ -1235,10 +1342,16 @@
         "url": "https://www.ipe.df.gov.br/",
         "status": 0,
         "erro": "<urlopen error _ssl.c:993: The handshake operation timed out>",
-        "ms": 45254
+        "ms": 46230
       }
     ],
-    "scripts": []
+    "scripts": [],
+    "temas": {
+      "sitemaps_lidos": [],
+      "candidatos": 0,
+      "exemplos": [],
+      "paginas": []
+    }
   },
   "Dados abertos do DF": {
     "robots": {
@@ -1252,21 +1365,27 @@
         "url": "https://dados.df.gov.br/",
         "status": 0,
         "erro": "<urlopen error _ssl.c:993: The handshake operation timed out>",
-        "ms": 45577
+        "ms": 45713
       },
       {
         "url": "https://dados.df.gov.br/api/3/action/package_search?q=ceasa&rows=20",
         "status": 0,
         "erro": "<urlopen error _ssl.c:993: The handshake operation timed out>",
-        "ms": 45588
+        "ms": 45239
       },
       {
         "url": "https://dados.df.gov.br/api/3/action/package_search?q=pre%C3%A7os&rows=20",
         "status": 0,
         "erro": "<urlopen error _ssl.c:993: The handshake operation timed out>",
-        "ms": 45740
+        "ms": 45588
       }
     ],
-    "scripts": []
+    "scripts": [],
+    "temas": {
+      "sitemaps_lidos": [],
+      "candidatos": 0,
+      "exemplos": [],
+      "paginas": []
+    }
   }
 }
