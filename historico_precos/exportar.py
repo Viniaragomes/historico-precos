@@ -13,6 +13,7 @@ from .armazenamento import Banco
 from .causas.analise import AgenteCausas
 from .comparativo import comparar
 from .modelo import Produto, agora_iso
+from .qualidade import AVISO as AVISO_QUALIDADE, BLOQUEIO, limpar
 
 log = logging.getLogger(__name__)
 
@@ -20,14 +21,14 @@ AVISO = "Preços online podem diferir da loja física. Cada preço tem um link p
 
 
 def dados_do_produto(banco: Banco, ean: str, causas: AgenteCausas | None, hoje: date | None = None) -> dict | None:
-    pontos = banco.precos(ean)
+    pontos, alertas = limpar(banco.precos(ean))
     if not pontos:
         return None
     produto = banco.produto(ean) or Produto(ean)
     comp = comparar(pontos, hoje=hoje, max_dias=30)
 
     if causas is not None:
-        _, explicacoes = causas.explicar(ean)
+        _, explicacoes = causas.explicar(ean, pontos=pontos)
         mudancas = [
             {
                 **asdict(ex.mudanca),
@@ -63,6 +64,10 @@ def dados_do_produto(banco: Banco, ean: str, causas: AgenteCausas | None, hoje: 
         ],
         "mudancas": sorted(mudancas, key=lambda m: m["data_nova"], reverse=True),
         "aviso": AVISO,
+        "qualidade": {
+            "ocultos": sum(1 for a in alertas if a.severidade == BLOQUEIO),
+            "avisos": sum(1 for a in alertas if a.severidade == AVISO_QUALIDADE),
+        },
     }
 
 

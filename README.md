@@ -100,6 +100,20 @@ python -m historico_precos mapa-df consultar CAFE --filtro 500G --detalhe
 - Se o painel for um dashboard embutido (Power BI, Qlik), o `descobrir` avisa, e a coleta por formulário não funciona.
 - As descrições são digitadas por cada empresa, então use `--filtro` para separar tamanhos e marcas.
 
+## Qualidade dos dados
+
+Antes de exportar, o agente de qualidade (`historico_precos/qualidade.py`) analisa cada produto:
+
+| Alerta | Quando | Efeito |
+|---|---|---|
+| Preço absurdo | Mais de 3x acima ou abaixo da mediana do produto | **Bloqueado**, não vai para o app |
+| Pico isolado | Variação de 60% ou mais que volta ao patamar anterior em até 45 dias | **Bloqueado** |
+| Salto mantido | Variação de 60% ou mais que se mantém | Aviso |
+| Produto trocado | Uma loja mostra tamanho diferente da maioria no mesmo período | Aviso |
+| Preço "de" irreal | Preço riscado mais de 3x o preço de venda | Aviso |
+
+Troca de embalagem nunca é tratada como erro. Para ver os alertas: `python -m historico_precos qualidade [EAN]`.
+
 ## O app (Preço com Prova)
 
 App web instalável (PWA) na pasta `site/`: o usuário aponta a câmera para o código de barras e vê onde o produto está mais barato, o gráfico do histórico e as causas de cada mudança de preço por nível de prova, com o link de cada fonte. Não precisa de servidor: o app lê os arquivos que o comando `exportar` gera.

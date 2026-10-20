@@ -63,6 +63,9 @@ jobs:
             python -m historico_precos mapa-df coletar
           fi
 
+      - name: Checagem de qualidade (bloqueios não vão para o app)
+        run: python -m historico_precos qualidade | tail -50
+
       - name: Gerar os dados do app
         run: python -m historico_precos exportar --saida site/dados
 

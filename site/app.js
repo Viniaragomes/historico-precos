@@ -810,6 +810,10 @@ function cartaoHistorico(p) {
     cartao.append(el("p", { class: "minusculo", style: "margin:0 0 6px" }, todasSeries[0].loja));
   }
   cartao.append(caixa);
+  if (p.qualidade?.ocultos) {
+    cartao.append(el("p", { class: "minusculo", style: "margin:8px 0 0" },
+      `${p.qualidade.ocultos} preço${p.qualidade.ocultos > 1 ? "s" : ""} com sinal de erro (valor absurdo ou pico que voltou logo) ${p.qualidade.ocultos > 1 ? "foram ocultados" : "foi ocultado"} pela checagem de qualidade.`));
+  }
 
   let largura = 0;
   new ResizeObserver(([e]) => {

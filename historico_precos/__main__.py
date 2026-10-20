@@ -28,6 +28,7 @@ from .armazenamento import Banco
 from .causas.analise import AgenteCausas, carregar_categorias
 from .comparativo import comparar
 from .exportar import exportar
+from .qualidade import avaliar as avaliar_qualidade
 from .fontes import vtex
 from .causas.series import normalizar
 from .leis.monitor import MonitorLeis
@@ -348,6 +349,9 @@ def main(argv: list[str] | None = None) -> int:
     bl.add_argument("--sem-wayback", action="store_true")
     bl.add_argument("--max-capturas", type=int, default=10)
 
+    q = sub.add_parser("qualidade", help="lista preços suspeitos (todos os produtos ou um EAN)")
+    q.add_argument("ean", nargs="?")
+
     ex = sub.add_parser("exportar", help="gera os arquivos JSON que o app lê")
     ex.add_argument("--saida", default="site/dados")
     ex.add_argument("--sem-causas", action="store_true", help="não consulta IBGE/Banco Central (mais rápido)")
@@ -364,6 +368,16 @@ def main(argv: list[str] | None = None) -> int:
     banco = Banco(args.banco)
     nav = Navegador(intervalo=args.intervalo)
 
+    if args.comando == "qualidade":
+        eans = [args.ean] if args.ean else [l[0] for l in banco.con.execute("SELECT DISTINCT ean FROM precos ORDER BY ean")]
+        total = 0
+        for ean in eans:
+            for a in avaliar_qualidade(banco.precos(ean)):
+                total += 1
+                print(f"[{a.severidade.upper():8}] {a.ean} {a.loja:<20} {a.data} R$ {a.preco:>8.2f}  {a.tipo}: {a.mensagem}")
+                print(f"           fonte: {a.evidencia}")
+        print(f"\n{total} alerta(s) em {len(eans)} produto(s). Bloqueios não são exportados para o app.")
+        return 0
     if args.comando == "exportar":
         causas = None if args.sem_causas else AgenteCausas(nav, banco, usar_noticias=args.com_noticias)
         n = exportar(banco, Path(args.saida), causas)

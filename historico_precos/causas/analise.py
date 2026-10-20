@@ -87,8 +87,10 @@ class AgenteCausas:
         self.usar_noticias = usar_noticias
         self._cache_subitem: dict[str, tuple[str, str] | None] = {}
 
-    def explicar(self, ean: str, uf: str = "DF", categoria: str | None = None) -> tuple[str | None, list[Explicacao]]:
-        pontos = self.banco.precos(ean)
+    def explicar(self, ean: str, uf: str = "DF", categoria: str | None = None,
+                 pontos: list[PontoDePreco] | None = None) -> tuple[str | None, list[Explicacao]]:
+        """`pontos`: use para explicar só preços já checados pelo agente de qualidade."""
+        pontos = self.banco.precos(ean) if pontos is None else pontos
         produto = self.banco.produto(ean)
         if categoria is None:
             categoria = detectar_categoria(
