@@ -41,11 +41,11 @@ jobs:
 
       - name: Mapa de Preços do DF (descoberta)
         continue-on-error: true
-        run: python -m historico_precos mapa-df descobrir --bruto relatorios/mapa_df_bruto
+        run: python -m historico_precos mapa-df descobrir --bruto relatorios/mapa-df-paginas
 
       - name: Mapa de Preços do DF (coleta de teste)
         continue-on-error: true
-        run: python -m historico_precos mapa-df coletar --termos CAFE,ARROZ --bruto relatorios/mapa_df_bruto
+        run: python -m historico_precos mapa-df coletar --termos CAFE,ARROZ --bruto relatorios/mapa-df-paginas
 
       - name: Viabilidade (amostra de produtos reais)
         run: |

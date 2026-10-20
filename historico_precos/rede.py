@@ -38,6 +38,8 @@ class Navegador:
         self._abrir = abrir or self._abrir_urllib
         self._dormir = dormir
         self._abrir_bytes = abrir_bytes
+        # registro de cada requisição, para diagnosticar fontes que falham
+        self.registro: list[dict] = []
         self._ultimo_acesso: dict[str, float] = {}
         self._robots: dict[str, RobotFileParser | None] = {}
         # guarda cookies de sessão entre requisições (painéis em PHP costumam exigir)
@@ -61,10 +63,20 @@ class Navegador:
             with self._opener.open(req, timeout=self.timeout) as resp:
                 return resp.status, self._decodificar(resp.read(), resp.headers.get_content_charset())
         except urllib.error.HTTPError as e:
+            try:
+                corpo = self._decodificar(e.read()[:2000], None)
+            except Exception:
+                corpo = ""
+            self._anotar(url, e.code, f"HTTP {e.code} {e.reason}", corpo)
             return e.code, ""
         except (urllib.error.URLError, TimeoutError, ConnectionError) as e:
             log.warning("falha de rede em %s: %s", url, e)
+            self._anotar(url, 0, f"falha de rede: {e}", "")
             return 0, ""
+
+    def _anotar(self, url: str, status: int, motivo: str, trecho: str) -> None:
+        self.registro.append({"url": url[:300], "status": status, "motivo": motivo[:200],
+                              "trecho": " ".join(trecho.split())[:300]})
 
     def _esperar_vez(self, host: str) -> None:
         ultimo = self._ultimo_acesso.get(host)
@@ -117,6 +129,7 @@ class Navegador:
     def _requisitar(self, url: str, dados: bytes | None, tentativas: int) -> str | None:
         if not self.permitido(url):
             log.info("robots.txt não permite: %s", url)
+            self._anotar(url, -1, "robots.txt não permite", "")
             return None
         host = urlsplit(url).netloc
         for tentativa in range(tentativas):
@@ -128,6 +141,8 @@ class Navegador:
                 self._dormir(self.intervalo * 5)
                 continue
             log.info("HTTP %s em %s", status, url)
+            if not self.registro or self.registro[-1]["url"] != url[:300]:
+                self._anotar(url, status, f"HTTP {status}", texto[:300])
             return None
         return None
 
@@ -139,4 +154,5 @@ class Navegador:
             return json.loads(texto)
         except json.JSONDecodeError:
             log.info("resposta não é JSON: %s", url)
+            self._anotar(url, 200, "resposta não é JSON", texto)
             return None

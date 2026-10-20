@@ -33,7 +33,7 @@ from .fontes import vtex
 from .causas.series import normalizar
 from .leis.monitor import MonitorLeis
 from .mapa_df.agente import AgenteMapaDF, adivinhar_campos, ultimos_meses
-from .viabilidade import AgenteViabilidade, para_markdown, salvar
+from .viabilidade import AgenteViabilidade, para_markdown, salvar, salvar_diagnostico
 from .modelo import Produto
 from .rede import Navegador
 
@@ -437,9 +437,11 @@ def main(argv: list[str] | None = None) -> int:
         if args.so_fontes:
             for s in agente.sondar():
                 print(f"{'OK ' if s.ok else 'NÃO'}  {s.fonte:<35} {s.detalhe}")
+            salvar_diagnostico(nav, Path(args.saida))
             return 0
         rel = agente.executar(args.amostra, args.max_capturas, args.com_causas, Path(args.saida) / "amostra.tsv")
         md, _ = salvar(rel, Path(args.saida))
+        salvar_diagnostico(nav, Path(args.saida))
         print(para_markdown(rel))
         print(f"Relatório salvo em {md}")
         return 0

@@ -70,11 +70,15 @@ class Relatorio:
     veredito: dict[str, str] = field(default_factory=dict)
 
 
-def _sonda(fonte: str, teste) -> Sonda:
+def _sonda(fonte: str, teste, nav: Navegador | None = None) -> Sonda:
+    inicio = len(nav.registro) if nav else 0
     try:
         ok, detalhe = teste()
     except Exception as e:  # uma sonda quebrada não pode derrubar o relatório inteiro
         ok, detalhe = False, f"erro: {e}"
+    if not ok and nav and len(nav.registro) > inicio:
+        ultimo = nav.registro[-1]  # o motivo concreto da falha: código HTTP, robots.txt ou rede
+        detalhe = f"{detalhe} — {ultimo['motivo']}"
     return Sonda(fonte, ok, detalhe)
 
 
@@ -90,28 +94,28 @@ class AgenteViabilidade:
         hoje = date.today()
         n = self.nav
         sondas = [
-            _sonda(f"Loja VTEX: {l['nome']}", lambda l=l: (vtex.eh_vtex(n, l["dominio"]), l["dominio"]))
+            _sonda(f"Loja VTEX: {l['nome']}", lambda l=l: (vtex.eh_vtex(n, l["dominio"]), l["dominio"]), n)
             for l in self.lojas
         ]
         sondas += [
             _sonda("Open Food Facts", lambda: (
-                bool(openfoodfacts.buscar_texto(n, "café", 1)), "busca de produtos do Brasil")),
+                bool(openfoodfacts.buscar_texto(n, "café", 1)), "busca de produtos do Brasil"), n),
             _sonda("Wayback Machine (CDX)", lambda: (
-                bool(wayback.listar_capturas(n, "www.carrefour.com.br", limite=3)), "lista de cópias arquivadas")),
+                bool(wayback.listar_capturas(n, "www.carrefour.com.br", limite=3)), "lista de cópias arquivadas"), n),
             _sonda("Open Prices", lambda: (
-                isinstance(n.get_json("https://prices.openfoodfacts.org/api/v1/prices?size=1"), dict), "API de preços")),
+                isinstance(n.get_json("https://prices.openfoodfacts.org/api/v1/prices?size=1"), dict), "API de preços"), n),
             _sonda("IBGE SIDRA (IPCA)", lambda: (
                 isinstance(n.get_json("https://servicodados.ibge.gov.br/api/v3/agregados/7060/metadados"), dict),
-                "metadados da tabela 7060")),
+                "metadados da tabela 7060"), n),
             _sonda("Banco Central (SGS)", lambda: (
-                bool(n.get_json(f"https://api.bcb.gov.br/dados/serie/bcdata.sgs.1/dados/ultimos/5?formato=json")),
-                "série 1 (dólar)")),
+                bool(n.get_json("https://api.bcb.gov.br/dados/serie/bcdata.sgs.1/dados/ultimos/5?formato=json")),
+                "série 1 (dólar)"), n),
             _sonda("GDELT (notícias)", lambda: (
                 isinstance(n.get_json("https://api.gdeltproject.org/api/v2/doc/doc?query="
                                       + quote("café sourcecountry:BR") + "&mode=artlist&format=json&maxrecords=5"), dict),
-                "busca de notícias")),
-            _sonda("Diário Oficial da União", lambda: self._sonda_dou(hoje)),
-            _sonda("Mapa de Preços do DF", self._sonda_mapa_df),
+                "busca de notícias"), n),
+            _sonda("Diário Oficial da União", lambda: self._sonda_dou(hoje), n),
+            _sonda("Mapa de Preços do DF", self._sonda_mapa_df, n),
         ]
         return sondas
 
@@ -256,6 +260,20 @@ def para_markdown(rel: Relatorio) -> str:
                       f"{p.mudancas} ({p.mudancas_com_evidencia}) |")
     linhas += ["", "_Gerado automaticamente pelo agente de viabilidade. Nenhum número deste relatório é estimado._", ""]
     return "\n".join(linhas)
+
+
+def salvar_diagnostico(nav: Navegador, pasta: Path) -> Path:
+    """Toda requisição que falhou, agrupada por site: é o que mostra por que uma fonte não respondeu."""
+    from urllib.parse import urlsplit
+
+    por_site: dict[str, list[dict]] = {}
+    for r in nav.registro:
+        por_site.setdefault(urlsplit(r["url"]).netloc, []).append(r)
+    resumo = {site: {"falhas": len(rs), "exemplos": rs[:5]} for site, rs in sorted(por_site.items())}
+    pasta.mkdir(parents=True, exist_ok=True)
+    caminho = pasta / "diagnostico.json"
+    caminho.write_text(json.dumps(resumo, ensure_ascii=False, indent=2), encoding="utf-8")
+    return caminho
 
 
 def salvar(rel: Relatorio, pasta: Path) -> tuple[Path, Path]:
