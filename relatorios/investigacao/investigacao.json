@@ -10,7 +10,7 @@
       {
         "url": "https://mercado.carrefour.com.br/",
         "status": 200,
-        "ms": 249,
+        "ms": 321,
         "titulo": "Mercado Carrefour | Ofertas de Supermercado Delivery",
         "servidor": "cloudflare",
         "antirrobo": [
@@ -39,7 +39,7 @@
       {
         "url": "https://mercado.carrefour.com.br/api/catalog_system/pub/products/search?_from=0&_to=0",
         "status": 503,
-        "ms": 257,
+        "ms": 115,
         "titulo": null,
         "servidor": "cloudflare",
         "antirrobo": [
@@ -166,7 +166,7 @@
       "analise": {
         "url": "https://www.carrefour.com.br/robots.txt",
         "status": 403,
-        "ms": 121,
+        "ms": 116,
         "titulo": "Acesso Bloqueado",
         "servidor": "cloudflare",
         "antirrobo": [
@@ -199,7 +199,7 @@
       {
         "url": "https://www.paodeacucar.com/",
         "status": 200,
-        "ms": 356,
+        "ms": 714,
         "titulo": "Pão de Açúcar | Supermercado Online",
         "servidor": null,
         "antirrobo": [],
@@ -313,7 +313,7 @@
       "analise": {
         "url": "https://www.comper.com.br/robots.txt",
         "status": 403,
-        "ms": 261,
+        "ms": 229,
         "titulo": "Just a moment...",
         "servidor": "cloudflare",
         "antirrobo": [
@@ -347,13 +347,13 @@
         "url": "https://www.in.gov.br/",
         "status": 0,
         "erro": "Remote end closed connection without response",
-        "ms": 199
+        "ms": 116
       },
       {
         "url": "https://www.in.gov.br/consulta/-/buscar/dou?q=ICMS",
         "status": 0,
         "erro": "Remote end closed connection without response",
-        "ms": 101
+        "ms": 172
       }
     ],
     "scripts": []
@@ -369,7 +369,7 @@
       {
         "url": "https://www.lexml.gov.br/sru?operation=searchRetrieve&version=1.1&query=urn%3D%22lei%22%20and%20description%3Dicms&maximumRecords=3",
         "status": 404,
-        "ms": 1097,
+        "ms": 763,
         "titulo": "HTTP Status 404 – Not Found",
         "servidor": "nginx",
         "antirrobo": [
@@ -405,7 +405,7 @@
         "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios",
         "status": 0,
         "erro": "<urlopen error timed out>",
-        "ms": 45048
+        "ms": 45170
       }
     ],
     "scripts": []
@@ -421,7 +421,7 @@
       {
         "url": "https://paineis.fazenda.df.gov.br/",
         "status": 200,
-        "ms": 645,
+        "ms": 832,
         "titulo": "Secretaria de Economia do Distrito Federal",
         "servidor": "Apache/2.4.39 (Win64) OpenSSL/1.1.1b PHP/7.3.5",
         "antirrobo": [],
@@ -441,7 +441,7 @@
       {
         "url": "https://paineis.fazenda.df.gov.br/mapadeprecos/",
         "status": 200,
-        "ms": 641,
+        "ms": 987,
         "titulo": "Mapa de Preço",
         "servidor": "Apache/2.4.39 (Win64) OpenSSL/1.1.1b PHP/7.3.5",
         "antirrobo": [],
@@ -642,7 +642,7 @@
       {
         "url": "https://paineis.fazenda.df.gov.br/mapadeprecos/assets/js/app.js",
         "status": 200,
-        "ms": 1560,
+        "ms": 823,
         "titulo": null,
         "servidor": "Apache/2.4.39 (Win64) OpenSSL/1.1.1b PHP/7.3.5",
         "antirrobo": [],
@@ -814,7 +814,7 @@
       "analise": {
         "url": "https://qap.fazenda.df.gov.br/robots.txt",
         "status": 404,
-        "ms": 975,
+        "ms": 1137,
         "titulo": "404 - The requested resource cannot be found. - Qlik Sense",
         "servidor": null,
         "antirrobo": [],
@@ -831,7 +831,7 @@
       {
         "url": "https://qap.fazenda.df.gov.br/paineis/resources/assets/external/requirejs/require.js",
         "status": 200,
-        "ms": 1214,
+        "ms": 1225,
         "titulo": null,
         "servidor": "Microsoft-HTTPAPI/2.0",
         "antirrobo": [],
@@ -865,7 +865,7 @@
       {
         "url": "https://www.receita.fazenda.df.gov.br/",
         "status": 200,
-        "ms": 2188,
+        "ms": 2181,
         "titulo": "Portal da Receita DF ? IPVA, IPTU e Serviços Tributários | SEEC",
         "servidor": "Microsoft-IIS/8.5",
         "antirrobo": [],
@@ -912,6 +912,62 @@
       }
     ]
   },
+  "CEPEA (widget oficial para sites)": {
+    "robots": {
+      "status": 200,
+      "erro": null,
+      "conteudo": "# robots.txt - bloqueia crawlers e agentes de IA\n# Gerado em 2026-09-03 a partir do projeto comunitario ai.robots.txt\n# https://github.com/ai-robots-txt/ai.robots.txt\n# NOTA: robots.txt e apenas uma convencao voluntaria - bots mal-intencionados\n# costumam ignora-lo. Para bloqueio efetivo, combine com regras no\n# firewall/WAF (Cloudflare Super Bot Fight Mode / regras de User-Agent).\n\nUser-agent: AddSearchBot\nDisallow: /\n\nUser-agent: AgentTimes\nDisallow: /\n\nUser-agent: AI2Bot\nDisallow: /\n\nUser-agent: AI2Bot-DeepResearchEval\nDisallow: /\n\nUser-agent: Ai2Bot-Dolma\nDisallow: /\n\nUser-agent: aiHitBot\nDisallow: /\n\nUser-agent: AIWebIndex\nDisallow: /\n\nUser-agent: amazon-kendra\nDisallow: /\n\nUser-agent: amazon-QBusiness\nDisallow: /\n\nUser-agent: Amazonbot\nDisallow: /\n\nUser-agent: AmazonBuyForMe\nDisallow: /\n\nUser-agent: Amzn-SearchBot\nDisallow: /\n\nUser-agent: Amzn-User\nDisallow: /\n\nUser-agent: Andibot\nDisallow: /\n\nUser-agent: Anomura\nDisallow: /\n\nUser-agent: anthropic-ai\nDisallow: /\n\nUser-agent: ApifyBot\nDisallow: /\n\nUser-agent: ApifyWebsiteContentCrawler\nDisallow: /\n\nUser-agent: Applebot-Extended\nDisallow: /\n\nUser-agent: Aranet-SearchBot\nDisallow: /\n\nUser-agent: atlassian-bot\nDisallow: /\n\nUser-agent: Awario\nDisallow: /\n\nUser-agent: AzureAI-SearchBot\nDisallow: /\n\nUser-agent: bedrockbot\nDisallow: /\n\nUser-agent: bigsur.ai\nDisallow: /\n\nUser-agent: Bravebot\nDisallow: /\n\nUser-agent: Brightbot\nDisallow: /\n\nUser-agent: Brightbot 1.0\nDisallow: /\n\nUser-agent: BuddyBot\nDisallow: /\n\nUser-agent: Bytespider\nDisallow: /\n\nUser-agent: CCBot\nDisallow: /\n\nUser-agent: Channel3Bot\nDisallow: /\n\nUser-agent: ChatGLM-Spider\nDisallow: /\n\nUser-agent: ChatGPT Agent\nDisallow: /\n\nUser-agent: ChatGPT-User\nDisallow: /\n\nUser-agent: Claude-Code\nDisallow: /\n\nUser-agent: Claude-SearchBot\nDisallow: /\n\nUser-agent: Claude-User\nDisallow: /\n\nUser-agent: Claude-Web\nDisallow: /\n\nUser-agent: ClaudeBot\nDisallow: /\n\nUser-agent: Cloudflare-AutoRAG\nDisallow: /\n\nUser-agent: CloudVertexBot\nDisallow: /\n\nUser-agent: Code\nDisallow: /\n\nUser-agent: cohere-ai\nDisallow: /\n\nUser-agent: cohere-training-data-crawler\nDisallow: /\n\nUser-agent: Cotoyogi\nDisallow: /\n\nUser-agent: CragCrawler\nDisallow: /\n\nUser-agent: Crawl4AI\nDisallow: /\n\nUser-agent: Crawlspace\nDisallow: /\n\nUser-agent: Cursor\nDisallow: /\n\nUser-agent: Datenbank Crawler\nDisallow: /\n\nUser-agent: DeepSeekBot\nDisallow: /\n\nUser-agent: Devin\nDisallow: /\n\nUser-agent: Diffbot\nDisallow: /\n\nUser-agent: DuckAssistBot\nDisallow: /\n\nUser-agent: Echobot Bot\nDisallow: /\n\nUser-agent: EchoboxBot\nDisallow: /\n\nUser-agent: ExaBot\nDisallow: /\n\nUser-agent: ExaSearchBot\nDisallow: /\n\nUser-agent: FacebookBot\nDisallow: /\n\nUser-agent: facebookexternalhit\nDisallow: /\n\nUser-agent: Factset_spyderbot\nDisallow: /\n\nUser-agent: FirecrawlAgent\nDisallow: /\n\nUser-agent: FriendlyCrawler\nDisallow: /\n\nUser-agent: GeistHaus-PageFetcher\nDisallow: /\n\nUser-agent: Gemini-Deep-Research\nDisallow: /\n\nUser-agent: Google-Agent\nDisallow: /\n\nUser-agent: Google-CloudVertexBot\nDisallow: /\n\nUser-agent: Google-Exten",
+      "analise": null
+    },
+    "paginas": [
+      {
+        "url": "https://www.cepea.org.br/br/widget.aspx",
+        "status": 200,
+        "ms": 293,
+        "titulo": "Cotações do Cepea no seu site - Centro de Estudos Avançados em Economia Aplicada - CEPEA-Esalq/USP",
+        "servidor": "cloudflare",
+        "antirrobo": [
+          "cloudflare"
+        ],
+        "tecnologia": [],
+        "tem_json_ld": false,
+        "arquivos_de_dados": [],
+        "enderecos_de_dados": [
+          "www.cepea.org.br"
+        ],
+        "inicio_do_texto": "window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-XR6QKV0FLF'); Cotações do Cepea no seu site - Centro de Estudos Avançados em Economia Aplicada - CEPEA-Esalq/USP (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=",
+        "dados_embutidos": {
+          "json_ld_tipos": [],
+          "produtos_json_ld": [],
+          "estados_embutidos": {},
+          "outros_json_em_script": [],
+          "meta_preco": []
+        }
+      }
+    ],
+    "scripts": [
+      {
+        "url": "https://www.cepea.org.br/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js",
+        "enderecos": [],
+        "qlik": null
+      },
+      {
+        "url": "https://www.cepea.org.br/view/js/marquee.js",
+        "enderecos": [],
+        "qlik": null
+      },
+      {
+        "url": "https://www.cepea.org.br/view/js/imagenet-tippy.min.js",
+        "enderecos": [],
+        "qlik": null
+      },
+      {
+        "url": "https://www.cepea.org.br/view/js/imagenet-scripts.js",
+        "enderecos": [],
+        "qlik": null
+      }
+    ]
+  },
   "CEPEA (indicadores agro)": {
     "robots": {
       "status": 200,
@@ -923,7 +979,7 @@
       {
         "url": "https://www.cepea.org.br/br/indicador/cafe.aspx",
         "status": 200,
-        "ms": 263,
+        "ms": 223,
         "titulo": "Café - Centro de Estudos Avançados em Economia Aplicada - CEPEA-Esalq/USP",
         "servidor": "cloudflare",
         "antirrobo": [
@@ -947,7 +1003,7 @@
       {
         "url": "https://www.cepea.org.br/br/indicador/boi-gordo.aspx",
         "status": 200,
-        "ms": 280,
+        "ms": 241,
         "titulo": "Boi gordo - Centro de Estudos Avançados em Economia Aplicada - CEPEA-Esalq/USP",
         "servidor": "cloudflare",
         "antirrobo": [
@@ -971,7 +1027,7 @@
       {
         "url": "https://www.cepea.org.br/br/indicador/arroz.aspx",
         "status": 200,
-        "ms": 278,
+        "ms": 238,
         "titulo": "Arroz - Centro de Estudos Avançados em Economia Aplicada - CEPEA-Esalq/USP",
         "servidor": "cloudflare",
         "antirrobo": [
@@ -1028,7 +1084,7 @@
         "url": "https://www.ceasa.df.gov.br/",
         "status": 0,
         "erro": "<urlopen error _ssl.c:993: The handshake operation timed out>",
-        "ms": 45358
+        "ms": 45356
       }
     ],
     "scripts": []
@@ -1045,7 +1101,7 @@
         "url": "https://prohort.conab.gov.br/",
         "status": 0,
         "erro": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'prohort.conab.gov.br'. (_ssl.c:1010)>",
-        "ms": 614
+        "ms": 604
       }
     ],
     "scripts": []
@@ -1061,7 +1117,7 @@
       {
         "url": "https://portaldeinformacoes.conab.gov.br/download-arquivos.html",
         "status": 403,
-        "ms": 773,
+        "ms": 484,
         "titulo": "Conab - Erro no acesso",
         "servidor": "Apache",
         "antirrobo": [],
@@ -1092,7 +1148,7 @@
       {
         "url": "https://www.gov.br/anp/pt-br/assuntos/precos-e-defesa-da-concorrencia/precos/levantamento-de-precos-de-combustiveis-ultimas-semanas-pesquisadas",
         "status": 200,
-        "ms": 817,
+        "ms": 829,
         "titulo": "Levantamento de Preços de Combustíveis (últimas semanas pesquisadas) — Agência Nacional do Petróleo, Gás Natural e Bioco",
         "servidor": "Zope/(2.13.28, python 2.7.16, linux2) ZServer/1.1",
         "antirrobo": [],
@@ -1179,7 +1235,36 @@
         "url": "https://www.ipe.df.gov.br/",
         "status": 0,
         "erro": "<urlopen error _ssl.c:993: The handshake operation timed out>",
-        "ms": 47964
+        "ms": 45254
+      }
+    ],
+    "scripts": []
+  },
+  "Dados abertos do DF": {
+    "robots": {
+      "status": 0,
+      "erro": "<urlopen error _ssl.c:993: The handshake operation timed out>",
+      "conteudo": null,
+      "analise": null
+    },
+    "paginas": [
+      {
+        "url": "https://dados.df.gov.br/",
+        "status": 0,
+        "erro": "<urlopen error _ssl.c:993: The handshake operation timed out>",
+        "ms": 45577
+      },
+      {
+        "url": "https://dados.df.gov.br/api/3/action/package_search?q=ceasa&rows=20",
+        "status": 0,
+        "erro": "<urlopen error _ssl.c:993: The handshake operation timed out>",
+        "ms": 45588
+      },
+      {
+        "url": "https://dados.df.gov.br/api/3/action/package_search?q=pre%C3%A7os&rows=20",
+        "status": 0,
+        "erro": "<urlopen error _ssl.c:993: The handshake operation timed out>",
+        "ms": 45740
       }
     ],
     "scripts": []
