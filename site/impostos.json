@@ -1,0 +1,93 @@
+{
+  "uf": "DF",
+  "revisado_em": "2026-10-20",
+  "aviso": "Estimativa dos impostos cobrados na venda ao consumidor no DF, calculada a partir da lei. Não inclui impostos pagos antes na cadeia (indústria, frete, energia), por isso a carga real é maior. Nenhuma linha foi conferida ainda no texto oficial por uma pessoa.",
+  "fontes": {
+    "df-modal": {
+      "titulo": "RICMS-DF (Decreto 18.955/1997) e Lei distrital 7.326/2023: alíquota geral de 20% desde 22/01/2024",
+      "url": "https://www.legisweb.com.br/legislacao/?id=123550"
+    },
+    "df-cesta": {
+      "titulo": "Lei distrital 5.745/2016: carga efetiva de 7% para itens da cesta básica (citada na Solução de Consulta COTRI 14/2017)",
+      "url": "https://www.legisweb.com.br/legislacao/?id=354932"
+    },
+    "pis-cofins-geral": {
+      "titulo": "Leis 10.637/2002 e 10.833/2003: PIS 1,65% + Cofins 7,6% no regime não cumulativo",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/2003/l10.833.htm"
+    },
+    "pis-cofins-zero-12839": {
+      "titulo": "Lei 12.839/2013: PIS/Cofins zero para carnes, peixes, café, açúcar, óleos vegetais, manteiga, margarina, sabonete, creme dental e papel higiênico",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2013/lei/l12839.htm"
+    },
+    "pis-cofins-zero-10925": {
+      "titulo": "Lei 10.925/2004, art. 1º: PIS/Cofins zero para leite, farinha de trigo e outros itens (revogado a partir de 2027 pela LC 214/2025)",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2004/lei-10925-23-julho-2004-533112-normaatualizada-pl.html"
+    },
+    "stf-tema-69": {
+      "titulo": "STF, RE 574.706 (Tema 69): o ICMS não entra na base do PIS/Cofins",
+      "url": null
+    },
+    "lc-214": {
+      "titulo": "Lei Complementar 214/2025: IBS e CBS; Anexo I (cesta básica nacional, alíquota zero) e reduções de 60%",
+      "url": "https://www2.camara.leg.br/legin/fed/leicom/2025/leicomplementar-214-16-janeiro-2025-796905-publicacaooriginal-174141-pl.html"
+    },
+    "aliquota-referencia": {
+      "titulo": "Alíquota de referência IBS + CBS ainda não definida oficialmente; 26,5% é a estimativa usada na regulamentação (o Comitê Gestor trabalhou com 27,91%)",
+      "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-08/governo-preve-arrecadar-r-636-bi-com-nova-cbs-em-2027"
+    }
+  },
+  "regras": {
+    "icms": {
+      "modal": {"carga": 20, "fonte": "df-modal"},
+      "cesta": {"carga": 7, "fonte": "df-cesta"}
+    },
+    "pis_cofins": {
+      "geral": {"aliquota": 9.25, "fonte": "pis-cofins-geral"},
+      "zero_12839": {"aliquota": 0, "fonte": "pis-cofins-zero-12839"},
+      "zero_10925": {"aliquota": 0, "fonte": "pis-cofins-zero-10925"},
+      "base_sem_icms": {"fonte": "stf-tema-69"}
+    },
+    "reforma": {
+      "ano_completo": 2033,
+      "aliquota_referencia": 26.5,
+      "fonte_referencia": "aliquota-referencia",
+      "regimes": {
+        "zero": {"reducao": 100, "fonte": "lc-214"},
+        "reduzida_60": {"reducao": 60, "fonte": "lc-214"},
+        "cheia": {"reducao": 0, "fonte": "lc-214"}
+      }
+    }
+  },
+  "categorias": [
+    {"id": "leite_condensado", "nome": "Leite condensado", "palavras": ["leite condensado"], "icms": "modal", "pis_cofins": "geral", "reforma": "cheia",
+     "pendente": "ICMS, PIS/Cofins e enquadramento na Reforma não confirmados para este item."},
+    {"id": "arroz", "nome": "Arroz", "palavras": ["arroz"], "icms": "cesta", "pis_cofins": "zero_10925", "reforma": "zero",
+     "pendente": "PIS/Cofins zero para arroz não confirmado no texto da Lei 10.925/2004."},
+    {"id": "feijao", "nome": "Feijão", "palavras": ["feijao"], "icms": "cesta", "pis_cofins": "zero_10925", "reforma": "zero",
+     "pendente": "Inciso da Lei 10.925/2004 para feijão não confirmado."},
+    {"id": "macarrao", "nome": "Macarrão", "palavras": ["macarrao", "espaguete", "massa de semola", "massa com ovos"], "icms": "cesta", "pis_cofins": "geral", "reforma": "zero",
+     "pendente": "A redução do ICMS cita o 'macarrão espaguete comum'; outros formatos podem ter carga diferente."},
+    {"id": "oleo_soja", "nome": "Óleo de soja", "palavras": ["oleo de soja"], "icms": "cesta", "pis_cofins": "zero_12839", "reforma": "reduzida_60",
+     "pendente": "Enquadramento na Reforma (redução de 60%) vem de fonte secundária."},
+    {"id": "farinha_trigo", "nome": "Farinha de trigo", "palavras": ["farinha de trigo"], "icms": "cesta", "pis_cofins": "zero_10925", "reforma": "zero", "pendente": null},
+    {"id": "farinha_mandioca", "nome": "Farinha de mandioca", "palavras": ["farinha de mandioca"], "icms": "cesta", "pis_cofins": "zero_10925", "reforma": "zero",
+     "pendente": "PIS/Cofins zero para farinha de mandioca não confirmado."},
+    {"id": "acucar", "nome": "Açúcar", "palavras": ["acucar"], "icms": "cesta", "pis_cofins": "zero_12839", "reforma": "zero", "pendente": null},
+    {"id": "cafe", "nome": "Café", "palavras": ["cafe torrado", "cafe moido", "cafe em po", "cafe soluvel", "cafe em graos", "cafe "], "icms": "modal", "pis_cofins": "zero_12839", "reforma": "zero",
+     "pendente": "Não confirmado se o café está na lista da cesta básica com ICMS reduzido no DF; usada a alíquota geral."},
+    {"id": "leite", "nome": "Leite", "palavras": ["leite longa vida", "leite integral", "leite desnatado", "leite semidesnatado", "leite uht", "leite em po"], "icms": "modal", "pis_cofins": "zero_10925", "reforma": "zero",
+     "pendente": "ICMS do leite no DF não confirmado; usada a alíquota geral."},
+    {"id": "manteiga", "nome": "Manteiga", "palavras": ["manteiga"], "icms": "modal", "pis_cofins": "zero_12839", "reforma": "zero",
+     "pendente": "ICMS da manteiga no DF não confirmado; usada a alíquota geral."},
+    {"id": "margarina", "nome": "Margarina", "palavras": ["margarina"], "icms": "modal", "pis_cofins": "zero_12839", "reforma": "zero",
+     "pendente": "ICMS e enquadramento na Reforma não confirmados."},
+    {"id": "carnes", "nome": "Carnes", "palavras": ["carne bovina", "contrafile", "alcatra", "patinho", "acem", "frango", "peito de frango", "coxa de frango", "carne suina", "linguica"], "icms": "modal", "pis_cofins": "zero_12839", "reforma": "zero",
+     "pendente": "ICMS das carnes no DF e enquadramento na Reforma (zero ou 60%) não confirmados."},
+    {"id": "papel_higienico", "nome": "Papel higiênico", "palavras": ["papel higienico"], "icms": "modal", "pis_cofins": "zero_12839", "reforma": "reduzida_60",
+     "pendente": "Enquadramento na Reforma (higiene pessoal com redução de 60%) não confirmado."},
+    {"id": "creme_dental", "nome": "Creme dental", "palavras": ["creme dental", "pasta de dente", "gel dental"], "icms": "modal", "pis_cofins": "zero_12839", "reforma": "reduzida_60",
+     "pendente": "Enquadramento na Reforma (higiene pessoal com redução de 60%) não confirmado."},
+    {"id": "sabonete", "nome": "Sabonete", "palavras": ["sabonete"], "icms": "modal", "pis_cofins": "zero_12839", "reforma": "reduzida_60",
+     "pendente": "Enquadramento na Reforma (higiene pessoal com redução de 60%) não confirmado."}
+  ]
+}

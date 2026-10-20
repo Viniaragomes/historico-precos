@@ -1,4 +1,5 @@
 // Preço com Prova: escaneia o código de barras e mostra onde está mais barato, o histórico e por que o preço mudou.
+import { calcular, categoria } from "./impostos.js";
 
 const conteudo = document.getElementById("conteudo");
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
@@ -27,6 +28,11 @@ const ICONES = {
   recibo: '<path d="M6 3h12v18l-2.5-1.5L13 21l-2.5-1.5L8 21l-2-1.5z"/><path d="M9 8h6M9 12h6M9 16h3"/>',
   fonte: '<path d="M14 4h6v6M20 4l-9 9"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/>',
   relogio: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  marcador: '<path d="M6 3h12v18l-6-4-6 4z"/>',
+  marcadorCheio: '<path d="M6 3h12v18l-6-4-6 4z" fill="currentColor"/>',
+  info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/>',
+  lixeira: '<path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>',
+  cadeado: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
 };
 
 function icone(nome) {
@@ -135,6 +141,53 @@ const recentes = {
     } catch { /* navegação privada: segue sem histórico */ }
   },
 };
+
+// produtos que a pessoa acompanha: guarda o preço visto para avisar quando mudar
+const favoritos = {
+  ler() { try { return JSON.parse(localStorage.getItem("favoritos") || "[]"); } catch { return []; } },
+  tem(ean) { return this.ler().some((f) => f.ean === ean); },
+  salvar(lista) { try { localStorage.setItem("favoritos", JSON.stringify(lista)); return true; } catch { return false; } },
+  alternar(p) {
+    const lista = this.ler();
+    if (lista.some((f) => f.ean === p.ean)) { this.salvar(lista.filter((f) => f.ean !== p.ean)); return false; }
+    const preco = p.ofertas?.[0]?.preco ?? null;
+    return this.salvar([{ ean: p.ean, nome: p.nome, preco_visto: preco }, ...lista]);
+  },
+  // ao abrir o produto, o preço atual vira o novo "visto"
+  visto(p) {
+    const preco = p.ofertas?.[0]?.preco;
+    if (preco == null) return;
+    this.salvar(this.ler().map((f) => (f.ean === p.ean ? { ...f, nome: p.nome, preco_visto: preco } : f)));
+  },
+};
+
+let tabelaImpostos = null;
+async function impostos() {
+  if (!tabelaImpostos) {
+    try { tabelaImpostos = await carregarJSON("impostos.json"); } catch { tabelaImpostos = null; }
+  }
+  return tabelaImpostos;
+}
+
+// nome e foto pela base aberta Open Food Facts (consulta feita pelo próprio aparelho)
+const cacheOFF = new Map();
+function produtoAberto(ean) {
+  if (!cacheOFF.has(ean)) {
+    const controle = new AbortController();
+    setTimeout(() => controle.abort(), 5000);
+    cacheOFF.set(ean, fetch(`https://world.openfoodfacts.org/api/v2/product/${ean}.json?fields=product_name,product_name_pt,brands,quantity,image_front_small_url,image_front_url`,
+      { signal: controle.signal })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => (d && d.status === 1 ? {
+        nome: d.product.product_name_pt || d.product.product_name || null,
+        marca: d.product.brands || null,
+        quantidade: d.product.quantity || null,
+        foto: d.product.image_front_small_url || d.product.image_front_url || null,
+      } : null))
+      .catch(() => null));
+  }
+  return cacheOFF.get(ean);
+}
 
 function normalizar(t) {
   return (t || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
@@ -267,12 +320,14 @@ async function telaInicio() {
   conteudo.replaceChildren(
     el("header", { class: "hero" },
       el("div", { class: "hero-barra" },
-        el("span", { class: "marca-logo" }, el("img", { src: "icone.svg", alt: "" }), "Preço com Prova")),
+        el("span", { class: "marca-logo" }, el("img", { src: "icone.svg", alt: "" }), "Preço com Prova"),
+        el("a", { class: "botao-redondo", href: "#/sobre", "aria-label": "Sobre e privacidade" }, icone("info"))),
       el("h1", {}, "Quanto custa de verdade?"),
       el("p", {}, "Escaneie um produto e veja onde está mais barato, quanto ele já custou e por que mudou."),
       el("button", { class: "botao-escanear-grande", type: "button", onclick: abrirLeitor }, icone("escanear"), "Escanear produto")),
     el("div", { class: "folha" },
       el("div", { class: "entrar" }, formBusca),
+      secaoSeusProdutos(produtos),
       vistos.length ? [
         el("div", { class: "titulo-secao entrar entrar-2" }, el("h2", {}, "Vistos por você")),
         el("div", { class: "carrossel entrar entrar-2" }, vistos.map((r) =>
@@ -291,6 +346,28 @@ async function telaInicio() {
         el("section", { class: "cartao entrar entrar-4" }, listaProdutos(produtos.slice(0, 5))),
       ] : null,
       el("p", { class: "rodape-nota" }, "Preços coletados de fontes públicas. A câmera funciona só no seu aparelho.")));
+}
+
+function secaoSeusProdutos(produtos) {
+  const meus = favoritos.ler();
+  if (!meus.length) return null;
+  const atual = new Map(produtos.map((p) => [p.ean, p]));
+  return [
+    el("div", { class: "titulo-secao entrar entrar-2" }, el("h2", {}, "Seus produtos")),
+    el("section", { class: "cartao entrar entrar-2" }, el("ul", { class: "lista" }, meus.map((f) => {
+      const agora = atual.get(f.ean)?.menor_preco ?? null;
+      const dif = agora != null && f.preco_visto != null ? agora - f.preco_visto : 0;
+      const status = Math.abs(dif) < 0.005
+        ? el("span", { class: "detalhe" }, "sem mudança desde sua última visita")
+        : el("span", { class: `detalhe ${dif < 0 ? "texto-desce" : "texto-sobe"}` },
+            `${dif < 0 ? "baixou" : "subiu"} ${brl.format(Math.abs(dif))} desde sua última visita`);
+      return el("li", {}, el("a", { class: "item-produto", href: `#/p/${f.ean}` },
+        el("span", { class: "avatar", "aria-hidden": "true" }, icone("marcadorCheio")),
+        el("span", { class: "meio" }, el("span", { class: "nome", style: "display:block" }, f.nome || f.ean), status),
+        el("span", { class: "valor" }, agora != null ? brl.format(agora) : "—"),
+        icone("seta")));
+    }))),
+  ];
 }
 
 function passo(nomeIcone, titulo, texto) {
@@ -369,22 +446,40 @@ async function telaProduto(ean) {
     conteudo.replaceChildren(heroSimples("Sem conexão", "Não deu para carregar este produto agora. Tente de novo em instantes."));
     return;
   }
+  const [tabela, aberto] = await Promise.all([impostos(), produtoAberto(ean)]);
   if (!p) {
-    conteudo.replaceChildren(
-      heroSimples("Ainda não acompanhamos este produto", `Código ${ean}. A lista cresce a cada coleta, e ele pode aparecer em breve.`),
-      el("div", { class: "folha" }, el("section", { class: "cartao" },
-        el("button", { class: "botao-escanear-grande", style: "margin:0;background:var(--marca);color:var(--sobre-marca)", type: "button", onclick: abrirLeitor },
-          icone("escanear"), "Escanear outro produto"))));
+    await telaNaoAcompanhado(ean, aberto, tabela);
     return;
   }
   recentes.guardar(p);
+  favoritos.visto(p);
   document.title = `${p.nome || ean} · Preço com Prova`;
-  conteudo.replaceChildren(heroProduto(p), el("div", { class: "folha" },
+  conteudo.replaceChildren(heroProduto(p, aberto?.foto), el("div", { class: "folha" },
     cartaoOndeComprar(p),
     cartaoHistorico(p),
     cartaoCausas(p),
-    cartaoImpostos(),
+    cartaoImpostos(tabela, [p.nome, aberto?.nome], p.ofertas[0]?.preco ?? null),
     el("p", { class: "rodape-nota" }, p.aviso, ` Atualizado ${idade(p.atualizado_em)}.`)));
+}
+
+async function telaNaoAcompanhado(ean, aberto, tabela) {
+  const nome = aberto?.nome;
+  const subtitulo = [aberto?.marca, aberto?.quantidade].filter(Boolean).join(" · ");
+  conteudo.replaceChildren(
+    el("header", { class: "hero" },
+      el("div", { class: "hero-barra" },
+        el("button", { class: "botao-redondo", type: "button", "aria-label": "Voltar", onclick: voltar }, icone("voltar"))),
+      el("div", { class: "produto-topo entrar" },
+        aberto?.foto ? el("img", { class: "foto-produto", src: aberto.foto, alt: "" }) : null,
+        el("p", { class: "produto-nome" }, nome || "Produto não identificado", el("small", {}, subtitulo || `Código ${ean}`))),
+      el("p", { class: "rotulo entrar" }, "Ainda não acompanhamos o preço deste produto"),
+      el("p", { class: "onde entrar" }, "A lista de produtos cresce a cada coleta.")),
+    el("div", { class: "folha" },
+      nome ? cartaoImpostos(tabela, [nome], null) : el("section", { class: "cartao entrar" },
+        el("h2", {}, "Não reconhecemos este código"),
+        el("p", { class: "sub", style: "margin:0" }, "Ele não está na nossa lista nem na base aberta de produtos. Confira se o código foi lido certo.")),
+      el("section", { class: "cartao entrar entrar-2" },
+        el("button", { class: "botao-escanear-grande botao-marca", type: "button", onclick: abrirLeitor }, icone("escanear"), "Escanear outro produto"))));
 }
 
 function heroSimples(titulo, texto) {
@@ -399,7 +494,7 @@ function voltar() {
   else location.hash = "#/";
 }
 
-function heroProduto(p) {
+function heroProduto(p, foto) {
   const melhor = p.ofertas[0];
   const subtitulo = [p.marca, p.quantidade].filter(Boolean).join(" · ");
   const economia = p.ofertas.length > 1 ? p.ofertas[p.ofertas.length - 1].preco - melhor.preco : 0;
@@ -407,8 +502,12 @@ function heroProduto(p) {
   return el("header", { class: "hero" },
     el("div", { class: "hero-barra" },
       el("button", { class: "botao-redondo", type: "button", "aria-label": "Voltar", onclick: voltar }, icone("voltar")),
-      el("button", { class: "botao-redondo", type: "button", "aria-label": "Compartilhar", onclick: () => compartilhar(p) }, icone("compartilhar"))),
-    el("p", { class: "produto-nome entrar" }, p.nome || "Produto sem nome", subtitulo ? el("small", {}, subtitulo) : null),
+      el("span", { class: "acoes-hero" },
+        botaoFavorito(p),
+        el("button", { class: "botao-redondo", type: "button", "aria-label": "Compartilhar", onclick: () => compartilhar(p) }, icone("compartilhar")))),
+    el("div", { class: "produto-topo entrar" },
+      foto ? el("img", { class: "foto-produto", src: foto, alt: "" }) : null,
+      el("p", { class: "produto-nome" }, p.nome || "Produto sem nome", subtitulo ? el("small", {}, subtitulo) : null)),
     melhor ? [
       el("p", { class: "rotulo entrar" }, "Menor preço agora"),
       el("p", { class: "preco-hero entrar" }, brl.format(melhor.preco)),
@@ -421,6 +520,23 @@ function heroProduto(p) {
       economia > 0.004 ? el("span", { class: "pilula" }, icone("economia"), `Economize até ${brl.format(economia)}`) : null,
       tend ? el("span", { class: "pilula" }, icone(tend.variacao >= 0 ? "sobe" : "desce"), `${pct(tend.variacao)} ${tend.periodo}`) : null,
       melhor?.em_promocao ? el("span", { class: "pilula" }, "Em promoção") : null));
+}
+
+function botaoFavorito(p) {
+  const botao = el("button", { class: "botao-redondo", type: "button" });
+  const desenhar = () => {
+    const ativo = favoritos.tem(p.ean);
+    botao.setAttribute("aria-pressed", String(ativo));
+    botao.setAttribute("aria-label", ativo ? "Deixar de acompanhar" : "Acompanhar este produto");
+    botao.replaceChildren(icone(ativo ? "marcadorCheio" : "marcador"));
+  };
+  botao.addEventListener("click", () => {
+    const ativo = favoritos.alternar(p);
+    desenhar();
+    avisar(ativo ? "Pronto! Vamos avisar na tela inicial quando o preço mudar." : "Você deixou de acompanhar este produto.");
+  });
+  desenhar();
+  return botao;
 }
 
 async function compartilhar(p) {
@@ -642,20 +758,119 @@ function cartaoCausas(p) {
   return cartao;
 }
 
-function cartaoImpostos() {
-  return el("section", { class: "cartao entrar entrar-4" },
-    el("div", { class: "em-breve" },
-      el("span", { class: "icone-grande" }, icone("recibo")),
-      el("div", {},
-        el("span", { class: "selo-breve" }, "EM BREVE"),
-        el("h2", {}, "Quanto do preço é imposto"),
-        el("p", { class: "sub", style: "margin:4px 0 0" }, "Vamos calcular direto da lei, com o artigo de cada alíquota, e mostrar como fica com a Reforma Tributária."))));
+function cartaoImpostos(tabela, nomes, precoInicial) {
+  const cartao = el("section", { class: "cartao entrar entrar-4" });
+  const cabecalho = el("div", { class: "cabecalho-impostos" },
+    el("h2", {}, "Impostos no preço"), el("span", { class: "selo-breve" }, "ESTIMATIVA"));
+  if (!tabela) {
+    cartao.append(cabecalho, el("p", { class: "sub", style: "margin:0" }, "Não foi possível carregar a tabela de impostos agora."));
+    return cartao;
+  }
+  const cat = categoria(tabela, ...nomes);
+  if (!cat) {
+    cartao.append(cabecalho, el("p", { class: "sub", style: "margin:0" },
+      "Ainda não sabemos classificar este produto para estimar os impostos. Por enquanto cobrimos itens da cesta básica e de higiene."));
+    return cartao;
+  }
+
+  const resultado = el("div");
+  const desenhar = (preco) => {
+    if (!(preco > 0)) {
+      resultado.replaceChildren(el("p", { class: "sub", style: "margin:0" }, "Informe o preço para ver quanto dele é imposto."));
+      return;
+    }
+    const r = calcular(tabela, cat, preco);
+    const fatia = (v) => `${Math.max(0, Math.min(100, (v / preco) * 100))}%`;
+    const reformaTexto = r.reforma.regime === "zero"
+      ? "Cesta básica nacional: IBS e CBS com alíquota zero."
+      : `${r.reforma.regime === "reduzida_60" ? "Redução de 60%: " : ""}IBS + CBS de ${pct(r.reforma.aliquota, false)} sobre o preço sem imposto.`;
+    resultado.replaceChildren(
+      el("div", { class: "imposto-total" },
+        el("span", { class: "valor" }, `≈ ${brl.format(r.total)}`),
+        el("span", { class: "sub", style: "margin:0" }, `${pct(r.percentual, false)} de ${brl.format(preco)} são impostos na venda`)),
+      el("div", { class: "barra-imposto", role: "img", "aria-label": `ICMS ${brl.format(r.icms.valor)}, PIS/Cofins ${brl.format(r.pisCofins.valor)}` },
+        el("span", { class: "fatia icms", style: `width:${fatia(r.icms.valor)}` }),
+        el("span", { class: "fatia pis", style: `width:${fatia(r.pisCofins.valor)}` })),
+      el("ul", { class: "linhas-imposto" },
+        el("li", {}, el("span", { class: "amostra icms" }),
+          el("span", { class: "meio" }, el("strong", {}, "ICMS (DF)"),
+            el("span", { class: "detalhe" }, r.icms.regra === "cesta" ? `carga de ${pct(r.icms.carga, false)} (cesta básica)` : `alíquota geral de ${pct(r.icms.carga, false)}`)),
+          el("span", { class: "valor" }, brl.format(r.icms.valor))),
+        el("li", {}, el("span", { class: "amostra pis" }),
+          el("span", { class: "meio" }, el("strong", {}, "PIS/Cofins (federal)"),
+            el("span", { class: "detalhe" }, r.pisCofins.aliquota === 0 ? "zerado por lei para este produto" : `${pct(r.pisCofins.aliquota, false)} sobre o preço sem ICMS`)),
+          el("span", { class: "valor" }, brl.format(r.pisCofins.valor)))),
+      el("div", { class: "reforma" },
+        el("strong", {}, `Com a Reforma Tributária (${r.reforma.ano})`),
+        el("p", {}, reformaTexto, " ",
+          r.reforma.valor > 0.004
+            ? `No mesmo preço final, seriam ≈ ${brl.format(r.reforma.valor)} (${pct(r.reforma.percentual, false)}).`
+            : "O imposto na venda cairia para zero."),
+        el("p", { class: "minusculo", style: "margin:4px 0 0" }, "A alíquota oficial da Reforma ainda não foi definida; usamos 26,5%, a estimativa da regulamentação.")));
+  };
+
+  let preco = precoInicial;
+  const entradaPreco = precoInicial == null ? el("label", { class: "campo-preco" },
+    el("span", {}, "Quanto custa aí?"),
+    el("span", { class: "entrada" }, "R$ ",
+      el("input", { inputmode: "decimal", placeholder: "0,00", "aria-label": "Preço do produto em reais",
+        oninput: (ev) => { preco = parseFloat(ev.target.value.replace(/\./g, "").replace(",", ".")); desenhar(preco); } }))) : null;
+
+  cartao.append(...[cabecalho,
+    el("p", { class: "sub" }, `Categoria: ${cat.nome}. ${precoInicial != null ? "Calculado sobre o menor preço de hoje." : ""}`),
+    entradaPreco, resultado,
+    cat.pendente ? el("p", { class: "pendente" }, icone("duvida"), el("span", {}, `A confirmar: ${cat.pendente}`)) : null,
+    el("details", { class: "expansivel" },
+      el("summary", {}, "Leis usadas no cálculo", icone("seta")),
+      el("ul", { class: "fontes-lei" }, calcularFontes(tabela, cat).map((id) => {
+        const f = tabela.fontes[id];
+        return el("li", {}, f.url ? el("a", { href: f.url, target: "_blank", rel: "noopener" }, f.titulo) : f.titulo);
+      })),
+      el("p", { class: "minusculo" }, tabela.aviso))].filter(Boolean));
+  desenhar(preco);
+  return cartao;
+}
+
+function calcularFontes(tabela, cat) {
+  return calcular(tabela, cat, 1).fontes;
+}
+
+// ---------- sobre e privacidade ----------
+
+function telaSobre() {
+  const apagar = () => {
+    try { localStorage.removeItem("recentes"); localStorage.removeItem("favoritos"); } catch { /* nada salvo */ }
+    avisar("Pronto. Apagamos o que estava guardado neste aparelho.");
+  };
+  const bloco = (nomeIcone, titulo, ...texto) => el("section", { class: "cartao entrar" },
+    el("div", { class: "passo" }, el("span", { class: "icone-passo" }, icone(nomeIcone)),
+      el("div", {}, el("strong", { style: "font-size:17px" }, titulo), ...texto.map((t) => el("p", { class: "texto-sobre" }, t)))));
+  conteudo.replaceChildren(
+    el("header", { class: "hero" },
+      el("div", { class: "hero-barra" },
+        el("button", { class: "botao-redondo", type: "button", "aria-label": "Voltar", onclick: voltar }, icone("voltar"))),
+      el("h1", {}, "Sobre o Preço com Prova"),
+      el("p", {}, "Preços com fonte, histórico real e causas separadas por nível de prova.")),
+    el("div", { class: "folha" },
+      bloco("fonte", "De onde vêm os preços",
+        "De páginas públicas de supermercados, de cópias antigas guardadas pelo Internet Archive e de bases abertas como o Open Prices. Cada preço tem o link de onde veio.",
+        "Preços online podem ser diferentes dos da loja física."),
+      bloco("escudo", "Como lemos as causas",
+        "Só chamamos de comprovado o que é fato documentado e com efeito calculável, como uma lei de imposto ou uma embalagem que encolheu. O resto aparece como contexto, sem afirmar a causa, e nunca acusamos nenhuma loja."),
+      bloco("cadeado", "Sua privacidade",
+        "Não há cadastro nem conta. A câmera funciona só no seu aparelho: nenhuma imagem é enviada.",
+        "Os produtos que você viu e os que acompanha ficam guardados só neste aparelho.",
+        "Para mostrar nome e foto, o aparelho consulta o código do produto na base aberta Open Food Facts. No iPhone, o leitor de código é baixado do serviço jsDelivr."),
+      el("section", { class: "cartao entrar" },
+        el("button", { class: "botao-secundario", type: "button", onclick: apagar }, icone("lixeira"), "Apagar meus dados deste aparelho")),
+      el("p", { class: "rodape-nota" }, "Projeto em teste. Os números são estimativas com fonte; confira sempre o link.")));
 }
 
 // ---------- rotas ----------
 
 async function rotear() {
   fecharLeitor();
+  document.getElementById("aviso-rapido").classList.remove("visivel");
   const hash = location.hash || "#/";
   const produto = hash.match(/^#\/p\/(\d{8,14})$/);
   const lista = hash.match(/^#\/produtos(?:\?q=(.*))?$/);
@@ -664,6 +879,7 @@ async function rotear() {
   document.title = "Preço com Prova";
   if (produto) await telaProduto(produto[1]);
   else if (lista) await telaProdutos(decodeURIComponent(lista[1] || ""));
+  else if (hash === "#/sobre") telaSobre();
   else await telaInicio();
   conteudo.focus({ preventScroll: true });
   window.scrollTo(0, 0);

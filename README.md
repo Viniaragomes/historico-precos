@@ -112,7 +112,11 @@ python -m historico_precos servir            # abre em http://localhost:8000
 - **Câmera:** usa o leitor nativo do navegador (Android/Chrome). No iPhone, carrega a biblioteca `html5-qrcode` só quando precisa. A câmera roda só no aparelho; nenhuma imagem é enviada.
 - **Instalar no celular:** abra o endereço do app e use "Adicionar à tela inicial".
 - **Publicação:** a coleta diária gera os dados e publica o app no GitHub Pages (ative em *Settings > Pages > Source: GitHub Actions*). O Pages é gratuito em repositório público.
-- **Ainda não tem:** o cálculo do imposto embutido (a tela avisa que está em construção) e a consulta de produtos que ainda não são acompanhados.
+- **Impostos no preço:** estimativa do ICMS do DF e do PIS/Cofins na venda, e de como fica com a Reforma (IBS + CBS), a partir de `site/impostos.json`. Cada regra cita a lei e cada categoria diz o que ainda falta conferir. Testes: `node --test tests/impostos.test.mjs`.
+- **Produto não acompanhado:** mostra nome e foto pela base aberta Open Food Facts e calcula os impostos sobre o preço que a pessoa digitar.
+- **Seus produtos:** a pessoa marca um produto e a tela inicial avisa se o preço baixou ou subiu desde a última visita (guardado só no aparelho).
+- **Sobre e privacidade** (`#/sobre`): de onde vêm os dados, como lemos as causas, o que fica no aparelho e um botão para apagar tudo.
+- **Ainda não tem (precisa de servidor):** consulta ao vivo de produto não acompanhado, alertas no celular e "reportar preço errado".
 
 ## Rodando no GitHub (recomendado)
 

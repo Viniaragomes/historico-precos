@@ -5,15 +5,20 @@
       "id": "df-icms-modal-2024",
       "tributo": "ICMS alíquota modal",
       "uf": "DF",
-      "vigencia": "2024-01-01",
+      "vigencia": "2024-01-22",
       "aliquota_anterior": 18,
       "aliquota_nova": 20,
       "calculo": "por_dentro",
       "abrangencia": "produtos tributados pela alíquota geral (modal) do DF; muitos alimentos têm alíquota reduzida e NÃO são atingidos",
-      "categorias": ["*"],
+      "categorias": [
+        "*"
+      ],
       "verificado": false,
-      "fontes": ["https://static.abras.com.br/pdf/estudo-abras-panorama-tributario-de-icms-sobre-a-cesta-basica-nacional-de-alimentos-%28cbna%29-mar-2025estudo-abras-panorama-tributario-de-icms-sobre-a-cesta-basica-nacional-de-alimentos-%28cbna%29-mar-2025.pdf"],
-      "observacao": "Data exata de vigência e número da lei distrital a confirmar no DODF."
+      "fontes": [
+        "https://www.legisweb.com.br/legislacao/?id=123550",
+        "https://static.abras.com.br/pdf/estudo-abras-panorama-tributario-de-icms-sobre-a-cesta-basica-nacional-de-alimentos-%28cbna%29-mar-2025estudo-abras-panorama-tributario-de-icms-sobre-a-cesta-basica-nacional-de-alimentos-%28cbna%29-mar-2025.pdf"
+      ],
+      "observacao": "Lei distrital 7.326/2023, efeitos a partir de 22/01/2024 (segundo fontes secundárias). Conferir o texto no DODF antes de marcar como verificado."
     },
     {
       "id": "br-cbs-ibs-teste-2026",
@@ -24,9 +29,13 @@
       "aliquota_nova": 1,
       "calculo": "sem_efeito",
       "abrangencia": "todos os produtos; em 2026 o valor é compensado com PIS/Cofins, sem aumento de carga",
-      "categorias": ["*"],
+      "categorias": [
+        "*"
+      ],
       "verificado": false,
-      "fontes": ["https://valorfinal.com.br/guia/reforma-tributaria"],
+      "fontes": [
+        "https://valorfinal.com.br/guia/reforma-tributaria"
+      ],
       "observacao": "Conferir na LC 214/2025."
     }
   ]
