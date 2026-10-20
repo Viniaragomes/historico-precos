@@ -1,23 +1,26 @@
-"""Até onde vão os dados do portal da CEASA-DF? Varre meses para o TOMATE (todas as classificações)."""
+"""Onde o portal da CEASA-DF lista os boletins diários (SIMA)? Procura em páginas e no sitemap."""
 
+import re
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from historico_precos.fontes import ceasa_df  # noqa: E402
 from historico_precos.rede import Navegador  # noqa: E402
 
 nav = Navegador(intervalo=3)
-cls = ceasa_df.classificacoes(nav, "1")
-print("classificações do TOMATE:", cls)
-meses = [(2026, m) for m in range(10, 0, -1)] + [(2025, m) for m in (12, 9, 6, 3)] + [(2024, 6)]
-for cid, nome in cls.items():
-    for ano, mes in meses:
-        c = ceasa_df.precos_do_mes(nav, "1", "TOMATE", cid, nome, ano, mes)
-        if c:
-            print(f"{nome:<10} {mes:02d}/{ano}: {len(c)} dias, de {c[0].data} a {c[-1].data}, último R$ {c[-1].preco_kg:.2f}/kg")
-    print()
-# o PDF diário (boletim SIMA) mais recente que a página lista
-pagina = nav.get_texto("https://www.portal.ceasadf.com.br/") or ""
-import re
-print("PDFs na página inicial:", sorted(set(re.findall(r'https://www\.portal\.ceasadf\.com\.br/storage/files/[^"\']+\.pdf', pagina)))[:10])
+BASE = "https://www.portal.ceasadf.com.br"
+vistos = set()
+for caminho in ["/", "/sitemap.xml", "/boletins", "/boletim", "/sima", "/publicacoes", "/documentos", "/precos", "/blog", "/noticias"]:
+    texto = nav.get_texto(BASE + caminho)
+    if not texto:
+        print(f"{caminho}: sem resposta ({nav.registro[-1] if nav.registro else ''})")
+        continue
+    pdfs = sorted(set(re.findall(r'(?:https://www\.portal\.ceasadf\.com\.br)?/storage/files/[^"\'\s<>]+\.pdf', texto)))
+    links = sorted({l for l in re.findall(r'href="(https://www\.portal\.ceasadf\.com\.br/[^"#?]+)"', texto) if l not in vistos})
+    vistos |= set(links)
+    titulo = re.search(r"<title>(.*?)</title>", texto, re.S)
+    print(f"\n{caminho}: {titulo.group(1).strip() if titulo else ''} | {len(texto)} bytes | {len(pdfs)} PDF(s)")
+    for p in pdfs[:15]:
+        print("   pdf", p)
+    if caminho == "/":
+        print("   links:", links[:60])
