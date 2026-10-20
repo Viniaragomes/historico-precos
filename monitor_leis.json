@@ -38,12 +38,13 @@
           "convênio icms",
           "convenio icms"
         ],
-        "ativa": true
+        "ativa": true,
+        "_verificacao": "Em 20/10/2026 o site do Confaz não respondeu aos servidores do GitHub (tempo esgotado, nem o robots.txt). O navegador agora espera até 90 s e tenta 4 vezes; se seguir sem resposta, é bloqueio de acesso de fora do Brasil."
       }
     ],
     "lexml": {
-      "ativa": true,
-      "_leia": "Consulta CQL ao LexML (Senado). Formato da consulta a confirmar na investigação de fontes.",
+      "ativa": false,
+      "_verificacao": "Em 20/10/2026: o robots.txt do LexML proíbe /busca/ (onde fica o SRU que funciona) e libera /sru, mas /sru responde 404. Desligado para não acessar caminho proibido; reativar se o /sru passar a responder.",
       "consultas": [
         "dc.description any \"ICMS aliquota\"",
         "dc.description any \"Imposto Seletivo\"",

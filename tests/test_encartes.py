@@ -113,3 +113,64 @@ class TestEncartes(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestEncartesDF(unittest.TestCase):
+    POSTS = [
+        {"date": "2026-10-20T09:17:49", "link": "https://encartesdf.com.br/supermercado-uniao-ate-22-10-2026/",
+         "title": {"rendered": "Supermercado Uni&atilde;o até 22-10-2026"},
+         "content": {"rendered": '<img src="https://encartesdf.com.br/wp-content/uploads/2026/10/WhatsApp Image 1.jpeg">'
+                                 '<img src="https://encartesdf.com.br/wp-content/uploads/2026/10/pag2-768x1024.webp">'
+                                 '<img src="https://encartesdf.com.br/wp-content/uploads/2026/10/pag2.webp">'
+                                 '<img src="https://outro.site/anuncio.jpg">'}},
+        {"date": "2026-10-19T08:00:00", "link": "https://encartesdf.com.br/so-texto/",
+         "title": {"rendered": "Dicas de economia"}, "content": {"rendered": "<p>sem imagem</p>"}},
+    ]
+
+    def setUp(self):
+        from test_agente import Fake
+
+        self.dir = tempfile.TemporaryDirectory()
+        self.banco = Banco(os.path.join(self.dir.name, "t.db"))
+        self.banco.salvar_produto(Produto("7896005800027", nome="Café Torrado e Moído Exemplo 500g"))
+        self.fake = Fake([("https://encartesdf.com.br/robots.txt", (200, "User-agent: *\nDisallow:")),
+                          ("https://encartesdf.com.br/wp-json/wp/v2/posts", (200, json.dumps(self.POSTS)))])
+        self.baixadas = []
+        self.nav = Navegador(intervalo=0, abrir=self.fake, dormir=lambda s: None,
+                             abrir_bytes=lambda u: self.baixadas.append(u) or b"\x89PNG fake")
+
+    def tearDown(self):
+        self.banco.con.close()
+        self.dir.cleanup()
+
+    def test_titulo_e_imagens(self):
+        from historico_precos.fontes import encartesdf
+
+        self.assertEqual(encartesdf.separar_titulo("Supermercado União até 22-10-2026"), ("Supermercado União", "2026-10-22"))
+        self.assertEqual(encartesdf.separar_titulo("Dicas"), ("Dicas", None))
+        encs = encartesdf.listar(self.nav, dias=7, hoje=__import__("datetime").date(2026, 10, 20))
+        self.assertEqual(len(encs), 1)  # o post sem imagem fica de fora
+        self.assertEqual(encs[0].mercado, "Supermercado União")
+        self.assertEqual(encs[0].imagens, ["https://encartesdf.com.br/wp-content/uploads/2026/10/WhatsApp%20Image%201.jpeg",
+                                           "https://encartesdf.com.br/wp-content/uploads/2026/10/pag2.webp"])
+        self.assertIn("after=2026-10-13", self.fake.acessos[-1])
+
+    def test_coletar_nao_le_a_mesma_imagem_duas_vezes(self):
+        from historico_precos.fontes import encartesdf
+
+        cliente = ClienteFalso()
+        agente = AgenteEncartes(self.banco, cliente=cliente, nav=self.nav)
+        r = encartesdf.coletar(self.nav, agente, dias=7)
+        self.assertEqual((r["encartes"], r["imagens_lidas"], r["falhas"]), (1, 2, 0))
+        self.assertGreater(r["precos_novos"], 0)
+        prova = self.banco.con.execute("SELECT DISTINCT loja, url_evidencia FROM precos").fetchall()
+        self.assertEqual(prova, [("Supermercado União", "https://encartesdf.com.br/supermercado-uniao-ate-22-10-2026/")])
+        r2 = encartesdf.coletar(self.nav, agente, dias=7)
+        self.assertEqual((r2["imagens_lidas"], r2["ja_lidas"]), (0, 2))
+        self.assertEqual(len(cliente.pedidos), 2)
+
+    def test_limite_de_imagens(self):
+        from historico_precos.fontes import encartesdf
+
+        agente = AgenteEncartes(self.banco, cliente=ClienteFalso(), nav=self.nav)
+        self.assertEqual(encartesdf.coletar(self.nav, agente, dias=7, max_imagens=1)["imagens_lidas"], 1)

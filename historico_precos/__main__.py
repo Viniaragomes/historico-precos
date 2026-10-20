@@ -357,6 +357,11 @@ def main(argv: list[str] | None = None) -> int:
     el_.add_argument("--cidade", default="Brasília")
     el_.add_argument("--data", help="AAAA-MM-DD, se o encarte não trouxer a validade")
     el_.add_argument("--fonte", help="página onde o encarte foi publicado (vira o link de prova)")
+    edf = esub.add_parser("encartesdf", help="lê os encartes novos publicados no encartesdf.com.br")
+    edf.add_argument("--dias", type=int, default=7, help="publicados nos últimos N dias")
+    edf.add_argument("--max-imagens", type=int, default=20, help="teto de imagens lidas (cada uma custa uma chamada de IA)")
+    edf.add_argument("--mercados", help="só estes mercados, separados por vírgula (parte do nome basta)")
+    edf.add_argument("--listar", action="store_true", help="só lista os encartes, sem ler (não precisa de credencial)")
     esub.add_parser("pendentes", help="itens que não foram associados a um produto com segurança")
     ev = esub.add_parser("vincular", help="associa um item pendente a um EAN, depois de conferir")
     ev.add_argument("id")
@@ -413,7 +418,19 @@ def main(argv: list[str] | None = None) -> int:
 
         agente = AgenteEncartes(banco, nav=nav)
         try:
-            if args.acao == "ler":
+            if args.acao == "encartesdf":
+                from .fontes import encartesdf
+
+                if args.listar:
+                    for enc in encartesdf.listar(nav, dias=args.dias):
+                        print(f"{enc.publicado} {enc.mercado:<32} até {enc.validade_fim or '?'}  {len(enc.imagens)} imagem(ns)  {enc.post}")
+                    return 0
+                mercados = [m.strip() for m in (args.mercados or "").split(",") if m.strip()]
+                r = encartesdf.coletar(nav, agente, dias=args.dias, max_imagens=args.max_imagens, mercados=mercados)
+                print(f"{r['encartes']} encarte(s), {r['imagens_lidas']} imagem(ns) lida(s) agora, {r['ja_lidas']} já lida(s), "
+                      f"{r['falhas']} falha(s): {r['itens']} itens, {r['precos_novos']} preço(s) novo(s), {r['pendentes']} pendente(s).")
+                return 0
+            elif args.acao == "ler":
                 r = agente.processar(args.origem, loja=args.loja, cidade=args.cidade, data_coleta=args.data, fonte=args.fonte)
                 print(f"{r['itens']} itens lidos (validade {r['validade'][0] or '?'} a {r['validade'][1] or '?'}): "
                       f"{r['vinculados']} viraram preço, {r['pendentes']} pendentes, {r['condicionais']} com condição.")

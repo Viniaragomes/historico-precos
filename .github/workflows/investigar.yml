@@ -18,6 +18,9 @@ jobs:
           python-version: "3.12"
       - name: Investigar
         run: python ferramentas/investigar_fontes.py relatorios/investigacao
+      - name: Teste real do Encartes DF (só lista, sem IA)
+        continue-on-error: true
+        run: python -m historico_precos --banco /tmp/t.db encarte encartesdf --dias 3 --listar > relatorios/investigacao/encartesdf.txt 2>&1
       - name: Guardar no repositório
         run: |
           git config user.name "github-actions[bot]"
