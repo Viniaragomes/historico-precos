@@ -1,0 +1,37 @@
+name: Diagnóstico rápido
+
+# Roda um script de ferramentas/ e guarda a saída em relatorios/diagnostico/.
+on:
+  workflow_dispatch:
+    inputs:
+      script:
+        description: "arquivo em ferramentas/ (ex.: diagnostico_ceasa.py)"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  rodar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Rodar
+        env:
+          SCRIPT: ${{ inputs.script }}
+        run: |
+          case "$SCRIPT" in *[!a-z0-9_.]*|"") echo "nome inválido"; exit 1;; esac
+          mkdir -p relatorios/diagnostico
+          python "ferramentas/$SCRIPT" > "relatorios/diagnostico/${SCRIPT%.py}.txt" 2>&1 || true
+          cat "relatorios/diagnostico/${SCRIPT%.py}.txt"
+      - name: Guardar no repositório
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add relatorios/diagnostico
+          git commit -m "Diagnóstico $(date +%F)" || exit 0
+          git pull --rebase origin main && git push
