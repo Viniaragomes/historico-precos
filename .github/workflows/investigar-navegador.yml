@@ -1,0 +1,32 @@
+name: Investigar com navegador
+
+# Abre as fontes num Chromium de verdade, respeitando robots.txt e sem passar por desafio anti-robô.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  navegador:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Instalar o navegador
+        run: |
+          pip install -q playwright==1.48.0
+          python -m playwright install --with-deps chromium
+      - name: Investigar
+        continue-on-error: true
+        run: python ferramentas/investigar_navegador.py relatorios/navegador
+      - name: Guardar no repositório
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add relatorios/navegador
+          git commit -m "Investigação com navegador $(date +%F)" || exit 0
+          git pull --rebase origin main && git push
