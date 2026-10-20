@@ -1,0 +1,72 @@
+name: Viabilidade
+
+# Rode pela aba Actions > Viabilidade > Run workflow.
+on:
+  workflow_dispatch:
+    inputs:
+      amostra:
+        description: "Quantidade de produtos na amostra"
+        default: "60"
+      max_capturas:
+        description: "Cópias antigas (Wayback) por página de produto"
+        default: "10"
+
+permissions:
+  contents: write
+
+jobs:
+  viabilidade:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    env:
+      AMOSTRA: ${{ inputs.amostra }}
+      MAX_CAPTURAS: ${{ inputs.max_capturas }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Testes
+        run: python -m unittest discover -s tests
+
+      - name: As fontes respondem?
+        run: python -m historico_precos viabilidade --so-fontes | tee fontes.txt
+
+      - name: Mapa de Preços do DF (descoberta)
+        continue-on-error: true
+        run: python -m historico_precos mapa-df descobrir --bruto relatorios/mapa_df_bruto
+
+      - name: Mapa de Preços do DF (coleta de teste)
+        continue-on-error: true
+        run: python -m historico_precos mapa-df coletar --termos CAFE,ARROZ --bruto relatorios/mapa_df_bruto
+
+      - name: Viabilidade (amostra de produtos reais)
+        run: |
+          python -m historico_precos -v viabilidade \
+            --amostra "$AMOSTRA" --max-capturas "$MAX_CAPTURAS" --saida relatorios
+
+      - name: Resumo na página da execução
+        if: always()
+        run: |
+          echo '## Fontes' >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          cat fontes.txt >> "$GITHUB_STEP_SUMMARY" || true
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          cat relatorios/viabilidade-*.md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: viabilidade
+          path: |
+            relatorios/
+            precos.db
+
+      - name: Guardar relatório no repositório
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add relatorios/
+          git commit -m "Relatório de viabilidade $(date +%F)" || exit 0
+          git push

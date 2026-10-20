@@ -1,0 +1,9 @@
+{
+  "_leia": "Domínios candidatos a verificar com: python -m historico_precos detectar-lojas. Desative com \"ativa\": false. \"sc\" é o canal de venda VTEX (pode mudar o preço por região).",
+  "lojas": [
+    {"nome": "Carrefour Mercado", "dominio": "mercado.carrefour.com.br", "cidade": "Brasília", "tipo": "vtex", "ativa": true},
+    {"nome": "Atacadão", "dominio": "www.atacadao.com.br", "cidade": "Brasília", "tipo": "vtex", "ativa": true},
+    {"nome": "Pão de Açúcar", "dominio": "www.paodeacucar.com", "cidade": "Brasília", "tipo": "vtex", "ativa": true},
+    {"nome": "Comper", "dominio": "www.comper.com.br", "cidade": "Brasília", "tipo": "vtex", "ativa": true}
+  ]
+}

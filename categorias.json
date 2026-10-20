@@ -1,0 +1,52 @@
+{
+  "_leia": "Mapeia cada categoria às fontes de causa. 'ipca_subitem' é procurado pelo nome nos metadados do IBGE (tabela 7060). Códigos do Banco Central marcados em _verificar devem ser conferidos em https://www3.bcb.gov.br/sgspub/ antes de uso público.",
+  "_verificar": ["27575 = Índice de Commodities Brasil (IC-Br) Agropecuária", "N6[5300108] = Brasília na tabela 7060"],
+  "localidades_ipca": {"DF": "N6[5300108]"},
+  "series_bcb_gerais": [
+    {"codigo": 1, "nome": "Dólar comercial (venda)", "defasagem_meses": 2}
+  ],
+  "categorias": {
+    "cafe": {
+      "palavras": ["café", "cafe "],
+      "ipca_subitem": "Café moído",
+      "series_bcb": [{"codigo": 27575, "nome": "Commodities agropecuárias (IC-Br Agro)", "defasagem_meses": 3}],
+      "termos_noticia": ["café", "preço do café"]
+    },
+    "leite": {
+      "palavras": ["leite longa vida", "leite integral", "leite desnatado", "leite semidesnatado"],
+      "ipca_subitem": "Leite longa vida",
+      "series_bcb": [{"codigo": 27575, "nome": "Commodities agropecuárias (IC-Br Agro)", "defasagem_meses": 2}],
+      "termos_noticia": ["leite", "preço do leite"]
+    },
+    "arroz": {
+      "palavras": ["arroz"],
+      "ipca_subitem": "Arroz",
+      "series_bcb": [{"codigo": 27575, "nome": "Commodities agropecuárias (IC-Br Agro)", "defasagem_meses": 2}],
+      "termos_noticia": ["arroz", "preço do arroz"]
+    },
+    "feijao": {
+      "palavras": ["feijão", "feijao"],
+      "ipca_subitem": "Feijão - carioca",
+      "series_bcb": [{"codigo": 27575, "nome": "Commodities agropecuárias (IC-Br Agro)", "defasagem_meses": 2}],
+      "termos_noticia": ["feijão"]
+    },
+    "oleo_soja": {
+      "palavras": ["óleo de soja", "oleo de soja"],
+      "ipca_subitem": "Óleo de soja",
+      "series_bcb": [{"codigo": 27575, "nome": "Commodities agropecuárias (IC-Br Agro)", "defasagem_meses": 2}],
+      "termos_noticia": ["óleo de soja", "soja"]
+    },
+    "acucar": {
+      "palavras": ["açúcar", "acucar"],
+      "ipca_subitem": "Açúcar refinado",
+      "series_bcb": [{"codigo": 27575, "nome": "Commodities agropecuárias (IC-Br Agro)", "defasagem_meses": 2}],
+      "termos_noticia": ["açúcar"]
+    },
+    "leite_condensado": {
+      "palavras": ["leite condensado"],
+      "ipca_subitem": "Leite condensado",
+      "series_bcb": [],
+      "termos_noticia": ["leite condensado", "leite"]
+    }
+  }
+}

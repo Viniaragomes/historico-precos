@@ -1,0 +1,24 @@
+{
+  "_leia": "Fontes do monitor de leis tributárias. 'pontuacao_minima' controla o que aparece como pendente. Em 'paginas', inclua qualquer página pública de legislação (ex.: lista de decretos de ICMS da Receita do DF); o monitor avisa quando surge um link novo com as palavras indicadas.",
+  "pontuacao_minima": 5,
+  "fontes": {
+    "dou": {
+      "ativa": true,
+      "termos": [
+        "\"Convênio ICMS\" alimentos",
+        "\"Convênio ICMS\" \"cesta básica\"",
+        "alíquota \"Imposto Seletivo\"",
+        "alíquota CBS IBS",
+        "\"alíquota zero\" PIS Cofins alimentos",
+        "\"cesta básica nacional\""
+      ]
+    },
+    "querido_diario": {
+      "ativa": true,
+      "_verificar": "Confirmar se o Querido Diário cobre o Diário Oficial do DF (território 5300108). Se não cobrir, a busca só volta vazia.",
+      "territorios": [{"id": "5300108", "uf": "DF"}],
+      "termos": ["ICMS alíquota", "RICMS alíquota", "Decreto 18.955"]
+    },
+    "paginas": []
+  }
+}

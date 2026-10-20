@@ -1,0 +1,77 @@
+name: Coleta diária
+
+# Todo dia às 06:17 de Brasília (09:17 UTC). O banco fica no ramo "dados" e cresce a cada execução.
+on:
+  schedule:
+    - cron: "17 9 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: coleta
+  cancel-in-progress: false
+
+jobs:
+  coleta:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Recuperar o banco do ramo "dados"
+        run: |
+          if git ls-remote --exit-code --heads origin dados >/dev/null; then
+            git fetch origin dados:dados
+            git show dados:precos.db > precos.db
+            echo "Banco recuperado: $(du -h precos.db | cut -f1)"
+          else
+            echo "Primeira execução: banco novo."
+          fi
+
+      - name: Preços dos produtos acompanhados
+        run: |
+          LISTA=produtos.txt
+          [ -f "$LISTA" ] || LISTA=relatorios/amostra.tsv
+          if [ ! -f "$LISTA" ]; then
+            echo "Sem lista de produtos. Rode o workflow Viabilidade primeiro (ele gera relatorios/amostra.tsv)."
+            exit 0
+          fi
+          # Wayback só aos domingos; nos outros dias, só o preço de hoje
+          if [ "$(date -u +%u)" = "7" ]; then EXTRA=""; else EXTRA="--sem-wayback"; fi
+          python -m historico_precos buscar-lista "$LISTA" $EXTRA
+
+      - name: Monitor de leis (segundas-feiras)
+        continue-on-error: true
+        run: |
+          if [ "$(date -u +%u)" = "1" ]; then
+            python -m historico_precos leis monitorar --desde "$(date -u -d '9 days ago' +%F)"
+          fi
+
+      - name: Mapa de Preços do DF (dia 5 de cada mês)
+        continue-on-error: true
+        run: |
+          if [ "$(date -u +%d)" = "05" ]; then
+            python -m historico_precos mapa-df coletar
+          fi
+
+      - name: Guardar o banco no ramo "dados"
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git show-ref --verify --quiet refs/heads/dados; then
+            git worktree add /tmp/dados dados
+          else
+            git worktree add --orphan -b dados /tmp/dados
+          fi
+          cp precos.db /tmp/dados/precos.db
+          cd /tmp/dados
+          git add precos.db
+          git commit -m "Coleta $(date -u +%F)" || exit 0
+          git push origin dados
