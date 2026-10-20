@@ -162,3 +162,23 @@ class TestMonitor(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestLexml(unittest.TestCase):
+    def test_registros_no_periodo(self):
+        xml = """<?xml version="1.0"?><srw:searchRetrieveResponse xmlns:srw="http://www.loc.gov/zing/srw/"
+          xmlns:dc="http://purl.org/dc/elements/1.1/"><srw:records>
+          <srw:record><srw:recordData><srw_dc xmlns="info:srw/schema/1/dc-schema">
+            <urn>urn:lex:br;distrito.federal:distrital:lei:2023-12-20;7326</urn>
+            <dc:title>Lei nº 7.326, de 20 de dezembro de 2023</dc:title>
+            <dc:description>Altera a alíquota do ICMS de 18% para 20%.</dc:description>
+            <dc:date>2023-12-20</dc:date></srw_dc></srw:recordData></srw:record>
+          <srw:record><srw:recordData><srw_dc xmlns="info:srw/schema/1/dc-schema">
+            <urn>urn:lex:br:federal:lei:2010-01-01;1</urn><dc:title>Antiga</dc:title><dc:date>2010-01-01</dc:date>
+          </srw_dc></srw:recordData></srw:record></srw:records></srw:searchRetrieveResponse>"""
+        nav = nav_com(Fake([("https://www.lexml.gov.br/busca/SRU", (200, xml))]), robots=False)
+        pubs = fontes.buscar_lexml(nav, 'dc.description any "ICMS"', date(2023, 1, 1), date(2024, 12, 31))
+        self.assertEqual(len(pubs), 1)
+        self.assertEqual((pubs[0].uf, pubs[0].data, pubs[0].fonte), ("DF", "2023-12-20", "LexML"))
+        self.assertIn("18% para 20%", pubs[0].texto)
+        self.assertTrue(pubs[0].url.startswith("https://www.lexml.gov.br/urn/urn:lex:br;distrito.federal"))

@@ -33,6 +33,24 @@
       "tipo": "vtex",
       "ativa": false,
       "verificacao": "robots.txt proíbe o acesso de robôs à API e o site usa proteção Cloudflare. Respeitado."
+    },
+    {
+      "nome": "Comper (arquivo)",
+      "dominio": "www.comper.com.br",
+      "cidade": null,
+      "tipo": "arquivo",
+      "padrao_produto": "/p$",
+      "ativa": true,
+      "verificacao": "Só cópias arquivadas no Internet Archive: o site da loja não é acessado, porque ele bloqueia robôs. Serve para histórico, não para o preço de hoje."
+    },
+    {
+      "nome": "Carrefour Mercado (arquivo)",
+      "dominio": "mercado.carrefour.com.br",
+      "cidade": null,
+      "tipo": "arquivo",
+      "padrao_produto": "/p$",
+      "ativa": true,
+      "verificacao": "Só cópias arquivadas no Internet Archive: o site da loja não é acessado, porque ele bloqueia robôs. Serve para histórico, não para o preço de hoje."
     }
   ]
 }

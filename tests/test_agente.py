@@ -235,3 +235,30 @@ class TestRegiaoERede(unittest.TestCase):
         self.assertEqual(nav_com(fake, robots=False).get_json("https://site.com.br/a"), [1])
         self.assertEqual(Navegador._descomprimir(gzip.compress(b'{"ok":1}'), None), b'{"ok":1}')
         self.assertEqual(Navegador._descomprimir(b"texto", None), b"texto")
+
+
+class TestCatalogoArquivo(unittest.TestCase):
+    def test_catalogo_e_historico_sem_acessar_a_loja(self):
+        import os, tempfile
+        from historico_precos.viabilidade import catalogar_arquivo
+
+        url = "https://www.loja-bloqueada.com.br/cafe-torrado-exemplo-500g/p"
+        cdx_catalogo = [["timestamp", "original"], ["20240101000000", url]]
+        fake = Fake([
+            ("https://web.archive.org/cdx/search/cdx?url=www.loja-bloqueada.com.br", (200, json.dumps(cdx_catalogo))),
+            ("https://web.archive.org/cdx/search/cdx?url=https", (200, json.dumps(CDX))),
+            ("https://web.archive.org/web/20240101000000id_/", (200, pagina_json_ld("19.90"))),
+            ("https://web.archive.org/web/", snapshot),
+        ])
+        lojas = [{"nome": "Bloqueada (arquivo)", "dominio": "www.loja-bloqueada.com.br", "tipo": "arquivo"}]
+        with tempfile.TemporaryDirectory() as d:
+            banco = Banco(os.path.join(d, "t.db"))
+            achados = catalogar_arquivo(nav_com(fake, robots=False), banco, lojas, "café", 5)
+            self.assertEqual(achados, [(EAN, "cafe torrado exemplo 500g")])
+            self.assertEqual(banco.paginas(EAN), [("Bloqueada (arquivo)", url)])
+            rel = AgenteHistorico(nav_com(fake, robots=False), banco, lojas).executar(EAN)
+            banco.con.close()
+        self.assertTrue(any(p.loja == "Bloqueada (arquivo)" and p.fonte == "wayback" for p in rel.pontos))
+        self.assertFalse([u for u in fake.acessos if u.startswith("https://www.loja-bloqueada.com.br")])
+        filtro = [u for u in fake.acessos if "matchType=prefix" in u][0]
+        self.assertIn("original%3A.%2Acafe.%2A%2Fp%24", filtro)

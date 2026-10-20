@@ -95,7 +95,7 @@ class AgenteViabilidade:
         n = self.nav
         sondas = [
             _sonda(f"Loja VTEX: {l['nome']}", lambda l=l: (vtex.eh_vtex(n, l["dominio"]), l["dominio"]), n)
-            for l in self.lojas
+            for l in self.lojas if l.get("tipo", "vtex") == "vtex"
         ]
         sondas += [
             _sonda("Open Food Facts", lambda: (
@@ -139,9 +139,13 @@ class AgenteViabilidade:
         for termo in termos:
             achados: list[tuple[str, str]] = []
             for loja in self.lojas:
+                if loja.get("tipo", "vtex") != "vtex":
+                    continue
                 achados += vtex.buscar_texto(self.nav, loja, termo, por_termo)
                 if len(achados) >= por_termo:
                     break
+            if len(achados) < por_termo:
+                achados += catalogar_arquivo(self.nav, self.banco, self.lojas, termo, por_termo - len(achados))
             if len(achados) < por_termo:
                 achados += openfoodfacts.buscar_texto(self.nav, termo, por_termo)
             for ean, nome in achados[:por_termo]:
@@ -188,6 +192,24 @@ class AgenteViabilidade:
         rel = Relatorio(date.today().isoformat(), round((time.monotonic() - inicio) / 60, 1), sondas, produtos)
         rel.metricas, rel.veredito = calcular_metricas(produtos, produtos_com_causas)
         return rel
+
+
+def catalogar_arquivo(nav: Navegador, banco: Banco, lojas: list[dict], termo: str, quantos: int,
+                      por_loja: int = 20) -> list[tuple[str, str]]:
+    """Para lojas que bloqueiam robôs: acha páginas de produto arquivadas no Internet Archive e o EAN de cada uma."""
+    achados = []
+    for loja in lojas:
+        if loja.get("tipo") != "arquivo" or len(achados) >= quantos:
+            continue
+        for ts, url in wayback.paginas_de_produto(nav, loja["dominio"], termo, loja.get("padrao_produto", "/p$"), por_loja):
+            ean = wayback.ean_da_pagina(nav, ts, url)
+            if not ean:
+                continue
+            banco.salvar_pagina(ean, loja["nome"], url)
+            achados.append((ean, url.rstrip("/").rsplit("/", 2)[-2].replace("-", " ")))
+            if len(achados) >= quantos:
+                break
+    return achados
 
 
 def calcular_metricas(produtos: list[ResultadoProduto], com_causas: int) -> tuple[dict, dict]:

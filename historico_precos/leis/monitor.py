@@ -81,6 +81,10 @@ class MonitorLeis:
         if dou.get("ativa", True):
             for termo in dou.get("termos", []):
                 pubs += fontes.buscar_dou(self.nav, termo, desde, ate)
+        lexml = cfg.get("lexml", {})
+        if lexml.get("ativa", False):
+            for consulta in lexml.get("consultas", []):
+                pubs += fontes.buscar_lexml(self.nav, consulta, desde, ate)
         qd = cfg.get("querido_diario", {})
         if qd.get("ativa", False):
             for territorio in qd.get("territorios", []):

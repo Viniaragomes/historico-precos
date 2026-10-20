@@ -364,6 +364,10 @@ def main(argv: list[str] | None = None) -> int:
     ed = esub.add_parser("descartar", help="descarta um item pendente")
     ed.add_argument("id")
 
+    cw = sub.add_parser("catalogo-wayback", help="cataloga páginas arquivadas de lojas que bloqueiam robôs (tipo 'arquivo')")
+    cw.add_argument("--termos", required=True, help="separados por vírgula, ex.: cafe,arroz")
+    cw.add_argument("--limite", type=int, default=20, help="páginas por termo e por loja")
+
     ci = sub.add_parser("conferencia-impostos", help="gera o checklist de conferência das leis de impostos")
     ci.add_argument("--saida", default="docs/conferencia-impostos.md")
 
@@ -393,6 +397,17 @@ def main(argv: list[str] | None = None) -> int:
     banco = Banco(args.banco)
     nav = Navegador(intervalo=args.intervalo)
 
+    if args.comando == "catalogo-wayback":
+        from .viabilidade import catalogar_arquivo
+
+        lojas = carregar_lojas(args.lojas)
+        total = 0
+        for termo in [t.strip() for t in args.termos.split(",") if t.strip()]:
+            achados = catalogar_arquivo(nav, banco, lojas, termo, quantos=10**6, por_loja=args.limite)
+            total += len(achados)
+            print(f"{termo}: {len(achados)} página(s) com código de barras")
+        print(f"{total} página(s) catalogada(s). O histórico vem das cópias arquivadas: python -m historico_precos buscar <EAN>")
+        return 0
     if args.comando == "encarte":
         from .encartes import AgenteEncartes, ErroEncarte
 

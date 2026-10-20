@@ -94,6 +94,10 @@ class AgenteHistorico:
             if not pontos and not links:
                 avisos.append(f"{loja['nome']}: produto não encontrado (ou loja fora do ar / não é VTEX)")
 
+        # lojas que bloqueiam robôs: só cópias arquivadas, já catalogadas (comando catalogo-wayback)
+        arquivo = {l["nome"] for l in self.lojas if l.get("tipo") == "arquivo"}
+        paginas += [(loja, url) for loja, url in self.banco.paginas(ean) if loja in arquivo]
+
         if usar_wayback:
             for nome_loja, url in dict.fromkeys(paginas):
                 log.info("Wayback: %s", url)

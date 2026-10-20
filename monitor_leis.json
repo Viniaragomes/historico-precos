@@ -11,14 +11,45 @@
         "alíquota CBS IBS",
         "\"alíquota zero\" PIS Cofins alimentos",
         "\"cesta básica nacional\""
-      ]
+      ],
+      "_verificacao": "Em 20/10/2026 o in.gov.br derrubou as conexões vindas dos servidores do GitHub (fora do Brasil). Funciona a partir de uma máquina no Brasil; nos servidores do GitHub, use LexML e Confaz."
     },
     "querido_diario": {
       "ativa": true,
       "_verificar": "Confirmar se o Querido Diário cobre o Diário Oficial do DF (território 5300108). Se não cobrir, a busca só volta vazia.",
-      "territorios": [{"id": "5300108", "uf": "DF"}],
-      "termos": ["ICMS alíquota", "RICMS alíquota", "Decreto 18.955"]
+      "territorios": [
+        {
+          "id": "5300108",
+          "uf": "DF"
+        }
+      ],
+      "termos": [
+        "ICMS alíquota",
+        "RICMS alíquota",
+        "Decreto 18.955"
+      ]
     },
-    "paginas": []
+    "paginas": [
+      {
+        "nome": "Confaz: convênios ICMS de 2026",
+        "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios/2026",
+        "uf": "CONFAZ",
+        "palavras": [
+          "convênio icms",
+          "convenio icms"
+        ],
+        "ativa": true
+      }
+    ],
+    "lexml": {
+      "ativa": true,
+      "_leia": "Consulta CQL ao LexML (Senado). Formato da consulta a confirmar na investigação de fontes.",
+      "consultas": [
+        "dc.description any \"ICMS aliquota\"",
+        "dc.description any \"Imposto Seletivo\"",
+        "dc.description any \"cesta basica\"",
+        "dc.description any \"PIS Cofins aliquota zero\""
+      ]
+    }
   }
 }

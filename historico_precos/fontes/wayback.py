@@ -6,6 +6,7 @@ como evidência, que qualquer pessoa pode abrir para conferir.
 
 from __future__ import annotations
 
+import re
 from urllib.parse import urlencode
 
 from ..extratores import extrair_preco
@@ -82,3 +83,52 @@ def historico(
             )
         )
     return pontos
+
+
+# ---------- catálogo de lojas que não podem ser consultadas diretamente ----------
+# Para lojas que bloqueiam robôs, o site da loja não é acessado: as páginas de produto
+# vêm das cópias públicas guardadas pelo Internet Archive.
+
+_RE_EAN = [
+    re.compile(r'"gtin1[34]?"\s*:\s*"(\d{8,14})"'),
+    re.compile(r'"ean"\s*:\s*"(\d{8,14})"', re.I),
+    re.compile(r'itemprop=["\']gtin1[34]?["\'][^>]*content=["\'](\d{8,14})["\']', re.I),
+]
+
+
+def paginas_de_produto(nav: Navegador, dominio: str, termo: str, padrao_produto: str = "/p$",
+                       limite: int = 60) -> list[tuple[str, str]]:
+    """Páginas de produto arquivadas do domínio cujo endereço contém o termo. Devolve [(timestamp, url)]."""
+    slug = re.sub(r"[^a-z0-9]+", "-", normalizar_slug(termo)).strip("-")
+    params = [
+        ("url", f"{dominio}/"),
+        ("matchType", "prefix"),
+        ("output", "json"),
+        ("fl", "timestamp,original"),
+        ("filter", "statuscode:200"),
+        ("filter", f"original:.*{re.escape(slug)}.*{padrao_produto}"),
+        ("collapse", "urlkey"),  # uma linha por página (a cópia mais antiga)
+        ("limit", str(limite)),
+    ]
+    linhas = nav.get_json(f"{CDX}?{urlencode(params)}")
+    if not isinstance(linhas, list) or len(linhas) < 2:
+        return []
+    cab = linhas[0]
+    return [(l[cab.index("timestamp")], l[cab.index("original")]) for l in linhas[1:]]
+
+
+def ean_da_pagina(nav: Navegador, ts: str, url: str) -> str | None:
+    html = nav.get_texto(f"https://web.archive.org/web/{ts}id_/{url}")
+    if not html:
+        return None
+    for regex in _RE_EAN:
+        achado = regex.search(html)
+        if achado:
+            return achado.group(1)
+    return None
+
+
+def normalizar_slug(texto: str) -> str:
+    import unicodedata
+
+    return unicodedata.normalize("NFKD", texto).encode("ascii", "ignore").decode().lower()

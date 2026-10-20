@@ -20,6 +20,11 @@ CREATE TABLE IF NOT EXISTS precos (
     UNIQUE (ean, loja, data_observada, preco, fonte)
 );
 CREATE INDEX IF NOT EXISTS idx_precos_ean ON precos (ean, data_observada);
+-- páginas de produto conhecidas por loja (ex.: cópias arquivadas de lojas que bloqueiam robôs)
+CREATE TABLE IF NOT EXISTS paginas_produto (
+    ean TEXT NOT NULL, loja TEXT NOT NULL, url TEXT NOT NULL, descoberto_em TEXT NOT NULL,
+    UNIQUE (ean, loja, url)
+);
 """
 
 
@@ -60,3 +65,14 @@ class Banco:
             f"SELECT {', '.join(_CAMPOS)} FROM precos WHERE ean = ? ORDER BY data_observada, loja", (ean,)
         )
         return [PontoDePreco(**dict(zip(_CAMPOS, linha))) for linha in cursor]
+
+    def salvar_pagina(self, ean: str, loja: str, url: str) -> bool:
+        from .modelo import agora_iso
+
+        cur = self.con.execute("INSERT OR IGNORE INTO paginas_produto VALUES (?, ?, ?, ?)", (ean, loja, url, agora_iso()))
+        self.con.commit()
+        return cur.rowcount > 0
+
+    def paginas(self, ean: str) -> list[tuple[str, str]]:
+        """[(loja, url)] de páginas conhecidas deste produto."""
+        return list(self.con.execute("SELECT loja, url FROM paginas_produto WHERE ean = ? ORDER BY loja", (ean,)))

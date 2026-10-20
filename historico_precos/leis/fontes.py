@@ -132,3 +132,47 @@ def links_da_pagina(nav: Navegador, url: str, palavras: list[str], uf: str, nome
             continue
         pubs.append(Publicacao(fonte=nome, titulo=texto, url=urljoin(url, href), data="", texto=texto, uf=uf))
     return pubs
+
+
+# ---------- LexML (base de legislação do Senado; alternativa ao DOU, que bloqueia servidores fora do Brasil) ----------
+
+LEXML = "https://www.lexml.gov.br/busca/SRU"
+
+
+def buscar_lexml(nav: Navegador, consulta: str, desde: date, ate: date, maximo: int = 50) -> list[Publicacao]:
+    """Consulta SRU/CQL do LexML. Cada registro traz título, ementa, data e URN da norma."""
+    import xml.etree.ElementTree as ET
+
+    params = {"operation": "searchRetrieve", "version": "1.1", "query": consulta,
+              "maximumRecords": str(maximo), "startRecord": "1"}
+    texto = nav.get_texto(f"{LEXML}?{urlencode(params)}")
+    if not texto:
+        return []
+    try:
+        raiz = ET.fromstring(texto.encode("utf-8"))
+    except ET.ParseError:
+        return []
+
+    def campo(no, nome):
+        for el in no.iter():
+            if el.tag.rsplit("}", 1)[-1].lower() == nome and (el.text or "").strip():
+                return el.text.strip()
+        return ""
+
+    pubs = []
+    for registro in (el for el in raiz.iter() if el.tag.rsplit("}", 1)[-1] == "record"):
+        data = campo(registro, "date")[:10]
+        try:
+            dia = date.fromisoformat(data)
+        except ValueError:
+            continue
+        if not (desde <= dia <= ate):
+            continue
+        urn = campo(registro, "urn") or campo(registro, "identifier")
+        titulo = campo(registro, "title")
+        ementa = campo(registro, "description")
+        local = urn.split(":")[2] if urn.count(":") >= 2 else ""
+        uf = "DF" if "distrito.federal" in local else ("BR" if local in ("federal", "br") else local.upper()[:10] or "BR")
+        pubs.append(Publicacao(fonte="LexML", titulo=titulo, url=f"https://www.lexml.gov.br/urn/{urn}" if urn else LEXML,
+                               data=data, texto=f"{titulo}. {ementa}", uf=uf))
+    return pubs
