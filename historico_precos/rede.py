@@ -144,8 +144,11 @@ class Navegador:
             log.warning("falha ao baixar %s: %s", url, e)
             return None
 
+    # sites lentos ganham mais uma tentativa
+    TENTATIVAS_EXTRA = {"web.archive.org": 2}
+
     def get_texto(self, url: str, tentativas: int = 2) -> str | None:
-        return self._requisitar(url, None, tentativas)
+        return self._requisitar(url, None, tentativas + self.TENTATIVAS_EXTRA.get(urlsplit(url).netloc, 0))
 
     def post_texto(self, url: str, campos: dict, tentativas: int = 2) -> str | None:
         return self._requisitar(url, urlencode(campos, doseq=True).encode(), tentativas)
@@ -161,7 +164,8 @@ class Navegador:
             status, texto = self._abrir(url) if dados is None else self._abrir(url, dados)
             if 200 <= status < 300:  # a VTEX responde 206 (conteúdo parcial) em buscas paginadas
                 return texto
-            if status in (429, 502, 503, 504) and tentativa + 1 < tentativas:
+            # 0 = falha de rede (tempo esgotado, TLS): o Internet Archive costuma oscilar; vale tentar de novo
+            if status in (0, 429, 502, 503, 504) and tentativa + 1 < tentativas:
                 self._dormir(max(self.intervalo * 5, self._intervalo_do(host) * 2))
                 continue
             log.info("HTTP %s em %s", status, url)

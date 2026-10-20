@@ -25,5 +25,5 @@
     "FARINHA DE TRIGO",
     "MANTEIGA"
   ],
-  "_verificacao": "Em 20/10/2026, .../mapadeprecos/index.php respondeu 'esta página não existe'. Testando o endereço da pasta."
+  "_verificacao": "Em 20/10/2026 o painel novo (…/mapadeprecos/) é um mashup Qlik: os dados vêm do servidor Qlik qap.fazenda.df.gov.br por websocket, não por formulário. Coleta pendente: precisa falar com a API do Qlik do mesmo jeito que a página pública."
 }

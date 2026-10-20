@@ -19,6 +19,7 @@ from .agente import AgenteHistorico
 from .armazenamento import Banco
 from .causas import REFERENCIA
 from .causas.analise import AgenteCausas
+from .causas.series import normalizar
 from .comparativo import comparar
 from .fontes import openfoodfacts, vtex, wayback
 from .leis import fontes as fontes_leis
@@ -27,9 +28,11 @@ from .rede import Navegador
 
 log = logging.getLogger(__name__)
 
+# termos específicos de itens da cesta (a busca da loja por "leite" traz até chocolate)
 TERMOS_AMOSTRA = [
-    "café", "arroz", "feijão", "leite", "óleo de soja", "açúcar", "macarrão",
-    "farinha de trigo", "biscoito", "manteiga", "sabão em pó", "papel higiênico", "creme dental",
+    "café torrado e moído", "arroz tipo 1", "feijão carioca", "leite integral", "óleo de soja",
+    "açúcar refinado", "macarrão espaguete", "farinha de trigo", "biscoito cream cracker",
+    "manteiga com sal", "sabão em pó", "papel higiênico", "creme dental",
 ]
 
 # meta mínima de cada métrica para considerar a parte viável
@@ -141,14 +144,17 @@ class AgenteViabilidade:
             for loja in self.lojas:
                 if loja.get("tipo", "vtex") != "vtex":
                     continue
-                achados += vtex.buscar_texto(self.nav, loja, termo, por_termo)
+                achados += vtex.buscar_texto(self.nav, loja, termo, por_termo * 3)
                 if len(achados) >= por_termo:
                     break
             if len(achados) < por_termo:
                 achados += catalogar_arquivo(self.nav, self.banco, self.lojas, termo, por_termo - len(achados))
             if len(achados) < por_termo:
                 achados += openfoodfacts.buscar_texto(self.nav, termo, por_termo)
-            for ean, nome in achados[:por_termo]:
+            # mantém só itens cujo nome traz as palavras principais do termo
+            chave = [p for p in normalizar(termo).split() if len(p) > 3][:2]
+            relevantes = [(e, n) for e, n in achados if all(p in normalizar(n) for p in chave)] or achados
+            for ean, nome in relevantes[:por_termo]:
                 amostra.setdefault(ean, nome)
         return list(amostra.items())[:tamanho]
 
