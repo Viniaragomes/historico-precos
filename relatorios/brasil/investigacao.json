@@ -1,0 +1,279 @@
+{
+  "Diário Oficial da União": {
+    "robots": {
+      "status": 0,
+      "erro": "Remote end closed connection without response",
+      "conteudo": null,
+      "analise": null
+    },
+    "paginas": [
+      {
+        "url": "https://www.in.gov.br/",
+        "status": 0,
+        "erro": "Remote end closed connection without response",
+        "ms": 80
+      },
+      {
+        "url": "https://www.in.gov.br/consulta/-/buscar/dou?q=ICMS",
+        "status": 0,
+        "erro": "Remote end closed connection without response",
+        "ms": 95
+      }
+    ],
+    "scripts": []
+  },
+  "Confaz (convênios ICMS)": {
+    "robots": {
+      "status": 200,
+      "erro": null,
+      "conteudo": "Sitemap: /sitemap.xml.gz\n\n# Define access-restrictions for robots/spiders\n# http://www.robotstxt.org/wc/norobots.html\n\n\n\n# By default we allow robots to access all areas of our site \n# already accessible to anonymous users\n\nUser-agent: *\nDisallow:\n\n\n\n# Add Googlebot-specific syntax extension to exclude forms \n# that are repeated for each piece of content in the site \n# the wildcard is only supported by Googlebot\n# http://www.google.com/support/webmasters/bin/answer.py?answer=40367&ctx=sibling\n\nUser-Agent: Googlebot\nDisallow: /*sendto_form$\nDisallow: /*folder_factories$",
+      "analise": null
+    },
+    "paginas": [
+      {
+        "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios",
+        "status": 200,
+        "ms": 229,
+        "titulo": "Convênios ICMS — Conselho Nacional de Política Fazendária CONFAZ",
+        "servidor": "Zope/(2.13.22, python 2.7.3, linux2) ZServer/1.1",
+        "antirrobo": [],
+        "tecnologia": [],
+        "tem_json_ld": false,
+        "arquivos_de_dados": [],
+        "enderecos_de_dados": [
+          "www.confaz.fazenda.gov.br"
+        ],
+        "inicio_do_texto": "@import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%20Theme/resourceplone.formwidget.autocompletejquery.autocomplete-cachekey-8a1ada68d10450ed014103370f01e143.css); @import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%20Theme/resourcecalendar_stylescalendar-cachekey-ab87c47333464a5f1d4a22f5f4f9f144.css); @import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%2",
+        "dados_embutidos": {
+          "json_ld_tipos": [],
+          "produtos_json_ld": [],
+          "estados_embutidos": {},
+          "outros_json_em_script": [],
+          "meta_preco": []
+        }
+      }
+    ],
+    "scripts": [
+      {
+        "url": "https://www.confaz.fazenda.gov.br/portal_javascripts/Sunburst%20Theme/resourceplone.formwidget.contenttreecontenttree-cachekey-603a1188baae40042b721f8e8b4e0747.js",
+        "enderecos": [
+          "//gdata.youtube.com/feeds/api/videos/",
+          "http://vimeo.com/api/v2/video/"
+        ],
+        "qlik": null
+      },
+      {
+        "url": "https://www.confaz.fazenda.gov.br/portal_javascripts/Sunburst%20Theme/resourcecollective.pollsjsexcanvas.min-cachekey-e870876a3dd67e4b933124dd99ee8080.js",
+        "enderecos": [],
+        "qlik": null
+      },
+      {
+        "url": "https://www.confaz.fazenda.gov.br/portal_javascripts/Sunburst%20Theme/resourcecollective.pollsjspolls-cachekey-366e1958e07a22d6854f29e089e930df.js",
+        "enderecos": [],
+        "qlik": null
+      }
+    ]
+  },
+  "CEASA-DF (atacado de hortifrúti)": {
+    "robots": {
+      "status": 0,
+      "erro": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1144)>",
+      "conteudo": null,
+      "analise": null
+    },
+    "paginas": [
+      {
+        "url": "https://www.ceasa.df.gov.br/",
+        "status": 0,
+        "erro": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1144)>",
+        "ms": 154
+      }
+    ],
+    "scripts": []
+  },
+  "Conab Portal de Informações (downloads)": {
+    "robots": {
+      "status": 200,
+      "erro": null,
+      "conteudo": "User-agent: *\nAllow: /\n",
+      "analise": null
+    },
+    "paginas": [
+      {
+        "url": "https://portaldeinformacoes.conab.gov.br/download-arquivos.html",
+        "status": 403,
+        "ms": 43,
+        "titulo": "Conab - Erro no acesso",
+        "servidor": "Apache",
+        "antirrobo": [],
+        "tecnologia": [],
+        "tem_json_ld": false,
+        "arquivos_de_dados": [],
+        "enderecos_de_dados": [],
+        "inicio_do_texto": "Conab - Erro no acesso 403 - Acesso proibido O acesso a esta página não é permitido.",
+        "dados_embutidos": {
+          "json_ld_tipos": [],
+          "produtos_json_ld": [],
+          "estados_embutidos": {},
+          "outros_json_em_script": [],
+          "meta_preco": []
+        }
+      }
+    ],
+    "scripts": []
+  },
+  "IPE-DF (índices do DF)": {
+    "robots": {
+      "status": 200,
+      "erro": null,
+      "conteudo": "User-Agent: *\nDisallow:\nSitemap: https://ipe.df.gov.br/sitemap.xml",
+      "analise": null
+    },
+    "paginas": [
+      {
+        "url": "https://www.ipe.df.gov.br/",
+        "status": 200,
+        "ms": 721,
+        "titulo": "Instituto de Pesquisa e Estatística do Distrito Federal",
+        "servidor": null,
+        "antirrobo": [],
+        "tecnologia": [],
+        "tem_json_ld": false,
+        "arquivos_de_dados": [],
+        "enderecos_de_dados": [
+          "fonts.googleapis.com",
+          "www.dodf.df.gov.br",
+          "www.ipe.df.gov.br"
+        ],
+        "inicio_do_texto": "Instituto de Pesquisa e Estatística do Distrito Federal {\"imports\":{\"react-dom\":\"/o/frontend-js-react-web/__liferay__/exports/react-dom.js\",\"@clayui/breadcrumb\":\"/o/frontend-taglib-clay/__liferay__/exports/@clayui$breadcrumb.js\",\"@clayui/form\":\"/o/frontend-taglib-clay/__liferay__/exports/@clayui$form.js\",\"@clayui/popover\":\"/o/frontend-taglib-clay/__liferay__/exports/@clayui$popover.js\",\"@clayui/ch",
+        "dados_embutidos": {
+          "json_ld_tipos": [],
+          "produtos_json_ld": [],
+          "estados_embutidos": {},
+          "outros_json_em_script": [],
+          "meta_preco": []
+        }
+      }
+    ],
+    "scripts": [
+      {
+        "url": "https://www.ipe.df.gov.br/o/frontend-js-loader-modules-extender/loader.js?&mac=9WaMmhziBCkScHZwrrVcOR7VZF4=&browserId=other&languageId=pt_BR&minifierType=js",
+        "enderecos": [],
+        "qlik": null
+      },
+      {
+        "url": "https://www.ipe.df.gov.br/combo?browserId=other&minifierType=js&languageId=pt_BR&t=1781128509309&/o/frontend-js-aui-web/aui/aui/aui-min.js&/o/frontend-js-aui-web/liferay/modules.js&/o/frontend-js-aui-web/liferay/aui_sandbox.js&/o/frontend-js-aui-web/aui/attribute-base/attribute-base-min.js&/o/frontend-js-aui-web/aui/attribute-complex/attribute-complex-min.js&/o/frontend-js-aui-web/aui/attribute-core/attribute-core-min.js&/o/frontend-js-aui-web/aui/attribute-observable/attribute-observable-min.js&/o/frontend-js-aui-web/aui/attribute-extras/attribute-extras-min.js&/o/frontend-js-aui-web/aui/event-custom-base/event-custom-base-min.js&/o/frontend-js-aui-web/aui/event-custom-complex/event-custom-complex-min.js&/o/frontend-js-aui-web/aui/oop/oop-min.js&/o/frontend-js-aui-web/aui/aui-base-lang/aui-base-lang-min.js&/o/frontend-js-aui-web/liferay/dependency.js&/o/frontend-js-aui-web/liferay/util.js&/o/oauth2-provider-web/js/liferay.js&/o/frontend-js-web/liferay/dom_task_runner.js&/o/frontend-js-web/liferay/events.js&/o/frontend-js-web/liferay/lazy_load.js&/o/frontend-js-web/liferay/liferay.js&/o/frontend-js-web/liferay/global.bundle.js&/o/frontend-js-web/liferay/portlet.js&/o/frontend-js-web/liferay/workflow.js",
+        "enderecos": [
+          "/api/jsonws/invoke"
+        ],
+        "qlik": null
+      },
+      {
+        "url": "https://www.ipe.df.gov.br/combo?browserId=other&minifierType=js&languageId=pt_BR&t=1781128520696&/o/gdf-theme-contributor/js/gdf-contributor.js",
+        "enderecos": [],
+        "qlik": null
+      },
+      {
+        "url": "https://www.ipe.df.gov.br/o/gdf-secretarias-lf7_4-2026-theme/js/main.js?browserId=other&amp;minifierType=js&amp;languageId=pt_BR&amp;t=1790294790000",
+        "enderecos": [],
+        "qlik": null
+      }
+    ]
+  },
+  "Dados abertos do DF": {
+    "robots": {
+      "status": 200,
+      "erro": null,
+      "conteudo": "User-Agent: *\nDisallow:\nSitemap: https://dados.df.gov.br:443/sitemap.xml",
+      "analise": null
+    },
+    "paginas": [
+      {
+        "url": "https://dados.df.gov.br/",
+        "status": 200,
+        "ms": 430,
+        "titulo": "Início - Portal de Dados Abertos - GDF",
+        "servidor": null,
+        "antirrobo": [],
+        "tecnologia": [],
+        "tem_json_ld": false,
+        "arquivos_de_dados": [],
+        "enderecos_de_dados": [
+          "dados.df.gov.br"
+        ],
+        "inicio_do_texto": "Início - Portal de Dados Abertos - GDF {\"imports\":{\"react-dom\":\"/o/frontend-js-react-web/__liferay__/exports/react-dom.js\",\"@clayui/breadcrumb\":\"/o/frontend-taglib-clay/__liferay__/exports/@clayui$breadcrumb.js\",\"@clayui/form\":\"/o/frontend-taglib-clay/__liferay__/exports/@clayui$form.js\",\"@clayui/popover\":\"/o/frontend-taglib-clay/__liferay__/exports/@clayui$popover.js\",\"@clayui/charts\":\"/o/fronten",
+        "dados_embutidos": {
+          "json_ld_tipos": [],
+          "produtos_json_ld": [],
+          "estados_embutidos": {},
+          "outros_json_em_script": [],
+          "meta_preco": []
+        }
+      },
+      {
+        "url": "https://dados.df.gov.br/api/3/action/package_search?q=ceasa&rows=20",
+        "status": 404,
+        "ms": 661,
+        "titulo": "",
+        "servidor": null,
+        "antirrobo": [],
+        "tecnologia": [],
+        "tem_json_ld": false,
+        "arquivos_de_dados": [],
+        "enderecos_de_dados": [],
+        "inicio_do_texto": "",
+        "dados_embutidos": {
+          "json_ld_tipos": [],
+          "produtos_json_ld": [],
+          "estados_embutidos": {},
+          "outros_json_em_script": [],
+          "meta_preco": []
+        }
+      },
+      {
+        "url": "https://dados.df.gov.br/api/3/action/package_search?q=pre%C3%A7os&rows=20",
+        "status": 404,
+        "ms": 228,
+        "titulo": "",
+        "servidor": null,
+        "antirrobo": [],
+        "tecnologia": [],
+        "tem_json_ld": false,
+        "arquivos_de_dados": [],
+        "enderecos_de_dados": [],
+        "inicio_do_texto": "",
+        "dados_embutidos": {
+          "json_ld_tipos": [],
+          "produtos_json_ld": [],
+          "estados_embutidos": {},
+          "outros_json_em_script": [],
+          "meta_preco": []
+        }
+      }
+    ],
+    "scripts": [
+      {
+        "url": "https://dados.df.gov.br/o/frontend-js-loader-modules-extender/loader.js?&mac=9WaMmhziBCkScHZwrrVcOR7VZF4=&browserId=other&languageId=pt_BR&minifierType=js",
+        "enderecos": [],
+        "qlik": null
+      },
+      {
+        "url": "https://dados.df.gov.br/combo?browserId=other&minifierType=js&languageId=pt_BR&t=1743048005394&/o/frontend-js-aui-web/aui/aui/aui-min.js&/o/frontend-js-aui-web/liferay/modules.js&/o/frontend-js-aui-web/liferay/aui_sandbox.js&/o/frontend-js-aui-web/aui/attribute-base/attribute-base-min.js&/o/frontend-js-aui-web/aui/attribute-complex/attribute-complex-min.js&/o/frontend-js-aui-web/aui/attribute-core/attribute-core-min.js&/o/frontend-js-aui-web/aui/attribute-observable/attribute-observable-min.js&/o/frontend-js-aui-web/aui/attribute-extras/attribute-extras-min.js&/o/frontend-js-aui-web/aui/event-custom-base/event-custom-base-min.js&/o/frontend-js-aui-web/aui/event-custom-complex/event-custom-complex-min.js&/o/frontend-js-aui-web/aui/oop/oop-min.js&/o/frontend-js-aui-web/aui/aui-base-lang/aui-base-lang-min.js&/o/frontend-js-aui-web/liferay/dependency.js&/o/frontend-js-aui-web/liferay/util.js&/o/oauth2-provider-web/js/liferay.js&/o/frontend-js-web/liferay/dom_task_runner.js&/o/frontend-js-web/liferay/events.js&/o/frontend-js-web/liferay/lazy_load.js&/o/frontend-js-web/liferay/liferay.js&/o/frontend-js-web/liferay/global.bundle.js&/o/frontend-js-web/liferay/portlet.js&/o/frontend-js-web/liferay/workflow.js",
+        "enderecos": [
+          "/api/jsonws/invoke"
+        ],
+        "qlik": null
+      },
+      {
+        "url": "https://dados.df.gov.br/o/contadores/js/main.CSQAnIYa.js?t=1790294978157",
+        "enderecos": [],
+        "qlik": null
+      },
+      {
+        "url": "https://dados.df.gov.br/o/mais-populares/js/main.BAEIoo2U.js?t=1790294978262",
+        "enderecos": [],
+        "qlik": null
+      }
+    ]
+  }
+}
