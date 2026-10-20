@@ -10,7 +10,7 @@
       {
         "url": "https://mercado.carrefour.com.br/",
         "status": 200,
-        "ms": 90,
+        "ms": 249,
         "titulo": "Mercado Carrefour | Ofertas de Supermercado Delivery",
         "servidor": "cloudflare",
         "antirrobo": [
@@ -39,7 +39,7 @@
       {
         "url": "https://mercado.carrefour.com.br/api/catalog_system/pub/products/search?_from=0&_to=0",
         "status": 503,
-        "ms": 68,
+        "ms": 257,
         "titulo": null,
         "servidor": "cloudflare",
         "antirrobo": [
@@ -166,7 +166,7 @@
       "analise": {
         "url": "https://www.carrefour.com.br/robots.txt",
         "status": 403,
-        "ms": 200,
+        "ms": 121,
         "titulo": "Acesso Bloqueado",
         "servidor": "cloudflare",
         "antirrobo": [
@@ -199,7 +199,7 @@
       {
         "url": "https://www.paodeacucar.com/",
         "status": 200,
-        "ms": 882,
+        "ms": 356,
         "titulo": "Pão de Açúcar | Supermercado Online",
         "servidor": null,
         "antirrobo": [],
@@ -250,7 +250,7 @@
         "qlik": null
       },
       {
-        "url": "https://www.paodeacucar.com/_next/static/chunks/pages/_app-3588773964f7bad2.js",
+        "url": "https://www.paodeacucar.com/_next/static/chunks/pages/_app-dc82e18055b49ebc.js",
         "enderecos": [
           "/Product_page",
           "/bestPrices",
@@ -313,7 +313,7 @@
       "analise": {
         "url": "https://www.comper.com.br/robots.txt",
         "status": 403,
-        "ms": 171,
+        "ms": 261,
         "titulo": "Just a moment...",
         "servidor": "cloudflare",
         "antirrobo": [
@@ -347,13 +347,13 @@
         "url": "https://www.in.gov.br/",
         "status": 0,
         "erro": "Remote end closed connection without response",
-        "ms": 103
+        "ms": 199
       },
       {
         "url": "https://www.in.gov.br/consulta/-/buscar/dou?q=ICMS",
         "status": 0,
         "erro": "Remote end closed connection without response",
-        "ms": 91
+        "ms": 101
       }
     ],
     "scripts": []
@@ -369,7 +369,7 @@
       {
         "url": "https://www.lexml.gov.br/sru?operation=searchRetrieve&version=1.1&query=urn%3D%22lei%22%20and%20description%3Dicms&maximumRecords=3",
         "status": 404,
-        "ms": 941,
+        "ms": 1097,
         "titulo": "HTTP Status 404 – Not Found",
         "servidor": "nginx",
         "antirrobo": [
@@ -405,7 +405,7 @@
         "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios",
         "status": 0,
         "erro": "<urlopen error timed out>",
-        "ms": 45163
+        "ms": 45048
       }
     ],
     "scripts": []
@@ -421,7 +421,7 @@
       {
         "url": "https://paineis.fazenda.df.gov.br/",
         "status": 200,
-        "ms": 551,
+        "ms": 645,
         "titulo": "Secretaria de Economia do Distrito Federal",
         "servidor": "Apache/2.4.39 (Win64) OpenSSL/1.1.1b PHP/7.3.5",
         "antirrobo": [],
@@ -441,7 +441,7 @@
       {
         "url": "https://paineis.fazenda.df.gov.br/mapadeprecos/",
         "status": 200,
-        "ms": 1119,
+        "ms": 641,
         "titulo": "Mapa de Preço",
         "servidor": "Apache/2.4.39 (Win64) OpenSSL/1.1.1b PHP/7.3.5",
         "antirrobo": [],
@@ -642,7 +642,7 @@
       {
         "url": "https://paineis.fazenda.df.gov.br/mapadeprecos/assets/js/app.js",
         "status": 200,
-        "ms": 1012,
+        "ms": 1560,
         "titulo": null,
         "servidor": "Apache/2.4.39 (Win64) OpenSSL/1.1.1b PHP/7.3.5",
         "antirrobo": [],
@@ -814,7 +814,7 @@
       "analise": {
         "url": "https://qap.fazenda.df.gov.br/robots.txt",
         "status": 404,
-        "ms": 832,
+        "ms": 975,
         "titulo": "404 - The requested resource cannot be found. - Qlik Sense",
         "servidor": null,
         "antirrobo": [],
@@ -831,7 +831,7 @@
       {
         "url": "https://qap.fazenda.df.gov.br/paineis/resources/assets/external/requirejs/require.js",
         "status": 200,
-        "ms": 865,
+        "ms": 1214,
         "titulo": null,
         "servidor": "Microsoft-HTTPAPI/2.0",
         "antirrobo": [],
@@ -865,7 +865,7 @@
       {
         "url": "https://www.receita.fazenda.df.gov.br/",
         "status": 200,
-        "ms": 2107,
+        "ms": 2188,
         "titulo": "Portal da Receita DF ? IPVA, IPTU e Serviços Tributários | SEEC",
         "servidor": "Microsoft-IIS/8.5",
         "antirrobo": [],
@@ -923,7 +923,7 @@
       {
         "url": "https://www.cepea.org.br/br/indicador/cafe.aspx",
         "status": 200,
-        "ms": 75,
+        "ms": 263,
         "titulo": "Café - Centro de Estudos Avançados em Economia Aplicada - CEPEA-Esalq/USP",
         "servidor": "cloudflare",
         "antirrobo": [
@@ -947,7 +947,7 @@
       {
         "url": "https://www.cepea.org.br/br/indicador/boi-gordo.aspx",
         "status": 200,
-        "ms": 58,
+        "ms": 280,
         "titulo": "Boi gordo - Centro de Estudos Avançados em Economia Aplicada - CEPEA-Esalq/USP",
         "servidor": "cloudflare",
         "antirrobo": [
@@ -971,7 +971,7 @@
       {
         "url": "https://www.cepea.org.br/br/indicador/arroz.aspx",
         "status": 200,
-        "ms": 235,
+        "ms": 278,
         "titulo": "Arroz - Centro de Estudos Avançados em Economia Aplicada - CEPEA-Esalq/USP",
         "servidor": "cloudflare",
         "antirrobo": [
@@ -1028,7 +1028,7 @@
         "url": "https://www.ceasa.df.gov.br/",
         "status": 0,
         "erro": "<urlopen error _ssl.c:993: The handshake operation timed out>",
-        "ms": 45309
+        "ms": 45358
       }
     ],
     "scripts": []
@@ -1045,7 +1045,7 @@
         "url": "https://prohort.conab.gov.br/",
         "status": 0,
         "erro": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'prohort.conab.gov.br'. (_ssl.c:1010)>",
-        "ms": 497
+        "ms": 614
       }
     ],
     "scripts": []
@@ -1061,7 +1061,7 @@
       {
         "url": "https://portaldeinformacoes.conab.gov.br/download-arquivos.html",
         "status": 403,
-        "ms": 650,
+        "ms": 773,
         "titulo": "Conab - Erro no acesso",
         "servidor": "Apache",
         "antirrobo": [],
@@ -1092,7 +1092,7 @@
       {
         "url": "https://www.gov.br/anp/pt-br/assuntos/precos-e-defesa-da-concorrencia/precos/levantamento-de-precos-de-combustiveis-ultimas-semanas-pesquisadas",
         "status": 200,
-        "ms": 701,
+        "ms": 817,
         "titulo": "Levantamento de Preços de Combustíveis (últimas semanas pesquisadas) — Agência Nacional do Petróleo, Gás Natural e Bioco",
         "servidor": "Zope/(2.13.28, python 2.7.16, linux2) ZServer/1.1",
         "antirrobo": [],
@@ -1179,7 +1179,7 @@
         "url": "https://www.ipe.df.gov.br/",
         "status": 0,
         "erro": "<urlopen error _ssl.c:993: The handshake operation timed out>",
-        "ms": 45479
+        "ms": 47964
       }
     ],
     "scripts": []

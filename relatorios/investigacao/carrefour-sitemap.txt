@@ -1,0 +1,8 @@
+Carrefour Mercado (site) · cafe: 1031 página(s) novas no sitemap, 15 lida(s), 15 com GTIN, 7 preço(s) novo(s)
+7896005800362|Carrefour Mercado (site)|14.99|2026-10-20|Café em Pó a Vácuo Tradicional 3 Corações 250g|https://mercado.carrefour.com.br/cafe-em-po-a-vacuo-tradicional-3-coracoes-250g-5003660/p
+7896089013849|Carrefour Mercado (site)|29.88|2026-10-20|Café Torrado e Moído Pilão 252° Graus Vácuo 500g|https://mercado.carrefour.com.br/cafe-torrado-e-moido-pilao-252-graus-vacuo-500-g-5741467/p
+7891000243954|Carrefour Mercado (site)|27.9|2026-10-20|Café em Cápsula NESCAFÉ DOLCE GUSTO Café Au Lait 10 Cápsulas|https://mercado.carrefour.com.br/cafe-em-capsula-nescafe-dolce-gusto-cafe-au-lait-10-capsulas-5538068/p
+7891000284155|Carrefour Mercado (site)|38.34|2026-10-20|Café Solúvel Nescafé Matinal 160g|https://mercado.carrefour.com.br/cafe-soluvel-nescafe-matinal-160g-5752639/p
+7891000283745|Carrefour Mercado (site)|19.09|2026-10-20|Café Torrado e Moído Nescafé Gold Intenso 250g|https://mercado.carrefour.com.br/cafe-torrado-e-moido-nescafe-gold-intenso-250g-5752698/p
+7891000284230|Carrefour Mercado (site)|38.4|2026-10-20|Café Solúvel Nescafé Tradição 160g|https://mercado.carrefour.com.br/cafe-soluvel-nescafe-tradicao-160g-5752671/p
+7891000283707|Carrefour Mercado (site)|19.09|2026-10-20|Café Torrado e Moído NESCAFÉ Gold Suave 250g|https://mercado.carrefour.com.br/cafe-torrado-e-moido-nescafe-gold-suave-250g-5761301/p
