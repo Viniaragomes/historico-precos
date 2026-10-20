@@ -82,14 +82,14 @@ jobs:
       - name: Gerar os dados do app
         run: python -m historico_precos exportar --saida site/dados
 
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: site
-
       - name: CEASA-DF, preço no atacado (R$/kg do dia)
         continue-on-error: true
         timeout-minutes: 20
         run: python -m historico_precos ceasa-df --exportar site/dados/ceasa-df.json | tail -30
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
 
       - name: Guardar o banco no ramo "dados"
         run: |
