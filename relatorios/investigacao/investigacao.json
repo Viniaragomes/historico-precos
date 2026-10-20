@@ -1,0 +1,249 @@
+{
+  "Carrefour Mercado": {
+    "robots": {
+      "status": 200,
+      "erro": null,
+      "conteudo": "User-agent: *\r\nAllow: /\r\nDisallow: /account/*\r\nDisallow: /minha-conta/*\r\nDisallow: /login*\r\nDisallow: /checkout/*\r\nDisallow: *sort=*\r\nDisallow:  /secure.mercado.carrefour.com.br/\r\nDisallow:  /secure.mercado.carrefour.com.br/*\r\n\r\nSitemap: https://mercado.carrefour.com.br/sitemap.xml\r\nHost: https://mercado.carrefour.com.br",
+      "analise": null
+    },
+    "paginas": [
+      {
+        "url": "https://mercado.carrefour.com.br/",
+        "status": 200,
+        "ms": 64,
+        "titulo": "Mercado Carrefour | Ofertas de Supermercado Delivery",
+        "servidor": "cloudflare",
+        "antirrobo": [
+          "cloudflare"
+        ],
+        "tecnologia": [
+          "vtex"
+        ],
+        "tem_json_ld": false,
+        "enderecos_de_dados": [
+          "api.whatsapp.com",
+          "carrefourbrfood.vtexassets.com",
+          "mercado.carrefour.com.br",
+          "statics.carrefour.com.br"
+        ],
+        "inicio_do_texto": "Mercado Carrefour | Ofertas de Supermercado Delivery (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://mercado.carrefour.com.br/sgtm/food-path/?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-5443NHD"
+      },
+      {
+        "url": "https://mercado.carrefour.com.br/api/catalog_system/pub/products/search?_from=0&_to=0",
+        "status": 503,
+        "ms": 90,
+        "titulo": null,
+        "servidor": "cloudflare",
+        "antirrobo": [
+          "cloudflare"
+        ],
+        "tecnologia": [],
+        "tem_json_ld": false,
+        "enderecos_de_dados": [],
+        "inicio_do_texto": ""
+      }
+    ]
+  },
+  "Carrefour (loja geral)": {
+    "robots": {
+      "status": 403,
+      "erro": null,
+      "conteudo": null,
+      "analise": {
+        "url": "https://www.carrefour.com.br/robots.txt",
+        "status": 403,
+        "ms": 160,
+        "titulo": "Acesso Bloqueado",
+        "servidor": "cloudflare",
+        "antirrobo": [
+          "cloudflare"
+        ],
+        "tecnologia": [],
+        "tem_json_ld": false,
+        "enderecos_de_dados": [],
+        "inicio_do_texto": "Acesso Bloqueado * { margin: 0; padding: 0; box-sizing: border-box; } body { margin: 0; background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%); color: #333333; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; text-align: center; flex-direction: column; padding: 20px; } .container { background: #ffff"
+      }
+    },
+    "paginas": [
+      {
+        "url": "https://www.carrefour.com.br/",
+        "status": null,
+        "nota": "robots.txt não permite: não acessado"
+      }
+    ]
+  },
+  "Pão de Açúcar": {
+    "robots": {
+      "status": 200,
+      "erro": null,
+      "conteudo": "User-Agent: *\nAllow: /user/register\nDisallow: /checkout\nDisallow: /busca\nDisallow: /user/\nDisallow: /modal/\nDisallow: /meu-desconto\nDisallow: /meus-favoritos\nDisallow: /user-info/\n\n",
+      "analise": null
+    },
+    "paginas": [
+      {
+        "url": "https://www.paodeacucar.com/",
+        "status": 200,
+        "ms": 1154,
+        "titulo": "Pão de Açúcar | Supermercado Online",
+        "servidor": null,
+        "antirrobo": [],
+        "tecnologia": [
+          "next.js"
+        ],
+        "tem_json_ld": false,
+        "enderecos_de_dados": [],
+        "inicio_do_texto": "Pão de Açúcar | Supermercado Online @font-face { font-family: openSans; font-style: normal; font-display: swap; src: local(\"Open Sans\"), local(\"OpenSans\"), url(https://static.gpa.digital/fonts/OpenSans-Regular.woff2) format(\"woff2\"), url(https://static.gpa.digital/fonts/OpenSans-Regular.woff) format(\"woff\"), url(https://static.gpa.digital/fonts/OpenSans-Regular.ttf) format(\"ttf\"), url(https://stat"
+      },
+      {
+        "url": "https://www.paodeacucar.com/busca?terms=cafe",
+        "status": null,
+        "nota": "robots.txt não permite: não acessado"
+      }
+    ]
+  },
+  "Comper": {
+    "robots": {
+      "status": 403,
+      "erro": null,
+      "conteudo": null,
+      "analise": {
+        "url": "https://www.comper.com.br/robots.txt",
+        "status": 403,
+        "ms": 153,
+        "titulo": "Just a moment...",
+        "servidor": "cloudflare",
+        "antirrobo": [
+          "cloudflare"
+        ],
+        "tecnologia": [],
+        "tem_json_ld": false,
+        "enderecos_de_dados": [],
+        "inicio_do_texto": "Just a moment... *{box-sizing:border-box;margin:0;padding:0}html{line-height:1.15;-webkit-text-size-adjust:100%;color:#313131;font-family:system-ui,-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,\"Noto Sans\",sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\",\"Noto Color Emoji\"}body{display:flex;flex-direction:column;height:100vh;min-height:100vh}.main-conte"
+      }
+    },
+    "paginas": [
+      {
+        "url": "https://www.comper.com.br/",
+        "status": null,
+        "nota": "robots.txt não permite: não acessado"
+      }
+    ]
+  },
+  "Diário Oficial da União": {
+    "robots": {
+      "status": 0,
+      "erro": "Remote end closed connection without response",
+      "conteudo": null,
+      "analise": null
+    },
+    "paginas": [
+      {
+        "url": "https://www.in.gov.br/",
+        "status": 0,
+        "erro": "Remote end closed connection without response",
+        "ms": 87
+      },
+      {
+        "url": "https://www.in.gov.br/consulta/-/buscar/dou?q=ICMS",
+        "status": 0,
+        "erro": "Remote end closed connection without response",
+        "ms": 294
+      }
+    ]
+  },
+  "LexML (leis, Senado)": {
+    "robots": {
+      "status": 200,
+      "erro": null,
+      "conteudo": "User-Agent: *\nAllow: /*******************.js\nAllow: /*******************.css\nAllow: /*******************.jpg\nAllow: /*******************.ico\nAllow: /*******************.png\nAllow: /*******************.txt\nDisallow: /busca/\nDisallow: /doc/\nDisallow: /linker/\nAllow: /urn\nAllow: /sru\nCrawl-delay: 5\n \n# OpenAI SearchBot – allow but slow down more\nUser-agent: OAI-SearchBot\nAllow: /urn\nAllow: /sru\nCrawl-delay: 10\n \n# Python Requests – block completely (almost never respects robots.txt, but good to declare)\nUser-agent: Python-Requests\nDisallow: /\nAllow: /urn\nAllow: /sru\nCrawl-delay: 5\n",
+      "analise": null
+    },
+    "paginas": [
+      {
+        "url": "https://www.lexml.gov.br/busca/SRU?operation=searchRetrieve&version=1.1&query=urn%3D%22lei%22%20and%20description%3Dicms&maximumRecords=3",
+        "status": null,
+        "nota": "robots.txt não permite: não acessado"
+      }
+    ]
+  },
+  "Confaz (convênios ICMS)": {
+    "robots": {
+      "status": 0,
+      "erro": "<urlopen error timed out>",
+      "conteudo": null,
+      "analise": null
+    },
+    "paginas": [
+      {
+        "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios",
+        "status": 0,
+        "erro": "<urlopen error timed out>",
+        "ms": 30942
+      }
+    ]
+  },
+  "Painéis da Secretaria de Economia do DF": {
+    "robots": {
+      "status": 200,
+      "erro": null,
+      "conteudo": "\r\n<!DOCTYPE html>\r\n<!--[if IE]><![endif]-->\r\n<!--[if IE 7 ]>     <html lang=\"pt-BR\" class=\"ie7\">    <![endif]-->\r\n<!--[if IE 8 ]>     <html lang=\"pt-BR\" class=\"ie8\">    <![endif]-->\r\n<!--[if IE 9 ]>     <html lang=\"pt-BR\" class=\"ie9\">    <![endif]-->\r\n<!--[if IE 10 ]>    <html lang=\"pt-BR\" class=\"ie10\">   <![endif]-->\r\n<!--[if (gt IE 11)|!(IE)]><!--><html lang=\"pt-BR\"><!--<![endif]-->\r\n<head>\r\n\t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\">\r\n\t<title>Secretaria de Economia do Distrito Federal</title>\r\n\t<meta charset=\"utf-8\">\r\n\t<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\n\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no\">\r\n    <link rel=\"icon\" href=\"layout/img/favicon.png\" type=\"image/x-icon\" />\r\n  <!-- CSS -->\r\n  <link rel=\"stylesheet\" type=\"text/css\" href=\"layout/css/bootstrap.min.css\">\r\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"layout/css/svg.css\">\r\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"layout/css/styleGDF.css\">\r\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"layout/css/style.css\">\r\n\t<script>\r\n\t    // if (window.location.protocol !== 'https:') {\r\n\t    //     window.location.href = 'https://' + window.location.host + window.location.pathname;\r\n\t    // }\r\n\t</script>\r\n</head>\r\n<body>\r\n<!-- MENU PARA DISPOSITIVO MÓVEL-->\r\n        <div class=\"topo-titulo-site\">\r\n            <div class=\"container-fluid\" style=\"height:6.5vw !important\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-md-10 col-lg-10 col-sm-10 ancoras\">\r\n                           <a href=\"https://receita.fazenda.df.gov.br/\"><img style=\"width: 4vw !important; margin-right: 30px\" align=\"left\" src=\"./cadastrofiscal/img/Brasão.png\"></a>\r\n                            <span class=\"Portal\" style=\"text-align: left;margin-top: 25px\"> SECRETARIA DE ESTADO DE ECONOMIA DO<b>DISTRITO FEDERAL</b></span>\r\n\r\n                    </div>\r\n                    <div class=\"col-md-2 col-lg-2 col-sm-2 ancoras\">\r\n                            <span class=\"Portal\" style=\"position:relative; float: right; margin-top: 45px;\"><b>SUREC</b></span>\r\n                    </div>\r\n\r\n                </div>\r\n            </div>\r\n\r\n            <!-- PARTE DO TOPO QUE APRESENTA O MENU -->\r\n            <div class=\"menu-principal\">\r\n                <!-- <div class=\"container\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-12 text-left\" style=\"margin-top:-25px\">\r\n                            <header id=\"masthead\" class=\"site-header\" role=\"banner\">\r\n                                <div class=\"header-main\">\r\n                                    <nav id=\"primary-navigation\" class=\"site-navigation primary-navigation\" role=\"navigation\" >\r\n                                        <button class=\"menu-toggle\">Primary Menu</button>\r\n                                        <div class=\"menu-barra-principal-container\">\r\n                                          <",
+      "analise": null
+    },
+    "paginas": [
+      {
+        "url": "https://paineis.fazenda.df.gov.br/",
+        "status": 200,
+        "ms": 791,
+        "titulo": "Secretaria de Economia do Distrito Federal",
+        "servidor": "Apache/2.4.39 (Win64) OpenSSL/1.1.1b PHP/7.3.5",
+        "antirrobo": [],
+        "tecnologia": [],
+        "tem_json_ld": false,
+        "enderecos_de_dados": [],
+        "inicio_do_texto": "Secretaria de Economia do Distrito Federal // if (window.location.protocol !== 'https:') { // window.location.href = 'https://' + window.location.host + window.location.pathname; // } SECRETARIA DE ESTADO DE ECONOMIA DO DISTRITO FEDERAL SUREC Primary Menu Início Institucional --> Titulo do novo painel Titulo do novo painel Titulo do novo painel Previous Next --> SERVIÇOS ON-LINE AGENCIANET ATENDIM"
+      },
+      {
+        "url": "https://paineis.fazenda.df.gov.br/mapadeprecos/",
+        "status": 200,
+        "ms": 2670,
+        "titulo": "Mapa de Preço",
+        "servidor": "Apache/2.4.39 (Win64) OpenSSL/1.1.1b PHP/7.3.5",
+        "antirrobo": [],
+        "tecnologia": [
+          "qlik"
+        ],
+        "tem_json_ld": false,
+        "enderecos_de_dados": [
+          "fonts.googleapis.com"
+        ],
+        "inicio_do_texto": "Mapa de Preço Inicio Mapa de Preços Detalhes NCM Filtros Disponíveis Limpar Última atualização: SECRETARIA DE ESTADO DE ECONOMIA DO DISTRITO FEDERAL Filtros disponíveis Limpar SUREC 0 --> Filtros Esse painel tem por objetivo apresentar as informações de preços de produtos comercializados no Distrito Federal. São apresentados dados de NF-e's emitidas no DF nos últimos 3 meses. As descrições de cada"
+      }
+    ]
+  },
+  "Receita do DF": {
+    "robots": {
+      "status": 200,
+      "erro": null,
+      "conteudo": "User-agent: *\r\nAllow: /\r\n\r\nSitemap: https://www.receita.fazenda.df.gov.br/sitemap.xml\r\n",
+      "analise": null
+    },
+    "paginas": [
+      {
+        "url": "https://www.receita.fazenda.df.gov.br/",
+        "status": 200,
+        "ms": 1916,
+        "titulo": "Portal da Receita DF ? IPVA, IPTU e Serviços Tributários | SEEC",
+        "servidor": "Microsoft-IIS/8.5",
+        "antirrobo": [],
+        "tecnologia": [],
+        "tem_json_ld": false,
+        "enderecos_de_dados": [
+          "dodf.df.gov.br",
+          "fonts.googleapis.com",
+          "www.receita.fazenda.df.gov.br"
+        ],
+        "inicio_do_texto": "var states = [ ' NF-e - Obter Informações', ' NFC-e - Obter Informações', ' CT-e - Obter Informações', ' NFC-e - Consultar e Efetuar Credenciamento para Emissão ou Descredenciamento', ' NFC-e - Gerar Código de Segurança do Contribuinte-CSC', ' CT-e OS - Obter informações', ' NF-e - Consultar e Efetuar Credenciamento para Emissão ou Descredenciamento', ' NFC-e - Consultar Documento Pela Chave de Ac"
+      }
+    ]
+  }
+}

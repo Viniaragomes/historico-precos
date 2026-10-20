@@ -1,0 +1,1622 @@
+
+
+
+<script>
+    
+        var states = [
+        
+            '       NF-e - Obter Informações',
+        
+            '       NFC-e - Obter Informações',
+        
+            '      CT-e - Obter Informações',
+        
+            '      NFC-e - Consultar e Efetuar Credenciamento para Emissão ou Descredenciamento',
+        
+            '      NFC-e - Gerar Código de Segurança do Contribuinte-CSC',
+        
+            '     CT-e OS - Obter informações',
+        
+            '     NF-e - Consultar e Efetuar Credenciamento para Emissão ou Descredenciamento',
+        
+            '     NFC-e - Consultar Documento Pela Chave de Acesso ou por QR CODE',
+        
+            '    CT-e ou CT-e OS - Efetuar Credenciamento e Descredenciamento',
+        
+            '    NF-e - Consultar Documento pela Chave de Acesso',
+        
+            '    NFC-e - Efetuar Download de Arquivos XML ou Chaves de Acesso',
+        
+            '   CT-e  ou CT-e OS - Verificar Credenciamento para Emissão',
+        
+            '   NF-e - Efetuar Download de Arquivos XML ou Chaves de Acesso',
+        
+            '   NFC-e - Cancelar Documento Autorizado',
+        
+            '  CT-e ou CT-e OS - Consultar Documento Autorizado',
+        
+            '  Indicação de IPVA ou IPTU para Crédito do Programa Nota Legal - Efetuar',
+        
+            '  NF-e - Cancelar Documento Autorizado',
+        
+            '  NFS-e - Cancelar Documento Autorizado',
+        
+            '  Registrar Reclamação do Programa Nota Legal',
+        
+            '  Vincular Inscrição de IPTU do Imóvel ao Cadastro Fiscal do DF - PJ',
+        
+            '  Vinculação da Inscrição de IPTU do Imóvel ao Cadastro Fiscal do DF - Efetuar',
+        
+            ' 235',
+        
+            ' 245 ou 320-B do RICMS - Efetuar Comunicado',
+        
+            ' Alterar ou Excluir Produtos',
+        
+            ' Antecipação de Parcelas ou Quitação',
+        
+            ' Antecipação de Parcelas ou Quitação - PJ',
+        
+            ' Autarquia ou Fundação Pública - Solicitar Imunidade de IPTU',
+        
+            ' Autoescola - Solicitar Isenção de IPVA',
+        
+            ' Clubes de Serviços e Outras Entidades - Solicitar Isenção de IPTU/TLP',
+        
+            ' Consultar Débitos',
+        
+            ' Consultar Débitos - PJ',
+        
+            ' Consultar Reclamação do Programa Nota Legal',
+        
+            ' Contribuintes de outra UF - Solicitar Baixa de Inscrição no Cadastro Fiscal do DF',
+        
+            ' Contribuintes de outra UF - Solicitar Inscrição ou Alteração no Cadastro Fiscal do DF',
+        
+            ' Contribuintes do DF - Comunicar Lista de Empresas - Coworking',
+        
+            ' Contribuintes do DF - Efetuar Alteração no Cadastro Fiscal do DF',
+        
+            ' Contribuintes do DF - Efetuar Baixa de Inscrição no Cadastro Fiscal do DF',
+        
+            ' Contribuintes do DF - Efetuar Inscrição no Cadastro Fiscal do DF',
+        
+            ' CT-e ou CT-e OS - Cancelar Documento Autorizado',
+        
+            ' de Esteira ou Misto - Solicitar Isenção de IPVA',
+        
+            ' de Esteira ou Misto - Solicitar Isenção de IPVA - PJ',
+        
+            ' Direitos e Semoventes',
+        
+            ' Divórcio ou Dissolução de União Estável',
+        
+            ' EFD ICMS IPI (SPED) - Obter Informações',
+        
+            ' Efetuar Inscrição ou Alteração no Programa Nota Legal',
+        
+            ' Emitir Nota Fiscal Avulsa na Remessa para Conserto/Reparo ou Referente a Mudança',
+        
+            ' Emitir ou Validar Certidão de Débitos',
+        
+            ' Emitir ou Validar Certidão de Débitos - PJ',
+        
+            ' Entidade Sindical de Trabalhadores - Solicitar Imunidade de IPTU',
+        
+            ' Estados Estrangeiros e seus Funcionários Estrangeiros - Solicitar Isenção de IPTU/Isenção de TLP - PJ',
+        
+            ' Imóvel Ocupado por Templos Religiosos de Qualquer Culto - Solicitar Imunidade de IPTU e Isenção de TLP',
+        
+            ' Incluir',
+        
+            ' inclusive Dinheiro',
+        
+            ' inclusive Dinheiro - PJ',
+        
+            ' Indicação de Conta Bancária para Crédito do Programa Nota Legal - Efetuar',
+        
+            ' Indicação de Conta Bancária para Crédito do Programa Nota Legal - Estornar',
+        
+            ' ITBI',
+        
+            ' ITCD - Acessar Requerimento e/ou Formulário',
+        
+            ' Motofrete - Solicitar Isenção de IPVA',
+        
+            ' Motofrete - Solicitar Isenção de IPVA - PJ',
+        
+            ' NF-e - Consultar Inutilização de Numeração',
+        
+            ' NF-e - Obter Informações sobre Carta de Correção Eletrônica - CC-e',
+        
+            ' NFC-e - Consultar Endereços de Web Services',
+        
+            ' Organismos Internacionais e seus Funcionários Estrangeiros - Solicitar Isenção de ICMS',
+        
+            ' Organismos Internacionais e seus Funcionários Estrangeiros - Solicitar Isenção de ICMS - PJ',
+        
+            ' Organismos Internacionais e seus Funcionários Estrangeiros - Solicitar Restituição de ICMS',
+        
+            ' Painel do Atendimento Virtual da Receita do DF - Consultar',
+        
+            ' Parcelar Débitos',
+        
+            ' Parcelar Débitos - PJ',
+        
+            ' Pensionista ou Beneficiário de Assistência ao Idoso – Solicitar Isenção de IPTU/TLP',
+        
+            ' Reforma Tributária - Obter Informações',
+        
+            ' Restituição ou Compensação - Consultar',
+        
+            ' Restituição ou Compensação - Consultar - PJ',
+        
+            ' Solicitar Inclusão de Imóveis',
+        
+            ' Solicitar Inclusão de Imóveis - PJ',
+        
+            ' Taxista - Solicitar Isenção de IPVA',
+        
+            ' Taxista - Solicitar Isenção de IPVA - PJ',
+        
+            ' Templos Religiosos de Qualquer Culto - Solicitar Imunidade de IPTU e Isenção de TLP',
+        
+            ' TLP',
+        
+            'Acessar o aplicativo Economia DF ',
+        
+            'Acessar o Portal do Microempreendedor ou Consultar Inscrição de MEI',
+        
+            'Acessar Programa Nota Legal - Recuperar ou Alterar Senha e demais Dados Cadastrais',
+        
+            'Acessar Serviços do Portal Receita ',
+        
+            'Adesivo de Participação no Programa Nota Legal - Baixar Arquivo',
+        
+            'Agendar Atendimento Presencial',
+        
+            'Aposentado',
+        
+            'Apresentar Declaração Eletrônica de ITCD - Doação de Bens Móveis',
+        
+            'Apresentar Declaração Eletrônica de ITCD - Inventário - Excesso em Partilha',
+        
+            'Apresentar Declaração Eletrônica de ITCD - Inventário - Sucessão Legítima',
+        
+            'Apresentar Declaração Eletrônica de ITCD - Inventário - Sucessão Testamentária',
+        
+            'Apresentar Declaração Eletrônica de ITCD - Separação',
+        
+            'Arquivar Reclamação do Programa Nota Legal',
+        
+            'Arrematação ou Adjudicação de Imóvel - Emitir Guia de ITBI',
+        
+            'Arrematação ou Adjudicação de Imóvel - Emitir Guia de ITBI - PJ',
+        
+            'Artigo 320-A do RICMS - Solicitar Enquadramento no Regime de Apuração',
+        
+            'Artigo 320-A do RICMS - Solicitar Recadastramento no Regime de Apuração',
+        
+            'Artigo 320-D do RICMS - Solicitar Enquadramento no Regime de Apuração',
+        
+            'Artigo 320-V do RICMS - Solicitar Enquadramento no Regime de Apuração',
+        
+            'Artigo 320-X do RICMS - Efetuar Registro de Dados',
+        
+            'Artigos 214',
+        
+            'Ato Declaratório de Benefícios Fiscais',
+        
+            'Atualizar Certidão de Locadora',
+        
+            'Autarquia ou Fundação Pública - Solicitar Imunidade de IPVA',
+        
+            'Autarquia ou Fundação Pública - Solicitar Imunidade de ISS',
+        
+            'Autarquia ou Fundação Pública - Solicitar Imunidade de ITBI',
+        
+            'Autarquia ou Fundação Pública - Solicitar Imunidade de ITCD',
+        
+            'Auto de Infração do Programa Nota Legal - Consultar',
+        
+            'Auto de Infração ou Confissão Espontânea de Débitos - Solicitar Parcelamento',
+        
+            'Bancos Conveniados/Agentes Arrecadadores – Consultar Instituições Autorizadas',
+        
+            'Bancos Conveniados/Agentes Arrecadadores – Consultar Instituições Autorizadas - PJ',
+        
+            'Benefício Fiscal de ICMS - Acessar Requerimento e/ou Formulário',
+        
+            'Benefício Fiscal de IPVA - Acessar Requerimento e/ou Formulário',
+        
+            'Benefício Fiscal de ISS - Acessar Requerimento e/ou Formulário',
+        
+            'Benefícios Fiscais de IPTU',
+        
+            'Bens Imóveis ITBI e/ou ITCD - Acessar Requerimento e/ou Formulário',
+        
+            'Bilhetes de Sorteio do Programa Nota Legal - Consultar',
+        
+            'BP-e - Consultar ou Efetuar Credenciamento',
+        
+            'BP-e - Obter Informações',
+        
+            'Cadastro de Imóveis - Solicitar Alteração de Imóveis da CODHAB',
+        
+            'Cadastro de Imóveis - Solicitar Alteração de Imóveis da TERRACAP',
+        
+            'Cartão de Crédito - Parcelar Débitos',
+        
+            'Cartão de Crédito - Parcelar Débitos - PJ',
+        
+            'Cartórios - Atualizar Cadastro de Imóveis',
+        
+            'Cartórios - Baixar Programa para Validar e Entregar Declaração',
+        
+            'Cartórios - Comunicar Cancelamento de Guia de ITBI',
+        
+            'Cartórios - Comunicar Lavratura de Escritura Pública Conforme Resolução CNJ 695/2026',
+        
+            'Cartórios - Emitir DAR de Dívida Ativa',
+        
+            'Cartórios - Solicitar Emissão de Guia de ITBI para Imóveis em Regularização',
+        
+            'Cartórios - Solicitar Guia de ITCD em Inventário',
+        
+            'Certidão de Baixa de Inscrição no Cadastro Fiscal do DF - Emitir',
+        
+            'CIB - Cadastro Imobiliário Brasileiro - Consultar',
+        
+            'CIB - Cadastro Imobiliário Brasileiro - Consultar - PJ',
+        
+            'Clientes do Contador/Contabilista - Consultar',
+        
+            'Cláusula Sexta do Convênio 109/2024 - Efetuar Registro de Opção',
+        
+            'CNAE Fiscal - Consultar',
+        
+            'Cobrança GECOE - Cumprir Notificação',
+        
+            'Compra e Venda de Imóvel (com ou sem Alienação Fiduciária) ou Consolidação da Propriedade Fiduciária - Emitir Guia de ITBI',
+        
+            'Compra e Venda de Imóvel (com ou sem Alienação Fiduciária) ou Consolidação da Propriedade Fiduciária - Emitir Guia de ITBI - PJ',
+        
+            'Comprovante de Inscrição e Situação no Cadastro Fiscal do DF - Emitir',
+        
+            'Comunicado GEJUC - Solicitar Emissão de Guia de Pagamento',
+        
+            'Comunicar Aproveitamento de Crédito ou Compensação Previstos nos Artigos 54 ou 57 do RICMS',
+        
+            'Comunicar Recuperação ou Ressarcimento ICMS - IN nº 22/2016',
+        
+            'Comércio Eletrônico - EC 87/15 - Cumprir Notificação de Cobrança Especial',
+        
+            'Comércio Eletrônico - EC 87/15 - Obter Informações',
+        
+            'Concessão de Direito Real de Uso de Imóvel - Solicitar Emissão da Guia de ITBI',
+        
+            'Concessão de Direito Real de Uso de Imóvel - Solicitar Emissão da Guia de ITBI - PJ',
+        
+            'Consultar Agenda Tributária',
+        
+            'Consultar Agências e Telefones de Atendimento',
+        
+            'Consultar Agências e Telefones de Atendimento - PJ',
+        
+            'Consultar Autenticidade ou Imprimir Autorização para Aquisição de Veículo com Isenção de ICMS - PCD',
+        
+            'Consultar Calendário de Vencimentos de IPTU/TLP 2026',
+        
+            'Consultar Calendário de Vencimentos de IPTU/TLP 2026 - PJ',
+        
+            'Consultar Calendário de Vencimentos de IPVA - 2026',
+        
+            'Consultar Calendário de Vencimentos de IPVA - 2026 - PJ',
+        
+            'Consultar Classificação (Rating) da Dívida Ativa',
+        
+            'Consultar Classificação (Rating) da Dívida Ativa - PJ',
+        
+            'Consultar demais Endereços de Atendimento',
+        
+            'Consultar demais Endereços de Atendimento - PJ',
+        
+            'Consultar e Emitir Comprovante de Quitação da 1ª Cota de ITBI',
+        
+            'Consultar e Emitir Comprovante de Quitação da 1ª Cota de ITBI - PJ',
+        
+            'Consultar e Emitir DAR de Auto de Infração',
+        
+            'Consultar e Emitir DAR de Auto de Infração - PJ',
+        
+            'Consultar e Emitir DAR de Dívida Ativa',
+        
+            'Consultar e Emitir DAR de Dívida Ativa - PJ',
+        
+            'Consultar e Emitir DAR para Pagamento do Imposto de ISS Autônomo',
+        
+            'Consultar e Emitir Demonstrativo de Cálculo de ITBI',
+        
+            'Consultar e Emitir Demonstrativo de Cálculo de ITBI - PJ',
+        
+            'Consultar e Emitir Demonstrativo de Cálculo de ITCD',
+        
+            'Consultar e Emitir Demonstrativo de Cálculo de ITCD - PJ',
+        
+            'Consultar e Emitir Relatório da Dívida Ativa (Espelho da CDA)',
+        
+            'Consultar e Emitir Relatório da Dívida Ativa (Espelho da CDA) - PJ',
+        
+            'Consultar e Emitir Termo de Quitação de ITBI',
+        
+            'Consultar e Emitir Termo de Quitação de ITBI - PJ',
+        
+            'Consultar e Emitir Termo de Quitação de ITCD',
+        
+            'Consultar e Emitir Termo de Quitação de ITCD - PJ',
+        
+            'Consultar Inscrição no Cadastro Fiscal de Produtor Rural Pessoa Física',
+        
+            'Consultar Inscrição no Cadastro Fiscal de Profissional Autônomo',
+        
+            'Consultar Lançamento e Emitir DAR de Débitos Lançados por Órgãos Públicos do DF',
+        
+            'Consultar Lançamento e Emitir DAR de Débitos Lançados por Órgãos Públicos do DF - PJ',
+        
+            'Consultar Nota Fiscal Consumidor Eletrônica (NFC-e) pela Chave de Acesso ou pelo QR Code',
+        
+            'Consultar Nota Fiscal Eletrônica - NF-e - Chave de Acesso',
+        
+            'Consultar ou Imprimir Nota Fiscal Avulsa na Remessa para Conserto/Reparo ou Referente a Mudança',
+        
+            'Consultar Parcelamentos Ativos',
+        
+            'Consultar Parcelamentos Ativos - PJ',
+        
+            'Consultar Quadro Resumo de Reclamação do Programa Nota Legal',
+        
+            'Consultar Relação de Veículos',
+        
+            'Consultar Relação de Veículos - PJ',
+        
+            'Consultar Tabela de Multa Acessória',
+        
+            'Consumo do Programa Nota Legal - Consultar',
+        
+            'Contribuintes do DF - Regime ISS Unipessoal de Advocacia - Registrar Solicitação',
+        
+            'Contribuintes do DF - Regime ISS Uniprofissional - Registrar Solicitação',
+        
+            'Contribuintes do ICMS - SINTEGRA - Consultar Inscrição ou Situação Cadastral',
+        
+            'Contribuintes do ISS - Consultar a Inscrição ou a  Situação Cadastral',
+        
+            'Correio Eletrônico no Portal Agnet - Agenci@net - Consultar',
+        
+            'CTR - Cadastro de Templos Religiosos - IPTU - Efetuar Adesão',
+        
+            'CTR - Cadastro de Templos Religiosos - IPVA - Efetuar Adesão',
+        
+            'CTR - Cadastro de Templos Religiosos - ITBI - Efetuar Adesão',
+        
+            'CTR - Cadastro de Templos Religiosos - ITCD - Efetuar Adesão',
+        
+            'Cumprir Notificação ou Intimação de Cadastro de Imóvel',
+        
+            'Cumprir Notificação ou Intimação de Cadastro de Imóvel - PJ',
+        
+            'Declaração Eletrônica de Serviços - Demais Contribuintes - Obter Informações ',
+        
+            'Declaração Eletrônica de Serviços de Instituições Financeiras - DES-IF - Obter Informações',
+        
+            'Declaração GIA-ST - Consultar',
+        
+            'Decreto nº 34.063/2012 - Solicitar Enquadramento como Substituto Tributário',
+        
+            'Decreto nº 38.670/2019 - Solicitar Autorização para Regime de Apuração',
+        
+            'Decreto nº 39.753/2019 - Efetuar Comunicado de Contribuinte Enquadrado na Lei nº 5.005/2012',
+        
+            'Decreto nº 39.753/2019 - Efetuar Comunicado de Contribuinte Enquadrado no Artigo 320-D do RICMS',
+        
+            'Decreto nº 39.753/2019 - Solicitar Enquadramento no Regime de Apuração',
+        
+            'Decreto nº 40.036/2019 - Solicitar Fruição de Crédito Outorgado',
+        
+            'Decreto nº 45.287/2023 - Solicitar Fruição de Crédito Outorgado',
+        
+            'Demonstrativo de IR do Programa Nota Legal - Consultar',
+        
+            'Demonstrativo Sintético Rito Especial - Consultar Débitos e/ou Recolhimentos',
+        
+            'Desbloqueio de Crédito do Programa Nota Legal - Solicitar',
+        
+            'Desbloqueio de Prêmio do Programa Nota Legal - Solicitar',
+        
+            'Diferencial de Alíquota (DIFAL) do Comércio Eletrônico - Consultar Débitos',
+        
+            'Doação de Imóvel Rural - Solicitar Emissão de Guia de ITCD',
+        
+            'Doação de Imóvel Rural - Solicitar Emissão de Guia de ITCD - PJ',
+        
+            'Doação de Imóvel Urbano - Emitir Guia de ITCD',
+        
+            'Doação de Imóvel Urbano - Emitir Guia de ITCD - PJ',
+        
+            'Documentos Fiscais do Programa Nota Legal - Consultar',
+        
+            'Documentos Fiscais e Créditos do Programa Nota Legal - Consultar',
+        
+            'Domicílio Fiscal Eletrônico (DF-e ou DT-e) no Portal Agnet - Agenci@net - Renunciar',
+        
+            'EFD ICMS/IPI (SPED) - Consultar Consolidação',
+        
+            'EFD ICMS/IPI (SPED) - Imprimir Recibo de Processamento',
+        
+            'EFD ICMS/IPI - Solicitar Aceitação de Retificação',
+        
+            'Efetuar Comunicado Prévio de Alteração de Endereço ',
+        
+            'Efetuar Declaração Espontânea de Área Construída',
+        
+            'Efetuar Declaração Espontânea de Área Construída - PJ',
+        
+            'Efetuar Impugnação contra Auto de Infração de ICMS / ISS ou Recurso ao TARF',
+        
+            'Efetuar Impugnação do Lançamento de IPTU/TLP',
+        
+            'Efetuar Impugnação do Lançamento de IPTU/TLP - PJ',
+        
+            'Efetuar Impugnação do Lançamento de IPVA',
+        
+            'Efetuar Impugnação do Lançamento de IPVA - PJ',
+        
+            'Efetuar Impugnação do Lançamento de ITBI',
+        
+            'Efetuar Impugnação do Lançamento de ITBI - PJ',
+        
+            'Efetuar Impugnação do Lançamento de ITCD',
+        
+            'Efetuar Impugnação do Lançamento de ITCD - PJ',
+        
+            'Efetuar Inscrição ou Alteração no Cadastro Fiscal de Microempreendedor Individual - MEI',
+        
+            'Emitir Certidão de Baixa de Inscrição no Cadastro Fiscal de Microempreendedor Individual - MEI',
+        
+            'Emitir Certidão de Baixa de Inscrição no Cadastro Fiscal de Produtor Rural Pessoa Física',
+        
+            'Emitir Certidão de Baixa de Inscrição no Cadastro Fiscal de Profissional Autônomo',
+        
+            'Emitir DAR de Parcelamento',
+        
+            'Emitir DAR de Parcelamento - PJ',
+        
+            'Emitir DAR para Pagamento do Imposto de Produtor Rural Pessoa Física',
+        
+            'Emitir Documento de Arrecadação de ICMS ou ISS - DAR Avulso',
+        
+            'Emitir Documento de Arrecadação de ICMS ou ISS - DAR Avulso - PJ',
+        
+            'Emitir Nota Fiscal Avulsa de Artesão',
+        
+            'Emitir Nota Fiscal de Microempreendedor Individual - MEI',
+        
+            'Emitir Nota Fiscal de Profissional Autônomo',
+        
+            'Emitir ou Validar Certidão de Lançamento Tributário de IPTU',
+        
+            'Emitir ou Validar Certidão de Lançamento Tributário de IPTU - PJ',
+        
+            'Empresas de Telecomunicação - Informar Utilização de Crédito Presumido',
+        
+            'Encerrar Benefício Fiscal de IPVA',
+        
+            'Encerrar Benefício Fiscal de IPVA - PJ',
+        
+            'Encerrar Benefício Fiscal de IPVA de Locadora',
+        
+            'Enquadramento no Simples Nacional - Consultar',
+        
+            'Entidade Sindical de Trabalhadores - Solicitar Imunidade de IPVA',
+        
+            'Entidade Sindical de Trabalhadores - Solicitar Imunidade de ISS',
+        
+            'Entidade Sindical de Trabalhadores - Solicitar Imunidade de ITBI',
+        
+            'Entidade Sindical de Trabalhadores - Solicitar Imunidade de ITCD',
+        
+            'Esclarecimento de Normas - Formular Consulta Tributária Formal',
+        
+            'Estados Estrangeiros',
+        
+            'Estados Estrangeiros e seus Funcionários Estrangeiros - Solicitar Imunidade de ITBI',
+        
+            'Estados Estrangeiros e seus Funcionários Estrangeiros - Solicitar Imunidade de ITBI - PJ',
+        
+            'Estados Estrangeiros e seus Funcionários Estrangeiros - Solicitar Imunidade de ITCD',
+        
+            'Estados Estrangeiros e seus Funcionários Estrangeiros - Solicitar Imunidade de ITCD - PJ',
+        
+            'Estados Estrangeiros e seus Funcionários Estrangeiros - Solicitar Isenção de IPTU/Isenção de TLP',
+        
+            'Estados Estrangeiros e seus Funcionários Estrangeiros - Solicitar Isenção de IPVA',
+        
+            'Estados Estrangeiros e seus Funcionários Estrangeiros - Solicitar Isenção de IPVA - PJ',
+        
+            'Ex-Combatente ou Viúva de Ex-Combatente - Solicitar Isenção de IPTU',
+        
+            'Excluir Responsabilidade Contábil',
+        
+            'Extrato de Créditos do Programa Nota Legal - Consultar ou Imprimir',
+        
+            'Feirante Ambulante - Informações e Esclarecimentos',
+        
+            'Ficha Cadastral de Imóvel - Consultar ',
+        
+            'Ficha Cadastral de Imóvel - Consultar - PJ',
+        
+            'GEOPORTAL - Consultar Área Construída',
+        
+            'GEOPORTAL - Consultar Área Construída - PJ',
+        
+            'Guias de Recolhimento de ICMS/ISS/Fundos - Solicitar Correção',
+        
+            'Homologar Créditos de ICMS para Utilização na Transação Resolutiva de Litígios',
+        
+            'ICMS-ST sobre Estoque - Efetuar Declaração',
+        
+            'Impressão Conjunta de NF de Serviço de Telecomunicação e Comunicação - Solicitar Regime Especial',
+        
+            'Imprimir Cartão do Programa Nota Legal',
+        
+            'Imóveis com Alvará de Construção ou Carta de Habite-se - Solicitar Redução de Alíquota',
+        
+            'Imóveis com Alvará de Construção ou Carta de Habite-se - Solicitar Redução de Alíquota - PJ',
+        
+            'Imóveis Edificados como Comercial com Utilização Residencial - Solicitar Redução de Alíquota',
+        
+            'Imóveis Edificados como Comercial com Utilização Residencial - Solicitar Redução de Alíquota - PJ',
+        
+            'Imóvel Rural - Solicitar Emissão de Guia de ITBI',
+        
+            'Imóvel Rural - Solicitar Emissão de Guia de ITBI - PJ',
+        
+            'IN nº 16/2019 - Solicitar Restituição de ICMS-ST',
+        
+            'Incluir ou Alterar Cadastro de Pessoa Física',
+        
+            'Indicação de Conta Bancária para Prêmio do Programa Nota Legal - Consultar ou Efetuar',
+        
+            'Informações no Cadastro Fiscal do DF - Consultar',
+        
+            'Inscrição Centralizadora / Centralizada - Efetuar Registro de Opção',
+        
+            'Instituição de Assistência Social sem Fins Lucrativos - Solicitar Imunidade de IPTU',
+        
+            'Instituição de Assistência Social sem Fins Lucrativos - Solicitar Imunidade de IPVA',
+        
+            'Instituição de Assistência Social Sem Fins Lucrativos - Solicitar Imunidade de ISS',
+        
+            'Instituição de Assistência Social sem Fins Lucrativos - Solicitar Imunidade de ITBI',
+        
+            'Instituição de Assistência Social sem Fins Lucrativos - Solicitar Imunidade de ITCD',
+        
+            'Instituição de Educação sem Fins Lucrativos - Solicitar Imunidade de IPTU',
+        
+            'Instituição de Educação sem Fins Lucrativos - Solicitar Imunidade de IPVA',
+        
+            'Instituição de Educação sem Fins Lucrativos - Solicitar Imunidade de ISS',
+        
+            'Instituição de Educação sem Fins Lucrativos - Solicitar Imunidade de ITBI',
+        
+            'Instituição de Educação sem Fins Lucrativos - Solicitar Imunidade de ITCD',
+        
+            'IPTU/TLP - Consultar e Emitir DAR para Pagamento',
+        
+            'IPTU/TLP - Consultar e Emitir DAR para Pagamento - PJ',
+        
+            'IPTU/TLP - Consultar e Emitir DAR para Pagamento da Cota Parte de Débitos na Projeção ',
+        
+            'IPTU/TLP - Consultar e Emitir DAR para Pagamento da Cota Parte de Débitos na Projeção - PJ',
+        
+            'IPTU/TLP e IPVA – Efetuar Pagamento Direto no Banco sem Emissão de DAR',
+        
+            'IPTU/TLP e IPVA – Efetuar Pagamento Direto no Banco sem Emissão de DAR - PJ',
+        
+            'IPTU/TLP – Efetuar Pagamento Direto no Banco sem Emissão de DAR',
+        
+            'IPTU/TLP – Efetuar Pagamento Direto no Banco sem Emissão de DAR - PJ',
+        
+            'IPVA - Consultar e Emitir DAR para Pagamento',
+        
+            'IPVA - Consultar e Emitir DAR para Pagamento - PJ',
+        
+            'IPVA - Consultar Relatório de Pagamentos ou Financeiro',
+        
+            'IPVA - Consultar Relatório de Pagamentos ou Financeiro - PJ',
+        
+            'IPVA - Efetuar Pagamento Direto no Banco sem Emissão de DAR',
+        
+            'IPVA - Efetuar Pagamento Direto no Banco sem Emissão de DAR - PJ',
+        
+            'ITBI - Emitir Guia em Cotas',
+        
+            'ITBI - Emitir Guia em Cotas - PJ',
+        
+            'ITBI - Emitir Segunda Via',
+        
+            'ITBI - Emitir Segunda Via - PJ',
+        
+            'ITBI/ITCD - Solicitar Emissão de Guia de Imóveis da TERRACAP',
+        
+            'ITCD - Emitir Guia em Cotas',
+        
+            'ITCD - Emitir Guia em Cotas - PJ',
+        
+            'ITCD - Emitir Segunda Via',
+        
+            'ITCD - Emitir Segunda Via - PJ',
+        
+            'Legislação do Portal Agnet - Agenci@net - Obter Informações',
+        
+            'Legislação e Publicações - Consultar',
+        
+            'Lei nº 5.005/2012 - Solicitar Ingresso ou Exclusão no Regime de Apuração',
+        
+            'LFE - Livro Fiscal Eletrônico - Obter Informações',
+        
+            'Malha Fiscal - Acessar e Consultar',
+        
+            'Malha Fiscal - Regularizar Divergência de Data de Emissão de Documentos Fiscais Eletrônicos',
+        
+            'Manual ISS de Shows e Eventos - Obter Informações',
+        
+            'Manual Restituição de Tributos Indiretos - Obter Informações',
+        
+            'Manual Retenção de IR na Fonte por Órgãos do GDF - Obter Informações',
+        
+            'Manual Substituto/Responsável Tributário do ISS - Obter Informações',
+        
+            'MDF-e - Obter Informações',
+        
+            'Monitoramento de ICMS sobre combustíveis - Cumprir Notificação',
+        
+            'Monitoramento Regimes Especiais - Cumprir Notificação',
+        
+            'Na Hora - Obter Informações',
+        
+            'NAS - Número de Acompanhamento de Solicitação - Consultar',
+        
+            'NF-e - Obter Código de Benefício Fiscal (CBenef)',
+        
+            'NF3-e - Obter Informações',
+        
+            'NFC-e - Obter Código de Benefício Fiscal (CBenef)',
+        
+            'NFCom - Obter Informações',
+        
+            'Nota Fiscal de Serviços Eletrônica NFS-e - Obter Informações',
+        
+            'Nota Fiscal Fácil NFF - Obter Informações',
+        
+            'Não Habilitação ao Sorteio do Programa Nota Legal - Consultar ou Contestar',
+        
+            'Obter Informações de Nota Fiscal de Produtor Rural Pessoa Física',
+        
+            'Obter Informações e Esclarecimentos sobre Artesão',
+        
+            'Organismos Internacionais e seus Funcionários Estrangeiros - Solicitar Imunidade de IPTU',
+        
+            'Organismos Internacionais e seus Funcionários Estrangeiros - Solicitar Imunidade de IPTU - PJ',
+        
+            'Organismos Internacionais e seus Funcionários Estrangeiros - Solicitar Imunidade de ITBI',
+        
+            'Organismos Internacionais e seus Funcionários Estrangeiros - Solicitar Imunidade de ITBI - PJ',
+        
+            'Organismos Internacionais e seus Funcionários Estrangeiros - Solicitar Imunidade de ITCD',
+        
+            'Organismos Internacionais e seus Funcionários Estrangeiros - Solicitar Imunidade de ITCD - PJ',
+        
+            'Organismos Internacionais e seus Funcionários Estrangeiros - Solicitar Isenção de IPVA',
+        
+            'Organismos Internacionais e seus Funcionários Estrangeiros - Solicitar Isenção de IPVA - PJ',
+        
+            'Outras Transações de Imóveis - Solicitar Isenção de ITBI',
+        
+            'Outras Transações de Imóveis - Solicitar Isenção de ITBI - PJ',
+        
+            'Outras Transmissões de Propriedade de Imóvel - Emitir ou Solicitar Guia de ITBI',
+        
+            'Outras Transmissões de Propriedade de Imóvel - Emitir ou Solicitar Guia de ITBI - PJ',
+        
+            'Outros Regimes Especiais - Solicitar Concessão',
+        
+            'Painel da Receita Tributária do DF - Consultar',
+        
+            'Painel de Mapa de Preços do DF - Consultar',
+        
+            'Painel do Cadastro Fiscal do DF - Consultar',
+        
+            'Painel Eletrônico do Portal Agnet - Agenci@net - Consultar',
+        
+            'Paralisação Temporária de Atividades - Comunicar',
+        
+            'Parcelamento - Alterar Endereço de Correspondência',
+        
+            'Parcelamento - Alterar Endereço de Correspondência - PJ',
+        
+            'Parcelamento - Solicitar Extrato/Espelho',
+        
+            'Partido Político ou Fundação Instituída por Partido Político - Solicitar Imunidade de IPTU',
+        
+            'Partido Político ou Fundação Instituída por Partido Político - Solicitar Imunidade de IPVA',
+        
+            'Partido Político ou Fundação Instituída por Partido Político - Solicitar Imunidade de ISS ',
+        
+            'Partido Político ou Fundação Instituída por Partido Político - Solicitar Imunidade de ITBI',
+        
+            'Partido Político ou Fundação Instituída por Partido Político - Solicitar Imunidade de ITCD',
+        
+            'Pauta de Valores e Base de Cálculo de IPTU/TLP - Consultar',
+        
+            'Pauta de Valores e Base de Cálculo de IPTU/TLP - Consultar - PJ',
+        
+            'Pauta de Valores e Base de Cálculo de IPVA - Consultar Valor de Veículo',
+        
+            'Pauta de Valores e Base de Cálculo de IPVA - Consultar Valor de Veículo - PJ',
+        
+            'Pauta Fiscal - Consultar',
+        
+            'Pessoa com Deficiência - Solicitar Isenção de ICMS',
+        
+            'Pessoa com Deficiência - Solicitar Isenção de IPVA',
+        
+            'Portaria nº 246/2017 - Comunicar Venda em Bazar',
+        
+            'Precatório/Parcelamento - Consultar e Cumprir Notificação ou Apresentar Precatório',
+        
+            'Precatórios - Solicitar Compensação de Débitos',
+        
+            'Precatórios - Solicitar Compensação de Débitos - PJ',
+        
+            'Processo - Consultar Andamento',
+        
+            'Processo - Obter Cópia',
+        
+            'Processo SEI - Obter Acesso',
+        
+            'Procuração - Obter Informações',
+        
+            'Procuração - Obter Informações - PJ',
+        
+            'Procuração Eletrônica - Cadastrar ou Revogar',
+        
+            'Procuração Eletrônica - Consultar Recibos',
+        
+            'Projeto Monitoramento ISS Próprio ou ST - Cumprir Notificação e Obter Informações',
+        
+            'Protesto - Solicitar Desbloqueio Para Parcelamento',
+        
+            'Protesto - Solicitar Desbloqueio Para Parcelamento - PJ',
+        
+            'Quadro Resumo de Créditos do Programa Nota Legal - Consultar',
+        
+            'Reativação de Inscrição no Cadastro Fiscal do DF - Solicitar',
+        
+            'Recibo de Indicação de Créditos do Programa Nota Legal - Consultar ou Imprimir',
+        
+            'Reclamação do Programa Nota Legal - Consultar e Analisar',
+        
+            'Recolhimentos de Tributos ao DF - Consultar Financeiro',
+        
+            'RECOPI Nacional - Solicitar Credenciamento',
+        
+            'Redesim e Junta Comercial do DF - Acessar Portais',
+        
+            'Regime Simplificado para Restaurantes e Similares - Efetuar Registro de Opção',
+        
+            'Regimes Diferenciados de Apuração do ICMS - Efetuar Registro de Opção',
+        
+            'Regimes Especiais - Consultar Publicações',
+        
+            'Regimes Especiais - Efetuar Registro de Concessão',
+        
+            'Relatórios do Cadastro Fiscal do DF - Consultar',
+        
+            'Relação de Imóvel - Consultar',
+        
+            'Relação de Imóvel - Consultar - PJ',
+        
+            'Requerer a Compensação Prevista no Artigo 72 do RISS',
+        
+            'Requerer Dispensa do Pagamento Antecipado do ICMS de Produtor Rural Pessoa Física',
+        
+            'Requerer Nota Fiscal Avulsa - Outros Contribuintes',
+        
+            'Restituir ou Compensar Pagamentos Indevidos de IPTU/TLP',
+        
+            'Restituir ou Compensar Pagamentos Indevidos de IPTU/TLP - PJ',
+        
+            'Restituir ou Compensar Pagamentos Indevidos de IPVA',
+        
+            'Restituir ou Compensar Pagamentos Indevidos de IPVA - PJ',
+        
+            'Restituir ou Compensar Pagamentos Indevidos de ISS Autônomo',
+        
+            'Restituir ou Compensar Pagamentos Indevidos de ITBI',
+        
+            'Restituir ou Compensar Pagamentos Indevidos de ITBI - PJ',
+        
+            'Restituir ou Compensar Pagamentos Indevidos de ITCD',
+        
+            'Restituir ou Compensar Pagamentos Indevidos de ITCD - PJ',
+        
+            'Restituição de ICMS/ISS para Contribuinte Inscrito no CFDF - Obter Informações',
+        
+            'Restituição de ICMS/ISS para Contribuinte Não Inscrito no CFDF ou Optante pelo Simples Nacional - Solicitar',
+        
+            'Saldo de Créditos do Programa Nota Legal - Consultar',
+        
+            'SEBRAE DF- Acessar Portal',
+        
+            'SISLANCA - Acessar Sistema de Lançamento do DF',
+        
+            'Sistema de Gestão Fiscalização e Arrecadação do ISS - Obter Informações',
+        
+            'Solicitar Alteração de Imóveis',
+        
+            'Solicitar Alteração de Imóveis - PJ',
+        
+            'Solicitar Atualização ou Correção de Dados Cadastrais de Veículos',
+        
+            'Solicitar Atualização ou Correção de Dados Cadastrais de Veículos - PJ',
+        
+            'Solicitar Autorização para Emplacamento de Veículo Novo Adquirido em outra UF',
+        
+            'Solicitar Autorização para Emplacamento de Veículo Novo Adquirido em outra UF - PJ',
+        
+            'Solicitar Autorização para Lavratura de Escritura Pública de Ata Notarial para Inclusão ou Desmembramento de Imóvel ',
+        
+            'Solicitar Autorização para Lavratura de Escritura Pública de Ata Notarial para Inclusão ou Desmembramento de Imóvel - PJ',
+        
+            'Solicitar Baixa de Inscrição no Cadastro Fiscal de Produtor Rural Pessoa Física',
+        
+            'Solicitar Baixa de Inscrição no Cadastro Fiscal de Profissional Autônomo',
+        
+            'Solicitar Baixa de Inscrição no Cadastro Fiscal do DF de Microempreendedor Individual - MEI',
+        
+            'Solicitar Cancelamento de Guia de ITBI ou Declaração Eletrônica',
+        
+            'Solicitar Cancelamento de Guia de ITBI ou Declaração Eletrônica - PJ',
+        
+            'Solicitar Cancelamento de Guia de ITCD ou Declaração Eletrônica',
+        
+            'Solicitar Cancelamento de Guia de ITCD ou Declaração Eletrônica - PJ',
+        
+            'Solicitar Declaração de Não Incidência de ITBI sobre Promessa de Compra e Venda',
+        
+            'Solicitar Declaração de Não Incidência de ITBI sobre Promessa de Compra e Venda - PJ',
+        
+            'Solicitar Desmembramento de Prédio',
+        
+            'Solicitar Desmembramento de Prédio - PJ',
+        
+            'Solicitar Desmembramento de Terreno',
+        
+            'Solicitar Desmembramento de Terreno - PJ',
+        
+            'Solicitar Emissão de Guia de ITCD - Separação',
+        
+            'Solicitar Emissão de Guia de ITCD sobre Inventário ',
+        
+            'Solicitar Inscrição ou Alteração no Cadastro Fiscal de Produtor Rural Pessoa Física',
+        
+            'Solicitar Inscrição ou Alteração no Cadastro Fiscal de Profissional Autônomo',
+        
+            'Solicitar Isenção de ITCD sobre Inventário',
+        
+            'Solicitar Membramento',
+        
+            'Solicitar Membramento - PJ',
+        
+            'Solicitar Não Incidência de ITBI sobre Aquisição de Bens e Direitos por Usucapião',
+        
+            'Solicitar Não Incidência de ITBI sobre Aquisição de Bens e Direitos por Usucapião - PJ',
+        
+            'Solicitar Não Incidência de ITBI sobre Patrimônio de Pessoa Jurídica',
+        
+            'Solicitar Prescrição de Débitos de ICMS/ISS',
+        
+            'Solicitar Prescrição de Débitos de IPTU/TLP',
+        
+            'Solicitar Prescrição de Débitos de IPTU/TLP - PJ',
+        
+            'Solicitar Prescrição de Débitos de IPVA',
+        
+            'Solicitar Prescrição de Débitos de IPVA - PJ',
+        
+            'Solicitar Prescrição de Débitos de ITBI',
+        
+            'Solicitar Prescrição de Débitos de ITBI - PJ',
+        
+            'Solicitar Prescrição de Débitos de ITCD',
+        
+            'Solicitar Prescrição de Débitos de ITCD - PJ',
+        
+            'Solicitar Redução de Alíquota de IPVA de Veículo de Locadora',
+        
+            'Solicitar Restituição de IR Retido na Fonte por Órgãos do GDF',
+        
+            'Solicitar Revisão do Lançamento (Débitos) de ISS Autônomo',
+        
+            'Status de Participação no Sorteio do Programa Nota Legal - Consultar ou Alterar',
+        
+            'Sócios de Pessoa Jurídica - Solicitar Exclusão',
+        
+            'TARF - Tribunal Administrativo de Recursos Fiscais - Acessar Portal',
+        
+            'Taxista - Solicitar Isenção de ICMS',
+        
+            'Templos de Religiosos de Qualquer Culto - Solicitar Imunidade de ITCD',
+        
+            'Templos de Religiosos qualquer Culto - Solicitar Imunidade de IPVA',
+        
+            'Templos Religiosos de qualquer Culto - Solicitar Imunidade de ITBI',
+        
+            'Transferência de Crédito entre Estabelecimentos conforme Artigo 61 do RICMS - Efetuar Registro',
+        
+            'Transmissão Web de Arquivos Telecom/Energia Elétrica - Efetuar',
+        
+            'Transporte Coletivo Escolar ou Público ou Trator de Roda',
+        
+            'Usufruto em Bens Imóveis - Emitir Guia de ITCD',
+        
+            'Veículo Elétrico ou Híbrido - Obter Isenção de IPVA',
+        
+            'Veículo Elétrico ou Híbrido - Solicitar Isenção de IPVA - PJ',
+        
+            'Veículo Novo de Pessoa Física - Obter Isenção de IPVA',
+        
+            'Veículo Novo de Pessoa Jurídica - Solicitar Isenção de IPVA',
+        
+            'Veículo Sinistrado - Solicitar Não Incidência e/ou Remissão de IPVA   ',
+        
+            'Veículo Sinistrado - Solicitar Não Incidência e/ou Remissão de IPVA - PJ',
+        
+            'Vinculação ou Participação no Quadro Societário - Cadastro Fiscal do DF - Consultar',
+        
+        ];
+    
+</script>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        
+        
+            <link rel="canonical" href="https://www.receita.fazenda.df.gov.br/">
+            <meta property="og:url" content="https://www.receita.fazenda.df.gov.br/">
+            
+            <meta name="description" content="Portal oficial da Receita do Distrito Federal (Receita DF). Acesse serviços de IPVA, IPTU, ITBI, ITCD, taxas, certidões e segunda via. Secretaria de Estado de Economia do DF.">
+            <meta name="author" content="Secretaria de Estado de Economia do Distrito Federal">
+            <title>Portal da Receita DF ? IPVA, IPTU e Serviços Tributários | SEEC</title>
+            <meta property="og:title" content="Portal da Receita DF - IPVA, IPTU e Serviços Tributários">
+            <meta property="og:description" content="Portal oficial da Receita do Distrito Federal. Consulte IPVA, IPTU, ITBI, ITCD, taxas, certidões e demais serviços tributários do DF.">
+            <meta property="og:type" content="website">
+            <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                "name": "Portal da Receita DF",
+                "alternateName": "Portal de Serviços da Receita do Distrito Federal",
+                "url": "https://www.receita.fazenda.df.gov.br/",
+                "inLanguage": "pt-BR",
+                "publisher": {
+                    "@type": "GovernmentOrganization",
+                    "name": "Secretaria de Estado de Economia do Distrito Federal",
+                    "url": "https://www.economia.df.gov.br/"
+                },
+                "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": "https://www.receita.fazenda.df.gov.br/aplicacoes/busca/resultado.cfm?palavras={search_term_string}",
+                    "query-input": "required name=search_term_string"
+                }
+            }
+            </script>
+        
+
+
+        <style type="text/css">
+            .recentcomments a {
+                display: inline !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+        </style>
+
+              
+        
+        
+            
+            <link href="/layout/modules/servicos/layouts/css/servicos.css" rel="stylesheet" type="text/css"/>
+            <link href="/layout/Componentes/validationEngine/css/style.css"   rel="stylesheet" type="text/css" />
+            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">            
+            <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+            
+            <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+            
+            <style type="text/css">
+                #Titulo_APP {
+                    display: none !important;
+                }
+
+                .titulo_APLICACAO {
+                    display: none !important;
+                }
+
+                .titulo_TEXTO {
+                    display: none !important;
+                }
+                .tt-menu{
+                    background-color: rgba(255, 255, 255, 0.9);
+                    font-size: 22px;
+                    padding: 20px;
+                    margin-top: 5px;
+                    width: 100%;
+                    box-shadow: rgba(0, 0, 0, 0.75) 0px 5px 5px 0px;
+                    border-radius: 20px;
+                    cursor: pointer;
+                }
+                /*  INICIO CSS PARA O REFIZOMETRO */
+                .boxes_imposto{
+                    background-color: #f2f2f2;
+                    min-height: 100px;
+                }
+                
+                .box_refis {
+                    margin: 24px 0 24px 0;
+                    -webkit-border-radius: 30px;
+                    -moz-border-radius: 30px;
+                    border-radius: 30px;
+                    background: #ffffff;
+                    /* height: 94px; */
+                    padding: 20px 10px;
+                    color: #000;
+                    border: 1px solid #dedede;
+                }
+                .refis_aba1{
+                }
+                .refis_aba1 h2{
+                    font-size: 22px;
+                    font-weight: bold;
+                }
+                .refis_aba2{                    
+                    margin-bottom: 20px;
+                }
+                .refis_aba2 p{
+                    margin-bottom: 0;
+                }
+                .refis_aba2 h3{
+                    font-size: 20px;
+                    font-weight: bold;
+                }
+                .refis_aba3{
+                }
+                .refis_aba3 a{
+                    padding: 8px 16px;
+                    -webkit-border-radius: 30px;
+                    -moz-border-radius: 30px;
+                    border-radius: 30px;
+                    background: #373737;
+                    height: 100px;
+                    color: #fff;
+                    text-decoration: none;
+                    transition: all 0.4s ease;
+                }
+                .refis_aba3 a:hover{
+                    background: #016fa7;
+                }
+
+                /* ### Media Queries ### */
+                
+                @media screen and (max-width: 992px) {
+                .box_refis{
+                    height: auto;
+                    padding: 10px 0;
+                
+                } 
+                }
+                /*  FIM CSS PARA O REFIZOMETRO  */          
+            </style>                 
+            
+            <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>            
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> 
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>            
+            <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+            <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+            <script src="/layout/js/typeahead/bloodhound.js"></script>
+            <script src="/layout/js/typeahead/bloodhound.min.js"></script>
+            <script src="/layout/js/typeahead/typeahead.bundle.js"></script>
+            <script src="/layout/js/typeahead/typeahead.bundle.min.js"></script>
+            <script src="/layout/js/typeahead/typeahead.jquery.js"></script>
+            <script src="/layout/js/typeahead/typeahead.jquery.min.js"></script>
+
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110060443-1"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'UA-110060443-1');
+            </script>
+
+            <script type="text/javascript">
+                $(function() {
+                    $(".titulo_APLICACAO").hide();
+                    $(".titulo_TEXTO").hide();
+                });
+                               
+            </script>           
+            
+           
+    </head>
+    <body>        
+        
+            <div class="container-fluid menu_topo">
+                <div class="container">
+                    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item"> <a class="nav-link" href="http://www.transparencia.df.gov.br/#/" target="_blank">Transparência <span class="sr-only">(current)</span></a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="https://www.ouvidoria.df.gov.br/" target="_blank">Ouvidoria</a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="https://www.seplad.df.gov.br/category/acesso-a-informacao/" target="_blank">Acesso à informação</a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="https://www.dodf.df.gov.br/" target="_blank">Diário oficial</a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="https://www.agenciabrasilia.df.gov.br/" target="_blank">Agência Brasília</a> </li>
+                                <!--<li class="nav-item"> <a class="nav-link" href="https://www.brasilia.df.gov.br" target="_blank">Portal Governo de Brasília</a> </li>-->
+                            </ul>
+                        </div>
+                        <div class="navbar-collapse collapse inline_menu" id="navbarNavDropdown">
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item"> <a class="nav-link" href="https://www.brasilia.df.gov.br/index.php/acessibilidade/">Acessibilidade</a> </li>
+                                <li class="separador_menu_topo"></li>
+                                <li class="nav-item"> <a class="nav-link" href="#">Aa</a> </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-5 col-xl-5 col-lg-5 col-md-5 col-sm-5 logo_receita">
+                        <a href="https://www.receita.fazenda.df.gov.br/"><img src="/layout/img/SecretariaDeEconomiaDoDistritoFederal.png" class="img-fluid"/></a>
+                    </div>
+                    <div class="col-xl-2 col-lg-2 col-md-3 col-sm-3 col-3 offset-xl-3 offset-lg-3 offset-md-1 offset-sm-1 offset-1 p-2 botoes_acesso"><a href="https://ww1.receita.fazenda.df.gov.br/area-restrita" target="_blank">Entrar</a></div>
+                    <div class="col-xl-2 col-lg-2 col-md-3 col-sm-3 col-3 p-2 botoes_acesso"><a href="https://ww1.receita.fazenda.df.gov.br/acesso/primeiro-acesso" target="_blank">Cadastre-se</a></div>
+                </div>
+            </div> 
+            
+            <style type="text/css">    
+    a.mensagem_capa {
+        background: rgba(0, 0, 0, 0.6);
+        font-size: 22px;
+        -webkit-border-radius: 30px;
+        -moz-border-radius: 30px;
+        border-radius: 30px;
+        text-align: center;
+        margin-top: 32px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        color: #fff;
+        width: 100%;
+        display: block;
+        padding: 10px 20;
+        transition: 0.3s;
+        font-weight: 600;
+            white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    }
+    a.mensagem_capa:hover {
+        text-decoration: none;
+        background-color: black;
+        color: #fff;
+        border: 2px solid #373737;
+    }
+</style>
+
+
+            <div class="container">
+                <div class="row">
+                                  
+                        <a class="mensagem_capa" href="https://economia.df.gov.br/w/comunicado-disponibilizacao-do-ambiente-de-producao-da-nfs-e-no-padrao-nacional" target="_blank">ADESÃO AO NOVO MODELO NOTA FISCAL DE SERVIÇOS NFS-e NO PADRÃO NACIONAL</a>
+                    
+                </div>   
+            </div>
+        
+
+<div class="container links_header">
+    <div class="row flex-row  d-flex align-items-stretch">           
+        
+            <div class="col-xl col-lg col-md col-sm-12 col-12 p-2"><a href="https://ww1.receita.fazenda.df.gov.br/servicos" target="_blank">SERVIÇOS ON-LINE</a></div>
+        
+            <div class="col-xl col-lg col-md col-sm-12 col-12 p-2"><a href="http://agnet.fazenda.df.gov.br/" target="_blank">AGÊNCI@NET</a></div>
+        
+            <div class="col-xl col-lg col-md col-sm-12 col-12 p-2"><a href="https://atendimentovirtual.fazenda.df.gov.br/#/" target="_blank">ATENDIMENTO VIRTUAL</a></div>
+        
+            <div class="col-xl col-lg col-md col-sm-12 col-12 p-2"><a href="https://www.receita.fazenda.df.gov.br/aplicacoes/CartaServicos/servico.cfm?codTipoPessoa=7&codServico=521&codSubCategoria=157" target="_blank">LEGISLAÇÃO E PUBLICAÇÕES</a></div>
+        
+    </div>
+</div>
+            
+            
+
+            
+
+             
+            
+            
+            <div class="container-fluid parallax">
+                <div class="container busca_home">
+                    <div class="col-12 col-xl-8 offset-xl-2 col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-12">
+                        <h1>O que você procura?</h1>
+                        <form class="navbar-form navbar-search" name="formPesquisa" id="formPesquisa" method="post" role="search" action="/aplicacoes/busca/resultado.cfm">
+                            <div class="input-group" id="busca">
+                                <input type="text" id="palavras" name="palavras" class="form-control" placeholder="Ex: Segunda via IPVA" >
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-search" onclick="this.form.submit();"> <span class="glyphicon glyphicon-search"></span> <span class="label-icon"></span> </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>            
+        
+<script type="text/javascript" src="/layout/js/buscaTopo.js"></script> <b class='titulo_APLICACAO'>Capa botões de acesso fácil</b> 
+        <div class="container">
+            <div class="row acesso_facil">
+                <div class="col-12 tilulo_acesso">
+                    <h1>ACESSO FÁCIL</h1>
+                </div>
+                
+                    <div class="col-12 col-xl-4 col-lg-4 col-md-4 col-sm-12 acesso_facil">
+                        
+                            <a href="https://ww1.receita.fazenda.df.gov.br/emissao-segunda-via/ipva" target="_blank">Emitir IPVA</a>
+                        
+                    </div>
+                
+                    <div class="col-12 col-xl-4 col-lg-4 col-md-4 col-sm-12 acesso_facil">
+                        
+                            <a href="https://ww1.receita.fazenda.df.gov.br/emissao-segunda-via/iptu" target="_blank">Emitir IPTU/TLP</a>
+                        
+                    </div>
+                
+                    <div class="col-12 col-xl-4 col-lg-4 col-md-4 col-sm-12 acesso_facil">
+                        
+                            <a href="https://ww1.receita.fazenda.df.gov.br/emissao-segunda-via/divida-ativa" target="_blank">Emitir Dívida Ativa</a>
+                        
+                    </div>
+                
+                    <div class="col-12 col-xl-4 col-lg-4 col-md-4 col-sm-12 acesso_facil">
+                        
+                            <a href="https://ww1.receita.fazenda.df.gov.br/dar-avulso/gerar-dar-avulso" target="_blank">Emitir DAR Avulso</a>
+                        
+                    </div>
+                
+                    <div class="col-12 col-xl-4 col-lg-4 col-md-4 col-sm-12 acesso_facil">
+                        
+                            <a href="https://ww1.receita.fazenda.df.gov.br/emissao-segunda-via/itbi-itcd" target="_blank">Emitir ITBI ou ITCD</a>
+                        
+                    </div>
+                
+                    <div class="col-12 col-xl-4 col-lg-4 col-md-4 col-sm-12 acesso_facil">
+                        
+                            <a href="https://ww1.receita.fazenda.df.gov.br/cidadao/certidoes/Certidao" target="_blank">Emitir Certidão Negativa</a>
+                        
+                    </div>
+                
+                    <div class="col-12 col-xl-4 col-lg-4 col-md-4 col-sm-12 acesso_facil">
+                        
+                            <a href="https://www.receita.fazenda.df.gov.br/aplicacoes/CartaServicos/servico.cfm?codTipoPessoa=6&codServico=981&codSubCategoria=248" target="_blank">Indicar Créditos Nota Legal</a>
+                        
+                    </div>
+                
+                    <div class="col-12 col-xl-4 col-lg-4 col-md-4 col-sm-12 acesso_facil">
+                        
+                            <a href="https://ww1.receita.fazenda.df.gov.br/servicos" target="_blank">Negociar  ou Parcelar Débitos</a>
+                        
+                    </div>
+                
+                    <div class="col-12 col-xl-4 col-lg-4 col-md-4 col-sm-12 acesso_facil">
+                        
+                            <a href="https://sisprot.pg.df.gov.br/" target="_blank">Portal Negocia-DF</a>
+                        
+                    </div>
+                
+                    <div class="col-12 col-xl-4 col-lg-4 col-md-4 col-sm-12 acesso_facil">
+                        
+                            <a href="https://receita.fazenda.df.gov.br/aplicacoes/perguntasfrequentes/perguntasfrequentes.cfm" target="_blank">Perguntas e Respostas</a>
+                        
+                    </div>
+                
+                    <div class="col-12 col-xl-4 col-lg-4 col-md-4 col-sm-12 acesso_facil">
+                        
+                            <a href="https://importador.fazenda.df.gov.br/" target="_blank">Portal do Importador</a>
+                        
+                    </div>
+                
+                    <div class="col-12 col-xl-4 col-lg-4 col-md-4 col-sm-12 acesso_facil">
+                        
+                            <a href="https://www.economia.df.gov.br/reforma-tributaria" target="_blank">Reforma Tributária</a>
+                        
+                    </div>
+                               
+            </div>
+        </div>
+    </div>
+
+
+<div class="container-fluid divisor_perfis"></div> <b class='titulo_APLICACAO'>Menu Tipo Pessoa Receita</b> 
+
+<div class="container-fluid area-tabs-perfis">
+	<div class="container tabs_perfis">
+		<ul class="nav nav-pills perfis" id="pills-tab" role="tablist">
+			
+					
+				<style>
+					.perfil_1569{
+						-webkit-box-shadow: inset 0px -12px 0px 0px #c7c7c7;
+						-moz-box-shadow: inset 0px -12px 0px 0px #c7c7c7;
+						box-shadow: inset 0px -12px 0px 0px#c7c7c7;
+					}
+					.perfis .perfil_1569 .nav-link.active {
+						background-color: #c7c7c7;
+					}				
+				</style>	
+			
+			
+				<li class="nav-item item_perfil perfil_1569" role="presentation"> 
+					<a class="nav-link active" id="perfil1569" data-toggle="pill" href="#pills-1569" role="tab" aria-controls="pills-1569" aria-selected="false">
+						<h2>Para o Cidadão</h2>
+						<p>Serviços para Pessoa Física</p>
+					</a> 
+				</li>
+			
+					
+				<style>
+					.perfil_1570{
+						-webkit-box-shadow: inset 0px -12px 0px 0px #a8a8a8;
+						-moz-box-shadow: inset 0px -12px 0px 0px #a8a8a8;
+						box-shadow: inset 0px -12px 0px 0px#a8a8a8;
+					}
+					.perfis .perfil_1570 .nav-link.active {
+						background-color: #a8a8a8;
+					}				
+				</style>	
+			
+			
+				<li class="nav-item item_perfil perfil_1570" role="presentation"> 
+					<a class="nav-link " id="perfil1570" data-toggle="pill" href="#pills-1570" role="tab" aria-controls="pills-1570" aria-selected="false">
+						<h2>Para o Empresário</h2>
+						<p>Serviços para Pessoa Jurídica</p>
+					</a> 
+				</li>
+			
+					
+				<style>
+					.perfil_1571{
+						-webkit-box-shadow: inset 0px -12px 0px 0px #858585;
+						-moz-box-shadow: inset 0px -12px 0px 0px #858585;
+						box-shadow: inset 0px -12px 0px 0px#858585;
+					}
+					.perfis .perfil_1571 .nav-link.active {
+						background-color: #858585;
+					}				
+				</style>	
+			
+			
+				<li class="nav-item item_perfil perfil_1571" role="presentation"> 
+					<a class="nav-link " id="perfil1571" data-toggle="pill" href="#pills-1571" role="tab" aria-controls="pills-1571" aria-selected="false">
+						<h2>Outros Contribuintes</h2>
+						<p>Autônomo, Produtor Rural, Feirante, Artesão, Nota Fiscal Avulsa e MEI</p>
+					</a> 
+				</li>
+			
+					
+				<style>
+					.perfil_1572{
+						-webkit-box-shadow: inset 0px -12px 0px 0px #585858;
+						-moz-box-shadow: inset 0px -12px 0px 0px #585858;
+						box-shadow: inset 0px -12px 0px 0px#585858;
+					}
+					.perfis .perfil_1572 .nav-link.active {
+						background-color: #585858;
+					}				
+				</style>	
+			
+			
+				<li class="nav-item item_perfil perfil_1572" role="presentation"> 
+					<a class="nav-link " id="perfil1572" data-toggle="pill" href="#pills-1572" role="tab" aria-controls="pills-1572" aria-selected="false">
+						<h2>Governos e Parceiros</h2>
+						<p>Governo, Cartórios, Sebrae, Redesim e Jucis-DF</p>
+					</a> 
+				</li>
+					
+		</ul>
+				
+			<script>
+				var urlCodTipoPessoa = "6";
+			</script>
+			<script type="text/javascript" src="/aplicacoes/CartaServicos/script/listaCategorias.js"></script>
+		 
+
+		<div class="area-destaque" id="listaCategorias">
+		</div>
+	</div> <!-- fecha container tabs_perfis -->
+</div> <!-- fecha area-tabs-perfis --> <b class='titulo_APLICACAO'>Noticia capa receita</b>
+    <div class="container-fluid informacoes_publicacoes">
+        <div class="container">
+            <h1>informações e publicações</h1>
+            <div class="row">
+                                              
+            
+
+<b class='titulo_APLICACAO'>Informativos Capa</b>                 
+                <div class="col-12 col-xl-4 col-lg-4 col-md-4 col-sm-12 noticia"> 
+                    <h2>Últimas Normas Publicadas</h2>
+                    
+                                <a href="https://dodf.df.gov.br/dodf/materia/visualizar?co_data=637254&p=decreto-n-49559-de-16-de-outubro-de-2026&busca=exata#termo=DECRETO%20N%C2%BA%2049.559,%20DE%2016%20DE%20OUTUBRO%20DE%202026" target="_blank" rel="noopener noreferrer">
+                            
+                                    <h3>16/10/2026</h3>
+                                    <p>ICMS_Decreto nº 49.559/2026 que altera o Decreto nº 18.955/1997 - Anexo I Caderno I Isenções</p>
+                                </a>
+                        
+                                <a href="https://dodf.df.gov.br/dodf/materia/visualizar?co_data=637253&p=decreto-n-49558-de-16-de-outubro-de-2026&busca=exata#termo=DECRETO%20N%C2%BA%2049.558,%20DE%2016%20DE%20OUTUBRO%20DE%202026" target="_blank" rel="noopener noreferrer">
+                            
+                                    <h3>16/10/2026</h3>
+                                    <p>ICMS_Decreto nº 49.558/2026 que altera o Decreto nº 18.955/1997 - Anexo I Caderno I Isenções</p>
+                                </a>
+                        
+                                <a href="https://dodf.df.gov.br/dodf/materia/visualizar?co_data=625472&p=decreto-n-49222-de-21-de-agosto-de-2026-&busca=exata#termo=DECRETO%20N%C2%BA%2049.222,%20DE%2021%20DE%20AGOSTO%20DE%202026" target="_blank" rel="noopener noreferrer">
+                            
+                                    <h3>01/09/2026</h3>
+                                    <p>ICMS_Decreto nº 49.222/2026 que altera o Decreto nº 18.955/1997 - Anexo I Caderno II</p>
+                                </a>
+                        
+                        <div class="link_veja">                            
+                            
+                                <a href="https://ww1.receita.fazenda.df.gov.br/legislacao/normas-publicadas" target="_blank">ver mais</a>
+                            
+				        </div>                         
+                </div>                
+                            
+                <div class="col-12 col-xl-4 col-lg-4 col-md-4 col-sm-12 noticia"> 
+                    <h2>Publicações Administrativas</h2>
+                    
+                                <a href="https://dodf.df.gov.br/dodf/materia/visualizar?co_data=636917&p=instrucao-normativa-n-14-de-14-de-outubro-de-2026&busca=exata#termo=INSTRU%C3%87%C3%83O%20NORMATIVA%20N%C2%BA%2014,%20DE%2014%20DE%20OUTUBRO%20DE%202026" target="_blank" rel="noopener noreferrer">
+                            
+                                    <h3>19/10/2026</h3>
+                                    <p>Instrução Normativa Nº 14, de14 de outubro de 2026 - SECAF</p>
+                                </a>
+                        
+                                <a href="https://dodf.df.gov.br/dodf/jornal/visualizar-pdf?pasta=2026/10_Outubro/DODF%20190%2013-10-2026|&arquivo=DODF%20190%2013-10-2026%20INTEGRA.pdf" target="_blank" rel="noopener noreferrer">
+                            
+                                    <h3>13/10/2026</h3>
+                                    <p>IN Nº 13/2026 que altera a IN 05/2026 - Sorteior Programa Nota Legal</p>
+                                </a>
+                        
+                                <a href="https://dodf.df.gov.br/dodf/materia/visualizar?co_data=632651&p=instrucao-normativa-n-12-de-29-de-setembro-de-2026&busca=exata#termo=INSTRU%C3%87%C3%83O%20NORMATIVA%20N%C2%BA%2012,%20DE%2029%20DE%20SETEMBRO%20DE%202026" target="_blank" rel="noopener noreferrer">
+                            
+                                    <h3>30/09/2026</h3>
+                                    <p>IN nº 12/2026 que altera a IN nº 7/2026 - ICMS/ST- Art. 9º - Restiuição Parcial/Complementação Valor</p>
+                                </a>
+                        
+                        <div class="link_veja">                            
+                            
+                                <a href="https://ww1.receita.fazenda.df.gov.br/legislacao/pesquisa-direta" target="_blank">ver mais</a>
+                            
+				        </div>                         
+                </div>                
+                            
+                <div class="col-12 col-xl-4 col-lg-4 col-md-4 col-sm-12 noticia"> 
+                    <h2>Consultas Tributárias Formais</h2>
+                    
+                                <a href="https://dodf.df.gov.br/dodf/materia/visualizar?co_data=632841&p=solucao-de-consulta-n-152026&busca=exata#termo=SOLU%C3%87%C3%83O%20DE%20CONSULTA%20N%C2%BA%2015/2026" target="_blank" rel="noopener noreferrer">
+                            
+                                    <h3>01/10/2026</h3>
+                                    <p>ICMS/ST_Decreto nº 34.063/2012_Atacadistas e Distribuidores_Caderno I Anexo IV RICMS</p>
+                                </a>
+                        
+                                <a href="https://dodf.df.gov.br/dodf/materia/visualizar?co_data=632746&p=solucao-de-consulta-n-172026&busca=exata#termo=SOLU%C3%87%C3%83O%20DE%20CONSULTA%20N%C2%BA%2017/2026" target="_blank" rel="noopener noreferrer">
+                            
+                                    <h3>01/10/2026</h3>
+                                    <p>ICMS/ST_Autopeças_NCM 8425.42.00_ART. 58, II, DA LEI Nº 4.567/2011</p>
+                                </a>
+                        
+                                <a href="https://ww1.receita.fazenda.df.gov.br/informacoes-tributarias/visualizar-informacoes-tributarias?CodigoTipo=24&Numero=7&Ano=2026&CodigoTributo=0&CodigoAssunto=0" target="_blank" rel="noopener noreferrer">
+                            
+                                    <h3>06/05/2026</h3>
+                                    <p>ICMS.Regime Especial de Apuração do Art. 320-D.Saídas Internas de Arroz</p>
+                                </a>
+                        
+                        <div class="link_veja">                            
+                            
+                                <a href="https://ww1.receita.fazenda.df.gov.br/informacoes-tributarias/informacoes-tributarias-consulta" target="_blank">ver mais</a>
+                            
+				        </div>                         
+                </div>                
+            
+        </div>
+    </div>
+    </div>
+     <b class='titulo_APLICACAO'>Rodapé Receita</b> 
+<div class="container-fluid links_diversos">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 col-xl-4 col-lg-4 col-md-4 col-sm-12 link_links_diversos">
+				<h3>Outros</h3>
+				<ul>
+                    
+                         <li><a href="https://www.receita.fazenda.df.gov.br/aplicacoes/CartaServicos/servico.cfm?codServico=517&codTipoPessoa=7&codCategoriaServico=76&codSubCategoria=157" target="_blank">Esclarecimento de Normas</a></li>
+                    
+                         <li><a href="https://www.receita.fazenda.df.gov.br/aplicacoes/CartaServicos/servico.cfm?codServico=511&codTipoPessoa=7&codCategoriaServico=33&codSubCategoria=113" target="_blank">Recurso e Impugnação</a></li>
+                    
+                         <li><a href="https://www.receita.fazenda.df.gov.br/aplicacoes/CartaServicos/servico.cfm?codTipoPessoa=8&codServico=520&codSubCategoria=151" target="_blank">SISLANCA</a></li>
+                    
+				</ul>
+			</div>
+			<div class="col-12 col-xl-4 col-lg-4 col-md-4 col-sm-12 link_links_diversos">
+				<h3>MAIS SITES</h3>
+				<ul>
+				  
+                         <li><a href="https://www.notalegal.df.gov.br/" target="_blank">Nota Legal</a></li>
+                    
+                         <li><a href="https://sefaz.df.gov.br/sobre-a-ouvidoria/" target="_blank">Ouvidoria</a></li>
+                    
+                         <li><a href="https://sefaz.df.gov.br/sobre-o-tarf/" target="_blank">TARF</a></li>
+                    
+				</ul>
+			</div>
+			<div class="col-12 col-xl-4 col-lg-4 col-md-4 col-sm-12 link_links_diversos">
+				<h3>Atendimento</h3>
+				<ul>
+				  
+                         <li><a href="https://atendimentovirtual.fazenda.df.gov.br/#/" target="_blank">Atendimento Virtual</a></li>
+                    
+                         <li><a href="https://www.receita.fazenda.df.gov.br/aplicacoes/CartaServicos/servico.cfm?codServico=523&codTipoPessoa=6&codCategoriaServico=36&codSubCategoria=158" target="_blank">Endereços, Telefones e Horários</a></li>
+                    
+                         <li><a href="https://www.receita.fazenda.df.gov.br/aplicacoes/perguntasfrequentes/perguntasfrequentes.cfm" target="_blank">Perguntas Frequentes</a></li>
+                    
+				</ul>
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+<div class="container-fluid base_site"  style="background-color: #373737">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 col-xl-4 col-lg-4 col-md-4 col-sm-12">
+				<h2>Receita do DF</h2>
+				<p>
+				<!--Governo de Brasília<br>-->
+				SBN Qd 02 Ed. Vale do Rio Doce 13º andar<br>
+				CEP 70.040-909 </p>
+			</div>
+		  
+			<div class="col-12 col-xl-3 offset-col-5 col-lg-3 offset-lg-5 col-md-3 offset-md-5 col-sm-12 logo_site_bottom">
+				<!--<img src="/layout/modules/servicos/layouts/imagens/icones//logo_gdf.jpg">-->
+			</div>		  
+		  
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>
+            <!-- pagina gerada em 20/10/2026 ?s 15:45:36 -->
+        
