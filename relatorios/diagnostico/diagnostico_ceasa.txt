@@ -1,21 +1,10 @@
+20657 bytes
+Informações do Mercado Portal de Serviços - O Portal de Serviços contém serviços destinados ao público da Ceasa-DF como: 2ª via de boletos, consulta de preços diários, catálogo de produto x comerciantes, cadastro na lista de espera e muito mais... Aguarde, carregando... Início Buscar Cadastre-se Entrar Informações de Mercado O SIMA – Serviço de Informação do Mercado Agropecuário/Hortifrutigranjeiro evidencia o preço mínimo, preço mais comum e preço máximo dos principais produtos comercializado na CEASA/DF Mais completo que o SIMA, informa o preço mínimo, preço mais comum e preço máximo de grande parte do produtos comercializados no mercado atacadista da CEASA/DF. O Calendário de Comercialização é o Comparativo Nacional de preços de Mercado praticado pela CONAB SIMA Preço no Atacado Calendário de Comercialização Voltar Política de Privacidade Sia Trecho 10, Lote 05 CEP: 71.200-100 Brasília - DF Telefone: 61 3686-4831 ceasa@ceasa.df.gov.br Início Buscar Cadastre-se Entrar Copyright &copy; 2024 - Centrais de Abastecimento do Distrito Federal S/A Título --> Onde Encontrar? Fechar Credenciamento Fechar Requerimento Seu vínculo com a Ceasa? Selecione Concessionário Permissionário Produtor Prestador de Serviço (Contratado) Não possuo vínculo Tipo de Requerimento Selecione CNPJ Razão Social Descrição Anexo Enviar Fechar Detalhes do Requerimento Fechar Histórico de Preços produto Preços do Mês Dia Preço R$ Preços do anual Mês Preço R$ Imprimir Fechar Fechar Arquivo Fechar ATENÇÃO Para recadastro de Permissionário, crie sua conta utilizando o seu CNPJ para a busca automática dos seus dados. Fechar
 
-/: Portal de Serviços - CEASA-DF | 24206 bytes | 0 PDF(s)
-   links: ['https://www.portal.ceasadf.com.br/2a-via-boleto', 'https://www.portal.ceasadf.com.br/cadastrar', 'https://www.portal.ceasadf.com.br/catalogo', 'https://www.portal.ceasadf.com.br/entrar', 'https://www.portal.ceasadf.com.br/faq', 'https://www.portal.ceasadf.com.br/informacao-mercado', 'https://www.portal.ceasadf.com.br/politica-de-privacidade', 'https://www.portal.ceasadf.com.br/precos', 'https://www.portal.ceasadf.com.br/shared/styles/app.min.css', 'https://www.portal.ceasadf.com.br/themes/portalweb/assets/css/styles.css', 'https://www.portal.ceasadf.com.br/themes/portalweb/assets/img/favicon.webp']
+PDFs: ['https://www.portal.ceasadf.com.br/storage/files/2026/04/calendario.pdf', 'https://www.portal.ceasadf.com.br/storage/files/2026/10/atacado-1792062554.pdf', 'https://www.portal.ceasadf.com.br/storage/files/2026/10/sima-1792062523.pdf']
 
-/sitemap.xml: Portal de Serviços - CEASA - DF | 2192 bytes | 0 PDF(s)
+links: ['https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css', 'https://facebook.com/ceasadf', 'https://instagram.com/ceasadf', 'https://www.ceasa.df.gov.br', 'https://www.portal.ceasadf.com.br/', 'https://www.portal.ceasadf.com.br/cadastrar', 'https://www.portal.ceasadf.com.br/entrar', 'https://www.portal.ceasadf.com.br/informacao-mercado', 'https://www.portal.ceasadf.com.br/politica-de-privacidade', 'https://www.portal.ceasadf.com.br/shared/styles/app.min.css', 'https://www.portal.ceasadf.com.br/storage/files/2026/04/calendario.pdf', 'https://www.portal.ceasadf.com.br/storage/files/2026/10/atacado-1792062554.pdf', 'https://www.portal.ceasadf.com.br/storage/files/2026/10/sima-1792062523.pdf', 'https://www.portal.ceasadf.com.br/themes/portalweb/assets/css/styles.css', 'https://www.portal.ceasadf.com.br/themes/portalweb/assets/img/favicon.webp', 'https://youtube.com/ceasadf', 'mailto:ceasa@ceasa.df.gov.br']
 
-/boletins: Portal de Serviços - CEASA - DF | 2192 bytes | 0 PDF(s)
+formulários: ['<form action="https://www.portal.ceasadf.com.br/app/protocolo" method="post" enctype="multipart/form-data">', '<form action="https://www.portal.ceasadf.com.br/catalogo/buscar">'] ['user_type', 'category']
 
-/boletim: Portal de Serviços - CEASA - DF | 2192 bytes | 0 PDF(s)
-
-/sima: Portal de Serviços - CEASA - DF | 2192 bytes | 0 PDF(s)
-
-/publicacoes: Portal de Serviços - CEASA - DF | 2192 bytes | 0 PDF(s)
-
-/documentos: Portal de Serviços - CEASA - DF | 2192 bytes | 0 PDF(s)
-
-/precos: Preços - Portal de Serviços | 51487 bytes | 0 PDF(s)
-
-/blog: Portal de Serviços - CEASA - DF | 2192 bytes | 0 PDF(s)
-
-/noticias: Portal de Serviços - CEASA - DF | 2192 bytes | 0 PDF(s)
+fetch: nenhum
