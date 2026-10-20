@@ -10,7 +10,7 @@
       {
         "url": "https://mercado.carrefour.com.br/",
         "status": 200,
-        "ms": 246,
+        "ms": 70,
         "titulo": "Mercado Carrefour | Ofertas de Supermercado Delivery",
         "servidor": "cloudflare",
         "antirrobo": [
@@ -31,7 +31,7 @@
       {
         "url": "https://mercado.carrefour.com.br/api/catalog_system/pub/products/search?_from=0&_to=0",
         "status": 503,
-        "ms": 283,
+        "ms": 311,
         "titulo": null,
         "servidor": "cloudflare",
         "antirrobo": [
@@ -52,7 +52,7 @@
       "analise": {
         "url": "https://www.carrefour.com.br/robots.txt",
         "status": 403,
-        "ms": 87,
+        "ms": 228,
         "titulo": "Acesso Bloqueado",
         "servidor": "cloudflare",
         "antirrobo": [
@@ -83,7 +83,7 @@
       {
         "url": "https://www.paodeacucar.com/",
         "status": 200,
-        "ms": 1273,
+        "ms": 1419,
         "titulo": "Pão de Açúcar | Supermercado Online",
         "servidor": null,
         "antirrobo": [],
@@ -109,7 +109,7 @@
       "analise": {
         "url": "https://www.comper.com.br/robots.txt",
         "status": 403,
-        "ms": 270,
+        "ms": 214,
         "titulo": "Just a moment...",
         "servidor": "cloudflare",
         "antirrobo": [
@@ -141,13 +141,13 @@
         "url": "https://www.in.gov.br/",
         "status": 0,
         "erro": "Remote end closed connection without response",
-        "ms": 183
+        "ms": 12
       },
       {
         "url": "https://www.in.gov.br/consulta/-/buscar/dou?q=ICMS",
         "status": 0,
         "erro": "Remote end closed connection without response",
-        "ms": 187
+        "ms": 12
       }
     ]
   },
@@ -162,7 +162,7 @@
       {
         "url": "https://www.lexml.gov.br/sru?operation=searchRetrieve&version=1.1&query=urn%3D%22lei%22%20and%20description%3Dicms&maximumRecords=3",
         "status": 404,
-        "ms": 1107,
+        "ms": 1097,
         "titulo": "HTTP Status 404 – Not Found",
         "servidor": "nginx",
         "antirrobo": [
@@ -189,7 +189,7 @@
         "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios",
         "status": 0,
         "erro": "<urlopen error timed out>",
-        "ms": 30175
+        "ms": 30181
       }
     ]
   },
@@ -204,7 +204,7 @@
       {
         "url": "https://paineis.fazenda.df.gov.br/",
         "status": 200,
-        "ms": 1489,
+        "ms": 1205,
         "titulo": "Secretaria de Economia do Distrito Federal",
         "servidor": "Apache/2.4.39 (Win64) OpenSSL/1.1.1b PHP/7.3.5",
         "antirrobo": [],
@@ -216,7 +216,7 @@
       {
         "url": "https://paineis.fazenda.df.gov.br/mapadeprecos/",
         "status": 200,
-        "ms": 2644,
+        "ms": 1619,
         "titulo": "Mapa de Preço",
         "servidor": "Apache/2.4.39 (Win64) OpenSSL/1.1.1b PHP/7.3.5",
         "antirrobo": [],
@@ -242,7 +242,7 @@
       {
         "url": "https://www.receita.fazenda.df.gov.br/",
         "status": 200,
-        "ms": 4861,
+        "ms": 2935,
         "titulo": "Portal da Receita DF ? IPVA, IPTU e Serviços Tributários | SEEC",
         "servidor": "Microsoft-IIS/8.5",
         "antirrobo": [],
@@ -257,6 +257,83 @@
       }
     ]
   },
+  "Mapa de Preços DF (script do painel)": {
+    "robots": {
+      "status": 200,
+      "erro": null,
+      "conteudo": "\r\n<!DOCTYPE html>\r\n<!--[if IE]><![endif]-->\r\n<!--[if IE 7 ]>     <html lang=\"pt-BR\" class=\"ie7\">    <![endif]-->\r\n<!--[if IE 8 ]>     <html lang=\"pt-BR\" class=\"ie8\">    <![endif]-->\r\n<!--[if IE 9 ]>     <html lang=\"pt-BR\" class=\"ie9\">    <![endif]-->\r\n<!--[if IE 10 ]>    <html lang=\"pt-BR\" class=\"ie10\">   <![endif]-->\r\n<!--[if (gt IE 11)|!(IE)]><!--><html lang=\"pt-BR\"><!--<![endif]-->\r\n<head>\r\n\t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\">\r\n\t<title>Secretaria de Economia do Distrito Federal</title>\r\n\t<meta charset=\"utf-8\">\r\n\t<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\r\n\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no\">\r\n    <link rel=\"icon\" href=\"layout/img/favicon.png\" type=\"image/x-icon\" />\r\n  <!-- CSS -->\r\n  <link rel=\"stylesheet\" type=\"text/css\" href=\"layout/css/bootstrap.min.css\">\r\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"layout/css/svg.css\">\r\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"layout/css/styleGDF.css\">\r\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"layout/css/style.css\">\r\n\t<script>\r\n\t    // if (window.location.protocol !== 'https:') {\r\n\t    //     window.location.href = 'https://' + window.location.host + window.location.pathname;\r\n\t    // }\r\n\t</script>\r\n</head>\r\n<body>\r\n<!-- MENU PARA DISPOSITIVO MÓVEL-->\r\n        <div class=\"topo-titulo-site\">\r\n            <div class=\"container-fluid\" style=\"height:6.5vw !important\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-md-10 col-lg-10 col-sm-10 ancoras\">\r\n                           <a href=\"https://receita.fazenda.df.gov.br/\"><img style=\"width: 4vw !important; margin-right: 30px\" align=\"left\" src=\"./cadastrofiscal/img/Brasão.png\"></a>\r\n                            <span class=\"Portal\" style=\"text-align: left;margin-top: 25px\"> SECRETARIA DE ESTADO DE ECONOMIA DO<b>DISTRITO FEDERAL</b></span>\r\n\r\n                    </div>\r\n                    <div class=\"col-md-2 col-lg-2 col-sm-2 ancoras\">\r\n                            <span class=\"Portal\" style=\"position:relative; float: right; margin-top: 45px;\"><b>SUREC</b></span>\r\n                    </div>\r\n\r\n                </div>\r\n            </div>\r\n\r\n            <!-- PARTE DO TOPO QUE APRESENTA O MENU -->\r\n            <div class=\"menu-principal\">\r\n                <!-- <div class=\"container\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-12 text-left\" style=\"margin-top:-25px\">\r\n                            <header id=\"masthead\" class=\"site-header\" role=\"banner\">\r\n                                <div class=\"header-main\">\r\n                                    <nav id=\"primary-navigation\" class=\"site-navigation primary-navigation\" role=\"navigation\" >\r\n                                        <button class=\"menu-toggle\">Primary Menu</button>\r\n                                        <div class=\"menu-barra-principal-container\">\r\n                                          <",
+      "analise": null
+    },
+    "paginas": [
+      {
+        "url": "https://paineis.fazenda.df.gov.br/mapadeprecos/assets/js/app.js",
+        "status": 200,
+        "ms": 774,
+        "titulo": null,
+        "servidor": "Apache/2.4.39 (Win64) OpenSSL/1.1.1b PHP/7.3.5",
+        "antirrobo": [],
+        "tecnologia": [
+          "qlik"
+        ],
+        "tem_json_ld": false,
+        "enderecos_de_dados": [],
+        "inicio_do_texto": "/* ================================================ PROJETO: TEMPLATE MASHUP BÁSICO E RESPONSIVO DESENVOLVEDOR: JEFFERSON MATHEUS ANDRADE DA SILVA CONTATO: jeffersonmatheus1212@gmail.com =================================================== */ var config = { host: 'qap.fazenda.df.gov.br', prefix: '/paineis/', port: 443, isSecure: true }; var app ; // Painel de estatistica //var appID = '26a0f2da-28f"
+      }
+    ]
+  },
+  "Servidor Qlik da Fazenda DF": {
+    "robots": {
+      "status": 404,
+      "erro": null,
+      "conteudo": null,
+      "analise": {
+        "url": "https://qap.fazenda.df.gov.br/robots.txt",
+        "status": 404,
+        "ms": 1162,
+        "titulo": "404 - The requested resource cannot be found. - Qlik Sense",
+        "servidor": null,
+        "antirrobo": [],
+        "tecnologia": [
+          "qlik"
+        ],
+        "tem_json_ld": false,
+        "enderecos_de_dados": [],
+        "inicio_do_texto": "404 - The requested resource cannot be found. - Qlik Sense var m; function scrollToCorrectPos() { if ( m.matches && window.scrollTo ) { window.scrollTo( 0, 0 ); } } function setupSmallDeviceMql() { return window.matchMedia( \"screen and (max-width: 640px) and (orientation: landscape)\" ); } m = setupSmallDeviceMql(); scrollToCorrectPos(); html { height: 100%; overflow-y: hidden; } body { min-height:"
+      }
+    },
+    "paginas": [
+      {
+        "url": "https://qap.fazenda.df.gov.br/paineis/resources/assets/external/requirejs/require.js",
+        "status": 200,
+        "ms": 1383,
+        "titulo": null,
+        "servidor": "Microsoft-HTTPAPI/2.0",
+        "antirrobo": [],
+        "tecnologia": [
+          "qlik"
+        ],
+        "tem_json_ld": false,
+        "enderecos_de_dados": [
+          "docs.angularjs.org"
+        ],
+        "inicio_do_texto": "/*! * sense-client@5.61.7 * * Copyright(C) 2018 Qlik International AB * All Rights Reserved * */(function(e){function t(t){var n=t[0];var i=t[1];var a,o,u=0,s=[];for(;u 1)for(var n=1;n =0;--a){var o=this.tryEntries[a];var u=o.completion;if(\"root\"===o.tryLoc)return n(\"end\");if(o.tryLoc =0;--n){var i=this.tryEntries[n];if(i.tryLoc =0;--t){var n=this.tryEntries[t];if(n.finallyLoc===e){this.complete(n"
+      },
+      {
+        "url": "https://qap.fazenda.df.gov.br/paineis/qrs/about",
+        "status": 200,
+        "ms": 1759,
+        "titulo": "Qlik Sense login page",
+        "servidor": "Microsoft-HTTPAPI/2.0",
+        "antirrobo": [],
+        "tecnologia": [
+          "qlik"
+        ],
+        "tem_json_ld": false,
+        "enderecos_de_dados": [],
+        "inicio_do_texto": "Qlik Sense login page var m; function checkErrorMessage() { var errorMessage = document.getElementById( \"error-message\" ), usernameInput = document.getElementById( \"username-input\" ), passwordInput = document.getElementById( \"password-input\" ); if ( errorMessage && errorMessage.textContent ) { errorMessage.style.display = ( errorMessage.textContent ) ? \"block\" : \"none\"; errorMessage.focus(); if ( "
+      }
+    ]
+  },
   "Encartes DF": {
     "robots": {
       "status": 200,
@@ -268,7 +345,7 @@
       {
         "url": "https://encartesdf.com.br/",
         "status": 200,
-        "ms": 1207,
+        "ms": 1360,
         "titulo": "Encartes DF - Ofertas de Supermercados do Distrito Federal",
         "servidor": "LiteSpeed",
         "antirrobo": [],
@@ -284,7 +361,7 @@
       {
         "url": "https://encartesdf.com.br/wp-json/wp/v2/posts?per_page=5",
         "status": 200,
-        "ms": 1141,
+        "ms": 1337,
         "titulo": null,
         "servidor": "LiteSpeed",
         "antirrobo": [],
@@ -298,7 +375,7 @@
       {
         "url": "https://encartesdf.com.br/feed/",
         "status": 200,
-        "ms": 759,
+        "ms": 913,
         "titulo": "Encartes DF",
         "servidor": "LiteSpeed",
         "antirrobo": [],
@@ -314,7 +391,7 @@
       {
         "url": "https://encartesdf.com.br/sitemap.xml",
         "status": 200,
-        "ms": 1291,
+        "ms": 1423,
         "titulo": null,
         "servidor": "LiteSpeed",
         "antirrobo": [],
