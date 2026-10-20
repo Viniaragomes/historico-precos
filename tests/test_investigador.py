@@ -43,3 +43,35 @@ class TestInvestigador(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestExplorarTemas(unittest.TestCase):
+    def test_sitemap_relativo_e_links_da_pagina(self):
+        import tempfile
+        from urllib.robotparser import RobotFileParser
+
+        paginas = {
+            "https://site.gov.br/sitemap.xml.gz": "<urlset><url><loc>/legislacao/convenios/2026</loc></url>"
+                                                  "<url><loc>https://site.gov.br/noticias/festa</loc></url></urlset>",
+            "https://site.gov.br/legislacao/convenios/2026": '<a href="/x/convenio-icms-10.pdf">Convênio</a>',
+            "https://site.gov.br/precos/boletim": '<a href="/b/cotacao.xlsx">planilha</a>',
+        }
+        originais = (inv.baixar, inv.time.sleep)
+        inv.baixar = lambda url, limite=0, contexto=None: (
+            {"url": url, "status": 200, "ms": 1, "cabecalhos": {}, "texto": paginas[url]} if url in paginas
+            else {"url": url, "status": 0, "erro": "x", "ms": 1})
+        inv.time.sleep = lambda s: None
+        try:
+            rp = RobotFileParser()
+            rp.parse([])
+            with tempfile.TemporaryDirectory() as d:
+                r = inv.explorar_temas("Sitemap: /sitemap.xml.gz", "https://site.gov.br", rp, Path(d),
+                                       '<a href="/precos/boletim">Boletim de preços</a>', ["convenio", "preco"])
+        finally:
+            inv.baixar, inv.time.sleep = originais
+        urls = [p["url"] for p in r["paginas"]]
+        self.assertIn("https://site.gov.br/legislacao/convenios/2026", urls)
+        self.assertIn("https://site.gov.br/precos/boletim", urls)
+        self.assertNotIn("https://site.gov.br/noticias/festa", urls)
+        boletim = next(p for p in r["paginas"] if p["url"].endswith("boletim"))
+        self.assertEqual(boletim["arquivos_de_dados"], ["https://site.gov.br/b/cotacao.xlsx"])

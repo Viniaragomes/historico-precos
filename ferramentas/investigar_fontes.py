@@ -249,7 +249,7 @@ def scripts_do_site(html: str, base: str) -> list[str]:
 
 def explorar_sitemap(robots_txt: str, base: str, rp: RobotFileParser, pasta: Path, max_arquivos: int = 6) -> dict:
     """Segue o sitemap indicado no robots.txt, conta páginas de produto e lê duas delas (se permitidas)."""
-    fila = re.findall(r"(?im)^\s*sitemap:\s*(\S+)", robots_txt) or [base + "/sitemap.xml"]
+    fila = [urljoin(base + "/", u) for u in re.findall(r"(?im)^\s*sitemap:\s*(\S+)", robots_txt)] or [base + "/sitemap.xml"]
     vistos, produtos, total, avisos = [], [], 0, []
     while fila and len(vistos) < max_arquivos:
         url = fila.pop(0)
@@ -296,7 +296,7 @@ def explorar_temas(robots_txt: str, base: str, rp: RobotFileParser, pasta: Path,
         u = urljoin(base + "/", href)
         if urlsplit(u).hostname == urlsplit(base).hostname and (casa(u) or casa(re.sub(r"<[^>]+>", " ", texto))):
             candidatos.append(u)
-    fila = re.findall(r"(?im)^\s*sitemap:\s*(\S+)", robots_txt or "")
+    fila = [urljoin(base + "/", u) for u in re.findall(r"(?im)^\s*sitemap:\s*(\S+)", robots_txt or "")]
     lidos = []
     while fila and len(lidos) < max_sitemaps:
         url = fila.pop(0)
@@ -306,6 +306,7 @@ def explorar_temas(robots_txt: str, base: str, rp: RobotFileParser, pasta: Path,
         r = baixar(url, limite=20_000_000)
         lidos.append({"url": url, "status": r["status"], "erro": r.get("erro")})
         locs = re.findall(r"<loc>\s*([^<\s]+)\s*</loc>", r.get("texto") or "")
+        locs = [urljoin(url, u) for u in locs]
         if "<sitemapindex" in (r.get("texto") or ""):
             fila += locs
         else:
@@ -402,9 +403,12 @@ def investigar(pasta: Path, so: list[str] | None = None) -> dict:
             r = baixar(s)
             item["scripts"].append({"url": s, **pistas_do_script(r["texto"])} if r["status"] == 200 else {"url": s, "status": r["status"]})
         if nome in TEMAS and not bloqueado_robots:
-            inicio = next((p for p in item["paginas"] if p.get("status") == 200), None)
-            html_inicio = (pasta / _arquivo(inicio["url"], ".html")).read_text(encoding="utf-8") if inicio else ""
-            item["temas"] = explorar_temas(robots.get("texto") if robots["status"] == 200 else "", base, rp, pasta, html_inicio, TEMAS[nome])
+            try:  # um erro aqui não pode derrubar a investigação dos outros sites
+                inicio = next((p for p in item["paginas"] if p.get("status") == 200), None)
+                html_inicio = (pasta / _arquivo(inicio["url"], ".html")).read_text(encoding="utf-8") if inicio else ""
+                item["temas"] = explorar_temas(robots.get("texto") if robots["status"] == 200 else "", base, rp, pasta, html_inicio, TEMAS[nome])
+            except Exception as e:
+                item["temas"] = {"erro": f"{type(e).__name__}: {e}"[:300], "candidatos": 0, "paginas": []}
         if nome in EXPLORAR_SITEMAP and not bloqueado_robots and robots["status"] == 200:
             item["sitemap"] = explorar_sitemap(robots["texto"], base, rp, pasta)
         resultado[nome] = item
