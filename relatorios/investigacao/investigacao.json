@@ -10,7 +10,7 @@
       {
         "url": "https://mercado.carrefour.com.br/",
         "status": 200,
-        "ms": 70,
+        "ms": 201,
         "titulo": "Mercado Carrefour | Ofertas de Supermercado Delivery",
         "servidor": "cloudflare",
         "antirrobo": [
@@ -26,12 +26,19 @@
           "mercado.carrefour.com.br",
           "statics.carrefour.com.br"
         ],
-        "inicio_do_texto": "Mercado Carrefour | Ofertas de Supermercado Delivery (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://mercado.carrefour.com.br/sgtm/food-path/?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-5443NHD"
+        "inicio_do_texto": "Mercado Carrefour | Ofertas de Supermercado Delivery (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://mercado.carrefour.com.br/sgtm/food-path/?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-5443NHD",
+        "dados_embutidos": {
+          "json_ld_tipos": [],
+          "produtos_json_ld": [],
+          "estados_embutidos": {},
+          "outros_json_em_script": [],
+          "meta_preco": []
+        }
       },
       {
         "url": "https://mercado.carrefour.com.br/api/catalog_system/pub/products/search?_from=0&_to=0",
         "status": 503,
-        "ms": 311,
+        "ms": 46,
         "titulo": null,
         "servidor": "cloudflare",
         "antirrobo": [
@@ -42,7 +49,112 @@
         "enderecos_de_dados": [],
         "inicio_do_texto": ""
       }
-    ]
+    ],
+    "scripts": [
+      {
+        "url": "https://mercado.carrefour.com.br/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js",
+        "enderecos": [],
+        "qlik": null
+      }
+    ],
+    "sitemap": {
+      "arquivos_lidos": [
+        {
+          "url": "https://mercado.carrefour.com.br/sitemap.xml",
+          "status": 200,
+          "erro": null
+        },
+        {
+          "url": "https://mercado.carrefour.com.br/sitemap/product-0.xml",
+          "status": 200,
+          "erro": null
+        },
+        {
+          "url": "https://mercado.carrefour.com.br/sitemap/product-1.xml",
+          "status": 200,
+          "erro": null
+        },
+        {
+          "url": "https://mercado.carrefour.com.br/sitemap/product-10.xml",
+          "status": 200,
+          "erro": null
+        },
+        {
+          "url": "https://mercado.carrefour.com.br/sitemap/product-11.xml",
+          "status": 200,
+          "erro": null
+        },
+        {
+          "url": "https://mercado.carrefour.com.br/sitemap/product-12.xml",
+          "status": 200,
+          "erro": null
+        }
+      ],
+      "urls_listadas": 5000,
+      "paginas_de_produto": 5000,
+      "exemplos": [
+        "https://mercado.carrefour.com.br/condicionador-elseve-longo-dos-sonhos-com-queratina-vegetal-sem-sal-200ml-5735270/p",
+        "https://mercado.carrefour.com.br/condicionador-elseve-longo-dos-sonhos-400ml-5735289/p",
+        "https://mercado.carrefour.com.br/shampoo-elseve-longo-dos-sonhos-400ml-5735262/p",
+        "https://mercado.carrefour.com.br/farinha-de-mandioca-tipo-1-fina-yoki-pacote-1kg-3739171/p",
+        "https://mercado.carrefour.com.br/lenco-umedecido-limpeza-e-suavidade-johnsons-leve-mais-e-pague-menos-176-unidades-5738032/p"
+      ],
+      "amostras": [
+        {
+          "url": "https://mercado.carrefour.com.br/condicionador-elseve-longo-dos-sonhos-com-queratina-vegetal-sem-sal-200ml-5735270/p",
+          "status": 200,
+          "erro": null,
+          "antirrobo": [
+            "cloudflare"
+          ],
+          "dados": {
+            "json_ld_tipos": [
+              "Product"
+            ],
+            "produtos_json_ld": [
+              {
+                "nome": "Condicionador Elseve Longo dos Sonhos com Queratina Vegetal sem Sal 200ml",
+                "gtin": "7899706170857",
+                "marca": "Elsève",
+                "preco": 22.59,
+                "moeda": "BRL",
+                "disponibilidade": "http://schema.org/InStock"
+              }
+            ],
+            "estados_embutidos": {},
+            "outros_json_em_script": [],
+            "meta_preco": []
+          }
+        },
+        {
+          "url": "https://mercado.carrefour.com.br/condicionador-elseve-longo-dos-sonhos-400ml-5735289/p",
+          "status": 200,
+          "erro": null,
+          "antirrobo": [
+            "cloudflare"
+          ],
+          "dados": {
+            "json_ld_tipos": [
+              "Product"
+            ],
+            "produtos_json_ld": [
+              {
+                "nome": "Condicionador Elseve Longo dos Sonhos 400ml",
+                "gtin": "7899706170871",
+                "marca": "Elsève",
+                "preco": 36.9,
+                "moeda": "BRL",
+                "disponibilidade": "http://schema.org/InStock"
+              }
+            ],
+            "estados_embutidos": {},
+            "outros_json_em_script": [],
+            "meta_preco": []
+          }
+        }
+      ],
+      "avisos": []
+    }
   },
   "Carrefour (loja geral)": {
     "robots": {
@@ -52,7 +164,7 @@
       "analise": {
         "url": "https://www.carrefour.com.br/robots.txt",
         "status": 403,
-        "ms": 228,
+        "ms": 186,
         "titulo": "Acesso Bloqueado",
         "servidor": "cloudflare",
         "antirrobo": [
@@ -70,7 +182,8 @@
         "status": null,
         "nota": "robots.txt não permite: não acessado"
       }
-    ]
+    ],
+    "scripts": []
   },
   "Pão de Açúcar": {
     "robots": {
@@ -83,7 +196,7 @@
       {
         "url": "https://www.paodeacucar.com/",
         "status": 200,
-        "ms": 1419,
+        "ms": 89,
         "titulo": "Pão de Açúcar | Supermercado Online",
         "servidor": null,
         "antirrobo": [],
@@ -92,14 +205,101 @@
         ],
         "tem_json_ld": false,
         "enderecos_de_dados": [],
-        "inicio_do_texto": "Pão de Açúcar | Supermercado Online @font-face { font-family: openSans; font-style: normal; font-display: swap; src: local(\"Open Sans\"), local(\"OpenSans\"), url(https://static.gpa.digital/fonts/OpenSans-Regular.woff2) format(\"woff2\"), url(https://static.gpa.digital/fonts/OpenSans-Regular.woff) format(\"woff\"), url(https://static.gpa.digital/fonts/OpenSans-Regular.ttf) format(\"ttf\"), url(https://stat"
+        "inicio_do_texto": "Pão de Açúcar | Supermercado Online @font-face { font-family: openSans; font-style: normal; font-display: swap; src: local(\"Open Sans\"), local(\"OpenSans\"), url(https://static.gpa.digital/fonts/OpenSans-Regular.woff2) format(\"woff2\"), url(https://static.gpa.digital/fonts/OpenSans-Regular.woff) format(\"woff\"), url(https://static.gpa.digital/fonts/OpenSans-Regular.ttf) format(\"ttf\"), url(https://stat",
+        "dados_embutidos": {
+          "json_ld_tipos": [],
+          "produtos_json_ld": [],
+          "estados_embutidos": {
+            "__NEXT_DATA__": {
+              "presente": true,
+              "tamanho": 134356,
+              "campos_de_preco_ou_gtin": []
+            }
+          },
+          "outros_json_em_script": [],
+          "meta_preco": []
+        }
       },
       {
         "url": "https://www.paodeacucar.com/busca?terms=cafe",
         "status": null,
         "nota": "robots.txt não permite: não acessado"
       }
-    ]
+    ],
+    "scripts": [
+      {
+        "url": "https://www.paodeacucar.com/_next/static/chunks/webpack-6364e9ee7e91119a.js",
+        "enderecos": [],
+        "qlik": null
+      },
+      {
+        "url": "https://www.paodeacucar.com/_next/static/chunks/framework-bb5c596eafb42b22.js",
+        "enderecos": [],
+        "qlik": null
+      },
+      {
+        "url": "https://www.paodeacucar.com/_next/static/chunks/main-3b10862d95a729d2.js",
+        "enderecos": [
+          "/api",
+          "/api/"
+        ],
+        "qlik": null
+      },
+      {
+        "url": "https://www.paodeacucar.com/_next/static/chunks/pages/_app-3588773964f7bad2.js",
+        "enderecos": [
+          "/Product_page",
+          "/bestPrices",
+          "/busca",
+          "/busca?terms=Achocolatado",
+          "/busca?terms=Cerveja",
+          "/busca?terms=Fraldas",
+          "/busca?terms=Heineken",
+          "/busca?terms=Vinhos",
+          "/catalog-page",
+          "/catalog-sponsored-banner",
+          "/product/recommendation",
+          "/product_list",
+          "/products",
+          "/products/",
+          "/products/ecom/",
+          "/products/ecom/seeMore",
+          "/products/ecom/skuLivePrice?storeId=",
+          "/products/list",
+          "/produto/",
+          "/search/autocomplete",
+          "/search/category-page",
+          "/search/popular",
+          "/search/search",
+          "/sponsored-events/page-view-product",
+          "/sponsored-products",
+          "/v3/products/categories/ecom?storeId=",
+          "/v3/products/ecom/skuLivePrice?storeId=",
+          "/v4/products/categories/ecom?storeId=",
+          "/v4/products/ecom/",
+          "/v4/products/ecom/firstPurchaseCoupon",
+          "/v4/products/ecom/installmentOption?productPrice=",
+          "https://api.linximpulse.com/engage/search/v3",
+          "https://www.google.com/recaptcha/api.js?hl=",
+          "https://www.paodeacucar.com/sitemapProduto.sdex"
+        ],
+        "qlik": null
+      }
+    ],
+    "sitemap": {
+      "arquivos_lidos": [
+        {
+          "url": "https://www.paodeacucar.com/sitemap.xml",
+          "status": 404,
+          "erro": null
+        }
+      ],
+      "urls_listadas": 0,
+      "paginas_de_produto": 0,
+      "exemplos": [],
+      "amostras": [],
+      "avisos": []
+    }
   },
   "Comper": {
     "robots": {
@@ -109,7 +309,7 @@
       "analise": {
         "url": "https://www.comper.com.br/robots.txt",
         "status": 403,
-        "ms": 214,
+        "ms": 417,
         "titulo": "Just a moment...",
         "servidor": "cloudflare",
         "antirrobo": [
@@ -127,7 +327,8 @@
         "status": null,
         "nota": "robots.txt não permite: não acessado"
       }
-    ]
+    ],
+    "scripts": []
   },
   "Diário Oficial da União": {
     "robots": {
@@ -141,15 +342,16 @@
         "url": "https://www.in.gov.br/",
         "status": 0,
         "erro": "Remote end closed connection without response",
-        "ms": 12
+        "ms": 81
       },
       {
         "url": "https://www.in.gov.br/consulta/-/buscar/dou?q=ICMS",
         "status": 0,
         "erro": "Remote end closed connection without response",
-        "ms": 12
+        "ms": 11
       }
-    ]
+    ],
+    "scripts": []
   },
   "LexML (leis, Senado)": {
     "robots": {
@@ -162,7 +364,7 @@
       {
         "url": "https://www.lexml.gov.br/sru?operation=searchRetrieve&version=1.1&query=urn%3D%22lei%22%20and%20description%3Dicms&maximumRecords=3",
         "status": 404,
-        "ms": 1097,
+        "ms": 1206,
         "titulo": "HTTP Status 404 – Not Found",
         "servidor": "nginx",
         "antirrobo": [
@@ -173,9 +375,17 @@
         ],
         "tem_json_ld": false,
         "enderecos_de_dados": [],
-        "inicio_do_texto": "HTTP Status 404 – Not Found body {font-family:Tahoma,Arial,sans-serif;} h1, h2, h3, b {color:white;background-color:#525D76;} h1 {font-size:22px;} h2 {font-size:16px;} h3 {font-size:14px;} p {font-size:12px;} a {color:black;} .line {height:1px;background-color:#525D76;border:none;} HTTP Status 404 – Not Found Type Status Report Description The origin server did not find a current representation fo"
+        "inicio_do_texto": "HTTP Status 404 – Not Found body {font-family:Tahoma,Arial,sans-serif;} h1, h2, h3, b {color:white;background-color:#525D76;} h1 {font-size:22px;} h2 {font-size:16px;} h3 {font-size:14px;} p {font-size:12px;} a {color:black;} .line {height:1px;background-color:#525D76;border:none;} HTTP Status 404 – Not Found Type Status Report Description The origin server did not find a current representation fo",
+        "dados_embutidos": {
+          "json_ld_tipos": [],
+          "produtos_json_ld": [],
+          "estados_embutidos": {},
+          "outros_json_em_script": [],
+          "meta_preco": []
+        }
       }
-    ]
+    ],
+    "scripts": []
   },
   "Confaz (convênios ICMS)": {
     "robots": {
@@ -189,9 +399,10 @@
         "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios",
         "status": 0,
         "erro": "<urlopen error timed out>",
-        "ms": 30181
+        "ms": 45182
       }
-    ]
+    ],
+    "scripts": []
   },
   "Painéis da Secretaria de Economia do DF": {
     "robots": {
@@ -204,19 +415,26 @@
       {
         "url": "https://paineis.fazenda.df.gov.br/",
         "status": 200,
-        "ms": 1205,
+        "ms": 1016,
         "titulo": "Secretaria de Economia do Distrito Federal",
         "servidor": "Apache/2.4.39 (Win64) OpenSSL/1.1.1b PHP/7.3.5",
         "antirrobo": [],
         "tecnologia": [],
         "tem_json_ld": false,
         "enderecos_de_dados": [],
-        "inicio_do_texto": "Secretaria de Economia do Distrito Federal // if (window.location.protocol !== 'https:') { // window.location.href = 'https://' + window.location.host + window.location.pathname; // } SECRETARIA DE ESTADO DE ECONOMIA DO DISTRITO FEDERAL SUREC Primary Menu Início Institucional --> Titulo do novo painel Titulo do novo painel Titulo do novo painel Previous Next --> SERVIÇOS ON-LINE AGENCIANET ATENDIM"
+        "inicio_do_texto": "Secretaria de Economia do Distrito Federal // if (window.location.protocol !== 'https:') { // window.location.href = 'https://' + window.location.host + window.location.pathname; // } SECRETARIA DE ESTADO DE ECONOMIA DO DISTRITO FEDERAL SUREC Primary Menu Início Institucional --> Titulo do novo painel Titulo do novo painel Titulo do novo painel Previous Next --> SERVIÇOS ON-LINE AGENCIANET ATENDIM",
+        "dados_embutidos": {
+          "json_ld_tipos": [],
+          "produtos_json_ld": [],
+          "estados_embutidos": {},
+          "outros_json_em_script": [],
+          "meta_preco": []
+        }
       },
       {
         "url": "https://paineis.fazenda.df.gov.br/mapadeprecos/",
         "status": 200,
-        "ms": 1619,
+        "ms": 550,
         "titulo": "Mapa de Preço",
         "servidor": "Apache/2.4.39 (Win64) OpenSSL/1.1.1b PHP/7.3.5",
         "antirrobo": [],
@@ -227,33 +445,181 @@
         "enderecos_de_dados": [
           "fonts.googleapis.com"
         ],
-        "inicio_do_texto": "Mapa de Preço Inicio Mapa de Preços Detalhes NCM Filtros Disponíveis Limpar Última atualização: SECRETARIA DE ESTADO DE ECONOMIA DO DISTRITO FEDERAL Filtros disponíveis Limpar SUREC 0 --> Filtros Esse painel tem por objetivo apresentar as informações de preços de produtos comercializados no Distrito Federal. São apresentados dados de NF-e's emitidas no DF nos últimos 3 meses. As descrições de cada"
+        "inicio_do_texto": "Mapa de Preço Inicio Mapa de Preços Detalhes NCM Filtros Disponíveis Limpar Última atualização: SECRETARIA DE ESTADO DE ECONOMIA DO DISTRITO FEDERAL Filtros disponíveis Limpar SUREC 0 --> Filtros Esse painel tem por objetivo apresentar as informações de preços de produtos comercializados no Distrito Federal. São apresentados dados de NF-e's emitidas no DF nos últimos 3 meses. As descrições de cada",
+        "dados_embutidos": {
+          "json_ld_tipos": [],
+          "produtos_json_ld": [],
+          "estados_embutidos": {},
+          "outros_json_em_script": [],
+          "meta_preco": []
+        }
       }
-    ]
-  },
-  "Receita do DF": {
-    "robots": {
-      "status": 200,
-      "erro": null,
-      "conteudo": "User-agent: *\r\nAllow: /\r\n\r\nSitemap: https://www.receita.fazenda.df.gov.br/sitemap.xml\r\n",
-      "analise": null
-    },
-    "paginas": [
+    ],
+    "scripts": [
       {
-        "url": "https://www.receita.fazenda.df.gov.br/",
-        "status": 200,
-        "ms": 2935,
-        "titulo": "Portal da Receita DF ? IPVA, IPTU e Serviços Tributários | SEEC",
-        "servidor": "Microsoft-IIS/8.5",
-        "antirrobo": [],
-        "tecnologia": [],
-        "tem_json_ld": false,
-        "enderecos_de_dados": [
-          "dodf.df.gov.br",
-          "fonts.googleapis.com",
-          "www.receita.fazenda.df.gov.br"
-        ],
-        "inicio_do_texto": "var states = [ ' NF-e - Obter Informações', ' NFC-e - Obter Informações', ' CT-e - Obter Informações', ' NFC-e - Consultar e Efetuar Credenciamento para Emissão ou Descredenciamento', ' NFC-e - Gerar Código de Segurança do Contribuinte-CSC', ' CT-e OS - Obter informações', ' NF-e - Consultar e Efetuar Credenciamento para Emissão ou Descredenciamento', ' NFC-e - Consultar Documento Pela Chave de Ac"
+        "url": "https://paineis.fazenda.df.gov.br/mapadeprecos/js/sb-admin-2.min.js",
+        "enderecos": [],
+        "qlik": null
+      },
+      {
+        "url": "https://paineis.fazenda.df.gov.br/mapadeprecos/js/sb-admin-2.js",
+        "enderecos": [],
+        "qlik": null
+      },
+      {
+        "url": "https://paineis.fazenda.df.gov.br/mapadeprecos/js/demo/datatables-demo.js",
+        "enderecos": [],
+        "qlik": null
+      },
+      {
+        "url": "https://paineis.fazenda.df.gov.br/mapadeprecos/assets/js/app.js",
+        "enderecos": [],
+        "qlik": {
+          "app_ids": [
+            "26a0f2da-28fd-4249-9b72-055528829f0f",
+            "f0176c31-3c3b-4d15-94b3-ca9f2e902854"
+          ],
+          "objetos": [
+            [
+              "CurrentSelections",
+              "CurrentSelections"
+            ],
+            [
+              "QVDASHBOARD-04",
+              "CWpswn"
+            ],
+            [
+              "QVDASHBOARD-KPI01",
+              "JwTxe"
+            ],
+            [
+              "QVDASHBOARD-KPI02",
+              "UJnFZ"
+            ],
+            [
+              "QVDASHBOARD-KPI03",
+              "ufkBM"
+            ],
+            [
+              "QVDASHBOARD-KPI04",
+              "EKeCnR"
+            ],
+            [
+              "QVFILTROS-01",
+              "QDPVpqr"
+            ],
+            [
+              "QVFILTROS-02",
+              "gyEJEAH"
+            ],
+            [
+              "QVFILTROS-03",
+              "jGFCY"
+            ],
+            [
+              "QVFILTROS-04",
+              "kqYr"
+            ],
+            [
+              "QVFILTROS-05",
+              "RjhVp"
+            ],
+            [
+              "QVFILTROS-06",
+              "QDPVpqr"
+            ],
+            [
+              "QVFILTROS-06",
+              "gyEJEAH"
+            ],
+            [
+              "QVFILTROS-07",
+              "UJPWbUH"
+            ],
+            [
+              "QVFILTROS-07",
+              "gyEJEAH"
+            ],
+            [
+              "QVFILTROS-08",
+              "jGFCY"
+            ],
+            [
+              "QVFILTROS-09",
+              "kqYr"
+            ],
+            [
+              "QVFILTROS-10",
+              "RjhVp"
+            ],
+            [
+              "QVFILTROS-11",
+              "gyEJEAH"
+            ],
+            [
+              "QVFILTROS-12",
+              "UJPWbUH"
+            ],
+            [
+              "Tabela-1",
+              "JDnEtp"
+            ],
+            [
+              "Tabela-10",
+              "phprpS"
+            ],
+            [
+              "Tabela-2",
+              "fXMujgw"
+            ],
+            [
+              "Tabela-3",
+              "VpyShME"
+            ],
+            [
+              "Tabela-4",
+              "VeewZ"
+            ],
+            [
+              "Tabela-5",
+              "SmEzj"
+            ],
+            [
+              "Tabela-6",
+              "GKjkaU"
+            ],
+            [
+              "Tabela-7",
+              "MXWS"
+            ],
+            [
+              "Tabela-8",
+              "kqYr"
+            ],
+            [
+              "Tabela-9",
+              "vBfzHk"
+            ]
+          ],
+          "config": [
+            [
+              "host",
+              "qap.fazenda.df.gov.br"
+            ],
+            [
+              "prefix",
+              "/paineis/"
+            ],
+            [
+              "port",
+              "443"
+            ],
+            [
+              "isSecure",
+              "true"
+            ]
+          ]
+        }
       }
     ]
   },
@@ -268,7 +634,7 @@
       {
         "url": "https://paineis.fazenda.df.gov.br/mapadeprecos/assets/js/app.js",
         "status": 200,
-        "ms": 774,
+        "ms": 415,
         "titulo": null,
         "servidor": "Apache/2.4.39 (Win64) OpenSSL/1.1.1b PHP/7.3.5",
         "antirrobo": [],
@@ -277,9 +643,159 @@
         ],
         "tem_json_ld": false,
         "enderecos_de_dados": [],
-        "inicio_do_texto": "/* ================================================ PROJETO: TEMPLATE MASHUP BÁSICO E RESPONSIVO DESENVOLVEDOR: JEFFERSON MATHEUS ANDRADE DA SILVA CONTATO: jeffersonmatheus1212@gmail.com =================================================== */ var config = { host: 'qap.fazenda.df.gov.br', prefix: '/paineis/', port: 443, isSecure: true }; var app ; // Painel de estatistica //var appID = '26a0f2da-28f"
+        "inicio_do_texto": "/* ================================================ PROJETO: TEMPLATE MASHUP BÁSICO E RESPONSIVO DESENVOLVEDOR: JEFFERSON MATHEUS ANDRADE DA SILVA CONTATO: jeffersonmatheus1212@gmail.com =================================================== */ var config = { host: 'qap.fazenda.df.gov.br', prefix: '/paineis/', port: 443, isSecure: true }; var app ; // Painel de estatistica //var appID = '26a0f2da-28f",
+        "pistas": {
+          "enderecos": [],
+          "qlik": {
+            "app_ids": [
+              "26a0f2da-28fd-4249-9b72-055528829f0f",
+              "f0176c31-3c3b-4d15-94b3-ca9f2e902854"
+            ],
+            "objetos": [
+              [
+                "CurrentSelections",
+                "CurrentSelections"
+              ],
+              [
+                "QVDASHBOARD-04",
+                "CWpswn"
+              ],
+              [
+                "QVDASHBOARD-KPI01",
+                "JwTxe"
+              ],
+              [
+                "QVDASHBOARD-KPI02",
+                "UJnFZ"
+              ],
+              [
+                "QVDASHBOARD-KPI03",
+                "ufkBM"
+              ],
+              [
+                "QVDASHBOARD-KPI04",
+                "EKeCnR"
+              ],
+              [
+                "QVFILTROS-01",
+                "QDPVpqr"
+              ],
+              [
+                "QVFILTROS-02",
+                "gyEJEAH"
+              ],
+              [
+                "QVFILTROS-03",
+                "jGFCY"
+              ],
+              [
+                "QVFILTROS-04",
+                "kqYr"
+              ],
+              [
+                "QVFILTROS-05",
+                "RjhVp"
+              ],
+              [
+                "QVFILTROS-06",
+                "QDPVpqr"
+              ],
+              [
+                "QVFILTROS-06",
+                "gyEJEAH"
+              ],
+              [
+                "QVFILTROS-07",
+                "UJPWbUH"
+              ],
+              [
+                "QVFILTROS-07",
+                "gyEJEAH"
+              ],
+              [
+                "QVFILTROS-08",
+                "jGFCY"
+              ],
+              [
+                "QVFILTROS-09",
+                "kqYr"
+              ],
+              [
+                "QVFILTROS-10",
+                "RjhVp"
+              ],
+              [
+                "QVFILTROS-11",
+                "gyEJEAH"
+              ],
+              [
+                "QVFILTROS-12",
+                "UJPWbUH"
+              ],
+              [
+                "Tabela-1",
+                "JDnEtp"
+              ],
+              [
+                "Tabela-10",
+                "phprpS"
+              ],
+              [
+                "Tabela-2",
+                "fXMujgw"
+              ],
+              [
+                "Tabela-3",
+                "VpyShME"
+              ],
+              [
+                "Tabela-4",
+                "VeewZ"
+              ],
+              [
+                "Tabela-5",
+                "SmEzj"
+              ],
+              [
+                "Tabela-6",
+                "GKjkaU"
+              ],
+              [
+                "Tabela-7",
+                "MXWS"
+              ],
+              [
+                "Tabela-8",
+                "kqYr"
+              ],
+              [
+                "Tabela-9",
+                "vBfzHk"
+              ]
+            ],
+            "config": [
+              [
+                "host",
+                "qap.fazenda.df.gov.br"
+              ],
+              [
+                "prefix",
+                "/paineis/"
+              ],
+              [
+                "port",
+                "443"
+              ],
+              [
+                "isSecure",
+                "true"
+              ]
+            ]
+          }
+        }
       }
-    ]
+    ],
+    "scripts": []
   },
   "Servidor Qlik da Fazenda DF": {
     "robots": {
@@ -289,7 +805,7 @@
       "analise": {
         "url": "https://qap.fazenda.df.gov.br/robots.txt",
         "status": 404,
-        "ms": 1162,
+        "ms": 1228,
         "titulo": "404 - The requested resource cannot be found. - Qlik Sense",
         "servidor": null,
         "antirrobo": [],
@@ -305,7 +821,7 @@
       {
         "url": "https://qap.fazenda.df.gov.br/paineis/resources/assets/external/requirejs/require.js",
         "status": 200,
-        "ms": 1383,
+        "ms": 1225,
         "titulo": null,
         "servidor": "Microsoft-HTTPAPI/2.0",
         "antirrobo": [],
@@ -316,91 +832,71 @@
         "enderecos_de_dados": [
           "docs.angularjs.org"
         ],
-        "inicio_do_texto": "/*! * sense-client@5.61.7 * * Copyright(C) 2018 Qlik International AB * All Rights Reserved * */(function(e){function t(t){var n=t[0];var i=t[1];var a,o,u=0,s=[];for(;u 1)for(var n=1;n =0;--a){var o=this.tryEntries[a];var u=o.completion;if(\"root\"===o.tryLoc)return n(\"end\");if(o.tryLoc =0;--n){var i=this.tryEntries[n];if(i.tryLoc =0;--t){var n=this.tryEntries[t];if(n.finallyLoc===e){this.complete(n"
-      },
-      {
-        "url": "https://qap.fazenda.df.gov.br/paineis/qrs/about",
-        "status": 200,
-        "ms": 1759,
-        "titulo": "Qlik Sense login page",
-        "servidor": "Microsoft-HTTPAPI/2.0",
-        "antirrobo": [],
-        "tecnologia": [
-          "qlik"
-        ],
-        "tem_json_ld": false,
-        "enderecos_de_dados": [],
-        "inicio_do_texto": "Qlik Sense login page var m; function checkErrorMessage() { var errorMessage = document.getElementById( \"error-message\" ), usernameInput = document.getElementById( \"username-input\" ), passwordInput = document.getElementById( \"password-input\" ); if ( errorMessage && errorMessage.textContent ) { errorMessage.style.display = ( errorMessage.textContent ) ? \"block\" : \"none\"; errorMessage.focus(); if ( "
+        "inicio_do_texto": "/*! * sense-client@5.61.7 * * Copyright(C) 2018 Qlik International AB * All Rights Reserved * */(function(e){function t(t){var n=t[0];var i=t[1];var a,o,u=0,s=[];for(;u 1)for(var n=1;n =0;--a){var o=this.tryEntries[a];var u=o.completion;if(\"root\"===o.tryLoc)return n(\"end\");if(o.tryLoc =0;--n){var i=this.tryEntries[n];if(i.tryLoc =0;--t){var n=this.tryEntries[t];if(n.finallyLoc===e){this.complete(n",
+        "pistas": {
+          "enderecos": [
+            "/api/v1"
+          ],
+          "qlik": null
+        }
       }
-    ]
+    ],
+    "scripts": []
   },
-  "Encartes DF": {
+  "Receita do DF": {
     "robots": {
       "status": 200,
       "erro": null,
-      "conteudo": "# START YOAST BLOCK\n# ---------------------------\nUser-agent: *\nDisallow:\n\nSitemap: https://encartesdf.com.br/sitemap_index.xml\n# ---------------------------\n# END YOAST BLOCK",
+      "conteudo": "User-agent: *\r\nAllow: /\r\n\r\nSitemap: https://www.receita.fazenda.df.gov.br/sitemap.xml\r\n",
       "analise": null
     },
     "paginas": [
       {
-        "url": "https://encartesdf.com.br/",
+        "url": "https://www.receita.fazenda.df.gov.br/",
         "status": 200,
-        "ms": 1360,
-        "titulo": "Encartes DF - Ofertas de Supermercados do Distrito Federal",
-        "servidor": "LiteSpeed",
+        "ms": 1742,
+        "titulo": "Portal da Receita DF ? IPVA, IPTU e Serviços Tributários | SEEC",
+        "servidor": "Microsoft-IIS/8.5",
         "antirrobo": [],
-        "tecnologia": [
-          "wordpress"
-        ],
-        "tem_json_ld": true,
-        "enderecos_de_dados": [
-          "api.w.org"
-        ],
-        "inicio_do_texto": "Encartes DF - Ofertas de Supermercados do Distrito Federal {\"@context\":\"https:\\/\\/schema.org\",\"@graph\":[{\"@type\":\"WebPage\",\"@id\":\"https:\\/\\/encartesdf.com.br\\/\",\"url\":\"https:\\/\\/encartesdf.com.br\\/\",\"name\":\"Encartes DF - Ofertas de Supermercados do Distrito Federal\",\"isPartOf\":{\"@id\":\"https:\\/\\/encartesdf.com.br\\/#website\"},\"primaryImageOfPage\":{\"@id\":\"https:\\/\\/encartesdf.com.br\\/#primaryimage\"},"
-      },
-      {
-        "url": "https://encartesdf.com.br/wp-json/wp/v2/posts?per_page=5",
-        "status": 200,
-        "ms": 1337,
-        "titulo": null,
-        "servidor": "LiteSpeed",
-        "antirrobo": [],
-        "tecnologia": [
-          "wordpress"
-        ],
-        "tem_json_ld": false,
-        "enderecos_de_dados": [],
-        "inicio_do_texto": "[{\"id\":45370,\"date\":\"2026-10-20T09:54:28\",\"date_gmt\":\"2026-10-20T12:54:28\",\"guid\":{\"rendered\":\"https:\\/\\/encartesdf.com.br\\/supermercado-mais-economico-ate-26-10-2026\\/\"},\"modified\":\"2026-10-20T10:13:40\",\"modified_gmt\":\"2026-10-20T13:13:40\",\"slug\":\"supermercado-mais-economico-ate-26-10-2026\",\"status\":\"publish\",\"type\":\"post\",\"link\":\"https:\\/\\/encartesdf.com.br\\/supermercado-mais-economico-ate-26-10"
-      },
-      {
-        "url": "https://encartesdf.com.br/feed/",
-        "status": 200,
-        "ms": 913,
-        "titulo": "Encartes DF",
-        "servidor": "LiteSpeed",
-        "antirrobo": [],
-        "tecnologia": [
-          "wordpress"
-        ],
+        "tecnologia": [],
         "tem_json_ld": false,
         "enderecos_de_dados": [
-          "search.yahoo.com"
+          "dodf.df.gov.br",
+          "fonts.googleapis.com",
+          "www.receita.fazenda.df.gov.br"
         ],
-        "inicio_do_texto": "Encartes DF https://encartesdf.com.br/ Confira as melhores ofertas, encartes e promoções de supermercados nas principais cidades do Distrito Federal. Tue, 20 Oct 2026 13:13:40 +0000 pt-BR hourly 1 https://wordpress.org/?v=7.1.3 https://encartesdf.com.br/wp-content/uploads/2021/12/cropped-logo-favicon2-32x32.png Encartes DF https://encartesdf.com.br/ 32 32 Supermercado Mais Econômico até 26-10-2026"
+        "inicio_do_texto": "var states = [ ' NF-e - Obter Informações', ' NFC-e - Obter Informações', ' CT-e - Obter Informações', ' NFC-e - Consultar e Efetuar Credenciamento para Emissão ou Descredenciamento', ' NFC-e - Gerar Código de Segurança do Contribuinte-CSC', ' CT-e OS - Obter informações', ' NF-e - Consultar e Efetuar Credenciamento para Emissão ou Descredenciamento', ' NFC-e - Consultar Documento Pela Chave de Ac",
+        "dados_embutidos": {
+          "json_ld_tipos": [
+            "WebSite"
+          ],
+          "produtos_json_ld": [],
+          "estados_embutidos": {},
+          "outros_json_em_script": [],
+          "meta_preco": []
+        }
+      }
+    ],
+    "scripts": [
+      {
+        "url": "https://www.receita.fazenda.df.gov.br/layout/js/typeahead/bloodhound.js",
+        "enderecos": [],
+        "qlik": null
       },
       {
-        "url": "https://encartesdf.com.br/sitemap.xml",
-        "status": 200,
-        "ms": 1423,
-        "titulo": null,
-        "servidor": "LiteSpeed",
-        "antirrobo": [],
-        "tecnologia": [
-          "wordpress"
-        ],
-        "tem_json_ld": false,
-        "enderecos_de_dados": [],
-        "inicio_do_texto": "https://encartesdf.com.br/post-sitemap.xml 2026-10-20T13:13:40+00:00 https://encartesdf.com.br/post-sitemap2.xml 2023-09-19T17:23:43+00:00 https://encartesdf.com.br/post-sitemap3.xml 2024-09-04T16:24:02+00:00 https://encartesdf.com.br/post-sitemap4.xml 2025-09-01T13:37:12+00:00 https://encartesdf.com.br/post-sitemap5.xml 2026-02-24T11:21:07+00:00 https://encartesdf.com.br/post-sitemap6.xml 2026-07"
+        "url": "https://www.receita.fazenda.df.gov.br/layout/js/typeahead/bloodhound.min.js",
+        "enderecos": [],
+        "qlik": null
+      },
+      {
+        "url": "https://www.receita.fazenda.df.gov.br/layout/js/typeahead/typeahead.bundle.js",
+        "enderecos": [],
+        "qlik": null
+      },
+      {
+        "url": "https://www.receita.fazenda.df.gov.br/layout/js/typeahead/typeahead.bundle.min.js",
+        "enderecos": [],
+        "qlik": null
       }
     ]
   }

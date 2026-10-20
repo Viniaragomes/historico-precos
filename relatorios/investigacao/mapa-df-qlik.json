@@ -1,0 +1,1076 @@
+{
+  "ok": true,
+  "app_id": "f0176c31-3c3b-4d15-94b3-ca9f2e902854",
+  "origin_usado": null,
+  "tentativas": [],
+  "titulo": "Mapa De Preços",
+  "ultima_carga": "2026-10-20T10:55:40.421Z",
+  "campos": [
+    "cfop",
+    "DESCRICAO",
+    "id",
+    "cprod",
+    "qcom",
+    "ucom",
+    "ucom_mod",
+    "vuncom",
+    "xprod",
+    "extipi",
+    "ncm",
+    "vprod",
+    "nitem",
+    "cuf",
+    "demi",
+    "dia",
+    "mes",
+    "ano",
+    "uf_emit",
+    "uf_dest",
+    "cpfcnpj_emit",
+    "cpfcnpj_dest",
+    "cpfcnpj",
+    "tipo_pessoa",
+    "possui_cean",
+    "cean",
+    "contagem",
+    "Capitulo",
+    "Descricao_capitulo",
+    "Posicao",
+    "Descricao_posicao",
+    "Unidade",
+    "Q3",
+    "Q2",
+    "Q1",
+    "Out1",
+    "Out3",
+    "contagem_outliers",
+    "cean_controle",
+    "DESC_TIPO_CONTB",
+    "DSC_FORMA_CALCULO_ICMS",
+    "DESC_ATVD_ICMS"
+  ],
+  "tabelas": [
+    {
+      "elemento": "Tabela-1",
+      "objeto": "JDnEtp",
+      "tipo": "table",
+      "titulo": "Valor Médio por Categoria Tributária",
+      "dimensoes": [
+        "Categoria Tributária"
+      ],
+      "medidas": [
+        "Valor Médio"
+      ],
+      "linhas_total": 20,
+      "amostra": [
+        [
+          "Telecom - Outra UF",
+          "R$ 162,45"
+        ],
+        [
+          "Substituto Tributário - OUTRA UF",
+          "R$ 348,64"
+        ],
+        [
+          "Simples Nacional",
+          "R$ 66,80"
+        ],
+        [
+          "Simples Feirante/Ambulante",
+          "R$ 92,11"
+        ],
+        [
+          "Simples Candango EPP - FAIXA 01",
+          "R$ 76,71"
+        ],
+        [
+          "Simples Candango - ME",
+          "R$ 52,02"
+        ],
+        [
+          "SIMEI - Microempreendedor Individual",
+          "R$ 86,93"
+        ],
+        [
+          "Regime Produto Origem Animal-320-D RICMS",
+          "R$ 35,30"
+        ],
+        [
+          "Regime esp Varejistas Mat Construcao",
+          "R$ 95,48"
+        ],
+        [
+          "Regime de refeições",
+          "R$ 54,21"
+        ],
+        [
+          "Produtor Rural",
+          "R$ 154,30"
+        ],
+        [
+          "Prod. Rural Equiparado a Com/Industria",
+          "R$ 110,13"
+        ],
+        [
+          "OUTRA UF-OP INTERESTADUAIS CONSUM FINAL",
+          "R$ 177,90"
+        ],
+        [
+          "Normal",
+          "R$ 58,95"
+        ],
+        [
+          "Inscrição Centralizadora",
+          "R$ 93,09"
+        ],
+        [
+          "Inscrição Centralizada",
+          "R$ 1.861,42"
+        ],
+        [
+          "ICMS-Imunidade",
+          "R$ 209,65"
+        ],
+        [
+          "Feirante/Ambulante Equiparado A EPP",
+          "R$ 111,50"
+        ],
+        [
+          "Crédito Presumido - Serv Transporte",
+          "R$ 104,79"
+        ],
+        [
+          "-",
+          "R$ 152,71"
+        ]
+      ],
+      "erro": null
+    },
+    {
+      "elemento": "Tabela-2",
+      "objeto": "fXMujgw",
+      "tipo": "table",
+      "titulo": "Valor Médio por CFOP",
+      "dimensoes": [
+        "CFOP",
+        "DESCRICAO"
+      ],
+      "medidas": [
+        "Valor Médio"
+      ],
+      "linhas_total": 64,
+      "amostra": [
+        [
+          "5101",
+          "Venda de producao do estabelecimento",
+          "R$ 24,64"
+        ],
+        [
+          "5102",
+          "Venda de mercadoria adquirida ou recebida de terceiros",
+          "R$ 69,14"
+        ],
+        [
+          "5103",
+          "Venda de producao do estabelecimento, efetuada fora do estabelecimento",
+          "R$ 20,27"
+        ],
+        [
+          "5104",
+          "Venda de mercadoria adquirida ou recebida de terceiros, efetuada fora do estabelecimento",
+          "R$ 21,11"
+        ],
+        [
+          "5105",
+          "Venda de producao do estabelecimento que nao deva por ele transitar",
+          "R$ 39,87"
+        ],
+        [
+          "5106",
+          "Venda de mercadoria adquirida ou recebida de terceiros, que nao deva por ele transitar",
+          "R$ 75,32"
+        ],
+        [
+          "5109",
+          "Venda de producao do estabelecimento, destinada a Zona Franca de Manaus ou areas de Livre Comercio",
+          "R$ 10,50"
+        ],
+        [
+          "5110",
+          "Venda de mercadoria adquirida ou recebida de terceiros, destinada a Zona Franca de Manaus ou areas de Livre Comercio",
+          "-"
+        ],
+        [
+          "5111",
+          "Venda de producao do estabelecimento remetida anteriormente em consignacao industrial",
+          "R$ 63,50"
+        ],
+        [
+          "5112",
+          "Venda de mercadoria adquirida ou recebida de terceiros remetida anteriormente em consignacao industrial",
+          "-"
+        ],
+        [
+          "5113",
+          "Venda de producao do estabelecimento remetida anteriormente em consignacao mercantil",
+          "R$ 31,80"
+        ],
+        [
+          "5114",
+          "Venda de mercadoria adquirida ou recebida de terceiros remetida anteriormente em consignacao mercantil",
+          "R$ 846,11"
+        ],
+        [
+          "5115",
+          "Venda de mercadoria adquirida ou recebida de terceiros, recebida anteriormente em consignacao mercantil",
+          "R$ 213,33"
+        ],
+        [
+          "5116",
+          "Venda de producao do estabelecimento originada de encomenda para entrega futura",
+          "R$ 61,23"
+        ],
+        [
+          "5117",
+          "Venda de mercadoria adquirida ou recebida de terceiros, originada de encomenda para entrega futura",
+          "R$ 131,89"
+        ],
+        [
+          "5118",
+          "Venda de producao do estabelecimento entregue ao destinatario por conta e ordem do adquirente originario, em venda a ordem",
+          "-"
+        ],
+        [
+          "5119",
+          "Venda de mercadoria adquirida ou recebida de terceiros entregue ao destinatario por conta e ordem do adquirente originario, em venda a ordem",
+          "R$ 7.410,28"
+        ],
+        [
+          "5120",
+          "Venda de mercadoria adquirida ou recebida de terceiros entregue ao destinatario pelo vendedor remetente, em venda a ordem",
+          "R$ 65,37"
+        ],
+        [
+          "5122",
+          "Venda de producao do estabelecimento remetida para industrializacao, por conta e ordem do adquirente, sem transitar pelo estabelecimento do adquirente",
+          "R$ 14,49"
+        ],
+        [
+          "5123",
+          "Venda de mercadoria adquirida ou recebida de terceiros remetida para industrializacao, por conta e ordem do adquirente, sem transitar pelo estabelecimento do adquirente",
+          "-"
+        ],
+        [
+          "5401",
+          "Venda de producao do estabelecimento em operacao com produto sujeito ao regime de substituicao tributaria, na condicao de contribuinte substituto",
+          "R$ 29,91"
+        ],
+        [
+          "5402",
+          "Venda de producao do estabelecimento de produto sujeito ao regime de substituicao tributaria, em operacao entre contribuintes substitutos do mesmo produto",
+          "R$ 41,58"
+        ],
+        [
+          "5403",
+          "Venda de mercadoria adquirida ou recebida de terceiros em operacao com mercadoria sujeita ao regime de substituicao tributaria, na condicao de contribuinte substituto",
+          "R$ 77,93"
+        ],
+        [
+          "5405",
+          "Venda de mercadoria adquirida ou recebida de terceiros em operacao com mercadoria sujeita ao regime de substituicao tributaria, na condicao de contribuinte substituído",
+          "R$ 68,39"
+        ],
+        [
+          "5651",
+          "Venda de combustível ou lubrificante de producao do estabelecimento destinado a industrializacao subsequente",
+          "-"
+        ]
+      ],
+      "erro": null
+    },
+    {
+      "elemento": "Tabela-3",
+      "objeto": "VpyShME",
+      "tipo": "table",
+      "titulo": "Valor Médio por Tipo de Contribuinte",
+      "dimensoes": [
+        "Tipo Contribuinte"
+      ],
+      "medidas": [
+        "Valor Médio"
+      ],
+      "linhas_total": 49,
+      "amostra": [
+        [
+          "ASSOC. OU ENTIDADE SEM FINS LUCRATIVOS",
+          "R$ 48,92"
+        ],
+        [
+          "Associação Privada",
+          "R$ 395,86"
+        ],
+        [
+          "Autarquia Estadual ou Do Distrito Federal",
+          "R$ 330,92"
+        ],
+        [
+          "Autarquia Federal",
+          "R$ 162,53"
+        ],
+        [
+          "Condomínio Edilício",
+          "R$ 69,13"
+        ],
+        [
+          "Consórcio de Sociedades",
+          "R$ 89,64"
+        ],
+        [
+          "Cooperativa",
+          "R$ 473,59"
+        ],
+        [
+          "Cooperativa de Consumo",
+          "R$ 566,00"
+        ],
+        [
+          "EIRELI (de Natureza Empresaria)",
+          "R$ 52,18"
+        ],
+        [
+          "EIRELI (de Natureza Simples)",
+          "R$ 203,98"
+        ],
+        [
+          "EMPRESA DE INSC. OBRIG. TEMPOR. P/ R.Imp",
+          "R$ 60,64"
+        ],
+        [
+          "Empresa Pública",
+          "R$ 1.359,44"
+        ],
+        [
+          "Empresa Simples de Inovação - Inova Simples",
+          "R$ 668,91"
+        ],
+        [
+          "Empresário (Individual)",
+          "R$ 80,31"
+        ],
+        [
+          "Entidade Sindical",
+          "R$ 76,48"
+        ],
+        [
+          "Estabelecimento, no Brasil, de Fundação ou Associação Estrangeiras",
+          "R$ 3.254,74"
+        ],
+        [
+          "Estabelecimento, no Brasil, de Sociedade Estrangeira",
+          "R$ 98,06"
+        ],
+        [
+          "FEIRANTE/AMBULANTE EQUIP. A EPP",
+          "R$ 57,51"
+        ],
+        [
+          "Fundação Estadual ou Do Distrito Federal",
+          "R$ 66,74"
+        ],
+        [
+          "Fundação Federal",
+          "R$ 14,94"
+        ],
+        [
+          "Fundação Privada",
+          "R$ 1.012,29"
+        ],
+        [
+          "INSCRICAO DE OFICIO - AUTONOMO",
+          "R$ 130,64"
+        ],
+        [
+          "Organização Internacional",
+          "R$ 48,96"
+        ],
+        [
+          "Organização Internacional e Outras Instituições Extraterritoriais",
+          "R$ 10,62"
+        ],
+        [
+          "Organização Religiosa",
+          "R$ 56,73"
+        ]
+      ],
+      "erro": null
+    },
+    {
+      "elemento": "Tabela-4",
+      "objeto": "VeewZ",
+      "tipo": "table",
+      "titulo": "Valor Médio por CNAE",
+      "dimensoes": [
+        "Código CNAE - Descrição"
+      ],
+      "medidas": [
+        "Valor Médio"
+      ],
+      "linhas_total": 607,
+      "amostra": [
+        [
+          "A011130100 - Cultivo de arroz",
+          "R$ 260,85"
+        ],
+        [
+          "A011130200 - Cultivo de milho",
+          "R$ 87,76"
+        ],
+        [
+          "A011130300 - Cultivo de trigo",
+          "R$ 56,21"
+        ],
+        [
+          "A011139900 - Cultivo de outros cereais não especificados anteriormente",
+          "R$ 98,06"
+        ],
+        [
+          "A011210200 - Cultivo de juta",
+          "R$ 305,04"
+        ],
+        [
+          "A011219900 - Cultivo de outras fibras de lavoura temporária não especificadas anteriormente",
+          "R$ 195,25"
+        ],
+        [
+          "A011300000 - Cultivo de cana-de-açúcar",
+          "R$ 55,49"
+        ],
+        [
+          "A011480000 - Cultivo de fumo",
+          "R$ 34,10"
+        ],
+        [
+          "A011560000 - Cultivo de soja",
+          "R$ 122,80"
+        ],
+        [
+          "A011640100 - Cultivo de amendoim",
+          "R$ 129,92"
+        ],
+        [
+          "A011640300 - Cultivo de mamona",
+          "R$ 271,25"
+        ],
+        [
+          "A011649900 - Cultivo de outras oleaginosas de lavoura temporária não especificadas anteriormente",
+          "R$ 82,72"
+        ],
+        [
+          "A011990200 - Cultivo de alho",
+          "R$ 102,40"
+        ],
+        [
+          "A011990300 - Cultivo de batata-inglesa",
+          "R$ 76,36"
+        ],
+        [
+          "A011990400 - Cultivo de cebola",
+          "R$ 69,45"
+        ],
+        [
+          "A011990500 - Cultivo de feijão",
+          "R$ 107,28"
+        ],
+        [
+          "A011990600 - Cultivo de mandioca",
+          "R$ 92,10"
+        ],
+        [
+          "A011990700 - Cultivo de melão",
+          "R$ 78,40"
+        ],
+        [
+          "A011990800 - Cultivo de melancia",
+          "R$ 1.917,60"
+        ],
+        [
+          "A011990900 - Cultivo de tomate rasteiro",
+          "R$ 230,96"
+        ],
+        [
+          "A011999900 - Cultivo de outras plantas de lavoura temporária não especificadas anteriormente",
+          "R$ 184,95"
+        ],
+        [
+          "A012110100 - Horticultura, exceto morango",
+          "R$ 168,28"
+        ],
+        [
+          "A012110200 - Cultivo de morango",
+          "R$ 127,63"
+        ],
+        [
+          "A012290000 - Cultivo de flores e plantas ornamentais",
+          "R$ 46,44"
+        ],
+        [
+          "A013180000 - Cultivo de laranja",
+          "R$ 403,01"
+        ]
+      ],
+      "erro": null
+    },
+    {
+      "elemento": "Tabela-5",
+      "objeto": "SmEzj",
+      "tipo": "filterpane",
+      "titulo": "Categoria Tributária",
+      "dimensoes": [],
+      "medidas": [],
+      "linhas_total": null,
+      "amostra": [],
+      "erro": null
+    },
+    {
+      "elemento": "Tabela-6",
+      "objeto": "GKjkaU",
+      "tipo": "filterpane",
+      "titulo": "CNAE | Classificação Nacional de Atividades Econômicas",
+      "dimensoes": [],
+      "medidas": [],
+      "linhas_total": null,
+      "amostra": [],
+      "erro": null
+    },
+    {
+      "elemento": "Tabela-7",
+      "objeto": "MXWS",
+      "tipo": "filterpane",
+      "titulo": "Tipo de Contribuinte",
+      "dimensoes": [],
+      "medidas": [],
+      "linhas_total": null,
+      "amostra": [],
+      "erro": null
+    },
+    {
+      "elemento": "Tabela-8",
+      "objeto": "kqYr",
+      "tipo": "filterpane",
+      "titulo": null,
+      "dimensoes": [],
+      "medidas": [],
+      "linhas_total": null,
+      "amostra": [],
+      "erro": null
+    },
+    {
+      "elemento": "Tabela-9",
+      "objeto": "vBfzHk",
+      "tipo": "table",
+      "titulo": "Produtos Médios",
+      "dimensoes": [
+        "NCM",
+        "cean",
+        "Descrição",
+        "Unidade"
+      ],
+      "medidas": [
+        "Média do Valor Unitário",
+        "Quantidade",
+        "Valor total das NFEs",
+        "Quantidade de NFEs"
+      ],
+      "linhas_total": 860647,
+      "amostra": [
+        [
+          "34011190",
+          "7909883279417",
+          " EKOS SAB BAR CASTANHA 2X100G GBL",
+          "Peça",
+          "R$ 13,72",
+          "90,00",
+          "R$ 1.234,90",
+          "53"
+        ],
+        [
+          "33059000",
+          "8719281988304",
+          " So Pure 60ml - Cor 8.00CP",
+          "Peça",
+          "R$ 109,99",
+          "3,00",
+          "R$ 329,97",
+          "1"
+        ],
+        [
+          "30067000",
+          "7898689860434",
+          "-  - E.P.T.Q LIDOCAINE S 500 - MEDBEAUTY",
+          "Unidade",
+          "R$ 185,55",
+          "90,00",
+          "R$ 16.699,50",
+          "1"
+        ],
+        [
+          "30061090",
+          "7898689860489",
+          "-  - ITHREAD CANULA FILLER 21G 38MMX50MM - MEDBEAUTY",
+          "Unidade",
+          "R$ 1.650,00",
+          "2,00",
+          "R$ 3.300,00",
+          "1"
+        ],
+        [
+          "30049099",
+          "7331689120455",
+          "-  - RESTYLANE 1ML - GALDERMA",
+          "Unidade",
+          "R$ 165,99",
+          "15,00",
+          "R$ 2.489,85",
+          "1"
+        ],
+        [
+          "30049099",
+          "7897930779280",
+          "-  - SCULPTRA 6 VIALS LIT - 3 SCULPTRA 2 FRASCOS - GALDERMA",
+          "Unidade",
+          "R$ 4.194,25",
+          "1,00",
+          "R$ 4.194,25",
+          "1"
+        ],
+        [
+          "30021590",
+          "7898962482223",
+          "-  - TRODELVY 200MG PO LIOF SOL INJ F/A - ONCO PROD DISTR DE PROD HOSP E",
+          "Unidade",
+          "R$ 8.864,89",
+          "1,00",
+          "R$ 8.864,89",
+          "1"
+        ],
+        [
+          "84811000",
+          "7898100081639",
+          "- 163-9 REGULADOR EXCEL COMP 1KG/H C/ REG MANG 0,80M",
+          "Peça",
+          "R$ 20,13",
+          "1.616,00",
+          "R$ 32.522,64",
+          "6"
+        ],
+        [
+          "30041011",
+          "7898739420281",
+          "- AMPICILINA SODICA 1G PO SOL INJ CX/50FA (AMPICILINA SODICA 1G)-EUGIA PHARMA  | Fab: 01/10/2025",
+          "Caixa",
+          "R$ 188,89",
+          "3,00",
+          "R$ 566,67",
+          "2"
+        ],
+        [
+          "30049069",
+          "7891317026769",
+          "- ANTARA IV SOL INJ CX/10FAX5ML (LEVETIRACETAM 100MG/ML)-EUROFARMA  | Fab: 12/02/2026",
+          "Caixa",
+          "R$ 70,61",
+          "7,00",
+          "R$ 494,27",
+          "1"
+        ],
+        [
+          "30049069",
+          "7891317026769",
+          "- ANTARA IV SOL INJ CX/10FAX5ML (LEVETIRACETAM 100MG/ML)-EUROFARMA  | Fab: 13/05/2026",
+          "Caixa",
+          "R$ 70,74",
+          "42,00",
+          "R$ 2.971,18",
+          "5"
+        ],
+        [
+          "30049069",
+          "7891317026769",
+          "- ANTARA IV SOL INJ CX/10FAX5ML (LEVETIRACETAM 100MG/ML)-EUROFARMA  | Fab: 20/07/2026",
+          "Caixa",
+          "R$ 71,84",
+          "36,00",
+          "R$ 2.586,16",
+          "3"
+        ],
+        [
+          "72172090",
+          "7893946570156",
+          "- ARAME GALVANIZADO 14BWG 2,10MM 37,5M/KG DIV ARAMES MARCA: DIV ARAMES",
+          "Quilograma",
+          "R$ 21,58",
+          "60,00",
+          "R$ 1.294,99",
+          "30"
+        ],
+        [
+          "30044990",
+          "7897316801154",
+          "- ATROPINA 1% SOL OFTAL CX/1FRX5ML (ATROPINA, SULFATO 10MG/ML 5ML)-ALLERGAN  | Fab: 03/12/2025",
+          "Caixa",
+          "R$ 10,16",
+          "688,00",
+          "R$ 6.989,15",
+          "12"
+        ],
+        [
+          "30044990",
+          "7897316801154",
+          "- ATROPINA 1% SOL OFTAL CX/1FRX5ML (ATROPINA, SULFATO 10MG/ML 5ML)-ALLERGAN  | Fab: 21/11/2025",
+          "Caixa",
+          "R$ 10,03",
+          "165,00",
+          "R$ 1.655,02",
+          "5"
+        ],
+        [
+          "30044990",
+          "7897316801154",
+          "- ATROPINA 1% SOL OFTAL CX/1FRX5ML (ATROPINA, SULFATO 10MG/ML 5ML)-ALLERGAN  | Fab: 29/11/2025",
+          "Caixa",
+          "R$ 10,27",
+          "172,00",
+          "R$ 1.765,68",
+          "3"
+        ],
+        [
+          "33041000",
+          "7908985910242",
+          "- BALM LABIAL BT COCA-COLA - POP CHARM - BRUNA TAVARES",
+          "Unidade",
+          "R$ 36,74",
+          "13,00",
+          "R$ 477,64",
+          "11"
+        ],
+        [
+          "33041000",
+          "7908985910471",
+          "- BALM LABIAL BT COCA-COLA - REFRESH YOUR LIPS - BRUNA TAVARES",
+          "Unidade",
+          "R$ 55,13",
+          "1,00",
+          "R$ 55,13",
+          "1"
+        ],
+        [
+          "33041000",
+          "7908985909420",
+          "- BATOM LIQUIDO - BT VINYL - BRUNA TAVARES - Morgana - Cereja Escuro",
+          "Unidade",
+          "R$ 50,72",
+          "3,00",
+          "R$ 152,16",
+          "3"
+        ],
+        [
+          "33049990",
+          "7908985910518",
+          "- BLUSH - COCA-COLA - BRUNA TAVARES - Classic Brown",
+          "Unidade",
+          "R$ 61,72",
+          "3,00",
+          "R$ 185,15",
+          "3"
+        ],
+        [
+          "33049990",
+          "7908985910495",
+          "- BLUSH - COCA-COLA - BRUNA TAVARES - Flush Vibes",
+          "Unidade",
+          "R$ 41,61",
+          "3,00",
+          "R$ 124,84",
+          "3"
+        ],
+        [
+          "33049990",
+          "7898741807261",
+          "- BLUSH CUSHION GLOW - BRUNA TAVARES - Coral",
+          "Unidade",
+          "R$ 33,74",
+          "13,00",
+          "R$ 438,60",
+          "13"
+        ],
+        [
+          "33049990",
+          "7898741807230",
+          "- BLUSH CUSHION GLOW - BRUNA TAVARES - Pearly",
+          "Unidade",
+          "R$ 57,91",
+          "2,00",
+          "R$ 115,81",
+          "2"
+        ],
+        [
+          "76090000",
+          "7895310000344",
+          "- BOX AL RETO 1 TRAMONT/WETZEL MARCA: TRAMONT/WETZEL",
+          "Peça",
+          "R$ 7,05",
+          "2,00",
+          "R$ 14,10",
+          "1"
+        ],
+        [
+          "30042059",
+          "7898739420373",
+          "- CEFAZOLINA SODICA 1G PO SOL INJ CX/50FA (CEFAZOLINA SODICA 1G)-EUGIA PHARMA  | Fab: 01/06/2026",
+          "Caixa",
+          "R$ 204,00",
+          "8,00",
+          "R$ 1.632,00",
+          "3"
+        ]
+      ],
+      "erro": null
+    },
+    {
+      "elemento": "Tabela-10",
+      "objeto": "phprpS",
+      "tipo": "pivot-table",
+      "titulo": "TABELA NCM",
+      "dimensoes": [
+        "Capítulo",
+        "Posicao"
+      ],
+      "medidas": [
+        "Descrição da Posição"
+      ],
+      "linhas_total": 96,
+      "amostra": [
+        [
+          "-"
+        ],
+        [
+          "-"
+        ],
+        [
+          "-"
+        ],
+        [
+          "-"
+        ],
+        [
+          "-"
+        ],
+        [
+          "-"
+        ],
+        [
+          "-"
+        ],
+        [
+          "-"
+        ],
+        [
+          "-"
+        ],
+        [
+          "-"
+        ],
+        [
+          "-"
+        ],
+        [
+          "-"
+        ],
+        [
+          "-"
+        ],
+        [
+          "-"
+        ],
+        [
+          "-"
+        ],
+        [
+          "-"
+        ],
+        [
+          "-"
+        ],
+        [
+          "-"
+        ],
+        [
+          "-"
+        ],
+        [
+          "-"
+        ],
+        [
+          "-"
+        ],
+        [
+          "-"
+        ],
+        [
+          "-"
+        ],
+        [
+          "-"
+        ],
+        [
+          "-"
+        ]
+      ],
+      "erro": null
+    }
+  ],
+  "filtros": [
+    {
+      "elemento": "QVFILTROS-01",
+      "objeto": "QDPVpqr",
+      "tipo": "filterpane",
+      "titulo": "FTL ANO",
+      "dimensoes": [],
+      "medidas": [],
+      "linhas_total": null,
+      "amostra": [],
+      "erro": null
+    },
+    {
+      "elemento": "QVFILTROS-02",
+      "objeto": "gyEJEAH",
+      "tipo": "filterpane",
+      "titulo": "FTL UF ORIGEM",
+      "dimensoes": [],
+      "medidas": [],
+      "linhas_total": null,
+      "amostra": [],
+      "erro": null
+    },
+    {
+      "elemento": "QVFILTROS-03",
+      "objeto": "jGFCY",
+      "tipo": "filterpane",
+      "titulo": "FTL MêS",
+      "dimensoes": [],
+      "medidas": [],
+      "linhas_total": null,
+      "amostra": [],
+      "erro": null
+    },
+    {
+      "elemento": "QVFILTROS-04",
+      "objeto": "kqYr",
+      "tipo": "filterpane",
+      "titulo": null,
+      "dimensoes": [],
+      "medidas": [],
+      "linhas_total": null,
+      "amostra": [],
+      "erro": null
+    },
+    {
+      "elemento": "QVFILTROS-05",
+      "objeto": "RjhVp",
+      "tipo": "filterpane",
+      "titulo": null,
+      "dimensoes": [],
+      "medidas": [],
+      "linhas_total": null,
+      "amostra": [],
+      "erro": null
+    },
+    {
+      "elemento": "QVFILTROS-07",
+      "objeto": "UJPWbUH",
+      "tipo": "filterpane",
+      "titulo": "FTL UF ORIGEM",
+      "dimensoes": [],
+      "medidas": [],
+      "linhas_total": null,
+      "amostra": [],
+      "erro": null
+    }
+  ],
+  "indicadores": [
+    {
+      "elemento": "KPI01",
+      "objeto": "JwTxe",
+      "tipo": null,
+      "titulo": null,
+      "dimensoes": [],
+      "medidas": [],
+      "linhas_total": null,
+      "amostra": [],
+      "erro": "GetLayout: {'code': -32602, 'parameter': 'JSON type error', 'message': 'Invalid method parameter(s)'}"
+    },
+    {
+      "elemento": "KPI02",
+      "objeto": "UJnFZ",
+      "tipo": null,
+      "titulo": null,
+      "dimensoes": [],
+      "medidas": [],
+      "linhas_total": null,
+      "amostra": [],
+      "erro": "GetLayout: {'code': -32602, 'parameter': 'JSON type error', 'message': 'Invalid method parameter(s)'}"
+    },
+    {
+      "elemento": "KPI03",
+      "objeto": "ufkBM",
+      "tipo": null,
+      "titulo": null,
+      "dimensoes": [],
+      "medidas": [],
+      "linhas_total": null,
+      "amostra": [],
+      "erro": "GetLayout: {'code': -32602, 'parameter': 'JSON type error', 'message': 'Invalid method parameter(s)'}"
+    },
+    {
+      "elemento": "KPI04",
+      "objeto": "EKeCnR",
+      "tipo": null,
+      "titulo": null,
+      "dimensoes": [],
+      "medidas": [],
+      "linhas_total": null,
+      "amostra": [],
+      "erro": "GetLayout: {'code': -32602, 'parameter': 'JSON type error', 'message': 'Invalid method parameter(s)'}"
+    },
+    {
+      "elemento": "DASHBOARD-04",
+      "objeto": "CWpswn",
+      "tipo": null,
+      "titulo": null,
+      "dimensoes": [],
+      "medidas": [],
+      "linhas_total": null,
+      "amostra": [],
+      "erro": "GetLayout: {'code': -32602, 'parameter': 'JSON type error', 'message': 'Invalid method parameter(s)'}"
+    }
+  ],
+  "avisos_do_servidor": [
+    {
+      "jsonrpc": "2.0",
+      "method": "OnAuthenticationInformation",
+      "params": {
+        "userId": "anonymousa9ae5653-f78e-41b3-b1f5-f4762d0d9018",
+        "userDirectory": "NONE",
+        "loginUri": "https://qap.fazenda.df.gov.br:443/paineis/internal_forms_authentication/?targetId=694d82bc-c421-441d-9955-68395db0cfea",
+        "mustAuthenticate": false
+      }
+    },
+    {
+      "jsonrpc": "2.0",
+      "method": "OnConnected",
+      "params": {
+        "qSessionState": "SESSION_CREATED"
+      }
+    }
+  ]
+}
