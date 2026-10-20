@@ -40,7 +40,28 @@ create table public.evidencias_sugeridas (
   url text not null check (url ~ '^https?://' and char_length(url) <= 1000),
   descricao text check (char_length(descricao) <= 500),
   status text not null default 'pendente' check (status in ('pendente', 'aceita', 'recusada')),
+  nivel text check (nivel in ('DECLARADO', 'ASSOCIADO')),  -- definido por quem modera; nunca COMPROVADO
+  motivo text check (char_length(motivo) <= 300),
+  moderado_em timestamptz,
   criado_em timestamptz not null default now()
+);
+
+-- reportes de erro e contestações de lojas: não exigem conta nem aceite dos termos da comunidade
+create table public.reportes (
+  id bigint generated always as identity primary key,
+  ean text check (ean is null or ean ~ '^[0-9]{8,14}$'),
+  tipo text not null check (tipo in ('preco', 'produto', 'foto', 'causa', 'imposto', 'contestacao_loja', 'outro')),
+  descricao text not null check (char_length(descricao) between 5 and 1000),
+  link text check (link is null or (link ~ '^https?://' and char_length(link) <= 1000)),
+  contato text check (contato is null or char_length(contato) <= 200),  -- opcional, só para quem quer resposta
+  status text not null default 'aberto' check (status in ('aberto', 'resolvido', 'descartado')),
+  resposta text check (char_length(resposta) <= 1000),
+  criado_em timestamptz not null default now()
+);
+
+-- quem modera: inclua o id manualmente (a página #/moderar mostra o seu)
+create table public.moderadores (
+  id uuid primary key references auth.users (id) on delete cascade
 );
 
 -- ---------- segurança por linha ----------
@@ -48,6 +69,13 @@ create table public.evidencias_sugeridas (
 alter table public.perfis enable row level security;
 alter table public.votos enable row level security;
 alter table public.evidencias_sugeridas enable row level security;
+alter table public.reportes enable row level security;
+alter table public.moderadores enable row level security;
+
+create or replace function public.eh_moderador() returns boolean
+language sql stable security definer set search_path = public as $$
+  select exists (select 1 from moderadores where id = auth.uid());
+$$;
 
 -- perfil: cada um cria e lê o próprio; só o apelido pode ser alterado
 create policy "cria o próprio perfil" on public.perfis for insert to authenticated with check (id = auth.uid() and pontos = 0);
@@ -59,7 +87,26 @@ grant update (apelido) on public.perfis to authenticated;
 -- votos e evidências: cada um insere os próprios; ninguém lê votos individuais de outras pessoas
 create policy "vota em nome próprio" on public.votos for insert to authenticated with check (usuario = auth.uid());
 create policy "lê os próprios votos" on public.votos for select to authenticated using (usuario = auth.uid());
-create policy "sugere em nome próprio" on public.evidencias_sugeridas for insert to authenticated with check (usuario = auth.uid());
+create policy "sugere em nome próprio" on public.evidencias_sugeridas for insert to authenticated with check (usuario = auth.uid() and status = 'pendente');
+create policy "moderação lê evidências" on public.evidencias_sugeridas for select to authenticated using (public.eh_moderador());
+create policy "moderação decide evidências" on public.evidencias_sugeridas for update to authenticated using (public.eh_moderador());
+
+-- qualquer pessoa pode reportar; só a moderação lê e responde
+create policy "qualquer um reporta" on public.reportes for insert to anon, authenticated with check (status = 'aberto' and resposta is null);
+create policy "moderação lê reportes" on public.reportes for select to authenticated using (public.eh_moderador());
+create policy "moderação responde reportes" on public.reportes for update to authenticated using (public.eh_moderador());
+create policy "moderador se vê" on public.moderadores for select to authenticated using (id = auth.uid());
+
+-- limite global de reportes anônimos, contra enxurrada
+create or replace function public.antes_de_reportar() returns trigger
+language plpgsql security definer set search_path = public as $$
+begin
+  if (select count(*) from reportes where criado_em > now() - interval '1 hour') >= 300 then
+    raise exception 'limite de reportes por hora atingido';
+  end if;
+  return new;
+end $$;
+create trigger antes_de_reportar before insert on public.reportes for each row execute function public.antes_de_reportar();
 
 -- ---------- limite de contribuições e pontos ----------
 
@@ -113,8 +160,12 @@ create view public.meus_votos with (security_invoker = true) as
 create view public.ranking as
   select apelido, pontos from public.perfis where apelido is not null and pontos > 0 order by pontos desc limit 20;
 
-revoke all on public.resumo_votos, public.ranking from anon, authenticated;
-grant select on public.resumo_votos, public.ranking to anon, authenticated;
+-- evidências aceitas pela moderação, sem identificar quem enviou
+create view public.evidencias_publicas as
+  select ean, chave, url, descricao, nivel, moderado_em from public.evidencias_sugeridas where status = 'aceita';
+
+revoke all on public.resumo_votos, public.ranking, public.evidencias_publicas from anon, authenticated;
+grant select on public.resumo_votos, public.ranking, public.evidencias_publicas to anon, authenticated;
 grant select on public.meus_votos to authenticated;
 
 -- ---------- direitos do titular e retenção ----------
@@ -135,6 +186,7 @@ create or replace function public.limpar_dados_antigos() returns void
 language sql security definer set search_path = public as $$
   delete from votos where criado_em < now() - interval '12 months';
   delete from evidencias_sugeridas where status = 'recusada' and criado_em < now() - interval '12 months';
+  delete from reportes where status <> 'aberto' and criado_em < now() - interval '12 months';
   delete from auth.users u where u.is_anonymous and u.last_sign_in_at < now() - interval '12 months';
 $$;
 revoke all on function public.limpar_dados_antigos() from public, anon, authenticated;

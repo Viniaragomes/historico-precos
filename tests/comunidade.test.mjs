@@ -51,3 +51,30 @@ test("validações", () => {
   assert.equal(pontosDoVoto({ alvo: "preco", valor: true }), 1);
   assert.equal(pontosDoVoto({ alvo: "causa", valor: false }), 1);
 });
+
+test("reportar não exige conta e valida o conteúdo", async () => {
+  const { validarReporte } = await import("../site/comunidade.js");
+  const c = new ComunidadeLocal(memoria());
+  await c.reportar({ ean: "7896005800027", tipo: "preco", descricao: "Na loja está R$ 23,90" });
+  await assert.rejects(c.reportar({ tipo: "preco", descricao: "x" }), ErroComunidade);
+  await assert.rejects(c.reportar({ tipo: "inexistente", descricao: "texto qualquer" }), ErroComunidade);
+  assert.equal(validarReporte({ ean: "abc", tipo: "outro", descricao: "texto ok" }).ean, null);
+  const fila = await c.filaModeracao();
+  assert.equal(fila.reportes.length, 1);
+  await c.responderReporte(fila.reportes[0].id, { status: "resolvido", resposta: "Corrigido" });
+  assert.equal((await c.filaModeracao()).reportes.length, 0);
+});
+
+test("moderação: evidência aceita vira pública com nível dado, nunca COMPROVADO", async () => {
+  const c = new ComunidadeLocal(memoria());
+  await c.sugerirEvidencia({ ean: "1", chave: "Loja|a|b", url: "https://noticia.exemplo/x", descricao: "Seca elevou o preço" });
+  await c.sugerirEvidencia({ ean: "1", chave: "Loja|a|b", url: "https://spam.exemplo" });
+  const [boa, ruim] = (await c.filaModeracao()).evidencias;
+  await assert.rejects(c.moderarEvidencia(boa.id, { status: "aceita", nivel: "COMPROVADO" }), ErroComunidade);
+  await c.moderarEvidencia(boa.id, { status: "aceita", nivel: "DECLARADO" });
+  await c.moderarEvidencia(ruim.id, { status: "recusada", motivo: "spam" });
+  const publicas = await c.evidenciasPublicas("1");
+  assert.equal(publicas.length, 1);
+  assert.equal(publicas[0].nivel, "DECLARADO");
+  assert.equal((await c.perfil()).pontos, 5); // evidência aceita vale 5
+});

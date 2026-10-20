@@ -37,8 +37,9 @@ export class ComunidadeLocal {
     this.store = store;
   }
   _ler() {
-    try { return JSON.parse(this.store?.getItem("comunidade_teste") || "null") || { perfil: { apelido: null, pontos: 0 }, votos: [], evidencias: [] }; }
-    catch { return { perfil: { apelido: null, pontos: 0 }, votos: [], evidencias: [] }; }
+    const vazio = { perfil: { apelido: null, pontos: 0 }, votos: [], evidencias: [], reportes: [], proximoId: 1 };
+    try { return { ...vazio, ...(JSON.parse(this.store?.getItem("comunidade_teste") || "null") || {}) }; }
+    catch { return vazio; }
   }
   _gravar(d) { try { this.store?.setItem("comunidade_teste", JSON.stringify(d)); } catch { /* sem armazenamento */ } }
 
@@ -73,9 +74,40 @@ export class ComunidadeLocal {
   }
   async sugerirEvidencia({ ean, chave, url, descricao }) {
     const d = this._ler();
-    d.evidencias.push({ ean, chave, url: validarUrl(url), descricao: (descricao || "").slice(0, 500), status: "pendente", criado_em: new Date().toISOString() });
+    d.evidencias.push({ id: d.proximoId++, ean, chave, url: validarUrl(url), descricao: (descricao || "").slice(0, 500), status: "pendente", nivel: null, criado_em: new Date().toISOString() });
     this._gravar(d);
     return { ganho: 0 }; // pontos só depois que a evidência for conferida
+  }
+  async reportar(reporte) {
+    const d = this._ler();
+    d.reportes.push({ id: d.proximoId++, ...validarReporte(reporte), status: "aberto", resposta: null, criado_em: new Date().toISOString() });
+    this._gravar(d);
+    return { ganho: 0 };
+  }
+  async evidenciasPublicas(ean) {
+    return this._ler().evidencias.filter((e) => e.ean === ean && e.status === "aceita");
+  }
+  // no modo de teste, o próprio aparelho faz o papel de moderação, para experimentar o fluxo
+  async souModerador() { return true; }
+  async meuId() { return "modo-de-teste"; }
+  async filaModeracao() {
+    const d = this._ler();
+    return { evidencias: d.evidencias.filter((e) => e.status === "pendente"), reportes: d.reportes.filter((r) => r.status === "aberto") };
+  }
+  async moderarEvidencia(id, { status, nivel = null, motivo = null }) {
+    const d = this._ler();
+    const e = d.evidencias.find((x) => x.id === id);
+    if (!e) throw new ErroComunidade("Evidência não encontrada.");
+    Object.assign(e, validarDecisao({ status, nivel, motivo }), { moderado_em: new Date().toISOString() });
+    if (e.status === "aceita") d.perfil.pontos += PONTOS.evidencia;
+    this._gravar(d);
+  }
+  async responderReporte(id, { status, resposta = null }) {
+    const d = this._ler();
+    const r = d.reportes.find((x) => x.id === id);
+    if (!r) throw new ErroComunidade("Reporte não encontrado.");
+    Object.assign(r, { status, resposta: (resposta || "").slice(0, 1000) || null });
+    this._gravar(d);
   }
   async ranking() { return null; } // ranking só existe com a comunidade online
   async apagarTudo() { try { this.store?.removeItem("comunidade_teste"); } catch { /* nada */ } consentimento.retirar(); }
@@ -165,6 +197,48 @@ export class ComunidadeSupabase {
     const { data } = await c.from("ranking").select("apelido, pontos");
     return data || [];
   }
+  // reportar não exige conta: vale também para lojas e fabricantes
+  async reportar(reporte) {
+    const c = await this._cliente();
+    const { error } = await c.from("reportes").insert(validarReporte(reporte));
+    if (error) throw new ErroComunidade("Não foi possível enviar agora. Tente mais tarde.");
+    return { ganho: 0 };
+  }
+  async evidenciasPublicas(ean) {
+    const c = await this._cliente();
+    const { data } = await c.from("evidencias_publicas").select("chave, url, descricao, nivel, moderado_em").eq("ean", ean);
+    return data || [];
+  }
+  async meuId() {
+    const c = await this._cliente();
+    const { data: { session } } = await c.auth.getSession();
+    return session?.user.id || null;
+  }
+  async souModerador() {
+    const c = await this._cliente();
+    if (!(await this.meuId())) return false;
+    const { data } = await c.rpc("eh_moderador");
+    return data === true;
+  }
+  async filaModeracao() {
+    const c = await this._cliente();
+    const [ev, rep] = await Promise.all([
+      c.from("evidencias_sugeridas").select("id, ean, chave, url, descricao, criado_em").eq("status", "pendente").order("criado_em"),
+      c.from("reportes").select("id, ean, tipo, descricao, link, contato, criado_em").eq("status", "aberto").order("criado_em"),
+    ]);
+    return { evidencias: ev.data || [], reportes: rep.data || [] };
+  }
+  async moderarEvidencia(id, decisao) {
+    const c = await this._cliente();
+    const { error } = await c.from("evidencias_sugeridas")
+      .update({ ...validarDecisao(decisao), moderado_em: new Date().toISOString() }).eq("id", id);
+    if (error) throw new ErroComunidade("Não foi possível salvar a decisão.");
+  }
+  async responderReporte(id, { status, resposta = null }) {
+    const c = await this._cliente();
+    const { error } = await c.from("reportes").update({ status, resposta: (resposta || "").slice(0, 1000) || null }).eq("id", id);
+    if (error) throw new ErroComunidade("Não foi possível salvar a resposta.");
+  }
   // apaga perfil, votos e evidências (em cascata no banco) e encerra a sessão
   async apagarTudo() {
     const c = await this._cliente();
@@ -206,6 +280,36 @@ export function validarUrl(url) {
     if (u.protocol === "https:" || u.protocol === "http:") return u.toString();
   } catch { /* inválida */ }
   throw new ErroComunidade("Informe um link completo, começando com https://");
+}
+
+export const TIPOS_REPORTE = {
+  preco: "O preço está errado",
+  produto: "O produto não é este",
+  foto: "A foto ou o nome estão errados",
+  causa: "Uma explicação de causa está errada",
+  imposto: "O cálculo de imposto está errado",
+  contestacao_loja: "Sou da loja ou do fabricante e quero contestar",
+  outro: "Outro problema",
+};
+
+export function validarReporte({ ean = null, tipo, descricao, link = null, contato = null }) {
+  if (!TIPOS_REPORTE[tipo]) throw new ErroComunidade("Escolha o tipo de problema.");
+  const texto = (descricao || "").trim();
+  if (texto.length < 5) throw new ErroComunidade("Conte em poucas palavras o que está errado.");
+  return {
+    ean: ean && /^\d{8,14}$/.test(ean) ? ean : null,
+    tipo,
+    descricao: texto.slice(0, 1000),
+    link: link ? validarUrl(link) : null,
+    contato: (contato || "").trim().slice(0, 200) || null,
+  };
+}
+
+export function validarDecisao({ status, nivel = null, motivo = null }) {
+  if (!["aceita", "recusada"].includes(status)) throw new ErroComunidade("Decisão inválida.");
+  // a comunidade nunca gera COMPROVADO: isso exige fato documentado com efeito calculável
+  if (status === "aceita" && !["DECLARADO", "ASSOCIADO"].includes(nivel)) throw new ErroComunidade("Escolha o nível: declarado ou associado.");
+  return { status, nivel: status === "aceita" ? nivel : null, motivo: (motivo || "").slice(0, 300) || null };
 }
 
 export function criarComunidade(config) {

@@ -135,6 +135,8 @@ Quem está na loja confirma ou corrige o preço, diz se uma explicação de caus
   4. (Opcional) Ative a extensão `pg_cron` e agende `select public.limpar_dados_antigos()` todo mês.
   5. Preencha `url` e `chave_publica` (a chave *anon*, que é pública) em `site/config.json`.
 
+**Reportar e moderar:** qualquer pessoa, inclusive lojas e fabricantes, pode reportar um erro ou contestar uma informação sem ter conta (botão no fim de cada produto e na página Sobre). Evidências enviadas e reportes entram numa fila em `#/moderar`. Quem modera aceita uma evidência como **DECLARADO** ou **ASSOCIADO** (nunca COMPROVADO) ou a recusa, e responde os reportes. Para liberar alguém como moderador, rode no Supabase `insert into public.moderadores (id) values ('<id mostrado em #/moderar>');`. No modo de teste, o próprio aparelho modera, para experimentar o fluxo.
+
 Testes: `node --test tests/*.test.mjs`.
 
 ## Rodando no GitHub (recomendado)
