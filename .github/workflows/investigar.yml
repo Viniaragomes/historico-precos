@@ -21,6 +21,9 @@ jobs:
       - name: Mapa de Preços do DF pelo Qlik (como a página pública)
         continue-on-error: true
         run: python -m historico_precos --banco /tmp/t.db mapa-df qlik --saida relatorios/investigacao/mapa-df-qlik.json --linhas 25
+      - name: Preço de compra no DF para a amostra (teste real)
+        continue-on-error: true
+        run: python -m historico_precos --banco /tmp/t.db mapa-df precos --arquivo relatorios/amostra.tsv > relatorios/investigacao/mapa-df-precos.txt 2>&1
       - name: Guardar no repositório
         run: |
           git config user.name "github-actions[bot]"

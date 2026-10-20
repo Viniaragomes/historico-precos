@@ -187,6 +187,27 @@ def _leis(args, nav: Navegador, banco: Banco) -> int:
 
 def _mapa_df(args, nav: Navegador, banco: Banco) -> int:
     agente = AgenteMapaDF(nav, banco)
+    if args.acao == "precos":
+        from .mapa_df import qlik
+
+        eans = [e.strip() for e in (args.eans or "").split(",") if e.strip()]
+        if args.arquivo:
+            eans += [l.split()[0] for l in Path(args.arquivo).read_text(encoding="utf-8").splitlines() if l.strip()]
+        if args.do_banco:
+            eans += [l[0] for l in banco.con.execute("SELECT ean FROM produtos")]
+        if not eans:
+            print("Informe --eans, --arquivo ou --do-banco.")
+            return 1
+        r = qlik.coletar(banco.con, eans)
+        print(f"{r['gtins']} código(s) consultado(s): {r['com_dados']} com notas no DF, {r['linhas']} dia(s)/unidade gravados.")
+        for ean in sorted(set(eans))[:40]:
+            s_ = qlik.serie(banco.con, ean)
+            if s_:
+                t = s_["tendencia"] or {}
+                ult = s_["pontos"][-1]
+                var = f"{t['variacao_pct']:+.1f}% em 7 dias" if t.get("variacao_pct") is not None else (t.get("nota") or "")
+                print(f"  {ean} {s_['descricao'][:40]:<40} {ult['data']} R$ {ult['mediana'] or 0:>8.2f}/{s_['unidade']}  {len(s_['pontos'])} dias  {var}")
+        return 0
     if args.acao == "qlik":
         from .mapa_df import qlik
 
@@ -350,6 +371,10 @@ def main(argv: list[str] | None = None) -> int:
     mdx = msub.add_parser("qlik", help="abre o app Qlik do painel como a página pública e descreve campos e tabelas")
     mdx.add_argument("--saida", default="relatorios/mapa-df-qlik.json")
     mdx.add_argument("--linhas", type=int, default=20, help="linhas de amostra por tabela")
+    mdp = msub.add_parser("precos", help="preço de compra no DF (mediana diária das NF-e) por código de barras")
+    mdp.add_argument("--eans", help="separados por vírgula")
+    mdp.add_argument("--arquivo", help="arquivo com um EAN por linha (o resto da linha é ignorado)")
+    mdp.add_argument("--do-banco", action="store_true", help="todos os produtos já cadastrados no banco")
     mdq = msub.add_parser("consultar", help="mostra o histórico mensal guardado de um termo")
     mdq.add_argument("termo")
     mdq.add_argument("--filtro", help="só descrições que contenham este texto (ex.: '500G')")

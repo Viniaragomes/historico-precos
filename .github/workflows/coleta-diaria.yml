@@ -63,6 +63,10 @@ jobs:
             python -m historico_precos mapa-df coletar
           fi
 
+      - name: Preço de compra no DF (Mapa de Preços, NF-e; o painel recarrega todo dia)
+        continue-on-error: true
+        run: python -m historico_precos mapa-df precos --do-banco | tail -60
+
       - name: Checagem de qualidade (bloqueios não vão para o app)
         run: python -m historico_precos qualidade | tail -50
 

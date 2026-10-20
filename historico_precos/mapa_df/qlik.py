@@ -232,3 +232,149 @@ def explorar(app_id: str = APP_ID, linhas: int = 20) -> dict:
     finally:
         motor.fechar()
     return resultado
+
+
+# ---------------- preço de compra por código de barras (NF-e entre empresas) ----------------
+
+# só agregados: nunca pedimos CPF/CNPJ de emitente ou destinatário
+DIMENSOES = ["cean", "demi", "ucom_mod"]
+MEDIDAS = ["Median(vuncom)", "Avg(vuncom)", "Min(vuncom)", "Max(vuncom)", "Sum(qcom)", "Count(id)", "MaxString(xprod)"]
+_ESQUEMA = """
+CREATE TABLE IF NOT EXISTS mapa_df_nfe (
+    ean TEXT NOT NULL, data TEXT NOT NULL, unidade TEXT NOT NULL,
+    mediana REAL, media REAL, minimo REAL, maximo REAL, quantidade REAL, itens INTEGER, descricao TEXT,
+    coletado_em TEXT NOT NULL,
+    PRIMARY KEY (ean, data, unidade)
+);
+"""
+
+
+def _data_iso(celula: dict) -> str | None:
+    """Data da nota: o Qlik devolve texto (formato do app) e número de série (dias desde 30/12/1899)."""
+    from datetime import date, datetime, timedelta
+
+    texto = (celula.get("qText") or "").strip()
+    for fmt in ("%Y-%m-%d", "%d/%m/%Y", "%Y-%m-%d %H:%M:%S", "%d/%m/%Y %H:%M:%S", "%Y%m%d"):
+        try:
+            return datetime.strptime(texto[: len(datetime.now().strftime(fmt))], fmt).date().isoformat()
+        except ValueError:
+            continue
+    num = celula.get("qNum")
+    if isinstance(num, (int, float)) and 30000 < num < 80000:
+        return (date(1899, 12, 30) + timedelta(days=int(num))).isoformat()
+    return None
+
+
+def _numero(celula: dict) -> float | None:
+    n = celula.get("qNum")
+    return float(n) if isinstance(n, (int, float)) else None
+
+
+def precos_por_gtin(motor: Motor, doc: int, gtins: list[str], altura: int = 1000) -> list[dict]:
+    """Mediana diária do valor unitário nas NF-e do DF, por GTIN e unidade comercial."""
+    gtins = sorted({g.strip() for g in gtins if g and g.strip().isdigit()})
+    if not gtins:
+        return []
+    campo = motor.chamar(doc, "GetField", {"qFieldName": "cean"})["qReturn"]["qHandle"]
+    motor.chamar(campo, "SelectValues", {"qFieldValues": [{"qText": g, "qIsNumeric": False} for g in gtins],
+                                         "qToggleMode": False, "qSoftLock": False})
+    definicao = {
+        "qInfo": {"qType": "precos-historico"},
+        "qHyperCubeDef": {
+            "qDimensions": [{"qDef": {"qFieldDefs": [d]}, "qNullSuppression": True} for d in DIMENSOES],
+            "qMeasures": [{"qDef": {"qDef": f"={m}"}} for m in MEDIDAS],
+            "qSuppressZero": False, "qSuppressMissing": True, "qInitialDataFetch": [],
+        },
+    }
+    h = motor.chamar(doc, "CreateSessionObject", [definicao])["qReturn"]["qHandle"]
+    total = motor.chamar(h, "GetLayout")["qLayout"]["qHyperCube"]["qSize"]["qcy"]
+    largura = len(DIMENSOES) + len(MEDIDAS)
+    linhas = []
+    for topo in range(0, total, altura):
+        pag = motor.chamar(h, "GetHyperCubeData", {"qPath": "/qHyperCubeDef", "qPages": [
+            {"qLeft": 0, "qTop": topo, "qWidth": largura, "qHeight": min(altura, total - topo)}]})
+        for p in pag.get("qDataPages", []):
+            for c in p.get("qMatrix", []):
+                data = _data_iso(c[1])
+                ean = (c[0].get("qText") or "").strip()
+                if not data or ean not in gtins:
+                    continue
+                linhas.append({
+                    "ean": ean, "data": data, "unidade": (c[2].get("qText") or "?").strip(),
+                    "mediana": _numero(c[3]), "media": _numero(c[4]), "minimo": _numero(c[5]), "maximo": _numero(c[6]),
+                    "quantidade": _numero(c[7]), "itens": int(_numero(c[8]) or 0), "descricao": (c[9].get("qText") or "").strip()[:120],
+                })
+    motor.chamar(doc, "ClearAll", {"qLockedAlso": False})
+    return linhas
+
+
+def salvar(con, linhas: list[dict]) -> int:
+    """Grava (ou atualiza: dias recentes mudam quando chegam notas novas) as medianas diárias."""
+    from ..modelo import agora_iso
+
+    con.executescript(_ESQUEMA)
+    agora = agora_iso()
+    con.executemany(
+        "INSERT OR REPLACE INTO mapa_df_nfe VALUES (:ean, :data, :unidade, :mediana, :media, :minimo, :maximo, "
+        ":quantidade, :itens, :descricao, :coletado_em)", [{**l, "coletado_em": agora} for l in linhas])
+    con.commit()
+    return len(linhas)
+
+
+def coletar(con, gtins: list[str], lote: int = 50, app_id: str = APP_ID) -> dict:
+    """Abre uma conexão, consulta em lotes e grava. Devolve um resumo."""
+    import time
+
+    motor = Motor(app_id)
+    resumo = {"gtins": len(set(gtins)), "com_dados": 0, "linhas": 0}
+    try:
+        doc = motor.abrir_app()
+        achados = set()
+        lista = sorted(set(gtins))
+        for i in range(0, len(lista), lote):
+            linhas = precos_por_gtin(motor, doc, lista[i:i + lote])
+            achados |= {l["ean"] for l in linhas}
+            resumo["linhas"] += salvar(con, linhas)
+            time.sleep(2)  # gentileza com o servidor
+        resumo["com_dados"] = len(achados)
+    finally:
+        motor.fechar()
+    return resumo
+
+
+def serie(con, ean: str) -> dict | None:
+    """Série diária na unidade mais comum do GTIN, com a tendência dos últimos 7 dias contra os 7 anteriores."""
+    con.executescript(_ESQUEMA)
+    linhas = con.execute("SELECT unidade, SUM(itens) FROM mapa_df_nfe WHERE ean = ? GROUP BY unidade ORDER BY 2 DESC", (ean,)).fetchall()
+    if not linhas:
+        return None
+    unidade = linhas[0][0]
+    pontos = [{"data": d, "mediana": m, "itens": n, "minimo": mi, "maximo": ma}
+              for d, m, n, mi, ma in con.execute(
+                  "SELECT data, mediana, itens, minimo, maximo FROM mapa_df_nfe WHERE ean = ? AND unidade = ? ORDER BY data", (ean, unidade))]
+    return {"unidade": unidade, "pontos": pontos, "tendencia": tendencia(pontos),
+            "descricao": con.execute("SELECT descricao FROM mapa_df_nfe WHERE ean = ? ORDER BY data DESC LIMIT 1", (ean,)).fetchone()[0]}
+
+
+def tendencia(pontos: list[dict], janela: int = 7, minimo_itens: int = 5) -> dict | None:
+    """Compara a mediana ponderada dos últimos `janela` dias com a dos `janela` dias anteriores."""
+    from datetime import date, timedelta
+    from statistics import median
+
+    if not pontos:
+        return None
+    fim = date.fromisoformat(pontos[-1]["data"])
+
+    def bloco(inicio: date, ate: date):
+        sel = [p for p in pontos if inicio < date.fromisoformat(p["data"]) <= ate and p["mediana"]]
+        itens = sum(p["itens"] for p in sel)
+        valores = [p["mediana"] for p in sel for _ in range(max(1, min(p["itens"], 50)))]
+        return (median(valores) if valores else None), itens
+
+    atual, n1 = bloco(fim - timedelta(days=janela), fim)
+    antes, n0 = bloco(fim - timedelta(days=2 * janela), fim - timedelta(days=janela))
+    if not atual or not antes or n1 < minimo_itens or n0 < minimo_itens:
+        return {"variacao_pct": None, "atual": atual, "anterior": antes, "itens": [n0, n1], "ate": fim.isoformat(),
+                "nota": "poucas notas para comparar"}
+    return {"variacao_pct": round((atual / antes - 1) * 100, 2), "atual": round(atual, 2), "anterior": round(antes, 2),
+            "itens": [n0, n1], "ate": fim.isoformat()}

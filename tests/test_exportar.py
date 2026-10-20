@@ -57,3 +57,24 @@ class TestExportar(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestExportarCompraDF(unittest.TestCase):
+    def test_produto_so_com_preco_de_compra(self):
+        import tempfile
+        from pathlib import Path
+
+        from historico_precos.armazenamento import Banco
+        from historico_precos.exportar import exportar
+        from historico_precos.mapa_df import qlik
+
+        with tempfile.TemporaryDirectory() as d:
+            banco = Banco(f"{d}/t.db")
+            qlik.salvar(banco.con, [{"ean": "7891", "data": "2026-10-15", "unidade": "UN", "mediana": 18.5, "media": 18.6,
+                                     "minimo": 17.0, "maximo": 20.0, "quantidade": 100, "itens": 12, "descricao": "CAFE X 500G"}])
+            self.assertEqual(exportar(banco, Path(d) / "dados"), 1)
+            dado = json.loads((Path(d) / "dados" / "7891.json").read_text())
+            self.assertEqual(dado["ofertas"], [])
+            self.assertEqual(dado["compra_df"]["serie"][0]["mediana"], 18.5)
+            self.assertIn("Não é o preço da prateleira", dado["compra_df"]["aviso"])
+            banco.con.close()

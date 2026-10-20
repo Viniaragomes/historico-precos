@@ -20,14 +20,32 @@ log = logging.getLogger(__name__)
 AVISO = "Preços online podem diferir da loja física. Cada preço tem um link para a fonte."
 
 
+AVISO_COMPRA = ("Preço de compra: mediana diária do valor unitário nas notas fiscais entre empresas (NF-e) emitidas no DF, "
+                "do Mapa de Preços da Secretaria de Economia do DF. Não é o preço da prateleira; mostra o custo que chega ao "
+                "comércio e costuma se mover antes dele.")
+
+
+def compra_df(banco: Banco, ean: str, dias: int = 90) -> dict | None:
+    from .mapa_df import qlik
+
+    s = qlik.serie(banco.con, ean)
+    if not s:
+        return None
+    return {"fonte": "Mapa de Preços do DF (NF-e)", "evidencia": "https://paineis.fazenda.df.gov.br/mapadeprecos/",
+            "unidade": s["unidade"], "descricao": s["descricao"], "tendencia": s["tendencia"],
+            "serie": [{"data": p["data"], "mediana": p["mediana"], "itens": p["itens"]} for p in s["pontos"][-dias:]],
+            "aviso": AVISO_COMPRA}
+
+
 def dados_do_produto(banco: Banco, ean: str, causas: AgenteCausas | None, hoje: date | None = None) -> dict | None:
     pontos, alertas = limpar(banco.precos(ean))
-    if not pontos:
+    compra = compra_df(banco, ean)
+    if not pontos and not compra:
         return None
     produto = banco.produto(ean) or Produto(ean)
     comp = comparar(pontos, hoje=hoje, max_dias=30)
 
-    if causas is not None:
+    if causas is not None and pontos:
         _, explicacoes = causas.explicar(ean, pontos=pontos)
         mudancas = [
             {
@@ -51,7 +69,7 @@ def dados_do_produto(banco: Banco, ean: str, causas: AgenteCausas | None, hoje: 
 
     return {
         "ean": ean,
-        "nome": produto.nome or next((p.descricao for p in reversed(pontos) if p.descricao), None),
+        "nome": produto.nome or next((p.descricao for p in reversed(pontos) if p.descricao), None) or (compra or {}).get("descricao"),
         "marca": produto.marca,
         "quantidade": produto.quantidade,
         "atualizado_em": agora_iso(),
@@ -63,6 +81,7 @@ def dados_do_produto(banco: Banco, ean: str, causas: AgenteCausas | None, hoje: 
             for p in pontos
         ],
         "mudancas": sorted(mudancas, key=lambda m: m["data_nova"], reverse=True),
+        "compra_df": compra,
         "aviso": AVISO,
         "qualidade": {
             "ocultos": sum(1 for a in alertas if a.severidade == BLOQUEIO),
@@ -74,6 +93,10 @@ def dados_do_produto(banco: Banco, ean: str, causas: AgenteCausas | None, hoje: 
 def exportar(banco: Banco, pasta: Path, causas: AgenteCausas | None = None) -> int:
     pasta.mkdir(parents=True, exist_ok=True)
     eans = [l[0] for l in banco.con.execute("SELECT DISTINCT ean FROM precos ORDER BY ean")]
+    try:
+        eans = sorted(set(eans) | {l[0] for l in banco.con.execute("SELECT DISTINCT ean FROM mapa_df_nfe")})
+    except Exception:  # banco sem a tabela do Mapa (ainda não coletado)
+        pass
     indice = []
     for ean in eans:
         dado = dados_do_produto(banco, ean, causas)
@@ -87,6 +110,7 @@ def exportar(banco: Banco, pasta: Path, causas: AgenteCausas | None = None) -> i
             "menor_preco": mais_barata["preco"] if mais_barata else None,
             "loja": mais_barata["loja"] if mais_barata else None,
             "lojas": len(dado["ofertas"]),
+            "compra_df": (dado["compra_df"] or {}).get("tendencia"),
         })
     (pasta / "indice.json").write_text(
         json.dumps({"atualizado_em": agora_iso(), "produtos": indice}, ensure_ascii=False), encoding="utf-8"

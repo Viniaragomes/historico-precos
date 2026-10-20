@@ -560,6 +560,7 @@ async function telaProduto(ean) {
   conteudo.replaceChildren(heroProduto(p, aberto?.foto), el("div", { class: "folha" },
     cartaoOndeComprar(contexto),
     cartaoHistorico(p),
+    cartaoCompraDF(p),
     cartaoCausas(contexto),
     cartaoImpostos(tabela, [p.nome, aberto?.nome], p.ofertas[0]?.preco ?? null),
     cartaoReportar(ean),
@@ -829,6 +830,58 @@ function cartaoHistorico(p) {
     el("table", { class: "tabela" },
       el("thead", {}, el("tr", {}, el("th", {}, "Data"), el("th", {}, "Loja"), el("th", { class: "num" }, "Preço"), el("th", {}, ""))),
       el("tbody", {}, linhas))));
+  return cartao;
+}
+
+// ---------- preço de compra no DF (NF-e entre empresas, Mapa de Preços do DF) ----------
+
+const UNIDADE_SIMPLES = /^(un|und|unid|unidade|pc|pç|peça|peca)\b/i;
+
+function cartaoCompraDF(p) {
+  const c = p.compra_df;
+  if (!c || !c.serie?.length) return null;
+  const cartao = el("section", { class: "cartao entrar entrar-3" }, el("h2", {}, "Preço de compra no DF"));
+  const ultimo = c.serie[c.serie.length - 1];
+  const t = c.tendencia || {};
+  cartao.append(el("p", { class: "sub" }, `Quanto o comércio pagou, por ${c.unidade.toLowerCase()}: mediana das notas fiscais entre empresas.`));
+  cartao.append(el("div", { class: "loja-linha" },
+    el("div", { class: "meio" },
+      el("div", { class: "nome" }, "Último dia com notas"),
+      el("div", { class: "detalhe" }, `${dataBR(ultimo.data)} · ${ultimo.itens} ${ultimo.itens === 1 ? "item de nota" : "itens de notas"}`)),
+    el("div", { class: "direita" }, el("div", { class: "valor" }, brl.format(ultimo.mediana)))));
+
+  if (t.variacao_pct != null) {
+    const sobe = t.variacao_pct >= 2, cai = t.variacao_pct <= -2;
+    const v = `${t.variacao_pct > 0 ? "+" : ""}${String(t.variacao_pct).replace(".", ",")}%`;
+    cartao.append(el("p", { class: "texto-folha", style: "margin:12px 0 0" },
+      el("strong", {}, sobe ? `Custo subindo: ${v} em 7 dias.` : cai ? `Custo caindo: ${v} em 7 dias.` : `Custo estável (${v} em 7 dias).`),
+      sobe ? " Quando o custo de compra sobe, a prateleira costuma subir depois. Não é certeza." :
+      cai ? " Se a queda se mantiver, pode abrir espaço para o preço da prateleira cair. Não é certeza." : ""));
+  } else if (t.nota) {
+    cartao.append(el("p", { class: "minusculo", style: "margin:12px 0 0" }, `Tendência de 7 dias: ${t.nota}.`));
+  }
+
+  const prateleira = p.ofertas[0];
+  if (prateleira && UNIDADE_SIMPLES.test(c.unidade) && ultimo.mediana > 0) {
+    const dif = (prateleira.preco / ultimo.mediana - 1) * 100;
+    cartao.append(el("p", { class: "minusculo", style: "margin:8px 0 0" },
+      `Na prateleira hoje: ${brl.format(prateleira.preco)} em ${prateleira.loja} (${dif >= 0 ? "+" : ""}${dif.toFixed(0).replace(".", ",")}% sobre a mediana de compra). ` +
+      "A diferença inclui frete, perdas, impostos e margem; não é só lucro."));
+  }
+
+  if (c.serie.length >= 2) {
+    const caixa = el("div", { class: "grafico" });
+    const pts = c.serie.filter((d) => d.mediana > 0).map((d) => ({ data: d.data, preco: d.mediana, t: dia(d.data).getTime() }));
+    const serie = [{ loja: "Mediana de compra", cor: "var(--serie-2)", pts }];
+    cartao.append(caixa);
+    let largura = 0;
+    new ResizeObserver(([e]) => {
+      const w = Math.floor(e.contentRect.width);
+      if (w > 0 && w !== largura) { largura = w; grafico(caixa, serie, pts[0].t, pts[pts.length - 1].t); }
+    }).observe(caixa);
+  }
+  cartao.append(el("p", { class: "minusculo", style: "margin:10px 0 0" }, c.aviso, " ",
+    el("a", { href: c.evidencia, target: "_blank", rel: "noopener" }, "Ver o painel oficial")));
   return cartao;
 }
 

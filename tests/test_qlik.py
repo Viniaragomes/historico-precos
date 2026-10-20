@@ -117,3 +117,61 @@ class TestQlik(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+def respostas_precos(msg):
+    m = msg["method"]
+    if m == "OpenDoc":
+        return {"qReturn": {"qHandle": 1}}
+    if m in ("GetField", "CreateSessionObject"):
+        if m == "CreateSessionObject":
+            dims = [d["qDef"]["qFieldDefs"][0] for d in msg["params"][0]["qHyperCubeDef"]["qDimensions"]]
+            assert not any("cpf" in d or "cnpj" in d for d in dims)  # nunca pede dado de pessoa
+        return {"qReturn": {"qHandle": 3}}
+    if m == "GetLayout":
+        return {"qLayout": {"qHyperCube": {"qSize": {"qcx": 10, "qcy": 3}}}}
+    if m == "GetHyperCubeData":
+        def linha(ean, data, num, mediana, itens):
+            return [{"qText": ean}, {"qText": data, "qNum": num}, {"qText": "UN"}, {"qNum": mediana}, {"qNum": mediana},
+                    {"qNum": mediana - 1}, {"qNum": mediana + 1}, {"qNum": 100}, {"qNum": itens}, {"qText": "CAFE X 500G"}]
+        return {"qDataPages": [{"qMatrix": [linha("7891", "15/10/2026", 46310, 18.5, 12),
+                                            linha("7891", "-", None, 19.0, 3),  # sem data: ignorada
+                                            linha("9999", "16/10/2026", 46311, 5.0, 2)]}]}  # GTIN não pedido
+    return {}
+
+
+class TestPrecosQlik(unittest.TestCase):
+    def test_precos_por_gtin_e_serie(self):
+        import sqlite3
+
+        url, pedidos = servidor_qlik_falso(respostas_precos)
+        motor = qlik.Motor("app", url=url)
+        doc = motor.abrir_app()
+        linhas = qlik.precos_por_gtin(motor, doc, ["7891", "abc"])
+        motor.fechar()
+        self.assertEqual(len(linhas), 1)
+        self.assertEqual((linhas[0]["data"], linhas[0]["mediana"], linhas[0]["itens"]), ("2026-10-15", 18.5, 12))
+        selecao = next(p for p in pedidos[1:] if p["method"] == "SelectValues")
+        self.assertEqual([v["qText"] for v in selecao["params"]["qFieldValues"]], ["7891"])
+        self.assertEqual(pedidos[-1]["method"], "ClearAll")  # deixa a sessão limpa
+
+        con = sqlite3.connect(":memory:")
+        qlik.salvar(con, linhas)
+        qlik.salvar(con, [{**linhas[0], "mediana": 18.9}])  # recarga atualiza o mesmo dia
+        s = qlik.serie(con, "7891")
+        self.assertEqual(s["unidade"], "UN")
+        self.assertEqual([p["mediana"] for p in s["pontos"]], [18.9])
+
+    def test_data_em_numero_de_serie(self):
+        self.assertEqual(qlik._data_iso({"qText": "", "qNum": 46310}), "2026-10-15")
+        self.assertEqual(qlik._data_iso({"qText": "2026-10-15"}), "2026-10-15")
+
+    def test_tendencia(self):
+        from datetime import date, timedelta
+
+        base = date(2026, 10, 1)
+        pontos = [{"data": (base + timedelta(days=i)).isoformat(), "mediana": 10.0 if i < 7 else 11.0, "itens": 3}
+                  for i in range(14)]
+        t = qlik.tendencia(pontos)
+        self.assertEqual(t["variacao_pct"], 10.0)
+        self.assertIsNone(qlik.tendencia(pontos[-3:])["variacao_pct"])  # poucas notas
