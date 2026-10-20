@@ -32,6 +32,9 @@ ALVOS = {
     "Confaz (convênios ICMS)": ["https://www.confaz.fazenda.gov.br/legislacao/convenios"],
     "Painéis da Secretaria de Economia do DF": ["https://paineis.fazenda.df.gov.br/", "https://paineis.fazenda.df.gov.br/mapadeprecos/"],
     "Receita do DF": ["https://www.receita.fazenda.df.gov.br/"],
+    "Mapa de Preços DF (script do painel)": ["https://paineis.fazenda.df.gov.br/mapadeprecos/assets/js/app.js"],
+    "Servidor Qlik da Fazenda DF": ["https://qap.fazenda.df.gov.br/paineis/resources/assets/external/requirejs/require.js",
+                                    "https://qap.fazenda.df.gov.br/paineis/qrs/about"],
     "Encartes DF": ["https://encartesdf.com.br/", "https://encartesdf.com.br/wp-json/wp/v2/posts?per_page=5",
                     "https://encartesdf.com.br/feed/", "https://encartesdf.com.br/sitemap.xml"],
 }
@@ -112,7 +115,7 @@ def investigar(pasta: Path) -> dict:
             resp = baixar(url)
             item["paginas"].append(analisar(resp))
             if resp["status"] and resp.get("texto"):
-                arquivo = re.sub(r"[^a-z0-9]+", "-", url.lower())[:80] + ".html"
+                arquivo = re.sub(r"[^a-z0-9]+", "-", url.lower())[:80] + (".js" if url.endswith(".js") else ".html")
                 (pasta / arquivo).write_text(resp["texto"][:400000], encoding="utf-8")
         resultado[nome] = item
         time.sleep(2)
