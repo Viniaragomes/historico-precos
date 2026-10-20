@@ -46,6 +46,8 @@ ALVOS = {
     "CEPEA (indicadores agro)": ["https://www.cepea.org.br/br/indicador/cafe.aspx", "https://www.cepea.org.br/br/indicador/boi-gordo.aspx",
                                  "https://www.cepea.org.br/br/indicador/arroz.aspx"],
     "CEASA-DF (atacado de hortifrúti)": ["https://www.ceasa.df.gov.br/"],
+    "CEASA-DF Portal de Serviços (preços)": ["https://www.portal.ceasadf.com.br/precos",
+                                             "https://www.portal.ceasadf.com.br/storage/files/2026/08/sima.pdf"],
     "Conab Prohort (preços diários das Ceasas)": ["https://prohort.conab.gov.br/"],
     "Conab Portal de Informações (downloads)": ["https://portaldeinformacoes.conab.gov.br/download-arquivos.html"],
     "ANP (preço do diesel, frete)": ["https://www.gov.br/anp/pt-br/assuntos/precos-e-defesa-da-concorrencia/precos/levantamento-de-precos-de-combustiveis-ultimas-semanas-pesquisadas"],
@@ -340,6 +342,7 @@ def analisar(resposta: dict) -> dict:
         "ms": resposta["ms"],
         "titulo": " ".join(titulo.group(1).split())[:120] if titulo else None,
         "servidor": resposta["cabecalhos"].get("Server") or resposta["cabecalhos"].get("server"),
+        "tipo": resposta["cabecalhos"].get("Content-Type") or resposta["cabecalhos"].get("content-type"),
         "antirrobo": [nome for nome, sinais in SINAIS_ANTIROBO.items() if any(s in baixo for s in sinais)],
         "tecnologia": [nome for nome, sinais in TECNOLOGIAS.items() if any(s in baixo for s in sinais)],
         "tem_json_ld": "application/ld+json" in baixo,
@@ -352,10 +355,11 @@ def analisar(resposta: dict) -> dict:
 
 # sites que, em 20/10/2026, recusaram os servidores do GitHub (fora do Brasil): rodar de uma conexão no Brasil
 # a Conab ("403 - Acesso proibido") e o DOU (conexão encerrada) recusaram também a partir do Brasil: ficam de fora
-SO_DO_BRASIL = ["CEASA-DF (atacado de hortifrúti)", "IPE-DF (índices do DF)", "Dados abertos do DF", "Confaz (convênios ICMS)"]
+SO_DO_BRASIL = ["CEASA-DF Portal de Serviços (preços)", "CEASA-DF (atacado de hortifrúti)", "IPE-DF (índices do DF)", "Dados abertos do DF", "Confaz (convênios ICMS)"]
 
 # o que procurar em cada site (no sitemap e nos links da página inicial)
 TEMAS = {
+    "CEASA-DF Portal de Serviços (preços)": ["sima", "preco", "cotac", "boletim"],
     "CEASA-DF (atacado de hortifrúti)": ["cotac", "preco", "boletim", "mercado", "estatistic", "informativo", "prohort"],
     "IPE-DF (índices do DF)": ["icdf", "preco", "cesta", "inflac", "ipca", "custo", "indice", "atacado"],
     "Dados abertos do DF": ["preco", "ceasa", "cesta", "abastecimento", "nota-fiscal", "nfe", "ipe"],
