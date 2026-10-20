@@ -24,15 +24,27 @@ def identificar(nav: Navegador, ean: str) -> Produto:
     )
 
 
+# a busca por texto (cgi/search.pl) é proibida no robots.txt do Open Food Facts;
+# a API v2 permite filtrar por categoria e país
 BUSCA = (
-    "https://world.openfoodfacts.org/cgi/search.pl?search_terms={termo}&tagtype_0=countries"
-    "&tag_contains_0=contains&tag_0=brazil&json=1&page_size={limite}&fields=code,product_name"
+    "https://world.openfoodfacts.org/api/v2/search?countries_tags_en=brazil&categories_tags_en={categoria}"
+    "&fields=code,product_name&page_size={limite}"
 )
+CATEGORIAS = {
+    "cafe": "coffees", "arroz": "rices", "feijao": "beans", "leite": "milks", "oleo de soja": "soybean-oils",
+    "acucar": "sugars", "macarrao": "pastas", "farinha de trigo": "wheat-flours", "biscoito": "biscuits",
+    "manteiga": "butters",
+}
 
 
 def buscar_texto(nav: Navegador, termo: str, limite: int = 5) -> list[tuple[str, str]]:
-    """Produtos vendidos no Brasil com o termo no nome. Prefixo 789/790 = código registrado no Brasil."""
-    dado = nav.get_json(BUSCA.format(termo=quote(termo), limite=limite * 3))
+    """Produtos vendidos no Brasil da categoria do termo. Prefixo 789/790 = código registrado no Brasil."""
+    from ..causas.series import normalizar
+
+    categoria = CATEGORIAS.get(normalizar(termo))
+    if not categoria:
+        return []
+    dado = nav.get_json(BUSCA.format(categoria=categoria, limite=limite * 3))
     achados = []
     for p in (dado or {}).get("products", []):
         codigo = str(p.get("code", ""))

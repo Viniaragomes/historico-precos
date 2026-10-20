@@ -1,9 +1,38 @@
 {
-  "_leia": "Domínios candidatos a verificar com: python -m historico_precos detectar-lojas. Desative com \"ativa\": false. \"sc\" é o canal de venda VTEX (pode mudar o preço por região).",
+  "_leia": "Lojas consultadas. Uma loja só entra se o robots.txt permitir e se ela não bloquear robôs; nunca burlamos bloqueio. 'cep' define a região VTEX (preço daquela cidade); sem região confirmada, o preço não é marcado com cidade. Resultado da verificação em 20/10/2026 em 'verificacao'.",
   "lojas": [
-    {"nome": "Carrefour Mercado", "dominio": "mercado.carrefour.com.br", "cidade": "Brasília", "tipo": "vtex", "ativa": true},
-    {"nome": "Atacadão", "dominio": "www.atacadao.com.br", "cidade": "Brasília", "tipo": "vtex", "ativa": true},
-    {"nome": "Pão de Açúcar", "dominio": "www.paodeacucar.com", "cidade": "Brasília", "tipo": "vtex", "ativa": true},
-    {"nome": "Comper", "dominio": "www.comper.com.br", "cidade": "Brasília", "tipo": "vtex", "ativa": true}
+    {
+      "nome": "Carrefour Mercado",
+      "dominio": "mercado.carrefour.com.br",
+      "cidade": "Brasília",
+      "tipo": "vtex",
+      "ativa": false,
+      "verificacao": "HTTP 503 em todas as consultas a partir dos servidores do GitHub (provável proteção contra robôs). Tentar de novo mais tarde; não burlar."
+    },
+    {
+      "nome": "Atacadão",
+      "dominio": "www.atacadao.com.br",
+      "cidade": "Brasília",
+      "tipo": "vtex",
+      "ativa": true,
+      "verificacao": "Responde (VTEX). Preço regionalizado pelo CEP.",
+      "cep": "70040010"
+    },
+    {
+      "nome": "Pão de Açúcar",
+      "dominio": "www.paodeacucar.com",
+      "cidade": "Brasília",
+      "tipo": "vtex",
+      "ativa": false,
+      "verificacao": "Não usa o catálogo público da VTEX (HTTP 404)."
+    },
+    {
+      "nome": "Comper",
+      "dominio": "www.comper.com.br",
+      "cidade": "Brasília",
+      "tipo": "vtex",
+      "ativa": false,
+      "verificacao": "robots.txt proíbe o acesso de robôs à API e o site usa proteção Cloudflare. Respeitado."
+    }
   ]
 }

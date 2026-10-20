@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import gzip
 import http.cookiejar
+import zlib
 import json
 import logging
 import time
@@ -46,6 +48,21 @@ class Navegador:
         self._opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(http.cookiejar.CookieJar()))
 
     @staticmethod
+    def _descomprimir(dados: bytes, codificacao: str | None) -> bytes:
+        """Alguns servidores mandam gzip mesmo sem o pedido aceitar; o urllib não descomprime sozinho."""
+        if (codificacao or "").lower() in ("gzip", "x-gzip") or dados[:2] == b"\x1f\x8b":
+            try:
+                return gzip.decompress(dados)
+            except (OSError, EOFError):
+                return dados
+        if (codificacao or "").lower() == "deflate":
+            try:
+                return zlib.decompress(dados)
+            except zlib.error:
+                return zlib.decompress(dados, -zlib.MAX_WBITS)
+        return dados
+
+    @staticmethod
     def _decodificar(dados: bytes, charset: str | None) -> str:
         if charset:
             return dados.decode(charset, errors="replace")
@@ -61,7 +78,8 @@ class Navegador:
         req = urllib.request.Request(url, data=dados, headers=cabecalhos)
         try:
             with self._opener.open(req, timeout=self.timeout) as resp:
-                return resp.status, self._decodificar(resp.read(), resp.headers.get_content_charset())
+                corpo = self._descomprimir(resp.read(), resp.headers.get("Content-Encoding"))
+                return resp.status, self._decodificar(corpo, resp.headers.get_content_charset())
         except urllib.error.HTTPError as e:
             try:
                 corpo = self._decodificar(e.read()[:2000], None)
@@ -78,10 +96,16 @@ class Navegador:
         self.registro.append({"url": url[:300], "status": status, "motivo": motivo[:200],
                               "trecho": " ".join(trecho.split())[:300]})
 
+    # sites que pedem mais espaço entre consultas do que o padrão
+    INTERVALO_MINIMO = {"api.gdeltproject.org": 6.0}
+
+    def _intervalo_do(self, host: str) -> float:
+        return max(self.intervalo, self.INTERVALO_MINIMO.get(host, 0.0))
+
     def _esperar_vez(self, host: str) -> None:
         ultimo = self._ultimo_acesso.get(host)
         if ultimo is not None:
-            falta = self.intervalo - (time.monotonic() - ultimo)
+            falta = self._intervalo_do(host) - (time.monotonic() - ultimo)
             if falta > 0:
                 self._dormir(falta)
         self._ultimo_acesso[host] = time.monotonic()
@@ -115,7 +139,7 @@ class Navegador:
         req = urllib.request.Request(url, headers={"User-Agent": self.user_agent, "Accept": "*/*"})
         try:
             with self._opener.open(req, timeout=self.timeout) as resp:
-                return resp.read() if resp.status == 200 else None
+                return self._descomprimir(resp.read(), resp.headers.get("Content-Encoding")) if 200 <= resp.status < 300 else None
         except (urllib.error.URLError, TimeoutError, ConnectionError) as e:
             log.warning("falha ao baixar %s: %s", url, e)
             return None
@@ -135,10 +159,10 @@ class Navegador:
         for tentativa in range(tentativas):
             self._esperar_vez(host)
             status, texto = self._abrir(url) if dados is None else self._abrir(url, dados)
-            if status == 200:
+            if 200 <= status < 300:  # a VTEX responde 206 (conteúdo parcial) em buscas paginadas
                 return texto
             if status in (429, 502, 503, 504) and tentativa + 1 < tentativas:
-                self._dormir(self.intervalo * 5)
+                self._dormir(max(self.intervalo * 5, self._intervalo_do(host) * 2))
                 continue
             log.info("HTTP %s em %s", status, url)
             if not self.registro or self.registro[-1]["url"] != url[:300]:

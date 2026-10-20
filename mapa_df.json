@@ -1,11 +1,29 @@
 {
   "_leia": "Configuração do agente do Mapa de Preços do DF. Primeiro rode 'mapa-df descobrir'. Se o agente não acertar sozinho os campos do formulário ou as colunas da tabela, preencha 'campos' e 'colunas' com os nomes que o relatório mostrar. 'fixos' são valores que vão sempre na consulta (ex.: um filtro de UF de origem). 'endpoint' só é necessário se a consulta for feita por JavaScript em outro endereço.",
-  "url": "https://paineis.fazenda.df.gov.br/mapadeprecos/index.php",
+  "url": "https://paineis.fazenda.df.gov.br/mapadeprecos/",
   "formulario_indice": null,
   "endpoint": null,
-  "campos": {"produto": null, "mes": null, "ano": null},
+  "campos": {
+    "produto": null,
+    "mes": null,
+    "ano": null
+  },
   "fixos": {},
   "colunas": {},
   "meses_por_coleta": 4,
-  "termos_padrao": ["CAFE", "ARROZ", "FEIJAO", "LEITE", "OLEO DE SOJA", "ACUCAR", "CARNE", "FRANGO", "OVOS", "MACARRAO", "FARINHA DE TRIGO", "MANTEIGA"]
+  "termos_padrao": [
+    "CAFE",
+    "ARROZ",
+    "FEIJAO",
+    "LEITE",
+    "OLEO DE SOJA",
+    "ACUCAR",
+    "CARNE",
+    "FRANGO",
+    "OVOS",
+    "MACARRAO",
+    "FARINHA DE TRIGO",
+    "MANTEIGA"
+  ],
+  "_verificacao": "Em 20/10/2026, .../mapadeprecos/index.php respondeu 'esta página não existe'. Testando o endereço da pasta."
 }

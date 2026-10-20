@@ -209,3 +209,29 @@ class TestAgente(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestRegiaoERede(unittest.TestCase):
+    def setUp(self):
+        vtex._regioes.clear()
+
+    def test_regiao_confirmada_pelo_cep(self):
+        fake = internet_padrao()
+        fake.rotas.insert(0, ("https://loja.exemplo.com.br/api/checkout/pub/regions", (200, json.dumps([{"id": "v2.ABC"}]))))
+        loja = {"nome": "Loja Exemplo", "dominio": "loja.exemplo.com.br", "cidade": "Brasília", "cep": "70040-010"}
+        pontos, _ = vtex.buscar_por_ean(nav_com(fake, robots=False), loja, EAN)
+        self.assertIn("regionId=v2.ABC", fake.acessos[-1])
+        self.assertIn("postalCode=70040010", fake.acessos[0])
+        self.assertEqual(pontos[0].cidade, "Brasília")
+
+    def test_sem_regiao_nao_afirma_cidade(self):
+        loja = {"nome": "Loja Exemplo", "dominio": "loja.exemplo.com.br", "cidade": "Brasília", "cep": "70040010"}
+        pontos, _ = vtex.buscar_por_ean(nav_com(internet_padrao(), robots=False), loja, EAN)
+        self.assertIsNone(pontos[0].cidade)
+
+    def test_206_e_gzip(self):
+        import gzip
+        fake = Fake([("https://site.com.br/a", (206, "[1]"))])
+        self.assertEqual(nav_com(fake, robots=False).get_json("https://site.com.br/a"), [1])
+        self.assertEqual(Navegador._descomprimir(gzip.compress(b'{"ok":1}'), None), b'{"ok":1}')
+        self.assertEqual(Navegador._descomprimir(b"texto", None), b"texto")
