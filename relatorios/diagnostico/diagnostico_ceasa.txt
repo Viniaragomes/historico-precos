@@ -1,27 +1,27 @@
 classificações do TOMATE: {'2': 'ESPECIAL', '3': 'EXTRA', '6': 'PRIMEIRA'}
+ESPECIAL   06/2026: 1 dias, de 2026-06-01 a 2026-06-01, último R$ 4.00/kg
+ESPECIAL   05/2026: 8 dias, de 2026-05-04 a 2026-05-28, último R$ 3.50/kg
+ESPECIAL   04/2026: 8 dias, de 2026-04-02 a 2026-04-30, último R$ 5.50/kg
+ESPECIAL   03/2026: 9 dias, de 2026-03-02 a 2026-03-30, último R$ 3.75/kg
+ESPECIAL   02/2026: 8 dias, de 2026-02-02 a 2026-02-26, último R$ 3.50/kg
+ESPECIAL   01/2026: 8 dias, de 2026-01-05 a 2026-01-29, último R$ 3.50/kg
+ESPECIAL   12/2025: 8 dias, de 2025-12-01 a 2025-12-29, último R$ 2.75/kg
+ESPECIAL   09/2025: 10 dias, de 2025-09-01 a 2025-09-29, último R$ 2.00/kg
+ESPECIAL   06/2025: 8 dias, de 2025-06-04 a 2025-06-30, último R$ 4.50/kg
+ESPECIAL   03/2025: 20 dias, de 2025-03-03 a 2025-03-31, último R$ 4.75/kg
+ESPECIAL   06/2024: 20 dias, de 2024-06-03 a 2024-06-28, último R$ 7.50/kg
 
-== classificação 2 10/2026 urlencoded:
-{"message":"<div class='message info '><i class='ti ti-info-circle'><\/i>Sua pesquisa n&atilde;o retornou resultados. Escolha outro per&iacute;odo e tente novamente.<\/div>"}
+EXTRA      06/2026: 1 dias, de 2026-06-01 a 2026-06-01, último R$ 6.50/kg
+EXTRA      05/2026: 8 dias, de 2026-05-04 a 2026-05-28, último R$ 5.00/kg
+EXTRA      04/2026: 8 dias, de 2026-04-02 a 2026-04-30, último R$ 7.50/kg
+EXTRA      03/2026: 9 dias, de 2026-03-02 a 2026-03-30, último R$ 5.50/kg
+EXTRA      02/2026: 8 dias, de 2026-02-02 a 2026-02-26, último R$ 5.00/kg
+EXTRA      01/2026: 8 dias, de 2026-01-05 a 2026-01-29, último R$ 5.50/kg
+EXTRA      12/2025: 8 dias, de 2025-12-01 a 2025-12-29, último R$ 4.50/kg
+EXTRA      09/2025: 10 dias, de 2025-09-01 a 2025-09-29, último R$ 3.00/kg
+EXTRA      06/2025: 8 dias, de 2025-06-04 a 2025-06-30, último R$ 6.00/kg
+EXTRA      03/2025: 20 dias, de 2025-03-03 a 2025-03-31, último R$ 6.50/kg
+EXTRA      06/2024: 20 dias, de 2024-06-03 a 2024-06-28, último R$ 9.00/kg
 
-== classificação 2 10/2026 multipart:
-{"message":"<div class='message info '><i class='ti ti-info-circle'><\/i>Sua pesquisa n&atilde;o retornou resultados. Escolha outro per&iacute;odo e tente novamente.<\/div>"}
 
-== classificação 2 09/2026 urlencoded:
-{"message":"<div class='message info '><i class='ti ti-info-circle'><\/i>Sua pesquisa n&atilde;o retornou resultados. Escolha outro per&iacute;odo e tente novamente.<\/div>"}
-
-== classificação 2 09/2026 multipart:
-{"message":"<div class='message info '><i class='ti ti-info-circle'><\/i>Sua pesquisa n&atilde;o retornou resultados. Escolha outro per&iacute;odo e tente novamente.<\/div>"}
-
-== classificação 3 10/2026 urlencoded:
-{"message":"<div class='message info '><i class='ti ti-info-circle'><\/i>Sua pesquisa n&atilde;o retornou resultados. Escolha outro per&iacute;odo e tente novamente.<\/div>"}
-
-== classificação 3 10/2026 multipart:
-{"message":"<div class='message info '><i class='ti ti-info-circle'><\/i>Sua pesquisa n&atilde;o retornou resultados. Escolha outro per&iacute;odo e tente novamente.<\/div>"}
-
-== classificação 3 09/2026 urlencoded:
-{"message":"<div class='message info '><i class='ti ti-info-circle'><\/i>Sua pesquisa n&atilde;o retornou resultados. Escolha outro per&iacute;odo e tente novamente.<\/div>"}
-
-== classificação 3 09/2026 multipart:
-{"message":"<div class='message info '><i class='ti ti-info-circle'><\/i>Sua pesquisa n&atilde;o retornou resultados. Escolha outro per&iacute;odo e tente novamente.<\/div>"}
-
-registro de falhas: []
+PDFs na página inicial: []
