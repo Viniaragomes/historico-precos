@@ -1,31 +1,31 @@
 {
   "data": "2026-10-20",
-  "duracao_min": 4.2,
+  "duracao_min": 4.6,
   "sondas": [
     {
       "fonte": "Loja VTEX: Carrefour Mercado",
       "ok": false,
-      "detalhe": "mercado.carrefour.com.br"
+      "detalhe": "mercado.carrefour.com.br — HTTP 503 Service Unavailable"
     },
     {
       "fonte": "Loja VTEX: Atacadão",
       "ok": false,
-      "detalhe": "www.atacadao.com.br"
+      "detalhe": "www.atacadao.com.br — HTTP 206"
     },
     {
       "fonte": "Loja VTEX: Pão de Açúcar",
       "ok": false,
-      "detalhe": "www.paodeacucar.com"
+      "detalhe": "www.paodeacucar.com — HTTP 404 Not Found"
     },
     {
       "fonte": "Loja VTEX: Comper",
       "ok": false,
-      "detalhe": "www.comper.com.br"
+      "detalhe": "www.comper.com.br — robots.txt não permite"
     },
     {
       "fonte": "Open Food Facts",
       "ok": false,
-      "detalhe": "busca de produtos do Brasil"
+      "detalhe": "busca de produtos do Brasil — robots.txt não permite"
     },
     {
       "fonte": "Wayback Machine (CDX)",
@@ -40,7 +40,7 @@
     {
       "fonte": "IBGE SIDRA (IPCA)",
       "ok": false,
-      "detalhe": "metadados da tabela 7060"
+      "detalhe": "metadados da tabela 7060 — resposta não é JSON"
     },
     {
       "fonte": "Banco Central (SGS)",
@@ -49,13 +49,13 @@
     },
     {
       "fonte": "GDELT (notícias)",
-      "ok": true,
-      "detalhe": "busca de notícias"
+      "ok": false,
+      "detalhe": "busca de notícias — HTTP 429 Too Many Requests"
     },
     {
       "fonte": "Diário Oficial da União",
       "ok": false,
-      "detalhe": "0 publicações sobre ICMS nos últimos 30 dias"
+      "detalhe": "0 publicações sobre ICMS nos últimos 30 dias — falha de rede: Remote end closed connection without response"
     },
     {
       "fonte": "Mapa de Preços do DF",
