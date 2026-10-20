@@ -40,6 +40,7 @@ ALVOS = {
     "Servidor Qlik da Fazenda DF": ["https://qap.fazenda.df.gov.br/paineis/resources/assets/external/requirejs/require.js"],
     "Receita do DF": ["https://www.receita.fazenda.df.gov.br/"],
     # preços que chegam antes ao mercado (atacado, produtor, frete), com frequência diária ou semanal
+    "CEPEA (widget oficial para sites)": ["https://www.cepea.org.br/br/widget.aspx"],
     "CEPEA (indicadores agro)": ["https://www.cepea.org.br/br/indicador/cafe.aspx", "https://www.cepea.org.br/br/indicador/boi-gordo.aspx",
                                  "https://www.cepea.org.br/br/indicador/arroz.aspx"],
     "CEASA-DF (atacado de hortifrúti)": ["https://www.ceasa.df.gov.br/"],
@@ -47,6 +48,8 @@ ALVOS = {
     "Conab Portal de Informações (downloads)": ["https://portaldeinformacoes.conab.gov.br/download-arquivos.html"],
     "ANP (preço do diesel, frete)": ["https://www.gov.br/anp/pt-br/assuntos/precos-e-defesa-da-concorrencia/precos/levantamento-de-precos-de-combustiveis-ultimas-semanas-pesquisadas"],
     "IPE-DF (índices do DF)": ["https://www.ipe.df.gov.br/"],
+    "Dados abertos do DF": ["https://dados.df.gov.br/", "https://dados.df.gov.br/api/3/action/package_search?q=ceasa&rows=20",
+                            "https://dados.df.gov.br/api/3/action/package_search?q=pre%C3%A7os&rows=20"],
 }
 
 # sites em que vale procurar páginas de produto pelo sitemap
@@ -266,10 +269,17 @@ def analisar(resposta: dict) -> dict:
     }
 
 
-def investigar(pasta: Path) -> dict:
+# sites que, em 20/10/2026, recusaram os servidores do GitHub (fora do Brasil): rodar de uma conexão no Brasil
+SO_DO_BRASIL = ["CEASA-DF (atacado de hortifrúti)", "IPE-DF (índices do DF)", "Dados abertos do DF",
+                "Conab Portal de Informações (downloads)", "Diário Oficial da União", "Confaz (convênios ICMS)"]
+
+
+def investigar(pasta: Path, so: list[str] | None = None) -> dict:
     pasta.mkdir(parents=True, exist_ok=True)
     resultado = {}
     for nome, urls in ALVOS.items():
+        if so and nome not in so:
+            continue
         base = "{0.scheme}://{0.netloc}".format(urlsplit(urls[0]))
         robots = baixar(base + "/robots.txt")
         rp = RobotFileParser()
