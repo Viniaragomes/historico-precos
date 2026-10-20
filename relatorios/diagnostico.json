@@ -27,6 +27,17 @@
       }
     ]
   },
+  "prices.openfoodfacts.org": {
+    "falhas": 1,
+    "exemplos": [
+      {
+        "url": "https://prices.openfoodfacts.org/api/v1/prices?product_code=7891080007682&size=100&order_by=-date",
+        "status": 0,
+        "motivo": "falha de rede: The read operation timed out",
+        "trecho": ""
+      }
+    ]
+  },
   "servicodados.ibge.gov.br": {
     "falhas": 1,
     "exemplos": [
@@ -39,42 +50,42 @@
     ]
   },
   "web.archive.org": {
-    "falhas": 24,
+    "falhas": 48,
     "exemplos": [
       {
         "url": "https://web.archive.org/robots.txt",
+        "status": 404,
+        "motivo": "HTTP 404 Not Found",
+        "trecho": "<html> <head><title>404 Not Found</title></head> <body> <center><h1>404 Not Found</h1></center> <hr><center>nginx</center> </body> </html>"
+      },
+      {
+        "url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fsecure.atacadao.com.br%2Farroz-solito-agulhinha-tipo-1-5358%2Fp&output=json&fl=timestamp%2Coriginal%2Cstatuscode&filter=statuscode%3A200&collapse=digest&limit=500",
         "status": 0,
-        "motivo": "falha de rede: <urlopen error timed out>",
+        "motivo": "falha de rede: <urlopen error [Errno 111] Connection refused>",
         "trecho": ""
       },
       {
-        "url": "https://web.archive.org/cdx/search/cdx?url=www.carrefour.com.br&output=json&fl=timestamp%2Coriginal%2Cstatuscode&filter=statuscode%3A200&collapse=digest&limit=3",
+        "url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fsecure.atacadao.com.br%2Farroz-solito-agulhinha-tipo-1-5358%2Fp&output=json&fl=timestamp%2Coriginal%2Cstatuscode&filter=statuscode%3A200&collapse=digest&limit=500",
         "status": 0,
-        "motivo": "falha de rede: <urlopen error _ssl.c:993: The handshake operation timed out>",
+        "motivo": "falha de rede: <urlopen error [Errno 111] Connection refused>",
         "trecho": ""
       },
       {
-        "url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fsecure.atacadao.com.br%2Fflocao-de-arroz-urbano-pacote-com-500g-63063%2Fp&output=json&fl=timestamp%2Coriginal%2Cstatuscode&filter=statuscode%3A200&collapse=digest&limit=500",
+        "url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fsecure.atacadao.com.br%2Farroz-solito-agulhinha-tipo-1-5358%2Fp&output=json&fl=timestamp%2Coriginal%2Cstatuscode&filter=statuscode%3A200&collapse=digest&limit=500",
         "status": 0,
-        "motivo": "falha de rede: <urlopen error timed out>",
+        "motivo": "falha de rede: <urlopen error [Errno 111] Connection refused>",
         "trecho": ""
       },
       {
-        "url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fsecure.atacadao.com.br%2Farroz-carreteiro-swift-2639%2Fp&output=json&fl=timestamp%2Coriginal%2Cstatuscode&filter=statuscode%3A200&collapse=digest&limit=500",
+        "url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fsecure.atacadao.com.br%2Farroz-solito-agulhinha-tipo-1-5358%2Fp&output=json&fl=timestamp%2Coriginal%2Cstatuscode&filter=statuscode%3A200&collapse=digest&limit=500",
         "status": 0,
-        "motivo": "falha de rede: <urlopen error timed out>",
-        "trecho": ""
-      },
-      {
-        "url": "https://web.archive.org/cdx/search/cdx?url=https%3A%2F%2Fsecure.atacadao.com.br%2Ffeijao-tropeiro-swift-2877%2Fp&output=json&fl=timestamp%2Coriginal%2Cstatuscode&filter=statuscode%3A200&collapse=digest&limit=500",
-        "status": 0,
-        "motivo": "falha de rede: <urlopen error timed out>",
+        "motivo": "falha de rede: <urlopen error [Errno 111] Connection refused>",
         "trecho": ""
       }
     ]
   },
   "world.openfoodfacts.org": {
-    "falhas": 62,
+    "falhas": 61,
     "exemplos": [
       {
         "url": "https://world.openfoodfacts.org/api/v2/search?countries_tags_en=brazil&categories_tags_en=coffees&fields=code,product_name&page_size=3",
@@ -83,25 +94,25 @@
         "trecho": ""
       },
       {
-        "url": "https://world.openfoodfacts.org/api/v2/search?countries_tags_en=brazil&categories_tags_en=pastas&fields=code,product_name&page_size=15",
+        "url": "https://world.openfoodfacts.org/api/v2/product/7891910030484.json?fields=product_name,product_name_pt,brands,quantity",
         "status": -1,
         "motivo": "robots.txt não permite",
         "trecho": ""
       },
       {
-        "url": "https://world.openfoodfacts.org/api/v2/product/7896348301724.json?fields=product_name,product_name_pt,brands,quantity",
+        "url": "https://world.openfoodfacts.org/api/v2/product/7896019205191.json?fields=product_name,product_name_pt,brands,quantity",
         "status": -1,
         "motivo": "robots.txt não permite",
         "trecho": ""
       },
       {
-        "url": "https://world.openfoodfacts.org/api/v2/product/7896005807668.json?fields=product_name,product_name_pt,brands,quantity",
+        "url": "https://world.openfoodfacts.org/api/v2/product/7891910030378.json?fields=product_name,product_name_pt,brands,quantity",
         "status": -1,
         "motivo": "robots.txt não permite",
         "trecho": ""
       },
       {
-        "url": "https://world.openfoodfacts.org/api/v2/product/8711000421703.json?fields=product_name,product_name_pt,brands,quantity",
+        "url": "https://world.openfoodfacts.org/api/v2/product/7891910030347.json?fields=product_name,product_name_pt,brands,quantity",
         "status": -1,
         "motivo": "robots.txt não permite",
         "trecho": ""
@@ -126,10 +137,16 @@
     ]
   },
   "www.in.gov.br": {
-    "falhas": 2,
+    "falhas": 3,
     "exemplos": [
       {
         "url": "https://www.in.gov.br/robots.txt",
+        "status": 0,
+        "motivo": "falha de rede: Remote end closed connection without response",
+        "trecho": ""
+      },
+      {
+        "url": "https://www.in.gov.br/consulta/-/buscar/dou?q=ICMS&s=do1&exactDate=personalizado&publishFrom=20-09-2026&publishTo=20-10-2026&sortType=0&delta=75",
         "status": 0,
         "motivo": "falha de rede: Remote end closed connection without response",
         "trecho": ""

@@ -1,6 +1,6 @@
 {
   "data": "2026-10-20",
-  "duracao_min": 16.4,
+  "duracao_min": 26.2,
   "sondas": [
     {
       "fonte": "Loja VTEX: Atacadão",
@@ -14,8 +14,8 @@
     },
     {
       "fonte": "Wayback Machine (CDX)",
-      "ok": false,
-      "detalhe": "lista de cópias arquivadas — falha de rede: <urlopen error _ssl.c:993: The handshake operation timed out>"
+      "ok": true,
+      "detalhe": "lista de cópias arquivadas"
     },
     {
       "fonte": "Open Prices",
@@ -50,8 +50,58 @@
   ],
   "produtos": [
     {
-      "ean": "7896348301724",
-      "nome": "Café Melitta Descafeinado Vácuo 250g",
+      "ean": "7891910030484",
+      "nome": "Café Torrado e Moído Extra Forte Pouch União 250g",
+      "pontos": 0,
+      "lojas_hoje": 0,
+      "dias_historico": 0,
+      "dias_desde_ultimo": null,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896019205191",
+      "nome": "Café Torrado Moído Iguaçu Tradicional 500g",
+      "pontos": 0,
+      "lojas_hoje": 0,
+      "dias_historico": 0,
+      "dias_desde_ultimo": null,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7891910030378",
+      "nome": "Café Torrado Moído Tradicional Vácuo União 500g",
+      "pontos": 0,
+      "lojas_hoje": 0,
+      "dias_historico": 0,
+      "dias_desde_ultimo": null,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7891910030347",
+      "nome": "Café Torrado Moído Tradicional Pouch União 500g",
+      "pontos": 0,
+      "lojas_hoje": 0,
+      "dias_historico": 0,
+      "dias_desde_ultimo": null,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7891910030385",
+      "nome": "Café Torrado Moido Extra Forte Vacuo União 500g",
+      "pontos": 0,
+      "lojas_hoje": 0,
+      "dias_historico": 0,
+      "dias_desde_ultimo": null,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896116900722",
+      "nome": "Arroz Kicaldo Agulhinha Tipo 1 1kg",
       "pontos": 1,
       "lojas_hoje": 1,
       "dias_historico": 0,
@@ -60,8 +110,8 @@
       "mudancas_com_evidencia": 0
     },
     {
-      "ean": "7896005807668",
-      "nome": "Café Solúvel 3 Corações Liofilizado 100g",
+      "ean": "7896401184080",
+      "nome": "Arroz Bulnez Agulhinha Tipo 1 5kg",
       "pontos": 1,
       "lojas_hoje": 1,
       "dias_historico": 0,
@@ -70,8 +120,8 @@
       "mudancas_com_evidencia": 0
     },
     {
-      "ean": "8711000421703",
-      "nome": "Café em Cápsula L'OR Espresso Colombia 104g",
+      "ean": "7896062699978",
+      "nome": "Arroz Solito Agulhinha Tipo 1 1kg",
       "pontos": 1,
       "lojas_hoje": 1,
       "dias_historico": 0,
@@ -80,8 +130,8 @@
       "mudancas_com_evidencia": 0
     },
     {
-      "ean": "7896045113972",
-      "nome": "Café em Cápsulas 3 Corações Espresso Colômbia 10x5,6g",
+      "ean": "7896006716112",
+      "nome": "Arroz Camil Parboilizado Tipo 1 1kg",
       "pontos": 1,
       "lojas_hoje": 1,
       "dias_historico": 0,
@@ -90,88 +140,8 @@
       "mudancas_com_evidencia": 0
     },
     {
-      "ean": "7896045114108",
-      "nome": "Café em Cápsulas 3 Corações Cappuccino Paçoca 10x11g",
-      "pontos": 1,
-      "lojas_hoje": 1,
-      "dias_historico": 0,
-      "dias_desde_ultimo": 0,
-      "mudancas": 0,
-      "mudancas_com_evidencia": 0
-    },
-    {
-      "ean": "7898152992129",
-      "nome": "Arroz Arbóreo Paganini 1kg",
-      "pontos": 1,
-      "lojas_hoje": 1,
-      "dias_historico": 0,
-      "dias_desde_ultimo": 0,
-      "mudancas": 0,
-      "mudancas_com_evidencia": 0
-    },
-    {
-      "ean": "7899567238260",
-      "nome": "Arroz Carreteiro Swift 300g",
-      "pontos": 1,
-      "lojas_hoje": 1,
-      "dias_historico": 0,
-      "dias_desde_ultimo": 0,
-      "mudancas": 0,
-      "mudancas_com_evidencia": 0
-    },
-    {
-      "ean": "7899567239526",
-      "nome": "Arroz Branco Swift 170g",
-      "pontos": 1,
-      "lojas_hoje": 1,
-      "dias_historico": 0,
-      "dias_desde_ultimo": 0,
-      "mudancas": 0,
-      "mudancas_com_evidencia": 0
-    },
-    {
-      "ean": "7896038360192",
-      "nome": "Flocão de Arroz Urbano 500g",
-      "pontos": 1,
-      "lojas_hoje": 1,
-      "dias_historico": 0,
-      "dias_desde_ultimo": 0,
-      "mudancas": 0,
-      "mudancas_com_evidencia": 0
-    },
-    {
-      "ean": "7908625605040",
-      "nome": "Arroz Carreteiro Swift 500g",
-      "pontos": 1,
-      "lojas_hoje": 1,
-      "dias_historico": 0,
-      "dias_desde_ultimo": 0,
-      "mudancas": 0,
-      "mudancas_com_evidencia": 0
-    },
-    {
-      "ean": "7908625605071",
-      "nome": "Feijão Tropeiro Swift 500g",
-      "pontos": 1,
-      "lojas_hoje": 1,
-      "dias_historico": 0,
-      "dias_desde_ultimo": 0,
-      "mudancas": 0,
-      "mudancas_com_evidencia": 0
-    },
-    {
-      "ean": "7898960982718",
-      "nome": "Feijão Branco Da Terrinha Premium 500g",
-      "pontos": 1,
-      "lojas_hoje": 1,
-      "dias_historico": 0,
-      "dias_desde_ultimo": 0,
-      "mudancas": 0,
-      "mudancas_com_evidencia": 0
-    },
-    {
-      "ean": "7896006797920",
-      "nome": "Feijão Pronto Camil Carioca 380g",
+      "ean": "7896116910103",
+      "nome": "Arroz Kicaldo Agulhinha Tipo 1 5kg",
       "pontos": 1,
       "lojas_hoje": 1,
       "dias_historico": 0,
@@ -190,8 +160,8 @@
       "mudancas_com_evidencia": 0
     },
     {
-      "ean": "7896116910219",
-      "nome": "Feijão Preto Bulnez Tipo 1 1kg",
+      "ean": "7896006797920",
+      "nome": "Feijão Pronto Camil Carioca 380g",
       "pontos": 1,
       "lojas_hoje": 1,
       "dias_historico": 0,
@@ -200,58 +170,8 @@
       "mudancas_com_evidencia": 0
     },
     {
-      "ean": "7898969803540",
-      "nome": "Leite Semidesnatado Leite + 8g de Proteína 200ml",
-      "pontos": 1,
-      "lojas_hoje": 1,
-      "dias_historico": 0,
-      "dias_desde_ultimo": 0,
-      "mudancas": 0,
-      "mudancas_com_evidencia": 0
-    },
-    {
-      "ean": "7896523182759",
-      "nome": "Doce de Soro de Leite Sabordê Sabor Doce de Leite 200g",
-      "pontos": 1,
-      "lojas_hoje": 1,
-      "dias_historico": 0,
-      "dias_desde_ultimo": 0,
-      "mudancas": 0,
-      "mudancas_com_evidencia": 0
-    },
-    {
-      "ean": "7896003740240",
-      "nome": "Biscoito Marilan Leite 300g",
-      "pontos": 1,
-      "lojas_hoje": 1,
-      "dias_historico": 0,
-      "dias_desde_ultimo": 0,
-      "mudancas": 0,
-      "mudancas_com_evidencia": 0
-    },
-    {
-      "ean": "7898080640765",
-      "nome": "Doce de Leite Italac 350g",
-      "pontos": 1,
-      "lojas_hoje": 1,
-      "dias_historico": 0,
-      "dias_desde_ultimo": 0,
-      "mudancas": 0,
-      "mudancas_com_evidencia": 0
-    },
-    {
-      "ean": "7622202273452",
-      "nome": "Chocolate Milka Ao Leite 90g",
-      "pontos": 1,
-      "lojas_hoje": 1,
-      "dias_historico": 0,
-      "dias_desde_ultimo": 0,
-      "mudancas": 0,
-      "mudancas_com_evidencia": 0
-    },
-    {
-      "ean": "7896279600538",
-      "nome": "Óleo de Soja Coamo 900ml",
+      "ean": "7896183912338",
+      "nome": "Feijão Carioca Zaeli 1kg",
       "pontos": 0,
       "lojas_hoje": 0,
       "dias_historico": 0,
@@ -260,8 +180,8 @@
       "mudancas_com_evidencia": 0
     },
     {
-      "ean": "7898917173381",
-      "nome": "Óleo de Soja Comigo 900ml",
+      "ean": "64803912",
+      "nome": "Feijão Carioca Paranaíba 1kg",
       "pontos": 0,
       "lojas_hoje": 0,
       "dias_historico": 0,
@@ -270,8 +190,8 @@
       "mudancas_com_evidencia": 0
     },
     {
-      "ean": "7892300030060",
-      "nome": "Óleo de Soja Sinhá 900ml",
+      "ean": "7898920795266",
+      "nome": "Feijão Carioca Baiano 1kg",
       "pontos": 0,
       "lojas_hoje": 0,
       "dias_historico": 0,
@@ -280,8 +200,58 @@
       "mudancas_com_evidencia": 0
     },
     {
-      "ean": "7891080803673",
-      "nome": "Óleo de Soja Primor 900ml",
+      "ean": "7896623100769",
+      "nome": "Leite Xandô Integral A2 1L",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7898080642646",
+      "nome": "Leite Condensado Italac Integral 395g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7898966549410",
+      "nome": "Leite em Pó Bulnez Integral 400g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7898080641267",
+      "nome": "Leite em Pó Italac Integral 1kg",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7897951610128",
+      "nome": "Leite Pasteurizado Serramar Integral 1L",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7891107101621",
+      "nome": "Óleo de Soja Soya 900ml",
       "pontos": 0,
       "lojas_hoje": 0,
       "dias_historico": 0,
@@ -290,8 +260,38 @@
       "mudancas_com_evidencia": 0
     },
     {
-      "ean": "23155908",
-      "nome": "Óleo de Soja Liza 18L",
+      "ean": "7896242200048",
+      "nome": "Óleo de Soja ABC 900ml",
+      "pontos": 0,
+      "lojas_hoje": 0,
+      "dias_historico": 0,
+      "dias_desde_ultimo": null,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7896036090855",
+      "nome": "Óleo de Soja Veleiro 900ml",
+      "pontos": 0,
+      "lojas_hoje": 0,
+      "dias_historico": 0,
+      "dias_desde_ultimo": null,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "14192942",
+      "nome": "Óleo de Soja Veleiro 900ml",
+      "pontos": 0,
+      "lojas_hoje": 0,
+      "dias_historico": 0,
+      "dias_desde_ultimo": null,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7897001010168",
+      "nome": "Óleo de Soja Cocamar 18L",
       "pontos": 0,
       "lojas_hoje": 0,
       "dias_historico": 0,
@@ -310,38 +310,48 @@
       "mudancas_com_evidencia": 0
     },
     {
-      "ean": "7896072649215",
-      "nome": "Açúcar Mavalério Confeiteiro 500g",
-      "pontos": 1,
-      "lojas_hoje": 1,
+      "ean": "7897154490565",
+      "nome": "Açúcar Refinado Petribu 1kg",
+      "pontos": 0,
+      "lojas_hoje": 0,
       "dias_historico": 0,
-      "dias_desde_ultimo": 0,
+      "dias_desde_ultimo": null,
       "mudancas": 0,
       "mudancas_com_evidencia": 0
     },
     {
-      "ean": "7896534405731",
-      "nome": "Açúcar Cristal Bulnez 5kg",
-      "pontos": 1,
-      "lojas_hoje": 1,
+      "ean": "7896534404154",
+      "nome": "Açúcar Refinado Globo 1kg",
+      "pontos": 0,
+      "lojas_hoje": 0,
       "dias_historico": 0,
-      "dias_desde_ultimo": 0,
+      "dias_desde_ultimo": null,
       "mudancas": 0,
       "mudancas_com_evidencia": 0
     },
     {
-      "ean": "7898080666178",
-      "nome": "Energético sem Açúcar Baly Tropical 1L",
-      "pontos": 1,
-      "lojas_hoje": 1,
+      "ean": "7891959004415",
+      "nome": "Açúcar Refinado Duçula 1kg",
+      "pontos": 0,
+      "lojas_hoje": 0,
       "dias_historico": 0,
-      "dias_desde_ultimo": 0,
+      "dias_desde_ultimo": null,
       "mudancas": 0,
       "mudancas_com_evidencia": 0
     },
     {
-      "ean": "7898080666222",
-      "nome": "Energético sem Açúcar Baly Melancia 1L",
+      "ean": "7896032501058",
+      "nome": "Açúcar Refinado Da Barra 5kg",
+      "pontos": 0,
+      "lojas_hoje": 0,
+      "dias_historico": 0,
+      "dias_desde_ultimo": null,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7898966085154",
+      "nome": "Macarrão com Ovos Bulnez Espaguete 500g",
       "pontos": 1,
       "lojas_hoje": 1,
       "dias_historico": 0,
@@ -360,8 +370,8 @@
       "mudancas_com_evidencia": 0
     },
     {
-      "ean": "7896024210128",
-      "nome": "Macarrão com Ovos Camil Penne 500g",
+      "ean": "7896024210098",
+      "nome": "Macarrão com Ovos Camil Espaguete 500g",
       "pontos": 1,
       "lojas_hoje": 1,
       "dias_historico": 0,
@@ -370,22 +380,22 @@
       "mudancas_com_evidencia": 0
     },
     {
-      "ean": "8004690050507",
-      "nome": "Macarrão La Molisana Fettuccine 500g",
-      "pontos": 1,
-      "lojas_hoje": 1,
+      "ean": "7897486625055",
+      "nome": "Macarrão Aliança Espaguete 500g",
+      "pontos": 0,
+      "lojas_hoje": 0,
       "dias_historico": 0,
-      "dias_desde_ultimo": 0,
+      "dias_desde_ultimo": null,
       "mudancas": 0,
       "mudancas_com_evidencia": 0
     },
     {
-      "ean": "8004690051573",
-      "nome": "Macarrão La Molisana Spaguetti 500g",
-      "pontos": 1,
-      "lojas_hoje": 1,
+      "ean": "7896016411014",
+      "nome": "Macarrão Pajuçara Espaguete 500g",
+      "pontos": 0,
+      "lojas_hoje": 0,
       "dias_historico": 0,
-      "dias_desde_ultimo": 0,
+      "dias_desde_ultimo": null,
       "mudancas": 0,
       "mudancas_com_evidencia": 0
     },
@@ -400,8 +410,8 @@
       "mudancas_com_evidencia": 0
     },
     {
-      "ean": "7896659600011",
-      "nome": "Farinha de Trigo Sananduva 5kg",
+      "ean": "7891080007682",
+      "nome": "Farinha de Trigo Farina 1kg",
       "pontos": 0,
       "lojas_hoje": 0,
       "dias_historico": 0,
@@ -410,8 +420,8 @@
       "mudancas_com_evidencia": 0
     },
     {
-      "ean": "7896984900015",
-      "nome": "Farinha de Trigo Buriti 1kg",
+      "ean": "7891080152528",
+      "nome": "Farinha de Trigo Predileta 25kg",
       "pontos": 0,
       "lojas_hoje": 0,
       "dias_historico": 0,
@@ -420,8 +430,8 @@
       "mudancas_com_evidencia": 0
     },
     {
-      "ean": "7896005251027",
-      "nome": "Farinha de Trigo Soberana 25kg",
+      "ean": "7891080123276",
+      "nome": "Farinha de Trigo Suprema 25kg",
       "pontos": 0,
       "lojas_hoje": 0,
       "dias_historico": 0,
@@ -430,8 +440,8 @@
       "mudancas_com_evidencia": 0
     },
     {
-      "ean": "18745968",
-      "nome": "Farinha de Trigo Invencível 50kg",
+      "ean": "7898234850682",
+      "nome": "Farinha de Trigo Nita 25kg",
       "pontos": 0,
       "lojas_hoje": 0,
       "dias_historico": 0,
@@ -440,8 +450,8 @@
       "mudancas_com_evidencia": 0
     },
     {
-      "ean": "7896024720382",
-      "nome": "Biscoito Piraquê Presuntinho 100g",
+      "ean": "7896080870144",
+      "nome": "Biscoito Liane Cream Cracker 330g",
       "pontos": 1,
       "lojas_hoje": 1,
       "dias_historico": 0,
@@ -450,8 +460,8 @@
       "mudancas_com_evidencia": 0
     },
     {
-      "ean": "7896003741674",
-      "nome": "Biscoito Bulnez Maisena 270g",
+      "ean": "7896003741636",
+      "nome": "Biscoito Bulnez Cream Cracker 270g",
       "pontos": 1,
       "lojas_hoje": 1,
       "dias_historico": 0,
@@ -460,8 +470,8 @@
       "mudancas_com_evidencia": 0
     },
     {
-      "ean": "7896003740233",
-      "nome": "Biscoito Marilan Coco 300g",
+      "ean": "7896003740318",
+      "nome": "Biscoito Marilan Cream Cracker 140g",
       "pontos": 1,
       "lojas_hoje": 1,
       "dias_historico": 0,
@@ -470,8 +480,8 @@
       "mudancas_com_evidencia": 0
     },
     {
-      "ean": "7896003740325",
-      "nome": "Biscoito Marilan Maizena 140g",
+      "ean": "7896003738629",
+      "nome": "Biscoito Marilan Cream Cracker Especial 350g",
       "pontos": 1,
       "lojas_hoje": 1,
       "dias_historico": 0,
@@ -480,8 +490,8 @@
       "mudancas_com_evidencia": 0
     },
     {
-      "ean": "7896003741650",
-      "nome": "Biscoito Bulnez Leite 270g",
+      "ean": "7896003740196",
+      "nome": "Biscoito Marilan Cream Cracker Integral 335g",
       "pontos": 1,
       "lojas_hoje": 1,
       "dias_historico": 0,
@@ -490,8 +500,18 @@
       "mudancas_com_evidencia": 0
     },
     {
-      "ean": "7896003740264",
-      "nome": "Biscoito Marilan Manteiga 300g",
+      "ean": "7898133621659",
+      "nome": "Manteiga com Sal Tourinho Zero Lactose 200g",
+      "pontos": 1,
+      "lojas_hoje": 1,
+      "dias_historico": 0,
+      "dias_desde_ultimo": 0,
+      "mudancas": 0,
+      "mudancas_com_evidencia": 0
+    },
+    {
+      "ean": "7891097106040",
+      "nome": "Manteiga com Sal Président Zero Lactose 200g",
       "pontos": 1,
       "lojas_hoje": 1,
       "dias_historico": 0,
@@ -522,16 +542,6 @@
     {
       "ean": "7898932702443",
       "nome": "Manteiga Tourinho Sem sal 200g",
-      "pontos": 1,
-      "lojas_hoje": 1,
-      "dias_historico": 0,
-      "dias_desde_ultimo": 0,
-      "mudancas": 0,
-      "mudancas_com_evidencia": 0
-    },
-    {
-      "ean": "7896003740172",
-      "nome": "Biscoito Marilan Cracker Manteiga 300g",
       "pontos": 1,
       "lojas_hoje": 1,
       "dias_historico": 0,
@@ -638,24 +648,14 @@
       "dias_desde_ultimo": 0,
       "mudancas": 0,
       "mudancas_com_evidencia": 0
-    },
-    {
-      "ean": "7500435243858",
-      "nome": "Creme Dental Oral-B Extra Branco 180g",
-      "pontos": 1,
-      "lojas_hoje": 1,
-      "dias_historico": 0,
-      "dias_desde_ultimo": 0,
-      "mudancas": 0,
-      "mudancas_com_evidencia": 0
     }
   ],
   "metricas": {
     "produtos_na_amostra": 60,
-    "preco_qualquer_fonte": 0.85,
+    "preco_qualquer_fonte": 0.617,
     "preco_atual_2_lojas": 0.0,
     "historico_6_meses": 0.0,
-    "preco_recente": 0.85,
+    "preco_recente": 0.617,
     "mediana_dias_historico": 0.0,
     "mudancas_analisadas": 0,
     "mudancas_com_evidencia": null
@@ -663,7 +663,7 @@
   "veredito": {
     "preco_atual_2_lojas": "ABAIXO DA META",
     "historico_6_meses": "ABAIXO DA META",
-    "preco_recente": "VIÁVEL",
+    "preco_recente": "ABAIXO DA META",
     "mudancas_com_evidencia": "sem dados"
   }
 }
