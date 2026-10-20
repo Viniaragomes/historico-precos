@@ -77,7 +77,7 @@ class Navegador:
             cabecalhos["Content-Type"] = "application/x-www-form-urlencoded"
         req = urllib.request.Request(url, data=dados, headers=cabecalhos)
         try:
-            with self._opener.open(req, timeout=self.timeout) as resp:
+            with self._opener.open(req, timeout=self._tempo_limite(url)) as resp:
                 corpo = self._descomprimir(resp.read(), resp.headers.get("Content-Encoding"))
                 return resp.status, self._decodificar(corpo, resp.headers.get_content_charset())
         except urllib.error.HTTPError as e:
@@ -100,7 +100,15 @@ class Navegador:
     INTERVALO_MINIMO = {"api.gdeltproject.org": 6.0}
 
     def _intervalo_do(self, host: str) -> float:
-        return max(self.intervalo, self.INTERVALO_MINIMO.get(host, 0.0))
+        """O maior entre: o padrão, o mínimo conhecido do site e o Crawl-delay que o robots.txt pede."""
+        atraso = 0.0
+        for base, rp in self._robots.items():
+            if rp is not None and urlsplit(base).netloc == host:
+                try:
+                    atraso = float(rp.crawl_delay(self.user_agent) or 0)
+                except (TypeError, ValueError):
+                    atraso = 0.0
+        return max(self.intervalo, self.INTERVALO_MINIMO.get(host, 0.0), atraso)
 
     def _esperar_vez(self, host: str) -> None:
         ultimo = self._ultimo_acesso.get(host)
@@ -144,8 +152,12 @@ class Navegador:
             log.warning("falha ao baixar %s: %s", url, e)
             return None
 
-    # sites lentos ganham mais uma tentativa
-    TENTATIVAS_EXTRA = {"web.archive.org": 2}
+    # sites lentos ganham mais tentativas e mais tempo para responder
+    TENTATIVAS_EXTRA = {"web.archive.org": 2, "www.confaz.fazenda.gov.br": 2}
+    TEMPO_LIMITE = {"www.confaz.fazenda.gov.br": 90.0}
+
+    def _tempo_limite(self, url: str) -> float:
+        return max(self.timeout, self.TEMPO_LIMITE.get(urlsplit(url).netloc, 0.0))
 
     def get_texto(self, url: str, tentativas: int = 2) -> str | None:
         return self._requisitar(url, None, tentativas + self.TENTATIVAS_EXTRA.get(urlsplit(url).netloc, 0))

@@ -262,3 +262,14 @@ class TestCatalogoArquivo(unittest.TestCase):
         self.assertFalse([u for u in fake.acessos if u.startswith("https://www.loja-bloqueada.com.br")])
         filtro = [u for u in fake.acessos if "matchType=prefix" in u][0]
         self.assertIn("original%3A.%2Acafe.%2A%2Fp%24", filtro)
+
+
+class TestCrawlDelay(unittest.TestCase):
+    def test_respeita_crawl_delay_do_robots(self):
+        esperas = []
+        fake = Fake([("https://lento.gov.br/robots.txt", (200, "User-agent: *\nCrawl-delay: 5\nAllow: /")),
+                     ("https://lento.gov.br/a", (200, "ok"))])
+        nav = Navegador(intervalo=0, abrir=fake, dormir=esperas.append)
+        nav.get_texto("https://lento.gov.br/a")
+        nav.get_texto("https://lento.gov.br/a")
+        self.assertTrue(esperas and max(esperas) > 4.5, esperas)

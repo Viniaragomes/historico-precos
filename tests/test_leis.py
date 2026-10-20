@@ -176,7 +176,7 @@ class TestLexml(unittest.TestCase):
           <srw:record><srw:recordData><srw_dc xmlns="info:srw/schema/1/dc-schema">
             <urn>urn:lex:br:federal:lei:2010-01-01;1</urn><dc:title>Antiga</dc:title><dc:date>2010-01-01</dc:date>
           </srw_dc></srw:recordData></srw:record></srw:records></srw:searchRetrieveResponse>"""
-        nav = nav_com(Fake([("https://www.lexml.gov.br/busca/SRU", (200, xml))]), robots=False)
+        nav = nav_com(Fake([("https://www.lexml.gov.br/sru", (200, xml))]), robots=False)
         pubs = fontes.buscar_lexml(nav, 'dc.description any "ICMS"', date(2023, 1, 1), date(2024, 12, 31))
         self.assertEqual(len(pubs), 1)
         self.assertEqual((pubs[0].uf, pubs[0].data, pubs[0].fonte), ("DF", "2023-12-20", "LexML"))

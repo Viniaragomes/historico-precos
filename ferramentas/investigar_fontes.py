@@ -28,10 +28,12 @@ ALVOS = {
     "Pão de Açúcar": ["https://www.paodeacucar.com/", "https://www.paodeacucar.com/busca?terms=cafe"],
     "Comper": ["https://www.comper.com.br/"],
     "Diário Oficial da União": ["https://www.in.gov.br/", "https://www.in.gov.br/consulta/-/buscar/dou?q=ICMS"],
-    "LexML (leis, Senado)": ["https://www.lexml.gov.br/busca/SRU?operation=searchRetrieve&version=1.1&query=urn%3D%22lei%22%20and%20description%3Dicms&maximumRecords=3"],
+    "LexML (leis, Senado)": ["https://www.lexml.gov.br/sru?operation=searchRetrieve&version=1.1&query=urn%3D%22lei%22%20and%20description%3Dicms&maximumRecords=3"],
     "Confaz (convênios ICMS)": ["https://www.confaz.fazenda.gov.br/legislacao/convenios"],
     "Painéis da Secretaria de Economia do DF": ["https://paineis.fazenda.df.gov.br/", "https://paineis.fazenda.df.gov.br/mapadeprecos/"],
     "Receita do DF": ["https://www.receita.fazenda.df.gov.br/"],
+    "Encartes DF": ["https://encartesdf.com.br/", "https://encartesdf.com.br/wp-json/wp/v2/posts?per_page=5",
+                    "https://encartesdf.com.br/feed/", "https://encartesdf.com.br/sitemap.xml"],
 }
 
 SINAIS_ANTIROBO = {
@@ -48,6 +50,7 @@ TECNOLOGIAS = {
     "angular": ["ng-version", "ng-app"],
     "power bi": ["powerbi"],
     "qlik": ["qlik"],
+    "wordpress": ["wp-content", "wp-json", "wordpress"],
 }
 
 

@@ -136,7 +136,8 @@ def links_da_pagina(nav: Navegador, url: str, palavras: list[str], uf: str, nome
 
 # ---------- LexML (base de legislação do Senado; alternativa ao DOU, que bloqueia servidores fora do Brasil) ----------
 
-LEXML = "https://www.lexml.gov.br/busca/SRU"
+# o robots.txt do LexML proíbe /busca/ e permite /sru (com Crawl-delay de 5 s, que o navegador respeita)
+LEXML = "https://www.lexml.gov.br/sru"
 
 
 def buscar_lexml(nav: Navegador, consulta: str, desde: date, ate: date, maximo: int = 50) -> list[Publicacao]:
