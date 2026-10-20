@@ -1,0 +1,21 @@
+{
+  "_leia": "Indicadores do CEPEA/ESALQ-USP mostrados pelo código oficial 'Cotações do Cepea no seu site' (https://www.cepea.org.br/br/widget.aspx). Licença CC BY-NC 4.0: uso não comercial, com crédito. O app não copia nem guarda os valores: o quadro é carregado do CEPEA no aparelho de quem toca em 'Mostrar'. Chave = id da categoria em impostos.json; valor = ids de indicador do formulário do widget (verificados em 20/10/2026).",
+  "licenca": "CEPEA/ESALQ-USP · licença CC BY-NC 4.0 (uso não comercial, com crédito)",
+  "licenca_url": "https://cepea.esalq.usp.br/br/licenca-de-uso-de-dados.aspx",
+  "widget": "https://www.cepea.org.br/br/widgetproduto.js.php",
+  "categorias": {
+    "cafe": {"ids": ["23", "24"], "explica": "Preço da saca de café (arábica e robusta) pago ao produtor."},
+    "arroz": {"ids": ["91"], "explica": "Preço do arroz em casca no Rio Grande do Sul, maior produtor."},
+    "feijao": {"ids": ["380-405", "380-413"], "explica": "Feijão-carioca no Leste e no Sul Goiano, praças vizinhas do DF."},
+    "leite": {"ids": ["leitep"], "explica": "Preço do leite pago ao produtor."},
+    "leite_condensado": {"ids": ["leitep"], "explica": "Preço do leite pago ao produtor, a principal matéria-prima."},
+    "manteiga": {"ids": ["leitep"], "explica": "Preço do leite pago ao produtor, a principal matéria-prima."},
+    "acucar": {"ids": ["53"], "explica": "Açúcar cristal em São Paulo, referência nacional."},
+    "oleo_soja": {"ids": ["12", "92"], "explica": "Soja no Paraná e no porto de Paranaguá."},
+    "margarina": {"ids": ["12"], "explica": "Soja no Paraná, base do óleo usado na margarina."},
+    "farinha_trigo": {"ids": ["178", "179"], "explica": "Trigo no Paraná e no Rio Grande do Sul."},
+    "macarrao": {"ids": ["178"], "explica": "Trigo no Paraná, matéria-prima da massa."},
+    "farinha_mandioca": {"ids": ["72"], "explica": "Mandioca para indústria."},
+    "carnes": {"ids": ["2"], "explica": "Boi gordo, preço da arroba pago ao pecuarista."}
+  }
+}

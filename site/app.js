@@ -561,6 +561,7 @@ async function telaProduto(ean) {
     cartaoOndeComprar(contexto),
     cartaoHistorico(p),
     cartaoCompraDF(p),
+    cartaoCampo(p, tabela),
     cartaoCausas(contexto),
     cartaoImpostos(tabela, [p.nome, aberto?.nome], p.ofertas[0]?.preco ?? null),
     cartaoReportar(ean),
@@ -830,6 +831,45 @@ function cartaoHistorico(p) {
     el("table", { class: "tabela" },
       el("thead", {}, el("tr", {}, el("th", {}, "Data"), el("th", {}, "Loja"), el("th", { class: "num" }, "Preço"), el("th", {}, ""))),
       el("tbody", {}, linhas))));
+  return cartao;
+}
+
+// ---------- preço no campo (CEPEA, código oficial de incorporação) ----------
+
+let cepeaCache = null;
+async function cepea() {
+  if (!cepeaCache) cepeaCache = carregarJSON("cepea.json").catch(() => null);
+  return cepeaCache;
+}
+
+function cartaoCampo(p, tabela) {
+  const cat = categoria(tabela, p.nome || "");
+  const cartao = el("section", { class: "cartao entrar entrar-3", hidden: true }, el("h2", {}, "Preço no campo"));
+  cepea().then((cfg) => {
+    const item = cat && cfg?.categorias?.[cat.id];
+    if (!item) return;
+    cartao.hidden = false;
+    const caixa = el("div", { class: "campo-cepea" });
+    const mostrar = el("button", { class: "botao-secundario-neutro", type: "button", onclick: () => {
+      const escuro = matchMedia("(prefers-color-scheme: dark)").matches;
+      const q = new URLSearchParams({ fonte: "arial", tamanho: "10", largura: "100%",
+        corfundo: escuro ? "151b19" : "ffffff", corlinha: escuro ? "1d2522" : "f3f5f4", cortexto: escuro ? "e6ece9" : "1b1f1d" });
+      item.ids.forEach((id) => q.append("id_indicador[]", id));
+      // isolado: o quadro roda numa moldura sem acesso ao app (sem allow-same-origin)
+      const quadro = el("iframe", { title: "Cotações do CEPEA", sandbox: "allow-scripts allow-popups", loading: "lazy",
+        style: "width:100%;border:0;min-height:" + (60 + 60 * item.ids.length) + "px" });
+      quadro.srcdoc = `<!doctype html><meta charset="utf-8"><body style="margin:0;background:transparent">` +
+        `<script src="${cfg.widget}?${q.toString()}"><\/script></body>`;
+      caixa.replaceChildren(quadro);
+    } }, "Mostrar cotações do CEPEA");
+    caixa.append(mostrar);
+    cartao.append(
+      el("p", { class: "sub" }, item.explica, " Quando o preço no campo sobe, o da prateleira costuma vir depois."),
+      caixa,
+      el("p", { class: "minusculo", style: "margin:10px 0 0" },
+        "Carregado direto do CEPEA no seu aparelho, só quando você toca no botão: o CEPEA vê o seu endereço de internet, como em qualquer site. ",
+        "Fonte: ", el("a", { href: cfg.licenca_url, target: "_blank", rel: "noopener" }, cfg.licenca), "."));
+  });
   return cartao;
 }
 
