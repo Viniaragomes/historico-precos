@@ -153,6 +153,13 @@ Quem está na loja confirma ou corrige o preço, diz se uma explicação de caus
 
 Testes: `node --test tests/*.test.mjs`.
 
+## Acessibilidade e desempenho
+
+- Auditoria automática (WCAG 2.1 AA, axe-core) de 11 telas nos temas claro e escuro: **nenhuma violação** em 20/10/2026. Para repetir: `node ferramentas/acessibilidade.mjs` (instruções no arquivo).
+- Cores com contraste mínimo de 4,5:1; no tema escuro, o verde de texto (`--marca-texto`) é separado do verde de fundo.
+- Títulos em ordem, nomes acessíveis em botões e barras, animações reduzidas para quem pede isso no sistema.
+- Peso do app: cerca de 126 KB (sem contar os dados), sem frameworks.
+
 ## Rodando no GitHub (recomendado)
 
 O GitHub Actions roda os agentes com internet liberada e de graça, dentro dos limites do plano.
