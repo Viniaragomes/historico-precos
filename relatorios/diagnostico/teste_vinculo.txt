@@ -1,14 +1,28 @@
-Open Food Facts: 0 produto(s) novo(s) de referência; 0 no total; próxima página: 1.
-Catálogo de referência: 32 produtos com código de barras e tamanho no nome.
-Big Box: 150 página(s) lida(s) agora, 90 com preço, 0 vinculada(s), 0 preço(s) novo(s). Catálogo da loja: 13414 produtos, 150 já lidos, 0 vinculados. 
-Fort Atacadista: 150 página(s) lida(s) agora, 150 com preço, 0 vinculada(s), 0 preço(s) novo(s). Catálogo da loja: 11908 produtos, 150 já lidos, 0 vinculados. 
+Open Food Facts: 35535 produto(s) do Brasil na exportação, 35519 novo(s) na referência; 35519 no total.
+Catálogo de referência: 17801 produtos com código de barras e tamanho no nome.
+Big Box: 150 página(s) lida(s) agora, 90 com preço, 8 vinculada(s), 6 preço(s) novo(s). Catálogo da loja: 13414 produtos, 150 já lidos, 18 vinculados. 
+Fort Atacadista: 150 página(s) lida(s) agora, 150 com preço, 3 vinculada(s), 3 preço(s) novo(s). Catálogo da loja: 11908 produtos, 150 já lidos, 3 vinculados. 
 
 exemplos vinculados:
+   ('Big Box', 'Café Torrado e Moído Tradicional 3 Corações Pacote 500g', 29.99, '7896005800010', 1.0, 'Café Torrado E Moído Tradicional 3 Corações Pacote 500g')
+   ('Big Box', 'Açaí Split Com Banana 1,5L', 37.9, '7896594972662', 0.75, 'Sorbet Banana Split Açaí Pote 1,5l')
+   ('Big Box', 'Sorbet Açaí e Cupuaçu Frooty Pote 1,5L', 49.99, '7896594900054', 1.0, 'Sorbet Açaí E Cupuaçu Frooty Pote 1,5l')
+   ('Big Box', 'Sorbet Açaí com Guaraná Frooty Pote 1,5l', 49.99, '7896594972310', 0.75, 'Sorbet Açaí Frooty Pote 1,5l')
+   ('Big Box', 'Sorbet com Granola Açaí, Banana e Guaraná Frooty Pote 200ml', 13.99, '7896594971283', 0.667, 'Sorbet Com Granola Açaí Frooty Pote 200ml')
+   ('Big Box', 'Sorbet com Granola Açaí e Guaraná Frooty Pote 200ml', 13.99, '7896594971283', 0.8, 'Sorbet Com Granola Açaí Frooty Pote 200ml')
+   ('Big Box', 'Vinagre Balsâmico Di Modena La Pastina Vidro 500ml', 36.42, '7896196080307', 0.875, 'Vinagre Balsâmico Di Modena La Pastina Gourmet Vidro 500ml')
+   ('Big Box', 'Bebida Láctea UHT Chocolate Italac Caixa 1L', 7.99, '7898080640925', 1.0, 'Bebida Láctea UHT Chocolate 1L')
+   ('Big Box', 'Bebida Láctea UHT Italakinho Sabor Chocolate 200ml', 1.59, '7898080640239', 0.857, 'Bebida Láctea Uht Sabor Chocolate 200ml Italac')
+   ('Big Box', 'Achocolatado em Pó Nescau 370G', 11.98, '7891000379691', 1.0, 'Achocolatado em pó - Nescau 370g')
+   ('Big Box', 'Achocolatado em Pó Orgânico Native Sachê 400g', 22.9, '7898206502373', 0.75, 'Achocolatado Orgânico Native 400g')
+   ('Big Box', 'Achocolatado em Pó Nescau Sachê 550G', 19.99, '7891000338087', 0.8, 'Achocolatado em pó Nescau 550g Refil')
+   ('Big Box', 'Achocolatado em Pó 30% Cacau Nescau Lata 180g', 22.99, '7891000377765', 1.0, 'Achocolatado Pó 30 Cacau Nescau Lata 180g')
+   ('Big Box', 'Achocolatado em Pó 60% Cacau Nescau Extra Cacau Lata 180g', 22.99, '7891000377765', 0.8, 'Achocolatado Pó 30 Cacau Nescau Lata 180g')
+   ('Big Box', 'Leite Fermentado Activia Desnatado Morango Zero Lactose ZeroLac Frasco 170g', 6.49, '6898025117162', 0.667, 'Activia Morango Leite Fermentado Zero Lactose 170g')
 
 exemplos lidos sem vínculo:
    ('Big Box', 'Cappuccino Solúvel Classic 3 Corações Pote 400g', '3 Corações', 49.99)
    ('Big Box', 'Cappuccino Solúvel Diet 3 Corações Pote 150g', '3 Corações', 24.99)
-   ('Big Box', 'Café Torrado e Moído Tradicional 3 Corações Pacote 500g', '3 Corações', 29.99)
    ('Big Box', 'Arroz 8 Grãos com Quinoa Integral Meu Biju Pacote 500g', 'Meu Biju', 10.99)
    ('Big Box', 'Arroz 8 Grãos com Aveia Integral Meu Biju Pacote 500g', 'Meu Biju', 10.99)
    ('Big Box', 'Arroz Integral Meu Biju com Chia 500g', 'Meu Biju', 10.99)
@@ -16,3 +30,4 @@ exemplos lidos sem vínculo:
    ('Big Box', 'Álcool Líquido 46º INPM Tradicional Coperalcool Bacfree Frasco 1l', 'Coperalcool', 16.99)
    ('Big Box', 'Assadeira Redonda de Alumínio N°25 Alumax 25cm', 'Alumax', 49.99)
    ('Big Box', 'Assadeira Redonda de Alumínio N°30 Alumax 30cm', 'Alumax', 59.99)
+   ('Big Box', 'Assadeira Redonda de Alumínio N°35 Alumax 35cm', 'Alumax', 79.99)
