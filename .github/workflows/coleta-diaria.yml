@@ -130,7 +130,7 @@ jobs:
         continue-on-error: true
         timeout-minutes: 25
         run: |
-          sudo apt-get install -y -qq tesseract-ocr tesseract-ocr-por > /dev/null
+          sudo apt-get install -y -qq tesseract-ocr tesseract-ocr-por poppler-utils > /dev/null
           pip install -q pillow
           python -m historico_precos encartes-dia --exportar site/dados/encartes.json | tail -40
 

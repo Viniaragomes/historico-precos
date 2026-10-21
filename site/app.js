@@ -614,8 +614,7 @@ function cartaoEncartes(...nomes) {
     cartao.replaceChildren(el("h2", {}, "Nos encartes de hoje"),
       el("p", { class: "sub" }, "Ofertas parecidas com este produto nos tabloides vigentes dos mercados do DF."),
       ...achados.map(linhaEncarte),
-      el("p", { class: "minusculo", style: "margin:10px 0 0" }, AVISO_ENCARTE, " Fonte: ",
-        el("a", { href: "https://encartesdf.com.br/", target: "_blank", rel: "noopener" }, "encartesdf.com.br"), "."));
+      el("p", { class: "minusculo", style: "margin:10px 0 0" }, AVISO_ENCARTE));
   });
   return cartao;
 }
@@ -643,17 +642,18 @@ function secaoEncartes() {
     secao.replaceChildren(
       el("div", { class: "titulo-secao entrar entrar-3" }, el("h2", {}, "Encartes do dia")),
       el("section", { class: "cartao entrar entrar-3" },
-        el("p", { class: "sub" }, `${d.encartes.length} ${d.encartes.length === 1 ? "encarte vigente" : "encartes vigentes"} de mercados do DF.`),
+        el("p", { class: "sub" }, `${d.encartes.length} ${d.encartes.length === 1 ? "encarte vigente" : "encartes vigentes"} de mercados do DF, `,
+          "dos sites dos próprios mercados e do encartesdf.com.br. Procure um produto:"),
         campo, resultado,
         el("details", { class: "expansivel" },
           el("summary", {}, "Ver todos os encartes", icone("seta")),
           el("ul", { class: "lista lista-atacado" }, porMercado.map((e) => el("li", { class: "linha-atacado" },
             el("span", { class: "nome" }, e.mercado,
+              e.titulo && e.titulo !== e.mercado ? el("small", {}, ` ${e.titulo}`) : null,
               el("small", {}, ` ${e.validade_fim ? `até ${dataBR(e.validade_fim)}` : `publicado ${dataBR(e.publicado)}`}`,
                 e.trechos?.length ? ` · ${e.trechos.length} preços lidos` : "")),
-            el("a", { href: e.post, target: "_blank", rel: "noopener" }, "abrir"), el("span", {}))))),
-        el("p", { class: "minusculo", style: "margin:10px 0 0" }, AVISO_ENCARTE, " Fonte: ",
-          el("a", { href: "https://encartesdf.com.br/", target: "_blank", rel: "noopener" }, "encartesdf.com.br"), ".")));
+            el("a", { href: e.pdf || e.post, target: "_blank", rel: "noopener" }, "abrir"), el("span", {}))))),
+        el("p", { class: "minusculo", style: "margin:10px 0 0" }, AVISO_ENCARTE, " Cada linha tem o link do encarte de onde veio.")));
   });
   return secao;
 }

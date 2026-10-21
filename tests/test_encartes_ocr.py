@@ -1,6 +1,10 @@
+import shutil
+import tempfile
 import unittest
+from pathlib import Path
 
 from historico_precos import encartes_ocr
+from historico_precos.fontes import folhetos_df
 
 TSV = "\n".join([
     "level\tpage_num\tblock_num\tpar_num\tline_num\tword_num\tleft\ttop\twidth\theight\tconf\ttext",
@@ -26,6 +30,56 @@ class TestOCR(unittest.TestCase):
     def test_pareia_nome_e_preco(self):
         trechos = encartes_ocr.trechos_das_linhas(encartes_ocr.linhas_do_tsv(TSV))
         self.assertEqual(sorted((t.texto, t.preco) for t in trechos), sorted([("CAFÉ PILÃO 500g", 14.98), ("ARROZ CAMIL 5KG", 24.9)]))
+
+
+    @unittest.skipUnless(shutil.which("pdftotext"), "sem pdftotext")
+    def test_pdf_com_texto(self):
+        try:
+            from reportlab.pdfgen import canvas
+        except ImportError:
+            self.skipTest("sem reportlab")
+        with tempfile.TemporaryDirectory() as tmp:
+            arq = Path(tmp) / "e.pdf"
+            c = canvas.Canvas(str(arq), pagesize=(600, 800))
+            for x, nome, tam, preco in [(40, "FEIJÃO KICALDO", "CARIOCA 1kg", "7,99"), (330, "AÇÚCAR UNIÃO", "REFINADO 1kg", "4,49")]:
+                c.setFont("Helvetica-Bold", 18); c.drawString(x, 700, nome)
+                c.setFont("Helvetica", 14); c.drawString(x, 675, tam)
+                c.setFont("Helvetica-Bold", 36); c.drawString(x, 625, "R$ " + preco)
+            c.showPage(); c.save()
+            trechos = encartes_ocr.texto_do_pdf(arq)
+        self.assertEqual(sorted((t.texto, t.preco) for t in trechos),
+                         [("AÇÚCAR UNIÃO REFINADO 1kg", 4.49), ("FEIJÃO KICALDO CARIOCA 1kg", 7.99)])
+
+
+class NavFalso:
+    def __init__(self, json=None, texto=None):
+        self.json, self.texto = json, texto
+
+    def get_json(self, url):
+        return self.json
+
+    def get_texto(self, url):
+        return self.texto
+
+
+class TestFolhetosDF(unittest.TestCase):
+    def test_dia_a_dia_so_df(self):
+        base = {"date": "2026-10-20T18:00:09", "link": "https://ofertas.diaadiaatacadista.com.br/ofertas/x/",
+                "publishpress_future_action": {"enabled": True, "date": "2026-10-21 22:11:00"}}
+        tab = [{"pdf_do_tabloide": "https://o/x.pdf", "paginas_do_tabloide": ["https://o/p1.jpeg"]}]
+        nav = NavFalso(json=[
+            {**base, "title": {"rendered": "Dia de Feira &#8211; 21/10 &#8211; DF E ENTORNO"},
+             "acf": {"regiao": ["DF"], "segmentacao_df": ["Gama", "Guará II"], "tabloide": tab}},
+            {**base, "title": {"rendered": "Dia de Feira &#8211; GOIAS"}, "acf": {"regiao": ["GO"], "tabloide": tab}},
+        ])
+        (e,) = folhetos_df.dia_a_dia(nav)
+        self.assertEqual((e.mercado, e.validade_fim, e.pdf, e.imagens), ("Atacadão Dia a Dia", "2026-10-21", "https://o/x.pdf", ["https://o/p1.jpeg"]))
+        self.assertEqual(e.titulo, "Dia de Feira – 21/10 – DF E ENTORNO (2 lojas)")
+
+    def test_dona_pdf_e_validade(self):
+        html = '<a href="https://donafazbem.com.br/wp-content/uploads/2026/10/DONA-Festival-Carrinho-Cheio-19-a-21-10-2026.pdf">BAIXAR</a>'
+        (e,) = folhetos_df.dona(NavFalso(texto=html * 2))
+        self.assertEqual((e.mercado, e.validade_fim, e.publicado), ("Dona", "2026-10-21", "2026-10-01"))
 
 
 if __name__ == "__main__":

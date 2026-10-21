@@ -1,8 +1,8 @@
 """Encartes do dia dos mercados do DF, lidos com reconhecimento de texto gratuito (Tesseract), sem IA paga.
 
-Fonte da lista de encartes: encartesdf.com.br (robots.txt libera tudo; lista pelo JSON público do WordPress).
-Cada imagem passa pelo Tesseract (português); o texto vira trechos "nome do produto + preço". A leitura de
-encarte por reconhecimento de texto erra às vezes (letras estilizadas, preços em destaque), por isso o app sempre
+Fontes: sites dos próprios mercados (Atacadão Dia a Dia, Dona; ver fontes/folhetos_df.py) e encartesdf.com.br
+(robots.txt libera tudo; JSON público do WordPress). PDF com texto é lido direto; imagem passa pelo Tesseract
+(português). O texto vira trechos "nome do produto + preço". A leitura de encarte por reconhecimento de texto erra às vezes (letras estilizadas, preços em destaque), por isso o app sempre
 mostra o trecho lido e o link do encarte para a pessoa conferir. Nada disso entra como preço comprovado.
 """
 
@@ -17,7 +17,7 @@ from dataclasses import asdict, dataclass, field
 from datetime import date
 from pathlib import Path
 
-from .fontes import encartesdf
+from .fontes import encartesdf, folhetos_df
 from .rede import Navegador
 
 RE_PRECO = re.compile(r"(?:R\$\s*)?(\d{1,4})\s*[,.]\s*(\d{2})\b")
@@ -37,6 +37,8 @@ class EncarteLido:
     publicado: str
     validade_fim: str | None
     imagens: list[str]
+    pdf: str | None = None
+    titulo: str = ""
     trechos: list[Trecho] = field(default_factory=list)
 
 
@@ -45,28 +47,26 @@ def tesseract_disponivel() -> bool:
 
 
 def linhas_do_tsv(tsv: str) -> list[dict]:
-    """TSV do Tesseract -> linhas {texto, topo, base, esquerda, direita, bloco}, na ordem de leitura."""
+    """TSV do Tesseract ou do pdftotext -tsv -> linhas {texto, pagina, topo, base, esquerda, direita}, na ordem de leitura."""
     grupos: dict[tuple, list] = defaultdict(list)
     for linha in tsv.splitlines()[1:]:
         c = linha.split("\t")
-        if len(c) < 12 or not c[11].strip() or c[10] in ("-1", ""):
+        if len(c) < 12 or not c[11].strip() or c[10] in ("-1", "") or c[11].startswith("###"):
             continue
         try:
             if float(c[10]) < 20:  # confiança baixa: lixo do fundo
                 continue
+            chave = (int(c[1]), int(c[2]), int(c[3]), int(c[4]))  # página, bloco/parágrafo, parágrafo/bloco, linha
+            grupos[chave].append((float(c[6]), float(c[7]), float(c[8]), float(c[9]), c[11]))
         except ValueError:
             continue
-        chave = (int(c[2]), int(c[3]), int(c[4]))  # bloco, parágrafo, linha
-        grupos[chave].append((int(c[6]), int(c[7]), int(c[8]), int(c[9]), c[11]))
     saida = []
-    for (bloco, _p, _l), palavras in grupos.items():
+    for (pagina, *_), palavras in grupos.items():
         palavras.sort()
-        esq = min(p[0] for p in palavras)
-        topo = min(p[1] for p in palavras)
-        dir_ = max(p[0] + p[2] for p in palavras)
-        base = max(p[1] + p[3] for p in palavras)
-        saida.append({"texto": " ".join(p[4] for p in palavras), "topo": topo, "base": base, "esquerda": esq, "direita": dir_, "bloco": bloco})
-    saida.sort(key=lambda l: (l["topo"], l["esquerda"]))
+        saida.append({"texto": " ".join(p[4] for p in palavras), "pagina": pagina,
+                      "topo": min(p[1] for p in palavras), "base": max(p[1] + p[3] for p in palavras),
+                      "esquerda": min(p[0] for p in palavras), "direita": max(p[0] + p[2] for p in palavras)})
+    saida.sort(key=lambda l: (l["pagina"], l["topo"], l["esquerda"]))
     return saida
 
 
@@ -85,7 +85,7 @@ def trechos_das_linhas(linhas: list[dict]) -> list[Trecho]:
         # linhas acima, na mesma coluna (sobreposição horizontal) e perto na vertical
         acima = []
         for anterior in reversed(linhas[:i]):
-            if l["topo"] - anterior["base"] > 2.5 * max(1, l["base"] - l["topo"]):
+            if anterior["pagina"] != l["pagina"] or l["topo"] - anterior["base"] > 2.5 * max(1, l["base"] - l["topo"]):
                 break
             sobrepoe = min(anterior["direita"], l["direita"]) - max(anterior["esquerda"], l["esquerda"]) > 0
             if sobrepoe and not RE_PRECO.search(anterior["texto"]):
@@ -123,23 +123,58 @@ def _preparar(dados: bytes, pasta: Path, nome: str) -> Path:
         return caminho
 
 
+def texto_do_pdf(caminho: Path) -> list[Trecho]:
+    """Texto embutido no PDF (pdftotext -tsv tem o mesmo formato do Tesseract). Vazio se o PDF for só imagem."""
+    if not shutil.which("pdftotext"):
+        return []
+    tsv = subprocess.run(["pdftotext", "-tsv", str(caminho), "-"], capture_output=True, text=True, timeout=120).stdout
+    return trechos_das_linhas(linhas_do_tsv(tsv))
+
+
+def paginas_do_pdf(caminho: Path, max_paginas: int = 8) -> list[Path]:
+    """PDF só de imagem: vira PNG por página para o Tesseract."""
+    if not shutil.which("pdftoppm"):
+        return []
+    subprocess.run(["pdftoppm", "-r", "120", "-l", str(max_paginas), "-png", str(caminho), str(caminho.with_suffix(""))],
+                   capture_output=True, timeout=300)
+    return sorted(caminho.parent.glob(caminho.stem + "-*.png"))
+
+
 def ler_encartes(nav: Navegador, dias: int = 4, hoje: date | None = None, max_imagens: int = 120) -> list[EncarteLido]:
-    """Encartes vigentes (validade de hoje em diante) publicados nos últimos `dias`, com os trechos lidos."""
+    """Encartes vigentes (validade de hoje em diante): do encartesdf.com.br e dos sites dos próprios mercados."""
     hoje = hoje or date.today()
     saida, lidas = [], 0
+    try:
+        lista = folhetos_df.todos(nav) + encartesdf.listar(nav, dias=dias, hoje=hoje)
+    except Exception as e:
+        print(f"lista de encartes: {e!r}")
+        lista = folhetos_df.todos(nav)
     with tempfile.TemporaryDirectory() as tmp:
-        for e in encartesdf.listar(nav, dias=dias, hoje=hoje):
+        pasta = Path(tmp)
+        for n, e in enumerate(lista):
             if e.validade_fim and e.validade_fim < hoje.isoformat():
                 continue
-            lido = EncarteLido(e.mercado, e.post, e.publicado, e.validade_fim, e.imagens)
-            for i, url in enumerate(e.imagens):
-                if lidas >= max_imagens or not tesseract_disponivel():
-                    break
-                dados = nav.get_bytes(url)
-                if not dados:
-                    continue
-                lidas += 1
-                lido.trechos += ocr(_preparar(dados, Path(tmp), f"{len(saida)}-{i}{Path(url.split('?')[0]).suffix or '.img'}"))
+            lido = EncarteLido(e.mercado, e.post, e.publicado, e.validade_fim, e.imagens, e.pdf, e.titulo)
+            if e.pdf and lidas < max_imagens:
+                dados = nav.get_bytes(e.pdf)
+                if dados:
+                    arq = pasta / f"{n}.pdf"
+                    arq.write_bytes(dados)
+                    lido.trechos = texto_do_pdf(arq)
+                    if len(lido.trechos) < 3 and not e.imagens and tesseract_disponivel():
+                        for pagina in paginas_do_pdf(arq):
+                            lidas += 1
+                            lido.trechos += ocr(_preparar(pagina.read_bytes(), pasta, f"{n}-{pagina.stem}.png"))
+            if len(lido.trechos) < 3:
+                lido.trechos = []
+                for i, url in enumerate(e.imagens):
+                    if lidas >= max_imagens or not tesseract_disponivel():
+                        break
+                    dados = nav.get_bytes(url)
+                    if not dados:
+                        continue
+                    lidas += 1
+                    lido.trechos += ocr(_preparar(dados, pasta, f"{n}-{i}{Path(url.split('?')[0]).suffix or '.img'}"))
             saida.append(lido)
     return saida
 

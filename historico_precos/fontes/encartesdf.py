@@ -35,6 +35,7 @@ class Encarte:
     publicado: str  # AAAA-MM-DD
     validade_fim: str | None
     imagens: list[str] = field(default_factory=list)
+    pdf: str | None = None  # quando o mercado publica o encarte em PDF (o texto do PDF é mais confiável que a imagem)
 
 
 def _limpar(html: str) -> str:
