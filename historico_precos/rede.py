@@ -105,7 +105,8 @@ class Navegador:
 
     # sites que pedem mais espaço entre consultas do que o padrão
     INTERVALO_MINIMO = {"api.gdeltproject.org": 6.0, "mercado.carrefour.com.br": 3.0, "www.atacadao.com.br": 3.0,
-                        "www.obahortifruti.com.br": 3.0}
+                        "www.obahortifruti.com.br": 3.0,
+                        "world.openfoodfacts.org": 6.5}  # OFF: até 10 buscas por minuto
 
     def _intervalo_do(self, host: str) -> float:
         """O maior entre: o padrão, o mínimo conhecido do site e o Crawl-delay que o robots.txt pede."""

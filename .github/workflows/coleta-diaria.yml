@@ -54,6 +54,11 @@ jobs:
         timeout-minutes: 80
         run: python -m historico_precos catalogo-vtex --minutos 35
 
+      - name: Referência para o vínculo por nome (Open Food Facts, produtos do Brasil, 20 min)
+        continue-on-error: true
+        timeout-minutes: 25
+        run: python -m historico_precos referencia-off --minutos 20
+
       - name: Lojas sem código de barras no site, vínculo pelo nome (rodízio, 35 min por loja)
         continue-on-error: true
         timeout-minutes: 80

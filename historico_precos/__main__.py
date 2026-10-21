@@ -194,7 +194,8 @@ def _mapa_df(args, nav: Navegador, banco: Banco) -> int:
         if args.arquivo:
             eans += [l.split()[0] for l in Path(args.arquivo).read_text(encoding="utf-8").splitlines() if l.strip()]
         if args.do_banco:
-            eans += [l[0] for l in banco.con.execute("SELECT ean FROM produtos")]
+            # só produtos com preço em alguma loja: o cadastro também guarda milhares de produtos só de referência
+            eans += [l[0] for l in banco.con.execute("SELECT DISTINCT ean FROM precos")]
         if not eans:
             print("Informe --eans, --arquivo ou --do-banco.")
             return 1
@@ -420,6 +421,9 @@ def main(argv: list[str] | None = None) -> int:
     cv.add_argument("--max-paginas", type=int, help="teto de páginas de 50 produtos por loja (para testes)")
     cv.add_argument("--minutos", type=float, help="tempo máximo por loja; a próxima rodada continua de onde parou")
 
+    rf = sub.add_parser("referencia-off", help="baixa, em rodízio, produtos do Brasil do Open Food Facts (EAN, nome, marca, tamanho) para o vínculo por nome")
+    rf.add_argument("--minutos", type=float, default=20)
+
     cn = sub.add_parser("catalogo-nome", help="lojas sem código de barras no site: lê páginas de produto em rodízio e vincula pelo nome")
     cn.add_argument("--minutos", type=float, default=60, help="tempo máximo por loja")
     cn.add_argument("--limite", type=int, default=5000, help="teto de páginas por loja")
@@ -548,13 +552,42 @@ def main(argv: list[str] | None = None) -> int:
             onde = f"próxima rodada começa na categoria {estado['i'] + 1} de {estado['total']}" if estado["total"] else "sem categorias"
             print(f"{loja['nome']}: {produtos} produto(s) com código de barras, {pontos} preço(s) novo(s); {onde}.")
         return 0
+    if args.comando == "referencia-off":
+        import time
+
+        from .fontes import openfoodfacts
+
+        banco.con.execute("CREATE TABLE IF NOT EXISTS catalogo_progresso (loja TEXT PRIMARY KEY, proxima INTEGER, total INTEGER, em TEXT)")
+        linha = banco.con.execute("SELECT proxima FROM catalogo_progresso WHERE loja = 'Open Food Facts'").fetchone()
+        pagina, novos, fim = (linha[0] if linha else 1), 0, time.monotonic() + args.minutos * 60
+        while time.monotonic() < fim:
+            produtos = openfoodfacts.referencia_brasil(nav, pagina)
+            if produtos is None:
+                break
+            if not produtos:
+                pagina = 1  # chegou ao fim: recomeça pelos mais escaneados
+                break
+            for p_ in produtos:
+                if not banco.produto(p_.ean):
+                    banco.salvar_produto(p_)
+                    novos += 1
+            pagina += 1
+        banco.con.execute("INSERT OR REPLACE INTO catalogo_progresso VALUES ('Open Food Facts', ?, NULL, datetime('now'))", (pagina,))
+        banco.con.commit()
+        total = banco.con.execute("SELECT COUNT(*) FROM produtos WHERE fonte = 'Open Food Facts'").fetchone()[0]
+        print(f"Open Food Facts: {novos} produto(s) novo(s) de referência; {total} no total; próxima página: {pagina}.")
+        return 0
     if args.comando == "catalogo-nome":
         import time
 
         from .fontes import pagina_produto
         from .vinculo import Catalogo
 
-        catalogo = Catalogo(list(banco.con.execute("SELECT ean, nome, marca FROM produtos WHERE nome IS NOT NULL")))
+        # referência: nomes do cadastro e os nomes com que as lojas com código de barras mostram cada produto
+        catalogo = Catalogo(list(banco.con.execute(
+            "SELECT ean, nome, marca FROM produtos WHERE nome IS NOT NULL "
+            "UNION SELECT DISTINCT x.ean, x.descricao, p.marca FROM precos x LEFT JOIN produtos p USING (ean) "
+            "WHERE x.descricao IS NOT NULL AND x.metodo <> 'vinculo-nome'")))
         print(f"Catálogo de referência: {len(catalogo.itens)} produtos com código de barras e tamanho no nome.")
         for loja in [l for l in carregar_lojas(args.lojas) if l.get("tipo") == "sitemap" and l.get("vinculo") == "nome"]:
             fim = time.monotonic() + args.minutos * 60
