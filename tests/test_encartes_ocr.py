@@ -65,6 +65,14 @@ class TestVocabulario(unittest.TestCase):
         self.assertFalse(encartes_ocr.conhecido("asa alma ad", vocab))
         self.assertFalse(encartes_ocr.conhecido("posta sesaos", vocab))
 
+    def test_nomes_sem_preco(self):
+        vocab = {"file", "peito", "frango", "seara", "congelado", "pacote", "uva", "thompson", "bandeja"}
+        linha = lambda t, topo, esq=10: {"texto": t, "pagina": 1, "topo": topo, "base": topo + 20, "esquerda": esq, "direita": esq + 300}
+        linhas = [linha("Filé de Peito de Frango Seara", 100), linha("Congelado Pacote 1kg", 124), linha("ácie: ;99", 150),
+                  linha("Uva Thompson", 300), linha("Bandeja 5009", 324), linha("asa alma ad", 500)]
+        self.assertEqual(encartes_ocr.nomes_das_linhas(linhas, vocab),
+                         ["Filé de Peito de Frango Seara Congelado Pacote 1kg", "Uva Thompson Bandeja 500g"])
+
 
 class NavFalso:
     def __init__(self, json=None, texto=None):

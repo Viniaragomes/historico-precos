@@ -55,6 +55,7 @@ class EncarteLido:
     pdf: str | None = None
     titulo: str = ""
     trechos: list[Trecho] = field(default_factory=list)
+    nomes: list[str] = field(default_factory=list)  # produtos cujo nome foi lido, mas o preço não (preço estilizado)
 
 
 def tesseract_disponivel() -> bool:
@@ -137,10 +138,38 @@ def conhecido(texto: str, vocab: set[str]) -> bool:
     return bool(ws) and sum(w in vocab for w in ws) / len(ws) >= 0.6
 
 
-def ocr(caminho: Path) -> list[Trecho]:
+def nomes_das_linhas(linhas: list[dict], vocab: set[str]) -> list[str]:
+    """Linhas sem preço que são nome de produto conhecido; linhas seguidas na mesma coluna viram um nome só."""
+    nomes, atual, anterior = [], [], None
+    for l in linhas:
+        junto = (anterior is not None and l["pagina"] == anterior["pagina"]
+                 and 0 <= l["topo"] - anterior["base"] < 1.2 * max(1, l["base"] - l["topo"])
+                 and min(l["direita"], anterior["direita"]) - max(l["esquerda"], anterior["esquerda"]) > 0)
+        boa = not RE_PRECO.search(l["texto"]) and limpar_nome(l["texto"]) is not None
+        if (not junto or not boa) and atual:
+            nomes.append(" ".join(atual))
+            atual = []
+        if boa:
+            atual.append(l["texto"])
+        anterior = l
+    if atual:
+        nomes.append(" ".join(atual))
+    saida = []
+    for n in nomes:
+        n = limpar_nome(n)
+        if n and len(n.split()) >= 2 and conhecido(n, vocab) and n not in saida:
+            saida.append(n)
+    return saida
+
+
+def ocr_linhas(caminho: Path) -> list[dict]:
     tsv = subprocess.run(["tesseract", str(caminho), "stdout", "-l", "por", "--psm", "11", "tsv"],
                          capture_output=True, text=True, timeout=120).stdout
-    return trechos_das_linhas(linhas_do_tsv(tsv))
+    return linhas_do_tsv(tsv)
+
+
+def ocr(caminho: Path) -> list[Trecho]:
+    return trechos_das_linhas(ocr_linhas(caminho))
 
 
 def _preparar(dados: bytes, pasta: Path, nome: str) -> Path:
@@ -178,6 +207,13 @@ def paginas_do_pdf(caminho: Path, max_paginas: int = 8) -> list[Path]:
     return sorted(caminho.parent.glob(caminho.stem + "-*.png"))
 
 
+def _ler_imagem(lido: EncarteLido, linhas: list[dict], vocab: set[str] | None, filtrar: bool) -> None:
+    lido.trechos += [t for t in trechos_das_linhas(linhas) if not filtrar or conhecido(t.texto, vocab)]
+    if filtrar:  # sem vocabulário, nome sem preço seria mais lixo que informação
+        com_preco = {t.texto for t in lido.trechos}
+        lido.nomes += [n for n in nomes_das_linhas(linhas, vocab) if n not in com_preco and n not in lido.nomes][:300]
+
+
 def ler_encartes(nav: Navegador, dias: int = 4, hoje: date | None = None, max_imagens: int = 120,
                  vocab: set[str] | None = None) -> list[EncarteLido]:
     """Encartes vigentes (validade de hoje em diante): do encartesdf.com.br e dos sites dos próprios mercados.
@@ -205,9 +241,9 @@ def ler_encartes(nav: Navegador, dias: int = 4, hoje: date | None = None, max_im
                     if len(lido.trechos) < 3 and not e.imagens and tesseract_disponivel():
                         for pagina in paginas_do_pdf(arq):
                             lidas += 1
-                            lido.trechos += [t for t in ocr(_preparar(pagina.read_bytes(), pasta, f"{n}-{pagina.stem}.png"))
-                                             if not filtrar or conhecido(t.texto, vocab)]
-            if len(lido.trechos) < 3:
+                            png = _preparar(pagina.read_bytes(), pasta, f"{n}-{pagina.stem}.png")
+                            _ler_imagem(lido, ocr_linhas(png), vocab, filtrar)
+            if len(lido.trechos) < 3 and not lido.nomes:
                 lido.trechos = []
                 for i, url in enumerate(e.imagens):
                     if lidas >= max_imagens or not tesseract_disponivel():
@@ -216,8 +252,8 @@ def ler_encartes(nav: Navegador, dias: int = 4, hoje: date | None = None, max_im
                     if not dados:
                         continue
                     lidas += 1
-                    lido.trechos += [t for t in ocr(_preparar(dados, pasta, f"{n}-{i}{Path(url.split('?')[0]).suffix or '.img'}"))
-                                     if not filtrar or conhecido(t.texto, vocab)]
+                    _ler_imagem(lido, ocr_linhas(_preparar(dados, pasta, f"{n}-{i}{Path(url.split('?')[0]).suffix or '.img'}")),
+                                vocab, filtrar)
             saida.append(lido)
     return saida
 

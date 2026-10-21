@@ -3,7 +3,7 @@ import { calcular, categoria } from "./impostos.js";
 import { confiancaPreco, nivelPorPontos, precoSugerido, utilidade, chavePreco, chaveCausa, PONTOS, NIVEIS as NIVEIS_COMUNIDADE } from "./confianca.js";
 import { criarComunidade, consentimento, ErroComunidade, TIPOS_REPORTE } from "./comunidade.js";
 
-const VERSAO_APP = "v22"; // igual à VERSAO do sw.js
+const VERSAO_APP = "v23"; // igual à VERSAO do sw.js
 
 const conteudo = document.getElementById("conteudo");
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
@@ -571,24 +571,32 @@ function encartes() {
 const VARIANTES = new Set("abacaxi acerola acucar adocado alho amora apimentado atum bacalhau bacon banana baunilha bovina cafe caju calabresa camarao canela cappuccino carne catupiry cebola cereja cheddar chocolate coco defumado descafeinado desnatado diet ervas expresso extra forte framboesa frango glutem gluten goiaba guarana hortela integral intenso kiwi lactose laranja leite light limao manga maracuja melancia melao menta mexerica mocha morango mussarela ninho organico ovo ovos parmesao peru pessego picante pimenta presunto queijo requeijao salmao sardinha sem semidesnatado suave suina tangerina tomate uva zero".split(" "));
 
 // trechos de encarte que parecem o produto: pelo menos 2 palavras em comum e tamanho igual quando os dois informam
-function trechosParecidos(lista, nome, limite = 8) {
+// estrito (tela do produto): ao menos 75% das palavras do produto no trecho, o que na prática exige a marca
+function trechosParecidos(lista, nome, limite = 8, estrito = false) {
   const alvo = palavras(nome);
   if (alvo.size < 2) return [];
   const tam = tamanho(nome);
   const achados = [];
   for (const e of lista) {
-    for (const t of e.trechos || []) {
+    for (const t of itensDoEncarte(e)) {
       const w = palavras(t.t);
       const comuns = [...alvo].filter((x) => w.has(x)).length;
       if (comuns < 2) continue;
       if ([...alvo].some((x) => VARIANTES.has(x) && !w.has(x)) || [...w].some((x) => VARIANTES.has(x) && !alvo.has(x))) continue;
       const tt = tamanho(t.t);
       if (tam && tt && (tt[1] !== tam[1] || Math.abs(tt[0] - tam[0]) > 1e-6)) continue;
+      if (estrito && comuns / alvo.size < 0.75) continue;
       const nota = comuns / Math.min(alvo.size, w.size || 1) + (tam && tt ? 0.3 : 0);
       if (nota >= 0.6) achados.push({ e, t, nota });
     }
   }
-  return achados.sort((a, b) => b.nota - a.nota || a.t.p - b.t.p).slice(0, limite);
+  // com preço lido primeiro; depois os que só tiveram o nome lido
+  return achados.sort((a, b) => (a.t.p == null) - (b.t.p == null) || b.nota - a.nota || a.t.p - b.t.p).slice(0, limite);
+}
+
+// trechos com preço + nomes lidos sem preço (encarte com preço estilizado que a leitura automática não pega)
+function itensDoEncarte(e) {
+  return [...(e.trechos || []), ...(e.nomes || []).map((t) => ({ t, p: null }))];
 }
 
 function linhaEncarte({ e, t }) {
@@ -598,7 +606,8 @@ function linhaEncarte({ e, t }) {
       el("div", { class: "detalhe" }, `lido no encarte: “${t.t}”`, el("br"),
         e.validade_fim ? `válido até ${dataBR(e.validade_fim)} · ` : `publicado em ${dataBR(e.publicado)} · `,
         el("a", { href: e.post, target: "_blank", rel: "noopener" }, "ver encarte"))),
-    el("div", { class: "direita" }, el("div", { class: "valor" }, brl.format(t.p))));
+    el("div", { class: "direita" }, t.p != null ? el("div", { class: "valor" }, brl.format(t.p))
+      : el("a", { class: "minusculo", href: e.pdf || e.post, target: "_blank", rel: "noopener" }, "preço no encarte")));
 }
 
 const AVISO_ENCARTE = "Texto e preço lidos automaticamente da imagem do encarte: podem ter erro. Confira no encarte antes de ir ao mercado.";
@@ -607,7 +616,7 @@ function cartaoEncartes(...nomes) {
   const cartao = el("section", { class: "cartao entrar entrar-2", hidden: true });
   encartes().then((d) => {
     const vistos = new Set();
-    const achados = nomes.filter(Boolean).flatMap((n) => trechosParecidos(d.encartes, n))
+    const achados = nomes.filter(Boolean).flatMap((n) => trechosParecidos(d.encartes, n, 8, true))
       .filter((a) => { const k = `${a.e.post}|${a.t.t}|${a.t.p}`; return !vistos.has(k) && vistos.add(k); }).slice(0, 8);
     if (!achados.length) return;
     cartao.hidden = false;
@@ -631,8 +640,8 @@ function secaoEncartes() {
       if (q.length < 3) { resultado.replaceChildren(); return; }
       const alvo = palavras(q);
       const achados = alvo.size >= 2 ? trechosParecidos(d.encartes, q, 20) : d.encartes.flatMap((e) =>
-        (e.trechos || []).filter((t) => [...palavras(t.t)].some((w) => alvo.has(w))).map((t) => ({ e, t })))
-        .sort((a, b) => a.t.p - b.t.p).slice(0, 20);
+        itensDoEncarte(e).filter((t) => [...palavras(t.t)].some((w) => alvo.has(w))).map((t) => ({ e, t })))
+        .sort((a, b) => (a.t.p == null) - (b.t.p == null) || a.t.p - b.t.p).slice(0, 20);
       resultado.replaceChildren(achados.length ? el("div", {}, ...achados.map(linhaEncarte))
         : el("p", { class: "sub" }, "Nada parecido nos encartes lidos. O encarte pode ter o produto com outro nome: abra-o abaixo."));
     };
@@ -651,7 +660,8 @@ function secaoEncartes() {
             el("span", { class: "nome" }, e.mercado,
               e.titulo && e.titulo !== e.mercado ? el("small", {}, ` ${e.titulo}`) : null,
               el("small", {}, ` ${e.validade_fim ? `até ${dataBR(e.validade_fim)}` : `publicado ${dataBR(e.publicado)}`}`,
-                e.trechos?.length ? ` · ${e.trechos.length} preços lidos` : "")),
+                e.trechos?.length ? ` · ${e.trechos.length} preços lidos` : "",
+                e.nomes?.length ? ` · ${e.nomes.length} produtos sem preço lido` : "")),
             el("a", { href: e.pdf || e.post, target: "_blank", rel: "noopener" }, "abrir"), el("span", {}))))),
         el("p", { class: "minusculo", style: "margin:10px 0 0" }, AVISO_ENCARTE, " Cada linha tem o link do encarte de onde veio.")));
   });
