@@ -21,7 +21,22 @@ from .fontes import encartesdf, folhetos_df
 from .rede import Navegador
 
 RE_PRECO = re.compile(r"(?:R\$\s*)?(\d{1,4})\s*[,.]\s*(\d{2})\b")
-RE_G_COMO_9 = re.compile(r"\b(\d{1,3}0)9\b")  # "5009": o leitor costuma confundir o "g" de "500g" com 9
+RE_G_COMO_9 = re.compile(r"\b(\d{1,3}0)[96]\b")  # "5009"/"5006": o leitor confunde o "g"/"G" de "500g" com 9 ou 6
+RE_PREFIXO = re.compile(r"^(?:(?:distrito federal e entorno|a cada|cada|r\$|apenas|por|só|so|oferta|ofertas)(?=[\s.:,-]|$)[\s.:,-]*)+", re.I)
+RE_PALAVRA_BOA = re.compile(r"^[A-Za-zÀ-ú][A-Za-zÀ-ú-]{2,}[.,]?$")
+
+
+def limpar_nome(texto: str) -> str | None:
+    """Tira o que não é nome de produto e descarta leitura ruim (a maioria das palavras precisa ser palavra de verdade)."""
+    texto = RE_G_COMO_9.sub(r"\1g", " ".join(texto.split()))
+    texto = RE_PREFIXO.sub("", texto).strip(" -:|“”\"'[]()>*+.,")
+    # siglas e medidas (BDJ, C/5UN, KG, 1) não contam nem a favor nem contra
+    partes = [p for p in texto.split() if not re.match(r"^(?:[A-Z]{1,3}|[A-Z0-9/]*[0-9/][A-Z0-9/]*)$", p)]
+    boas = [p for p in partes if RE_PALAVRA_BOA.match(p) and re.search(r"[aeiouáéíóúâêôãõAEIOUÁÉÍÓÚÂÊÔÃÕ]", p)
+            or re.match(r"^\d+(?:[.,]\d+)?(?:kg|g|ml|l|un)$", p, re.I)]
+    if not partes or len(boas) / len(partes) < 0.6 or not any(len(p) >= 4 for p in boas):
+        return None
+    return texto[:120]
 
 
 @dataclass
@@ -92,10 +107,9 @@ def trechos_das_linhas(linhas: list[dict]) -> list[Trecho]:
                 acima.insert(0, anterior["texto"])
             if len(acima) >= 3:
                 break
-        texto = " ".join(acima + ([nome] if nome else [])).strip(" -:|")
-        texto = RE_G_COMO_9.sub(r"\1g", texto)
-        if len(re.findall(r"[A-Za-zÀ-ú]", texto)) >= 4:
-            trechos.append(Trecho(" ".join(texto.split())[:120], preco))
+        texto = limpar_nome(" ".join(acima + ([nome] if nome else [])))
+        if texto:
+            trechos.append(Trecho(texto, preco))
     return trechos
 
 
