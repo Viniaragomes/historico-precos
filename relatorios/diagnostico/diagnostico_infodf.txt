@@ -1,5 +1,31 @@
-Traceback (most recent call last):
-  File "/home/runner/work/historico-precos/historico-precos/ferramentas/diagnostico_infodf.py", line 16, in <module>
-    vistos[x.get("id")] = x
-           ^^^^^
-AttributeError: 'str' object has no attribute 'get'
+formato: dict ['count', 'next', 'previous', 'results']
+
+== /api/v1/indicador/: 11 itens
+  [10] Meio-Ambiente | ISU DF - Consumo de água | period. 4 | atualizado 2024-01-01
+  [9] Meio-Ambiente | ISU DF - Evapotranspiração | period. 4 | atualizado 2024-01-01
+  [13] Meio-Ambiente | ISU DF - Incidência de dengue | period. 4 | atualizado 2024-01-01
+  [12] Meio-Ambiente | ISU DF - Microclima | period. 4 | atualizado 2024-01-01
+  [14] Meio-Ambiente | ISU DF - Pegada de Carbono | period. 4 | atualizado 2024-01-01
+  [8] Meio-Ambiente | ISU DF - Potencial de Infiltração | period. 4 | atualizado 2024-01-01
+  [7] Meio-Ambiente | ISU DF - Recarga em área verde | period. 4 | atualizado 2024-01-01
+  [1] Meio-Ambiente | ISU DF - Área verde | period. 4 | atualizado 2024-01-01
+  [16] Social | PDAD Ampliada 2024 - Média de Idade por RA | period. 4 | atualizado 2024-01-01
+  [17] Social | PDAD Ampliada 2024 - Número de Domicílios por RA | period. 4 | atualizado 2024-01-01
+  [2] Social | PDAD Ampliada 2024 - População por RA | period. 4 | atualizado 2024-01-01
+formato: dict ['count', 'next', 'previous', 'results']
+
+== /api/v1/painel/: 14 itens
+  [11] Meio Ambiente e Território | IBEU-DF | period.  | atualizado 2026-03-19
+  [2] Meio-Ambiente | ISU DF | period.  | atualizado 2026-07-12
+  [10] Meio-Ambiente | IUDA-DF | period.  | atualizado 2026-03-12
+  [12] Meio-Ambiente | Painel AgroAmbiental | period.  | atualizado 2026-05-15
+  [5] Social | Cuidador Familiar - Pessoas Idosas com Demência e Cuidadores | period.  | atualizado 2026-03-12
+  [7] Social | Cuidador Institucionalizado - Pessoas Idosas com Demência e Cuidadores | period.  | atualizado 2026-03-12
+  [6] Social | Cuidador Particular - Pessoas Idosas com Demência e Cuidadores | period.  | atualizado 2026-03-12
+  [14] Social | Felicidade no Distrito Federal | period.  | atualizado 2026-09-25
+  [3] Social | PDAD Ampliada - Distribuição populacional | period.  | atualizado 2026-03-18
+  [9] Social | PIPS-DF | period.  | atualizado 2026-07-30
+  [1] Social | Pop Rua - Painel comparativo (2022 e 2025) | period.  | atualizado 2026-05-20
+  [4] Social | Primeira infância | period.  | atualizado 2026-03-12
+  [8] Social | Violência contra Profissionais de Enfermagem no DF | period.  | atualizado 2026-03-12
+  [13] Território | Panorama Habitacional do DF | period.  | atualizado 2026-03-19
