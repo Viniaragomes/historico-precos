@@ -1,0 +1,8 @@
+200 / 1536 bytes text/html; charset=utf-8 
+200 manifest.webmanifest 581 bytes application/manifest+json; charset=utf-8 
+200 sw.js 1457 bytes application/javascript; charset=utf-8 
+200 app.js 82765 bytes application/javascript; charset=utf-8 
+200 icone-192.png 1702 bytes image/png 
+ERRO dados/indice.json: HTTP Error 404: Not Found
+200 dados/ceasa-df.json 70013 bytes application/json; charset=utf-8 172 séries/produtos
+200 dados/conab.json 128010 bytes application/json; charset=utf-8 21 séries/produtos
