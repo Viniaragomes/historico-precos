@@ -1,3 +1,12 @@
-Atacadão: 0 produto(s) com código de barras no catálogo, 0 preço(s) novo(s) gravado(s).
-tempo: 25 s
-produtos: 0 | preços: 0
+Atacadão: 29 produto(s) com código de barras no catálogo, 29 preço(s) novo(s) gravado(s).
+Oba Hortifruti: 0 produto(s) com código de barras no catálogo, 0 preço(s) novo(s) gravado(s).
+tempo: 910 s
+produtos: 29 | preços: 29
+   ('7896534405779', 'Açúcar Refinado Bulnez 1kg', 3.09, None)
+   ('7896534405731', 'Açúcar Cristal Bulnez 5kg', 13.29, None)
+   ('7891959009922', 'Açúcar Cristalçúcar União Cristal 5kg', 17.3, None)
+   ('7896072649215', 'Açúcar Mavalério Confeiteiro 500g', 6.9, None)
+   ('7896045112760', 'Açúcar Cristal 3 Corações Minissachê 400x5g', 17.9, None)
+   ('7898187830045', 'Açúcar Cristal Santa Isabel Sachê com 5g Caixeta com 400 unidades', 17.9, None)
+   ('17898206502578', 'Açúcar Orgânico Native Cristal Minissachê 200x5g', 27.9, None)
+   ('17898206502561', 'Açúcar Orgânico Native Demerara Minissachê 200x5g', 29.9, None)
