@@ -470,7 +470,27 @@ function secaoAtacado() {
           el("ul", { class: "lista lista-atacado" }, ordem.slice(6).map(linha))) : null,
         el("p", { class: "minusculo", style: "margin:10px 0 0" },
           "Atacado não é o preço da feira ou do mercado, mas costuma andar antes dele. Fonte: ",
-          el("a", { href: d.evidencia, target: "_blank", rel: "noopener" }, "CEASA-DF"), ".")));
+          el("a", { href: d.evidencia, target: "_blank", rel: "noopener" }, "CEASA-DF"), "."),
+        comparativoConab));
+  }).catch(() => {});
+  const comparativoConab = el("div", { hidden: true });
+  carregarJSON("dados/conab.json").then((c) => {
+    const series = c?.series || [];
+    if (!series.length) return;
+    const porProduto = new Map();
+    for (const x of series) porProduto.set(x.produto, [...(porProduto.get(x.produto) || []), x]);
+    const mesTexto = (m) => { const [a, mm] = m.split("-"); return `${mm}/${a}`; };
+    const fmtVar = (v) => v == null ? "" : ` (${v > 0 ? "+" : ""}${String(v).replace(".", ",")}% no mês)`;
+    comparativoConab.hidden = false;
+    comparativoConab.replaceChildren(el("details", { class: "expansivel" },
+      el("summary", {}, "Comparar com Goiânia e São Paulo (Conab, mensal)", icone("seta")),
+      el("ul", { class: "lista lista-atacado" }, [...porProduto].map(([produto, xs]) => el("li", { class: "linha-atacado" },
+        el("span", { class: "nome" }, produto, ...xs.map((x) => el("small", {},
+          `${x.ceasa.replace(/^Ceasa\/|^Ceagesp - /, "")}: ${brl.format(x.ultimo.preco_kg)}/kg em ${mesTexto(x.ultimo.mes)}${fmtVar(x.variacao_pct)}`))),
+        el("span", {}), el("span", {})))),
+      el("p", { class: "minusculo", style: "margin:8px 0 0" },
+        "A CEASA-DF quase não informa a Conab; Goiânia é a principal origem do hortifrúti do DF. Fonte: ",
+        el("a", { href: c.evidencia, target: "_blank", rel: "noopener" }, "Conab, Boletim Hortigranjeiro"), ".")));
   }).catch(() => {});
   return secao;
 }

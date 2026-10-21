@@ -426,6 +426,10 @@ def main(argv: list[str] | None = None) -> int:
                     help="também lê o formulário de preços (R$/kg por dia) destes últimos N meses; o portal parou em 01/06/2026")
     cd.add_argument("--exportar", help="grava as séries em JSON para o app (ex.: site/dados/ceasa-df.json)")
 
+    cb = sub.add_parser("conab", help="preço médio mensal nas Ceasas (planilhas do Boletim Hortigranjeiro da Conab, gov.br)")
+    cb.add_argument("--anos", default=str(date.today().year), help="pastas anuais a ler, separados por vírgula")
+    cb.add_argument("--exportar", help="grava as séries em JSON para o app (ex.: site/dados/conab.json)")
+
     ci = sub.add_parser("conferencia-impostos", help="gera o checklist de conferência das leis de impostos")
     ci.add_argument("--saida", default="docs/conferencia-impostos.md")
 
@@ -455,6 +459,23 @@ def main(argv: list[str] | None = None) -> int:
     banco = Banco(args.banco)
     nav = Navegador(intervalo=args.intervalo)
 
+    if args.comando == "conab":
+        from .fontes import conab_prohort
+        from .modelo import agora_iso
+
+        r = conab_prohort.coletar(nav, banco.con, [int(a) for a in args.anos.split(",")])
+        print(f"{r['planilhas']} planilha(s) no gov.br, {r['lidas']} lida(s) agora, {r['linhas']} preço(s) mensais gravados.")
+        series = conab_prohort.series(banco.con)
+        for s_ in series:
+            v = f"{s_['variacao_pct']:+.1f}%" if s_["variacao_pct"] is not None else "—"
+            print(f"  {s_['produto']:<9} {s_['ceasa']:<24} {s_['ultimo']['mes']} R$ {s_['ultimo']['preco_kg']:.2f}/kg  {v}")
+        if args.exportar:
+            Path(args.exportar).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.exportar).write_text(json.dumps({
+                "fonte": "Conab, Boletim Hortigranjeiro (planilhas de dados), preço médio mensal R$/kg",
+                "evidencia": conab_prohort.PASTA, "atualizado_em": agora_iso(), "series": series}, ensure_ascii=False), encoding="utf-8")
+            print(f"Exportado em {args.exportar}")
+        return 0
     if args.comando == "ceasa-df":
         from .fontes import ceasa_df
         from .mapa_df.agente import ultimos_meses
