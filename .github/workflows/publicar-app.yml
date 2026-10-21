@@ -48,6 +48,8 @@ jobs:
         run: |
           sudo apt-get install -y -qq tesseract-ocr tesseract-ocr-por poppler-utils > /dev/null
           pip install -q pillow
+          git fetch -q origin dados || true
+          git show origin/dados:dicionario.db.gz > dicionario.db.gz 2>/dev/null || rm -f dicionario.db.gz
           python -m historico_precos encartes-dia --exportar site/dados/encartes.json | tail -40
       - name: Dicionário de códigos para o app (nome e preço de compra de qualquer código das notas do DF)
         continue-on-error: true

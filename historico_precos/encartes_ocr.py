@@ -114,21 +114,38 @@ def trechos_das_linhas(linhas: list[dict]) -> list[Trecho]:
     return trechos
 
 
-def vocabulario(con) -> set[str]:
+def vocabulario(*cons) -> set[str]:
     """Palavras (sem acento, 3+ letras) dos nomes de produtos que já conhecemos: catálogos das lojas, Open Food Facts,
-    descrições de preços. Serve para descartar leitura de imagem que parece palavra mas não é ("posta sesaos")."""
+    descrições de preços e o dicionário de códigos das notas fiscais do DF. Serve para descartar leitura de imagem que parece palavra mas não é ("posta sesaos")."""
     from .vinculo import normalizar
 
     palavras: set[str] = set()
     consultas = ["SELECT nome FROM produtos", "SELECT marca FROM produtos", "SELECT DISTINCT descricao FROM precos",
-                 "SELECT nome FROM produtos_loja"]
-    for sql in consultas:
-        try:
-            for (nome,) in con.execute(sql):
-                palavras.update(w for w in re.findall(r"[a-z]{3,}", normalizar(nome)))
-        except Exception:  # tabela ainda não existe neste banco
-            continue
+                 "SELECT nome FROM produtos_loja", "SELECT descricao FROM mapa_df_dicionario"]
+    for con in cons:
+        for sql in consultas:
+            try:
+                for (nome,) in con.execute(sql):
+                    palavras.update(w for w in re.findall(r"[a-z]{3,}", normalizar(nome)))
+            except Exception:  # tabela ainda não existe neste banco
+                continue
     return palavras
+
+
+def abrir_dicionario(caminho: str | Path):
+    """Conexão com o dicionário de códigos (dicionario.db ou .db.gz), ou None se não existir."""
+    import gzip
+    import sqlite3
+
+    caminho = Path(caminho)
+    if not caminho.exists():
+        return None
+    if caminho.suffix == ".gz":
+        destino = Path(tempfile.mkdtemp()) / "dicionario.db"
+        with gzip.open(caminho, "rb") as origem, open(destino, "wb") as saida:
+            shutil.copyfileobj(origem, saida)
+        caminho = destino
+    return sqlite3.connect(caminho)
 
 
 def conhecido(texto: str, vocab: set[str]) -> bool:

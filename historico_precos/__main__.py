@@ -474,6 +474,7 @@ def main(argv: list[str] | None = None) -> int:
     ed.add_argument("--dias", type=int, default=4, help="encartes publicados nestes últimos dias")
     ed.add_argument("--max-imagens", type=int, default=120)
     ed.add_argument("--exportar", help="grava em JSON para o app (ex.: site/dados/encartes.json)")
+    ed.add_argument("--dicionario", default="dicionario.db.gz", help="dicionário de códigos (vocabulário de nomes de produtos)")
 
     ci = sub.add_parser("conferencia-impostos", help="gera o checklist de conferência das leis de impostos")
     ci.add_argument("--saida", default="docs/conferencia-impostos.md")
@@ -514,7 +515,7 @@ def main(argv: list[str] | None = None) -> int:
 
         if not encartes_ocr.tesseract_disponivel():
             print("Tesseract não instalado (apt install tesseract-ocr tesseract-ocr-por): só a lista de encartes sai.")
-        vocab = encartes_ocr.vocabulario(banco.con)
+        vocab = encartes_ocr.vocabulario(banco.con, *filter(None, [encartes_ocr.abrir_dicionario(args.dicionario)]))
         print(f"Vocabulário de nomes de produtos: {len(vocab)} palavras" + ("" if len(vocab) >= 5000 else " (pouco: sem filtro)"))
         encartes = encartes_ocr.ler_encartes(nav, dias=args.dias, max_imagens=args.max_imagens, vocab=vocab)
         for e in encartes:
