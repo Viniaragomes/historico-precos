@@ -1,0 +1,16 @@
+
+===== www.atacadao.com.br
+permitido pelo robots: True
+árvore: sem resposta
+registro: [{'url': 'https://www.atacadao.com.br/api/catalog_system/pub/category/tree/3', 'status': 429, 'motivo': 'HTTP 429 Too Many Requests', 'trecho': 'Too Many Requests'}, {'url': 'https://www.atacadao.com.br/api/catalog_system/pub/category/tree/3', 'status': 429, 'motivo': 'HTTP 429 Too Many Requests', 'trecho': 'Too Many Requests'}]
+folhas: 0 []
+região:  None
+
+===== www.obahortifruti.com.br
+permitido pelo robots: True
+árvore: [{"id":1,"name":"OBA","hasChildren":true,"url":"https://www.obahortifruti.com.br/oba","children":[],"Title":"OBA","MetaTagDescription":""},{"id":2,"name":"HORTIFRÚTI","hasChildren":true,"url":"https://www.obahortifruti.com.br/hortifruti","children":[{"id":48,"name":"COGUMELOS E BROTOS","hasChildren":true,"url":"https://www.obahortifruti.com.br/hortifruti/cogumelos-e-brotos","children":[{"id":180,"name":"CHAMPIGNON","hasChildren":false,"url":"https://www.obahortifruti.com.br/hortifruti/cogumelos-e-brotos/champignon","children":[],"Title":"Champignon fresco ou em conserva para saladas, risotos e
+registro: [{'url': 'https://www.obahortifruti.com.br/robots.txt', 'status': 404, 'motivo': 'HTTP 404 Not Found', 'trecho': '<!DOCTYPE html><html dir="ltr" lang="pt-BR"><head><meta charSet="utf-8" data-next-head=""/><meta name="viewport" content="width=device-width" data-next-head=""/><script type="text/partytown"> window.VTEX_METADATA = {account:\'obahortifruti\', renderer: \'faststore\'}; window.sendrc=function(en,ed){windo'}, {'url': 'https://www.obahortifruti.com.br/api/catalog_system/pub/category/tree/3', 'status': 429, 'motivo': 'HTTP 429 Too Many Requests', 'trecho': 'Too Many Requests'}]
+folhas: 360 [('/1/', 'OBA'), ('/2/48/180/', 'CHAMPIGNON'), ('/2/48/288/', 'OUTROS COGUMELOS'), ('/2/48/370/', 'SHITAKE'), ('/2/48/431/', 'PARIS')]
+região:  None
+url: https://www.obahortifruti.com.br/api/catalog_system/pub/products/search?fq=C:/1/&_from=0&_to=4 permitido: True
+resposta: [{"productId":"100008907","productName":"Alcatra Suína Moura Oba Reserve 500g","brand":"OBA RESERVE","brandId":2004175,"brandImageUrl":null,"linkText":"alcatra-suina-moura-oba-reserve-500-g","productReference":"231858","productReferenceCode":"231858","categoryId":"1","productTitle":"Alcatra Suína Oba Reserve 500g","metaTagDescription":"Alcatra suína Moura Oba Reserve 500g, versátil para grelhados, [{'url': 'https://www.obahortifruti.com.br/api/checkout/pub/regions?country=BRA&postalCode=70040010', 'status': 429, 'motivo': 'HTTP 429 Too Many Requests', 'trecho': 'Too Many Requests'}]
