@@ -298,6 +298,35 @@ function normalizar(t) {
   return (t || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 }
 
+// ---------- cupom fiscal (NFC-e do DF) ----------
+
+const RE_CUPOM = /^https?:\/\/(www\.)?fazenda\.df\.gov\.br\/nfce\/qrcode\?p=\d{44}\|/i;
+
+function enviarCupom(link) {
+  const enviar = async () => {
+    fechar();
+    const com = await comunidade();
+    if (com.modo === "teste") {
+      avisar("O envio de cupons começa quando a comunidade online estiver ligada.");
+      return;
+    }
+    try {
+      await com.enviarCupom(link);
+      avisar("Cupom enviado. Obrigado! Os preços aparecem depois da próxima coleta.");
+    } catch (e) {
+      avisar(e instanceof ErroComunidade ? e.message : "Não deu para enviar agora.");
+    }
+  };
+  const fechar = abrirFolha("Enviar cupom fiscal",
+    el("p", { class: "texto-folha" }, "Os preços deste cupom ajudam todo mundo a saber quanto custa cada produto em cada mercado do DF."),
+    el("ul", { class: "lista-simples" },
+      el("li", {}, "Usamos só os produtos, os preços, o mercado e a data."),
+      el("li", {}, "O CPF e o nome do consumidor, se estiverem no cupom, nunca são lidos nem guardados."),
+      el("li", {}, "O link do cupom fica numa área fechada e é apagado assim que os preços são extraídos.")),
+    el("button", { class: "botao-principal", type: "button", onclick: enviar }, "Enviar cupom"),
+    el("button", { class: "botao-texto", type: "button", onclick: () => fechar() }, "Agora não"));
+}
+
 // ---------- leitor em tela cheia ----------
 
 let pararCamera = null;
@@ -337,7 +366,7 @@ function abrirLeitor() {
     el("div", { class: "moldura" }, el("div", { class: "laser" })),
     el("div", { class: "leitor-topo" },
       el("button", { class: "botao-redondo", type: "button", "aria-label": "Fechar", onclick: fecharLeitor }, icone("fechar")),
-      el("strong", {}, "Escanear produto"),
+      el("strong", {}, "Escanear produto ou cupom"),
       el("span", { style: "width:44px" })),
     dica,
     el("div", { class: "leitor-base" },
@@ -356,13 +385,20 @@ async function ligarCamera(tela, dica) {
     dica.textContent = "A câmera precisa de conexão segura. Digite o código abaixo.";
     return;
   }
-  const formatos = ["ean_13", "ean_8", "upc_a", "upc_e"];
+  const formatos = ["ean_13", "ean_8", "upc_a", "upc_e", "qr_code"];
   let nativo = false;
   if ("BarcodeDetector" in window) {
     try { nativo = (await BarcodeDetector.getSupportedFormats()).some((f) => formatos.includes(f)); }
     catch { nativo = false; }
   }
-  const lido = (codigo) => irParaCodigo(codigo, () => { dica.textContent = "Não consegui ler direito. Aproxime um pouco."; });
+  const lido = (codigo) => {
+    if (/^https?:\/\//i.test(codigo)) {  // QR code: cupom fiscal do DF?
+      if (RE_CUPOM.test(codigo)) { fecharLeitor(); enviarCupom(codigo); return true; }
+      dica.textContent = "Este QR code não é de um cupom fiscal do DF.";
+      return false;
+    }
+    return irParaCodigo(codigo, () => { dica.textContent = "Não consegui ler direito. Aproxime um pouco."; });
+  };
   try {
     if (nativo) await cameraNativa(tela, formatos, lido);
     else await cameraAlternativa(lido);
@@ -403,7 +439,7 @@ async function cameraAlternativa(lido) {
     });
   }
   const F = window.Html5QrcodeSupportedFormats;
-  const leitor = new window.Html5Qrcode("leitor-alternativo", { formatsToSupport: [F.EAN_13, F.EAN_8, F.UPC_A, F.UPC_E], verbose: false });
+  const leitor = new window.Html5Qrcode("leitor-alternativo", { formatsToSupport: [F.EAN_13, F.EAN_8, F.UPC_A, F.UPC_E, F.QR_CODE], verbose: false });
   await leitor.start({ facingMode: "environment" }, { fps: 12, qrbox: { width: 280, height: 130 } }, (t) => { lido(t); }, () => {});
   pararCamera = async () => { await leitor.stop(); leitor.clear(); };
 }

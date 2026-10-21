@@ -171,6 +171,39 @@ create view public.codigos_pedidos as
   select ean, pedidos, ultimo_em from public.pedidos_codigo order by ultimo_em desc limit 2000;
 grant select on public.codigos_pedidos to anon, authenticated;
 
+-- cupons fiscais (NFC-e) enviados por quem comprou: o link do QR code dá acesso ao cupom inteiro (que pode ter CPF),
+-- por isso ninguém lê esta tabela pelo app. Só a coleta, com a chave secreta guardada no GitHub, lê, extrai os
+-- produtos e preços e apaga o link. Para não processar o mesmo cupom duas vezes, fica só o resumo (hash) da chave.
+create table public.cupons_recebidos (
+  id bigint generated always as identity primary key,
+  url text check (url is null or (char_length(url) <= 600 and url ~ '^https?://(www\.)?fazenda\.df\.gov\.br/nfce/qrcode\?p=[0-9]{44}\|')),
+  chave_hash text not null unique,
+  status text not null default 'pendente' check (status in ('pendente', 'lido', 'falhou')),
+  itens integer,
+  criado_em timestamptz not null default now()
+);
+alter table public.cupons_recebidos enable row level security;  -- sem políticas: o app não lê nem grava direto
+
+create extension if not exists pgcrypto with schema extensions;
+
+create or replace function public.enviar_cupom(link text) returns text
+language plpgsql security definer set search_path = public, extensions as $$
+declare
+  chave text := substring(link from 'p=([0-9]{44})');
+begin
+  if link !~ '^https?://(www\.)?fazenda\.df\.gov\.br/nfce/qrcode\?p=[0-9]{44}\|' then
+    raise exception 'não parece um cupom fiscal do DF';
+  end if;
+  if (select count(*) from cupons_recebidos where criado_em > now() - interval '1 hour') >= 1000 then
+    raise exception 'limite de cupons por hora atingido';
+  end if;
+  insert into cupons_recebidos (url, chave_hash) values (link, encode(digest(chave, 'sha256'), 'hex'))
+    on conflict (chave_hash) do nothing;
+  return 'ok';
+end $$;
+revoke all on function public.enviar_cupom(text) from public;
+grant execute on function public.enviar_cupom(text) to anon, authenticated;
+
 -- ---------- limite de contribuições e pontos ----------
 
 create or replace function public.antes_de_votar() returns trigger
@@ -263,6 +296,7 @@ create or replace function public.limpar_dados_antigos() returns void
 language sql security definer set search_path = public as $$
   delete from votos where criado_em < now() - interval '12 months';
   delete from precos_informados where criado_em < now() - interval '12 months';
+  update cupons_recebidos set url = null where status <> 'pendente' or criado_em < now() - interval '7 days';
   delete from evidencias_sugeridas where status = 'recusada' and criado_em < now() - interval '12 months';
   delete from reportes where status <> 'aberto' and criado_em < now() - interval '12 months';
   delete from auth.users u where u.is_anonymous and u.last_sign_in_at < now() - interval '12 months';

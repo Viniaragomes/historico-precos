@@ -551,3 +551,5 @@ a.botao-secundario-neutro { text-decoration: none; box-sizing: border-box; }
 .rotulo-campo { display: block; font-weight: 600; margin: 12px 0 6px; }
 .folha-modal .campo-texto + .campo-texto { margin-top: 8px; }
 .aviso-vinculo { color: var(--texto-2); font-size: .85em; margin-top: 2px; }
+.lista-simples { margin: 8px 0 14px; padding-left: 20px; color: var(--texto-2); }
+.lista-simples li { margin: 4px 0; }

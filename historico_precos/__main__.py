@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import logging
 import sys
 from dataclasses import asdict
@@ -448,6 +449,9 @@ def main(argv: list[str] | None = None) -> int:
     pd.add_argument("--saida", default="pedidos.txt")
     pd.add_argument("--config", default="site/config.json")
 
+    cp_ = sub.add_parser("cupons", help="lê os cupons fiscais enviados pelo app (precisa da chave secreta SUPABASE_SERVICE_ROLE)")
+    cp_.add_argument("--config", default="site/config.json")
+
     cn = sub.add_parser("catalogo-nome", help="lojas sem código de barras no site: lê páginas de produto em rodízio e vincula pelo nome")
     cn.add_argument("--minutos", type=float, default=60, help="tempo máximo por loja")
     cn.add_argument("--limite", type=int, default=5000, help="teto de páginas por loja")
@@ -618,6 +622,49 @@ def main(argv: list[str] | None = None) -> int:
             eans = []
         Path(args.saida).write_text("\n".join(eans) + ("\n" if eans else ""), encoding="utf-8")
         print(f"{len(eans)} código(s) pedido(s) gravado(s) em {args.saida}.")
+        return 0
+    if args.comando == "cupons":
+        import hashlib
+        import os
+        import urllib.request
+
+        from .fontes import nfce_df
+        from .vinculo import Catalogo
+
+        cfg = json.loads(Path(args.config).read_text(encoding="utf-8")).get("comunidade") or {}
+        chave = os.environ.get("SUPABASE_SERVICE_ROLE", "").strip()
+        if not (cfg.get("url") and chave):
+            print("Sem comunidade online ou sem a chave secreta SUPABASE_SERVICE_ROLE: nenhum cupom para ler.")
+            return 0
+        base = f"{cfg['url'].rstrip('/')}/rest/v1/cupons_recebidos"
+        cab = {"apikey": chave, "Authorization": f"Bearer {chave}", "User-Agent": nav.user_agent, "Content-Type": "application/json"}
+
+        def api(url, metodo="GET", corpo=None):
+            req = urllib.request.Request(url, method=metodo, headers=cab, data=json.dumps(corpo).encode() if corpo is not None else None)
+            with urllib.request.urlopen(req, timeout=60) as r:
+                texto = r.read().decode()
+                return json.loads(texto) if texto else None
+
+        pendentes = api(f"{base}?select=id,url&status=eq.pendente&url=not.is.null&limit=300") or []
+        catalogo = Catalogo(list(banco.con.execute(
+            "SELECT ean, nome, marca FROM produtos WHERE nome IS NOT NULL "
+            "UNION SELECT DISTINCT x.ean, x.descricao, p.marca FROM precos x LEFT JOIN produtos p USING (ean) "
+            "WHERE x.descricao IS NOT NULL AND x.metodo NOT IN ('vinculo-nome', 'nfce-vinculo-nome')")))
+        lidos = itens = precos_novos = 0
+        for c in pendentes:
+            html = nav.get_texto(c["url"])
+            cupom = nfce_df.ler_cupom(html) if html else None
+            ok = bool(cupom and cupom.itens and cupom.emissao)
+            if ok:
+                resumo = hashlib.sha256(re.search(r"p=(\d{44})", c["url"]).group(1).encode()).hexdigest()
+                pontos = nfce_df.pontos_do_cupom(cupom, catalogo, resumo)
+                precos_novos += banco.salvar_precos(pontos)
+                itens += len(cupom.itens)
+                lidos += 1
+            # o link é apagado sempre, lido ou não: ele pode dar acesso a dados do consumidor
+            api(f"{base}?id=eq.{c['id']}", "PATCH", {"status": "lido" if ok else "falhou", "url": None,
+                                                     "itens": len(cupom.itens) if cupom else 0})
+        print(f"{len(pendentes)} cupom(ns) pendente(s): {lidos} lido(s), {itens} item(ns), {precos_novos} preço(s) novo(s).")
         return 0
     if args.comando == "catalogo-nome":
         import time

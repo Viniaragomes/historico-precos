@@ -37,6 +37,12 @@ jobs:
             echo "Primeira execução: banco novo."
           fi
 
+      - name: Cupons fiscais enviados pelo app (preço de prateleira em qualquer mercado)
+        continue-on-error: true
+        env:
+          SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
+        run: python -m historico_precos cupons
+
       - name: Códigos pedidos no app (produtos escaneados que ainda não eram acompanhados)
         continue-on-error: true
         run: |

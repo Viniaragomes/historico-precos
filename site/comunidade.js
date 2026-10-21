@@ -88,6 +88,7 @@ export class ComunidadeLocal {
     return resumirPrecos((this._ler().precos || []).filter((p) => p.ean === ean));
   }
   async pedirCodigo() { return { registrado: false }; } // só a comunidade online leva o pedido à coleta
+  async enviarCupom() { return { registrado: false }; }
   async sugerirEvidencia({ ean, chave, url, descricao }) {
     const d = this._ler();
     d.evidencias.push({ id: d.proximoId++, ean, chave, url: validarUrl(url), descricao: (descricao || "").slice(0, 500), status: "pendente", nivel: null, criado_em: new Date().toISOString() });
@@ -217,6 +218,13 @@ export class ComunidadeSupabase {
     if (error?.message?.includes("limite")) throw new ErroComunidade("Muitas contribuições em pouco tempo. Tente de novo mais tarde.");
     if (error) throw new ErroComunidade("Não foi possível registrar agora.");
     return { ganho: PONTOS.corrigir };
+  }
+  // cupom fiscal: o link vai para uma tabela fechada; só a coleta lê, extrai os preços e apaga o link
+  async enviarCupom(link) {
+    const c = await this._cliente();
+    const { error } = await c.rpc("enviar_cupom", { link });
+    if (error) throw new ErroComunidade(error.message?.includes("não parece") ? "Este QR code não é de um cupom fiscal do DF." : "Não deu para enviar agora.");
+    return { registrado: true };
   }
   // pedido de inclusão: anônimo, sem login e sem aceite (só o código de barras)
   async pedirCodigo(ean) {
