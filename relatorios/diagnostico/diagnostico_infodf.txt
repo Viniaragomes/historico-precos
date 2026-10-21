@@ -1,30 +1,15 @@
-página inicial: 7579 bytes
+trechos com /api/ ou apiUrl:
+  ... Gt(It),n=Gt(D),s=i.clone({withCredentials:!0});return e(s).pipe(Wt(l=>l instanceof he&&l.status===401&&!i.url.includes("/api/v1/refresh/")?t.refreshToken().pipe(j(()=>e(i.clone({withCredentials:!0}))),Wt(()=>(t.clearSession(),n.navigate(["/login"]),Qt(()=>l)))):Qt(()=>l)))};ue(nn
 
-== env.js:
- (function(window) {
-  window.env = window.env || {}
-  // Environment variables
-  window.env.externalApiUrl = "https://api.ipe.df.gov.br";
-  window.env.apiUrl = "https://infodf.ipe.df.gov.br";
-})(this);
+candidatos: ['/api/v1/refresh/']
 
+/api/v1/indicador/ -> JSON, 2 itens
+   ** [{"id": 13, "nome": "ISU DF - Incidência de dengue", "qualificacao": 1, "periodicidade": 4, "ultimo_valor": 0.0, "medida": 0, "ultima_atualizacao": "2024-01-01T03:00:00Z", "tendencia": 0, "categoria": "Meio-Ambiente", "destaque": false, "tipo": 1}, {"id": 12, "nome": "ISU DF - Microclima", "qualific
+   exemplo: [[{"id": 14, "nome": "ISU DF - Pegada de Carbono", "qualificacao": 1, "periodicidade": 4, "ultimo_valor": 0.0, "medida": 0, "ultima_atualizacao": "2024-01-01T03:00:00Z", "tendencia": 0, "categoria": "Meio-Ambiente", "destaque": true, "tipo": 1}, {"id": 1, "nome": "ISU DF - Área verde", "qualificacao": 0, "periodicidade": 4, "ultimo_valor": 0.0, "medida": 0, "ultima_atualizacao": "2024-01-01T03:00:00Z", "tendencia": 0, "categoria": "Meio-Ambiente", "destaque": true, "tipo": 1}, {"id": 2, "nome": "PDAD Ampliada 2024 - População por RA", "qualificacao": 0, "periodicidade": 4, "ultimo_valor": 0.0, "medida": 0, "ultima_atualizacao": "2024-01-01T03:00:00Z", "tendencia": 0, "categoria": "Social", "destaque": true, "tipo": 1}, {"id": 17, "nome": "PDAD Ampliada 2024 - Número de Domicílios por RA", 
+/api/v1/indicadores/ -> sem resposta [{'url': 'https://infodf.ipe.df.gov.br/api/v1/indicadores/', 'status': 404, 'motivo': 'HTTP 404 Not Found', 'trecho': '<!doctype html> <html lang="en"> <head> <title>Not Found</title> </head> <body> <h1>Not Found</h1><p>The requested resource was not found on this server.</p> <script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement(\'script\');d.'}]
 
-== main-A55ITAGP.js: 163496 bytes
-   endereços de API: ['/api/v1/refresh/']
-   rotas: ['**', 'administracao', 'administracao/dashboard', 'administracao/indicador', 'administracao/painel', 'indicador', 'indicador/:id', 'inicio', 'login', 'painel', 'painel/:id']
-   textos sobre preço/inflação: []
-
-== chunk-OWI4BXY5.js: 132490 bytes
-   endereços de API: []
-   rotas: []
-   textos sobre preço/inflação: []
-
-== chunk-YR2VE3BP.js: 90471 bytes
-   endereços de API: []
-   rotas: []
-   textos sobre preço/inflação: []
-
-== chunk-BHQM6SP6.js: 1822262 bytes
-   endereços de API: []
-   rotas: []
-   textos sobre preço/inflação: ['notspacestart', 'replacestate']
+/api/v1/painel/ -> JSON, 2 itens
+   exemplo: [[{"id": 14, "nome": "Felicidade no Distrito Federal", "resumo": "Felicidade no Distrito Federal: fatores associados e implicações para políticas públicas.", "destaque": true, "ultima_atualizacao": "2026-09-25T12:43:28.390774Z", "categoria": {"nome": "Social"}}, {"id": 2, "nome": "ISU DF", "resumo": "Índice de Sustentabilidade Ambiental Urbana das regiões do DF", "destaque": true, "ultima_atualizacao": "2026-07-12T22:41:52.243715Z", "categoria": {"nome": "Meio-Ambiente"}}, {"id": 1, "nome": "Pop Rua - Painel comparativo (2022 e 2025)", "resumo": "Censo Distrital da População em Situação de Rua", "destaque": true, "ultima_atualizacao": "2026-05-20T14:44:57.102129Z", "categoria": {"nome": "Social"}}, {"id": 3, "nome": "PDAD Ampliada - Distribuição populacional", "resumo": "A Pesquisa Distrit
+/api/v1/paineis/ -> sem resposta [{'url': 'https://infodf.ipe.df.gov.br/api/v1/paineis/', 'status': 404, 'motivo': 'HTTP 404 Not Found', 'trecho': '<!doctype html> <html lang="en"> <head> <title>Not Found</title> </head> <body> <h1>Not Found</h1><p>The requested resource was not found on this server.</p> <script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement(\'script\');d.'}]
+/api/v1/tema/ -> sem resposta [{'url': 'https://infodf.ipe.df.gov.br/api/v1/tema/', 'status': 404, 'motivo': 'HTTP 404 Not Found', 'trecho': '<!doctype html> <html lang="en"> <head> <title>Not Found</title> </head> <body> <h1>Not Found</h1><p>The requested resource was not found on this server.</p> <script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement(\'script\');d.'}]
+/api/v1/temas/ -> sem resposta [{'url': 'https://infodf.ipe.df.gov.br/api/v1/temas/', 'status': 404, 'motivo': 'HTTP 404 Not Found', 'trecho': '<!doctype html> <html lang="en"> <head> <title>Not Found</title> </head> <body> <h1>Not Found</h1><p>The requested resource was not found on this server.</p> <script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement(\'script\');d.'}]
