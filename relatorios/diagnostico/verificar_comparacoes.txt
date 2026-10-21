@@ -1,22 +1,41 @@
-Traceback (most recent call last):
-  File "/home/runner/work/historico-precos/historico-precos/ferramentas/verificar_comparacoes.py", line 6, in <module>
-    with urllib.request.urlopen("https://viniaragomes.github.io/historico-precos/dados/encartes.json", timeout=30) as r:
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/urllib/request.py", line 215, in urlopen
-    return opener.open(url, data, timeout)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/urllib/request.py", line 521, in open
-    response = meth(req, response)
-               ^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/urllib/request.py", line 630, in http_response
-    response = self.parent.error(
-               ^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/urllib/request.py", line 559, in error
-    return self._call_chain(*args)
-           ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/urllib/request.py", line 492, in _call_chain
-    result = func(*args)
-             ^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/urllib/request.py", line 639, in http_error_default
-    raise HTTPError(req.full_url, code, msg, hdrs, fp)
-urllib.error.HTTPError: HTTP Error 404: Not Found
+2026-10-21T18:10:34+00:00 20 encartes; 8 produtos em 2+ mercados
+
+BANANA NANICA  (diferença R$ 2.50, 100.4%)
+    R$    2.49  Atacadão Dia a Dia             lido: BANANA NANICA
+    R$    4.99  Supermercado Super Big         lido: BANANA NANICA
+   (sem preço)  Supermercado Brandão           lido: BANANA NANICA
+   (sem preço)  Dia a Dia Atacadista           lido: BANANA NANICA
+   (sem preço)  Supermercado Mineirão          lido: BANANA NANICA
+   (sem preço)  Supermercado Planeta           lido: BANANA NANICA KG
+
+UVA VERDE FRUTAYA SEM SEMENTE OU UVA PRETA BRAVIS COM SEMENTE BANDEJA 500G  (diferença R$ 0.00, 0.0%)
+    R$    7.49  Atacadão Dia a Dia             lido: UVA VERDE FRUTAYA SEM SEMENTE OU UVA PRETA BRAVIS COM SEMENTE BANDEJA 500G
+   (sem preço)  Dia a Dia Atacadista           lido: SEMENTE OU UVA PRETA BRAVIS COM SEMENTE BANDEJA500G
+
+OVOS BRANCOS MANTIQUEIRA OU EMAPE TIPO EXTRA BANDEJA COM 30 UNIDADES  (diferença R$ 0.00, 0.0%)
+    R$   12.79  Atacadão Dia a Dia             lido: OVOS BRANCOS MANTIQUEIRA OU EMAPE TIPO EXTRA BANDEJA COM 30 UNIDADES
+   (sem preço)  Dia a Dia Atacadista           lido: OVOS BRANCOS MANTIQUEIRA OU EMAPE TIPO EXTRA
+
+UVA CRIMSON  (diferença R$ 0.00, 0.0%)
+    R$    6.98  Supermercado Mineirão          lido: UVA CRIMSON
+   (sem preço)  Assaí Atacadista               lido: UVA CRIMSON
+   (sem preço)  Supermercado Superbom          lido: UVA CRIMSON BANDEJA
+
+ALHO A GRANEL  (diferença R$ 0.00, 0.0%)
+    R$   25.90  Supermercado Superbom          lido: ALHO A GRANEL
+   (sem preço)  Supermercado Ultrabox          lido: Alho a Granel
+
+BATATA DOCE  (diferença R$ 0.00, 0.0%)
+    R$    3.99  Supermercado Super Big         lido: BATATA DOCE
+   (sem preço)  Supermercado Brandão           lido: BATATA DOCE
+
+ABOBORA JAPONESA  (diferença R$ 0.00, 0.0%)
+    R$    3.99  Supermercado Super Big         lido: ABOBORA JAPONESA
+   (sem preço)  Assaí Atacadista               lido: ABÓBORA JAPONESA
+   (sem preço)  Supermercado Brandão           lido: ABOBORA JAPONESA
+   (sem preço)  Bevia Atacadista               lido: ABOBORA JAPONESA E
+   (sem preço)  Supermercado Superbom          lido: ABÓBORA JAPONESA
+
+MELAO AMARELO  (diferença R$ 0.00, 0.0%)
+    R$    4.99  Supermercado Super Big         lido: MELAO AMARELO
+   (sem preço)  Assaí Atacadista               lido: MELÃO AMARELO
