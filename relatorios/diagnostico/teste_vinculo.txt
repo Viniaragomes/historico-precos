@@ -1,6 +1,7 @@
-Catálogo de referência: 0 produtos com código de barras e tamanho no nome.
-Big Box: 120 página(s) lida(s) agora, 74 com preço, 0 vinculada(s), 0 preço(s) novo(s). Catálogo da loja: 13413 produtos, 120 já lidos, 0 vinculados. 
-Fort Atacadista: 120 página(s) lida(s) agora, 120 com preço, 0 vinculada(s), 0 preço(s) novo(s). Catálogo da loja: 11908 produtos, 120 já lidos, 0 vinculados. 
+Open Food Facts: 0 produto(s) novo(s) de referência; 0 no total; próxima página: 1.
+Catálogo de referência: 32 produtos com código de barras e tamanho no nome.
+Big Box: 150 página(s) lida(s) agora, 90 com preço, 0 vinculada(s), 0 preço(s) novo(s). Catálogo da loja: 13414 produtos, 150 já lidos, 0 vinculados. 
+Fort Atacadista: 150 página(s) lida(s) agora, 150 com preço, 0 vinculada(s), 0 preço(s) novo(s). Catálogo da loja: 11908 produtos, 150 já lidos, 0 vinculados. 
 
 exemplos vinculados:
 
