@@ -1,0 +1,100 @@
+
+===== https://www.fortatacadista.com.br/promocoes robots: True
+robots.txt do site:
+ User-agent: *
+Disallow: /admin
+Disallow: /minha-conta
+Disallow: /account/*
+Disallow: /painel-do-cliente
+Disallow: /carrinho
+Disallow: /checkout
+Disallow: /login
+Disallow: /pedido
+Disallow: /busca
+Disallow: /search
+Disallow: /embed/
+Disallow: /lojas
+Disallow: /*?*
+Allow: /categorias
+Allow: /receitas
+Allow: /produtos/
+Allow: /listas/
+Allow: /*.css$
+Allow: /*.js$
+
+Sitemap: https://fortatacadista.com.br/sitemap.xml
+
+  script id: main-states
+  estado embutido: window.__TRAFFIC_QUALITY__ em 825
+  estado embutido: window.__CONSENT__ em 1964
+  estado embutido: window.__CONSENT__ em 2901
+  estado embutido: window.__CONSENT__ em 5133
+  estado embutido: window.__CONSENT__ em 5155
+  estado embutido: window.__TRAFFIC_QUALITY__ em 6038
+  estado embutido: window.__TRAFFIC_QUALITY__ em 6068
+  estado embutido: window.__TRAFFIC_QUALITY__ em 6526
+  estado embutido: window.__TRAFFIC_QUALITY__ em 6919
+  estado embutido: window.__TRAFFIC_QUALITY__ em 7290
+  estado embutido: window.__TRAFFIC_QUALITY__ em 7320
+  estado embutido: window.__TRAFFIC_QUALITY__ em 7661
+  estado embutido: window.__TRAFFIC_QUALITY__ em 7691
+  estado embutido: window.__TRAFFIC_QUALITY__ em 8086
+  estado embutido: window.__TRAFFIC_QUALITY__ em 8479
+  estado embutido: window.__BUILD_VERSION__ em 195014
+  estado embutido: window.__ASSETS_BASE__ em 195604
+  scripts inline: 14 maiores: [150503, 3110, 1426, 1118, 1111]
+   trecho:              window.INITIAL_STATE = {"app":{"crmConfig":{"active":true,"activeCashback":false,"activeCoupon":false,"activeEconomizometer":true,"activeRaffles":true,"activeStores":false,"showFirstAccessOption":true,"activeDataCloudEvents":false,"dataCloudAppId":null,"dataCloudEndpoint":null},"addressRegistrationModal":false,"customerAgentAlert":null,"cloudfrontPath":"https:\u002F\u002Fcdn.osuper.co
+   trecho:      (function () {       try {         var verdict = window.__CONSENT__ || { ANALYTICS: false, MARKETING: false }         var marketing = verdict.MARKETING ? 'granted' : 'denied'         var analytics = verdict.ANALYTICS ? 'granted' : 'denied'          window.dataLayer = window.dataLayer || []         window.gtag = window.gtag || function gtag() { window.dataLayer.push(arguments) }          windo
+  chaves de preço no HTML: 0
+  scripts externos: ['https://cdn.osuper.com.br/beta/bundles/modern/bundle-DbsR4sOp.js']
+  hosts de API citados no HTML: ['api.fortatacadista.com.br', 'cdn.osuper.com.br', 'edge.osuper.com.br', 'fonts.googleapis.com', 'osuper-ecommerce-fortatacadista.s3.sa-east-1.amazonaws.com', 'osuper-ecommerce-static.s3.amazonaws.com', 'osuper-ecommerce-static.s3.sa-east-1.amazonaws.com', 'www.osuper.com.br']
+    s://cdn.osuper.com.br/beta/bundles/modern/bundle-DbsR4sOp.js | endpoints: [] | operações: ['AcceptShoppingListInvite', 'AddCouponToCartMutation', 'AddCustomerAddress', 'AddNewsletterMutation', 'AddProductToShoppingLists', 'AddProductsToShoppingList', 'AgreementById', 'AllCategoriesPageQuery', 'CancelOrderMutation', 'CardBrandByBinQuery', 'ChangeCustomerPasswordMutation', 'ChangeCustomerProfilePicture', 'ChangeShoppingListProductQty', 'ChangeShoppingListProductQuantity', 'CopyOrderItemsToCart', 'CopyShoppingListToCustomer', 'CreateShoppingList', 'CreateShoppingListFromCart', 'CreateShoppingListInvitation', 'CreateShoppingListInviteLink', 'CustomerAddProductToExistingOrder', 'CustomerAndStoreAddresses', 'CustomerCartQuery', 'CustomerEmailInUse', 'CustomerNationalRegistryInUse']
+
+===== https://bigboxdelivery.com.br/promocoes robots: True
+robots.txt do site:
+ User-Agent: *
+Allow: /
+Disallow: /finalizar
+Disallow: /perfil/
+Disallow: /next_api/
+Disallow: /auth/
+Disallow: /monitoring
+Disallow: /listas/
+Disallow: /pesquisar
+
+Sitemap: https://bigboxdelivery.com.br/sitemap.xml
+
+  script id: public-env
+  script id: app-version
+  script id: _R_
+  estado embutido: window.__APP_VERSION__ em 6398
+  estado embutido: self.__next_f em 77716
+  estado embutido: self.__next_f em 77730
+  estado embutido: self.__next_f em 77775
+  estado embutido: self.__next_f em 82132
+  estado embutido: self.__next_f em 86491
+  estado embutido: self.__next_f em 90846
+  estado embutido: self.__next_f em 95206
+  estado embutido: self.__next_f em 97486
+  estado embutido: self.__next_f em 103573
+  estado embutido: self.__next_f em 107576
+  estado embutido: window.__APP_VERSION__ em 109480
+  estado embutido: self.__next_f em 110380
+  estado embutido: self.__next_f em 110901
+  estado embutido: self.__next_f em 115916
+  estado embutido: self.__next_f em 116075
+  estado embutido: self.__next_f em 119442
+  estado embutido: self.__next_f em 119494
+  estado embutido: self.__next_f em 121664
+  estado embutido: self.__next_f em 122196
+  estado embutido: self.__next_f em 125313
+  scripts inline: 50 maiores: [6070, 4998, 4343, 4342, 4340]
+   trecho: self.__next_f.push([1,"0:{\"P\":null,\"c\":[\"\",\"promocoes\"],\"q\":\"\",\"i\":false,\"f\":[[[\"\",{\"children\":[\"(loja)\",{\"children\":[\"promocoes\",{\"children\":[\"__PAGE__\",{}]}]},\"$undefined\",\"$undefined\",4]},\"$undefined\",\"$undefined\",24],[[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/chunks/0m-~a2afrnlac.css\",\"prec
+   trecho: self.__next_f.push([1,"3b:[\"$\",\"body\",null,{\"className\":\"poppins_27c1d5ca-module__9rNIbG__variable antialiased\",\"children\":[[\"$\",\"div\",null,{\"hidden\":true,\"dangerouslySetInnerHTML\":{\"__html\":\"\u003c!-- Instabuy Web Store 4.37.5 --\u003e\"}}],[\"$\",\"$L3c\",null,{\"storeData\":{\"store\":{\"id\":\"5a4d173b94e42937b3a6563a\",\"subdomain\":\"bigboxdelivery\",\"custom_domain\":\"
+  chaves de preço no HTML: 0
+  scripts externos: ['/_next/static/chunks/0ab6ja43wer.g.js', '/_next/static/chunks/155bi7ep2xvb5.js', '/_next/static/chunks/0.twyhsiwqr~j.js', '/_next/static/chunks/0l2lwd3p1lb~8.js', '/_next/static/chunks/turbopack-0nqb~7tfqcyqk.js', '/_next/static/chunks/0-it91v_v.vwx.js', '/_next/static/chunks/104_xw-h7odyn.js', '/_next/static/chunks/12-ukw_zf_wf_.js', '/_next/static/chunks/16wvz9iveem3z.js', '/_next/static/chunks/0yj.x3tc78pm-.js', '/_next/static/chunks/0y1e~vv_ve.i4.js', '/_next/static/chunks/11rrk5jb78re2.js', '/_next/static/chunks/15ipionq7smmq.js', '/_next/static/chunks/03kh.g57ptei~.js', '/_next/static/chunks/0hb4-086og6vs.js']
+  hosts de API citados no HTML: ['api-legada.ibecom.com.br', 'api.ibecom.com.br']
+    //bigboxdelivery.com.br/_next/static/chunks/0ab6ja43wer.g.js | endpoints: ['https://nextjs.org/docs/app/api-reference/functions/use-search-params'] | operações: []
+    //bigboxdelivery.com.br/_next/static/chunks/0l2lwd3p1lb~8.js | endpoints: ['https://nextjs.org/docs/messages/next-dynamic-api-wrong-context'] | operações: []
+    //bigboxdelivery.com.br/_next/static/chunks/104_xw-h7odyn.js | endpoints: ['https://nextjs.org/docs/app/api-reference/functions/cookies', 'https://nextjs.org/docs/app/api-reference/functions/headers'] | operações: []
+    //bigboxdelivery.com.br/_next/static/chunks/0yj.x3tc78pm-.js | endpoints: ['https://nextjs.org/docs/messages/sync-dynamic-apis'] | operações: []
