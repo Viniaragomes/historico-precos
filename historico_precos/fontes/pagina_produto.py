@@ -172,9 +172,9 @@ def catalogar_por_nome(nav: Navegador, banco, loja: dict, catalogo, limite: int 
         resumo["bloqueios"] = 0
         resumo["lidas"] += 1
         d = _dados_pagina(html) or {}
-        ean, nota, nome_cat = None, None, None
+        ean, nota, nome_cat, por_codigo = None, None, None, False
         if ean_valido(re.sub(r"\D", "", d.get("gtin") or "")):
-            ean, nota = re.sub(r"\D", "", d["gtin"]), 1.0
+            ean, nota, por_codigo = re.sub(r"\D", "", d["gtin"]), 1.0, True
         elif d.get("nome"):
             v = catalogo.vincular(d["nome"], d.get("marca"))
             # um código de barras só pode valer para um produto da mesma loja: o primeiro vínculo fica
@@ -191,7 +191,7 @@ def catalogar_por_nome(nav: Navegador, banco, loja: dict, catalogo, limite: int 
                 pontos.append(PontoDePreco(
                     ean=ean, preco=d["preco"], data_observada=dia, fonte="pagina-produto", loja=loja["nome"],
                     cidade=loja.get("cidade"), url_origem=url, url_evidencia=url,
-                    metodo="json-ld" if nota == 1.0 else "vinculo-nome", descricao=d.get("nome"),
+                    metodo="json-ld" if por_codigo else "vinculo-nome", descricao=d.get("nome"),
                 ))
     con.commit()
     resumo["precos"] = banco.salvar_precos(pontos)
