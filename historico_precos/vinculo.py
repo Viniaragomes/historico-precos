@@ -34,6 +34,18 @@ VAZIAS = {"de", "da", "do", "das", "dos", "e", "com", "sem", "para", "em", "tipo
           "cx", "caixa", "lata", "garrafa", "pet", "pote", "sache", "bandeja", "fardo", "kg", "g", "gr", "ml", "l", "lt"}
 
 
+# palavras que distinguem variantes: se aparece só de um lado, são produtos diferentes (sabor, ingrediente, versão)
+DISTINTIVAS = set("""
+guarana bacon morango chocolate baunilha limao laranja uva coco abacaxi maracuja banana manga goiaba pessego cereja
+framboesa amora acerola caju melancia melao kiwi limao tangerina mexerica menta hortela canela cafe leite ninho
+frango carne bovina suina peru calabresa presunto queijo cheddar mussarela parmesao requeijao catupiry tomate cebola
+alho ervas pimenta picante apimentado defumado ovo ovos atum sardinha salmao camarao bacalhau
+integral desnatado semidesnatado zero diet light lactose glutem gluten organico sem acucar adocado
+tradicional extra forte suave intenso descafeinado expresso gourmet premium
+original classic classico cappuccino mocha
+""".split()) - {"gourmet", "premium", "original", "classic", "classico", "tradicional"}  # marketing, não variante
+
+
 def normalizar(texto: str | None) -> str:
     sem_acento = unicodedata.normalize("NFKD", texto or "").encode("ascii", "ignore").decode().lower()
     return re.sub(r"[^a-z0-9,.]+", " ", sem_acento.replace(".", " ")).strip()
@@ -98,6 +110,8 @@ class Catalogo:
                 continue  # tamanho diferente: produto diferente
             if marca_tk and marca_cat and not (marca_tk & marca_cat):
                 continue  # marcas diferentes
+            if (tk ^ tk_cat) & DISTINTIVAS:
+                continue  # um lado tem sabor/ingrediente/variante que o outro não tem
             notas.append((semelhanca(tk, tk_cat), ean, nome_cat))
         if not notas:
             return None

@@ -68,3 +68,15 @@ class TestCasosReais(unittest.TestCase):
     def test_casos_certos_continuam(self):
         self.assertEqual(self.cat.vincular("Café Torrado e Moído Tradicional 3 Corações Pacote 500g", "3 Corações").ean, "7896005800010")
         self.assertEqual(self.cat.vincular("Achocolatado em Pó Nescau 370G", "Nescau").ean, "7891000379691")
+
+
+class TestIngredienteAMais(unittest.TestCase):
+    def test_ingrediente_so_de_um_lado_nao_vincula(self):
+        cat = Catalogo([("1", "Sorbet Com Granola Açaí Frooty Pote 200ml", "Frooty"),
+                        ("2", "Linguiça De Frango Com Bacon Perdigão Na Brasa 600g", "Perdigão"),
+                        ("3", "Vinagre Balsâmico Di Modena La Pastina Gourmet Vidro 500ml", "La Pastina"),
+                        ("4", "Bebida Láctea Uht Sabor Chocolate 200ml Italac", "Italac")])
+        self.assertIsNone(cat.vincular("Sorbet com Granola Açaí e Guaraná Frooty Pote 200ml", "Frooty"))
+        self.assertIsNone(cat.vincular("Linguiça de Frango Perdigão Na Brasa 600g", "Perdigão"))
+        self.assertEqual(cat.vincular("Vinagre Balsâmico Di Modena La Pastina Vidro 500ml", "La Pastina").ean, "3")  # 'gourmet' é marketing
+        self.assertEqual(cat.vincular("Bebida Láctea UHT Italakinho Sabor Chocolate 200ml", "Italac").ean, "4")
