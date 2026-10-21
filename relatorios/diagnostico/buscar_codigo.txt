@@ -1,0 +1,4 @@
+Open Food Facts: Produto(ean='7898955519028', nome=None, marca=None, quantidade=None, fonte=None)
+Atacadão: [] [] [{'url': 'https://www.atacadao.com.br/api/checkout/pub/regions?country=BRA&postalCode=70040010', 'status': 429, 'motivo': 'HTTP 429 Too Many Requests', 'trecho': 'Too Many Requests'}]
+Oba Hortifruti: [] [] [{'url': 'https://www.obahortifruti.com.br/api/checkout/pub/regions?country=BRA&postalCode=70040010', 'status': 429, 'motivo': 'HTTP 429 Too Many Requests', 'trecho': 'Too Many Requests'}]
+Mapa de Preços do DF: erro seleção de GTIN não aplicada (Count(DISTINCT cean) = '163175'); consulta cancelada
