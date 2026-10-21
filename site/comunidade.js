@@ -87,6 +87,7 @@ export class ComunidadeLocal {
   async precosInformados(ean) {
     return resumirPrecos((this._ler().precos || []).filter((p) => p.ean === ean));
   }
+  async pedirCodigo() { return { registrado: false }; } // só a comunidade online leva o pedido à coleta
   async sugerirEvidencia({ ean, chave, url, descricao }) {
     const d = this._ler();
     d.evidencias.push({ id: d.proximoId++, ean, chave, url: validarUrl(url), descricao: (descricao || "").slice(0, 500), status: "pendente", nivel: null, criado_em: new Date().toISOString() });
@@ -216,6 +217,13 @@ export class ComunidadeSupabase {
     if (error?.message?.includes("limite")) throw new ErroComunidade("Muitas contribuições em pouco tempo. Tente de novo mais tarde.");
     if (error) throw new ErroComunidade("Não foi possível registrar agora.");
     return { ganho: PONTOS.corrigir };
+  }
+  // pedido de inclusão: anônimo, sem login e sem aceite (só o código de barras)
+  async pedirCodigo(ean) {
+    if (!/^\d{8,14}$/.test(ean)) return { registrado: false };
+    const c = await this._cliente();
+    const { error } = await c.rpc("pedir_codigo", { codigo: ean });
+    return { registrado: !error };
   }
   async precosInformados(ean) {
     const c = await this._cliente();

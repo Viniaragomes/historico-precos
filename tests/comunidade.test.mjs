@@ -100,3 +100,8 @@ test("preço informado: mediana por mercado, nome sem diferença de maiúsculas,
   assert.deepEqual(resumo.map((x) => [x.mercado, x.preco_mediano, x.pessoas, x.ultimo_dia]),
     [["Tatico", 6, 1, "2026-10-21"], ["Dona", 8, 3, "2026-10-21"]]);
 });
+
+test("pedido de código no modo de teste não finge que registrou", async () => {
+  const { ComunidadeLocal } = await import("../site/comunidade.js");
+  assert.deepEqual(await new ComunidadeLocal(memoria()).pedirCodigo("7898955519028"), { registrado: false });
+});

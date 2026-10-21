@@ -37,6 +37,15 @@ jobs:
             echo "Primeira execução: banco novo."
           fi
 
+      - name: Códigos pedidos no app (produtos escaneados que ainda não eram acompanhados)
+        continue-on-error: true
+        run: |
+          python -m historico_precos pedidos --saida pedidos.txt
+          if [ -s pedidos.txt ]; then
+            python -m historico_precos buscar-lista pedidos.txt --sem-wayback | tail -20
+            python -m historico_precos mapa-df precos --arquivo pedidos.txt | tail -20
+          fi
+
       - name: Preços dos produtos acompanhados
         run: |
           LISTA=produtos.txt

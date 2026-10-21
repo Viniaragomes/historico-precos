@@ -144,6 +144,33 @@ begin
 end $$;
 create trigger pontuar_preco_informado after insert on public.precos_informados for each row execute function public.pontuar_preco_informado();
 
+-- pedido de inclusão: quando alguém escaneia um código que o app não conhece. Só o código e a data, sem pessoa.
+create table public.pedidos_codigo (
+  ean text primary key check (ean ~ '^[0-9]{8,14}$'),
+  pedidos integer not null default 1,
+  primeiro_em timestamptz not null default now(),
+  ultimo_em timestamptz not null default now()
+);
+alter table public.pedidos_codigo enable row level security;  -- ninguém lê ou grava direto: só pela função abaixo
+
+create or replace function public.pedir_codigo(codigo text) returns void
+language plpgsql security definer set search_path = public as $$
+begin
+  if codigo !~ '^[0-9]{8,14}$' then raise exception 'código inválido'; end if;
+  if (select count(*) from pedidos_codigo where ultimo_em > now() - interval '1 hour') >= 2000 then
+    raise exception 'limite de pedidos por hora atingido';
+  end if;
+  insert into pedidos_codigo (ean) values (codigo)
+    on conflict (ean) do update set pedidos = pedidos_codigo.pedidos + 1, ultimo_em = now();
+end $$;
+revoke all on function public.pedir_codigo(text) from public;
+grant execute on function public.pedir_codigo(text) to anon, authenticated;
+
+-- a coleta diária lê os códigos pedidos (é público: não identifica ninguém)
+create view public.codigos_pedidos as
+  select ean, pedidos, ultimo_em from public.pedidos_codigo order by ultimo_em desc limit 2000;
+grant select on public.codigos_pedidos to anon, authenticated;
+
 -- ---------- limite de contribuições e pontos ----------
 
 create or replace function public.antes_de_votar() returns trigger

@@ -286,9 +286,13 @@ def precos_por_gtin(motor: Motor, doc: int, gtins: list[str], altura: int = 1000
         n_sel = int(float(str(selecionados).replace(".", "").replace(",", ".")))
     except ValueError:
         n_sel = -1
-    if n_sel < 0 or n_sel > len(gtins):
+    if n_sel < 0:
         motor.chamar(doc, "ClearAll", {"qLockedAlso": False})
-        raise ErroQlik(f"seleção de GTIN não aplicada (Count(DISTINCT cean) = {selecionados!r}); consulta cancelada")
+        raise ErroQlik(f"não deu para conferir a seleção (Count(DISTINCT cean) = {selecionados!r}); consulta cancelada")
+    if n_sel > len(gtins):
+        # nenhum dos códigos existe nas notas: o Qlik ignora a seleção e o total volta inteiro. Não consulta nada.
+        motor.chamar(doc, "ClearAll", {"qLockedAlso": False})
+        return []
     if n_sel == 0:
         motor.chamar(doc, "ClearAll", {"qLockedAlso": False})
         return []

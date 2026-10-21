@@ -423,6 +423,10 @@ def main(argv: list[str] | None = None) -> int:
 
     sub.add_parser("referencia-off", help="baixa a exportação completa do Open Food Facts e guarda os produtos do Brasil (referência do vínculo por nome)")
 
+    pd = sub.add_parser("pedidos", help="lê os códigos que as pessoas escanearam e o app não conhecia (Supabase) e grava a lista")
+    pd.add_argument("--saida", default="pedidos.txt")
+    pd.add_argument("--config", default="site/config.json")
+
     cn = sub.add_parser("catalogo-nome", help="lojas sem código de barras no site: lê páginas de produto em rodízio e vincula pelo nome")
     cn.add_argument("--minutos", type=float, default=60, help="tempo máximo por loja")
     cn.add_argument("--limite", type=int, default=5000, help="teto de páginas por loja")
@@ -569,6 +573,26 @@ def main(argv: list[str] | None = None) -> int:
         banco.con.commit()
         total = banco.con.execute("SELECT COUNT(*) FROM produtos WHERE fonte = 'Open Food Facts'").fetchone()[0]
         print(f"Open Food Facts: {vistos} produto(s) do Brasil na exportação, {novos} novo(s) na referência; {total} no total.")
+        return 0
+    if args.comando == "pedidos":
+        cfg = json.loads(Path(args.config).read_text(encoding="utf-8")).get("comunidade") or {}
+        if not (cfg.get("url") and cfg.get("chave_publica")):
+            print("Comunidade online não configurada (site/config.json): sem pedidos para ler.")
+            Path(args.saida).write_text("", encoding="utf-8")
+            return 0
+        import urllib.request
+
+        req = urllib.request.Request(f"{cfg['url'].rstrip('/')}/rest/v1/codigos_pedidos?select=ean",
+                                     headers={"apikey": cfg["chave_publica"], "Authorization": f"Bearer {cfg['chave_publica']}",
+                                              "User-Agent": nav.user_agent})
+        try:
+            with urllib.request.urlopen(req, timeout=60) as r:
+                eans = [x["ean"] for x in json.loads(r.read())]
+        except Exception as e:
+            print(f"Não deu para ler os pedidos: {e}")
+            eans = []
+        Path(args.saida).write_text("\n".join(eans) + ("\n" if eans else ""), encoding="utf-8")
+        print(f"{len(eans)} código(s) pedido(s) gravado(s) em {args.saida}.")
         return 0
     if args.comando == "catalogo-nome":
         import time

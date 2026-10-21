@@ -180,7 +180,7 @@ class TestPrecosQlik(unittest.TestCase):
 
 
 class TestTravaQlik(unittest.TestCase):
-    def test_selecao_que_nao_pega_cancela(self):
+    def test_codigo_inexistente_devolve_vazio_sem_consultar(self):
         def resp(msg):
             if msg["method"] == "Evaluate":
                 return {"qReturn": "860647"}  # seleção não aplicou: o painel todo
@@ -189,7 +189,6 @@ class TestTravaQlik(unittest.TestCase):
         url, pedidos = servidor_qlik_falso(resp)
         motor = qlik.Motor("app", url=url)
         doc = motor.abrir_app()
-        with self.assertRaisesRegex(qlik.ErroQlik, "não aplicada"):
-            qlik.precos_por_gtin(motor, doc, ["7891"])
+        self.assertEqual(qlik.precos_por_gtin(motor, doc, ["7891"]), [])
         motor.fechar()
         self.assertNotIn("CreateSessionObject", [p.get("method") for p in pedidos[1:]])

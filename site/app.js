@@ -667,6 +667,28 @@ function cartaoPrecosComunidade(ean, nome) {
   return cartao;
 }
 
+// código desconhecido: pede a inclusão (uma vez por aparelho e por dia); a coleta diária procura em todas as fontes
+function cartaoPedido(ean) {
+  const texto = el("p", { class: "sub", style: "margin:0" }, "Registrando o pedido…");
+  const cartao = el("section", { class: "cartao entrar entrar-2" }, el("h2", {}, "Pedido de inclusão"), texto);
+  const chave = `pedido_${ean}_${new Date().toISOString().slice(0, 10)}`;
+  (async () => {
+    const com = await comunidade();
+    let ja = false;
+    try { ja = !!localStorage.getItem(chave); } catch { /* sem armazenamento */ }
+    const r = ja ? { registrado: true } : await com.pedirCodigo(ean).catch(() => ({ registrado: false }));
+    if (r.registrado) {
+      try { localStorage.setItem(chave, "1"); } catch { /* sem armazenamento */ }
+      texto.textContent = "Pedimos a inclusão deste código. A próxima coleta (todo dia, de manhã) procura o produto nas lojas e no Mapa de Preços do DF; se achar, ele passa a ser acompanhado.";
+    } else if (com.modo === "teste") {
+      texto.textContent = "Quando a comunidade online estiver ligada, este código vai entrar sozinho na próxima coleta. Enquanto isso, você pode informar o preço que viu.";
+    } else {
+      texto.textContent = "Não deu para registrar o pedido agora. Tente de novo mais tarde.";
+    }
+  })();
+  return cartao;
+}
+
 function ultimosMercados() {
   try { return JSON.parse(localStorage.getItem("ultimos_mercados") || "[]"); } catch { return []; }
 }
@@ -756,6 +778,7 @@ async function telaNaoAcompanhado(ean, aberto, tabela) {
           el("a", { class: "botao-secundario-neutro", href: `https://world.openfoodfacts.org/cgi/product.pl?type=search_or_add&code=${ean}`,
             target: "_blank", rel: "noopener" }, "Cadastrar no Open Food Facts")),
       cartaoPrecosComunidade(ean, nome),
+      cartaoPedido(ean),
       el("section", { class: "cartao entrar entrar-2" },
         el("button", { class: "botao-escanear-grande botao-marca", type: "button", onclick: abrirLeitor }, icone("escanear"), "Escanear outro produto"))));
 }
