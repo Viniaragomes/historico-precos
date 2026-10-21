@@ -39,6 +39,16 @@ def limpar_nome(texto: str) -> str | None:
     return texto[:120]
 
 
+# a mesma rede com nomes diferentes conforme a fonte (encartesdf x site próprio)
+MESMA_REDE = {"dia a dia atacadista": "Atacadão Dia a Dia", "atacadao dia a dia": "Atacadão Dia a Dia"}
+
+
+def nome_da_rede(mercado: str) -> str:
+    from .vinculo import normalizar
+
+    return MESMA_REDE.get(normalizar(mercado), mercado)
+
+
 @dataclass
 class Trecho:
     texto: str
@@ -289,7 +299,7 @@ def ler_encartes(nav: Navegador, dias: int = 4, hoje: date | None = None, max_im
         for n, e in enumerate(lista):
             if e.validade_fim and e.validade_fim < hoje.isoformat():
                 continue
-            lido = EncarteLido(e.mercado, e.post, e.publicado, e.validade_fim, e.imagens, e.pdf, e.titulo)
+            lido = EncarteLido(nome_da_rede(e.mercado), e.post, e.publicado, e.validade_fim, e.imagens, e.pdf, e.titulo)
             if e.pdf and lidas < max_imagens:
                 dados = nav.get_bytes(e.pdf)
                 if dados:

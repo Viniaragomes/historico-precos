@@ -113,6 +113,12 @@ class TestComparar(unittest.TestCase):
         self.assertEqual(c["diferenca"], 0)
 
 
+class TestRede(unittest.TestCase):
+    def test_mesma_rede_com_outro_nome(self):
+        self.assertEqual(encartes_ocr.nome_da_rede("Dia a Dia Atacadista"), "Atacadão Dia a Dia")
+        self.assertEqual(encartes_ocr.nome_da_rede("Supermercado Tatico"), "Supermercado Tatico")
+
+
 class TestComandoEncartes(unittest.TestCase):
     def test_exporta_e_imprime_com_nome_sem_preco(self):
         import io
