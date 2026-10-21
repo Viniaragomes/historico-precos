@@ -109,8 +109,8 @@ def manchas_coloridas(img: Image.Image, passo: int = 8, min_celulas: int = 40) -
                         if 0 <= c < largura and 0 <= d < altura and cor[c][d] and not visto[c][d]:
                             visto[c][d] = True
                             pilha.append((c, d))
-                # etiqueta de preço: nem minúscula nem do tamanho da página
-                if min_celulas <= len(xs) <= largura * altura * 0.15:
+                # etiqueta de preço: nem minúscula nem faixa ou banner (até 8% da página)
+                if min_celulas <= len(xs) <= largura * altura * 0.08:
                     caixas.append((min(xs) * passo, min(ys) * passo, (max(xs) + 1) * passo, (max(ys) + 1) * passo))
     return caixas
 

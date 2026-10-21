@@ -245,7 +245,15 @@ def palavras_do_tsv(tsv: str) -> list[tuple]:
 def ocr_linhas(caminho: Path, estilizados: bool = True) -> list[dict]:
     """Linhas lidas pelo Tesseract + preços estilizados (centavos pequenos no alto, letra branca em etiqueta colorida)
     lidos à parte. A linha original que caiu em cima de um preço estilizado ("14º") sai, para não virar nome."""
-    tsv = subprocess.run(["tesseract", str(caminho), "stdout", "-l", "por", "--psm", "11", "tsv"],
+    # leitura principal em tons de cinza (é como o Tesseract rende mais); a imagem colorida fica para achar etiquetas
+    cinza = caminho.with_name(caminho.stem + "-cinza.png")
+    try:
+        from PIL import Image
+
+        Image.open(caminho).convert("L").save(cinza)
+    except Exception:
+        cinza = caminho
+    tsv = subprocess.run(["tesseract", str(cinza), "stdout", "-l", "por", "--psm", "11", "tsv"],
                          capture_output=True, text=True, timeout=120).stdout
     linhas = linhas_do_tsv(tsv)
     if not estilizados:
