@@ -1,0 +1,13 @@
+git show: 0 1183744 bytes
+produtos 60
+precos 37
+produtos_loja no such table: produtos_loja
+fontes de produtos: [(None, 60)]
+vocabulário: 60 ['act', 'acucar', 'agulhinha', 'arroz', 'biscoito', 'bulnez', 'camil', 'carioca', 'com', 'condensado', 'cracker', 'cream', 'dupla', 'espaguete', 'especial', 'farinha', 'feijao', 'floriani', 'folha', 'ftaq', 'higienico', 'integral', 'italac', 'kicaldo', 'lactose', 'leite', 'leve', 'liane', 'macarrao', 'manteiga']
+posta sesaos False
+asa alma ad False
+Dove origina False
+CLUBE NENE es False
+Leite Longa Vida Piracanjuba False
+TOMATE GRAPE False
+BANANA NANICA False
