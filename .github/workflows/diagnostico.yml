@@ -27,6 +27,11 @@ jobs:
         run: |
           pip install -q playwright==1.48.0
           python -m playwright install --with-deps chromium > /dev/null
+      - name: Leitor de texto em imagem (só para scripts de encartes)
+        if: contains(inputs.script, 'encartes')
+        run: |
+          sudo apt-get install -y -qq tesseract-ocr tesseract-ocr-por > /dev/null
+          pip install -q pillow
       - name: Rodar
         env:
           SCRIPT: ${{ inputs.script }}

@@ -3,7 +3,7 @@ import { calcular, categoria } from "./impostos.js";
 import { confiancaPreco, nivelPorPontos, precoSugerido, utilidade, chavePreco, chaveCausa, PONTOS, NIVEIS as NIVEIS_COMUNIDADE } from "./confianca.js";
 import { criarComunidade, consentimento, ErroComunidade, TIPOS_REPORTE } from "./comunidade.js";
 
-const VERSAO_APP = "v21"; // igual à VERSAO do sw.js
+const VERSAO_APP = "v22"; // igual à VERSAO do sw.js
 
 const conteudo = document.getElementById("conteudo");
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
@@ -491,6 +491,7 @@ async function telaInicio() {
             el("span", { class: "valor" }, r.preco != null ? brl.format(r.preco) : "—"),
             el("span", { class: "loja" }, r.loja ? `em ${r.loja}` : "sem preço recente")))),
       ] : null,
+      secaoEncartes(),
       secaoAtacado(),
       el("div", { class: "titulo-secao entrar entrar-3" }, el("h2", {}, "Como funciona")),
       el("section", { class: "cartao passos entrar entrar-3" },
@@ -552,6 +553,108 @@ function secaoAtacado() {
         "A CEASA-DF quase não informa a Conab; Goiânia é a principal origem do hortifrúti do DF. Fonte: ",
         el("a", { href: c.evidencia, target: "_blank", rel: "noopener" }, "Conab, Boletim Hortigranjeiro"), ".")));
   }).catch(() => {});
+  return secao;
+}
+
+// ---------- encartes do dia (tabloides publicados pelos mercados; texto lido por Tesseract, pode errar) ----------
+
+let _encartes;
+function encartes() {
+  _encartes ??= carregarJSON("dados/encartes.json").then((d) => {
+    const hoje = new Date().toISOString().slice(0, 10);
+    return { ...d, encartes: (d?.encartes || []).filter((e) => !e.validade_fim || e.validade_fim >= hoje) };
+  }).catch(() => ({ encartes: [] }));
+  return _encartes;
+}
+
+// palavras de variante (mesma lista do vínculo por nome): se só um lado tem, é outro produto
+const VARIANTES = new Set("abacaxi acerola acucar adocado alho amora apimentado atum bacalhau bacon banana baunilha bovina cafe caju calabresa camarao canela cappuccino carne catupiry cebola cereja cheddar chocolate coco defumado descafeinado desnatado diet ervas expresso extra forte framboesa frango glutem gluten goiaba guarana hortela integral intenso kiwi lactose laranja leite light limao manga maracuja melancia melao menta mexerica mocha morango mussarela ninho organico ovo ovos parmesao peru pessego picante pimenta presunto queijo requeijao salmao sardinha sem semidesnatado suave suina tangerina tomate uva zero".split(" "));
+
+// trechos de encarte que parecem o produto: pelo menos 2 palavras em comum e tamanho igual quando os dois informam
+function trechosParecidos(lista, nome, limite = 8) {
+  const alvo = palavras(nome);
+  if (alvo.size < 2) return [];
+  const tam = tamanho(nome);
+  const achados = [];
+  for (const e of lista) {
+    for (const t of e.trechos || []) {
+      const w = palavras(t.t);
+      const comuns = [...alvo].filter((x) => w.has(x)).length;
+      if (comuns < 2) continue;
+      if ([...alvo].some((x) => VARIANTES.has(x) && !w.has(x)) || [...w].some((x) => VARIANTES.has(x) && !alvo.has(x))) continue;
+      const tt = tamanho(t.t);
+      if (tam && tt && (tt[1] !== tam[1] || Math.abs(tt[0] - tam[0]) > 1e-6)) continue;
+      const nota = comuns / Math.min(alvo.size, w.size || 1) + (tam && tt ? 0.3 : 0);
+      if (nota >= 0.6) achados.push({ e, t, nota });
+    }
+  }
+  return achados.sort((a, b) => b.nota - a.nota || a.t.p - b.t.p).slice(0, limite);
+}
+
+function linhaEncarte({ e, t }) {
+  return el("div", { class: "loja-linha" },
+    el("div", { class: "meio" },
+      el("div", { class: "nome" }, e.mercado),
+      el("div", { class: "detalhe" }, `lido no encarte: “${t.t}”`, el("br"),
+        e.validade_fim ? `válido até ${dataBR(e.validade_fim)} · ` : `publicado em ${dataBR(e.publicado)} · `,
+        el("a", { href: e.post, target: "_blank", rel: "noopener" }, "ver encarte"))),
+    el("div", { class: "direita" }, el("div", { class: "valor" }, brl.format(t.p))));
+}
+
+const AVISO_ENCARTE = "Texto e preço lidos automaticamente da imagem do encarte: podem ter erro. Confira no encarte antes de ir ao mercado.";
+
+function cartaoEncartes(...nomes) {
+  const cartao = el("section", { class: "cartao entrar entrar-2", hidden: true });
+  encartes().then((d) => {
+    const vistos = new Set();
+    const achados = nomes.filter(Boolean).flatMap((n) => trechosParecidos(d.encartes, n))
+      .filter((a) => { const k = `${a.e.post}|${a.t.t}|${a.t.p}`; return !vistos.has(k) && vistos.add(k); }).slice(0, 8);
+    if (!achados.length) return;
+    cartao.hidden = false;
+    cartao.replaceChildren(el("h2", {}, "Nos encartes de hoje"),
+      el("p", { class: "sub" }, "Ofertas parecidas com este produto nos tabloides vigentes dos mercados do DF."),
+      ...achados.map(linhaEncarte),
+      el("p", { class: "minusculo", style: "margin:10px 0 0" }, AVISO_ENCARTE, " Fonte: ",
+        el("a", { href: "https://encartesdf.com.br/", target: "_blank", rel: "noopener" }, "encartesdf.com.br"), "."));
+  });
+  return cartao;
+}
+
+function secaoEncartes() {
+  const secao = el("div", { hidden: true });
+  encartes().then((d) => {
+    if (!d.encartes.length) return;
+    const resultado = el("div");
+    const campo = el("input", { type: "search", class: "campo-texto", placeholder: "Procurar nos encartes (ex.: café 500g)",
+      "aria-label": "Procurar produto nos encartes", enterkeyhint: "search" });
+    const procurar = () => {
+      const q = campo.value.trim();
+      if (q.length < 3) { resultado.replaceChildren(); return; }
+      const alvo = palavras(q);
+      const achados = alvo.size >= 2 ? trechosParecidos(d.encartes, q, 20) : d.encartes.flatMap((e) =>
+        (e.trechos || []).filter((t) => [...palavras(t.t)].some((w) => alvo.has(w))).map((t) => ({ e, t })))
+        .sort((a, b) => a.t.p - b.t.p).slice(0, 20);
+      resultado.replaceChildren(achados.length ? el("div", {}, ...achados.map(linhaEncarte))
+        : el("p", { class: "sub" }, "Nada parecido nos encartes lidos. O encarte pode ter o produto com outro nome: abra-o abaixo."));
+    };
+    campo.addEventListener("input", procurar);
+    const porMercado = [...d.encartes].sort((a, b) => a.mercado.localeCompare(b.mercado, "pt-BR"));
+    secao.hidden = false;
+    secao.replaceChildren(
+      el("div", { class: "titulo-secao entrar entrar-3" }, el("h2", {}, "Encartes do dia")),
+      el("section", { class: "cartao entrar entrar-3" },
+        el("p", { class: "sub" }, `${d.encartes.length} ${d.encartes.length === 1 ? "encarte vigente" : "encartes vigentes"} de mercados do DF.`),
+        campo, resultado,
+        el("details", { class: "expansivel" },
+          el("summary", {}, "Ver todos os encartes", icone("seta")),
+          el("ul", { class: "lista lista-atacado" }, porMercado.map((e) => el("li", { class: "linha-atacado" },
+            el("span", { class: "nome" }, e.mercado,
+              el("small", {}, ` ${e.validade_fim ? `até ${dataBR(e.validade_fim)}` : `publicado ${dataBR(e.publicado)}`}`,
+                e.trechos?.length ? ` · ${e.trechos.length} preços lidos` : "")),
+            el("a", { href: e.post, target: "_blank", rel: "noopener" }, "abrir"), el("span", {}))))),
+        el("p", { class: "minusculo", style: "margin:10px 0 0" }, AVISO_ENCARTE, " Fonte: ",
+          el("a", { href: "https://encartesdf.com.br/", target: "_blank", rel: "noopener" }, "encartesdf.com.br"), ".")));
+  });
   return secao;
 }
 
@@ -672,6 +775,7 @@ async function telaProduto(ean) {
   conteudo.replaceChildren(heroProduto(p, aberto?.foto), el("div", { class: "folha" },
     cartaoOndeComprar(contexto),
     cartaoPrecosComunidade(ean, p.nome),
+    cartaoEncartes(p.nome, aberto?.nome),
     cartaoHistorico(p),
     cartaoCompraDF(p),
     cartaoCampo(p, tabela),
@@ -903,7 +1007,7 @@ function cartaoDigiteNome(ean, tabela) {
     const nome = campo.value.trim();
     if (nome.length < 3) return;
     try { localStorage.setItem(`nome_${ean}`, nome); } catch { /* sem armazenamento */ }
-    resultado.replaceChildren(cartaoParecidos(nome, ean), cartaoImpostos(tabela, [nome], null));
+    resultado.replaceChildren(cartaoEncartes(nome), cartaoParecidos(nome, ean), cartaoImpostos(tabela, [nome], null));
   };
   try { campo.value = localStorage.getItem(`nome_${ean}`) || ""; } catch { /* sem armazenamento */ }
   const cartao = el("section", { class: "cartao entrar entrar-2" },
@@ -939,6 +1043,7 @@ async function telaNaoAcompanhado(ean, aberto, tabela) {
     el("div", { class: "folha" },
       cartaoBuscaNaHora(ean),
       cartaoPrecosComunidade(ean, nome),
+      nome ? cartaoEncartes(nome, nomeLegivel(dic?.n)) : null,
       dic ? cartaoCompraDicionario(dic) : null,
       nome ? cartaoParecidos(nome, ean) : null,
       nome ? cartaoImpostos(tabela, [nome], null) : aberto?.falhou ? el("section", { class: "cartao entrar" },

@@ -470,6 +470,11 @@ def main(argv: list[str] | None = None) -> int:
     cb.add_argument("--anos", default=str(date.today().year), help="pastas anuais a ler, separados por vírgula")
     cb.add_argument("--exportar", help="grava as séries em JSON para o app (ex.: site/dados/conab.json)")
 
+    ed = sub.add_parser("encartes-dia", help="encartes vigentes dos mercados do DF lidos com Tesseract (grátis, sem IA paga)")
+    ed.add_argument("--dias", type=int, default=4, help="encartes publicados nestes últimos dias")
+    ed.add_argument("--max-imagens", type=int, default=120)
+    ed.add_argument("--exportar", help="grava em JSON para o app (ex.: site/dados/encartes.json)")
+
     ci = sub.add_parser("conferencia-impostos", help="gera o checklist de conferência das leis de impostos")
     ci.add_argument("--saida", default="docs/conferencia-impostos.md")
 
@@ -503,6 +508,26 @@ def main(argv: list[str] | None = None) -> int:
     banco = Banco(args.banco)
     nav = Navegador(intervalo=args.intervalo)
 
+    if args.comando == "encartes-dia":
+        from . import encartes_ocr
+        from .modelo import agora_iso
+
+        if not encartes_ocr.tesseract_disponivel():
+            print("Tesseract não instalado (apt install tesseract-ocr tesseract-ocr-por): só a lista de encartes sai.")
+        encartes = encartes_ocr.ler_encartes(nav, dias=args.dias, max_imagens=args.max_imagens)
+        for e in encartes:
+            print(f"  {e.mercado:<28} até {e.validade_fim or '?':<10} {len(e.imagens):>2} imagem(ns) {len(e.trechos):>4} trecho(s) com preço")
+            for t in e.trechos[:3]:
+                print(f"      R$ {t.preco:>7.2f}  {t.texto}")
+        print(f"{len(encartes)} encarte(s) vigente(s), {sum(len(e.trechos) for e in encartes)} trecho(s) com preço.")
+        if args.exportar:
+            Path(args.exportar).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.exportar).write_text(json.dumps({
+                "fonte": "encartesdf.com.br (encartes publicados pelos mercados), texto lido por Tesseract",
+                "aviso": "Leitura automática da imagem: pode errar. Confira sempre no encarte.",
+                "atualizado_em": agora_iso(), "encartes": encartes_ocr.para_json(encartes)}, ensure_ascii=False), encoding="utf-8")
+            print(f"Exportado em {args.exportar}")
+        return 0
     if args.comando == "conab":
         from .fontes import conab_prohort
         from .modelo import agora_iso

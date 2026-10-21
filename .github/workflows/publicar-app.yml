@@ -42,6 +42,13 @@ jobs:
           pip install -q -r requirements-ceasa.txt
           python -m historico_precos ceasa-df --exportar site/dados/ceasa-df.json | tail -5
           python -m historico_precos conab --exportar site/dados/conab.json | tail -5
+      - name: Encartes do dia (mercados do DF, leitura grátis com Tesseract)
+        continue-on-error: true
+        timeout-minutes: 25
+        run: |
+          sudo apt-get install -y -qq tesseract-ocr tesseract-ocr-por > /dev/null
+          pip install -q pillow
+          python -m historico_precos encartes-dia --exportar site/dados/encartes.json | tail -40
       - name: Dicionário de códigos para o app (nome e preço de compra de qualquer código das notas do DF)
         continue-on-error: true
         run: |
