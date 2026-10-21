@@ -1,4 +1,4 @@
-formato: dict ['count', 'next', 'previous', 'results']
+total informado pela API: 12 | páginas lidas: 1
 
 == /api/v1/indicador/: 11 itens
   [10] Meio-Ambiente | ISU DF - Consumo de água | period. 4 | atualizado 2024-01-01
@@ -12,7 +12,7 @@ formato: dict ['count', 'next', 'previous', 'results']
   [16] Social | PDAD Ampliada 2024 - Média de Idade por RA | period. 4 | atualizado 2024-01-01
   [17] Social | PDAD Ampliada 2024 - Número de Domicílios por RA | period. 4 | atualizado 2024-01-01
   [2] Social | PDAD Ampliada 2024 - População por RA | period. 4 | atualizado 2024-01-01
-formato: dict ['count', 'next', 'previous', 'results']
+total informado pela API: 14 | páginas lidas: 1
 
 == /api/v1/painel/: 14 itens
   [11] Meio Ambiente e Território | IBEU-DF | period.  | atualizado 2026-03-19
