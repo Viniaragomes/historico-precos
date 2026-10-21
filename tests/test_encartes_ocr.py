@@ -74,6 +74,21 @@ class TestVocabulario(unittest.TestCase):
                          ["Filé de Peito de Frango Seara Congelado Pacote 1kg", "Uva Thompson Bandeja 500g"])
 
 
+class TestPlausivel(unittest.TestCase):
+    def test_precos_impossiveis(self):
+        T = encartes_ocr.Trecho
+        self.assertFalse(encartes_ocr.plausivel(T("Banana Prata", 192.99)))
+        self.assertFalse(encartes_ocr.plausivel(T("PÉ DE FRANGO RESFRIADO COPACOL", 169.90)))
+        self.assertTrue(encartes_ocr.plausivel(T("CESTA BÁSICA", 150.0)))
+        self.assertTrue(encartes_ocr.plausivel(T("ARROZ CAMIL 5kg", 24.9)))
+        self.assertTrue(encartes_ocr.plausivel(T("Whisky Fardo 12 un", 300.0)))
+
+    def test_propaganda_nao_e_produto(self):
+        vocab = {"preco", "baixo", "todo", "vila", "jose", "picanha", "bovina"}
+        self.assertFalse(encartes_ocr.conhecido("é preço baixo todo", vocab))
+        self.assertTrue(encartes_ocr.conhecido("Picanha Bovina", vocab))
+
+
 class NavFalso:
     def __init__(self, json=None, texto=None):
         self.json, self.texto = json, texto

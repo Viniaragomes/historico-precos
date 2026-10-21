@@ -127,6 +127,29 @@ cereja resfriado resfriada congelado congelada vacuo peca inteiro inteira fatiad
 """.split())
 
 
+# propaganda e endereço: aparecem em todo encarte, mas não são produto
+NAO_PRODUTO = set("""
+preco precos baixo todo todos toda voce precisa oferta ofertas loja lojas modulo lote quadra valido valida validas
+validos estoque estoques enquanto durarem cliente clientes clube exclusivo exclusiva sempre aproveite imperdivel
+desconto descontos cada leve pague somente apenas partir vila setor avenida rua shopping conjunto norte centro
+endereco telefone whatsapp delivery entrega site aplicativo cartao pagamento parcela parcelas dias semana
+""".split())
+HORTIFRUTI = set("""banana maca laranja limao tomate batata cebola alho cenoura beterraba abobora abobrinha chuchu couve
+alface repolho pepino pimentao mamao melao melancia abacaxi manga uva goiaba tangerina mexerica pera mandioca""".split())
+
+
+def plausivel(t: Trecho) -> bool:
+    """Preço lido de imagem que não pode ser verdade: hortifrúti acima de R$ 30, qualquer item acima de R$ 100 sem
+    indicar volume (fardo, caixa, kit, cesta, 5 kg ou mais). Quase sempre é centavo colado no real ("1,99" + "2")."""
+    from .vinculo import normalizar
+
+    nome = normalizar(t.texto)
+    if HORTIFRUTI & set(nome.split()) and t.preco > 30:
+        return False
+    volume = re.search(r"fardo|caixa|\bcx\b|\bkit\b|cesta|\b([5-9]|\d{2,})\s*(kg|l|litros?)\b|com \d+|\d+\s*un", nome)
+    return t.preco <= 100 or bool(volume)
+
+
 def vocabulario(*cons, minimo: int = 20) -> set[str]:
     """Palavras (sem acento, 4+ letras) dos nomes de produtos que já conhecemos: catálogos das lojas, Open Food Facts,
     descrições de preços e o dicionário de códigos das notas fiscais do DF. Serve para descartar leitura de imagem que
@@ -154,7 +177,7 @@ def conhecido(texto: str, vocab: set[str]) -> bool:
     from .vinculo import normalizar
 
     ws = re.findall(r"[a-z]{4,}", normalizar(texto))
-    return bool(ws) and sum(w in vocab for w in ws) / len(ws) >= 0.6
+    return bool(ws) and sum(w in vocab and w not in NAO_PRODUTO for w in ws) / len(ws) >= 0.6
 
 
 def abrir_dicionario(caminho: str | Path):
@@ -243,7 +266,7 @@ def paginas_do_pdf(caminho: Path, max_paginas: int = 8) -> list[Path]:
 
 
 def _ler_imagem(lido: EncarteLido, linhas: list[dict], vocab: set[str] | None, filtrar: bool) -> None:
-    lido.trechos += [t for t in trechos_das_linhas(linhas) if not filtrar or conhecido(t.texto, vocab)]
+    lido.trechos += [t for t in trechos_das_linhas(linhas) if plausivel(t) and (not filtrar or conhecido(t.texto, vocab))]
     if filtrar:  # sem vocabulário, nome sem preço seria mais lixo que informação
         com_preco = {t.texto for t in lido.trechos}
         lido.nomes += [n for n in nomes_das_linhas(linhas, vocab) if n not in com_preco and n not in lido.nomes][:300]
