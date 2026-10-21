@@ -42,7 +42,7 @@ jobs:
           python -m historico_precos conab --exportar site/dados/conab.json | tail -5
       - name: Encartes do dia (mercados do DF, leitura grátis com Tesseract)
         continue-on-error: true
-        timeout-minutes: 25
+        timeout-minutes: 40
         run: |
           sudo apt-get install -y -qq tesseract-ocr tesseract-ocr-por poppler-utils > /dev/null
           pip install -q pillow
