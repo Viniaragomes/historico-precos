@@ -1,19 +1,21 @@
-"""Confere o app publicado: arquivos, quantos produtos, quantos com preço e exemplos."""
+"""Confere o app publicado: produtos, dicionário de códigos e alguns códigos testados no celular."""
 
 import json
 import urllib.request
 
 BASE = "https://viniaragomes.github.io/historico-precos/"
-for caminho in ["", "sw.js", "dados/ceasa-df.json", "dados/conab.json"]:
+
+
+def pegar(c):
+    with urllib.request.urlopen(BASE + c, timeout=30) as r:
+        return json.loads(r.read())
+
+
+ind = pegar("dados/indice.json")
+print("produtos com preço:", sum(1 for p in ind["produtos"] if p.get("menor_preco")), "de", len(ind["produtos"]))
+print("dicionário:", pegar("dados/codigos/_sobre.json"))
+for ean in ["7500435172561", "7896006716112", "7898955519028"]:
     try:
-        with urllib.request.urlopen(BASE + caminho, timeout=30) as r:
-            print(r.status, caminho or "/", len(r.read()), "bytes")
+        print(ean, "->", pegar(f"dados/codigos/{ean[:6]}.json").get(ean))
     except Exception as e:
-        print("ERRO", caminho, e)
-with urllib.request.urlopen(BASE + "dados/indice.json", timeout=30) as r:
-    indice = json.loads(r.read())
-prods = indice["produtos"]
-com_preco = [p for p in prods if p.get("menor_preco")]
-print(f"\nindice.json: {len(prods)} produtos, {len(com_preco)} com preço recente, {sum(1 for p in prods if p.get('compra_df'))} com preço de compra no DF")
-for p in prods[:80]:
-    print(f"  {p['ean']} {str(p.get('nome'))[:45]:<45} {p.get('menor_preco')} {p.get('loja') or ''} lojas={p.get('lojas')}")
+        print(ean, "-> arquivo do prefixo não existe:", e)
