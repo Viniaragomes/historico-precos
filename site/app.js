@@ -3,6 +3,8 @@ import { calcular, categoria } from "./impostos.js";
 import { confiancaPreco, nivelPorPontos, precoSugerido, utilidade, chavePreco, chaveCausa, PONTOS, NIVEIS as NIVEIS_COMUNIDADE } from "./confianca.js";
 import { criarComunidade, consentimento, ErroComunidade, TIPOS_REPORTE } from "./comunidade.js";
 
+const VERSAO_APP = "v21"; // igual à VERSAO do sw.js
+
 const conteudo = document.getElementById("conteudo");
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
 const pct = (v, sinal = true) => `${sinal && v > 0 ? "+" : ""}${v.toFixed(1).replace(".", ",")}%`;
@@ -397,8 +399,18 @@ async function ligarCamera(tela, dica) {
       dica.textContent = "Este QR code não é de um cupom fiscal do DF.";
       return false;
     }
+    // só aceita depois de ler o mesmo código duas vezes seguidas: evita leitura parcial ou errada
+    const limpo = String(codigo).replace(/\D/g, "");
+    const agora = Date.now();
+    if (limpo !== ultimaLeitura.codigo || agora - ultimaLeitura.em > 2000) {
+      ultimaLeitura.codigo = limpo;
+      ultimaLeitura.em = agora;
+      dica.textContent = "Segure firme…";
+      return false;
+    }
     return irParaCodigo(codigo, () => { dica.textContent = "Não consegui ler direito. Aproxime um pouco."; });
   };
+  const ultimaLeitura = { codigo: null, em: 0 };
   try {
     if (nativo) await cameraNativa(tela, formatos, lido);
     else await cameraAlternativa(lido);
@@ -489,7 +501,7 @@ async function telaInicio() {
         el("div", { class: "titulo-secao entrar entrar-4" }, el("h2", {}, "Produtos acompanhados"), el("a", { href: "#/produtos" }, "Ver todos")),
         el("section", { class: "cartao entrar entrar-4" }, listaProdutos(produtos.slice(0, 5))),
       ] : null,
-      el("p", { class: "rodape-nota" }, "Preços coletados de fontes públicas. A câmera funciona só no seu aparelho.")));
+      el("p", { class: "rodape-nota" }, "Preços coletados de fontes públicas. A câmera funciona só no seu aparelho.", el("br"), `Versão ${VERSAO_APP}`)));
 }
 
 // atacado de hortifrúti da CEASA-DF: preço mais comum do dia, R$/kg (carrega depois, sem travar a tela)
