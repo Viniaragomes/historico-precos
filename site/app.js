@@ -1520,5 +1520,11 @@ window.addEventListener("hashchange", rotear);
 rotear();
 
 if ("serviceWorker" in navigator && location.protocol !== "file:") {
-  navigator.serviceWorker.register("sw.js").catch(() => {});
+  // versão nova do app: recarrega uma vez para já usar a nova (sem precisar fechar e abrir)
+  const tinhaControle = !!navigator.serviceWorker.controller;
+  let recarregou = false;
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    if (tinhaControle && !recarregou) { recarregou = true; location.reload(); }
+  });
+  navigator.serviceWorker.register("sw.js", { updateViaCache: "none" }).then((r) => r.update()).catch(() => {});
 }
