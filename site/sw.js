@@ -1,5 +1,5 @@
 // Guarda o app para abrir sem internet. Dados: tenta a rede primeiro e usa a cópia salva se estiver offline.
-const VERSAO = "v12";
+const VERSAO = "v13";
 const APP = ["./", "index.html", "app.css", "app.js", "impostos.js", "impostos.json", "cepea.json", "confianca.js", "comunidade.js", "legal/termos.html", "legal/privacidade.html", "manifest.webmanifest", "icone.svg", "icone-192.png", "icone-512.png"];
 
 self.addEventListener("install", (ev) => {

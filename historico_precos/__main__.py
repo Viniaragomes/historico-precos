@@ -27,7 +27,7 @@ from .agente import AgenteHistorico, Relatorio, detectar_mudancas
 from .armazenamento import Banco
 from .causas.analise import AgenteCausas, carregar_categorias
 from .comparativo import comparar
-from .exportar import exportar
+from .exportar import exportar as exportar_app
 from .qualidade import avaliar as avaliar_qualidade
 from .fontes import vtex
 from .causas.series import normalizar
@@ -578,7 +578,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     if args.comando == "exportar":
         causas = None if args.sem_causas else AgenteCausas(nav, banco, usar_noticias=args.com_noticias)
-        n = exportar(banco, Path(args.saida), causas)
+        n = exportar_app(banco, Path(args.saida), causas)
         print(f"{n} produto(s) exportado(s) para {args.saida}")
         return 0
     if args.comando == "viabilidade":

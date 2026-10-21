@@ -78,3 +78,30 @@ class TestExportarCompraDF(unittest.TestCase):
             self.assertEqual(dado["compra_df"]["serie"][0]["mediana"], 18.5)
             self.assertIn("Não é o preço da prateleira", dado["compra_df"]["aviso"])
             banco.con.close()
+
+
+class TestComandoExportar(unittest.TestCase):
+    """Roda o comando de verdade (python -m historico_precos exportar), como a coleta diária faz."""
+
+    def test_comando(self):
+        import subprocess
+        import sys
+        from pathlib import Path
+
+        from historico_precos.armazenamento import Banco
+        from historico_precos.mapa_df import qlik
+
+        with tempfile.TemporaryDirectory() as d:
+            banco = Banco(f"{d}/t.db")
+            banco.salvar_produto(Produto("7891910030378", nome="Café União 500g"))
+            banco.salvar_precos([PontoDePreco(ean="7891910030378", preco=24.9, data_observada="2026-10-20", fonte="vtex",
+                                              loja="Atacadão", url_origem="u", url_evidencia="e", metodo="m")])
+            qlik.salvar(banco.con, [{"ean": "7896005800027", "data": "2026-10-15", "unidade": "UN", "mediana": 12.0, "media": 12.0,
+                                     "minimo": 11.0, "maximo": 13.0, "quantidade": 10.0, "itens": 3, "descricao": "CAFE 3C"}])
+            banco.con.close()
+            raiz = Path(__file__).resolve().parents[1]
+            r = subprocess.run([sys.executable, "-m", "historico_precos", "--banco", f"{d}/t.db", "exportar", "--saida", f"{d}/dados",
+                                "--sem-causas"], cwd=raiz, capture_output=True, text=True, timeout=120)
+            self.assertEqual(r.returncode, 0, r.stderr)
+            indice = json.loads(Path(f"{d}/dados/indice.json").read_text())
+            self.assertEqual(sorted(p["ean"] for p in indice["produtos"]), ["7891910030378", "7896005800027"])

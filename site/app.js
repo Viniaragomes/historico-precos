@@ -264,20 +264,32 @@ async function impostos() {
 
 // nome e foto pela base aberta Open Food Facts (consulta feita pelo próprio aparelho)
 const cacheOFF = new Map();
+// consulta o Open Food Facts. Devolve o produto, {naoEncontrado: true} ou {falhou: true} (rede lenta/sem internet).
+// Falha não fica guardada: na próxima vez tenta de novo.
 function produtoAberto(ean) {
   if (!cacheOFF.has(ean)) {
     const controle = new AbortController();
-    setTimeout(() => controle.abort(), 5000);
-    cacheOFF.set(ean, fetch(`https://world.openfoodfacts.org/api/v2/product/${ean}.json?fields=product_name,product_name_pt,brands,quantity,image_front_small_url,image_front_url`,
+    const prazo = setTimeout(() => controle.abort(), 10000);
+    const nomeBom = (t) => (t && (t.match(/\p{L}/gu) || []).length >= 3 ? t.trim() : null);
+    const consulta = fetch(`https://world.openfoodfacts.org/api/v2/product/${ean}.json?fields=product_name,product_name_pt,brands,quantity,image_front_small_url,image_front_url`,
       { signal: controle.signal })
-      .then((r) => (r.ok ? r.json() : null))
-      .then((d) => (d && d.status === 1 ? {
-        nome: d.product.product_name_pt || d.product.product_name || null,
-        marca: d.product.brands || null,
-        quantidade: d.product.quantity || null,
-        foto: d.product.image_front_small_url || d.product.image_front_url || null,
-      } : null))
-      .catch(() => null));
+      .then(async (r) => {
+        if (r.status === 404) return { naoEncontrado: true };
+        if (!r.ok) return { falhou: true };
+        const d = await r.json();
+        if (d.status !== 1) return { naoEncontrado: true };
+        const marca = d.product.brands ? d.product.brands.split(",")[0].trim() : null;
+        return {
+          nome: nomeBom(d.product.product_name_pt) || nomeBom(d.product.product_name) || (marca ? `Produto ${marca}` : null),
+          marca: d.product.brands || null,
+          quantidade: d.product.quantity || null,
+          foto: d.product.image_front_small_url || d.product.image_front_url || null,
+        };
+      })
+      .catch(() => ({ falhou: true }))
+      .finally(() => clearTimeout(prazo));
+    cacheOFF.set(ean, consulta);
+    consulta.then((r) => { if (r.falhou) cacheOFF.delete(ean); });
   }
   return cacheOFF.get(ean);
 }
@@ -668,9 +680,17 @@ async function telaNaoAcompanhado(ean, aberto, tabela) {
       el("p", { class: "rotulo entrar" }, "Ainda não acompanhamos o preço deste produto"),
       el("p", { class: "onde entrar" }, "A lista de produtos cresce a cada coleta.")),
     el("div", { class: "folha" },
-      nome ? cartaoImpostos(tabela, [nome], null) : el("section", { class: "cartao entrar" },
-        el("h2", {}, "Não reconhecemos este código"),
-        el("p", { class: "sub", style: "margin:0" }, "Ele não está na nossa lista nem na base aberta de produtos. Confira se o código foi lido certo.")),
+      nome ? cartaoImpostos(tabela, [nome], null) : aberto?.falhou ? el("section", { class: "cartao entrar" },
+        el("h2", {}, "Não deu para consultar agora"),
+        el("p", { class: "sub" }, "A base aberta de produtos não respondeu a tempo (internet lenta ou instável)."),
+        el("button", { class: "botao-secundario-neutro", type: "button", onclick: () => telaProduto(ean) }, "Tentar de novo"))
+        : el("section", { class: "cartao entrar" },
+          el("h2", {}, "Produto ainda sem cadastro"),
+          el("p", { class: "sub" }, `O código ${ean} ainda não está na base aberta de produtos (Open Food Facts) nem na nossa lista. `,
+            "Se o código na tela não for o da embalagem, escaneie de novo."),
+          el("p", { class: "sub" }, "Qualquer pessoa pode cadastrar o produto lá, com fotos da embalagem; depois disso o nome e a foto aparecem aqui."),
+          el("a", { class: "botao-secundario-neutro", href: `https://world.openfoodfacts.org/cgi/product.pl?type=search_or_add&code=${ean}`,
+            target: "_blank", rel: "noopener" }, "Cadastrar no Open Food Facts")),
       el("section", { class: "cartao entrar entrar-2" },
         el("button", { class: "botao-escanear-grande botao-marca", type: "button", onclick: abrirLeitor }, icone("escanear"), "Escanear outro produto"))));
 }
