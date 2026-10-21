@@ -114,6 +114,19 @@ def trechos_das_linhas(linhas: list[dict]) -> list[Trecho]:
     return trechos
 
 
+# hortifrúti, açougue e granel quase não têm código de barras, então pouco aparecem no dicionário das notas fiscais
+VOCAB_BASE = set("""
+banana nanica prata maca laranja limao tomate batata cebola alho cenoura beterraba abobora abobrinha chuchu couve alface
+repolho brocolis pepino pimentao mamao formosa papaya melao melancia abacaxi manga palmer tommy uva thompson crimson
+morango goiaba maracuja tangerina mexerica ponkan pera kiwi coco ovos ovo frango coxa sobrecoxa peito file carne bovina
+bovino suina suino picanha alcatra maminha patinho acem costela linguica toscana calabresa pernil lombo bisteca
+fraldinha cupim musculo moida peixe tilapia salmao sardinha merluza queijo presunto mussarela granel bandeja unidade
+quilo pacote cheiro verde mandioca inhame milho vagem quiabo jilo berinjela rucula agriao espinafre salsa cebolinha
+coentro hortela gengibre batata doce baroa mandioquinha abacate pessego ameixa caqui lima rosa amarelo amarela grape
+cereja resfriado resfriada congelado congelada vacuo peca inteiro inteira fatiado fatiada temperado temperada
+""".split())
+
+
 def vocabulario(*cons, minimo: int = 20) -> set[str]:
     """Palavras (sem acento, 4+ letras) dos nomes de produtos que já conhecemos: catálogos das lojas, Open Food Facts,
     descrições de preços e o dicionário de códigos das notas fiscais do DF. Serve para descartar leitura de imagem que
@@ -133,7 +146,7 @@ def vocabulario(*cons, minimo: int = 20) -> set[str]:
                     contagem.update(set(re.findall(r"[a-z]{4,}", normalizar(nome))))
             except Exception:  # tabela ainda não existe neste banco
                 continue
-    return {w for w, n in contagem.items() if n >= minimo}
+    return {w for w, n in contagem.items() if n >= minimo} | VOCAB_BASE
 
 
 def conhecido(texto: str, vocab: set[str]) -> bool:
@@ -240,7 +253,7 @@ def ler_encartes(nav: Navegador, dias: int = 4, hoje: date | None = None, max_im
                  vocab: set[str] | None = None) -> list[EncarteLido]:
     """Encartes vigentes (validade de hoje em diante): do encartesdf.com.br e dos sites dos próprios mercados.
     Com `vocab` (palavras de nomes conhecidos, ao menos 5 mil), trechos lidos de imagem só ficam se forem nome de produto."""
-    filtrar = vocab is not None and len(vocab) >= 5000
+    filtrar = vocab is not None and len(vocab - VOCAB_BASE) >= 5000
     hoje = hoje or date.today()
     saida, lidas = [], 0
     try:
