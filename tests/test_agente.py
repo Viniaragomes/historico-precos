@@ -273,3 +273,33 @@ class TestCrawlDelay(unittest.TestCase):
         nav.get_texto("https://lento.gov.br/a")
         nav.get_texto("https://lento.gov.br/a")
         self.assertTrue(esperas and max(esperas) > 4.5, esperas)
+
+
+class TestCatalogoVtex(unittest.TestCase):
+    def test_percorre_categorias_e_paginas(self):
+        from historico_precos.fontes import vtex
+
+        arvore = [{"id": 1, "name": "Mercearia", "children": [{"id": 10, "name": "Café", "children": []},
+                                                              {"id": 11, "name": "Arroz", "children": []}]}]
+
+        def produto(pid, ean, preco, disponivel=True):
+            return {"productId": pid, "productName": f"Produto {pid}", "brand": "Marca", "linkText": f"p{pid}",
+                    "items": [{"ean": ean, "sellers": [{"commertialOffer": {"Price": preco, "ListPrice": preco, "IsAvailable": disponivel}}]}]}
+
+        cafe_p1 = [produto(i, f"78900000000{i:02d}", 10.0 + i) for i in range(50)]
+        cafe_p2 = [produto(50, "7890000000050", 9.9), produto(51, "", 5.0), produto(52, "7890000000052", 4.0, False)]
+        arroz = [produto(1, "7890000000001", 11.0), produto(99, "7890000000099", 25.0)]  # produto 1 repetido em outra categoria
+        fake = Fake([
+            ("https://loja.com.br/robots.txt", (200, "User-agent: *\nAllow: /")),
+            ("https://loja.com.br/api/catalog_system/pub/category/tree/3", (200, json.dumps(arvore))),
+            ("https://loja.com.br/api/catalog_system/pub/products/search?fq=C:/1/10/&_from=0&", (200, json.dumps(cafe_p1))),
+            ("https://loja.com.br/api/catalog_system/pub/products/search?fq=C:/1/10/&_from=50&", (200, json.dumps(cafe_p2))),
+            ("https://loja.com.br/api/catalog_system/pub/products/search?fq=C:/1/11/&_from=0&", (200, json.dumps(arroz))),
+        ])
+        loja = {"nome": "Loja", "dominio": "loja.com.br"}
+        itens = list(vtex.catalogo(nav_com(fake), loja))
+        eans = [p.ean for p, _ in itens]
+        self.assertEqual(len(eans), 52)  # 50 + 1 (pág. 2) + 1 (arroz novo); sem EAN, indisponível e repetido ficam de fora
+        self.assertIn("7890000000099", eans)
+        self.assertEqual(itens[0][1][0].loja, "Loja")
+        self.assertEqual(len(list(vtex.catalogo(nav_com(fake), loja, max_paginas=1))), 50)

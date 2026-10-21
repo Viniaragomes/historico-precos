@@ -416,6 +416,9 @@ def main(argv: list[str] | None = None) -> int:
     cw.add_argument("--termos", required=True, help="separados por vírgula, ex.: cafe,arroz")
     cw.add_argument("--limite", type=int, default=20, help="páginas por termo e por loja")
 
+    cv = sub.add_parser("catalogo-vtex", help="lê o catálogo inteiro das lojas VTEX ativas (todas as categorias) e grava o preço de hoje")
+    cv.add_argument("--max-paginas", type=int, help="teto de páginas de 50 produtos por loja (para testes)")
+
     cs = sub.add_parser("catalogo-sitemap", help="acha páginas de produto pelo sitemap das lojas (tipo 'sitemap') e lê nome, GTIN e preço")
     cs.add_argument("--termos", required=True, help="separados por vírgula, ex.: cafe,arroz (procurados no endereço da página)")
     cs.add_argument("--limite", type=int, default=100, help="páginas lidas por termo e por loja")
@@ -508,6 +511,22 @@ def main(argv: list[str] | None = None) -> int:
                 "evidencia": ceasa_df.INFORMACAO_MERCADO, "atualizado_em": agora_iso(), "series": series},
                 ensure_ascii=False), encoding="utf-8")
             print(f"Exportado em {args.exportar}")
+        return 0
+    if args.comando == "catalogo-vtex":
+        from .fontes import vtex
+
+        for loja in [l for l in carregar_lojas(args.lojas) if l.get("tipo", "vtex") == "vtex"]:
+            produtos, pontos, lote = 0, 0, []
+            for produto, pts in vtex.catalogo(nav, loja, args.max_paginas):
+                produtos += 1
+                if not banco.produto(produto.ean):
+                    banco.salvar_produto(produto)
+                lote += pts
+                if len(lote) >= 500:
+                    pontos += banco.salvar_precos(lote)
+                    lote = []
+            pontos += banco.salvar_precos(lote)
+            print(f"{loja['nome']}: {produtos} produto(s) com código de barras no catálogo, {pontos} preço(s) novo(s) gravado(s).")
         return 0
     if args.comando == "catalogo-sitemap":
         from .fontes import pagina_produto
