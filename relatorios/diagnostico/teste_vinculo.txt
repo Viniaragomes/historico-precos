@@ -1,0 +1,17 @@
+Catálogo de referência: 0 produtos com código de barras e tamanho no nome.
+Big Box: 120 página(s) lida(s) agora, 74 com preço, 0 vinculada(s), 0 preço(s) novo(s). Catálogo da loja: 13413 produtos, 120 já lidos, 0 vinculados. 
+Fort Atacadista: 120 página(s) lida(s) agora, 120 com preço, 0 vinculada(s), 0 preço(s) novo(s). Catálogo da loja: 11908 produtos, 120 já lidos, 0 vinculados. 
+
+exemplos vinculados:
+
+exemplos lidos sem vínculo:
+   ('Big Box', 'Cappuccino Solúvel Classic 3 Corações Pote 400g', '3 Corações', 49.99)
+   ('Big Box', 'Cappuccino Solúvel Diet 3 Corações Pote 150g', '3 Corações', 24.99)
+   ('Big Box', 'Café Torrado e Moído Tradicional 3 Corações Pacote 500g', '3 Corações', 29.99)
+   ('Big Box', 'Arroz 8 Grãos com Quinoa Integral Meu Biju Pacote 500g', 'Meu Biju', 10.99)
+   ('Big Box', 'Arroz 8 Grãos com Aveia Integral Meu Biju Pacote 500g', 'Meu Biju', 10.99)
+   ('Big Box', 'Arroz Integral Meu Biju com Chia 500g', 'Meu Biju', 10.99)
+   ('Big Box', 'Álcool Líquido 46º INPM Citrus Coperalcool Bacfree Frasco 1l', 'Coperalcool', 16.99)
+   ('Big Box', 'Álcool Líquido 46º INPM Tradicional Coperalcool Bacfree Frasco 1l', 'Coperalcool', 16.99)
+   ('Big Box', 'Assadeira Redonda de Alumínio N°25 Alumax 25cm', 'Alumax', 49.99)
+   ('Big Box', 'Assadeira Redonda de Alumínio N°30 Alumax 30cm', 'Alumax', 59.99)
