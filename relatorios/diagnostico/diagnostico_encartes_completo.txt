@@ -7,11 +7,11 @@ Vocabulário de nomes de produtos: 8189 palavras
       R$    8.90  IOGURTE BATAVO PENSE ZERO BANDEJA SABORES 510G
       R$    8.29  REQUEIJÃO CREMOSO TRADICIONAL BATAVO 200G
       R$    6.49  LEITE FERMENTADO BOB ESPONJA SABORES 480G
-  Dona                         até 2026-10-21  0 imagem(ns)   18 trecho(s) com preço
+  Dona                         até 2026-10-21  0 imagem(ns)   19 trecho(s) com preço
       R$   89.90  sa Picanha Bovina Minerva Pul Peça a Vácuo
       R$   29.99  AR e A A ei Costela Suína Sadia em Fatias Congelada
       R$   19.99  Filé de Coxa e Sobrecoxa de Frango com Pele Super Frango Resfriado
-  Assaí Atacadista             até 2026-10-22  1 imagem(ns)   20 trecho(s) com preço
+  Assaí Atacadista             até 2026-10-22  1 imagem(ns)   25 trecho(s) com preço
       R$   16.90  CARNE BOVINA MOÍDA CONGELADA FRIBOL EMBALAGEM 500g
       R$   34.90  LAGARTO BOVINO RESFRIADO FRIBOI PREÇO POR QUILO NA PEÇA
       R$   14.50  CONGELADA FRIBOL EMBALAGEM 500g
@@ -19,7 +19,7 @@ Vocabulário de nomes de produtos: 8189 palavras
   Bevia Atacadista             até 2026-10-21  1 imagem(ns)    0 trecho(s) com preço
   Atacadão Dia a Dia           até 2026-10-21  1 imagem(ns)    1 trecho(s) com preço
       R$    7.99  mimo
-  Supermercado Ultrabox        até 2026-10-25  2 imagem(ns)    3 trecho(s) com preço
+  Supermercado Ultrabox        até 2026-10-25  2 imagem(ns)    5 trecho(s) com preço
       R$    2.48  Em» ANTARCTICA PILSEN
       R$   12.98  pérola | tao 5kg as
       R$   67.45  98 PACOTE 2,5KG
@@ -27,10 +27,10 @@ Vocabulário de nomes de produtos: 8189 palavras
       R$    5.98  eite Fermentado Chamyto Tradicional
       R$    0.98  Láctea UHT Mocoquinha Chocolate
       R$    6.98  logurte Com Polpa Nestlé Ninho 3 Sabores
-  Supermercado Ultrabox        até 2026-10-26 10 imagem(ns)    6 trecho(s) com preço
+  Supermercado Ultrabox        até 2026-10-26 10 imagem(ns)   10 trecho(s) com preço
       R$   10.98  Toalhas Umedecidas Bebê Casademãe Com 100 unidades
-      R$   10.98  Batata Palito Congelada Casademãe
-      R$    6.98  Biscoito de Polvilho Casademãe Sabor Queijo Parmesão
+      R$    4.58  Gel Dental Infantil Casademãe
+      R$    2.98  Escova Dental Infantil Casademãe Pocoyo
   Supermercado Mineirão        até 2026-10-21  1 imagem(ns)    2 trecho(s) com preço
       R$    3.99  MELÃO AMARELO OU MAMÃO FORMOSA
       R$    6.98  UVA CRIMSON
@@ -42,42 +42,47 @@ Vocabulário de nomes de produtos: 8189 palavras
       R$    3.49  LARANJA
       R$    3.99  BATATA DOCE
       R$    1.99  COUVE INTEIRA
-  Supermercado Planeta         até 2026-10-21  1 imagem(ns)    2 trecho(s) com preço
+  Supermercado Planeta         até 2026-10-21  1 imagem(ns)    4 trecho(s) com preço
       R$    4.99  MILHO BDJ C/5UN
       R$    0.99  PIMENTA DE CHEIRO BDJ Ae
+      R$    4.99  TOMATE KG
   Supermercado União           até 2026-10-22  1 imagem(ns)    0 trecho(s) com preço
   Cristal Supermercado         até 2026-10-21  1 imagem(ns)    1 trecho(s) com preço
       R$    6.99  Vitória
-  Fort Atacadista              até 2026-10-22  4 imagem(ns)    1 trecho(s) com preço
+  Fort Atacadista              até 2026-10-22  4 imagem(ns)    2 trecho(s) com preço
       R$   36.90  Copacal Filé de Tilápia
-  Supermercado Tatico          até 2026-10-25  7 imagem(ns)    6 trecho(s) com preço
+      R$    1.99  Sabonete Francis Intenso 85g
+  Supermercado Tatico          até 2026-10-25  7 imagem(ns)    9 trecho(s) com preço
       R$    6.99  Minuano
       R$   14.99  W rito campo raça
       R$    5.99  PLUS
-  Supermercado Bistecão        até 2026-10-22  2 imagem(ns)    0 trecho(s) com preço
-20 encarte(s) vigente(s), 117 trecho(s) com preço.
+  Supermercado Bistecão        até 2026-10-22  2 imagem(ns)    1 trecho(s) com preço
+      R$   41.56  CHOCOLATE KIT KAT
+20 encarte(s) vigente(s), 136 trecho(s) com preço.
 Exportado em encartes_teste.json
-8 produto(s) anunciado(s) em 2 ou mais mercados:
+9 produto(s) anunciado(s) em 2 ou mais mercados:
   BANANA NANICA: Atacadão Dia a Dia R$ 2.49 · Supermercado Super Big R$ 4.99 · Supermercado Brandão (preço no encarte) · Supermercado Mineirão (preço no encarte) · Supermercado Planeta (preço no encarte)
   Filé de Tilápia: Dona R$ 44.99 · Fort Atacadista (preço no encarte)
-  Banana Prata: Supermercado Ultrabox R$ 3.98 · Dona (preço no encarte) · Supermercado Brandão (preço no encarte) · Supermercado Mineirão (preço no encarte) · Supermercado Superbom (preço no encarte) · Supermercado Planeta (preço no encarte)
+  Banana Prata: Supermercado Ultrabox R$ 3.98 · Dona (preço no encarte) · Assaí Atacadista (preço no encarte) · Supermercado Brandão (preço no encarte) · Supermercado Mineirão (preço no encarte) · Supermercado Superbom (preço no encarte) · Supermercado Planeta (preço no encarte)
   UVA CRIMSON: Supermercado Mineirão R$ 6.98 · Assaí Atacadista (preço no encarte) · Supermercado Superbom (preço no encarte)
-  A ALHO A GRANEL KG =: Supermercado Superbom R$ 4.15 · Supermercado Ultrabox (preço no encarte)
+  A ALHO A GRANEL KG =: Supermercado Superbom R$ 4.15 · Assaí Atacadista (preço no encarte) · Supermercado Ultrabox (preço no encarte)
   BATATA DOCE: Supermercado Super Big R$ 3.99 · Supermercado Brandão (preço no encarte)
   ABOBORA JAPONESA: Supermercado Super Big R$ 3.99 · Assaí Atacadista (preço no encarte) · Supermercado Brandão (preço no encarte) · Bevia Atacadista (preço no encarte) · Supermercado Superbom (preço no encarte)
   MELAO AMARELO: Supermercado Super Big R$ 4.99 · Assaí Atacadista (preço no encarte)
+  MAMÃO FORMOSA KG: Supermercado Planeta R$ 4.99 · Supermercado Mineirão (preço no encarte) · Supermercado Superbom (preço no encarte)
 
-tempo: 228s
-preços lidos: 117 {'Atacadão Dia a Dia': 37, 'Assaí Atacadista': 20, 'Supermercado Ultrabox': 19, 'Dona': 18, 'Supermercado Super Big': 9, 'Supermercado Tatico': 6, 'Supermercado Mineirão': 2, 'Supermercado Superbom': 2, 'Supermercado Planeta': 2, 'Cristal Supermercado': 1, 'Fort Atacadista': 1, 'Supermercado Brandão': 0, 'Bevia Atacadista': 0, 'Supermercado Mais Econômico': 0, 'Supermercado União': 0, 'Supermercado Bistecão': 0}
-comparações: 8 | com preço em 2+ mercados: 1
+tempo: 280s
+preços lidos: 136 {'Atacadão Dia a Dia': 37, 'Assaí Atacadista': 25, 'Supermercado Ultrabox': 25, 'Dona': 19, 'Supermercado Super Big': 9, 'Supermercado Tatico': 9, 'Supermercado Planeta': 4, 'Supermercado Mineirão': 2, 'Supermercado Superbom': 2, 'Fort Atacadista': 2, 'Cristal Supermercado': 1, 'Supermercado Bistecão': 1, 'Supermercado Brandão': 0, 'Bevia Atacadista': 0, 'Supermercado Mais Econômico': 0, 'Supermercado União': 0}
+comparações: 9 | com preço em 2+ mercados: 1
   BANANA NANICA | Atacadão Dia a Dia 2.49 · Supermercado Super Big 4.99 · Supermercado Brandão - · Supermercado Mineirão - · Supermercado Planeta -
   Filé de Tilápia | Dona 44.99 · Fort Atacadista -
-  Banana Prata | Supermercado Ultrabox 3.98 · Dona - · Supermercado Brandão - · Supermercado Mineirão - · Supermercado Superbom - · Supermercado Planeta -
+  Banana Prata | Supermercado Ultrabox 3.98 · Dona - · Assaí Atacadista - · Supermercado Brandão - · Supermercado Mineirão - · Supermercado Superbom - · Supermercado Planeta -
   UVA CRIMSON | Supermercado Mineirão 6.98 · Assaí Atacadista - · Supermercado Superbom -
-  A ALHO A GRANEL KG = | Supermercado Superbom 4.15 · Supermercado Ultrabox -
+  A ALHO A GRANEL KG = | Supermercado Superbom 4.15 · Assaí Atacadista - · Supermercado Ultrabox -
   BATATA DOCE | Supermercado Super Big 3.99 · Supermercado Brandão -
   ABOBORA JAPONESA | Supermercado Super Big 3.99 · Assaí Atacadista - · Supermercado Brandão - · Bevia Atacadista - · Supermercado Superbom -
   MELAO AMARELO | Supermercado Super Big 4.99 · Assaí Atacadista -
+  MAMÃO FORMOSA KG | Supermercado Planeta 4.99 · Supermercado Mineirão - · Supermercado Superbom -
 
 amostra de preços lidos por mercado:
   Atacadão Dia a Dia [('TOMATE GRAPE', 1.29), ('BANANA NANICA', 2.49), ('BETERRABA', 2.49), ('UVA VERDE FRUTAYA SEM SEMENTE OU UVA PRETA BR', 7.49), ('OVOS BRANCOS MANTIQUEIRA OU EMAPE TIPO EXTRA ', 12.79)]
@@ -85,13 +90,14 @@ amostra de preços lidos por mercado:
   Dona [('sa Picanha Bovina Minerva Pul Peça a Vácuo', 89.9), ('AR e A A ei Costela Suína Sadia em Fatias Con', 29.99), ('Filé de Coxa e Sobrecoxa de Frango com Pele S', 19.99), ('Filé de Tilápia', 44.99), ('cu Café 3 Corações Torrado e Moído Tradiciona', 32.99), ('Alimento Almond Breeze Sabores g', 19.99), ('Piracanjuba IL “Integral, Desnatado ou Semide', 6.19), ('vi su a Zespri Uva Thompson Bandeja 500g', 15.49)]
   Assaí Atacadista [('CARNE BOVINA MOÍDA CONGELADA FRIBOL EMBALAGEM', 16.9), ('LAGARTO BOVINO RESFRIADO FRIBOI PREÇO POR QUI', 34.9), ('CONGELADA FRIBOL EMBALAGEM 500g', 14.5), ('RESFRIADO COPACOL quito ix', 8.99), ('BATATA-DOCE ROSADA', 2.95), ('ABACATE', 2.99), ('CONGELADO SEARA BANDEJA', 14.49), ('EMPANADO DE FRANGO EM sea mona', 14.9)]
   Atacadão Dia a Dia [('mimo', 7.99)]
-  Supermercado Ultrabox [('Em» ANTARCTICA PILSEN', 2.48), ('pérola | tao 5kg as', 12.98), ('98 PACOTE 2,5KG', 67.45)]
+  Supermercado Ultrabox [('Em» ANTARCTICA PILSEN', 2.48), ('pérola | tao 5kg as', 12.98), ('98 PACOTE 2,5KG', 67.45), ('R$0,8 CAIXA 36 UNIDADES', 31.68), ('48 PACOTE 5KG', 47.4)]
   Supermercado Ultrabox [('eite Fermentado Chamyto Tradicional', 5.98), ('Láctea UHT Mocoquinha Chocolate', 0.98), ('logurte Com Polpa Nestlé Ninho 3 Sabores', 6.98), ('Coca-Cola Original', 12.98), ('Coxão Mole Bovi Peça ou pedaço Kg', 42.98), ('Pemil ou Paleta Suína à Pururuca', 13.98), ('Ovos Brancos Grandes Bandeja 30 unidades', 2.98), ('ilé de Tilápia Congelado Outubro Rosa', 29.98)]
-  Supermercado Ultrabox [('Toalhas Umedecidas Bebê Casademãe Com 100 uni', 10.98), ('Batata Palito Congelada Casademãe', 10.98), ('Biscoito de Polvilho Casademãe Sabor Queijo P', 6.98), ('DERMA Desodorante Aerossol Nívea Fragrâncias', 13.98), ('Batata Palha Crocante Tradicional', 13.98), ('thg Açúcar Cristal', 2.19)]
+  Supermercado Ultrabox [('Toalhas Umedecidas Bebê Casademãe Com 100 uni', 10.98), ('Gel Dental Infantil Casademãe', 4.58), ('Escova Dental Infantil Casademãe Pocoyo', 2.98), ("Casademãe Com Pontas de Algodão 75 unidades '", 1.98), ('Batata Palito Congelada Casademãe', 10.98), ('Biscoito de Polvilho Casademãe Sabor Queijo P', 6.98), ('DERMA Desodorante Aerossol Nívea Fragrâncias', 13.98), ('Batata Palha Crocante Tradicional', 13.98)]
   Supermercado Mineirão [('MELÃO AMARELO OU MAMÃO FORMOSA', 3.99), ('UVA CRIMSON', 6.98)]
   Supermercado Superbom [('ALHO A GRANEL', 25.9), ('A ALHO A GRANEL KG =', 4.15)]
   Supermercado Super Big [('LARANJA', 3.49), ('BATATA DOCE', 3.99), ('COUVE INTEIRA', 1.99), ('CHEIRO VERDE', 2.49), ('BANANA NANICA', 4.99), ('ABOBORA JAPONESA', 3.99), ('ABACAXI', 5.99), ('MAMÃO', 3.99)]
-  Supermercado Planeta [('MILHO BDJ C/5UN', 4.99), ('PIMENTA DE CHEIRO BDJ Ae', 0.99)]
+  Supermercado Planeta [('MILHO BDJ C/5UN', 4.99), ('PIMENTA DE CHEIRO BDJ Ae', 0.99), ('TOMATE KG', 4.99), ('MAMÃO FORMOSA KG', 4.99)]
   Cristal Supermercado [('Vitória', 6.99)]
-  Fort Atacadista [('Copacal Filé de Tilápia', 36.9)]
-  Supermercado Tatico [('Minuano', 6.99), ('W rito campo raça', 14.99), ('PLUS', 5.99), ('Arborio Arborio comer', 18.99), ('Arbório E', 10.99), ('14 CESTA BÁSICA Hu', 50.99)]
+  Fort Atacadista [('Copacal Filé de Tilápia', 36.9), ('Sabonete Francis Intenso 85g', 1.99)]
+  Supermercado Tatico [('Minuano', 6.99), ('W rito campo raça', 14.99), ('PLUS', 5.99), ('MORTADELA TIPO BOLOGNA. pe', 2.99), ('GOLD PARA us', 14.99), ('ARROZ ARROZ', 24.99), ('Arborio Arborio comer', 18.99), ('Arbório E', 10.99)]
+  Supermercado Bistecão [('CHOCOLATE KIT KAT', 41.56)]
