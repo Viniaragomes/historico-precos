@@ -553,3 +553,32 @@ a.botao-secundario-neutro { text-decoration: none; box-sizing: border-box; }
 .aviso-vinculo { color: var(--texto-2); font-size: .85em; margin-top: 2px; }
 .lista-simples { margin: 8px 0 14px; padding-left: 20px; color: var(--texto-2); }
 .lista-simples li { margin: 4px 0; }
+
+/* ---------- tela do produto: comparativo e histórico recolhido ---------- */
+.lista-comp { list-style: none; margin: 0; padding: 0; }
+.linha-comp { padding: 12px 0; }
+.lista-comp .linha-comp + .linha-comp { border-top: 1px solid var(--linha); }
+.linha-comp.referencia { border-top: 1px dashed var(--linha); margin-top: 4px; }
+.linha-comp-topo { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.linha-comp-topo .nome { font-weight: 650; font-size: 15px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; min-width: 0; }
+.linha-comp-topo .nome small { font-weight: 500; color: var(--texto-3); font-size: 12.5px; }
+.linha-comp-topo .valor { font-weight: 800; font-size: 17px; white-space: nowrap; }
+.barra-comp { position: relative; height: 8px; border-radius: 99px; background: var(--grade); margin: 8px 0 4px; }
+.barra-comp > span { display: block; height: 100%; border-radius: 99px; background: var(--marca); }
+.barra-comp > span.barato { background: var(--desce); }
+.barra-comp > span.ref { background: var(--texto-3); }
+.barra-comp > .marca-media { position: absolute; top: -4px; bottom: -4px; width: 2px; margin-left: -1px; background: var(--texto); border-radius: 2px; opacity: .55; }
+.dif-media { font-size: 12.5px; color: var(--texto-3); }
+.dif-media.abaixo { color: var(--desce); }
+.dif-media.acima { color: var(--sobe); }
+.dif-media a { color: var(--marca-texto); font-weight: 600; }
+details.recolhido > summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+details.recolhido > summary::-webkit-details-marker { display: none; }
+details.recolhido > summary > span { display: flex; flex-direction: column; gap: 2px; }
+details.recolhido > summary strong { font-size: 19px; font-weight: 750; letter-spacing: -.015em; }
+details.recolhido > summary small { color: var(--texto-2); font-size: 14px; }
+details.recolhido > summary .ic { width: 20px; height: 20px; flex: none; transition: transform .2s; }
+details.recolhido[open] > summary .ic { transform: rotate(90deg); }
+details.recolhido > .cartao { box-shadow: none; background: none; border: 0; border-radius: 0; padding: 0; margin: 18px 0 0; animation: none; }
+details.recolhido > .cartao + .cartao { border-top: 1px solid var(--linha); padding-top: 18px; }
+details.recolhido > .cartao:first-of-type > h2 { display: none; }

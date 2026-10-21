@@ -3,7 +3,7 @@ import { calcular, categoria } from "./impostos.js";
 import { confiancaPreco, nivelPorPontos, precoSugerido, utilidade, chavePreco, chaveCausa, PONTOS, NIVEIS as NIVEIS_COMUNIDADE } from "./confianca.js";
 import { criarComunidade, consentimento, ErroComunidade, TIPOS_REPORTE } from "./comunidade.js";
 
-const VERSAO_APP = "v23"; // igual à VERSAO do sw.js
+const VERSAO_APP = "v24"; // igual à VERSAO do sw.js
 
 const conteudo = document.getElementById("conteudo");
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
@@ -777,57 +777,207 @@ async function telaProduto(ean) {
   const com = await comunidade();
   const [votos, evidencias] = await Promise.all([com.votos(ean).catch(() => []), com.evidenciasPublicas(ean).catch(() => [])]);
   const contexto = { p, votos, evidencias, ean };
+  const painel = painelDePrecos({ ean, p, nomes: [p.nome, aberto?.nome], referencia: referenciaCompra(p, null), votos,
+    atualizarVotos: () => contexto.atualizar() });
   contexto.atualizar = async (chaveAberta) => {
     contexto.votos = await com.votos(ean).catch(() => contexto.votos);
-    document.querySelector('[data-cartao="onde"]')?.replaceWith(cartaoOndeComprar(contexto));
+    painel.votos = contexto.votos;
+    document.querySelector('[data-cartao="onde"]')?.replaceWith(cartaoOndeEncontrar(painel));
     document.querySelector('[data-cartao="causas"]')?.replaceWith(cartaoCausas(contexto, chaveAberta));
   };
-  conteudo.replaceChildren(heroProduto(p, aberto?.foto), el("div", { class: "folha" },
-    cartaoOndeComprar(contexto),
-    cartaoPrecosComunidade(ean, p.nome),
-    cartaoEncartes(p.nome, aberto?.nome),
-    cartaoHistorico(p),
-    cartaoCompraDF(p),
-    cartaoCampo(p, tabela),
-    cartaoCausas(contexto),
+  conteudo.replaceChildren(heroProduto(p, aberto?.foto, painel), el("div", { class: "folha" },
+    cartaoOndeEncontrar(painel),
+    cartaoComparativo(painel),
+    secaoHistorico(cartaoHistorico(p), cartaoCompraDF(p), cartaoCampo(p, tabela), cartaoCausas(contexto)),
     cartaoImpostos(tabela, [p.nome, aberto?.nome], p.ofertas[0]?.preco ?? null),
+    cartaoInformar(painel, p.nome),
     cartaoReportar(ean),
     el("p", { class: "rodape-nota" }, p.aviso, ` Atualizado ${idade(p.atualizado_em)}.`)));
+}
+
+// ---------- painel de preços do produto: junta todas as fontes e alimenta resumo, lugares e comparativo ----------
+
+// replaceChildren escreveria "null" na tela: só entram filhos de verdade
+function preencher(no, ...filhos) {
+  no.replaceChildren(...filhos.flat(Infinity).filter((f) => f != null && f !== false));
+}
+
+const TIPO_LUGAR = {
+  site: { rotulo: "site da loja", classe: "melhor" },
+  encarte: { rotulo: "encarte", classe: "promo" },
+  comunidade: { rotulo: "informado por pessoas", classe: "neutra" },
+};
+
+// preços de prateleira de todas as fontes. Cada fonte chega no seu tempo; a cada chegada, a tela se redesenha.
+// referencia = preço de compra do comércio (notas entre empresas): aparece no comparativo, mas fica fora da média.
+function painelDePrecos({ ean, p, nomes, referencia, votos = [], atualizarVotos }) {
+  const estado = { site: [], encarte: [], comunidade: [] };
+  estado.site = (p?.ofertas || []).map((o) => ({
+    lugar: o.loja, tipo: "site", preco: o.preco, data: o.data, link: o.evidencia, oferta: o,
+    detalhe: o.metodo === "vinculo-nome" ? `Vinculado pelo nome: “${o.descricao || "?"}”. Confira o tamanho.` : null,
+    promo: o.em_promocao, preco_de: o.preco_de,
+  }));
+  const ouvintes = [];
+  const lugares = () => [...estado.site, ...estado.encarte, ...estado.comunidade];
+  const comPreco = () => lugares().filter((l) => l.preco != null);
+  const resumo = () => {
+    const xs = comPreco().map((l) => l.preco);
+    if (!xs.length) return null;
+    const media = xs.reduce((a, b) => a + b, 0) / xs.length;
+    return { media, min: Math.min(...xs), max: Math.max(...xs), n: xs.length, lugares: new Set(comPreco().map((l) => l.lugar)).size };
+  };
+  const avisar = () => ouvintes.forEach((f) => f());
+  const painel = { lugares, comPreco, resumo, referencia, p, ean, votos, atualizarVotos, ao: (f) => { ouvintes.push(f); f(); } };
+
+  encartes().then((d) => {
+    const vistos = new Set();
+    estado.encarte = nomes.filter(Boolean).flatMap((n) => trechosParecidos(d.encartes, n, 8, true))
+      .filter((a) => { const k = `${a.e.post}|${a.t.t}|${a.t.p}`; return !vistos.has(k) && vistos.add(k); })
+      .map(({ e, t }) => ({ lugar: e.mercado, tipo: "encarte", preco: t.p, validade: e.validade_fim, data: e.publicado,
+        link: e.pdf || e.post, detalhe: `lido no encarte: “${t.t}”` }));
+    // mercado com preço lido no encarte não precisa repetir a linha "só o nome foi lido"
+    const comPrecoLido = new Set(estado.encarte.filter((l) => l.preco != null).map((l) => l.lugar));
+    estado.encarte = estado.encarte.filter((l) => l.preco != null || !comPrecoLido.has(l.lugar));
+    avisar();
+  });
+  painel.recarregarComunidade = async () => {
+    const com = await comunidade();
+    const lista = await com.precosInformados(ean).catch(() => []);
+    estado.comunidade = lista.map((x) => ({ lugar: x.mercado, tipo: "comunidade", preco: x.preco_mediano, data: x.ultimo_dia,
+      detalhe: `${x.pessoas === 1 ? "1 pessoa informou" : `${x.pessoas} pessoas informaram`}` + (x.pessoas >= 3 ? " · confirmado" : " · não verificado") }));
+    painel.modoTeste = com.modo === "teste";
+    avisar();
+  };
+  painel.recarregarComunidade();
+  return painel;
+}
+
+// preço médio no topo da tela (vale para produto acompanhado ou não)
+function resumoPreco(painel, semPreco) {
+  const caixa = el("div", { class: "resumo-preco" });
+  painel.ao(() => {
+    const r = painel.resumo();
+    if (!r) { preencher(caixa, ...[].concat(semPreco || [])); return; }
+    const barato = painel.comPreco().reduce((a, b) => (b.preco < a.preco ? b : a));
+    preencher(caixa, 
+      el("p", { class: "rotulo entrar" }, "Preço médio no DF"),
+      el("p", { class: "preco-hero entrar" }, brl.format(r.media)),
+      el("p", { class: "onde entrar" }, r.n === 1 ? `1 preço encontrado, em ${barato.lugar}`
+        : `média de ${r.n} preços em ${r.lugares} ${r.lugares === 1 ? "lugar" : "lugares"} · de ${brl.format(r.min)} a ${brl.format(r.max)}`),
+      r.n > 1 ? el("div", { class: "pilulas entrar entrar-2" },
+        el("span", { class: "pilula" }, icone("economia"), `Mais barato: ${brl.format(barato.preco)} em ${barato.lugar}`)) : null);
+  });
+  return caixa;
+}
+
+function quando(l) {
+  if (l.tipo === "encarte") return l.validade ? `válido até ${dataBR(l.validade)}` : `publicado ${dataBR(l.data)}`;
+  return l.data ? idade(l.data) : "";
+}
+
+// 1) onde encontrar: os lugares, de que tipo é a informação e o link da fonte
+function cartaoOndeEncontrar(painel) {
+  const cartao = el("section", { class: "cartao entrar", "data-cartao": "onde" });
+  painel.ao(() => {
+    const lista = painel.lugares();
+    const porTipo = (t) => lista.filter((l) => l.tipo === t);
+    preencher(cartao, el("h2", {}, "Onde encontrar"),
+      lista.length
+        ? el("p", { class: "sub" }, `${new Set(lista.map((l) => l.lugar)).size} ${new Set(lista.map((l) => l.lugar)).size === 1 ? "lugar" : "lugares"} com este produto. Toque em "ver fonte" para conferir de onde veio cada informação.`)
+        : el("p", { class: "sub", style: "margin:0" }, "Ainda não encontramos este produto em nenhum mercado do DF. Se você viu, informe o preço logo abaixo."),
+      ...["site", "encarte", "comunidade"].filter((t) => porTipo(t).length).map((t) => el("ul", { class: "lojas" },
+        porTipo(t).map((l) => el("li", {},
+          el("div", { class: "loja-linha" },
+            el("div", { class: "meio" },
+              el("div", { class: "nome" }, l.lugar, el("span", { class: `etiqueta ${TIPO_LUGAR[t].classe}` }, TIPO_LUGAR[t].rotulo),
+                l.promo ? el("span", { class: "etiqueta promo" }, "Promoção") : null),
+              el("div", { class: "detalhe" }, [quando(l), l.detalhe].filter(Boolean).join(" · "),
+                l.link ? [" · ", el("a", { href: l.link, target: "_blank", rel: "noopener" }, t === "encarte" ? "ver encarte" : "ver fonte")] : null)),
+            l.preco == null ? el("div", { class: "direita" }, el("div", { class: "diferenca" }, "preço no encarte")) : null),
+          t === "site" && painel.p ? linhaConfianca(painel.p, l.oferta, painel.votos, painel.atualizarVotos) : null)))),
+      porTipo("encarte").length ? el("p", { class: "minusculo", style: "margin:10px 0 0" }, AVISO_ENCARTE) : null,
+      painel.p?.ofertas_antigas?.length ? el("p", { class: "minusculo", style: "margin:10px 0 0" }, "Preços antigos, fora da conta: ",
+        painel.p.ofertas_antigas.map((o) => `${o.loja} ${brl.format(o.preco)} em ${dataBR(o.data)}`).join("; ")) : null);
+  });
+  return cartao;
+}
+
+// 2) comparativo: todos os preços lado a lado, com a distância para a média
+function cartaoComparativo(painel) {
+  const cartao = el("section", { class: "cartao entrar entrar-2", hidden: true });
+  painel.ao(() => {
+    const r = painel.resumo();
+    const ref = painel.referencia;
+    if (!r && !ref) { cartao.hidden = true; return; }
+    cartao.hidden = false;
+    const lista = [...painel.comPreco()].sort((a, b) => a.preco - b.preco);
+    // a escala começa um pouco abaixo do menor preço: partindo do zero, R$ 5,49 e R$ 6,29 pareceriam iguais
+    const valores = [...lista.map((l) => l.preco), ...(ref ? [ref.preco] : [])];
+    const topo = Math.max(...valores), base = Math.min(...valores) * 0.75;
+    const pos = (v) => (topo > base ? ((v - base) / (topo - base)) * 100 : 100);
+    const barra = (valor, classe) => el("div", { class: "barra-comp" },
+      el("span", { class: classe || "", style: `width:${Math.max(4, pos(valor)).toFixed(1)}%` }),
+      r ? el("i", { class: "marca-media", style: `left:${pos(r.media).toFixed(1)}%`, "aria-hidden": "true" }) : null);
+    const linha = (l, i) => {
+      const dif = r ? l.preco - r.media : 0;
+      return el("li", { class: "linha-comp" },
+        el("div", { class: "linha-comp-topo" },
+          el("span", { class: "nome" }, l.lugar, el("small", {}, ` ${TIPO_LUGAR[l.tipo].rotulo}`),
+            i === 0 && lista.length > 1 ? el("span", { class: "etiqueta melhor" }, "Mais barato") : null),
+          el("span", { class: "valor" }, brl.format(l.preco))),
+        barra(l.preco, i === 0 && lista.length > 1 ? "barato" : ""),
+        lista.length > 1 ? el("div", { class: `dif-media ${dif < -0.004 ? "abaixo" : dif > 0.004 ? "acima" : ""}` },
+          Math.abs(dif) < 0.005 ? "na média" : `${brl.format(Math.abs(dif))} ${dif < 0 ? "abaixo" : "acima"} da média`) : null);
+    };
+    preencher(cartao, el("h2", {}, "Comparativo de preços"),
+      el("p", { class: "sub" }, r ? (lista.length > 1 ? `Do mais barato ao mais caro. A linha vertical marca a média (${brl.format(r.media)}).`
+        : "Só um preço encontrado até agora: quanto mais lugares, melhor a comparação.") : "Ainda sem preço de prateleira; abaixo, a referência de custo."),
+      lista.length ? el("ul", { class: "lista-comp" }, lista.map(linha)) : null,
+      ref ? el("div", { class: "linha-comp referencia" },
+        el("div", { class: "linha-comp-topo" },
+          el("span", { class: "nome" }, "Preço de compra do comércio", el("small", {}, ` ${ref.texto}`)),
+          el("span", { class: "valor" }, brl.format(ref.preco))),
+        barra(ref.preco, "ref"),
+        el("div", { class: "dif-media" }, "Referência de custo (notas fiscais entre empresas no DF), fora da média. ",
+          el("a", { href: "https://paineis.fazenda.df.gov.br/mapadeprecos/", target: "_blank", rel: "noopener" }, "ver fonte"))) : null,
+      lista.some((l) => l.tipo !== "site") ? el("p", { class: "minusculo", style: "margin:10px 0 0" },
+        "Preço de encarte é lido automaticamente e pode ter erro; preço informado por pessoas só vira confirmado com 3 ou mais. Confira a fonte em \"Onde encontrar\".") : null);
+  });
+  return cartao;
+}
+
+// 3) histórico: recolhido, abre ao tocar (gráfico, preço de compra, campo e causas)
+function secaoHistorico(...cartoes) {
+  const dentro = cartoes.filter(Boolean);
+  if (!dentro.length) return null;
+  return el("details", { class: "cartao recolhido entrar entrar-3" },
+    el("summary", {}, el("span", {}, el("strong", {}, "Histórico do preço"), el("small", {}, "Quanto já custou, custo de compra e por que mudou")), icone("seta")),
+    ...dentro);
+}
+
+// informar preço (a lista de quem informou já entra em "Onde encontrar" e no comparativo)
+function cartaoInformar(painel, nome) {
+  return el("section", { class: "cartao entrar entrar-4" },
+    el("h2", {}, "Viu este produto em um mercado?"),
+    el("p", { class: "sub" }, "Conte o preço que você viu. Com 3 pessoas ou mais no mesmo mercado, o preço aparece como confirmado."),
+    el("button", { class: "botao-principal", type: "button", onclick: () => informarPreco(painel.ean, nome, () => painel.recarregarComunidade()) },
+      "Informar o preço que você viu"),
+    painel.modoTeste ? el("p", { class: "minusculo", style: "margin:10px 0 0" },
+      "Modo de teste: o que você informar fica só neste aparelho até a comunidade online ser ligada.") : null);
+}
+
+// só serve de referência quando a nota é por unidade: "por caixa" ou "por fardo" confundiria com o preço do item
+function referenciaCompra(p, dic) {
+  const ultimo = p?.compra_df?.serie?.at(-1);
+  if (ultimo && UNIDADE_SIMPLES.test(p.compra_df.unidade || "un")) return { preco: ultimo.mediana, texto: `por ${(p.compra_df.unidade || "un").toLowerCase()}, ${dataBR(ultimo.data)}` };
+  if (dic?.p != null && UNIDADE_SIMPLES.test(dic.u || "un")) return { preco: dic.p, texto: `por ${(dic.u || "un").toLowerCase()}, mediana de ${dic.q} ${dic.q === 1 ? "nota" : "notas"}` };
+  return null;
 }
 
 // ---------- preços informados pela comunidade (cobre mercados sem site) ----------
 
 const MERCADOS_DF = ["Atacadão", "Atacadão Dia a Dia", "Assaí", "Big Box", "Carrefour", "Comper", "Dona", "Fort Atacadista",
   "Oba Hortifruti", "Pague Pouco", "Pão de Açúcar", "Super Adega", "Superbom", "Supermercado Tatico", "Ultrabox", "Veneza"];
-
-function cartaoPrecosComunidade(ean, nome) {
-  const cartao = el("section", { class: "cartao entrar entrar-2", "data-cartao": "comunidade-precos" },
-    el("h2", {}, "Preços informados por quem compra"));
-  const corpo = el("div", {}, el("p", { class: "sub" }, "Carregando…"));
-  const desenhar = async () => {
-    const com = await comunidade();
-    const lista = await com.precosInformados(ean).catch(() => []);
-    const fmtDia = (d) => idade(d);
-    corpo.replaceChildren(
-      com.modo === "teste" ? el("p", { class: "minusculo", style: "margin:0 0 8px" },
-        "Modo de teste: o que você informar fica só neste aparelho até a comunidade online ser ligada.") : null,
-      lista.length
-        ? el("ul", { class: "lista lista-atacado" }, lista.map((x) => el("li", { class: "linha-atacado" },
-          el("span", { class: "nome" }, x.mercado,
-            el("small", {}, `${x.pessoas === 1 ? "1 pessoa informou" : `${x.pessoas} pessoas informaram`} · ${fmtDia(x.ultimo_dia)}` +
-              (x.preco_minimo !== x.preco_maximo ? ` · de ${brl.format(x.preco_minimo)} a ${brl.format(x.preco_maximo)}` : ""))),
-          el("span", { class: "valor" }, brl.format(x.preco_mediano)),
-          el("span", { class: "etiqueta neutra" }, x.pessoas >= 3 ? "confirmado" : "não verificado"))))
-        : el("p", { class: "sub" }, "Ninguém informou ainda. Viu este produto em algum mercado do DF? Conte o preço e ajude quem vem depois."),
-      el("button", { class: "botao-principal", type: "button", onclick: () => informarPreco(ean, nome, desenhar) },
-        "Informar o preço que você viu"),
-      el("p", { class: "minusculo", style: "margin:10px 0 0" },
-        "Mostramos a mediana dos últimos 14 dias por mercado, sem identificar quem informou. Com 3 pessoas ou mais, o preço aparece como confirmado."));
-  };
-  cartao.append(corpo);
-  desenhar();
-  return cartao;
-}
 
 // código desconhecido: pede a inclusão (uma vez por aparelho e por dia); a coleta diária procura em todas as fontes
 // busca na hora (só com a comunidade online): consulta as lojas no momento do escaneamento
@@ -995,19 +1145,6 @@ function cartaoParecidos(nome, ean) {
   return cartao;
 }
 
-function cartaoCompraDicionario(d) {
-  return el("section", { class: "cartao entrar entrar-2" },
-    el("h2", {}, "Preço de compra no DF"),
-    el("div", { class: "loja-linha" },
-      el("div", { class: "meio" }, el("div", { class: "nome" }, nomeLegivel(d.n) || "Produto"),
-        el("div", { class: "detalhe" }, `mediana de ${d.q} ${d.q === 1 ? "item de nota fiscal" : "itens de notas fiscais"} · por ${(d.u || "un").toLowerCase()}`)),
-      el("div", { class: "direita" }, el("div", { class: "valor" }, d.p != null ? brl.format(d.p) : "—"))),
-    el("p", { class: "minusculo", style: "margin:10px 0 0" },
-      "Quanto o comércio pagou por este código nas notas fiscais entre empresas emitidas no DF nos últimos 3 meses. ",
-      "Na prateleira costuma ser mais caro (frete, perdas, impostos e margem). Fonte: ",
-      el("a", { href: "https://paineis.fazenda.df.gov.br/mapadeprecos/", target: "_blank", rel: "noopener" }, "Mapa de Preços do DF"), "."));
-}
-
 // sem nome em nenhuma fonte: a pessoa digita o que está na embalagem e já vê parecidos e impostos
 function cartaoDigiteNome(ean, tabela) {
   const resultado = el("div");
@@ -1034,27 +1171,27 @@ async function telaNaoAcompanhado(ean, aberto, tabela) {
   const dic = await codigoDF(ean);
   const nome = aberto?.nome || nomeLegivel(dic?.n);
   const subtitulo = [aberto?.marca, aberto?.quantidade].filter(Boolean).join(" · ");
+  const painel = painelDePrecos({ ean, p: null, nomes: [nome, nomeLegivel(dic?.n)], referencia: referenciaCompra(null, dic) });
   conteudo.replaceChildren(
     el("header", { class: "hero" },
       el("div", { class: "hero-barra" },
         el("button", { class: "botao-redondo", type: "button", "aria-label": "Voltar", onclick: voltar }, icone("voltar"))),
       el("div", { class: "produto-topo entrar" },
         aberto?.foto ? el("img", { class: "foto-produto", src: aberto.foto, alt: "" }) : null,
-        el("h1", { class: "produto-nome" }, nome || "Produto não identificado", el("small", {}, subtitulo || `Código ${ean}`),
+        el("h1", { class: "produto-nome" }, nome || "Produto não identificado", el("small", {}, [subtitulo, `código ${ean}`].filter(Boolean).join(" · ")),
           aberto?.foto || aberto?.nome ? creditoFoto(ean) : null)),
-      dic?.p != null ? [
+      resumoPreco(painel, dic?.p != null ? [
         el("p", { class: "rotulo entrar" }, "Preço de compra no DF"),
         el("p", { class: "preco-hero entrar" }, brl.format(dic.p)),
         el("p", { class: "onde entrar" }, "Ainda sem preço de prateleira: ajude informando o que você viu."),
       ] : [
-        el("p", { class: "rotulo entrar" }, "Ainda não acompanhamos o preço deste produto"),
+        el("p", { class: "rotulo entrar" }, "Ainda sem preço deste produto"),
         el("p", { class: "onde entrar" }, "Pedimos a inclusão e você pode informar o preço que viu."),
-      ]),
+      ])),
     el("div", { class: "folha" },
       cartaoBuscaNaHora(ean),
-      cartaoPrecosComunidade(ean, nome),
-      nome ? cartaoEncartes(nome, nomeLegivel(dic?.n)) : null,
-      dic ? cartaoCompraDicionario(dic) : null,
+      cartaoOndeEncontrar(painel),
+      cartaoComparativo(painel),
       nome ? cartaoParecidos(nome, ean) : null,
       nome ? cartaoImpostos(tabela, [nome], null) : aberto?.falhou ? el("section", { class: "cartao entrar" },
         el("h2", {}, "Não deu para consultar agora"),
@@ -1068,6 +1205,7 @@ async function telaNaoAcompanhado(ean, aberto, tabela) {
           el("a", { class: "botao-secundario-neutro", href: `https://world.openfoodfacts.org/cgi/product.pl?type=search_or_add&code=${ean}`,
             target: "_blank", rel: "noopener" }, "Cadastrar no Open Food Facts")),
       nome ? null : cartaoDigiteNome(ean, tabela),
+      cartaoInformar(painel, nome),
       cartaoPedido(ean),
       el("section", { class: "cartao entrar entrar-2" },
         el("button", { class: "botao-escanear-grande botao-marca", type: "button", onclick: abrirLeitor }, icone("escanear"), "Escanear outro produto"))));
@@ -1085,10 +1223,8 @@ function voltar() {
   else location.hash = "#/";
 }
 
-function heroProduto(p, foto) {
-  const melhor = p.ofertas[0];
+function heroProduto(p, foto, painel) {
   const subtitulo = [p.marca, p.quantidade].filter(Boolean).join(" · ");
-  const economia = p.ofertas.length > 1 ? p.ofertas[p.ofertas.length - 1].preco - melhor.preco : 0;
   const tend = tendencia(p);
   return el("header", { class: "hero" },
     el("div", { class: "hero-barra" },
@@ -1098,20 +1234,14 @@ function heroProduto(p, foto) {
         el("button", { class: "botao-redondo", type: "button", "aria-label": "Compartilhar", onclick: () => compartilhar(p) }, icone("compartilhar")))),
     el("div", { class: "produto-topo entrar" },
       foto ? el("img", { class: "foto-produto", src: foto, alt: "" }) : null,
-      el("h1", { class: "produto-nome" }, p.nome || "Produto sem nome", subtitulo ? el("small", {}, subtitulo) : null,
+      el("h1", { class: "produto-nome" }, p.nome || "Produto sem nome", el("small", {}, [subtitulo, `código ${p.ean}`].filter(Boolean).join(" · ")),
         foto ? creditoFoto(p.ean) : null)),
-    melhor ? [
-      el("p", { class: "rotulo entrar" }, "Menor preço agora"),
-      el("p", { class: "preco-hero entrar" }, brl.format(melhor.preco)),
-      el("p", { class: "onde entrar" }, `em ${melhor.loja} · ${idade(melhor.data)}`),
-    ] : [
+    resumoPreco(painel, [
       el("p", { class: "rotulo" }, "Sem preço recente"),
       el("p", { class: "onde" }, "Não encontramos preço deste produto nos últimos 30 dias."),
-    ],
-    el("div", { class: "pilulas entrar entrar-2" },
-      economia > 0.004 ? el("span", { class: "pilula" }, icone("economia"), `Economize até ${brl.format(economia)}`) : null,
-      tend ? el("span", { class: "pilula" }, icone(tend.variacao >= 0 ? "sobe" : "desce"), `${pct(tend.variacao)} ${tend.periodo}`) : null,
-      melhor?.em_promocao ? el("span", { class: "pilula" }, "Em promoção") : null));
+    ]),
+    tend ? el("div", { class: "pilulas entrar entrar-2" },
+      el("span", { class: "pilula" }, icone(tend.variacao >= 0 ? "sobe" : "desce"), `${pct(tend.variacao)} ${tend.periodo}`)) : null);
 }
 
 // licença das fotos e dados do Open Food Facts: CC BY-SA (fotos) e ODbL (dados), com crédito obrigatório
@@ -1185,36 +1315,6 @@ function confirmarPreco(p, o, atualizar) {
       el("button", { class: "botao-secundario-neutro", type: "button", onclick: () => { correcao.hidden = false; entrada.focus(); } },
         icone("polegarBaixo"), "Não, está diferente")),
     correcao);
-}
-
-function cartaoOndeComprar({ p, votos, atualizar }) {
-  const cartao = el("section", { class: "cartao", "data-cartao": "onde" }, el("h2", {}, "Onde comprar"));
-  if (!p.ofertas.length) {
-    cartao.append(el("p", { class: "sub", style: "margin:0" }, "Nenhuma loja com preço nos últimos 30 dias."));
-    return cartao;
-  }
-  cartao.append(el("p", { class: "sub" }, p.ofertas.length > 1 ? `Comparamos ${p.ofertas.length} lojas.` : "Só uma loja com preço recente."));
-  cartao.append(el("ul", { class: "lojas" }, p.ofertas.map((o, i) => el("li", {},
-    el("div", { class: "loja-linha" },
-      el("span", { class: `posicao${i === 0 ? " primeiro" : ""}`, "aria-label": `${i + 1}º lugar` }, i + 1),
-      el("div", { class: "meio" },
-        el("div", { class: "nome" }, o.loja,
-          i === 0 && p.ofertas.length > 1 ? el("span", { class: "etiqueta melhor" }, "Mais barato") : null,
-          o.em_promocao ? el("span", { class: "etiqueta promo" }, "Promoção") : null),
-        el("div", { class: "detalhe" }, `${idade(o.data)} · `, el("a", { href: o.evidencia, target: "_blank", rel: "noopener" }, "ver fonte")),
-        o.metodo === "vinculo-nome" ? el("div", { class: "detalhe aviso-vinculo" },
-          `Vinculado pelo nome (a loja não publica o código de barras): “${o.descricao || "?"}”. Confira o tamanho.`) : null),
-      el("div", { class: "direita" },
-        el("div", { class: "valor" }, brl.format(o.preco)),
-        el("div", { class: "diferenca" }, i === 0
-          ? (o.em_promocao && o.preco_de ? `era ${brl.format(o.preco_de)}` : "")
-          : `+${brl.format(o.diferenca_rs)}`))),
-    linhaConfianca(p, o, votos, atualizar)))));
-  if (p.ofertas_antigas.length) {
-    cartao.append(el("p", { class: "minusculo", style: "margin:10px 0 0" }, "Preços antigos, fora da comparação: ",
-      p.ofertas_antigas.map((o) => `${o.loja} ${brl.format(o.preco)} em ${dataBR(o.data)}`).join("; ")));
-  }
-  return cartao;
 }
 
 // ---------- histórico ----------
