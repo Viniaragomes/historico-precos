@@ -10,6 +10,11 @@ from historico_precos.rede import Navegador  # noqa: E402
 nav = Navegador(intervalo=3)
 for caminho in ["/api/v1/indicador/", "/api/v1/painel/"]:
     j = json.loads(nav.get_texto("https://infodf.ipe.df.gov.br" + caminho) or "[]")
+    paginas = [j]
+    while isinstance(paginas[-1], dict) and paginas[-1].get("next") and len(paginas) < 20:
+        paginas.append(json.loads(nav.get_texto(paginas[-1]["next"]) or "{}"))
+    print("total informado pela API:", j.get("count") if isinstance(j, dict) else "?", "| páginas lidas:", len(paginas))
+    j = [p.get("results", p) if isinstance(p, dict) else p for p in paginas]
     def achatar(no):  # junta todos os objetos com "nome", em qualquer nível
         if isinstance(no, dict):
             if "nome" in no and "id" in no:
@@ -20,7 +25,6 @@ for caminho in ["/api/v1/indicador/", "/api/v1/painel/"]:
             for v in no:
                 yield from achatar(v)
 
-    print("formato:", type(j).__name__, list(j)[:10] if isinstance(j, dict) else len(j))
     itens = list(achatar(j))
     vistos = {}
     for x in itens:
