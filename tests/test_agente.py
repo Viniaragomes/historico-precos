@@ -319,3 +319,22 @@ class TestDevagar(unittest.TestCase):
         self.assertEqual(nav.get_texto("https://loja.com.br/api/x"), "ok")
         self.assertEqual([e for e in esperas if e >= 30], [30.0, 60.0])  # recuo crescente
         self.assertGreaterEqual(nav._intervalo_do("loja.com.br"), 4.0)  # e o site passa a ser acessado mais devagar
+
+
+class TestExportacaoOFF(unittest.TestCase):
+    def test_so_produtos_do_brasil_com_nome(self):
+        import gzip
+        import io
+
+        from historico_precos.fontes import openfoodfacts
+
+        linhas = ["code\tproduct_name\tbrands\tquantity\tcountries_tags",
+                  "7896005800027\tCafé Tradicional\t3 Corações,Marca2\t500 g\ten:brazil",
+                  "3017620422003\tNutella\tFerrero\t400 g\ten:france,en:germany",
+                  "7891000100103\tLeite Condensado 395g\tNestlé\t395 g\ten:brazil,en:portugal",
+                  "123\tCurto\tX\t1 kg\ten:brazil",
+                  "7890000000001\t2.0\tY\t\ten:brazil"]
+        dados = gzip.compress("\n".join(linhas).encode())
+        produtos = list(openfoodfacts.linhas_do_brasil(io.BytesIO(dados)))
+        self.assertEqual([(p.ean, p.nome, p.marca) for p in produtos],
+                         [("7896005800027", "Café Tradicional 500 g", "3 Corações"), ("7891000100103", "Leite Condensado 395g", "Nestlé")])

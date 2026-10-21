@@ -53,30 +53,72 @@ def buscar_texto(nav: Navegador, termo: str, limite: int = 5) -> list[tuple[str,
     return achados[:limite]
 
 
-# ---------- referência para o vínculo por nome: produtos vendidos no Brasil, os mais escaneados primeiro ----------
+# ---------- referência para o vínculo por nome: exportação completa (caminho oficial para uso em massa) ----------
+# A busca da API é proibida no robots.txt; o Open Food Facts pede que uso em massa seja feito pela exportação.
 
-REFERENCIA = ("https://world.openfoodfacts.org/api/v2/search?countries_tags_en=brazil&sort_by=unique_scans_n"
-              "&fields=code,product_name,product_name_pt,brands,quantity&page_size=100&page={pagina}")
+EXPORTACAO = "https://static.openfoodfacts.org/data/en.openfoodfacts.org.products.csv.gz"
 
 
-def _nome_com_tamanho(p: dict) -> str | None:
-    nome = (p.get("product_name_pt") or p.get("product_name") or "").strip()
+def _nome_com_tamanho(nome: str, qtd: str) -> str | None:
+    nome = (nome or "").strip()
     if len([c for c in nome if c.isalpha()]) < 3:
         return None
-    qtd = (p.get("quantity") or "").strip()
-    return f"{nome} {qtd}" if qtd and qtd.lower() not in nome.lower() else nome
+    from ..causas import embalagem
+
+    qtd = (qtd or "").strip()
+    return f"{nome} {qtd}" if qtd and not embalagem.quantidade(nome) else nome
 
 
-def referencia_brasil(nav: Navegador, pagina: int) -> list[Produto] | None:
-    """Uma página (100 produtos) da busca pública por produtos do Brasil. None = falhou (tentar de novo depois)."""
-    dado = nav.get_json(REFERENCIA.format(pagina=pagina))
-    if not isinstance(dado, dict):
-        return None
-    saida = []
-    for p in dado.get("products", []):
-        codigo = str(p.get("code") or "")
-        nome = _nome_com_tamanho(p)
+def linhas_do_brasil(fluxo):
+    """Lê o CSV (tabulado, gzip) em fluxo e devolve Produto dos itens vendidos no Brasil."""
+    import csv
+    import io
+    import sys
+    import zlib
+
+    csv.field_size_limit(sys.maxsize)
+    descompressor = zlib.decompressobj(16 + zlib.MAX_WBITS)
+
+    def texto():
+        while True:
+            pedaco = fluxo.read(1 << 20)
+            if not pedaco:
+                yield descompressor.flush().decode("utf-8", "replace")
+                return
+            yield descompressor.decompress(pedaco).decode("utf-8", "replace")
+
+    class Linhas(io.TextIOBase):
+        def __init__(self):
+            self.ger, self.resto = texto(), ""
+
+        def __iter__(self):
+            for parte in self.ger:
+                parte = self.resto + parte
+                *completas, self.resto = parte.split("\n")
+                yield from completas
+            if self.resto:
+                yield self.resto
+
+    leitor = csv.reader(Linhas(), delimiter="\t", quoting=csv.QUOTE_NONE)
+    cab = next(leitor)
+    col = {nome: i for i, nome in enumerate(cab)}
+    i_cod, i_nome, i_marca, i_qtd, i_pais = (col.get(c) for c in ("code", "product_name", "brands", "quantity", "countries_tags"))
+    for linha in leitor:
+        if i_pais is None or len(linha) <= max(i_cod, i_nome, i_pais) or "en:brazil" not in linha[i_pais]:
+            continue
+        codigo = linha[i_cod].strip()
+        nome = _nome_com_tamanho(linha[i_nome], linha[i_qtd] if i_qtd is not None and i_qtd < len(linha) else "")
         if codigo.isdigit() and 8 <= len(codigo) <= 14 and nome:
-            marca = (p.get("brands") or "").split(",")[0].strip() or None
-            saida.append(Produto(codigo, nome=nome, marca=marca, fonte="Open Food Facts"))
-    return saida
+            marca = (linha[i_marca] if i_marca is not None and i_marca < len(linha) else "").split(",")[0].strip() or None
+            yield Produto(codigo, nome=nome, marca=marca, fonte="Open Food Facts")
+
+
+def referencia_brasil(nav: Navegador, url: str = EXPORTACAO):
+    """Baixa a exportação em fluxo (respeitando o robots.txt) e devolve os produtos do Brasil."""
+    import urllib.request
+
+    if not nav.permitido(url):
+        raise PermissionError("robots.txt não permite a exportação")
+    req = urllib.request.Request(url, headers={"User-Agent": nav.user_agent})
+    with urllib.request.urlopen(req, timeout=120) as resposta:
+        yield from linhas_do_brasil(resposta)

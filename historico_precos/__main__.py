@@ -421,8 +421,7 @@ def main(argv: list[str] | None = None) -> int:
     cv.add_argument("--max-paginas", type=int, help="teto de páginas de 50 produtos por loja (para testes)")
     cv.add_argument("--minutos", type=float, help="tempo máximo por loja; a próxima rodada continua de onde parou")
 
-    rf = sub.add_parser("referencia-off", help="baixa, em rodízio, produtos do Brasil do Open Food Facts (EAN, nome, marca, tamanho) para o vínculo por nome")
-    rf.add_argument("--minutos", type=float, default=20)
+    sub.add_parser("referencia-off", help="baixa a exportação completa do Open Food Facts e guarda os produtos do Brasil (referência do vínculo por nome)")
 
     cn = sub.add_parser("catalogo-nome", help="lojas sem código de barras no site: lê páginas de produto em rodízio e vincula pelo nome")
     cn.add_argument("--minutos", type=float, default=60, help="tempo máximo por loja")
@@ -553,29 +552,23 @@ def main(argv: list[str] | None = None) -> int:
             print(f"{loja['nome']}: {produtos} produto(s) com código de barras, {pontos} preço(s) novo(s); {onde}.")
         return 0
     if args.comando == "referencia-off":
-        import time
-
         from .fontes import openfoodfacts
 
-        banco.con.execute("CREATE TABLE IF NOT EXISTS catalogo_progresso (loja TEXT PRIMARY KEY, proxima INTEGER, total INTEGER, em TEXT)")
-        linha = banco.con.execute("SELECT proxima FROM catalogo_progresso WHERE loja = 'Open Food Facts'").fetchone()
-        pagina, novos, fim = (linha[0] if linha else 1), 0, time.monotonic() + args.minutos * 60
-        while time.monotonic() < fim:
-            produtos = openfoodfacts.referencia_brasil(nav, pagina)
-            if produtos is None:
-                break
-            if not produtos:
-                pagina = 1  # chegou ao fim: recomeça pelos mais escaneados
-                break
-            for p_ in produtos:
+        novos = vistos = 0
+        try:
+            for p_ in openfoodfacts.referencia_brasil(nav):
+                vistos += 1
                 if not banco.produto(p_.ean):
                     banco.salvar_produto(p_)
                     novos += 1
-            pagina += 1
-        banco.con.execute("INSERT OR REPLACE INTO catalogo_progresso VALUES ('Open Food Facts', ?, NULL, datetime('now'))", (pagina,))
+                if vistos % 5000 == 0:
+                    banco.con.commit()
+        except PermissionError as e:
+            print(f"Open Food Facts: {e}.")
+            return 1
         banco.con.commit()
         total = banco.con.execute("SELECT COUNT(*) FROM produtos WHERE fonte = 'Open Food Facts'").fetchone()[0]
-        print(f"Open Food Facts: {novos} produto(s) novo(s) de referência; {total} no total; próxima página: {pagina}.")
+        print(f"Open Food Facts: {vistos} produto(s) do Brasil na exportação, {novos} novo(s) na referência; {total} no total.")
         return 0
     if args.comando == "catalogo-nome":
         import time

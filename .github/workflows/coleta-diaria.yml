@@ -54,10 +54,12 @@ jobs:
         timeout-minutes: 80
         run: python -m historico_precos catalogo-vtex --minutos 35
 
-      - name: Referência para o vínculo por nome (Open Food Facts, produtos do Brasil, 20 min)
+      - name: Referência para o vínculo por nome (exportação do Open Food Facts; domingos ou banco sem referência)
         continue-on-error: true
-        timeout-minutes: 25
-        run: python -m historico_precos referencia-off --minutos 20
+        timeout-minutes: 30
+        run: |
+          N=$(python -c "import sqlite3;print(sqlite3.connect('precos.db').execute(\"SELECT COUNT(*) FROM produtos WHERE fonte='Open Food Facts'\").fetchone()[0])" 2>/dev/null || echo 0)
+          if [ "$(date -u +%u)" = "7" ] || [ "$N" -lt 1000 ]; then python -m historico_precos referencia-off; fi
 
       - name: Lojas sem código de barras no site, vínculo pelo nome (rodízio, 35 min por loja)
         continue-on-error: true
