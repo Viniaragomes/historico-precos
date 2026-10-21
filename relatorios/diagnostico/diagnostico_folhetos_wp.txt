@@ -1,0 +1,85 @@
+
+== https://donafazbem.com.br/wp-json/wp/v2/folheto?per_page=5
+  id 6741 2024-11-14T14:38:22 https://donafazbem.com.br/folheto/ofertas/ | título: Ofertas
+    chaves: ['_links', 'acf', 'class_list', 'date', 'date_gmt', 'featured_media', 'guid', 'id', 'link', 'meta', 'modified', 'modified_gmt', 'slug', 'status', 'template', 'title', 'type']
+    meta {"_acf_changed": false}
+    imagens/pdf: 0 []
+    texto: {}
+
+== https://donafazbem.com.br/wp-json/wp/v2/folheto/6741
+  id 6741 2024-11-14T14:38:22 https://donafazbem.com.br/folheto/ofertas/ | título: Ofertas
+    chaves: ['_links', 'acf', 'class_list', 'date', 'date_gmt', 'featured_media', 'guid', 'id', 'link', 'meta', 'modified', 'modified_gmt', 'slug', 'status', 'template', 'title', 'type']
+    meta {"_acf_changed": false}
+    imagens/pdf: 0 []
+    texto: {}
+
+== https://donafazbem.com.br/wp-json/wp/v2/types
+  tipos: {'post': 'posts', 'page': 'pages', 'attachment': 'media', 'nav_menu_item': 'menu-items', 'wp_block': 'blocks', 'wp_template': 'templates', 'wp_template_part': 'template-parts', 'wp_global_styles': 'global-styles', 'wp_navigation': 'navigation', 'wp_font_family': 'font-families', 'wp_font_face': 'font-families/(?P<font_family_id>[\\d]+)/font-faces', 'e-floating-buttons': 'e-floating-buttons', 'elementor_library': 'elementor_library', 'elementor_snippet': 'elementor_snippet', 'elementskit_content': 'elementskit-content', 'elementskit_template': 'elementskit-template', 'htslider_slider': 'htslider_slider', 'folheto': 'folheto', 'lojas': 'lojas', 'product': 'product', 'cfkef-entries': 'cfkef-entries', 'rm_content_editor': 'rm_content_editor', 'rank_math_schema': 'rank_math_schema'}
+
+== https://ofertas.diaadiaatacadista.com.br/wp-json/wp/v2/types
+  tipos: {'post': 'posts', 'page': 'pages', 'attachment': 'media', 'nav_menu_item': 'menu-items', 'wp_block': 'blocks', 'wp_template': 'templates', 'wp_template_part': 'template-parts', 'wp_global_styles': 'global-styles', 'wp_navigation': 'navigation', 'wp_font_family': 'font-families', 'wp_font_face': 'font-families/(?P<font_family_id>[\\d]+)/font-faces', 'ofertas': 'ofertas'}
+
+== https://ofertas.diaadiaatacadista.com.br/wp-json/wp/v2/posts?per_page=5
+  id 1 2026-01-19T09:55:24 https://ofertas.diaadiaatacadista.com.br/ola-mundo/ | título: Olá, mundo!
+    chaves: ['_links', 'acf', 'author', 'categories', 'class_list', 'comment_status', 'content', 'date', 'date_gmt', 'excerpt', 'featured_media', 'format', 'guid', 'id', 'link', 'meta', 'modified', 'modified_gmt', 'ping_status', 'publishpress_future_action', 'publishpress_future_workflow_manual_trigger', 'slug', 'status', 'sticky', 'tags', 'template', 'title', 'type', 'yoast_head', 'yoast_head_json']
+    meta {"footnotes": ""}
+    imagens/pdf: 0 []
+    texto: Boas-vindas ao WordPress. Esse é o seu primeiro post. Edite-o ou exclua-o, e então comece a escrever! {}
+
+== https://ofertas.diaadiaatacadista.com.br/wp-json/wp/v2/media?per_page=10
+  id 3256 2026-10-20T15:25:48 https://ofertas.diaadiaatacadista.com.br/ofertas/dia-de-feira-21-10-lem/attachment/campanha-4736-cluster-12-pagina-1/ | título: campanha-4736-cluster-12-pagina-1
+    chaves: ['_links', 'acf', 'alt_text', 'author', 'caption', 'class_list', 'comment_status', 'date', 'date_gmt', 'description', 'featured_media', 'filename', 'filesize', 'guid', 'id', 'link', 'media_details', 'media_type', 'meta', 'mime_type', 'modified', 'modified_gmt', 'ping_status', 'post', 'publishpress_future_workflow_manual_trigger', 'slug', 'source_url', 'status', 'template', 'title', 'type']
+    imagens/pdf: 0 []
+    texto: {}
+    mídia: https://ofertas.diaadiaatacadista.com.br/wp-content/uploads/2026/10/campanha-4736-cluster-12-pagina-1.jpeg 1548 1964
+  id 3255 2026-10-20T15:25:29 https://ofertas.diaadiaatacadista.com.br/ofertas/dia-de-feira-21-10-gurupi/attachment/campanha-4736-cluster-119-pagina-1/ | título: campanha-4736-cluster-119-pagina-1
+    chaves: ['_links', 'acf', 'alt_text', 'author', 'caption', 'class_list', 'comment_status', 'date', 'date_gmt', 'description', 'featured_media', 'filename', 'filesize', 'guid', 'id', 'link', 'media_details', 'media_type', 'meta', 'mime_type', 'modified', 'modified_gmt', 'ping_status', 'post', 'publishpress_future_workflow_manual_trigger', 'slug', 'source_url', 'status', 'template', 'title', 'type']
+    imagens/pdf: 0 []
+    texto: {}
+    mídia: https://ofertas.diaadiaatacadista.com.br/wp-content/uploads/2026/10/campanha-4736-cluster-119-pagina-1.jpeg 1548 1964
+  id 3254 2026-10-20T15:24:05 https://ofertas.diaadiaatacadista.com.br/ofertas/dia-de-feira-21-10-goias/attachment/campanha-4736-cluster-216-pagina-1/ | título: campanha-4736-cluster-216-pagina-1
+    chaves: ['_links', 'acf', 'alt_text', 'author', 'caption', 'class_list', 'comment_status', 'date', 'date_gmt', 'description', 'featured_media', 'filename', 'filesize', 'guid', 'id', 'link', 'media_details', 'media_type', 'meta', 'mime_type', 'modified', 'modified_gmt', 'ping_status', 'post', 'publishpress_future_workflow_manual_trigger', 'slug', 'source_url', 'status', 'template', 'title', 'type']
+    imagens/pdf: 0 []
+    texto: {}
+    mídia: https://ofertas.diaadiaatacadista.com.br/wp-content/uploads/2026/10/campanha-4736-cluster-216-pagina-1.jpeg 1548 1964
+
+== página do Dia a Dia (estrutura)
+   #
+   #!
+   https://atacadaodiaadia.com.br
+   https://fonts.googleapis.com
+   https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800;900&family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap
+   https://fonts.googleapis.com/icon?family=Material+Icons
+   https://fonts.gstatic.com
+   https://ofertas.diaadiaatacadista.com.br
+   https://ofertas.diaadiaatacadista.com.br/
+   https://ofertas.diaadiaatacadista.com.br/wp-content/themes/ofertasdd-1.2-ajustes-banners/img/icn-apple-store.webp
+   https://ofertas.diaadiaatacadista.com.br/wp-content/themes/ofertasdd-1.2-ajustes-banners/img/logo-clube-dd-3.png
+   https://ofertas.diaadiaatacadista.com.br/wp-content/themes/ofertasdd-1.2-ajustes-banners/img/logo-clube-dd.png
+   https://ofertas.diaadiaatacadista.com.br/wp-content/themes/ofertasdd-1.2-ajustes-banners/img/logo-dd.png
+   https://ofertas.diaadiaatacadista.com.br/wp-content/themes/ofertasdd-1.2-ajustes-banners/img/play-store.webp
+   https://ofertas.diaadiaatacadista.com.br/wp-content/uploads/2026/02/cropped-logo-180x180.png
+   https://ofertas.diaadiaatacadista.com.br/wp-content/uploads/2026/02/cropped-logo-192x192.png
+   https://ofertas.diaadiaatacadista.com.br/wp-content/uploads/2026/02/cropped-logo-32x32.png
+   https://ofertas.diaadiaatacadista.com.br/wp-content/uploads/2026/02/image-2.png
+   https://ofertas.diaadiaatacadista.com.br/wp-content/uploads/2026/02/image.png
+   https://ofertas.diaadiaatacadista.com.br/wp-content/uploads/bfi_thumb/image-4-7n8j5f89whhjgqkspyb0wsxbprrfmqwco6q088sxg8y.png
+   https://ofertas.diaadiaatacadista.com.br/wp-content/uploads/bfi_thumb/image-5-7n8j5f89whhjgqkspyb0wsxbprrfmqwco6q088sxg8y.png
+   https://ofertas.diaadiaatacadista.com.br/wp-content/uploads/bfi_thumb/image-6-7n8j5f89whhjgqkspyb0wsxbprrfmqwco6q088sxg8y.png
+   https://ofertas.diaadiaatacadista.com.br/wp-content/uploads/bfi_thumb/image-7-7n8j5f89whhjgqkspyb0wsxbprrfmqwco6q088sxg8y.png
+   https://ofertas.diaadiaatacadista.com.br/wp-json/
+   https://ofertas.diaadiaatacadista.com.br/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fofertas.diaadiaatacadista.com.br%2F
+   https://ofertas.diaadiaatacadista.com.br/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fofertas.diaadiaatacadista.com.br%2F&#038;format=xml
+   https://ofertas.diaadiaatacadista.com.br/wp-json/wp/v2/pages/134
+   https://ofertas.diaadiaatacadista.com.br/xmlrpc.php?rsd
+   https://www.facebook.com/atacadaodiaadia/
+   https://www.googletagmanager.com/ns.html?id=GTM-KRMMMHJ
+   https://www.instagram.com/atacadaodiaadia/
+   https://www.tiktok.com/@atacadaodiaadia
+   https://www.youtube.com/@atacadistadiaadia
+   link loja apple
+   link loja playstore
+   logo do cartão
+   site.webmanifest
+   url imagem
+  Dia a Dia Atacadista &#187; Ofertas Carregando as ofertas do dia… Baixe Agora! Faça o Cartão Dia a Dia Usar localização automática Confira aqui nossa seleção de ofertas! Escolha uma região DF e Entorno Goiás Tocantins Bahia Escolha uma loja Escolha as ofertas Ver ofertas Conheça os produtos Dia a Dia Baixe o Clube Dia a Dia Faça o cartão Dia a Dia Acompanhe nosso Dia a Dia Política de Privacidade Orientações Nome do cartão Faça o download do app em uma das plataformas abaixo Quero conhecer Fechar Política de Privacidade Política de Privacidade — Atacadão Dia a Dia (Ofertas) Esta Política de Privacidade explica como o site de ofertas do Atacadão Dia a Dia (“Site”) coleta e utiliza informações quando você navega pelas páginas e acessa nossos conteúdos. Ao utilizar este Site, você concorda com as práticas descritas aqui. 1) O que coletamos Coletamos principalmente dados de navegação e uso , de forma automática, para entender como o Site é utilizado e melhorar sua experiência. Isso pode incluir: • Páginas visitadas, cliques, tempo de permanência e caminho de navegação; • Métricas de quais ofertas foram acessadas (ex.: tablóides e promoções avulsas); • Informações do dispositivo (mobile/desktop), navegador, sistema operacional, resolução e idioma; • Dados de origem de acesso (ex.: anúncios, redes sociais, busca); • Identificadores de cookies e tecnologias semelhantes. 2) Ferramentas e tecnologias utilizadas Utilizamos ferramentas de análise e publicidade para medir desempenho e me
