@@ -9,7 +9,7 @@ with urllib.request.urlopen(BASE + "dados/encartes.json", timeout=30) as r:
 print(d["atualizado_em"], len(d["encartes"]), "encartes,", sum(len(e["trechos"]) for e in d["encartes"]), "preços lidos")
 for e in d["encartes"]:
     print(f"\n{len(e['trechos']):>4}  {e['mercado']} | até {e['validade_fim']} | pdf: {bool(e.get('pdf'))} | {e['post']}")
-    for t in e["trechos"][:6]:
+    for t in e["trechos"][:6] + [{"p": 0, "t": "(sem preço) " + n} for n in e.get("nomes", [])[:4]]:
         print(f"        R$ {t['p']:>7.2f}  {t['t']}")
 with urllib.request.urlopen(BASE + "sw.js", timeout=30) as r:
     print("\n", r.read().decode()[:120])
