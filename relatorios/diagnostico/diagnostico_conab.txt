@@ -1,11 +1,262 @@
-== 1. Boletim Hortigranjeiro (gov.br)
-https://www.gov.br/conab/pt-br/atuacao/informacoes-agropecuarias/hortigranjeiros-prohort/boletim-hortigranjeiro -> 119290 bytes
-  PDFs: []
-  subpáginas: ['https://www.gov.br/conab/pt-br/atuacao/informacoes-agropecuarias/hortigranjeiros-prohort/boletim-hortigranjeiro', 'https://www.gov.br/conab/pt-br/atuacao/informacoes-agropecuarias/hortigranjeiros-prohort/boletim-hortigranjeiro/2026/boletim-hortigranjeiro-2026-1', 'https://www.gov.br/conab/pt-br/atuacao/informacoes-agropecuarias/hortigranjeiros-prohort/boletim-hortigranjeiro/boletim-hortigranjeiro']
-https://www.gov.br/conab/pt-br/atuacao/informacoes-agropecuarias/hortigranjeiros-prohort/boletim-hortigranjeiro/2026 -> 125438 bytes
-  PDFs: ['https://www.gov.br/conab/pt-br/atuacao/informacoes-agropecuarias/hortigranjeiros-prohort/boletim-hortigranjeiro/2026/boletim-hortigranjeiro_agosto-2026.pdf', 'https://www.gov.br/conab/pt-br/atuacao/informacoes-agropecuarias/hortigranjeiros-prohort/boletim-hortigranjeiro/2026/boletim-hortigranjeiro_julho-2026-versao-final.pdf', 'https://www.gov.br/conab/pt-br/atuacao/informacoes-agropecuarias/hortigranjeiros-prohort/boletim-hortigranjeiro/2026/boletim-hortigranjeiro_setembro-2026.pdf']
-  subpáginas: ['https://www.gov.br/conab/pt-br/atuacao/informacoes-agropecuarias/hortigranjeiros-prohort/boletim-hortigranjeiro', 'https://www.gov.br/conab/pt-br/atuacao/informacoes-agropecuarias/hortigranjeiros-prohort/boletim-hortigranjeiro/2026', 'https://www.gov.br/conab/pt-br/atuacao/informacoes-agropecuarias/hortigranjeiros-prohort/boletim-hortigranjeiro/2026/boletim-hortigranjeiro-2026-1', 'https://www.gov.br/conab/pt-br/atuacao/informacoes-agropecuarias/hortigranjeiros-prohort/boletim-hortigranjeiro/2026/boletim-hortigranjeiro_agosto-2026.pdf', 'https://www.gov.br/conab/pt-br/atuacao/informacoes-agropecuarias/hortigranjeiros-prohort/boletim-hortigranjeiro/2026/boletim-hortigranjeiro_julho-2026-versao-final.pdf', 'https://www.gov.br/conab/pt-br/atuacao/informacoes-agropecuarias/hortigranjeiros-prohort/boletim-hortigranjeiro/2026/boletim-hortigranjeiro_setembro-2026.pdf', 'https://www.gov.br/conab/pt-br/atuacao/informacoes-agropecuarias/hortigranjeiros-prohort/boletim-hortigranjeiro/2026/tabelas-de-dados-boletim-hortigranjeiro-julho-2026.xlsx', 'https://www.gov.br/conab/pt-br/atuacao/informacoes-agropecuarias/hortigranjeiros-prohort/boletim-hortigranjeiro/2026/tabelas-de-dados-boletim-hortigranjeiro-setembro-2026.xlsx', 'https://www.gov.br/conab/pt-br/atuacao/informacoes-agropecuarias/hortigranjeiros-prohort/boletim-hortigranjeiro/2026/tabelasdedadosboletimhortigranjeiroagosto2026.xlsx']
-falhas: []
+planilhas: ['https://www.gov.br/conab/pt-br/atuacao/informacoes-agropecuarias/hortigranjeiros-prohort/boletim-hortigranjeiro/2026/tabelas-de-dados-boletim-hortigranjeiro-julho-2026.xlsx', 'https://www.gov.br/conab/pt-br/atuacao/informacoes-agropecuarias/hortigranjeiros-prohort/boletim-hortigranjeiro/2026/tabelas-de-dados-boletim-hortigranjeiro-setembro-2026.xlsx', 'https://www.gov.br/conab/pt-br/atuacao/informacoes-agropecuarias/hortigranjeiros-prohort/boletim-hortigranjeiro/2026/tabelasdedadosboletimhortigranjeiroagosto2026.xlsx']
+https://www.gov.br/conab/pt-br/atuacao/informacoes-agropecuarias/hortigranjeiros-prohort/boletim-hortigranjeiro/2026/tabelas-de-dados-boletim-hortigranjeiro-setembro-2026.xlsx 524406 bytes
+abas: ['Principal', 'Preços-Hortaliças', 'Q-Total-Hortaliças', 'Preços-Frutas', 'Q-Total-Frutas', 'Preços-Alface', 'Preços-Batata', 'Preços-Cebola', 'Preços-Cenoura', 'Preços-Tomate', 'Preços-Banana', 'Preços-Laranja', 'Preços-Maçã', 'Preços-Mamão', 'Preços-Melancia', 'Quantidade-Alface', 'Quantidade-Batata', 'Quantidade-Cebola', 'Quantidade-Cenoura', 'Quantidade-Tomate', 'Quantidade-Banana', 'Quantidade-Laranja', 'Quantidade-Maçã', 'Quantidade-Mamão', 'Quantidade-Melancia', 'Microrregiões-Hortaliças', 'UF-Hortaliças', 'Microrregiões-Frutas', 'UF-Frutas']
 
-== 2. dados.gov.br
-chave configurada no GitHub: não
+--- Principal: 1001 linhas
+    [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]
+    [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]
+    [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]
+    [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]
+    [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]
+    [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]
+
+--- Preços-Hortaliças: 23 linhas
+    [None, None, None, 'Preços - hortaliças ', None, None, None, 'Setembro de 2026', None, None, None, None]
+    ['Preço Médio (R$/kg) das Principais Hortaliças Comercializadas nos Entrepostos Selecionados', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]
+    [None, None, None, None, 46266.0, None, None, None, None, None, None, None, None, None, None, None]
+    ['Produto', 'Alface', None, 'Batata', None, 'Cebola', None, 'Cenoura', None, 'Tomate', None, None]
+    ['Ceasa', 'Preço', 'Jul/Jun', 'Preço', 'Jul/Jun', 'Preço', 'Jul/Jun', 'Preço', 'Jul/Jun', 'Preço', 'Jul/Jun', None]
+    ['CEAGESP - São Paulo', 3.2329679316297173, -0.296375064474917, 2.7692683108495917, -0.1247874069354504, 3.9092256796739413, -0.077079788018526, 4.3187986986906575, 0.10920044054479297, 4.427295384110383, 0.3857921921462314]
+   DF: ['CEASA/DF - Brasília', 0.0, '#DIV/0!', 0.0, '#DIV/0!', 0.0, '#DIV/0!', 0.0, '#DIV/0!', 0.0, '#DIV/0!']
+
+--- Q-Total-Hortaliças: 31 linhas
+    [None, None, None, 'Setembro de 2026']
+    ['Quantidade de Hortaliças Comercializadas (kg) nas Ceasas Analisadas em 2024, 2025 e 2026', None, None, None, None, None, None, None]
+    ['Mês ', 2024.0, 2025.0, 2026.0, None, None, None, None]
+    ['Jan', 350393652.0, 366908888.0, 351322070.0, None, 'Ceasas consideradas:', None, None, None]
+    ['Fev', 353236909.0, 343964943.0, 320669004.0, None, 'CEAGESP - SAO PAULO', None, None, None]
+    ['Mar', 384940510.0, 358251908.0, 367514063.0, None, 'CEASA/RJ - RIO DE JANEIRO', None, None]
+
+--- Preços-Frutas: 23 linhas
+    [None, None, None, None, None, None, 'Setembro de 2026', None, None, None, None, None]
+    ['Preço Médio (R$/kg) das Principais Frutas Comercializadas nos Entrepostos Selecionados', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]
+    [None, None, None, None, 46266.0, None, None, None, None, None, None, None, None, None, None, None]
+    ['Produto', 'Banana', None, 'Laranja', None, 'Maçã', None, 'Mamão', None, 'Melancia', None, None]
+    ['Ceasa', 'Preço', 'Abr/Mar', 'Preço', 'Abr/Mar', 'Preço', 'Abr/Mar', 'Preço', 'Abr/Mar', 'Preço', 'Abr/Mar', None]
+    ['CEAGESP - São Paulo', 4.257854222138887, 0.040845000502211626, 2.0748195257454767, 0.02181217601220047, 6.991228370155324, 0.032766283592456015, 4.658194218762788, -0.23203728544084698, 2.460431045631224, -0.09449849712238358]
+   DF: ['CEASA/DF - Brasília', 0.0, '#DIV/0!', 0.0, '#DIV/0!', 0.0, '#DIV/0!', 0.0, '#DIV/0!', 0.0, '#DIV/0!']
+
+--- Q-Total-Frutas: 31 linhas
+    [None, None, None, 'Setembro de 2026']
+    ['Quantidade de Frutas Comercializadas (kg) nas Ceasas Analisadas em 2024, 2025 e 2026.', None, None, None, None, None, None, None, None, None, None, None, None, None]
+    ['Mês ', '2024', '2025', 2026.0, None, None, None, None]
+    ['Jan', 382010147.0, 383809687.0, 393126726.0, None, 'Ceasas consideradas:', None, None, None]
+    ['Fev', 370113486.0, 363299098.0, 357408437.0, None, 'CEAGESP - SAO PAULO', None, None, None]
+    ['Mar', 398363883.0, 386297342.0, 403414023.0, None, 'CEASA/RJ - RIO DE JANEIRO', None, None]
+
+--- Preços-Alface: 36 linhas
+    [None, None, None, None, None, None, None, None, 'Setembro de 2026', None, None, None, None, None, None, None]
+    [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]
+    ['Preço Médio (R$/kg) da Alface Comercializado nos Entrepostos Selecionados', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]
+    [None, 45505.0, 45536.0, 45566.0, 45597.0, 45627.0, 45658.0, 45689.0, 45717.0, 45748.0, 45778.0, 45809.0, 45839.0, 45870.0, 45901.0, 45931.0]
+    ['Ceagesp - São Paulo', 2.6905409742883895, 2.2782459788168867, 2.3699170413394306, 4.775192781392027, 4.218469660309238, 2.9849383621881755, 5.07315864969511, 4.346922308583861, 3.866369824471252, 4.382367040684815, 3.16650733124244, 2.9676146087090274, 2.8031554896812825, 2.47170089946727, 2.455196252617321]
+    ['CeasaMinas - Belo Horizonte', 5.024129550933683, 5.302911932288735, 5.652161381447057, 8.132825999192573, 8.579274930548904, 10.071029663302255, 12.434300060206553, 9.712753319930524, 10.096416670814698, 12.590011231525628, 8.09977269043374, 7.103764359675019, 6.885920934878977, 6.1723639039681935, 6.590938768049717]
+   DF: ['Ceasa/DF - Brasília', 5.555999999050527, 5.555999996107697, 5.555999998803169, '', '', '', None, None, None, None, None, None, None, None, None]
+
+--- Preços-Batata: 29 linhas
+    [None, None, None, None, None, None, None, 'Setembro de 2026', None, None, None, None, None, None, None, None]
+    [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]
+    ['Preço Médio (R$/kg) da Batata Comercializada nos Entrepostos Selecionados ', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]
+    ['Ceasa', 45505.0, 45536.0, 45566.0, 45597.0, 45627.0, 45658.0, 45689.0, 45717.0, 45748.0, 45778.0, 45809.0, 45839.0, 45870.0, 45901.0, 45931.0]
+    ['Ceagesp - São Paulo', 4.622733996980423, 4.390298918809525, 3.9851106094291118, 4.0668470500620035, 3.193625057064447, 2.8924945301362626, 2.737086760889101, 2.7007174457891385, 3.2926411771011326, 3.52914724544599, 3.153435406130392, 2.0144381672975697, 1.9463311897902842, 1.804756221726823, 2.1384758006867113]
+    ['CeasaMinas - Belo Horizonte', 3.6375224226246257, 3.728265464247313, 3.014627731652976, 3.142912762605325, 2.2719663405584543, 1.9993859309511859, 1.951713199806868, 1.8054362768873855, 2.2508663256475048, 2.4445792374557054, 2.5446626415172617, 1.745154001604272, 1.5442234710116403, 1.29258327507795, 1.4661204902059832]
+   DF: ['Ceasa/DF - Brasília', None, None, None, None, None, '', None, None, None, None, None, None, None, None, None]
+
+--- Preços-Cebola: 23 linhas
+    [None, None, None, None, None, None, None, 'Setembro de 2026', None, None, None, None, None, None, None, None]
+    [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]
+    ['Preço Médio (R$/kg) da Cebola Comercializada nos Entrepostos Selecionados ', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]
+    ['Cebola', 45505.0, 45536.0, 45566.0, 45597.0, 45627.0, 45658.0, 45689.0, 45717.0, 45748.0, 45778.0, 45809.0, 45839.0, 45870.0, 45901.0, 45931.0]
+    ['Ceagesp - São Paulo', 3.531359888012685, 2.8037978527631076, 2.064954060432375, 1.830589715936266, 2.0374359314954513, 2.1195512294512615, 2.2104982495983156, 2.4159172191422504, 2.5078292853140938, 3.0575497522024295, 2.511806897653692, 1.9283874876581995, 1.7524433724633754, 1.5185309448370794, 1.792744301910855]
+    ['CeasaMinas - Belo Horizonte', 3.264542266048755, 2.927846611780991, 1.8962876822273511, 1.8238335830382395, 1.9398752476229348, 2.1510978339501956, 2.035576608961974, 2.318153172523951, 2.4221722665533916, 3.1992844735066592, 2.761758539427319, 1.9598545455075558, 1.652072815337474, 1.4354192199068039, 1.7367358485803017]
+   DF: ['Ceasa/DF - Brasília', None, None, None, None, None, '', None, None, None, None, None, None, None, None, None]
+
+--- Preços-Cenoura: 25 linhas
+    [None, None, None, None, None, None, None, 'Setembro de 2026', None, None, None, None, None, None, None, None]
+    [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]
+    ['Preço Médio (R$/kg) da Cenoura Comercializada nos Entrepostos Selecionados ', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]
+    ['Ceasa', 45505.0, 45536.0, 45566.0, 45597.0, 45627.0, 45658.0, 45689.0, 45717.0, 45748.0, 45778.0, 45809.0, 45839.0, 45870.0, 45901.0, 45931.0]
+    ['Ceagesp - São Paulo', 2.0313001023628647, 1.767888434190927, 1.5962741188007152, 1.8952363556424563, 2.4253550228595304, 3.25580700180972, 3.237937185035343, 3.1007439219410093, 2.116665881170514, 2.57288898485055, 2.119808282531263, 2.1445832914484706, 2.494478170652341, 2.5266125242386215, 2.459942910294346]
+    ['CeasaMinas - Belo Horizonte', 1.5837433274389925, 1.4617136296045736, 1.3932011206415083, 1.5194850181553763, 1.605498541634365, 3.2982633974154094, 2.5346013525488753, 2.6742851276589414, 2.1778053753004882, 2.099731744727941, 1.6279716463241565, 1.4446830525939225, 1.9828647348779453, 2.137681771650287, 2.079211894949239]
+   DF: ['Ceasa/DF - Brasília', None, None, None, None, None, '', None, None, None, None, None, None, None, None, None]
+
+--- Preços-Tomate: 27 linhas
+    [None, None, None, None, None, None, None, 'Setembro de 2026', None, None, None, None, None, None, None, None]
+    [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]
+    ['Preço Médio (R$/kg) do Tomate Comercializado nos Entrepostos Selecionados ', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]
+    ['Ceasa', 45505.0, 45536.0, 45566.0, 45597.0, 45627.0, 45658.0, 45689.0, 45717.0, 45748.0, 45778.0, 45809.0, 45839.0, 45870.0, 45901.0, 45931.0]
+    ['Ceagesp - São Paulo', 2.4111205044014223, 2.548522474813739, 2.7506681647349325, 2.163184669765884, 2.774878769666342, 2.9085298009003777, 3.5569089627497035, 6.045732399135588, 5.601047317221267, 4.325087394357236, 4.585638630054668, 4.173475683249867, 3.7854144143508015, 3.460391168784117, 3.373010147889746]
+    ['CeasaMinas - Belo Horizonte', 1.7188996019192453, 1.4989875608534653, 1.810288357915924, 1.7748890315732686, 2.5801774654453764, 3.030361709306498, 3.6494821309905325, 4.813997210474933, 3.950508308425104, 3.544632908462877, 3.899147471682754, 3.5774194497263623, 3.0934202410503966, 2.440220534057867, 2.6437978835068567]
+   DF: ['Ceasa/DF - Brasília', None, None, None, None, None, '', None, None, None, None, None, None, None, None, None]
+
+--- Preços-Banana: 23 linhas
+    [None, None, None, None, None, None, None, 'Setembro de 2026', None, None, None, None, None, None, None, None]
+    [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]
+    ['Preço Médio (R$/kg) da Banana Comercializada nos Entrepostos Selecionados ', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]
+    ['Ceasa', 45505.0, 45536.0, 45566.0, 45597.0, 45627.0, 45658.0, 45689.0, 45717.0, 45748.0, 45778.0, 45809.0, 45839.0, 45870.0, 45901.0, 45931.0]
+    ['Ceagesp - São Paulo', 4.599179162526081, 4.543408542145669, 4.5382032943629875, 4.003433507915701, 4.108007742292273, 3.8895670405459577, 3.600001460743472, 3.477924934727696, 3.4685148792600167, 3.35071475152285, 3.18412542844315, 3.578135650421861, 3.9790559834251775, 4.279426399195659, 4.39582027102628]
+    ['CeasaMinas - Belo Horizonte', 4.475421920559398, 3.7184840475692407, 3.594233242659589, 3.184469860999941, 3.767694165312927, 3.6956391763567527, 3.3563554719310287, 3.271168988777329, 3.1083639973531585, 2.9522407601560294, 2.7975257019640565, 3.441294893490266, 3.910520906547301, 4.126892781450692, 3.732837987572306]
+   DF: ['Ceasa/DF - Brasília', 7.253168025904288, 8.680233252626962, 8.716288174050504, '', '', '', None, None, None, None, None, None, None, None, None]
+
+--- Preços-Laranja: 24 linhas
+    [None, None, None, None, None, None, None, 'Setembro de 2026', None, None, None, None, None, None, None, None]
+    [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]
+    ['Preço Médio (R$/kg) da Laranja Comercializada nos Entrepostos Selecionados ', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]
+    ['Ceasa', 45505.0, 45536.0, 45566.0, 45597.0, 45627.0, 45658.0, 45689.0, 45717.0, 45748.0, 45778.0, 45809.0, 45839.0, 45870.0, 45901.0, 45931.0]
+    ['Ceagesp - São Paulo', 3.7434889666590645, 4.338081838136068, 5.35397016663333, 5.1204915585665525, 4.598022139681066, 4.416988059936005, 4.185626329672487, 4.208543747436256, 4.114570127732571, 3.50614509006577, 2.901998546468541, 2.5530462157003972, 2.581899905977213, 2.8681989964579375, 3.0133245300492]
+    ['CeasaMinas - Belo Horizonte', 3.719340590118619, 4.3224950901791965, 5.2338176134899115, 4.861614891116218, 4.1923781434729515, 3.96601853323645, 3.8182825990633935, 3.909825977846257, 3.7825794444630385, 3.3014415804701565, 2.482101727405938, 2.2528820238771115, 2.283318449099147, 2.4266646906111107, 2.5386551979731102]
+   DF: ['Ceasa/DF - Brasília', 8.984330213750049, 7.714033140878538, 8.637954582112837, '', '', '', None, None, None, None, None, None, None, None, None]
+
+--- Preços-Maçã: 26 linhas
+    [None, None, None, None, None, None, None, 'Setembro de 2026', None, None, None, None, None, None, None, None]
+    [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]
+    ['Preço Médio (R$/kg) da Maçã Comercializada nos Entrepostos Selecionados ', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]
+    ['Ceasa', 45505.0, 45536.0, 45566.0, 45597.0, 45627.0, 45658.0, 45689.0, 45717.0, 45748.0, 45778.0, 45809.0, 45839.0, 45870.0, 45901.0, 45931.0]
+    ['Ceagesp - São Paulo', 9.222304556526153, 9.24073879851696, 9.01024509853766, 9.005196525118846, 9.486953434831044, 9.403324120781068, 8.105352667774927, 8.138789900112453, 8.67686575015802, 8.57061089071407, 8.489499496991776, 8.633354718947954, 8.529565523658354, 8.54714697507368, 8.82593438777835]
+    ['CeasaMinas - Belo Horizonte', 7.482142533710881, 8.79973181041864, 8.900545844573873, 8.703469353460951, 8.186696428669766, 8.306634747256785, 7.464125920015808, 7.307898186764396, 7.695244781383735, 7.859514729749668, 8.326668058433643, 8.186294996055972, 8.57801779592693, 8.590763635542505, 8.845743711123532]
+   DF: ['Ceasa/DF - Brasília', None, None, None, None, None, '', None, None, None, None, None, None, None, None, None]
+
+--- Preços-Mamão: 25 linhas
+    [None, None, None, None, None, None, None, 'Setembro de 2026', None, None, None, None, None, None, None, None]
+    [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]
+    ['Preço Médio (R$/kg) do Mamão Comercializado nos Entrepostos Selecionados ', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]
+    ['Ceasa', 45505.0, 45536.0, 45566.0, 45597.0, 45627.0, 45658.0, 45689.0, 45717.0, 45748.0, 45778.0, 45809.0, 45839.0, 45870.0, 45901.0, 45931.0]
+    ['Ceagesp - São Paulo', 5.200783138025676, 3.8586458733863975, 3.0173968302769594, 3.688008815137746, 3.8364404613815846, 3.6758273854458166, 5.581300069189605, 5.087308230621809, 4.502272678086352, 3.7222135739338604, 4.442113452924837, 4.874552432830632, 3.932322281015772, 4.751025179316715, 3.806468766193105]
+    ['CeasaMinas - Belo Horizonte', 4.0418170332880266, 4.294435564332591, 2.7303222840248744, 3.8159203575560308, 3.556663120680008, 2.795388455125834, 4.6037291602270445, 5.540185991615015, 4.11798712875096, 3.437547913958511, 3.361856026884918, 4.876328659905626, 3.449996406802614, 3.9016286046043924, 3.812418891896873]
+   DF: ['Ceasa/DF - Brasília', 4.929295894309103, 5.315937822264132, 7.202164012957102, '', '', '', None, None, None, None, None, None, None, None, None]
+
+--- Preços-Melancia: 24 linhas
+    [None, None, None, None, None, None, None, 'Setembro de 2026', None, None, None, None, None, None, None, None]
+    [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]
+    ['Preço Médio (R$/kg) da Melancia Comercializada nos Entrepostos Selecionados', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]
+    ['Ceasa', 45505.0, 45536.0, 45566.0, 45597.0, 45627.0, 45658.0, 45689.0, 45717.0, 45748.0, 45778.0, 45809.0, 45839.0, 45870.0, 45901.0, 45931.0]
+    ['Ceagesp - São Paulo', 1.8991779916951845, 2.1083343133960457, 1.8808736457647015, 1.6932103611693463, 1.9312932883368525, 2.0850864485141236, 2.838888262971599, 2.8340371860685347, 2.1022300467898263, 1.7709021761597254, 1.8354074078395453, 1.9260776098783075, 2.3583882239707212, 2.094155132672995, 2.11428636978446]
+    ['CeasaMinas - Belo Horizonte', 2.3164697112878767, 2.343636817703267, 2.1677163622162485, 1.7735974739690405, 2.1305124526149846, 2.139020117574832, 2.9623255772299157, 2.901549912283384, 2.5324839037823255, 2.186804418337046, 2.027522870981336, 1.9737063891766984, 2.579465968232689, 2.1714581251192575, 2.154679637626105]
+   DF: ['Ceasa/DF - Brasília', 2.7999999969712346, 4.4375, 4.5652173840976165, '', '', '', None, None, None, None, None, None, None, None, None]
+
+--- Quantidade-Alface: 24 linhas
+    [None, None, None, 'Setembro de 2026', None]
+    [None, None, None, None, None]
+    ['Quantidade (Kg) de Alface Comercializado nos Entrepostos Selecionados', None, None, None, None]
+    ['Ceasa', 'Agosto de 2025', 'Julho de 2026', 'Agosto de 2026', None]
+    ['CEAGESP - SÃO PAULO', 1974131.0, 1978050.0, 2032813.0, 0.027685346679810926]
+    ['CEASAMINAS - BELO HORIZONTE', 96098.0, 71476.0, 86699.0, 0.2129805808942862]
+   DF: ['CEASA/DF - BRASILIA', None, None, None, '#DIV/0!']
+
+--- Quantidade-Batata: 25 linhas
+    [None, None, None, 'Setembro de 2026', None]
+    [None, None, None, None, None, None, None, 'Boletim Hortigranjeiro – ']
+    ['Quantidade (Kg) de Batata Comercializada nos Entrepostos Selecionados', None, None, None, None]
+    ['Ceasa', 'Agosto de 2025', 'Julho de 2026', 'Agosto de 2026', None]
+    ['CEAGESP - SÃO PAULO', 23003970.0, 24990105.0, 22823900.0, -0.08668250893703727]
+    ['CEASAMINAS - BELO HORIZONTE', 16976797.0, 15810098.0, 15962629.0, 0.009647694783422594]
+   DF: ['CEASA/DF - BRASILIA', None, None, None, '#DIV/0!']
+
+--- Quantidade-Cebola: 24 linhas
+    [None, None, None, 'Setembro de 2026', None]
+    [None, None, None, None, None]
+    ['Quantidade (Kg) de Cebola Comercializada nos Entrepostos Selecionados', None, None, None, None]
+    ['Ceasa', 'Agosto de 2025', 'Julho de 2026', 'Agosto de 2026', None]
+    ['CEAGESP - SÃO PAULO', 10568180.0, 12190000.0, 11673980.0, -0.04233141919606235]
+    ['CEASAMINAS - BELO HORIZONTE', 8522655.0, 7868460.0, 8765720.0, 0.11403247903655861]
+   DF: ['CEASA/DF - BRASILIA', None, None, None, '#DIV/0!']
+
+--- Quantidade-Cenoura: 24 linhas
+    [None, None, None, 'Setembro de 2026', None]
+    [None, None, None, None, None]
+    ['Quantidade (Kg) de Cenoura Comercializada nos Entrepostos Selecionados', None, None, None, None]
+    ['Ceasa', 'Agosto de 2025', 'Julho de 2026', 'Agosto de 2026', None]
+    ['CEAGESP - SÃO PAULO', 5872782.0, 6046803.0, 5875928.0, -0.028258734408909966]
+    ['CEASAMINAS - BELO HORIZONTE', 3775016.0, 3291324.0, 3647352.0, 0.10817166587063443]
+   DF: ['CEASA/DF - BRASILIA', None, None, None, '#DIV/0!']
+
+--- Quantidade-Tomate: 26 linhas
+    [None, None, None, 'Setembro de 2026', None]
+    [None, None, None, None, None]
+    ['Quantidade (Kg) de Tomate Comercializado nos Entrepostos Selecionados', None, None, None, None]
+    ['Ceasa', 'Agosto de 2025', 'Julho de 2026', 'Agosto de 2026', None]
+    ['CEAGESP - SÃO PAULO', 18552941.0, 21892181.0, 18705170.0, -0.14557759229196945]
+    ['CEASAMINAS - BELO HORIZONTE', 7735063.0, 8419544.0, 8195847.0, -0.026568778546676636]
+   DF: ['CEASA/DF - BRASILIA', None, None, None, '#DIV/0!']
+
+--- Quantidade-Banana: 25 linhas
+    [None, None, None, 'Setembro de 2026', None]
+    [None, None, None, None, None]
+    ['Quantidade (Kg) de Banana Comercializada nos Entrepostos Selecionados', None, None, None, None]
+    ['Ceasa', 'Agosto de 2025', 'Julho de 2026', 'Agosto de 2026', None]
+    ['CEAGESP - SÃO PAULO', 4631603.0, 5037164.0, 5589134.0, 0.10957951736334175]
+    ['CEASAMINAS - BELO HORIZONTE', 8923616.0, 8872745.0, 8870033.0, -0.00030565512702100645]
+   DF: ['CEASA/DF - BRASILIA', None, None, None, '#DIV/0!']
+
+--- Quantidade-Laranja: 22 linhas
+    [None, None, None, 'Setembro de 2026', None]
+    [None, None, None, None, None]
+    ['Quantidade (Kg) de Laranja Comercializada nos Entrepostos Selecionados', None, None, None, None]
+    ['Ceasa', 'Agosto de 2025', 'Julho de 2026', 'Agosto de 2026', None]
+    ['CEAGESP - SÃO PAULO', 18089232.0, 22103561.0, 22739393.0, 0.0287660436252783]
+    ['CEASAMINAS - BELO HORIZONTE', 7776461.0, 7027126.0, 8552419.0, 0.21705786974646535]
+   DF: ['CEASA/DF - BRASILIA', None, None, None, '#DIV/0!']
+
+--- Quantidade-Maçã: 27 linhas
+    [None, None, None, 'Setembro de 2026', None]
+    [None, None, None, None, None]
+    ['Quantidade (Kg) de Maçã Comercializada nos Entrepostos Selecionados', None, None, None, None]
+    ['Ceasa', 'Agosto de 2025', 'Julho de 2026', 'Agosto de 2026', None]
+    ['CEAGESP - SÃO PAULO', 12103674.0, 11775060.0, 13169304.0, 0.11840653041258388]
+    ['CEASAMINAS - BELO HORIZONTE', 5757722.0, 5245777.0, 6417063.0, 0.22328169878361204]
+   DF: ['CEASA/DF - BRASILIA', None, None, None, '#DIV/0!']
+
+--- Quantidade-Mamão: 25 linhas
+    [None, None, None, 'Setembro de 2026', None]
+    [None, None, None, None, None]
+    ['Quantidade (Kg) de Mamão Comercializado nos Entrepostos Selecionados', None, None, None, None]
+    ['Ceasa', 'Agosto de 2025', 'Julho de 2026', 'Agosto de 2026', None]
+    ['CEAGESP - SÃO PAULO', 10244699.0, 8969074.0, 11155709.0, 0.24379718575184015]
+    ['CEASAMINAS - BELO HORIZONTE', 3949129.0, 3214770.0, 4112589.0, 0.2792793885721218]
+   DF: ['CEASA/DF - BRASILIA', None, None, None, '#DIV/0!']
+
+--- Quantidade-Melancia: 25 linhas
+    [None, None, None, 'Setembro de 2026', None]
+    [None, None, None, None, None]
+    ['Quantidade (Kg) de Melancia Comercializada nos Entrepostos Selecionados', None, None, None, None]
+    ['Ceasa', 'Agosto de 2025', 'Julho de 2026', 'Agosto de 2026', None]
+    ['CEAGESP - SÃO PAULO', 8013601.0, 6791763.0, 9634850.0, 0.418608099251991]
+    ['CEASAMINAS - BELO HORIZONTE', 4944013.0, 3774044.0, 5270384.0, 0.39648186401642377]
+   DF: ['CEASA/DF - BRASILIA', None, None, None, '#DIV/0!']
+
+--- Microrregiões-Hortaliças: 43 linhas
+    [None, None, None, 'Setembro de 2026', None, None, None, None, None, None]
+    [None, None, None, None, None, None, None, None, None, None]
+    [None, None, None, None, 46266.0, None, None, None, None, None]
+    ['ALFACE', None, 'BATATA', None, 'CEBOLA', None, 'CENOURA', None, 'TOMATE', None, None, None, None, None, None, None]
+    ['Micro Regiao', 'Quantidade Kg', 'Micro Regiao', 'Quantidade Kg', 'Micro Regiao', 'Quantidade Kg', 'Micro Regiao', 'Quantidade Kg', 'Micro Regiao', 'Quantidade Kg', None, None, None, None, None, None]
+    ['PIEDADE-SP', 1610689.0, 'SÃO JOÃO DA BOA VISTA-SP', 21046510.0, 'ENTORNO DE BRASÍLIA-GO', 5722380.0, 'PIEDADE-SP', 4526448.0, 'GOIÂNIA-GO', 4139736.0, None, None, None, None, None, None]
+   DF: ['PIEDADE-SP', 1610689.0, 'SÃO JOÃO DA BOA VISTA-SP', 21046510.0, 'ENTORNO DE BRASÍLIA-GO', 5722380.0, 'PIEDADE-SP', 4526448.0, 'GOIÂNIA-GO', 4139736.0, None, None, None, None, None, None]
+   DF: ['VITÓRIA DE SANTO ANTÃO-PE', 144560.0, 'ENTORNO DE BRASÍLIA-GO', 4735100.0, 'PATOS DE MINAS-MG', 1557200.0, 'SÃO JOÃO DA BOA VISTA-SP', 1132786.0, 'IBIAPABA-CE', 2027500.0, None, None, None, None, None, None]
+   DF: ['BELO HORIZONTE-MG', 63808.0, 'BELO HORIZONTE-MG', 2102548.0, 'UBERLÂNDIA-MG', 1240160.0, 'APUCARANA-PR', 486160.0, 'ENTORNO DE BRASÍLIA-GO', 1466617.0, None, None, None, None, None, None]
+
+--- UF-Hortaliças: 59 linhas
+    [None, None, None, 'Setembro de 2026', None, None, None, None, None, None]
+    [None, None, None, None, None, None, None, None, None, None]
+    [None, None, None, None, 46266.0, None, None, None, None, None]
+    ['ALFACE', None, 'BATATA', None, 'CEBOLA', None, 'CENOURA', None, 'TOMATE', None, None, None, None, None, None]
+    ['UF', 'Quantidade Kg', 'UF', 'Quantidade Kg', 'UF', 'Quantidade Kg', 'UF', 'Quantidade Kg', 'UF', 'Quantidade Kg', None, None, None, None, None]
+    ['SP', 2073809.0, 'SP', 45602090.0, 'MG', 10428320.0, 'MG', 8101988.0, 'MG', 14869655.0, None, None, None, None, None]
+   DF: [None, None, 'CE', 39500.0, 'DF', 40000.0, 'CE', 4000.0, 'PB', 134953.0, None, None, None, None, None]
+
+--- Microrregiões-Frutas: 38 linhas
+    [None, None, None, 'Setembro de 2026', None, None, None, None, None, None]
+    [None, None, None, None, None, None, None, None, None, None]
+    [None, None, None, None, 46266.0, None, None, None, None, None]
+    ['BANANA', None, 'LARANJA', None, 'MAÇÃ', None, 'MAMÃO', None, 'MELANCIA', None, None, None, None, None, None, None]
+    ['Micro Regiao', 'Quantidade Kg', 'Micro Regiao', 'Quantidade Kg', 'Micro Regiao', 'Quantidade Kg', 'Micro Regiao', 'Quantidade Kg', 'Micro Regiao', 'Quantidade Kg', None, None, None, None, None, None]
+    ['JANAÚBA-MG', 8232311.0, 'LIMEIRA-SP', 10212895.0, 'CAMPOS DE LAGES-SC', 9897028.0, 'PORTO SEGURO-BA', 9994377.0, 'CERES-GO', 15274524.0, None, None, None, None, None, None]
+
+--- UF-Frutas: 46 linhas
+    [None, None, None, 'Setembro de 2026', None, None, None, None, None, None]
+    [None, None, None, None, None, None, None, None, None, None]
+    [None, None, None, None, 46266.0, None, None, None, None, None]
+    ['BANANA', None, 'LARANJA', None, 'MAÇÃ', None, 'MAMÃO', None, 'MELANCIA', None]
+    ['UF', 'Quantidade Kg', 'UF', 'Quantidade Kg', 'UF', 'Quantidade Kg', 'UF', 'Quantidade Kg', 'UF', 'Quantidade Kg']
+    ['MG', 14469462.0, 'SP', 38105882.0, 'SC', 18263054.0, 'BA', 12944716.0, 'GO', 19923492.0]
+   DF: ['AL', 6150.0, None, None, None, None, None, None, 'DF', 2093.0]
