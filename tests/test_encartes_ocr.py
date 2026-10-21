@@ -113,6 +113,27 @@ class TestComparar(unittest.TestCase):
         self.assertEqual(c["diferenca"], 0)
 
 
+class TestComandoEncartes(unittest.TestCase):
+    def test_exporta_e_imprime_com_nome_sem_preco(self):
+        import io
+        import json
+        from contextlib import redirect_stdout
+        from unittest import mock
+
+        from historico_precos import __main__ as cli
+
+        T, E = encartes_ocr.Trecho, encartes_ocr.EncarteLido
+        lidos = [E("Dia a Dia", "https://a", "2026-10-20", None, [], trechos=[T("CAFÉ PILÃO 500g", 14.98)]),
+                 E("Dona", "https://b", "2026-10-20", None, [], nomes=["Café Pilão Tradicional 500g"])]
+        with tempfile.TemporaryDirectory() as tmp, mock.patch.object(encartes_ocr, "ler_encartes", return_value=lidos), \
+                redirect_stdout(io.StringIO()) as saida:
+            cli.main(["--banco", f"{tmp}/b.db", "encartes-dia", "--dicionario", f"{tmp}/nao-existe.gz",
+                      "--exportar", f"{tmp}/e.json"])
+            d = json.loads(Path(f"{tmp}/e.json").read_text(encoding="utf-8"))
+        self.assertEqual(len(d["comparacoes"]), 1)
+        self.assertIn("(preço no encarte)", saida.getvalue())
+
+
 class NavFalso:
     def __init__(self, json=None, texto=None):
         self.json, self.texto = json, texto

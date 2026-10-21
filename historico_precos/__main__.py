@@ -541,9 +541,6 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"      R$ {t.preco:>7.2f}  {t.texto}")
         print(f"{len(encartes)} encarte(s) vigente(s), {sum(len(e.trechos) for e in encartes)} trecho(s) com preço.")
         comparacoes = encartes_ocr.comparar_mercados(encartes)
-        print(f"{len(comparacoes)} produto(s) anunciado(s) em 2 ou mais mercados:")
-        for c in comparacoes[:10]:
-            print(f"  {c['produto']}: " + " · ".join(f"{o['mercado']} R$ {o['p']:.2f}" for o in c["ofertas"]))
         if args.exportar:
             Path(args.exportar).parent.mkdir(parents=True, exist_ok=True)
             Path(args.exportar).write_text(json.dumps({
@@ -552,6 +549,10 @@ def main(argv: list[str] | None = None) -> int:
                 "atualizado_em": agora_iso(), "encartes": encartes_ocr.para_json(encartes),
                 "comparacoes": comparacoes}, ensure_ascii=False), encoding="utf-8")
             print(f"Exportado em {args.exportar}")
+        print(f"{len(comparacoes)} produto(s) anunciado(s) em 2 ou mais mercados:")
+        for c in comparacoes[:10]:
+            print(f"  {c['produto']}: " + " · ".join(
+                f"{o['mercado']} " + (f"R$ {o['p']:.2f}" if o["p"] is not None else "(preço no encarte)") for o in c["ofertas"]))
         return 0
     if args.comando == "conab":
         from .fontes import conab_prohort
