@@ -1,0 +1,4 @@
+falha de rede em https://encartesdf.com.br/robots.txt: <urlopen error [Errno 101] Network is unreachable>
+falha de rede em https://encartesdf.com.br/wp-json/wp/v2/posts?per_page=20&page=1&after=2026-10-17T00%3A00%3A00&_fields=date%2Clink%2Ctitle%2Ccontent: <urlopen error [Errno 101] Network is unreachable>
+falha de rede em https://encartesdf.com.br/wp-json/wp/v2/posts?per_page=20&page=1&after=2026-10-17T00%3A00%3A00&_fields=date%2Clink%2Ctitle%2Ccontent: <urlopen error [Errno 101] Network is unreachable>
+0 encarte(s) vigente(s); Tesseract: True
