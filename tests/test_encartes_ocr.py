@@ -149,6 +149,12 @@ def _bytes(img):
     return b.getvalue()
 
 
+class TestLimpeza(unittest.TestCase):
+    def test_sobras_no_comeco(self):
+        self.assertEqual(encartes_ocr.limpar_nome("AR e A A ei Costela Suína Sadia em Fatias"), "Costela Suína Sadia em Fatias")
+        self.assertEqual(encartes_ocr.limpar_nome("Pé de frango Copacol"), "Pé de frango Copacol")
+
+
 class TestRede(unittest.TestCase):
     def test_mesma_rede_com_outro_nome(self):
         self.assertEqual(encartes_ocr.nome_da_rede("Dia a Dia Atacadista"), "Atacadão Dia a Dia")

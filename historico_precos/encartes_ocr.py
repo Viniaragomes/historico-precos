@@ -23,6 +23,7 @@ from .rede import Navegador
 RE_PRECO = re.compile(r"(?:R\$\s*)?(\d{1,4})\s*[,.]\s*(\d{2})\b")
 RE_G_COMO_9 = re.compile(r"\b(\d{1,3}0)[96]\b")  # "5009"/"5006": o leitor confunde o "g"/"G" de "500g" com 9 ou 6
 RE_PREFIXO = re.compile(r"^(?:(?:distrito federal e entorno|a cada|cada|r\$|apenas|por|só|so|oferta|ofertas)(?=[\s.:,-]|$)[\s.:,-]*)+", re.I)
+CURTAS_REAIS = {"pé", "pe", "pó", "po", "de", "da", "do", "no", "na", "ao", "kg", "lt"}  # começo de nome de verdade
 RE_PALAVRA_BOA = re.compile(r"^[A-Za-zÀ-ú][A-Za-zÀ-ú-]{2,}[.,]?$")
 
 
@@ -30,8 +31,14 @@ def limpar_nome(texto: str) -> str | None:
     """Tira o que não é nome de produto e descarta leitura ruim (a maioria das palavras precisa ser palavra de verdade)."""
     texto = RE_G_COMO_9.sub(r"\1g", " ".join(texto.split()))
     texto = RE_PREFIXO.sub("", texto).strip(" -:|“”\"'[]()>*+.,")
+    # sobras de leitura no começo ("sa Picanha", "AR e A A ei Costela"): palavrinhas de 1 ou 2 letras
+    partes_ = texto.split()
+    while len(partes_) > 1 and re.fullmatch(r"[A-Za-zÀ-ú]{1,2}", partes_[0]) and partes_[0].lower() not in CURTAS_REAIS:
+        partes_.pop(0)
+    texto = " ".join(partes_)
     # siglas e medidas (BDJ, C/5UN, KG, 1) não contam nem a favor nem contra
-    partes = [p for p in texto.split() if not re.match(r"^(?:[A-Z]{1,3}|[A-Z0-9/]*[0-9/][A-Z0-9/]*)$", p)]
+    partes = [p for p in texto.split() if not re.match(r"^(?:[A-Z]{1,3}|[A-Z0-9/]*[0-9/][A-Z0-9/]*)$", p)
+              and p.lower() not in CURTAS_REAIS]
     boas = [p for p in partes if RE_PALAVRA_BOA.match(p) and re.search(r"[aeiouáéíóúâêôãõAEIOUÁÉÍÓÚÂÊÔÃÕ]", p)
             or re.match(r"^\d+(?:[.,]\d+)?(?:kg|g|ml|l|un)$", p, re.I)]
     if not partes or len(boas) / len(partes) < 0.6 or not any(len(p) >= 4 for p in boas):
@@ -317,9 +324,14 @@ def paginas_do_pdf(caminho: Path, max_paginas: int = 8) -> list[Path]:
 def _ler_imagem(lido: EncarteLido, linhas: list[dict], vocab: set[str] | None, filtrar: bool) -> None:
     from .vinculo import semelhanca, tokens
 
+    from .vinculo import normalizar
+
     for t in trechos_das_linhas(linhas):
         if not plausivel(t) or (filtrar and not conhecido(t.texto, vocab)):
             continue
+        palavras = re.findall(r"[a-z]{3,}", normalizar(t.texto))
+        if len(palavras) < 2 and not (set(palavras) & VOCAB_BASE):
+            continue  # nome de uma palavra só ("PLUS", "Vitória") quase sempre é lixo; hortifrúti ("ABACAXI") passa
         # a mesma oferta lida nas duas passadas (cinza e cores) entra uma vez só
         if any(abs(x.preco - t.preco) < 0.005 and semelhanca(tokens(x.texto), tokens(t.texto)) >= 0.5 for x in lido.trechos):
             continue
