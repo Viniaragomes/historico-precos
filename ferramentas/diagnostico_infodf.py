@@ -10,7 +10,18 @@ from historico_precos.rede import Navegador  # noqa: E402
 nav = Navegador(intervalo=3)
 for caminho in ["/api/v1/indicador/", "/api/v1/painel/"]:
     j = json.loads(nav.get_texto("https://infodf.ipe.df.gov.br" + caminho) or "[]")
-    itens = [x for grupo in j for x in (grupo if isinstance(grupo, list) else [grupo])]
+    def achatar(no):  # junta todos os objetos com "nome", em qualquer nível
+        if isinstance(no, dict):
+            if "nome" in no and "id" in no:
+                yield no
+            for v in no.values():
+                yield from achatar(v)
+        elif isinstance(no, list):
+            for v in no:
+                yield from achatar(v)
+
+    print("formato:", type(j).__name__, list(j)[:10] if isinstance(j, dict) else len(j))
+    itens = list(achatar(j))
     vistos = {}
     for x in itens:
         vistos[x.get("id")] = x
