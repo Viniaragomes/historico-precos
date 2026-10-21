@@ -1,0 +1,10 @@
+https://static.openfoodfacts.org/data/en.openfoodfacts.org.products.csv.gz permitido: True
+https://static.openfoodfacts.org/api/v2/search?countries_tags_en=brazil permitido: False
+https://world.openfoodfacts.org/data/en.openfoodfacts.org.products.csv.gz permitido: True
+https://world.openfoodfacts.org/api/v2/search?countries_tags_en=brazil permitido: False
+tamanho: 1490.083633 MB | modificado: Wed, 21 Oct 2026 09:03:50 GMT
+Traceback (most recent call last):
+  File "/home/runner/work/historico-precos/historico-precos/ferramentas/diagnostico_off_dump.py", line 26, in <module>
+    d = gzip.decompressobj(16 + 15)
+        ^^^^^^^^^^^^^^^^^^
+AttributeError: module 'gzip' has no attribute 'decompressobj'. Did you mean: 'decompress'?
