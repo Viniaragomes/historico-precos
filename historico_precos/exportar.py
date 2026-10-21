@@ -116,3 +116,38 @@ def exportar(banco: Banco, pasta: Path, causas: AgenteCausas | None = None) -> i
         json.dumps({"atualizado_em": agora_iso(), "produtos": indice}, ensure_ascii=False), encoding="utf-8"
     )
     return len(indice)
+
+
+def exportar_codigos(caminho_dicionario: Path, pasta: Path, prefixo: int = 6) -> int:
+    """Divide o dicionário de códigos (Mapa de Preços do DF) em arquivos pequenos por prefixo do código de barras,
+    para o app consultar qualquer código sem baixar tudo: dados/codigos/<6 primeiros dígitos>.json."""
+    import gzip
+    import shutil
+    import sqlite3
+    import tempfile
+
+    caminho = Path(caminho_dicionario)
+    if caminho.suffix == ".gz":
+        tmp = Path(tempfile.mkdtemp()) / "dicionario.db"
+        with gzip.open(caminho, "rb") as origem, open(tmp, "wb") as destino:
+            shutil.copyfileobj(origem, destino)
+        caminho = tmp
+    con = sqlite3.connect(caminho)
+    linhas = con.execute(
+        "SELECT ean, unidade, descricao, ncm, mediana, notas, atualizado_em FROM mapa_df_dicionario ORDER BY ean, notas DESC")
+    grupos: dict[str, dict] = {}
+    atualizado = None
+    for ean, unidade, descricao, ncm, mediana, notas, em in linhas:
+        atualizado = atualizado or em
+        g = grupos.setdefault(ean[:prefixo], {})
+        if ean in g:
+            continue  # fica a unidade com mais notas
+        g[ean] = {"n": descricao, "u": unidade, "p": round(mediana, 2) if mediana else None, "q": notas, "ncm": ncm}
+    pasta.mkdir(parents=True, exist_ok=True)
+    for pre, itens in grupos.items():
+        (pasta / f"{pre}.json").write_text(json.dumps(itens, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    (pasta / "_sobre.json").write_text(json.dumps({
+        "fonte": "Mapa de Preços do DF (Secretaria de Economia): notas fiscais entre empresas emitidas no DF, últimos 3 meses",
+        "evidencia": "https://paineis.fazenda.df.gov.br/mapadeprecos/", "atualizado_em": atualizado,
+        "codigos": sum(len(g) for g in grupos.values())}, ensure_ascii=False), encoding="utf-8")
+    return sum(len(g) for g in grupos.values())

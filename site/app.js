@@ -752,8 +752,102 @@ async function abrirReporte(ean = null, tipoInicial = null) {
     contato ? el("p", { class: "minusculo", style: "text-align:center" }, "Ou escreva para ", el("a", { href: `mailto:${contato}` }, contato)) : null);
 }
 
+// dicionário de códigos (Mapa de Preços do DF): nome e preço de compra de quase todo código vendido no DF
+async function codigoDF(ean) {
+  try {
+    const parte = await carregarJSON(`dados/codigos/${ean.slice(0, 6)}.json`);
+    return parte?.[ean] || null;
+  } catch { return null; }
+}
+
+// "CAFE TORRADO PILAO 500G" -> "Cafe Torrado Pilao 500g" (as notas fiscais vêm em maiúsculas)
+function nomeLegivel(t) {
+  if (!t) return null;
+  if (t !== t.toUpperCase()) return t;
+  return t.toLowerCase().replace(/(^|\s)([a-zà-ú])/g, (m, a, b) => a + b.toUpperCase())
+    .replace(/(\d)(Kg|G|Ml|L|Un)\b/g, (m, n, u) => n + u.toLowerCase());
+}
+
+// ---------- produtos parecidos (para nunca terminar em tela vazia) ----------
+
+const PALAVRAS_VAZIAS = new Set(["de", "da", "do", "das", "dos", "e", "com", "sem", "para", "em", "tipo", "pct", "pacote", "un", "und",
+  "cx", "caixa", "lata", "garrafa", "pet", "pote", "sache", "bandeja", "kg", "g", "gr", "ml", "l", "lt", "c", "unid"]);
+
+function palavras(t) {
+  return new Set(normalizar(t).replace(/\d+(?:[.,]\d+)?\s*(kg|g|gr|ml|l|lt|litros?)\b/g, " ").split(/[^a-z0-9]+/)
+    .filter((w) => w.length > 1 && !PALAVRAS_VAZIAS.has(w) && !/^\d+$/.test(w)));
+}
+
+function tamanho(t) {
+  const m = [...normalizar(t).matchAll(/(\d+(?:[.,]\d+)?)\s*(kg|g|gr|ml|l|lt|litros?)\b/g)].pop();
+  if (!m) return null;
+  const n = parseFloat(m[1].replace(",", ".")), u = m[2];
+  return u === "kg" ? [n * 1000, "g"] : ["l", "lt", "litro", "litros"].includes(u) ? [n * 1000, "ml"] : [n, u === "gr" ? "g" : u];
+}
+
+async function parecidos(nome, ean, limite = 4) {
+  const alvo = palavras(nome);
+  if (alvo.size < 1) return [];
+  const tam = tamanho(nome);
+  const { produtos } = await indice();
+  return produtos.filter((p) => p.ean !== ean && p.menor_preco != null && p.nome).map((p) => {
+    const w = palavras(p.nome);
+    const comuns = [...alvo].filter((x) => w.has(x)).length;
+    const t = tamanho(p.nome);
+    const mesmoTamanho = tam && t && t[1] === tam[1] && Math.abs(t[0] - tam[0]) < 1e-6;
+    return { p, nota: comuns / Math.max(alvo.size, 1) + (mesmoTamanho ? 0.3 : 0), comuns };
+  }).filter((x) => x.comuns >= Math.min(2, alvo.size)).sort((a, b) => b.nota - a.nota).slice(0, limite).map((x) => x.p);
+}
+
+function cartaoParecidos(nome, ean) {
+  const cartao = el("section", { class: "cartao entrar entrar-2", hidden: true }, el("h2", {}, "Parecidos com preço"));
+  parecidos(nome, ean).then((lista) => {
+    if (!lista.length) return;
+    cartao.hidden = false;
+    cartao.append(el("p", { class: "sub" }, "Não são este produto: são os mais parecidos que acompanhamos (tipo, marca ou tamanho). Use como referência."),
+      listaProdutos(lista));
+  });
+  return cartao;
+}
+
+function cartaoCompraDicionario(d) {
+  return el("section", { class: "cartao entrar entrar-2" },
+    el("h2", {}, "Preço de compra no DF"),
+    el("div", { class: "loja-linha" },
+      el("div", { class: "meio" }, el("div", { class: "nome" }, nomeLegivel(d.n) || "Produto"),
+        el("div", { class: "detalhe" }, `mediana de ${d.q} ${d.q === 1 ? "item de nota fiscal" : "itens de notas fiscais"} · por ${(d.u || "un").toLowerCase()}`)),
+      el("div", { class: "direita" }, el("div", { class: "valor" }, d.p != null ? brl.format(d.p) : "—"))),
+    el("p", { class: "minusculo", style: "margin:10px 0 0" },
+      "Quanto o comércio pagou por este código nas notas fiscais entre empresas emitidas no DF nos últimos 3 meses. ",
+      "Na prateleira costuma ser mais caro (frete, perdas, impostos e margem). Fonte: ",
+      el("a", { href: "https://paineis.fazenda.df.gov.br/mapadeprecos/", target: "_blank", rel: "noopener" }, "Mapa de Preços do DF"), "."));
+}
+
+// sem nome em nenhuma fonte: a pessoa digita o que está na embalagem e já vê parecidos e impostos
+function cartaoDigiteNome(ean, tabela) {
+  const resultado = el("div");
+  const campo = el("input", { class: "campo-texto", placeholder: "Ex.: Água mineral Platina 310ml", "aria-label": "Nome do produto na embalagem",
+    autocomplete: "off" });
+  const ver = () => {
+    const nome = campo.value.trim();
+    if (nome.length < 3) return;
+    try { localStorage.setItem(`nome_${ean}`, nome); } catch { /* sem armazenamento */ }
+    resultado.replaceChildren(cartaoParecidos(nome, ean), cartaoImpostos(tabela, [nome], null));
+  };
+  try { campo.value = localStorage.getItem(`nome_${ean}`) || ""; } catch { /* sem armazenamento */ }
+  const cartao = el("section", { class: "cartao entrar entrar-2" },
+    el("h2", {}, "Como se chama este produto?"),
+    el("p", { class: "sub" }, "Digite o nome e o tamanho que aparecem na embalagem para ver produtos parecidos com preço e os impostos."),
+    campo,
+    el("button", { class: "botao-principal", type: "button", style: "margin-top:10px", onclick: ver }, "Ver parecidos e impostos"));
+  campo.addEventListener("keydown", (ev) => { if (ev.key === "Enter") ver(); });
+  if (campo.value) setTimeout(ver, 0);
+  return el("div", {}, cartao, resultado);
+}
+
 async function telaNaoAcompanhado(ean, aberto, tabela) {
-  const nome = aberto?.nome;
+  const dic = await codigoDF(ean);
+  const nome = aberto?.nome || nomeLegivel(dic?.n);
   const subtitulo = [aberto?.marca, aberto?.quantidade].filter(Boolean).join(" · ");
   conteudo.replaceChildren(
     el("header", { class: "hero" },
@@ -763,21 +857,30 @@ async function telaNaoAcompanhado(ean, aberto, tabela) {
         aberto?.foto ? el("img", { class: "foto-produto", src: aberto.foto, alt: "" }) : null,
         el("h1", { class: "produto-nome" }, nome || "Produto não identificado", el("small", {}, subtitulo || `Código ${ean}`),
           aberto?.foto || aberto?.nome ? creditoFoto(ean) : null)),
-      el("p", { class: "rotulo entrar" }, "Ainda não acompanhamos o preço deste produto"),
-      el("p", { class: "onde entrar" }, "A lista de produtos cresce a cada coleta.")),
+      dic?.p != null ? [
+        el("p", { class: "rotulo entrar" }, "Preço de compra no DF"),
+        el("p", { class: "preco-hero entrar" }, brl.format(dic.p)),
+        el("p", { class: "onde entrar" }, "Ainda sem preço de prateleira: ajude informando o que você viu."),
+      ] : [
+        el("p", { class: "rotulo entrar" }, "Ainda não acompanhamos o preço deste produto"),
+        el("p", { class: "onde entrar" }, "Pedimos a inclusão e você pode informar o preço que viu."),
+      ]),
     el("div", { class: "folha" },
+      cartaoPrecosComunidade(ean, nome),
+      dic ? cartaoCompraDicionario(dic) : null,
+      nome ? cartaoParecidos(nome, ean) : null,
       nome ? cartaoImpostos(tabela, [nome], null) : aberto?.falhou ? el("section", { class: "cartao entrar" },
         el("h2", {}, "Não deu para consultar agora"),
         el("p", { class: "sub" }, "A base aberta de produtos não respondeu a tempo (internet lenta ou instável)."),
         el("button", { class: "botao-secundario-neutro", type: "button", onclick: () => telaProduto(ean) }, "Tentar de novo"))
         : el("section", { class: "cartao entrar" },
           el("h2", {}, "Produto ainda sem cadastro"),
-          el("p", { class: "sub" }, `O código ${ean} ainda não está na base aberta de produtos (Open Food Facts) nem na nossa lista. `,
+          el("p", { class: "sub" }, `O código ${ean} ainda não aparece em nenhuma fonte pública: nem na base aberta de produtos, nem nas notas fiscais do DF. `,
             "Se o código na tela não for o da embalagem, escaneie de novo."),
-          el("p", { class: "sub" }, "Qualquer pessoa pode cadastrar o produto lá, com fotos da embalagem; depois disso o nome e a foto aparecem aqui."),
+          el("p", { class: "sub" }, "Qualquer pessoa pode cadastrar o produto na base aberta, com fotos da embalagem; depois disso o nome e a foto aparecem aqui."),
           el("a", { class: "botao-secundario-neutro", href: `https://world.openfoodfacts.org/cgi/product.pl?type=search_or_add&code=${ean}`,
             target: "_blank", rel: "noopener" }, "Cadastrar no Open Food Facts")),
-      cartaoPrecosComunidade(ean, nome),
+      nome ? null : cartaoDigiteNome(ean, tabela),
       cartaoPedido(ean),
       el("section", { class: "cartao entrar entrar-2" },
         el("button", { class: "botao-escanear-grande botao-marca", type: "button", onclick: abrirLeitor }, icone("escanear"), "Escanear outro produto"))));

@@ -120,6 +120,16 @@ jobs:
         timeout-minutes: 10
         run: python -m historico_precos conab --exportar site/dados/conab.json | tail -40
 
+      - name: Dicionário de códigos para o app (nome e preço de compra de qualquer código das notas do DF)
+        continue-on-error: true
+        run: |
+          git fetch -q origin dados || true
+          if git show origin/dados:dicionario.db.gz > dicionario.db.gz 2>/dev/null; then
+            python -m historico_precos exportar-codigos dicionario.db.gz --saida site/dados/codigos
+          else
+            echo "Dicionário ainda não baixado (workflow 'Dicionário de códigos')."
+          fi
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site

@@ -105,3 +105,27 @@ class TestComandoExportar(unittest.TestCase):
             self.assertEqual(r.returncode, 0, r.stderr)
             indice = json.loads(Path(f"{d}/dados/indice.json").read_text())
             self.assertEqual(sorted(p["ean"] for p in indice["produtos"]), ["7891910030378", "7896005800027"])
+
+
+class TestExportarCodigos(unittest.TestCase):
+    def test_divide_por_prefixo_e_fica_com_a_unidade_mais_vendida(self):
+        import gzip
+        import sqlite3
+
+        from historico_precos.exportar import exportar_codigos
+        from historico_precos.mapa_df import qlik
+
+        with tempfile.TemporaryDirectory() as d:
+            con = sqlite3.connect(f"{d}/dic.db")
+            con.executescript(qlik._ESQUEMA_DICIONARIO)
+            con.executemany("INSERT INTO mapa_df_dicionario VALUES (?, ?, ?, ?, ?, ?, ?, '2026-10-21')", [
+                ("7898955519028", "UN", "AGUA MIN PLATINA 310ML", "22011000", 1.2, 8, 480),
+                ("7898955519028", "CX", "AGUA PLATINA CX12", "22011000", 14.0, 2, 10),
+                ("7896005800027", "UN", "CAFE 3C 500G", "09012100", 18.5, 30, 900)])
+            con.commit()
+            con.close()
+            with open(f"{d}/dic.db", "rb") as f, gzip.open(f"{d}/dic.db.gz", "wb") as g:
+                g.write(f.read())
+            self.assertEqual(exportar_codigos(Path(f"{d}/dic.db.gz"), Path(f"{d}/codigos")), 2)
+            item = json.loads(Path(f"{d}/codigos/789895.json").read_text())["7898955519028"]
+            self.assertEqual((item["n"], item["u"], item["p"]), ("AGUA MIN PLATINA 310ML", "UN", 1.2))

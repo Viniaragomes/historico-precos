@@ -477,6 +477,10 @@ def main(argv: list[str] | None = None) -> int:
     ex.add_argument("--sem-causas", action="store_true", help="não consulta IBGE/Banco Central (mais rápido)")
     ex.add_argument("--com-noticias", action="store_true", help="inclui notícias (GDELT) nas causas")
 
+    ec = sub.add_parser("exportar-codigos", help="divide o dicionário de códigos em arquivos por prefixo, para o app")
+    ec.add_argument("dicionario", help="dicionario.db ou dicionario.db.gz")
+    ec.add_argument("--saida", default="site/dados/codigos")
+
     sv = sub.add_parser("servir", help="abre o app no computador em http://localhost:8000")
     sv.add_argument("--porta", type=int, default=8000)
     sv.add_argument("--pasta", default="site")
@@ -702,6 +706,12 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"[{a.severidade.upper():8}] {a.ean} {a.loja:<20} {a.data} R$ {a.preco:>8.2f}  {a.tipo}: {a.mensagem}")
                 print(f"           fonte: {a.evidencia}")
         print(f"\n{total} alerta(s) em {len(eans)} produto(s). Bloqueios não são exportados para o app.")
+        return 0
+    if args.comando == "exportar-codigos":
+        from .exportar import exportar_codigos
+
+        n = exportar_codigos(Path(args.dicionario), Path(args.saida))
+        print(f"{n} código(s) de barras exportado(s) para {args.saida}")
         return 0
     if args.comando == "exportar":
         causas = None if args.sem_causas else AgenteCausas(nav, banco, usar_noticias=args.com_noticias)

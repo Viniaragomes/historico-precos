@@ -1,6 +1,6 @@
 // Guarda o app para abrir sem internet. Com internet, sempre busca a versão mais nova (rede primeiro);
 // a cópia salva só é usada quando a rede falha ou demora demais.
-const VERSAO = "v17";
+const VERSAO = "v18";
 const APP = ["./", "index.html", "app.css", "app.js", "impostos.js", "impostos.json", "cepea.json", "confianca.js", "comunidade.js", "legal/termos.html", "legal/privacidade.html", "manifest.webmanifest", "icone.svg", "icone-192.png", "icone-512.png"];
 
 self.addEventListener("install", (ev) => {
