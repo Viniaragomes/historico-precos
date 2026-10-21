@@ -1,4 +1,166 @@
-falha de rede em https://encartesdf.com.br/robots.txt: <urlopen error [Errno 101] Network is unreachable>
-falha de rede em https://encartesdf.com.br/wp-json/wp/v2/posts?per_page=20&page=1&after=2026-10-17T00%3A00%3A00&_fields=date%2Clink%2Ctitle%2Ccontent: <urlopen error [Errno 101] Network is unreachable>
-falha de rede em https://encartesdf.com.br/wp-json/wp/v2/posts?per_page=20&page=1&after=2026-10-17T00%3A00%3A00&_fields=date%2Clink%2Ctitle%2Ccontent: <urlopen error [Errno 101] Network is unreachable>
-0 encarte(s) vigente(s); Tesseract: True
+20 encarte(s) vigente(s); Tesseract: True
+
+== Atacadão Dia a Dia | até 2026-10-21 | 1 imagem(ns) | https://ofertas.diaadiaatacadista.com.br/ofertas/dia-de-feira-21-10-df-e-entorno/
+   R$    1.29 | DISTRITO FEDERAL E ENTORNO TOMATE GRAPE
+   R$   12.90 | A CADA 1 g
+   R$    2.49 | BANANA NANICA
+   R$    2.49 | BETERRABA
+   R$    7.49 | UVA VERDE FRUTAYA SEM SEMENTE OU UVA PRETA BRAVIS COM SEMENTE BANDEJA 500G
+   R$   12.79 | OVOS BRANCOS MANTIQUEIRA OU EMAPE TIPO EXTRA BANDEJA COM 30 UNIDADES
+
+== Atacadão Dia a Dia | até 2026-10-21 | 8 imagem(ns) | https://ofertas.diaadiaatacadista.com.br/ofertas/exclusivo-aniversario-15-a-21-df-e-entorno/
+   R$    8.90 | DISTRITO FEDERAL E ENTORNO IOGURTE BATAVO PENSE ZERO BANDEJA SABORES 510G
+   R$    8.29 | cada REQUEIJÃO CREMOSO TRADICIONAL BATAVO 200G
+   R$    6.49 | cada LEITE FERMENTADO BOB ESPONJA SABORES 480G
+   R$   32.89 | R$ cada NUGGETS TRADICIONAIS AURORA 2KG
+   R$    1.49 | BISCOITO WAFER DIA A DIA SABORES 73G
+   R$    3.79 | cada BISCOITO CREAM CRACKER DIA A DIA 300G
+   R$   42.48 | 16 ,  kg PACOTE: 2.5 kg
+   R$   34.95 | kg PACOTE: 5 kg
+   R$    2.29 | cada EXCETO ÁGUAS CLARAS, GUARÁ E RIACHO FUNDO CREME DE LEITE LEITBOM TP 200G
+   R$    1.59 | 6 ,  cada CREME CULINÁRIO TRIANGULO 200G
+   R$    5.49 | PETIT SUISSE TREVINHO KIDS SABORES 320G
+   R$    5.49 | LEITE FERMENTADO ORIGINAL TREVINHO 450G
+   R$    7.49 | cada IOGURTE ZERO LACTOSE 24G DE PROTEÍNA EHRMANN SABORES 250G
+   R$   79.95 | kg PACOTE: 5 kg
+   R$    8.49 | COPACOL, LEVO, SUPER FRANGO OU QUALITTI
+   R$   19.90 | CHANTILLY CHANTY MIX TRADICIONAL 1 LITRO
+   R$    4.89 | LEITE CONDENSADO MARAJOARA 395G
+   R$    3.19 | EXCETO GUARÁ E RIACHO FUNDO MAIONESE VIGOR POTE 500G
+   R$   19.79 | CAFÉ TRADICIONAL OU EXTRA FORTE 3CORAÇÕES ALMOFADA OU À VÁCUO 500G OU TRADICIONAL SANTA CLARA ALMOFADA 500G
+   R$    1.49 | SABORES 34G
+   R$    4.79 | 96G OU 100G
+   R$   22.49 | cada VAREJO
+   R$    2.99 | cada VAREJO
+   R$    1.59 | VAREJO
+   R$    1.35 | SUCO MISTO NUTRI 100% SABORES
+   R$    3.19 | CERVEJA PURO MALTE AMSTEL LATA 350ML
+   R$   17.49 | 17 ,  cada INSETICIDA AEROSSOL RAID TIPOS 420ML
+   R$    1.79 | SABONETE JOHNSON'S FRAGRÂNCIAS 80G
+   R$    1.79 | DETERGENTE LÍQUIDO OESTE FRAGRÂNCIAS 500ML
+   R$    2.79 | ÁGUA SANITÁRIA QBOA 1 LITRO
+   R$    3.89 | LIMPADOR MULTIUSO VEJA 750ML
+   R$    7.26 | LAVA-ROUPAS EM PÓ TIXAN YPÊ 2,2KG
+   R$    5.93 | LAVA-ROUPAS LÍQUIDO UAU
+   R$    1.89 | cada ALIMENTO PARA CÃES ADULTOS CHAMP SACHÊ SABORES 85G OU KITEKAT 70G
+   R$   13.49 | R$ TOALHA CORTTEX NANTES 68X1,35M SORTIDAS LISA
+
+== Dona | até 2026-10-21 | 0 imagem(ns) | https://donafazbem.com.br/folheto/ofertas/
+   R$  192.99 | R$ cada Banana Prata
+   R$    5.99 | Tradicional ape q 19:92 a mpre Rs
+   R$  250.69 | e Bombom Lacta Sortidos
+
+== Assaí Atacadista | até 2026-10-22 | 1 imagem(ns) | https://encartesdf.com.br/assai-atacadista-ate-22-10-2026/
+   R$  169.90 | pci PÉ DE FRANGO RESFRIADO COPACOL [
+   R$   16.90 | CARNE BOVINA MOÍDA CONGELADA FRIBOL EMBALAGEM 5006
+   R$  514.90 | RESFRIADA PARA CHURRASCO BONFRIGO
+   R$   34.90 | LAGARTO BOVINO RESFRIADO FRIBOI PREÇO POR QUILO NA PEÇA “
+   R$   14.50 | CONGELADA FRIBOL EMBALAGEM 5006
+   R$    8.99 | RESFRIADO COPACOL quito ix
+   R$    2.95 | BATATA-DOCE ROSADA “
+   R$    2.99 | ABACATE “
+   R$   14.49 | CONGELADO SEARA BANDEJA
+   R$   14.90 | EMPANADO DE FRANGO EM sea mona “
+   R$   12.90 | DESFIADO CONGELADO SUPER FRAN PACOTE 4006 “
+   R$   10.49 | SOBRECOXA DE FRANGO CONGELADO BANDEJA 1KG “
+   R$   14.90 | CONGELADAS DE FRANGO SUPER FRANGO. PACOTE IQF “
+   R$    4.99 | ç > | MELÃO AMARELO “
+   R$    5.49 | BRÓCOLIS NINIA “
+   R$    5.79 | <a. MAMÃO-FORMOSA “
+   R$    5.99 | MAÇASULI PACOTE 1KG. “
+   R$    7.99 | MAÇÃ NACIONAL FUZI “
+   R$   15.90 | (un APRESUNTADO REZENDE “
+   R$   16.90 | PIZZA CONGELADA AURORA SABORES UNIDADE 4606. “
+   R$   21.90 | PARA CONGELADA AURORA PACOTE KG “
+   R$   21.90 | SORVETE CREME MEL SABORES POTE SL “
+   R$    4.99 | UVA CRIMSON, 500G
+   R$    2.49 | NESTLÉ SABOR MORANGO GARRAFA 1706. “
+   R$    4.99 | POLPA DE FRUTA BATAVO SABORES BANDEJA S10G. “
+   R$    6.99 | MARGARINA COM SAL QUALY POTE S00G “
+
+== Supermercado Brandão | até 2026-10-21 | 2 imagem(ns) | https://encartesdf.com.br/supermercado-brandao-ate-21-10-2026/
+
+== Bevia Atacadista | até 2026-10-21 | 1 imagem(ns) | https://encartesdf.com.br/bevia-atacadista-ate-21-10-2026/
+
+== Dia a Dia Atacadista | até 2026-10-21 | 1 imagem(ns) | https://encartesdf.com.br/dia-a-dia-atacadista-ate-21-10-2026-2/
+   R$    0.99 | VERDESÓ oa “
+   R$    2.49 | 4 é ES d “
+   R$    7.99 | mimo Seeção “
+
+== Supermercado Ultrabox | até 2026-10-25 | 2 imagem(ns) | https://encartesdf.com.br/supermercado-ultrabox-ate-25-10-2026/
+   R$   10.98 | ni Edo a Pa
+   R$   16.98 | E per +
+   R$   59.98 | CLUBE NENE es
+   R$   19.98 | no 0 EE | arroz as
+   R$   12.98 | pérola | tao 5kg as
+   R$    6.98 | EXCLUSIVA LTRA as
+   R$    2.58 | E a se ns
+   R$    1.68 | o É PA EXCLUSIVA o
+   R$    1.28 | «x EXCLUSIVA CLUBE as
+   R$   10.98 | (EXCLUSIVA LTRA CLUBE as
+   R$   11.98 | CLUBE u Tia
+   R$   19.98 | 2 TUPA A AA
+   R$    6.98 | Qualy remosa o)
+   R$   17.98 | (el Z NÓ as
+   R$    1.98 | ULTRA! CLUBE as
+   R$    9.98 | 44 CLUBE o, ns
+   R$   67.45 | 98 PACOTE 2,5KG
+   R$   47.40 | ns 9:48 PACOTE 5KG
+   R$   29.98 | ULTRA CLUBE CLUBE
+   R$   24.98 | EXCLUSIVA ULTRA CLUBE ns
+   R$    4.98 | ng ps
+   R$   15.98 | ota é “a = as
+   R$   11.98 | EXCLUSIVA ULTRA CLUBE
+   R$   24.98 | Cd Fato tom
+   R$   19.98 | ida Em 38 as
+
+== Supermercado Ultrabox | até 2026-10-22 | 7 imagem(ns) | https://encartesdf.com.br/supermercado-ultrabox-ate-22-10-2026/
+   R$    5.98 | eite Fermentado Chamyto Tradicional
+   R$   12.98 | Coca-Cola Original s
+   R$    2.98 | Manga Palmer EB
+
+== Supermercado Ultrabox | até 2026-10-26 | 10 imagem(ns) | https://encartesdf.com.br/supermercado-ultrabox-ate-26-10-2026/
+   R$   10.98 | Batata Palito Congelada Casademãe
+   R$    6.98 | Biscoito de Polvilho Casademãe Sabor Queijo Parmesão
+
+== Supermercado Mineirão | até 2026-10-21 | 1 imagem(ns) | https://encartesdf.com.br/supermercado-mineirao-ate-21-10-2026/
+   R$    3.99 | MELÃO AMARELO OU MAMÃO FORMOSA >
+   R$    6.98 | UVA CRIMSON *
+   R$    4.98 | sy da e.
+
+== Supermercado Superbom | até 2026-10-22 | 2 imagem(ns) | https://encartesdf.com.br/supermercado-superbom-ate-22-10-2026/
+   R$   25.90 | ALHO A GRANEL
+
+== Supermercado Mais Econômico | até 2026-10-26 | 5 imagem(ns) | https://encartesdf.com.br/supermercado-mais-economico-ate-26-10-2026/
+   R$    1.99 | “!20M0 poor emas
+
+== Supermercado Super Big | até 2026-10-21 | 1 imagem(ns) | https://encartesdf.com.br/supermercado-super-big-ate-21-10-2026/
+   R$    3.49 | LARANJA
+   R$    3.99 | BATATA DOCE
+   R$    1.99 | COUVE INTEIRA
+   R$    2.49 | CHEIRO VERDE
+   R$    4.99 | BANANA NANICA
+   R$    2.99 | ABOBORA BAIANINHA
+   R$    3.99 | ABOBORA JAPONESA
+   R$    5.99 | ABACAXI
+   R$    3.99 | MAMÃO
+   R$    4.99 | MELAO AMARELO
+
+== Supermercado Planeta | até 2026-10-21 | 1 imagem(ns) | https://encartesdf.com.br/supermercado-planeta-ate-21-10-2026/
+   R$    5.99 | MAÇÃ GALA KG
+   R$    3.99 | fica
+   R$    4.99 | MILHO BDJ C/5UN
+   R$    3.99 | Pa fo Sm aa)
+   R$    0.99 | PIMENTA DE CHEIRO BDJ ae
+   R$   41.99 | MAMÃO FORMOSA KG io 4
+
+== Supermercado União | até 2026-10-22 | 1 imagem(ns) | https://encartesdf.com.br/supermercado-uniao-ate-22-10-2026/
+
+== Cristal Supermercado | até 2026-10-21 | 1 imagem(ns) | https://encartesdf.com.br/cristal-supermercado-ate-21-10-2026/
+
+== Fort Atacadista | até 2026-10-22 | 4 imagem(ns) | https://encartesdf.com.br/fort-atacadista-ate-22-10-2026/
+   R$   13.45 | SC: Sa |) A 2 *UN.SAIPOR
+
+== Supermercado Tatico | até 2026-10-25 | 7 imagem(ns) | https://encartesdf.com.br/supermercado-tatico-ate-25-10-2026/
+
+== Supermercado Bistecão | até 2026-10-22 | 2 imagem(ns) | https://encartesdf.com.br/supermercado-bistecao-ate-22-10-2026/
