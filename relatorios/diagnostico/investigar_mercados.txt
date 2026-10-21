@@ -1,0 +1,45 @@
+
+== Atacadão Dia a Dia (https://www.atacadaodiaadia.com.br): robots 200 | página 200 Atacadão Dia a Dia &#187; Home | tec ['wordpress'] | anti-robô ['cloudflare'] 
+   sitemap: 230 URLs, 0 de produto; amostra: None
+
+== Assaí Atacadista (https://www.assai.com.br): robots 200 | página 403  | tec [] | anti-robô [] 
+   sitemap: 0 URLs, 0 de produto; amostra: None
+
+== Big Box (https://www.bigboxdelivery.com.br): robots 200 | página 200 BIG BOX Delivery - 402/403 Norte - Lugar com qualidade e economia. | tec ['next.js'] | anti-robô ['cloudflare'] 
+   sitemap: 13610 URLs, 13413 de produto; amostra: [{'status': 200, 'json_ld': [{'nome': 'Cappuccino Solúvel Classic 3 Corações Pote 400g', 'gtin': None, 'marca': '3 Corações', 'preco': 49.99, 'moeda': 'BRL', 'disponibilidade': 'https://schema.org/InStock'}]}, {'status': 200, 'json_ld': [{'nome': 'Cappuccino Solúvel Diet 3 Corações Pote 150g', 'gtin': None, 'marca': '3 Corações', 'preco': 24.99, 'moeda': 'BRL', 'disponibilidade': 'https://schema.org/InStock'}]}]
+
+== Dona (Dona Fazbem) (https://donafazbem.com.br): robots 200 | página 200 Dona ® Mercado, Hortifruti e Adega Em Brasília DF | tec ['wordpress'] | anti-robô [] 
+   sitemap: 206 URLs, 5 de produto; amostra: [{'status': 200, 'json_ld': [{'nome': 'Dona: Cesta Dona Alegria em Fazer o Bem - Brasília DF', 'gtin': None, 'marca': None, 'preco': '199.00', 'moeda': 'BRL', 'disponibilidade': 'http://schema.org/InStock'}]}, {'status': 200, 'json_ld': [{'nome': 'Dona: Cesta Dona Desejo de Paz - Brasília DF', 'gtin': None, 'marca': None, 'preco': None, 'moeda': None, 'disponibilidade': None}]}]
+
+== Pague Pouco (https://paguepouco.com.br): robots 0 | página None  | tec None | anti-robô None <urlopen error [Errno -2] Name or service not known>
+
+== Fort Atacadista (https://www.fortatacadista.com.br): robots 200 | página 200 Fort Atacadista | Atacado Online e Clube Mais de Vantagens | tec [] | anti-robô ['cloudflare'] 
+   sitemap: 12078 URLs, 11908 de produto; amostra: [{'status': 200, 'json_ld': [{'nome': 'BEB.CERV.IMPERIO 350ML PURO MALTE', 'gtin': '8227963', 'marca': 'Imperio', 'preco': '3.09', 'moeda': 'BRL', 'disponibilidade': 'https://schema.org/InStock'}]}, {'status': 200, 'json_ld': [{'nome': 'BEB.CERV.IMPERIO 350ML HELLES LT', 'gtin': '8227962', 'marca': 'Imperio', 'preco': '4.29', 'moeda': 'BRL', 'disponibilidade': 'https://schema.org/InStock'}]}]
+
+== Tatico (https://supermercadostatico.com.br): robots 0 | página None  | tec None | anti-robô None <urlopen error [Errno -2] Name or service not known>
+
+== Super Adega (https://www.superadega.com.br): robots 200 | página 200 Super Adega | tec [] | anti-robô ['cloudflare', 'captcha'] 
+   sitemap: 5379 URLs, 0 de produto; amostra: None
+
+== Ultrabox (https://www.ultrabox.com.br): robots 0 | página None  | tec None | anti-robô None <urlopen error [Errno -2] Name or service not known>
+
+== Oba Hortifruti (https://www.obahortifruti.com.br): robots 404 | página 200 Descubra o Frescor de Cada Dia e Surpreenda-se | Oba Hortifruti | tec ['vtex', 'next.js'] | anti-robô [] 
+   VTEX API: 206 [{'nome': 'Gelato Leite e Creme de Leite Bacio di Latte 490ml', 'ean': '7898967660008', 'preco': 59.99}, {'nome': 'Chocolate ao Leite Toblerone 100g', 'ean': '7622200341191', 'preco': 29.99}]
+
+== Veneza (https://www.supermercadoveneza.com.br): robots 403 | página None  | tec None | anti-robô None robots.txt não permite a página inicial
+
+== Superbom (https://www.superbom.com.br): robots 200 | página 200 Home - Superbom | tec ['wordpress'] | anti-robô ['captcha'] 
+   sitemap: 0 URLs, 0 de produto; amostra: None
+
+== Carrefour Mercado (https://mercado.carrefour.com.br): robots 200 | página 200 Mercado Carrefour | Ofertas de Supermercado Delivery | tec ['vtex'] | anti-robô ['cloudflare'] 
+   VTEX API: 503 
+   sitemap: 3000 URLs, 3000 de produto; amostra: [{'status': 200, 'json_ld': [{'nome': 'Condicionador Elseve Longo dos Sonhos com Queratina Vegetal sem Sal 200ml', 'gtin': '7899706170857', 'marca': 'Elsève', 'preco': 22.59, 'moeda': 'BRL', 'disponibilidade': 'http://schema.org/InStock'}]}, {'status': 200, 'json_ld': [{'nome': 'Condicionador Elseve Longo dos Sonhos 400ml', 'gtin': '7899706170871', 'marca': 'Elsève', 'preco': 36.9, 'moeda': 'BRL', 'disponibilidade': 'http://schema.org/InStock'}]}]
+
+== Atacadão (Carrefour) (https://www.atacadao.com.br): robots 200 | página 200 Atacadão: Suas compras de supermercado online com preço de atacado! | Atacadão | tec ['vtex', 'next.js'] | anti-robô ['cloudflare'] 
+   VTEX API: 206 [{'nome': 'Leite Semidesnatado Leite + 8g de Proteína 200ml', 'ean': '7898969803540', 'preco': 1.39}, {'nome': 'Doce de Soro de Leite Sabordê Sabor Doce de Leite 200g', 'ean': '7896523182759', 'preco': 2.99}]
+   sitemap: 3000 URLs, 3000 de produto; amostra: [{'status': 200, 'json_ld': [{'nome': 'Café Rosa De Ouro Almofada 500g', 'gtin': '66582919', 'marca': 'Rosa De Ouro', 'preco': None, 'moeda': 'BRL', 'disponibilidade': 'http://schema.org/InStock'}]}, {'status': 200, 'json_ld': [{'nome': 'Granola São Braz Tradicional 500g', 'gtin': '61352912', 'marca': 'São Braz', 'preco': None, 'moeda': 'BRL', 'disponibilidade': 'http://schema.org/InStock'}]}]
+
+== Pão de Açúcar (https://www.paodeacucar.com): robots 200 | página 200 Pão de Açúcar | Supermercado Online | tec ['next.js'] | anti-robô [] 
+   sitemap: 0 URLs, 0 de produto; amostra: None
+
+== Comper (https://www.comper.com.br): robots 403 | página None  | tec None | anti-robô None robots.txt não permite a página inicial

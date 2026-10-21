@@ -1,0 +1,410 @@
+{
+  "Atacadão Dia a Dia": {
+    "base": "https://www.atacadaodiaadia.com.br",
+    "robots_status": 200,
+    "robots_trecho": "# As a condition of accessing this website, you agree to abide by the following\n# content signals:\n\n# (a)  If a Content-Signal = yes, you may collect content for the corresponding\n#      use.\n# (b)  If a Content-Signal = no, you may not collect content for the\n#      corresponding use.\n# (c)  If the website operator does not include a Content-Signal for a\n#      corresponding use, the website oper",
+    "status": 200,
+    "titulo": "Atacadão Dia a Dia &#187; Home",
+    "antirrobo": [
+      "cloudflare"
+    ],
+    "tecnologia": [
+      "wordpress"
+    ],
+    "erro": null,
+    "sitemap": {
+      "urls": 230,
+      "produtos": 0,
+      "exemplos": [],
+      "amostras": []
+    }
+  },
+  "Assaí Atacadista": {
+    "base": "https://www.assai.com.br",
+    "robots_status": 200,
+    "robots_trecho": "User-agent: *\nAllow:\nUser-agent: Googlebot\nAllow:\nUser-agent: Googlebot-Image\nAllow:\nUser-agent: Mediapartners-Google\nAllow:\nUser-agent: Adsbot-Google\nAllow:\n\nUser-agent: *\nCrawl-delay: 10\n\n# Paths (clean URLs)\nDisallow: /peca-agora-seu-cartao\nDisallow: /promocaoassai\nDisallow: /promocao\nDisallow: /abraceumacausa\n\nSitemap: https://www.assai.com.br/sitemap.xml",
+    "status": 403,
+    "titulo": null,
+    "antirrobo": [],
+    "tecnologia": [],
+    "erro": null,
+    "sitemap": {
+      "urls": 0,
+      "produtos": 0,
+      "exemplos": [],
+      "amostras": []
+    }
+  },
+  "Big Box": {
+    "base": "https://www.bigboxdelivery.com.br",
+    "robots_status": 200,
+    "robots_trecho": "User-Agent: *\nAllow: /\nDisallow: /finalizar\nDisallow: /perfil/\nDisallow: /next_api/\nDisallow: /auth/\nDisallow: /monitoring\nDisallow: /listas/\nDisallow: /pesquisar\n\nSitemap: https://bigboxdelivery.com.br/sitemap.xml\n",
+    "status": 200,
+    "titulo": "BIG BOX Delivery - 402/403 Norte - Lugar com qualidade e economia.",
+    "antirrobo": [
+      "cloudflare"
+    ],
+    "tecnologia": [
+      "next.js"
+    ],
+    "erro": null,
+    "sitemap": {
+      "urls": 13610,
+      "produtos": 13413,
+      "exemplos": [
+        "https://bigboxdelivery.com.br/p/3-Coracoes-Cafe-Cappuccino-400g",
+        "https://bigboxdelivery.com.br/p/3-Coracoes-Cafe-Cappuccino-Diet-150g"
+      ],
+      "amostras": [
+        {
+          "status": 200,
+          "json_ld": [
+            {
+              "nome": "Cappuccino Solúvel Classic 3 Corações Pote 400g",
+              "gtin": null,
+              "marca": "3 Corações",
+              "preco": 49.99,
+              "moeda": "BRL",
+              "disponibilidade": "https://schema.org/InStock"
+            }
+          ]
+        },
+        {
+          "status": 200,
+          "json_ld": [
+            {
+              "nome": "Cappuccino Solúvel Diet 3 Corações Pote 150g",
+              "gtin": null,
+              "marca": "3 Corações",
+              "preco": 24.99,
+              "moeda": "BRL",
+              "disponibilidade": "https://schema.org/InStock"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "Dona (Dona Fazbem)": {
+    "base": "https://donafazbem.com.br",
+    "robots_status": 200,
+    "robots_trecho": "User-Agent: *\nAllow: /wp-content/uploads/\nAllow: /*/*.css\nAllow: /*/*.js\n\n\n# remocao dos diretorios\n\nDisallow: /cgi-bin/\nDisallow: /wusage\nDisallow: /wp-admin/\nDisallow: /wp-includes/\nDisallow: /wp-content/plugins/\nDisallow: /wp-admin/admin-ajax.php\nDisallow: /?s=\nDisallow: /search/\nDisallow: /feed/\nDisallow: /trackback/\nDisallow: /xmlrpc.php \nDisallow: /wp\nDisallow: /tag/\nDisallow: /tags/\nDisallo",
+    "status": 200,
+    "titulo": "Dona ® Mercado, Hortifruti e Adega Em Brasília DF",
+    "antirrobo": [],
+    "tecnologia": [
+      "wordpress"
+    ],
+    "erro": null,
+    "sitemap": {
+      "urls": 206,
+      "produtos": 5,
+      "exemplos": [
+        "https://donafazbem.com.br/produto/cesta-dona-alegria-em-fazer-o-bem/",
+        "https://donafazbem.com.br/produto/cesta-dona-desejo-de-paz/"
+      ],
+      "amostras": [
+        {
+          "status": 200,
+          "json_ld": [
+            {
+              "nome": "Dona: Cesta Dona Alegria em Fazer o Bem - Brasília DF",
+              "gtin": null,
+              "marca": null,
+              "preco": "199.00",
+              "moeda": "BRL",
+              "disponibilidade": "http://schema.org/InStock"
+            }
+          ]
+        },
+        {
+          "status": 200,
+          "json_ld": [
+            {
+              "nome": "Dona: Cesta Dona Desejo de Paz - Brasília DF",
+              "gtin": null,
+              "marca": null,
+              "preco": null,
+              "moeda": null,
+              "disponibilidade": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "Pague Pouco": {
+    "base": "https://paguepouco.com.br",
+    "robots_status": 0,
+    "erro": "<urlopen error [Errno -2] Name or service not known>"
+  },
+  "Fort Atacadista": {
+    "base": "https://www.fortatacadista.com.br",
+    "robots_status": 200,
+    "robots_trecho": "User-agent: *\nDisallow: /admin\nDisallow: /minha-conta\nDisallow: /account/*\nDisallow: /painel-do-cliente\nDisallow: /carrinho\nDisallow: /checkout\nDisallow: /login\nDisallow: /pedido\nDisallow: /busca\nDisallow: /search\nDisallow: /embed/\nDisallow: /lojas\nDisallow: /*?*\nAllow: /categorias\nAllow: /receitas\nAllow: /produtos/\nAllow: /listas/\nAllow: /*.css$\nAllow: /*.js$\n\nSitemap: https://fortatacadista.com.",
+    "status": 200,
+    "titulo": "Fort Atacadista | Atacado Online e Clube Mais de Vantagens",
+    "antirrobo": [
+      "cloudflare"
+    ],
+    "tecnologia": [],
+    "erro": null,
+    "sitemap": {
+      "urls": 12078,
+      "produtos": 11908,
+      "exemplos": [
+        "https://fortatacadista.com.br/produtos/8227963/bebcervimperio-350ml-puro-malte",
+        "https://fortatacadista.com.br/produtos/8227962/bebcervimperio-350ml-helles-lt"
+      ],
+      "amostras": [
+        {
+          "status": 200,
+          "json_ld": [
+            {
+              "nome": "BEB.CERV.IMPERIO 350ML PURO MALTE",
+              "gtin": "8227963",
+              "marca": "Imperio",
+              "preco": "3.09",
+              "moeda": "BRL",
+              "disponibilidade": "https://schema.org/InStock"
+            }
+          ]
+        },
+        {
+          "status": 200,
+          "json_ld": [
+            {
+              "nome": "BEB.CERV.IMPERIO 350ML HELLES LT",
+              "gtin": "8227962",
+              "marca": "Imperio",
+              "preco": "4.29",
+              "moeda": "BRL",
+              "disponibilidade": "https://schema.org/InStock"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "Tatico": {
+    "base": "https://supermercadostatico.com.br",
+    "robots_status": 0,
+    "erro": "<urlopen error [Errno -2] Name or service not known>"
+  },
+  "Super Adega": {
+    "base": "https://www.superadega.com.br",
+    "robots_status": 200,
+    "robots_trecho": "# We use Nuvemshop as our ecommerce platform: https://www.nuvemshop.com.br\n\nUser-agent: *\nDisallow: /admin/\nDisallow: /account/\nDisallow: /checkout/\nDisallow: /discount/\nDisallow: /*?*preview_theme_installation_id*\nDisallow: /*?view=\nDisallow: /*?*&view=\nDisallow: /*?*exit_preview_theme_installation*\nDisallow: /*?*srsltid=*\nDisallow: /blog/drafts/*\nDisallow: /comprar/\nDisallow: /comprar-express/\nD",
+    "status": 200,
+    "titulo": "Super Adega",
+    "antirrobo": [
+      "cloudflare",
+      "captcha"
+    ],
+    "tecnologia": [],
+    "erro": null,
+    "sitemap": {
+      "urls": 5379,
+      "produtos": 0,
+      "exemplos": [],
+      "amostras": []
+    }
+  },
+  "Ultrabox": {
+    "base": "https://www.ultrabox.com.br",
+    "robots_status": 0,
+    "erro": "<urlopen error [Errno -2] Name or service not known>"
+  },
+  "Oba Hortifruti": {
+    "base": "https://www.obahortifruti.com.br",
+    "robots_status": 404,
+    "robots_trecho": "",
+    "status": 200,
+    "titulo": "Descubra o Frescor de Cada Dia e Surpreenda-se | Oba Hortifruti",
+    "antirrobo": [],
+    "tecnologia": [
+      "vtex",
+      "next.js"
+    ],
+    "erro": null,
+    "vtex_api": 206,
+    "vtex_exemplo": [
+      {
+        "nome": "Gelato Leite e Creme de Leite Bacio di Latte 490ml",
+        "ean": "7898967660008",
+        "preco": 59.99
+      },
+      {
+        "nome": "Chocolate ao Leite Toblerone 100g",
+        "ean": "7622200341191",
+        "preco": 29.99
+      }
+    ]
+  },
+  "Veneza": {
+    "base": "https://www.supermercadoveneza.com.br",
+    "robots_status": 403,
+    "robots_trecho": "",
+    "nota": "robots.txt não permite a página inicial"
+  },
+  "Superbom": {
+    "base": "https://www.superbom.com.br",
+    "robots_status": 200,
+    "robots_trecho": "User-agent: *\r\nDisallow: /wp-content/uploads/wc-logs/\r\nDisallow: /wp-content/uploads/woocommerce_transient_files/\r\nDisallow: /wp-content/uploads/woocommerce_uploads/\r\nDisallow: /*?add-to-cart=\r\nDisallow: /*?*add-to-cart=\r\nDisallow: /wp-admin/\r\nAllow: /wp-admin/admin-ajax.php\r\n\r\n# START YOAST BLOCK\r\n# ---------------------------\r\nUser-agent: *\r\nDisallow:\r\n\r\nSitemap: https://superbom.com.br/sitemap_",
+    "status": 200,
+    "titulo": "Home - Superbom",
+    "antirrobo": [
+      "captcha"
+    ],
+    "tecnologia": [
+      "wordpress"
+    ],
+    "erro": null,
+    "sitemap": {
+      "urls": 0,
+      "produtos": 0,
+      "exemplos": [],
+      "amostras": []
+    }
+  },
+  "Carrefour Mercado": {
+    "base": "https://mercado.carrefour.com.br",
+    "robots_status": 200,
+    "robots_trecho": "User-agent: *\r\nAllow: /\r\nDisallow: /account/*\r\nDisallow: /minha-conta/*\r\nDisallow: /login*\r\nDisallow: /checkout/*\r\nDisallow: *sort=*\r\nDisallow:  /secure.mercado.carrefour.com.br/\r\nDisallow:  /secure.mercado.carrefour.com.br/*\r\n\r\nSitemap: https://mercado.carrefour.com.br/sitemap.xml\r\nHost: https://mercado.carrefour.com.br",
+    "status": 200,
+    "titulo": "Mercado Carrefour | Ofertas de Supermercado Delivery",
+    "antirrobo": [
+      "cloudflare"
+    ],
+    "tecnologia": [
+      "vtex"
+    ],
+    "erro": null,
+    "vtex_api": 503,
+    "vtex_exemplo": [],
+    "sitemap": {
+      "urls": 3000,
+      "produtos": 3000,
+      "exemplos": [
+        "https://mercado.carrefour.com.br/condicionador-elseve-longo-dos-sonhos-com-queratina-vegetal-sem-sal-200ml-5735270/p",
+        "https://mercado.carrefour.com.br/condicionador-elseve-longo-dos-sonhos-400ml-5735289/p"
+      ],
+      "amostras": [
+        {
+          "status": 200,
+          "json_ld": [
+            {
+              "nome": "Condicionador Elseve Longo dos Sonhos com Queratina Vegetal sem Sal 200ml",
+              "gtin": "7899706170857",
+              "marca": "Elsève",
+              "preco": 22.59,
+              "moeda": "BRL",
+              "disponibilidade": "http://schema.org/InStock"
+            }
+          ]
+        },
+        {
+          "status": 200,
+          "json_ld": [
+            {
+              "nome": "Condicionador Elseve Longo dos Sonhos 400ml",
+              "gtin": "7899706170871",
+              "marca": "Elsève",
+              "preco": 36.9,
+              "moeda": "BRL",
+              "disponibilidade": "http://schema.org/InStock"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "Atacadão (Carrefour)": {
+    "base": "https://www.atacadao.com.br",
+    "robots_status": 200,
+    "robots_trecho": "User-agent: *\nAllow: /\nDisallow: /checkout/*\nDisallow: /Site/Carrinho.aspx\nDisallow: /busca/*\nDisallow: /Site/QuickView.aspx\nDisallow: /Site/ProdutoFrete.aspx\nDisallow: /Site/TagDetalhe.aspx\nDisallow: /checkout\nDisallow: /account\nDisallow: /api/io/login\nDisallow: /orders\nDisallow: /secure.atacadao.com.br/\nDisallow: /secure.atacadao.com.br/*\nDisallow: /faststore-atc-dev.cloud.carrefour.com.br/\nDisa",
+    "status": 200,
+    "titulo": "Atacadão: Suas compras de supermercado online com preço de atacado! | Atacadão",
+    "antirrobo": [
+      "cloudflare"
+    ],
+    "tecnologia": [
+      "vtex",
+      "next.js"
+    ],
+    "erro": null,
+    "vtex_api": 206,
+    "vtex_exemplo": [
+      {
+        "nome": "Leite Semidesnatado Leite + 8g de Proteína 200ml",
+        "ean": "7898969803540",
+        "preco": 1.39
+      },
+      {
+        "nome": "Doce de Soro de Leite Sabordê Sabor Doce de Leite 200g",
+        "ean": "7896523182759",
+        "preco": 2.99
+      }
+    ],
+    "sitemap": {
+      "urls": 3000,
+      "produtos": 3000,
+      "exemplos": [
+        "https://www.atacadao.com.br/cafe-rosa-de-ouro-almofada-66582/p",
+        "https://www.atacadao.com.br/granola-sao-braz-tradicional-pacote-com-500g-61352/p"
+      ],
+      "amostras": [
+        {
+          "status": 200,
+          "json_ld": [
+            {
+              "nome": "Café Rosa De Ouro Almofada 500g",
+              "gtin": "66582919",
+              "marca": "Rosa De Ouro",
+              "preco": null,
+              "moeda": "BRL",
+              "disponibilidade": "http://schema.org/InStock"
+            }
+          ]
+        },
+        {
+          "status": 200,
+          "json_ld": [
+            {
+              "nome": "Granola São Braz Tradicional 500g",
+              "gtin": "61352912",
+              "marca": "São Braz",
+              "preco": null,
+              "moeda": "BRL",
+              "disponibilidade": "http://schema.org/InStock"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "Pão de Açúcar": {
+    "base": "https://www.paodeacucar.com",
+    "robots_status": 200,
+    "robots_trecho": "User-Agent: *\nAllow: /user/register\nDisallow: /checkout\nDisallow: /busca\nDisallow: /user/\nDisallow: /modal/\nDisallow: /meu-desconto\nDisallow: /meus-favoritos\nDisallow: /user-info/\n\n",
+    "status": 200,
+    "titulo": "Pão de Açúcar | Supermercado Online",
+    "antirrobo": [],
+    "tecnologia": [
+      "next.js"
+    ],
+    "erro": null,
+    "sitemap": {
+      "urls": 0,
+      "produtos": 0,
+      "exemplos": [],
+      "amostras": []
+    }
+  },
+  "Comper": {
+    "base": "https://www.comper.com.br",
+    "robots_status": 403,
+    "robots_trecho": "",
+    "nota": "robots.txt não permite a página inicial"
+  }
+}
