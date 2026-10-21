@@ -45,3 +45,26 @@ class TestVinculo(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestCasosReais(unittest.TestCase):
+    """Casos vistos no teste real de 21/10/2026 (Big Box x Open Food Facts)."""
+
+    def setUp(self):
+        self.cat = Catalogo([
+            ("7891000377765", "Achocolatado Pó 30 Cacau Nescau Lata 180g", "Nescau"),
+            ("7896594972310", "Sorbet Açaí Frooty Pote 1,5l", "Frooty"),
+            ("7896005800010", "Café Torrado E Moído Tradicional 3 Corações Pacote 500g", "3 Corações"),
+            ("7891000379691", "Achocolatado em pó - Nescau 370g", "Nescau"),
+        ])
+
+    def test_percentual_diferente_nao_vincula(self):
+        self.assertIsNone(self.cat.vincular("Achocolatado em Pó 60% Cacau Nescau Extra Cacau Lata 180g", "Nescau"))
+        self.assertEqual(self.cat.vincular("Achocolatado em Pó 30% Cacau Nescau Lata 180g", "Nescau").ean, "7891000377765")
+
+    def test_sabor_a_mais_nao_vincula(self):
+        self.assertIsNone(self.cat.vincular("Sorbet Açaí com Guaraná Frooty Pote 1,5l", "Frooty"))
+
+    def test_casos_certos_continuam(self):
+        self.assertEqual(self.cat.vincular("Café Torrado e Moído Tradicional 3 Corações Pacote 500g", "3 Corações").ean, "7896005800010")
+        self.assertEqual(self.cat.vincular("Achocolatado em Pó Nescau 370G", "Nescau").ean, "7891000379691")

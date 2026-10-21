@@ -90,7 +90,7 @@ class TestVinculoPorNome(unittest.TestCase):
                    "<url><loc>https://mercado.df/p/sem-par</loc></url></urlset>")
         fake = Fake([("https://mercado.df/robots.txt", (200, "User-agent: *\nAllow: /")),
                      ("https://mercado.df/sitemap.xml", (200, sitemap)),
-                     ("https://mercado.df/p/cafe-3c-500", (200, pagina_sem_gtin("Café 3 Corações Tradicional 500g", "3 Corações", "18.90"))),
+                     ("https://mercado.df/p/cafe-3c-500", (200, pagina_sem_gtin("Café Torrado e Moído Tradicional 3 Corações 500g", "3 Corações", "18.90"))),
                      ("https://mercado.df/p/cafe-3c-1kg", (200, pagina_sem_gtin("Café 3 Corações Tradicional 1kg", "3 Corações", "35.90"))),
                      ("https://mercado.df/p/sem-par", (200, pagina_sem_gtin("Vela Aromática 200g", "Casa", "9.90")))])
         banco = Banco(os.path.join(tempfile.mkdtemp(), "t.db"))
@@ -99,7 +99,7 @@ class TestVinculoPorNome(unittest.TestCase):
         r = pagina_produto.catalogar_por_nome(nav_com(fake), banco, loja, catalogo, hoje=date(2026, 10, 21))
         self.assertEqual((r["novas_no_sitemap"], r["lidas"], r["com_preco"], r["vinculadas"], r["precos"]), (3, 3, 3, 1, 1))
         ponto = banco.precos("7896005800027")[0]
-        self.assertEqual((ponto.loja, ponto.preco, ponto.metodo, ponto.descricao), ("Mercado DF", 18.9, "vinculo-nome", "Café 3 Corações Tradicional 500g"))
+        self.assertEqual((ponto.loja, ponto.preco, ponto.metodo, ponto.descricao), ("Mercado DF", 18.9, "vinculo-nome", "Café Torrado e Moído Tradicional 3 Corações 500g"))
         # rodízio: na próxima rodada, nada novo no sitemap e as páginas são relidas
         r2 = pagina_produto.catalogar_por_nome(nav_com(fake), banco, loja, catalogo, limite=1, hoje=date(2026, 10, 22))
         self.assertEqual((r2["novas_no_sitemap"], r2["lidas"]), (0, 1))

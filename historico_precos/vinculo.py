@@ -18,7 +18,7 @@ from dataclasses import dataclass
 
 from .causas import embalagem
 
-LIMIAR = 0.6  # semelhança mínima
+LIMIAR = 0.8  # semelhança mínima (subiu de 0,6 após conferir vínculos reais com sabor ou variante errados)
 MARGEM = 0.1  # distância mínima para o segundo melhor
 
 # abreviações comuns em nomes de atacado ("BEB.CERV.IMPERIO 350ML LT")
@@ -44,7 +44,8 @@ def tokens(texto: str | None) -> set[str]:
     saida = set()
     for t in re.findall(r"[a-z0-9]+", sem_qtd):
         t = ABREVIACOES.get(t, t)
-        if len(t) > 1 and t not in VAZIAS and not t.isdigit():
+        # números que não são tamanho contam (30% x 60% cacau, 46º INPM): diferenciam variantes do mesmo produto
+        if (len(t) > 1 or t.isdigit()) and t not in VAZIAS:
             saida.add(t)
     return saida
 

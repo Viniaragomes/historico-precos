@@ -177,7 +177,10 @@ def catalogar_por_nome(nav: Navegador, banco, loja: dict, catalogo, limite: int 
             ean, nota = re.sub(r"\D", "", d["gtin"]), 1.0
         elif d.get("nome"):
             v = catalogo.vincular(d["nome"], d.get("marca"))
-            if v:
+            # um código de barras só pode valer para um produto da mesma loja: o primeiro vínculo fica
+            ja = v and con.execute("SELECT 1 FROM produtos_loja WHERE loja = ? AND ean = ? AND url <> ? LIMIT 1",
+                                   (loja["nome"], v.ean, url)).fetchone()
+            if v and not ja:
                 ean, nota, nome_cat = v.ean, v.semelhanca, v.nome_catalogo
         con.execute("UPDATE produtos_loja SET nome=?, marca=?, preco=?, data=?, ean=?, semelhanca=?, nome_catalogo=?, lido_em=? WHERE url=?",
                     (d.get("nome"), d.get("marca"), d.get("preco"), dia, ean, nota, nome_cat, agora_iso(), url))
