@@ -1,29 +1,39 @@
-2026-10-21T18:10:34+00:00 20 encartes; 8 produtos em 2+ mercados
+2026-10-21T20:27:31+00:00 20 encartes; 11 produtos em 2+ mercados
 
 BANANA NANICA  (diferença R$ 2.50, 100.4%)
     R$    2.49  Atacadão Dia a Dia             lido: BANANA NANICA
     R$    4.99  Supermercado Super Big         lido: BANANA NANICA
    (sem preço)  Supermercado Brandão           lido: BANANA NANICA
-   (sem preço)  Dia a Dia Atacadista           lido: BANANA NANICA
+   (sem preço)  Bevia Atacadista               lido: BANANA NANICA - Kg
    (sem preço)  Supermercado Mineirão          lido: BANANA NANICA
    (sem preço)  Supermercado Planeta           lido: BANANA NANICA KG
 
-UVA VERDE FRUTAYA SEM SEMENTE OU UVA PRETA BRAVIS COM SEMENTE BANDEJA 500G  (diferença R$ 0.00, 0.0%)
-    R$    7.49  Atacadão Dia a Dia             lido: UVA VERDE FRUTAYA SEM SEMENTE OU UVA PRETA BRAVIS COM SEMENTE BANDEJA 500G
-   (sem preço)  Dia a Dia Atacadista           lido: SEMENTE OU UVA PRETA BRAVIS COM SEMENTE BANDEJA500G
+Filé de Tilápia  (diferença R$ 0.00, 0.0%)
+    R$   44.99  Dona                           lido: Filé de Tilápia
+   (sem preço)  Fort Atacadista                lido: Filé de Tilápia
 
-OVOS BRANCOS MANTIQUEIRA OU EMAPE TIPO EXTRA BANDEJA COM 30 UNIDADES  (diferença R$ 0.00, 0.0%)
-    R$   12.79  Atacadão Dia a Dia             lido: OVOS BRANCOS MANTIQUEIRA OU EMAPE TIPO EXTRA BANDEJA COM 30 UNIDADES
-   (sem preço)  Dia a Dia Atacadista           lido: OVOS BRANCOS MANTIQUEIRA OU EMAPE TIPO EXTRA
+Banana Prata  (diferença R$ 0.00, 0.0%)
+    R$    3.98  Supermercado Ultrabox          lido: Banana Prata
+   (sem preço)  Dona                           lido: Banana Prata
+   (sem preço)  Assaí Atacadista               lido: BANANA PRATA
+   (sem preço)  Supermercado Brandão           lido: BANANA PRATA
+   (sem preço)  Supermercado Mineirão          lido: BANANA PRATA
+   (sem preço)  Supermercado Superbom          lido: BANANA PRATA
+   (sem preço)  Supermercado Planeta           lido: BANANA PRATA KG
 
 UVA CRIMSON  (diferença R$ 0.00, 0.0%)
     R$    6.98  Supermercado Mineirão          lido: UVA CRIMSON
    (sem preço)  Assaí Atacadista               lido: UVA CRIMSON
    (sem preço)  Supermercado Superbom          lido: UVA CRIMSON BANDEJA
 
-ALHO A GRANEL  (diferença R$ 0.00, 0.0%)
-    R$   25.90  Supermercado Superbom          lido: ALHO A GRANEL
+ALHO A GRANEL KG =  (diferença R$ 0.00, 0.0%)
+    R$    4.15  Supermercado Superbom          lido: ALHO A GRANEL KG =
+   (sem preço)  Assaí Atacadista               lido: ALHO A GRANEL
    (sem preço)  Supermercado Ultrabox          lido: Alho a Granel
+
+FARINHA DE TRIGO  (diferença R$ 0.00, 0.0%)
+    R$    2.13  Supermercado Superbom          lido: FARINHA DE TRIGO
+   (sem preço)  Supermercado Tatico            lido: FARINHA DE TRIGO
 
 BATATA DOCE  (diferença R$ 0.00, 0.0%)
     R$    3.99  Supermercado Super Big         lido: BATATA DOCE
@@ -33,9 +43,18 @@ ABOBORA JAPONESA  (diferença R$ 0.00, 0.0%)
     R$    3.99  Supermercado Super Big         lido: ABOBORA JAPONESA
    (sem preço)  Assaí Atacadista               lido: ABÓBORA JAPONESA
    (sem preço)  Supermercado Brandão           lido: ABOBORA JAPONESA
-   (sem preço)  Bevia Atacadista               lido: ABOBORA JAPONESA E
+   (sem preço)  Bevia Atacadista               lido: ABÓBORA JAPONESA E
    (sem preço)  Supermercado Superbom          lido: ABÓBORA JAPONESA
 
 MELAO AMARELO  (diferença R$ 0.00, 0.0%)
     R$    4.99  Supermercado Super Big         lido: MELAO AMARELO
    (sem preço)  Assaí Atacadista               lido: MELÃO AMARELO
+
+MAMÃO FORMOSA KG  (diferença R$ 0.00, 0.0%)
+    R$    4.99  Supermercado Planeta           lido: MAMÃO FORMOSA KG
+   (sem preço)  Supermercado Mineirão          lido: MAMÃO FORMOSA
+   (sem preço)  Supermercado Superbom          lido: MAMÃO FORMOSA
+
+Lava roupas  (diferença R$ 0.00, 0.0%)
+    R$    9.99  Fort Atacadista                lido: Lava roupas
+   (sem preço)  Supermercado Bistecão          lido: LAVA ROUPAS
