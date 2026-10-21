@@ -1,45 +1,5 @@
-200 / 1536 bytes
-200 sw.js 1457 bytes
-200 dados/ceasa-df.json 70013 bytes
-200 dados/conab.json 128010 bytes
-
-indice.json: 39 produtos, 37 com preço recente, 15 com preço de compra no DF
-  17681954 Papel Higiênico Neve Folha Dupla 40m 6 rolos  33.9 Atacadão lojas=1
-  7891080007682 FARINHA DE TRIGO FARINA 1KG                   None  lojas=0
-  7891097106040 Manteiga com Sal Président Zero Lactose 200g  14.6 Atacadão lojas=1
-  7891172523472 Papel Higiênico Neve Leve 12 Pague 11 rolos F 28.89 Atacadão lojas=1
-  7891172523601 Papel Higiênico Neve Folha Dupla 40m 6 rolos  20.9 Atacadão lojas=1
-  7891910030378 CAFE UNIAO VACUO 500G TRADICIONAL             None  lojas=0
-  7896003738629 Biscoito Marilan Cream Cracker Especial 350g  5.98 Atacadão lojas=1
-  7896003740196 Biscoito Marilan Cream Cracker Integral 335g  7.75 Atacadão lojas=1
-  7896003740318 Biscoito Marilan Cream Cracker 140g           3.39 Atacadão lojas=1
-  7896003741636 Biscoito Bulnez Cream Cracker 270g            3.89 Atacadão lojas=1
-  7896006716112 Arroz Camil Parboilizado Tipo 1 1kg           4.99 Atacadão lojas=1
-  7896006797920 Feijão Pronto Camil Carioca 380g              7.29 Atacadão lojas=1
-  7896024210098 Macarrão com Ovos Camil Espaguete 500g        3.29 Atacadão lojas=1
-  7896055510242 Sabão em Pó Tixan Power Act 1,6Kg             21.9 Atacadão lojas=1
-  7896055510273 Sabão em Pó Tixan Power Act Sachê 2,4Kg       26.99 Atacadão lojas=1
-  7896062699978 Arroz Solito Agulhinha Tipo 1 1kg             4.25 Atacadão lojas=1
-  7896066804354 Manteiga Teixeira Com Sal 200g                13.9 Atacadão lojas=1
-  7896066804361 Manteiga Teixeira Com Sal 500g                29.9 Atacadão lojas=1
-  7896080870144 Biscoito Liane Cream Cracker 330g             2.98 Atacadão lojas=1
-  7896098909720 Sabão em Pó Tixan Ypê Primavera 400g          5.28 Atacadão lojas=1
-  7896098909744 Sabão em Pó Tixan Ypê Primavera 800g          8.99 Atacadão lojas=1
-  7896098909850 Sabão em Pó Tixan Ypê Primavera 2,4kg         18.99 Atacadão lojas=1
-  7896104990698 Papel Higiênico Bulnez Folha Dupla 30m 24 rol 34.6 Atacadão lojas=1
-  7896104990704 Papel Higiênico Bulnez Folha Dupla 30m 12 rol 17.3 Atacadão lojas=1
-  7896116900722 Arroz Kicaldo Agulhinha Tipo 1 1kg            4.49 Atacadão lojas=1
-  7896116910103 Arroz Kicaldo Agulhinha Tipo 1 5kg            21.49 Atacadão lojas=1
-  7896116910202 Feijão Carioca Bulnez Tipo 1 1kg              7.89 Atacadão lojas=1
-  7896232111286 Macarrão com Ovos Floriani Espaguete 500g     2.39 Atacadão lojas=1
-  7896401184080 Arroz Bulnez Agulhinha Tipo 1 5kg             19.89 Atacadão lojas=1
-  7896534405779 Açúcar Refinado Bulnez 1kg                    3.09 Atacadão lojas=1
-  7896623100769 Leite Xandô Integral A2 1L                    8.9 Atacadão lojas=1
-  7897951610128 Leite Pasteurizado Serramar Integral 1L       6.9 Atacadão lojas=1
-  7898080641267 Leite em Pó Italac Integral 1kg               38.9 Atacadão lojas=1
-  7898080642646 Leite Condensado Italac Integral 395g         7.9 Atacadão lojas=1
-  7898133621659 Manteiga com Sal Tourinho Zero Lactose 200g   11.9 Atacadão lojas=1
-  7898234850774 Farinha de Trigo Nita Para Pizza 5kg          13.99 Atacadão lojas=1
-  7898932702443 Manteiga Tourinho Sem sal 200g                7.97 Atacadão lojas=1
-  7898966085154 Macarrão com Ovos Bulnez Espaguete 500g       1.99 Atacadão lojas=1
-  7898966549410 Leite em Pó Bulnez Integral 400g              14.9 Atacadão lojas=1
+produtos com preço: 37 de 39
+dicionário: {'fonte': 'Mapa de Preços do DF (Secretaria de Economia): notas fiscais entre empresas emitidas no DF, últimos 3 meses', 'evidencia': 'https://paineis.fazenda.df.gov.br/mapadeprecos/', 'atualizado_em': '2026-10-21T12:26:33+00:00', 'codigos': 163175}
+7500435172561 -> {'n': 'Gillette Venus Suave Sensitive Aparelho de Depilacao Descartavel, 4 Un', 'u': 'un', 'p': 19.99, 'q': 2096, 'ncm': '82121020'}
+7896006716112 -> {'n': 'Arroz Parb Camil 1kg Camil UN', 'u': 'un', 'p': 4.69, 'q': 24, 'ncm': '10063011'}
+7898955519028 -> None
