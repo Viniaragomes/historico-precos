@@ -1,0 +1,30 @@
+página inicial: 7579 bytes
+
+== env.js:
+ (function(window) {
+  window.env = window.env || {}
+  // Environment variables
+  window.env.externalApiUrl = "https://api.ipe.df.gov.br";
+  window.env.apiUrl = "https://infodf.ipe.df.gov.br";
+})(this);
+
+
+== main-A55ITAGP.js: 163496 bytes
+   endereços de API: ['/api/v1/refresh/']
+   rotas: ['**', 'administracao', 'administracao/dashboard', 'administracao/indicador', 'administracao/painel', 'indicador', 'indicador/:id', 'inicio', 'login', 'painel', 'painel/:id']
+   textos sobre preço/inflação: []
+
+== chunk-OWI4BXY5.js: 132490 bytes
+   endereços de API: []
+   rotas: []
+   textos sobre preço/inflação: []
+
+== chunk-YR2VE3BP.js: 90471 bytes
+   endereços de API: []
+   rotas: []
+   textos sobre preço/inflação: []
+
+== chunk-BHQM6SP6.js: 1822262 bytes
+   endereços de API: []
+   rotas: []
+   textos sobre preço/inflação: ['notspacestart', 'replacestate']
