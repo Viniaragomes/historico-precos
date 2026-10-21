@@ -1,0 +1,42 @@
+== encartesdf.com.br, 5 tentativas espaçadas
+  200 0.8s [{"date":"2026-10-21T09:10:07","title":{"rendered":"Assa\u00ed Atacadista at\u00e9 22-10-2026"}},{"date":"2026-10-21T09:08:02","title":{"rendered":"Supermercado Brand\u00e3o at\u00e9 21-10-2026"}},{"d
+
+== Tiendeo
+/brasilia/supermercados robots: ("robots erro <HTTPError 403: 'Forbidden'>", None)
+   falhou <HTTPError 403: 'Forbidden'>
+/brasilia/atacadao robots: ("robots erro <HTTPError 403: 'Forbidden'>", None)
+   falhou <HTTPError 403: 'Forbidden'>
+/brasilia/carrefour robots: ("robots erro <HTTPError 403: 'Forbidden'>", None)
+   falhou <HTTPError 403: 'Forbidden'>
+/brasilia/comper robots: ("robots erro <HTTPError 403: 'Forbidden'>", None)
+   falhou <HTTPError 403: 'Forbidden'>
+/brasilia/big-box robots: ("robots erro <HTTPError 403: 'Forbidden'>", None)
+   falhou <HTTPError 403: 'Forbidden'>
+/brasilia/assai robots: ("robots erro <HTTPError 403: 'Forbidden'>", None)
+   falhou <HTTPError 403: 'Forbidden'>
+
+== Sites próprios das redes do DF (procura página de encarte/ofertas)
+https://www.tatico.com.br falhou URLError(TimeoutError('timed out'))
+https://tatico.com.br falhou URLError(TimeoutError('timed out'))
+https://www.supermercadotatico.com.br falhou URLError(gaierror(-2, 'Name or service not known'))
+https://www.donadecasa.com.br falhou URLError(SSLCertVerificationError(1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify 
+https://www.supermercadodonadecasa.com.br 200 1172958 | links: ['https://donafazbem.com.br/folheto/ofertas', 'https://donafazbem.com.br/ofertas', 'https://donafazbem.com.br/ofertas/'] | pdfs: [] | robots /: robots erro <HTTPError 404: 'Not Found'>
+https://www.paguepouco.com.br falhou URLError(gaierror(-2, 'Name or service not known'))
+https://www.superpaguepouco.com.br falhou URLError(TimeoutError('timed out'))
+https://www.ultrabox.com.br falhou URLError(gaierror(-2, 'Name or service not known'))
+https://www.ultraboxsupermercados.com.br falhou URLError(gaierror(-2, 'Name or service not known'))
+https://www.superadega.com.br 200 1649981 | links: ['https://www.superadega.com.br/destilados/ofertas-de-whisky/', 'https://www.superadega.com.br/espumante/ofertas1/', 'https://www.superadega.com.br/ofertas/'] | pdfs: [] | robots /: True
+https://www.superbom.com.br 200 229809 | links: [] | pdfs: [] | robots /: True
+https://www.veneza.com.br 200 880471 | links: [] | pdfs: [] | robots /: True
+https://www.supermercadosveneza.com.br falhou URLError(gaierror(-3, 'Temporary failure in name resolution'))
+https://www.comper.com.br falhou <HTTPError 403: 'Forbidden'>
+https://www.assai.com.br falhou <HTTPError 403: 'Forbidden'>
+https://www.atacadao.com.br 200 225687 | links: [] | pdfs: [] | robots /: True
+https://www.bigboxdelivery.com.br 200 424744 | links: ['/promocoes', '/promocoes-clube'] | pdfs: [] | robots /: True
+https://www.fortatacadista.com.br 200 1125204 | links: ['/categorias/promocao-de-aniversario-vizinho-de-sorte', '/encartes', '/promocoes', '/promocoes?ofertas_clube=true', 'https://edge.osuper.com.br/jZYSnB3x_gGpaL7YNO3XSHgrVr0=/300x300/smart/https://osuper-ecommerce-fortatacadista.s3.sa-east-1.amazonaws.com/90d6eb59-300x300folhetoofertascategorias.jpg', 'https://edge.osuper.com.br/zgwI76zq3Dj0-mtgoSS1jMzGnCo=/1920x0/smart/https://osuper-ecommerce-fortatacadista.s3.sa-east-1.amazonaws.com/a866fc0a-1920x366promocaoaniversariovizinhodesortejpg.jpeg'] | pdfs: [] | robots /: True
+https://www.atacadaodiaadia.com.br 200 263536 | links: ['/clube-dd/ofertas-selecionadas', 'http://ofertas.diaadiaatacadista.com.br', 'https://diaadiaatacadista.com.br/clube-dd/ofertas-selecionadas', 'https://ofertas.diaadiaatacadista.com.br'] | pdfs: [] | robots /: True
+https://www.supermercadosdona.com.br falhou URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify 
+https://www.olimpicosupermercados.com.br falhou URLError(gaierror(-2, 'Name or service not known'))
+https://www.supermercadosnorte.com.br falhou URLError(gaierror(-2, 'Name or service not known'))
+https://www.leaosupermercados.com.br falhou URLError(gaierror(-2, 'Name or service not known'))
+https://www.mercadosuperbom.com.br falhou URLError(gaierror(-2, 'Name or service not known'))
