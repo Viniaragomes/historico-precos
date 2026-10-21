@@ -135,6 +135,9 @@ class Navegador:
         if base not in self._robots:
             self._esperar_vez(partes.netloc)
             status, texto = self._abrir(base + "/robots.txt")
+            if status == 0:
+                # falha de rede: não dá para saber as regras; não coleta agora e pergunta de novo no próximo acesso
+                return False
             if status in (401, 403):
                 # mesma convenção do urllib.robotparser: acesso negado ao robots = não coletar
                 self._robots[base] = None
@@ -154,16 +157,25 @@ class Navegador:
         if self._abrir_bytes:
             return self._abrir_bytes(url)
         req = urllib.request.Request(url, headers={"User-Agent": self.user_agent, "Accept": "*/*"})
-        try:
-            with self._opener.open(req, timeout=self.timeout) as resp:
-                return self._descomprimir(resp.read(), resp.headers.get("Content-Encoding")) if 200 <= resp.status < 300 else None
-        except (urllib.error.URLError, TimeoutError, ConnectionError) as e:
-            log.warning("falha ao baixar %s: %s", url, e)
-            return None
+        host = urlsplit(url).netloc
+        for tentativa in range(1 + self.TENTATIVAS_EXTRA.get(host, 0) // 2):
+            if tentativa:
+                self._dormir(self.PAUSA_FALHA.get(host, self.intervalo * 5))
+            try:
+                with self._opener.open(req, timeout=self._tempo_limite(url)) as resp:
+                    return self._descomprimir(resp.read(), resp.headers.get("Content-Encoding")) if 200 <= resp.status < 300 else None
+            except urllib.error.HTTPError as e:
+                log.warning("falha ao baixar %s: %s", url, e)
+                return None
+            except (urllib.error.URLError, TimeoutError, ConnectionError) as e:
+                log.warning("falha ao baixar %s: %s", url, e)
+        return None
 
     # sites lentos ganham mais tentativas e mais tempo para responder
-    TENTATIVAS_EXTRA = {"web.archive.org": 2, "www.confaz.fazenda.gov.br": 2}
-    TEMPO_LIMITE = {"www.confaz.fazenda.gov.br": 90.0}
+    TENTATIVAS_EXTRA = {"web.archive.org": 2, "www.confaz.fazenda.gov.br": 2, "encartesdf.com.br": 4}
+    TEMPO_LIMITE = {"www.confaz.fazenda.gov.br": 90.0, "encartesdf.com.br": 40.0}
+    # sites que oscilam para os servidores do GitHub: espera mais entre uma falha de rede e a próxima tentativa
+    PAUSA_FALHA = {"encartesdf.com.br": 20.0}
 
     def _tempo_limite(self, url: str) -> float:
         return max(self.timeout, self.TEMPO_LIMITE.get(urlsplit(url).netloc, 0.0))
@@ -198,7 +210,7 @@ class Navegador:
                     continue
             # 0 = falha de rede (tempo esgotado, TLS): o Internet Archive costuma oscilar; vale tentar de novo
             elif status in (0, 502, 503, 504) and tentativa + 1 < tentativas:
-                self._dormir(max(self.intervalo * 5, self._intervalo_do(host) * 2))
+                self._dormir(max(self.intervalo * 5, self._intervalo_do(host) * 2, self.PAUSA_FALHA.get(host, 0.0)))
                 tentativa += 1
                 continue
             log.info("HTTP %s em %s", status, url)
