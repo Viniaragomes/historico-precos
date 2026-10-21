@@ -151,19 +151,29 @@ jobs:
           path: site
 
       - name: Guardar o banco no ramo "dados"
+        # roda mesmo se um passo anterior falhar: horas de coleta não podem se perder
+        if: always()
         run: |
+          test -s precos.db || { echo "Sem banco para guardar."; exit 0; }
+          echo "Banco: $(du -h precos.db | cut -f1)"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if git show-ref --verify --quiet refs/heads/dados; then
-            git worktree add /tmp/dados dados
+          # parte da versão mais nova do ramo (o workflow do dicionário também grava nele durante a coleta)
+          if git ls-remote --exit-code --heads origin dados >/dev/null; then
+            git fetch -q origin dados
+            git worktree add -f /tmp/dados origin/dados
           else
             git worktree add --orphan -b dados /tmp/dados
           fi
           cp precos.db /tmp/dados/precos.db
           cd /tmp/dados
           git add precos.db
-          git commit -m "Coleta $(date -u +%F)" || exit 0
-          git push origin dados
+          git commit -q -m "Coleta $(date -u +%F)" || exit 0
+          for i in 1 2 3 4 5; do
+            git fetch -q origin dados && git rebase -q origin/dados && git push origin HEAD:dados && exit 0
+            sleep $((i * 5))
+          done
+          echo "Não deu para guardar o banco"; exit 1
 
   # Publica o app no GitHub Pages. Ative em Settings > Pages > Source: GitHub Actions.
   # Em repositório privado, o Pages exige plano pago; sem ele, este passo falha e a coleta continua normal.
