@@ -1,6 +1,6 @@
 {
-  "name": "Preço com Prova",
-  "short_name": "Preço c/ Prova",
+  "name": "Prova Preço",
+  "short_name": "Prova Preço",
   "description": "Onde está mais barato, histórico do preço e por que ele mudou, com a fonte de cada número.",
   "lang": "pt-BR",
   "start_url": "./",

@@ -1,4 +1,4 @@
--- Comunidade do Preço com Prova (Supabase / Postgres).
+-- Comunidade do Prova Preço (Supabase / Postgres).
 -- Como usar: crie um projeto (região São Paulo), abra o SQL Editor, cole e rode este arquivo.
 -- Depois: Authentication > Sign In / Providers > ative "Allow anonymous sign-ins".
 --

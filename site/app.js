@@ -1,9 +1,9 @@
-// Preço com Prova: escaneia o código de barras e mostra onde está mais barato, o histórico e por que o preço mudou.
+// Prova Preço: escaneia o código de barras e mostra onde está mais barato, o histórico e por que o preço mudou.
 import { calcular, categoria } from "./impostos.js";
 import { confiancaPreco, nivelPorPontos, precoSugerido, utilidade, chavePreco, chaveCausa, PONTOS, NIVEIS as NIVEIS_COMUNIDADE } from "./confianca.js";
 import { criarComunidade, consentimento, ErroComunidade, TIPOS_REPORTE } from "./comunidade.js";
 
-const VERSAO_APP = "v24"; // igual à VERSAO do sw.js
+const VERSAO_APP = "v25"; // igual à VERSAO do sw.js
 
 const conteudo = document.getElementById("conteudo");
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
@@ -473,7 +473,7 @@ async function telaInicio() {
   conteudo.replaceChildren(
     el("header", { class: "hero" },
       el("div", { class: "hero-barra" },
-        el("span", { class: "marca-logo" }, el("img", { src: "icone.svg", alt: "" }), "Preço com Prova"),
+        el("span", { class: "marca-logo" }, el("img", { src: "icone.svg", alt: "" }), "Prova Preço"),
         el("span", { class: "acoes-hero" },
           el("a", { class: "botao-redondo", href: "#/perfil", "aria-label": "Seu perfil e pontos" }, icone("usuario")),
           el("a", { class: "botao-redondo", href: "#/sobre", "aria-label": "Sobre e privacidade" }, icone("info")))),
@@ -723,7 +723,7 @@ async function telaProdutos(consulta = "") {
   busca.addEventListener("input", desenhar);
   conteudo.replaceChildren(
     el("header", { class: "hero" },
-      el("div", { class: "hero-barra" }, el("span", { class: "marca-logo" }, el("img", { src: "icone.svg", alt: "" }), "Preço com Prova")),
+      el("div", { class: "hero-barra" }, el("span", { class: "marca-logo" }, el("img", { src: "icone.svg", alt: "" }), "Prova Preço")),
       el("h1", {}, "Produtos acompanhados"),
       el("p", {}, produtos.length ? `${produtos.length} produtos${atualizado_em ? ` · atualizado ${idade(atualizado_em)}` : ""}` : "Nenhum produto ainda")),
     el("div", { class: "folha" },
@@ -773,7 +773,7 @@ async function telaProduto(ean) {
   }
   recentes.guardar(p);
   favoritos.visto(p);
-  document.title = `${p.nome || ean} · Preço com Prova`;
+  document.title = `${p.nome || ean} · Prova Preço`;
   const com = await comunidade();
   const [votos, evidencias] = await Promise.all([com.votos(ean).catch(() => []), com.evidenciasPublicas(ean).catch(() => [])]);
   const contexto = { p, votos, evidencias, ean };
@@ -1270,8 +1270,8 @@ function botaoFavorito(p) {
 async function compartilhar(p) {
   const melhor = p.ofertas[0];
   const texto = melhor
-    ? `${p.nome}: ${brl.format(melhor.preco)} em ${melhor.loja}. Veja o histórico e as provas no Preço com Prova.`
-    : `${p.nome} no Preço com Prova.`;
+    ? `${p.nome}: ${brl.format(melhor.preco)} em ${melhor.loja}. Veja o histórico e as provas no Prova Preço.`
+    : `${p.nome} no Prova Preço.`;
   try {
     if (navigator.share) await navigator.share({ title: p.nome, text: texto, url: location.href });
     else { await navigator.clipboard.writeText(`${texto} ${location.href}`); avisar("Link copiado"); }
@@ -1730,7 +1730,7 @@ function telaSobre() {
     el("header", { class: "hero" },
       el("div", { class: "hero-barra" },
         el("button", { class: "botao-redondo", type: "button", "aria-label": "Voltar", onclick: voltar }, icone("voltar"))),
-      el("h1", {}, "Sobre o Preço com Prova"),
+      el("h1", {}, "Sobre o Prova Preço"),
       el("p", {}, "Preços com fonte, histórico real e causas separadas por nível de prova.")),
     el("div", { class: "folha" },
       bloco("fonte", "De onde vêm os preços",
@@ -1913,7 +1913,7 @@ async function rotear() {
   const lista = hash.match(/^#\/produtos(?:\?q=(.*))?$/);
   document.querySelectorAll(".abas a").forEach((a) =>
     a.classList.toggle("ativa", (a.dataset.aba === "produtos" && !!lista) || (a.dataset.aba === "inicio" && hash === "#/")));
-  document.title = "Preço com Prova";
+  document.title = "Prova Preço";
   if (produto) await telaProduto(produto[1]);
   else if (lista) await telaProdutos(decodeURIComponent(lista[1] || ""));
   else if (hash === "#/sobre") telaSobre();

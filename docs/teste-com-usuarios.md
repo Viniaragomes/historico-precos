@@ -1,4 +1,4 @@
-# Teste com usuários: Preço com Prova
+# Teste com usuários: Prova Preço
 
 **Objetivo:** ver pessoas reais usando o app e descobrir onde elas travam, o que não entendem e se confiam no que veem. Com 5 pessoas já aparecem cerca de 80% dos problemas de uso.
 

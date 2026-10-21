@@ -131,7 +131,7 @@ Antes de exportar, o agente de qualidade (`historico_precos/qualidade.py`) anali
 
 Troca de embalagem nunca é tratada como erro. Para ver os alertas: `python -m historico_precos qualidade [EAN]`.
 
-## O app (Preço com Prova)
+## O app (Prova Preço)
 
 App web instalável (PWA) na pasta `site/`: o usuário aponta a câmera para o código de barras e vê onde o produto está mais barato, o gráfico do histórico e as causas de cada mudança de preço por nível de prova, com o link de cada fonte. Não precisa de servidor: o app lê os arquivos que o comando `exportar` gera.
 
