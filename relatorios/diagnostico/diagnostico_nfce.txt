@@ -1,0 +1,22 @@
+
+== https://dec.fazenda.df.gov.br: robots HTTP 200 
+     |  |  | <script> |      |         var states = [ |          |             '       NF-e - Obter Informações', |          |             '       NFC-e - Obter Informações', |          |             '      CT-e - Obter Informações', |          |             '      NFC-e - Consultar e Efetuar Credenciamento para Emissão ou Descredenciamento', |          |             '      NFC-e - Gerar Código de Segurança do Contribuinte-CSC', |          |             '     CT-e OS - Obter informações', |          |             '     NF-e - Consultar e Efetuar Credenciamento para Emissão ou Descredenciamento', |          |          
+   /NFCE/: HTTP 200  | título: Portal da Receita DF ? IPVA, IPTU e Serviços Tributários | SEEC | anti-robô: []
+      formulários: ['<form class="navbar-form navbar-search" name="formPesquisa" id="formPesquisa" method="post" role="search" action="/aplicacoes/busca/resultado.cfm">']
+      texto: Portal da Receita DF ? IPVA, IPTU e Serviços Tributários | SEEC Transparência (current) Ouvidoria Acesso à informação Diário oficial Agência Brasília Portal Governo de Brasília --> Acessibilidade Aa Entrar Cadastre-se ADESÃO AO NOVO MODELO NOTA FISCAL DE SERVIÇOS NFS-e NO PADRÃO NACIONAL SERVIÇOS ON-LINE AGÊNCI@NET ATENDIMENTO VIRTUAL LEGISLAÇÃO E PUBLICAÇÕES O que você procura? Capa botões de acesso fácil ACESSO FÁCIL Emitir IPVA Emitir IPTU/TLP Emitir Dívida Ativa Emitir DAR Avulso Emitir ITBI
+   /ConsultarNFCe.aspx: HTTP 200  | título: Portal da Receita DF ? IPVA, IPTU e Serviços Tributários | SEEC | anti-robô: []
+      formulários: ['<form class="navbar-form navbar-search" name="formPesquisa" id="formPesquisa" method="post" role="search" action="/aplicacoes/busca/resultado.cfm">']
+      texto: Portal da Receita DF ? IPVA, IPTU e Serviços Tributários | SEEC Transparência (current) Ouvidoria Acesso à informação Diário oficial Agência Brasília Portal Governo de Brasília --> Acessibilidade Aa Entrar Cadastre-se ADESÃO AO NOVO MODELO NOTA FISCAL DE SERVIÇOS NFS-e NO PADRÃO NACIONAL SERVIÇOS ON-LINE AGÊNCI@NET ATENDIMENTO VIRTUAL LEGISLAÇÃO E PUBLICAÇÕES O que você procura? Capa botões de acesso fácil ACESSO FÁCIL Emitir IPVA Emitir IPTU/TLP Emitir Dívida Ativa Emitir DAR Avulso Emitir ITBI
+
+== https://www.fazenda.df.gov.br: robots HTTP 404 
+   /nfce/qrcode: HTTP 200  | título:  | anti-robô: ['cloudflare']
+      formulários: []
+      texto: Chave não encontrada! Não encontramos a chave que você está tentando acessar! Pode ser que isto esteja ocorrendo porque a chave de acesso informada não encontra-se cadastrada na nossa base de dados ou é inválida. Verifique os dados informados e caso a ocorrência persista, favor notificar a área responsável. Chave n&#227;o encontrada! Informações adicionais: 404 - N&#227;o encontrado Voltar principal
+   /nfce/consulta: HTTP 200  | título: Portal de Serviços da Receita - Secretaria de Fazenda do Distrito Federal | anti-robô: ['cloudflare']
+      formulários: []
+      texto: Portal de Serviços da Receita - Secretaria de Fazenda do Distrito Federal O JavaScript não está habilitado. Por favor ative o JavaScript no navegador, para continuar utilizando o Portal de Serviços da Receita.
+
+== http://www.fazenda.df.gov.br: robots HTTP 404 
+   /nfce/qrcode: HTTP 200  | título:  | anti-robô: ['cloudflare']
+      formulários: []
+      texto: Chave não encontrada! Não encontramos a chave que você está tentando acessar! Pode ser que isto esteja ocorrendo porque a chave de acesso informada não encontra-se cadastrada na nossa base de dados ou é inválida. Verifique os dados informados e caso a ocorrência persista, favor notificar a área responsável. Chave n&#227;o encontrada! Informações adicionais: 404 - N&#227;o encontrado Voltar principal
