@@ -1,0 +1,19 @@
+robots de https://api.fortatacadista.com.br: HTTP 404; permite /: True
+robots de https://api.ibecom.com.br: HTTP 404; permite /: True
+robots de https://api-legada.ibecom.com.br: HTTP 404; permite /: True
+
+== https://www.fortatacadista.com.br/categorias: erro Page.goto: Timeout 60000ms exceeded.
+Call log:
+navigating to "https://www.fortatacadista.com.br/categorias", waiting until "networkidle"
+
+
+== https://fortatacadista.com.br/produtos/8227963/bebcervimperio-350ml-puro-malte: erro Page.goto: Timeout 60000ms exceeded.
+Call log:
+navigating to "https://fortatacadista.com.br/produtos/8227963/bebcervimperio-350ml-puro-malte", waiting until "networkidle"
+
+
+== https://bigboxdelivery.com.br/p/3-Coracoes-Cafe-Cappuccino-400g: HTTP 403 | título: Attention Required! | Cloudflare
+   EAN de 13 dígitos no texto: []
+   links de categoria/produto: 0 []
+   204 POST https://bigboxdelivery.com.br/cdn-cgi/rum? | EAN: [] | ''
+   200 POST https://bigboxdelivery.com.br/cdn-cgi/challenge-platform/h/b/jsd/oneshot/d2d3316b729e/0.16791209510940042:1792576831:oKUrNg4Q0DtnsqKNgG8sE-TB7j3mXGTsx | EAN: [] | ''
