@@ -25,6 +25,7 @@ jobs:
       - name: Rodar
         env:
           SCRIPT: ${{ inputs.script }}
+          DADOS_GOV_BR_CHAVE: ${{ secrets.DADOS_GOV_BR_CHAVE }}
         run: |
           case "$SCRIPT" in *[!a-z0-9_.]*|"") echo "nome inválido"; exit 1;; esac
           mkdir -p relatorios/diagnostico
