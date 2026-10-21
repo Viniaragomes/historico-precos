@@ -623,6 +623,7 @@ async function telaProduto(ean) {
   };
   conteudo.replaceChildren(heroProduto(p, aberto?.foto), el("div", { class: "folha" },
     cartaoOndeComprar(contexto),
+    cartaoPrecosComunidade(ean, p.nome),
     cartaoHistorico(p),
     cartaoCompraDF(p),
     cartaoCampo(p, tabela),
@@ -630,6 +631,69 @@ async function telaProduto(ean) {
     cartaoImpostos(tabela, [p.nome, aberto?.nome], p.ofertas[0]?.preco ?? null),
     cartaoReportar(ean),
     el("p", { class: "rodape-nota" }, p.aviso, ` Atualizado ${idade(p.atualizado_em)}.`)));
+}
+
+// ---------- preços informados pela comunidade (cobre mercados sem site) ----------
+
+const MERCADOS_DF = ["Atacadão", "Atacadão Dia a Dia", "Assaí", "Big Box", "Carrefour", "Comper", "Dona", "Fort Atacadista",
+  "Oba Hortifruti", "Pague Pouco", "Pão de Açúcar", "Super Adega", "Superbom", "Supermercado Tatico", "Ultrabox", "Veneza"];
+
+function cartaoPrecosComunidade(ean, nome) {
+  const cartao = el("section", { class: "cartao entrar entrar-2", "data-cartao": "comunidade-precos" },
+    el("h2", {}, "Preços informados por quem compra"));
+  const corpo = el("div", {}, el("p", { class: "sub" }, "Carregando…"));
+  const desenhar = async () => {
+    const com = await comunidade();
+    const lista = await com.precosInformados(ean).catch(() => []);
+    const fmtDia = (d) => idade(d);
+    corpo.replaceChildren(
+      com.modo === "teste" ? el("p", { class: "minusculo", style: "margin:0 0 8px" },
+        "Modo de teste: o que você informar fica só neste aparelho até a comunidade online ser ligada.") : null,
+      lista.length
+        ? el("ul", { class: "lista lista-atacado" }, lista.map((x) => el("li", { class: "linha-atacado" },
+          el("span", { class: "nome" }, x.mercado,
+            el("small", {}, `${x.pessoas === 1 ? "1 pessoa informou" : `${x.pessoas} pessoas informaram`} · ${fmtDia(x.ultimo_dia)}` +
+              (x.preco_minimo !== x.preco_maximo ? ` · de ${brl.format(x.preco_minimo)} a ${brl.format(x.preco_maximo)}` : ""))),
+          el("span", { class: "valor" }, brl.format(x.preco_mediano)),
+          el("span", { class: "etiqueta neutra" }, x.pessoas >= 3 ? "confirmado" : "não verificado"))))
+        : el("p", { class: "sub" }, "Ninguém informou ainda. Viu este produto em algum mercado do DF? Conte o preço e ajude quem vem depois."),
+      el("button", { class: "botao-principal", type: "button", onclick: () => informarPreco(ean, nome, desenhar) },
+        "Informar o preço que você viu"),
+      el("p", { class: "minusculo", style: "margin:10px 0 0" },
+        "Mostramos a mediana dos últimos 14 dias por mercado, sem identificar quem informou. Com 3 pessoas ou mais, o preço aparece como confirmado."));
+  };
+  cartao.append(corpo);
+  desenhar();
+  return cartao;
+}
+
+function ultimosMercados() {
+  try { return JSON.parse(localStorage.getItem("ultimos_mercados") || "[]"); } catch { return []; }
+}
+
+function informarPreco(ean, nome, depois) {
+  const mercado = el("input", { list: "mercados-df", autocomplete: "off", placeholder: "Ex.: Big Box", "aria-label": "Mercado", class: "campo-texto" });
+  const local = el("input", { autocomplete: "off", placeholder: "Bairro ou região (opcional)", "aria-label": "Bairro ou região", class: "campo-texto", style: "margin-top:8px" });
+  const preco = el("input", { inputmode: "decimal", placeholder: "0,00", "aria-label": "Preço em reais" });
+  const sugestoes = [...new Set([...ultimosMercados(), ...MERCADOS_DF])];
+  const enviar = async () => {
+    const n = parseFloat(preco.value.replace(/\./g, "").replace(",", "."));
+    const ok = await contribuir((com) => com.informarPreco({ ean, mercado: mercado.value, local: local.value, preco: Number.isFinite(n) ? n : null }));
+    if (ok) {
+      try { localStorage.setItem("ultimos_mercados", JSON.stringify([mercado.value.trim(), ...ultimosMercados()].filter((v, i, a) => v && a.indexOf(v) === i).slice(0, 5))); } catch { /* sem armazenamento */ }
+      fechar();
+      depois();
+    }
+  };
+  const fechar = abrirFolha("Informar preço",
+    el("p", { class: "texto-folha" }, nome ? `${nome}` : `Código ${ean}`),
+    el("label", { class: "rotulo-campo" }, "Em qual mercado?"), mercado,
+    el("datalist", { id: "mercados-df" }, sugestoes.map((m) => el("option", { value: m }))),
+    local,
+    el("label", { class: "campo-preco" }, el("span", {}, "Preço na prateleira"), el("span", { class: "entrada" }, "R$ ", preco)),
+    el("p", { class: "minusculo" }, "Informe só o preço que você viu hoje, sem promoção de cartão ou clube."),
+    el("button", { class: "botao-principal", type: "button", onclick: enviar }, "Enviar"));
+  setTimeout(() => mercado.focus(), 50);
 }
 
 function cartaoReportar(ean) {
@@ -691,6 +755,7 @@ async function telaNaoAcompanhado(ean, aberto, tabela) {
           el("p", { class: "sub" }, "Qualquer pessoa pode cadastrar o produto lá, com fotos da embalagem; depois disso o nome e a foto aparecem aqui."),
           el("a", { class: "botao-secundario-neutro", href: `https://world.openfoodfacts.org/cgi/product.pl?type=search_or_add&code=${ean}`,
             target: "_blank", rel: "noopener" }, "Cadastrar no Open Food Facts")),
+      cartaoPrecosComunidade(ean, nome),
       el("section", { class: "cartao entrar entrar-2" },
         el("button", { class: "botao-escanear-grande botao-marca", type: "button", onclick: abrirLeitor }, icone("escanear"), "Escanear outro produto"))));
 }

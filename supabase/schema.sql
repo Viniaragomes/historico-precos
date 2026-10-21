@@ -108,6 +108,42 @@ begin
 end $$;
 create trigger antes_de_reportar before insert on public.reportes for each row execute function public.antes_de_reportar();
 
+-- preço que a pessoa viu na prateleira, em qualquer mercado (cobre mercados sem site)
+create table public.precos_informados (
+  id bigint generated always as identity primary key,
+  usuario uuid not null default auth.uid() references public.perfis (id) on delete cascade,
+  ean text not null check (ean ~ '^[0-9]{8,14}$'),
+  mercado text not null check (char_length(mercado) between 2 and 60),
+  local text check (local is null or char_length(local) <= 60),  -- bairro ou região administrativa, opcional
+  preco numeric(10, 2) not null check (preco > 0 and preco < 100000),
+  dia date not null default current_date,
+  criado_em timestamptz not null default now(),
+  unique (usuario, ean, mercado, dia)  -- um preço por produto, mercado e dia
+);
+create index precos_informados_ean on public.precos_informados (ean);
+alter table public.precos_informados enable row level security;
+create policy "informa em nome próprio" on public.precos_informados for insert to authenticated with check (usuario = auth.uid());
+create policy "lê os próprios preços" on public.precos_informados for select to authenticated using (usuario = auth.uid());
+
+create or replace function public.antes_de_informar_preco() returns trigger
+language plpgsql security definer set search_path = public as $$
+begin
+  if (select count(*) from precos_informados where usuario = new.usuario and criado_em > now() - interval '1 hour') >= 40 then
+    raise exception 'limite de contribuições por hora atingido';
+  end if;
+  new.mercado := btrim(regexp_replace(new.mercado, '\s+', ' ', 'g'));
+  return new;
+end $$;
+create trigger antes_de_informar_preco before insert on public.precos_informados for each row execute function public.antes_de_informar_preco();
+
+create or replace function public.pontuar_preco_informado() returns trigger
+language plpgsql security definer set search_path = public as $$
+begin
+  update perfis set pontos = pontos + 3 where id = new.usuario;
+  return new;
+end $$;
+create trigger pontuar_preco_informado after insert on public.precos_informados for each row execute function public.pontuar_preco_informado();
+
 -- ---------- limite de contribuições e pontos ----------
 
 create or replace function public.antes_de_votar() returns trigger
@@ -164,8 +200,22 @@ create view public.ranking as
 create view public.evidencias_publicas as
   select ean, chave, url, descricao, nivel, moderado_em from public.evidencias_sugeridas where status = 'aceita';
 
-revoke all on public.resumo_votos, public.ranking, public.evidencias_publicas from anon, authenticated;
-grant select on public.resumo_votos, public.ranking, public.evidencias_publicas to anon, authenticated;
+-- preços informados: por produto e mercado, só a mediana dos últimos 14 dias e quantas pessoas informaram
+create view public.precos_comunidade as
+  select ean, lower(mercado) as mercado_chave, min(mercado) as mercado,
+         percentile_cont(0.5) within group (order by preco)::numeric(10, 2) as preco_mediano,
+         min(preco) as preco_minimo, max(preco) as preco_maximo,
+         count(distinct usuario) as pessoas, max(dia) as ultimo_dia
+  from public.precos_informados
+  where dia >= current_date - 14
+  group by ean, lower(mercado);
+
+create view public.meus_precos with (security_invoker = true) as
+  select ean, mercado, local, preco, dia from public.precos_informados where usuario = auth.uid();
+
+revoke all on public.resumo_votos, public.ranking, public.evidencias_publicas, public.precos_comunidade from anon, authenticated;
+grant select on public.resumo_votos, public.ranking, public.evidencias_publicas, public.precos_comunidade to anon, authenticated;
+grant select on public.meus_precos to authenticated;
 grant select on public.meus_votos to authenticated;
 
 -- ---------- direitos do titular e retenção ----------
@@ -185,6 +235,7 @@ grant execute on function public.apagar_minha_conta() to authenticated;
 create or replace function public.limpar_dados_antigos() returns void
 language sql security definer set search_path = public as $$
   delete from votos where criado_em < now() - interval '12 months';
+  delete from precos_informados where criado_em < now() - interval '12 months';
   delete from evidencias_sugeridas where status = 'recusada' and criado_em < now() - interval '12 months';
   delete from reportes where status <> 'aberto' and criado_em < now() - interval '12 months';
   delete from auth.users u where u.is_anonymous and u.last_sign_in_at < now() - interval '12 months';

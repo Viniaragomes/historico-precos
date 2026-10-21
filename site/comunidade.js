@@ -72,6 +72,21 @@ export class ComunidadeLocal {
     this._gravar(d);
     return { ganho };
   }
+  async informarPreco({ ean, mercado, local = null, preco }) {
+    const d = this._ler();
+    d.precos = d.precos || [];
+    const nome = validarMercado(mercado);
+    if (d.precos.some((p) => p.ean === ean && p.mercado.toLowerCase() === nome.toLowerCase() && p.dia === hoje())) {
+      throw new ErroComunidade("Você já informou o preço deste produto neste mercado hoje.");
+    }
+    d.precos.push({ ean, mercado: nome, local: (local || "").trim().slice(0, 60) || null, preco: validarPreco(preco), dia: hoje() });
+    d.perfil.pontos += PONTOS.corrigir;
+    this._gravar(d);
+    return { ganho: PONTOS.corrigir };
+  }
+  async precosInformados(ean) {
+    return resumirPrecos((this._ler().precos || []).filter((p) => p.ean === ean));
+  }
   async sugerirEvidencia({ ean, chave, url, descricao }) {
     const d = this._ler();
     d.evidencias.push({ id: d.proximoId++, ean, chave, url: validarUrl(url), descricao: (descricao || "").slice(0, 500), status: "pendente", nivel: null, criado_em: new Date().toISOString() });
@@ -192,6 +207,22 @@ export class ComunidadeSupabase {
     if (error) throw new ErroComunidade("Não foi possível enviar agora.");
     return { ganho: 0 };
   }
+  async informarPreco({ ean, mercado, local = null, preco }) {
+    await this._usuario();
+    const c = await this._cliente();
+    const { error } = await c.from("precos_informados").insert({
+      ean, mercado: validarMercado(mercado), local: (local || "").trim().slice(0, 60) || null, preco: validarPreco(preco) });
+    if (error?.code === "23505") throw new ErroComunidade("Você já informou o preço deste produto neste mercado hoje.");
+    if (error?.message?.includes("limite")) throw new ErroComunidade("Muitas contribuições em pouco tempo. Tente de novo mais tarde.");
+    if (error) throw new ErroComunidade("Não foi possível registrar agora.");
+    return { ganho: PONTOS.corrigir };
+  }
+  async precosInformados(ean) {
+    const c = await this._cliente();
+    const { data, error } = await c.from("precos_comunidade")
+      .select("mercado, preco_mediano, preco_minimo, preco_maximo, pessoas, ultimo_dia").eq("ean", ean).order("preco_mediano");
+    return error ? [] : data.map((x) => ({ ...x, preco_mediano: Number(x.preco_mediano), preco_minimo: Number(x.preco_minimo), preco_maximo: Number(x.preco_maximo) }));
+  }
   async ranking() {
     const c = await this._cliente();
     const { data } = await c.from("ranking").select("apelido, pontos");
@@ -272,6 +303,29 @@ export function validarPreco(preco) {
   const n = Number(preco);
   if (!(n > 0 && n < 100000)) throw new ErroComunidade("Informe um preço válido.");
   return Math.round(n * 100) / 100;
+}
+
+export function validarMercado(mercado) {
+  const limpo = (mercado || "").trim().replace(/\s+/g, " ");
+  if (limpo.length < 2 || limpo.length > 60) throw new ErroComunidade("Diga em qual mercado você viu o preço.");
+  return limpo;
+}
+
+// mediana por mercado dos últimos 14 dias, no mesmo formato da view precos_comunidade
+export function resumirPrecos(lista, hojeISO = hoje()) {
+  const limite = new Date(new Date(hojeISO).getTime() - 14 * 864e5).toISOString().slice(0, 10);
+  const grupos = new Map();
+  for (const p of lista.filter((x) => x.dia >= limite)) {
+    const chave = p.mercado.toLowerCase();
+    grupos.set(chave, [...(grupos.get(chave) || []), p]);
+  }
+  return [...grupos.values()].map((g) => {
+    const precos = g.map((x) => x.preco).sort((a, b) => a - b);
+    const meio = Math.floor(precos.length / 2);
+    const mediana = precos.length % 2 ? precos[meio] : (precos[meio - 1] + precos[meio]) / 2;
+    return { mercado: g[0].mercado, preco_mediano: Math.round(mediana * 100) / 100, preco_minimo: precos[0],
+      preco_maximo: precos[precos.length - 1], pessoas: g.length, ultimo_dia: g.map((x) => x.dia).sort().pop() };
+  }).sort((a, b) => a.preco_mediano - b.preco_mediano);
 }
 
 export function validarUrl(url) {

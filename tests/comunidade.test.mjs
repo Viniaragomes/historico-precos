@@ -78,3 +78,25 @@ test("moderação: evidência aceita vira pública com nível dado, nunca COMPRO
   assert.equal(publicas[0].nivel, "DECLARADO");
   assert.equal((await c.perfil()).pontos, 5); // evidência aceita vale 5
 });
+
+test("preço informado: mediana por mercado, nome sem diferença de maiúsculas, um por dia", async () => {
+  const { ComunidadeLocal, resumirPrecos } = await import("../site/comunidade.js");
+  const memoria = new Map();
+  const store = { getItem: (k) => memoria.get(k) ?? null, setItem: (k, v) => memoria.set(k, v), removeItem: (k) => memoria.delete(k) };
+  const c = new ComunidadeLocal(store);
+  const r = await c.informarPreco({ ean: "7891000100103", mercado: "  Big   Box ", preco: "6.49" });
+  assert.equal(r.ganho, 3);
+  await assert.rejects(c.informarPreco({ ean: "7891000100103", mercado: "big box", preco: 6.5 }), /já informou/);
+  await assert.rejects(c.informarPreco({ ean: "7891000100103", mercado: "x", preco: 6.5 }), /mercado/);
+  await assert.rejects(c.informarPreco({ ean: "7891000100103", mercado: "Dona", preco: -1 }), /preço válido/);
+  const lista = await c.precosInformados("7891000100103");
+  assert.deepEqual(lista.map((x) => [x.mercado, x.preco_mediano, x.pessoas]), [["Big Box", 6.49, 1]]);
+
+  const resumo = resumirPrecos([
+    { mercado: "Dona", preco: 7, dia: "2026-10-20" }, { mercado: "dona", preco: 9, dia: "2026-10-21" },
+    { mercado: "Dona", preco: 8, dia: "2026-10-21" }, { mercado: "Tatico", preco: 6, dia: "2026-10-21" },
+    { mercado: "Velho", preco: 1, dia: "2026-09-01" },
+  ], "2026-10-21");
+  assert.deepEqual(resumo.map((x) => [x.mercado, x.preco_mediano, x.pessoas, x.ultimo_dia]),
+    [["Tatico", 6, 1, "2026-10-21"], ["Dona", 8, 3, "2026-10-21"]]);
+});

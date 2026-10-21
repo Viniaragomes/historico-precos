@@ -547,3 +547,6 @@ textarea.campo-texto { resize: vertical; }
 .etiqueta.baixa { background: var(--desce-fundo); color: var(--desce); }
 .etiqueta.neutra { background: var(--superficie-2); color: var(--texto-2); }
 a.botao-secundario-neutro { text-decoration: none; box-sizing: border-box; }
+
+.rotulo-campo { display: block; font-weight: 600; margin: 12px 0 6px; }
+.folha-modal .campo-texto + .campo-texto { margin-top: 8px; }
