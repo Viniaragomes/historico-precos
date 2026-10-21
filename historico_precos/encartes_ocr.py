@@ -114,22 +114,34 @@ def trechos_das_linhas(linhas: list[dict]) -> list[Trecho]:
     return trechos
 
 
-def vocabulario(*cons) -> set[str]:
-    """Palavras (sem acento, 3+ letras) dos nomes de produtos que já conhecemos: catálogos das lojas, Open Food Facts,
-    descrições de preços e o dicionário de códigos das notas fiscais do DF. Serve para descartar leitura de imagem que parece palavra mas não é ("posta sesaos")."""
+def vocabulario(*cons, minimo: int = 20) -> set[str]:
+    """Palavras (sem acento, 4+ letras) dos nomes de produtos que já conhecemos: catálogos das lojas, Open Food Facts,
+    descrições de preços e o dicionário de códigos das notas fiscais do DF. Serve para descartar leitura de imagem que
+    parece palavra mas não é ("posta sesaos"). Só vale palavra que aparece em `minimo` nomes diferentes: as notas fiscais
+    têm muita abreviação e erro de digitação, e uma palavra rara ali não prova nada."""
+    from collections import Counter
+
     from .vinculo import normalizar
 
-    palavras: set[str] = set()
+    contagem: Counter = Counter()
     consultas = ["SELECT nome FROM produtos", "SELECT marca FROM produtos", "SELECT DISTINCT descricao FROM precos",
                  "SELECT nome FROM produtos_loja", "SELECT descricao FROM mapa_df_dicionario"]
     for con in cons:
         for sql in consultas:
             try:
                 for (nome,) in con.execute(sql):
-                    palavras.update(w for w in re.findall(r"[a-z]{3,}", normalizar(nome)))
+                    contagem.update(set(re.findall(r"[a-z]{4,}", normalizar(nome))))
             except Exception:  # tabela ainda não existe neste banco
                 continue
-    return palavras
+    return {w for w, n in contagem.items() if n >= minimo}
+
+
+def conhecido(texto: str, vocab: set[str]) -> bool:
+    """A maioria das palavras de 4+ letras do trecho existe em nomes de produtos (as de 3 letras não contam)."""
+    from .vinculo import normalizar
+
+    ws = re.findall(r"[a-z]{4,}", normalizar(texto))
+    return bool(ws) and sum(w in vocab for w in ws) / len(ws) >= 0.6
 
 
 def abrir_dicionario(caminho: str | Path):
@@ -146,13 +158,6 @@ def abrir_dicionario(caminho: str | Path):
             shutil.copyfileobj(origem, saida)
         caminho = destino
     return sqlite3.connect(caminho)
-
-
-def conhecido(texto: str, vocab: set[str]) -> bool:
-    from .vinculo import normalizar
-
-    ws = re.findall(r"[a-z]{3,}", normalizar(texto))
-    return bool(ws) and sum(w in vocab for w in ws) / len(ws) >= 0.6
 
 
 def nomes_das_linhas(linhas: list[dict], vocab: set[str]) -> list[str]:

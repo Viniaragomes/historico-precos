@@ -59,10 +59,10 @@ class TestVocabulario(unittest.TestCase):
         con.execute("CREATE TABLE produtos (ean, nome, marca, quantidade, fonte)")
         con.executemany("INSERT INTO produtos VALUES (?,?,?,?,?)", [("1", "Asa de frango Sadia 1kg", "Sadia", "", ""),
                                                                     ("2", "Sabonete Dove Original 90g", "Dove", "", "")])
-        vocab = encartes_ocr.vocabulario(con)
+        vocab = encartes_ocr.vocabulario(con, minimo=1)
         self.assertTrue(encartes_ocr.conhecido("ASA DE FRANGO SADIA", vocab))
         self.assertTrue(encartes_ocr.conhecido("Sabonete Dove original", vocab))
-        self.assertFalse(encartes_ocr.conhecido("asa alma ad", vocab))
+        self.assertFalse(encartes_ocr.conhecido("asa alma ad", vocab))  # "asa" (3 letras) não conta; "alma" não existe
         self.assertFalse(encartes_ocr.conhecido("posta sesaos", vocab))
 
     def test_nomes_sem_preco(self):
