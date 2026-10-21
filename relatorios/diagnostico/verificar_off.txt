@@ -1,0 +1,4 @@
+7891800652260: HTTP 404 em 759 ms: b'{"code":"7891800652260","status":0,"status_verbose":"product not found"}'
+7500435172561: HTTP 404 em 365 ms: b'{"code":"7500435172561","status":0,"status_verbose":"product not found"}'
+7891000053508: 680 ms, status=1 (product found), CORS=*, produto={'brands': 'Nestlé, Nescau', 'image_front_small_url': 'https://images.openfoodfacts.org/images/products/789/100/005/3508/front_es.33.200.jpg', 'product_name': '', 'product_name_pt': '2.0', 'quantity': '400 g'}
+7896005800027: 352 ms, status=1 (product found), CORS=*, produto={'brands': '3 Corações', 'image_front_small_url': 'https://images.openfoodfacts.org/images/products/789/600/580/0027/front_pt.3.200.jpg', 'product_name': 'Tradicional', 'product_name_pt': 'Tradicional', 'quantity': '250 g'}
