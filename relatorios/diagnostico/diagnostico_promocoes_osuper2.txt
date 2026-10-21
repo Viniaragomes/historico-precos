@@ -1,0 +1,122 @@
+https://api.fortatacadista.com.br robots.txt: <HTTPError 404: 'Not Found'>
+https://api.ibecom.com.br robots.txt: <HTTPError 404: 'Not Found'>
+https://api-legada.ibecom.com.br robots.txt: <HTTPError 404: 'Not Found'>
+
+===== Fort (osuper)
+urls com api/graphql: ['https://api.fortatacadista.com.br:443/storefront/gr', 'https://api.whatsapp.com/send?phone=${g.value?.repl', 'https://cdn.osuper.com.br/beta/bundles/graphql-global-types/graphql-global-types-BL1No', 'https://fonts.googleapis.com', 'https://fonts.googleapis.com/css2?family=Google+Sans:wght@200;3']
+trechos 'graphql': ['slice-CVsH-6z-.js",globalThis.__ASSETS_BASE__ + "gift-identity/gift-identity-BbASZtxl.js",globalThis.__ASSETS_BASE__ + "graphql-global-types/graphql-global-types-BL1No2Hz.js",globa', 'obalThis.__ASSETS_BASE__ + "gift-identity/gift-identity-BbASZtxl.js",globalThis.__ASSETS_BASE__ + "graphql-global-types/graphql-global-types-BL1No2Hz.js",globalThis.__ASSETS_BASE__', ',f as Zn,g as Qn,i as $n,j as er,k as tr,m as nr,n as rr,p as ir,q as ar,r as or,v as sr,w as cr,x as J,z as lr}from"../graphql-global-types/graphql-global-types-BL1No2Hz.js";impor', ' $n,j as er,k as tr,m as nr,n as rr,p as ir,q as ar,r as or,v as sr,w as cr,x as J,z as lr}from"../graphql-global-types/graphql-global-types-BL1No2Hz.js";import{a as ur,i as dr,n a', ')===`1`;return t.dispatch(Ct({token:r.token,refreshToken:r.refreshToken,keepLogin:i})),r.token}catch{return null}},Hl=({graphqlEndpointUrl:e,ssrHost:t,client:n=!1,store:r,ssrSecret']
+operações com promo/oferta/produto: ['AddProductToShoppingLists', 'AddProductsToShoppingList', 'AllCategoriesPageQuery', 'ChangeShoppingListProductQty', 'ChangeShoppingListProductQuantity', 'CustomerAddProductToExistingOrder', 'FindProductTagsReview', 'MostFrequentSearchTermsMobileQuery', 'OrderProductsDetails', 'ProductsInPromotionQuery', 'PublicCustomerPersonaProductsQuery', 'PublicLastBoughtProductsQuery', 'PublicLastViewedProductsQuery', 'SearchActiveStoresQuery', 'StoreHasPromotions', 'UpdateProductLastViewed']
+
+--- ProductsInPromotionQuery:
+ query ProductsInPromotionQuery($storeId: ID!, $bannerType: BannerType = PROMOTIONS) {
+    publicViewer(storeId: $storeId) {
+      id
+      banners(storeId: $storeId, type: $bannerType) {
+        id
+        link
+        title
+        mediaType
+        linkTarget
+        linkType
+        mediaTypeMobile
+        isSponsored
+        mediaMobile {
+          thumborized(width: 750)
+          name
+          id
+          url
+        }
+        media {
+          id
+          name
+          thumborized(width: 1700)
+          url
+        }
+      }
+    }
+  }
+`,NK=z([ji,oi],(e,t)=>({storePromotionTitle:e.promotionTitle,selectedStore:e,promotionsSeo:t?.promotionsSeoConfig??null,defaultOgImage:t?.seoConfig?.defaultOgImage?.thumborized??void 0}));function PK(){let e=(0,Z.c)(44),{storePromotionTitle:t,selectedStore:n,promotionsSeo:r,defaultOgImage:i}=B(NK),{filters:a}=EF(),o;e[0]===n.id?o=e[1]:(o={variables:{storeId:n.id}},e[0]=n.id,e[1]=o);let{data:s}=_e(MK,o),c;e[2]===a?c=e[3]:(c=Object.keys(a),e[2]=a,e[3]=c);let l;e[4]!==a||e[5]!==c?(l=c.find(e=>Array.isArray(a[e])&&!a[e].isEmpty()),e[4]=a,e[5]=c,e[6]=l):l=e[6];let u=l==null,d=s?.publicViewer.banners,f=d&&d.length>1,p=r?.metaTitle??void 0,m=r?.metaDescription??`Acesse nossa página de promoções e encontre ofertas exclusivas!`,h=r?.ogImage?.thumborized??i,g=r?.metaKeywords??void 0,_=r?.noIndex??!1,v;e[7]!==t||e[8]!==p||e[9]!==m||e[10]!==h||e[11]!==g||e[12]!==_?(v=(0,$.jsx)(Hu,{title:t,rawTitle:p,ogDescription:m,ogImage:h,keywords:g,noIndex:_}
+
+--- StoreHasPromotions:
+ query StoreHasPromotions($storeId: ID!) {
+    publicViewer(storeId: $storeId) {
+      id
+      storeHasPromotion(storeId: $storeId)
+    }
+  }
+
+`,Wp=K`
+  ${fr}
+  ${dr}
+  query HomePageQuery($storeId: ID!, $showOn: BannerShowOn) {
+    publicViewer(storeId: $storeId) {
+      id
+      banners(storeId: $storeId, type: MAIN, showOn: $showOn) {
+        id
+        mediaType
+        mediaTypeMobile
+        title
+        subtitle
+        showOn
+        interval
+        color
+        isInteractive
+        isSponsored
+        product {
+          ...ProductDetails
+          flags(storeId: $storeId) {
+            ...ProductFlagsFragment
+          }
+        }
+        icon {
+          id
+          url
+          thumborized(width: 100)
+        }
+        media {
+          id
+          url
+          thumborized(width: 1920)
+        }
+        mediaMobile {
+          id
+          url
+          thumborized(width: 840)
+        }
+        linkType
+        link
+        linkTarget
+      }
+      miniBanners: banners(storeId: $storeId, type: MINI, limit: 4) {
+        id
+        title
+        subtitle
+        media {
+          id
+          url
+          thumborized(width: 420, height: 0)
+        }
+        linkType
+        link
+        linkTarget
+        isSponsored
+      }
+      categories(storeId: $storeId, level: 1, visibleInHomepage: true) {
+        id
+        name
+        description
+        slug
+        sponsored
+        imageHomePage {
+          id
+          url
+          thumborized(width: 253, hei
+
+INITIAL_STATE: tamanho 150448 | chaves de 1º nível: [('app', ''), ('', 'instanceInfo'), ('', 'logo')]
+   storeId -> storeId":"1585"},{"slug":"valparaiso","storeId":"1621"},{"slug":"tijuca","storeId":"1622"},{"slug":"ceilandia","storeId":"1623"},{"slug":"presidente-vargas","st
+   apiUrl -> apiUrl":"https:\u002F\u002Fapi.fortatacadista.com.br:443","recaptchaKey":"6LepabQtAAAAANSqot5XLrsxl7Mu-oZOjeeTzQtU","isSelectStoreModalOpen":false,"alert":{"tex
+   "id" -> "id":334,"logo":{"url":"https:\u002F\u002Fosuper-ecommerce-fortatacadista.s3.sa-east-1.amazonaws.com\u002F79c02faf-fortcompactada400.png","thumborized":"https:\
+
+===== Big Box (Instabuy)
+['/apiv3/address', '/apiv3/address/autocomplete', '/apiv3/address/get_infos_from_location', '/apiv3/address/place_geolocation/${t}', '/apiv3/available_schedules', '/apiv3/buy', '/apiv3/buys/${t}/update_credit_card', '/apiv3/card', '/apiv3/card/${r}', '/apiv3/cashback/history', '/apiv3/change_password', '/apiv3/delivery_tax', '/apiv3/discount_coupons', '/apiv3/forgotpassword', '/apiv3/login_token', '/apiv3/message', '/apiv3/shopping_list', '/apiv3/subscriptions', '/apiv3/subscriptions/${t}', '/apiv3/subscriptions/${t}/cancel_subscription', '/apiv3/user', '/apiv3/validate_phone_token', '/apiv3/verify_phone', '/apiv3/zipcode', 'promo),N=P&&P!==g?.kind?D(e,P):null,j=[g?.kin', 'promo),n=(t=w(e.priceConfig,e.ctx)).length?t.', 'promo);return{price:c(l.unitPrice,r),original', 'promo_cashback&&i.push({label:', 'promo_cashback:', 'promo_cashback:t?.promo_cashback??r,price_discount:t?.', 'promo_cashback;u&&(0,n.isPromoActive)(u.promo_end_at,a', 'promo_cashback=e.promo_cashback?new eZ(e.promo_cashbac', 'promo_cashback??{},e.promo_cashback?.max_qtd_per_clien', 'promo_cashback}),this.price_discount&&i.push({label:th', 'promo_club_name;vale_payment_online_flags;constructor(t', 'promo_club_name=t.promo_club_name,this.vale_payment_onl', 'promo_club_name||', 'promo_crm_massive,b=m.stock?.max_purchase_quantity,_=', 'promo_crm_massive.price,t)),t}getDiscountPercentage(e){le', 'promo_crm_massive:', 'promo_crm_massive;promo_cashback;constructor(e){this.pric', 'promo_crm_massive=e.promo_crm_massive?new eX(e.promo_crm_', 'promo_crm_massive??r,promo_take_and_pay:t?.promo_take_and', 'promo_crm_massive??{},e.promo_crm_massive?.max_qtd_per_cl', 'promo_crm_massive}),this.promo_take_and_pay&&i.push({labe', 'promo_end_at,a.now)&&s.push({kind:', 'promo_end_at,i.now))return null;let l=r(e.price,n.di', 'promo_end_at,i.now)||n.price>=e.price)return null;le', 'promo_end_at=new Date(e.promo_end_at),this.max_qtd_p', 'promo_end_at=new Date(e.promo_end_at),this.take_qtd=', 'promo_end_at=new Date(e.promo_end_at)}}class e1{max_', 'promo_end_at}),s}var l=e.i(842400),o=e.i(619827);fun', 'promo_end_at});let c=e.promo_free_delivery;return c&', 'promo_end_at})}(e,t,i),function(e,t,i){let n=e.promo', 'promo_end_at})}(e,t,i)].filter(e=>null!==e)},', 'promo_free_delivery:', 'promo_free_delivery:t?.promo_free_delivery??r,promo_crm_mas', 'promo_free_delivery?new e0(e.promo_free_delivery):void 0,th', 'promo_free_delivery}),this.promo_crm_massive&&i.push({label', 'promo_free_delivery})[e]??t.default??null:null}function x(e']
+storeData: storeData":{"store":{"id":"5a4d173b94e42937b3a6563a","subdomain":"bigboxdelivery","custom_domain":"bigboxdelivery.com.br","has_store_selector":true,"name":"BIG BOX Delivery - 402/403 Norte","description":"A rede de supermercados BIG BOX nasceu em Brasília e hoje possui 24 lojas em todo o Distrito Federal.","slogan":"Lugar com qualidade e economia.","logo_urls":{"small":"https://assets.ibecom.com.br/ib.store.image.small/s-fbbc6f65a4bc42a2adc216d00f5c8142.png","medium":"https://assets.ibecom.com.br/ib.store.image.medium/m-fbbc6f65a4bc42a2adc216d00f5c8142.png
