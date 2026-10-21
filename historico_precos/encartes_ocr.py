@@ -358,7 +358,7 @@ def ler_encartes(nav: Navegador, dias: int = 4, hoje: date | None = None, max_im
                             lidas += 1
                             png = _preparar(pagina.read_bytes(), pasta, f"{n}-{pagina.stem}.png")
                             for cor in (False, True):
-                                _ler_imagem(lido, ocr_linhas(png, estilizados=not cor, cor=cor), vocab, filtrar)
+                                _ler_imagem(lido, ocr_linhas(png, cor=cor), vocab, filtrar)
             if len(lido.trechos) < 3 and not lido.nomes:
                 lido.trechos = []
                 for i, url in enumerate(e.imagens):
@@ -369,8 +369,8 @@ def ler_encartes(nav: Navegador, dias: int = 4, hoje: date | None = None, max_im
                         continue
                     lidas += 1
                     png = _preparar(dados, pasta, f"{n}-{i}{Path(url.split('?')[0]).suffix or '.img'}")
-                    for cor in (False, True):  # estilizados só na 1ª passada: a 2ª serve para o texto comum
-                        _ler_imagem(lido, ocr_linhas(png, estilizados=not cor, cor=cor), vocab, filtrar)
+                    for cor in (False, True):
+                        _ler_imagem(lido, ocr_linhas(png, cor=cor), vocab, filtrar)
             saida.append(lido)
     return saida
 
