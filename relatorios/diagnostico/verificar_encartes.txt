@@ -1,4 +1,4 @@
-2026-10-21T13:32:27+00:00 20 encartes, 81 preços lidos
+2026-10-21T13:37:18+00:00 20 encartes, 76 preços lidos
 
    5  Atacadão Dia a Dia | até 2026-10-21 | pdf: True | https://ofertas.diaadiaatacadista.com.br/ofertas/dia-de-feira-21-10-df-e-entorno/
         R$    1.29  TOMATE GRAPE
@@ -15,21 +15,19 @@
         R$    1.49  BISCOITO WAFER DIA A DIA SABORES 73G
         R$    3.79  BISCOITO CREAM CRACKER DIA A DIA 300G
 
-   2  Dona | até 2026-10-21 | pdf: True | https://donafazbem.com.br/folheto/ofertas/
-        R$  192.99  Banana Prata
-        R$  250.69  e Bombom Lacta Sortidos
+   0  Dona | até 2026-10-21 | pdf: True | https://donafazbem.com.br/folheto/ofertas/
         R$    0.00  (sem preço) Filé de Coxa e Sobrecoxa
         R$    0.00  (sem preço) Picanha Bovina Minerva Pul
         R$    0.00  (sem preço) Costela Suína Sadia em Fatias
         R$    0.00  (sem preço) de Frango com Pele Super Frango
 
-  21  Assaí Atacadista | até 2026-10-22 | pdf: False | https://encartesdf.com.br/assai-atacadista-ate-22-10-2026/
-        R$  169.90  pci PÉ DE FRANGO RESFRIADO COPACOL
+  19  Assaí Atacadista | até 2026-10-22 | pdf: False | https://encartesdf.com.br/assai-atacadista-ate-22-10-2026/
         R$   16.90  CARNE BOVINA MOÍDA CONGELADA FRIBOL EMBALAGEM 500g
-        R$  514.90  RESFRIADA PARA CHURRASCO BONFRIGO
         R$   34.90  LAGARTO BOVINO RESFRIADO FRIBOI PREÇO POR QUILO NA PEÇA
         R$   14.50  CONGELADA FRIBOL EMBALAGEM 500g
         R$    8.99  RESFRIADO COPACOL quito ix
+        R$    2.95  BATATA-DOCE ROSADA
+        R$    2.99  ABACATE
         R$    0.00  (sem preço) CARNE BOVINA MOÍDA
         R$    0.00  (sem preço) LINGUIÇA SUÍNA
         R$    0.00  (sem preço) TRASEIRO FRIBOI
@@ -39,7 +37,7 @@
         R$    0.00  (sem preço) BANANA PRATA
         R$    0.00  (sem preço) MANGA TOMMY
         R$    0.00  (sem preço) BANANA NANICA
-        R$    0.00  (sem preço) Q VILA SÃO JOSE QD 10 LJ 01
+        R$    0.00  (sem preço) PEPINO JAPONÊS
 
    0  Bevia Atacadista | até 2026-10-21 | pdf: False | https://encartesdf.com.br/bevia-atacadista-ate-21-10-2026/
         R$    0.00  (sem preço) mato, dg ade
@@ -47,18 +45,18 @@
         R$    0.00  (sem preço) Bandeja - 30 Unidades
 
    0  Dia a Dia Atacadista | até 2026-10-21 | pdf: False | https://encartesdf.com.br/dia-a-dia-atacadista-ate-21-10-2026-2/
-        R$    0.00  (sem preço) é preço baixo todo
         R$    0.00  (sem preço) ALFACE CRESPA OU CHEIRO
         R$    0.00  (sem preço) PEPINO COMUM
         R$    0.00  (sem preço) REPOLHO BRANCO
+        R$    0.00  (sem preço) BANANA NANICA
 
    2  Supermercado Ultrabox | até 2026-10-25 | pdf: False | https://encartesdf.com.br/supermercado-ultrabox-ate-25-10-2026/
         R$   12.98  pérola | tao 5kg as
         R$   67.45  98 PACOTE 2,5KG
-        R$    0.00  (sem preço) voce precisa
         R$    0.00  (sem preço) Extra Virgem Argentino
         R$    0.00  (sem preço) Frango a Passarinho
         R$    0.00  (sem preço) Queijo Mussarela Deale
+        R$    0.00  (sem preço) Músculo Bovino
 
    2  Supermercado Ultrabox | até 2026-10-22 | pdf: False | https://encartesdf.com.br/supermercado-ultrabox-ate-22-10-2026/
         R$   12.98  Coca-Cola Original s
@@ -92,10 +90,10 @@
         R$    0.00  (sem preço) MANGA det Y
 
    0  Supermercado Mais Econômico | até 2026-10-26 | pdf: False | https://encartesdf.com.br/supermercado-mais-economico-ate-26-10-2026/
-        R$    0.00  (sem preço) COND. PETRÓPOLIS - MÓDULO G - LOTE 01
         R$    0.00  (sem preço) OVOS BRANCO C/30 UNIDADES
-        R$    0.00  (sem preço) Rus 45 Lote 370
-        R$    0.00  (sem preço) LOTE 30
+        R$    0.00  (sem preço) COXINHA DA ASA
+        R$    0.00  (sem preço) A SUINA
+        R$    0.00  (sem preço) COXA SOBRECOXA
 
    8  Supermercado Super Big | até 2026-10-21 | pdf: False | https://encartesdf.com.br/supermercado-super-big-ate-21-10-2026/
         R$    3.49  LARANJA
@@ -107,12 +105,11 @@
         R$    0.00  (sem preço) O BIG DA ECONOMIA
         R$    0.00  (sem preço) LUBE BIG
         R$    0.00  (sem preço) supermercado super big se reserva o direito de
-        R$    0.00  (sem preço) QD 69 LOTE 10/11
+        R$    0.00  (sem preço) Ao lado do campo gramado
 
-   3  Supermercado Planeta | até 2026-10-21 | pdf: False | https://encartesdf.com.br/supermercado-planeta-ate-21-10-2026/
+   2  Supermercado Planeta | até 2026-10-21 | pdf: False | https://encartesdf.com.br/supermercado-planeta-ate-21-10-2026/
         R$    4.99  MILHO BDJ C/5UN
         R$    0.99  PIMENTA DE CHEIRO BDJ ae
-        R$   41.99  MAMÃO FORMOSA KG io 4
         R$    0.00  (sem preço) BANANA PRATA KG
         R$    0.00  (sem preço) TOMATE KG
         R$    0.00  (sem preço) BATATA KG
@@ -127,10 +124,10 @@
    0  Cristal Supermercado | até 2026-10-21 | pdf: False | https://encartesdf.com.br/cristal-supermercado-ate-21-10-2026/
 
    0  Fort Atacadista | até 2026-10-22 | pdf: False | https://encartesdf.com.br/fort-atacadista-ate-22-10-2026/
-        R$    0.00  (sem preço) VOCÊ FAZER A FESTA COM A VIZINHANÇA!
         R$    0.00  (sem preço) Pote 500g
         R$    0.00  (sem preço) pla Conde ds
         R$    0.00  (sem preço) Moido Bandeja
+        R$    0.00  (sem preço) Arroz Branco
 
    2  Supermercado Tatico | até 2026-10-25 | pdf: False | https://encartesdf.com.br/supermercado-tatico-ate-25-10-2026/
         R$   13.99  asa alma ad
