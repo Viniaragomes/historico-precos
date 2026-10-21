@@ -192,3 +192,40 @@ class TestTravaQlik(unittest.TestCase):
         self.assertEqual(qlik.precos_por_gtin(motor, doc, ["7891"]), [])
         motor.fechar()
         self.assertNotIn("CreateSessionObject", [p.get("method") for p in pedidos[1:]])
+
+
+class TestDicionario(unittest.TestCase):
+    def test_paginas_e_filtra_sem_gtin(self):
+        import sqlite3
+
+        def resp(msg):
+            m = msg["method"]
+            if m == "OpenDoc":
+                return {"qReturn": {"qHandle": 1}}
+            if m == "CreateSessionObject":
+                dims = [d["qDef"]["qFieldDefs"][0] for d in msg["params"][0]["qHyperCubeDef"]["qDimensions"]]
+                assert dims == ["cean", "ucom_mod"]
+                return {"qReturn": {"qHandle": 5}}
+            if m == "GetLayout":
+                return {"qLayout": {"qHyperCube": {"qSize": {"qcx": 7, "qcy": 3}}}}
+            if m == "GetHyperCubeData":
+                topo = msg["params"]["qPages"][0]["qTop"]
+                linhas = [
+                    [{"qText": "7898955519028"}, {"qText": "UN"}, {"qText": "AGUA MIN PLATINA 310ML"}, {"qText": "22011000"},
+                     {"qNum": 1.2}, {"qNum": 8}, {"qNum": 480}],
+                    [{"qText": "SEM GTIN"}, {"qText": "UN"}, {"qText": "X"}, {"qText": "1"}, {"qNum": 1}, {"qNum": 1}, {"qNum": 1}],
+                    [{"qText": "7896005800027"}, {"qText": "CX"}, {"qText": "CAFE 3C 500G CX20"}, {"qText": "09012100"},
+                     {"qNum": 300.0}, {"qNum": 4}, {"qNum": 12}],
+                ]
+                return {"qDataPages": [{"qMatrix": linhas[topo:topo + 2]}]}
+            return {}
+
+        url, pedidos = servidor_qlik_falso(resp)
+        motor = qlik.Motor("app", url=url)
+        doc = motor.abrir_app()
+        con = sqlite3.connect(":memory:")
+        r = qlik.dicionario(motor, doc, con, altura=2, pausa=0)
+        motor.fechar()
+        self.assertEqual((r["linhas_no_painel"], r["paginas"], r["gravadas"]), (3, 2, 2))
+        self.assertEqual(con.execute("SELECT descricao, mediana FROM mapa_df_dicionario WHERE ean='7898955519028'").fetchone(),
+                         ("AGUA MIN PLATINA 310ML", 1.2))

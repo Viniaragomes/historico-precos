@@ -209,6 +209,24 @@ def _mapa_df(args, nav: Navegador, banco: Banco) -> int:
                 var = f"{t['variacao_pct']:+.1f}% em 7 dias" if t.get("variacao_pct") is not None else (t.get("nota") or "")
                 print(f"  {ean} {s_['descricao'][:40]:<40} {ult['data']} R$ {ult['mediana'] or 0:>8.2f}/{s_['unidade']}  {len(s_['pontos'])} dias  {var}")
         return 0
+    if args.acao == "dicionario":
+        import sqlite3
+        import time
+
+        from .mapa_df import qlik
+
+        con = sqlite3.connect(args.banco_dicionario)
+        motor = qlik.Motor()
+        try:
+            doc = motor.abrir_app()
+            fim = time.monotonic() + args.minutos * 60
+            r = qlik.dicionario(motor, doc, con, ate=lambda: time.monotonic() > fim)
+        finally:
+            motor.fechar()
+        n = con.execute("SELECT COUNT(DISTINCT ean) FROM mapa_df_dicionario").fetchone()[0]
+        print(f"Painel: {r['linhas_no_painel']} linhas (código x unidade); {r['gravadas']} gravadas em {r['paginas']} páginas; "
+              f"{n} códigos de barras no dicionário. {r.get('parou') or ''}")
+        return 0
     if args.acao == "qlik":
         from .mapa_df import qlik
 
@@ -369,6 +387,9 @@ def main(argv: list[str] | None = None) -> int:
     mdc.add_argument("--termos", help="separados por vírgula (padrão: termos_padrao do mapa_df.json)")
     mdc.add_argument("--meses", help="AAAA-MM separados por vírgula (padrão: últimos meses)")
     mdc.add_argument("--bruto", help="salva as respostas nesta pasta (útil para ajustar o agente)")
+    mdd = msub.add_parser("dicionario", help="baixa o dicionário de códigos (todos os GTIN das notas do DF, com nome e preço de compra)")
+    mdd.add_argument("--banco-dicionario", default="dicionario.db")
+    mdd.add_argument("--minutos", type=float, default=50)
     mdx = msub.add_parser("qlik", help="abre o app Qlik do painel como a página pública e descreve campos e tabelas")
     mdx.add_argument("--saida", default="relatorios/mapa-df-qlik.json")
     mdx.add_argument("--linhas", type=int, default=20, help="linhas de amostra por tabela")

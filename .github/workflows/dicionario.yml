@@ -1,0 +1,39 @@
+name: Dicionário de códigos (Mapa de Preços do DF)
+
+# Uma vez por semana: todos os códigos de barras das notas fiscais do DF (últimos 3 meses), com nome e preço de compra.
+on:
+  schedule:
+    - cron: "41 4 * * 6"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dicionario
+  cancel-in-progress: false
+
+jobs:
+  dicionario:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Baixar o dicionário (devagar, uma página por segundo)
+        run: python -m historico_precos mapa-df dicionario --banco-dicionario dicionario.db --minutos 60
+      - name: Guardar no ramo "dados"
+        run: |
+          gzip -9 -k dicionario.db
+          ls -lh dicionario.db dicionario.db.gz
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin dados
+          git worktree add /tmp/dados origin/dados
+          cp dicionario.db.gz /tmp/dados/
+          cd /tmp/dados
+          git add dicionario.db.gz
+          git commit -m "Dicionário de códigos $(date -u +%F)" || exit 0
+          for i in 1 2 3 4; do git pull --rebase origin dados && git push origin HEAD:dados && break; sleep $((i * 5)); done

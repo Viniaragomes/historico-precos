@@ -399,3 +399,59 @@ def tendencia(pontos: list[dict], janela: int = 7, minimo_itens: int = 5) -> dic
                 "nota": "poucas notas para comparar"}
     return {"variacao_pct": round((atual / antes - 1) * 100, 2), "atual": round(atual, 2), "anterior": round(antes, 2),
             "itens": [n0, n1], "ate": fim.isoformat()}
+
+
+# ---------------- dicionário de códigos: todos os GTIN das notas do DF, com nome e preço de compra ----------------
+
+_ESQUEMA_DICIONARIO = """
+CREATE TABLE IF NOT EXISTS mapa_df_dicionario (
+    ean TEXT NOT NULL, unidade TEXT NOT NULL, descricao TEXT, ncm TEXT, mediana REAL, notas INTEGER, quantidade REAL,
+    atualizado_em TEXT NOT NULL,
+    PRIMARY KEY (ean, unidade)
+);
+"""
+
+
+def dicionario(motor: Motor, doc: int, con, altura: int = 1000, pausa: float = 1.0, ate=None) -> dict:
+    """Lê, em páginas, um cubo com uma linha por GTIN e unidade: descrição, NCM, mediana do valor unitário, notas.
+    Só agregados (nada de CPF/CNPJ). Grava em mapa_df_dicionario."""
+    import time
+
+    from ..modelo import agora_iso
+
+    con.executescript(_ESQUEMA_DICIONARIO)
+    definicao = {
+        "qInfo": {"qType": "dicionario-gtin"},
+        "qHyperCubeDef": {
+            "qDimensions": [{"qDef": {"qFieldDefs": ["cean"]}, "qNullSuppression": True},
+                            {"qDef": {"qFieldDefs": ["ucom_mod"]}, "qNullSuppression": True}],
+            "qMeasures": [{"qDef": {"qDef": "=MaxString(xprod)"}}, {"qDef": {"qDef": "=MaxString(ncm)"}},
+                          {"qDef": {"qDef": "=Median(vuncom)"}}, {"qDef": {"qDef": "=Count(id)"}}, {"qDef": {"qDef": "=Sum(qcom)"}}],
+            "qSuppressZero": False, "qSuppressMissing": True, "qInitialDataFetch": [],
+        },
+    }
+    motor.chamar(doc, "ClearAll", {"qLockedAlso": False})
+    h = motor.chamar(doc, "CreateSessionObject", [definicao])["qReturn"]["qHandle"]
+    total = motor.chamar(h, "GetLayout")["qLayout"]["qHyperCube"]["qSize"]["qcy"]
+    agora = agora_iso()
+    resumo = {"linhas_no_painel": total, "gravadas": 0, "paginas": 0}
+    for topo in range(0, total, altura):
+        if ate and ate():
+            resumo["parou"] = "tempo da rodada acabou"
+            break
+        pag = motor.chamar(h, "GetHyperCubeData", {"qPath": "/qHyperCubeDef", "qPages": [
+            {"qLeft": 0, "qTop": topo, "qWidth": 7, "qHeight": min(altura, total - topo)}]})
+        lote = []
+        for p in pag.get("qDataPages", []):
+            for c in p.get("qMatrix", []):
+                ean = (c[0].get("qText") or "").strip()
+                if not (ean.isdigit() and 8 <= len(ean) <= 14):
+                    continue  # "SEM GTIN" e similares
+                lote.append((ean, (c[1].get("qText") or "?").strip(), (c[2].get("qText") or "").strip()[:120],
+                             (c[3].get("qText") or "").strip(), _numero(c[4]), int(_numero(c[5]) or 0), _numero(c[6]), agora))
+        con.executemany("INSERT OR REPLACE INTO mapa_df_dicionario VALUES (?, ?, ?, ?, ?, ?, ?, ?)", lote)
+        con.commit()
+        resumo["gravadas"] += len(lote)
+        resumo["paginas"] += 1
+        time.sleep(pausa)  # gentileza com o servidor do governo
+    return resumo
