@@ -113,6 +113,42 @@ class TestComparar(unittest.TestCase):
         self.assertEqual(c["diferenca"], 0)
 
 
+@unittest.skipUnless(shutil.which("tesseract"), "sem tesseract")
+class TestPrecoEstilizado(unittest.TestCase):
+    def test_centavos_pequenos_e_etiqueta_colorida(self):
+        import glob
+
+        from PIL import Image, ImageDraw, ImageFont
+
+        fontes = glob.glob("/usr/share/fonts/**/DejaVuSans-Bold.ttf", recursive=True)
+        if not fontes:
+            self.skipTest("sem fonte DejaVu")
+        f = lambda n: ImageFont.truetype(fontes[0], n)  # noqa: E731
+        img = Image.new("RGB", (1200, 520), "white")
+        d = ImageDraw.Draw(img)
+        for x, nome, tam, reais, cent, fundo in [(40, "CAFÉ PILÃO", "500g", "14", "98", None),
+                                                  (640, "ARROZ CAMIL", "TIPO 1 5kg", "24", "90", (200, 20, 20))]:
+            d.text((x, 60), nome, fill="black", font=f(40))
+            d.text((x, 115), tam, fill="black", font=f(32))
+            if fundo:
+                d.rectangle((x - 10, 170, x + 330, 320), fill=fundo)
+            cor = "white" if fundo else "red"
+            d.text((x + 70, 170), reais, fill=cor, font=f(120))
+            d.text((x + 75 + d.textlength(reais, font=f(120)), 180), cent, fill=cor, font=f(56))
+        with tempfile.TemporaryDirectory() as tmp:
+            png = encartes_ocr._preparar(_bytes(img), Path(tmp), "e.jpg")
+            lidos = sorted((t.texto, t.preco) for t in encartes_ocr.trechos_das_linhas(encartes_ocr.ocr_linhas(png)))
+        self.assertEqual(lidos, [("ARROZ CAMIL TIPO 1 5kg", 24.9), ("CAFÉ PILÃO 500g", 14.98)])
+
+
+def _bytes(img):
+    import io
+
+    b = io.BytesIO()
+    img.save(b, "JPEG", quality=92)
+    return b.getvalue()
+
+
 class TestRede(unittest.TestCase):
     def test_mesma_rede_com_outro_nome(self):
         self.assertEqual(encartes_ocr.nome_da_rede("Dia a Dia Atacadista"), "Atacadão Dia a Dia")

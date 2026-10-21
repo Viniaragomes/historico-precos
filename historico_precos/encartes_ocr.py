@@ -230,10 +230,38 @@ def nomes_das_linhas(linhas: list[dict], vocab: set[str]) -> list[str]:
     return saida
 
 
-def ocr_linhas(caminho: Path) -> list[dict]:
+def palavras_do_tsv(tsv: str) -> list[tuple]:
+    saida = []
+    for linha in tsv.splitlines()[1:]:
+        c = linha.split("\t")
+        try:
+            if len(c) >= 12 and c[11].strip() and float(c[10]) > 0:
+                saida.append((int(float(c[6])), int(float(c[7])), int(float(c[8])), int(float(c[9])), c[11]))
+        except ValueError:
+            continue
+    return saida
+
+
+def ocr_linhas(caminho: Path, estilizados: bool = True) -> list[dict]:
+    """Linhas lidas pelo Tesseract + preços estilizados (centavos pequenos no alto, letra branca em etiqueta colorida)
+    lidos à parte. A linha original que caiu em cima de um preço estilizado ("14º") sai, para não virar nome."""
     tsv = subprocess.run(["tesseract", str(caminho), "stdout", "-l", "por", "--psm", "11", "tsv"],
                          capture_output=True, text=True, timeout=120).stdout
-    return linhas_do_tsv(tsv)
+    linhas = linhas_do_tsv(tsv)
+    if not estilizados:
+        return linhas
+    try:
+        from .precos_estilizados import linhas_de_preco
+
+        extras = linhas_de_preco(caminho, palavras_do_tsv(tsv))
+    except Exception as e:  # leitura extra nunca derruba a leitura principal
+        print(f"preços estilizados: {e!r}")
+        extras = []
+    def sob(l, x):
+        return not (l["direita"] <= x["esquerda"] or l["esquerda"] >= x["direita"] or l["base"] <= x["topo"] or l["topo"] >= x["base"])
+    linhas = [l for l in linhas if not (re.search(r"\d", l["texto"]) and not RE_PRECO.search(l["texto"])
+                                        and any(sob(l, x) for x in extras))]
+    return sorted(linhas + extras, key=lambda l: (l["pagina"], l["topo"], l["esquerda"]))
 
 
 def ocr(caminho: Path) -> list[Trecho]:
@@ -247,7 +275,7 @@ def _preparar(dados: bytes, pasta: Path, nome: str) -> Path:
     try:
         from PIL import Image
 
-        img = Image.open(caminho).convert("L")
+        img = Image.open(caminho).convert("RGB")  # a cor ajuda a achar etiquetas de preço
         if img.width < 1600:
             fator = 1600 / img.width
             img = img.resize((1600, int(img.height * fator)))
