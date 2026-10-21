@@ -1,0 +1,59 @@
+name: Publicar o app
+
+# Publica o app no GitHub Pages em poucos minutos, sem esperar a coleta diária completa.
+# Usa o banco já coletado (ramo "dados"), se existir, e atualiza o atacado da CEASA-DF e da Conab.
+# Antes, ative: Settings > Pages > Source: GitHub Actions.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["site/**"]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  montar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Dados já coletados
+        run: |
+          if git ls-remote --exit-code --heads origin dados >/dev/null; then
+            git fetch origin dados:dados
+            git show dados:precos.db > precos.db
+            python -m historico_precos exportar --saida site/dados --sem-causas
+          else
+            echo "Ainda não há coleta completa: o app sai sem lista de produtos."
+          fi
+      - name: Atacado (CEASA-DF e Conab)
+        continue-on-error: true
+        run: |
+          pip install -q -r requirements-ceasa.txt
+          python -m historico_precos ceasa-df --exportar site/dados/ceasa-df.json | tail -5
+          python -m historico_precos conab --exportar site/dados/conab.json | tail -5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  publicar:
+    needs: montar
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4
+      - name: Endereço do app
+        run: echo "App publicado em ${{ steps.deploy.outputs.page_url }}" >> "$GITHUB_STEP_SUMMARY"
