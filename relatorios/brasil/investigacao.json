@@ -10,9 +10,10 @@
       {
         "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios",
         "status": 200,
-        "ms": 247,
+        "ms": 467,
         "titulo": "Convênios ICMS — Conselho Nacional de Política Fazendária CONFAZ",
         "servidor": "Zope/(2.13.22, python 2.7.3, linux2) ZServer/1.1",
+        "tipo": "text/html;charset=utf-8",
         "antirrobo": [],
         "tecnologia": [],
         "tem_json_ld": false,
@@ -95,9 +96,10 @@
         {
           "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios",
           "status": 200,
-          "ms": 237,
+          "ms": 227,
           "titulo": "Convênios ICMS — Conselho Nacional de Política Fazendária CONFAZ",
           "servidor": "Zope/(2.13.22, python 2.7.3, linux2) ZServer/1.1",
+          "tipo": "text/html;charset=utf-8",
           "antirrobo": [],
           "tecnologia": [],
           "tem_json_ld": false,
@@ -107,9 +109,10 @@
         {
           "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios/2025",
           "status": 200,
-          "ms": 1043,
+          "ms": 932,
           "titulo": "2025 — Conselho Nacional de Política Fazendária CONFAZ",
           "servidor": "Zope/(2.13.22, python 2.7.3, linux2) ZServer/1.1",
+          "tipo": "text/html;charset=utf-8",
           "antirrobo": [],
           "tecnologia": [],
           "tem_json_ld": false,
@@ -119,9 +122,10 @@
         {
           "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios/2026",
           "status": 200,
-          "ms": 301,
+          "ms": 285,
           "titulo": "2026 — Conselho Nacional de Política Fazendária CONFAZ",
           "servidor": "Zope/(2.13.22, python 2.7.3, linux2) ZServer/1.1",
+          "tipo": "text/html;charset=utf-8",
           "antirrobo": [],
           "tecnologia": [],
           "tem_json_ld": false,
@@ -131,9 +135,10 @@
         {
           "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios-ecf",
           "status": 200,
-          "ms": 473,
+          "ms": 496,
           "titulo": "Convênios ECF — Conselho Nacional de Política Fazendária CONFAZ",
           "servidor": "Zope/(2.13.22, python 2.7.3, linux2) ZServer/1.1",
+          "tipo": "text/html;charset=utf-8",
           "antirrobo": [],
           "tecnologia": [],
           "tem_json_ld": false,
@@ -143,9 +148,10 @@
         {
           "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios_arrecadacao",
           "status": 200,
-          "ms": 447,
+          "ms": 235,
           "titulo": "Convênios Arrecadação — Conselho Nacional de Política Fazendária CONFAZ",
           "servidor": "Zope/(2.13.22, python 2.7.3, linux2) ZServer/1.1",
+          "tipo": "text/html;charset=utf-8",
           "antirrobo": [],
           "tecnologia": [],
           "tem_json_ld": false,
@@ -155,9 +161,10 @@
         {
           "url": "https://www.confaz.fazenda.gov.br/legislacao/Convenios-de-cooperacao-outros2",
           "status": 200,
-          "ms": 458,
+          "ms": 411,
           "titulo": "Página principal - OUTROS — Conselho Nacional de Política Fazendária CONFAZ",
           "servidor": "Zope/(2.13.22, python 2.7.3, linux2) ZServer/1.1",
+          "tipo": "text/html;charset=utf-8",
           "antirrobo": [],
           "tecnologia": [],
           "tem_json_ld": false,
@@ -166,16 +173,24 @@
         },
         {
           "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios/1966/conveniosicms_1966",
-          "status": 0,
-          "erro": "The read operation timed out",
-          "ms": 45205
+          "status": 200,
+          "ms": 488,
+          "titulo": "CONVÊNIO ICMS 1966 — Conselho Nacional de Política Fazendária CONFAZ",
+          "servidor": "Zope/(2.13.22, python 2.7.3, linux2) ZServer/1.1",
+          "tipo": "text/html;charset=utf-8",
+          "antirrobo": [],
+          "tecnologia": [],
+          "tem_json_ld": false,
+          "arquivos_de_dados": [],
+          "inicio_do_texto": "@import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%20Theme/resourceplone.formwidget.autocompletejquery.autocomplete-cachekey-8a1ada68d10450ed014103370f01e143.css); @import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%20Theme/resourcecalendar_stylescalendar-cachekey-ab87c47333464a5f1d4a22f5f4f9f144.css); @import url(https://www.confaz.fazenda.gov.br/portal_css/Sunburst%2"
         },
         {
           "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios/1967/conveniosicms_1967",
           "status": 200,
-          "ms": 517,
+          "ms": 441,
           "titulo": "CONVÊNIOS ICMS 1967 — Conselho Nacional de Política Fazendária CONFAZ",
           "servidor": "Zope/(2.13.22, python 2.7.3, linux2) ZServer/1.1",
+          "tipo": "text/html;charset=utf-8",
           "antirrobo": [],
           "tecnologia": [],
           "tem_json_ld": false,
@@ -185,9 +200,10 @@
         {
           "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios/1968/conveniosicms_1968",
           "status": 200,
-          "ms": 480,
+          "ms": 498,
           "titulo": "CONVÊNIOS ICMS 1968 — Conselho Nacional de Política Fazendária CONFAZ",
           "servidor": "Zope/(2.13.22, python 2.7.3, linux2) ZServer/1.1",
+          "tipo": "text/html;charset=utf-8",
           "antirrobo": [],
           "tecnologia": [],
           "tem_json_ld": false,
@@ -197,9 +213,10 @@
         {
           "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios/1969/conveniosicms_1969",
           "status": 200,
-          "ms": 479,
+          "ms": 467,
           "titulo": "CONVÊNIO ICMS 1969 — Conselho Nacional de Política Fazendária CONFAZ",
           "servidor": "Zope/(2.13.22, python 2.7.3, linux2) ZServer/1.1",
+          "tipo": "text/html;charset=utf-8",
           "antirrobo": [],
           "tecnologia": [],
           "tem_json_ld": false,
@@ -209,9 +226,10 @@
         {
           "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios/1970/conveniosicms_1970",
           "status": 200,
-          "ms": 505,
+          "ms": 244,
           "titulo": "CONVÊNIOS ICMS 1970 — Conselho Nacional de Política Fazendária CONFAZ",
           "servidor": "Zope/(2.13.22, python 2.7.3, linux2) ZServer/1.1",
+          "tipo": "text/html;charset=utf-8",
           "antirrobo": [],
           "tecnologia": [],
           "tem_json_ld": false,
@@ -221,9 +239,10 @@
         {
           "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios/1971/conveniosicms_1971",
           "status": 200,
-          "ms": 515,
+          "ms": 547,
           "titulo": "CONVÊNIOS ICMS 1971 — Conselho Nacional de Política Fazendária CONFAZ",
           "servidor": "Zope/(2.13.22, python 2.7.3, linux2) ZServer/1.1",
+          "tipo": "text/html;charset=utf-8",
           "antirrobo": [],
           "tecnologia": [],
           "tem_json_ld": false,
@@ -245,10 +264,87 @@
         "url": "https://www.ceasa.df.gov.br/",
         "status": 0,
         "erro": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1144)>",
-        "ms": 234
+        "ms": 226
       }
     ],
     "scripts": [],
+    "temas": {
+      "sitemaps_lidos": [],
+      "candidatos": 0,
+      "exemplos": [],
+      "paginas": []
+    }
+  },
+  "CEASA-DF Portal de Serviços (preços)": {
+    "robots": {
+      "status": 200,
+      "erro": null,
+      "conteudo": "<!DOCTYPE html>\n<html lang=\"pt-br\">\n    <head>\n        <meta charset=\"UTF-8\"/>\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\n        <link rel=\"stylesheet\" href=\"https://www.portal.ceasadf.com.br/shared/styles/app.min.css\">\n        <link rel=\"stylesheet\" href=\"https://www.portal.ceasadf.com.br/themes/portalweb/assets/css/style.min.css\"/>\n        <link rel=\"icon\" href=\"https://www.portal.ceasadf.com.br/themes/portalweb/assets/img/logo-icon-green.png\" type=\"image/png\">\n        <title>Portal de Serviços - CEASA - DF</title>\n    </head>\n    <body>\n        <div class=\"ajax_load\">\n            <div class=\"ajax_load_box\">\n                <div class=\"ajax_load_box_circle\"></div>\n                <p class=\"ajax_load_box_title\">Aguarde, carregando...</p>\n            </div>\n        </div>\n\n        <header class=\"header\" id=\"top\">\n            <nav class=\"header-content\">\n                <a href=\"https://www.portal.ceasadf.com.br/\" class=\"logo\">\n                    <img class=\"logo-header\" src=\"https://www.portal.ceasadf.com.br/themes/portalweb/assets/img/logo-text-green.png\" alt=\"\"/>\n                </a>\n            </nav>\n        </header>\n\n        <div class=\"ajax_response\"></div>\n        \n<section class=\"main-container\">\n    <div class=\"container error\">\n        <div class=\"split-container\">\n            <img src=\"https://www.portal.ceasadf.com.br/themes/portalweb/assets/img/logo-icon-green.webp\" alt=\"imagem de Erro\" class=\"error-image\">\n            <div class=\"content\">\n              <h1 class=\"error-code\">404</h1>\n              <h2 class=\"error-title\">Ooops. Conteúdo indisponível :/</h2>\n              <p>Sentimos muito, mas o conteúdo que você tentou acessar não existe, está indisponível no momento ou foi removido :/</p>\n              \n          </div>\n      </div>\n    </div>\n</section> \n       \n\n        <script src=\"https://www.portal.ceasadf.com.br/shared/scripts/vanilla-masker.min.js\"></script>    \n        <script src=\"https://www.portal.ceasadf.com.br/shared/scripts/message-all.js\"></script>\n\n        <script src=\"https://www.portal.ceasadf.com.br/themes/portalweb/assets/js/script.js\"></script>\n\n            \n    </body>\n</html>",
+      "analise": null
+    },
+    "paginas": [
+      {
+        "url": "https://www.portal.ceasadf.com.br/precos",
+        "status": 200,
+        "ms": 775,
+        "titulo": "Preços - Portal de Serviços",
+        "servidor": "Apache",
+        "tipo": "text/html; charset=UTF-8",
+        "antirrobo": [],
+        "tecnologia": [],
+        "tem_json_ld": false,
+        "arquivos_de_dados": [],
+        "enderecos_de_dados": [
+          "www.portal.ceasadf.com.br"
+        ],
+        "inicio_do_texto": "Preços - Portal de Serviços Aguarde, carregando... Início Buscar Cadastre-se Entrar Cotação de Preços Acompanhe e consulte a variação de preços dos principais produtos comercializados. Variação de preços diária e mensal do preço mais comum praticado no mercado atacadista da CEASA/DF. Mês Janeiro Fevereiro Março Abril Maio Junho Julho Agosto Setembro Outubro Novembro Dezembro Ano 2026 2025 2024 202",
+        "dados_embutidos": {
+          "json_ld_tipos": [],
+          "produtos_json_ld": [],
+          "estados_embutidos": {},
+          "outros_json_em_script": [],
+          "meta_preco": []
+        }
+      },
+      {
+        "url": "https://www.portal.ceasadf.com.br/storage/files/2026/08/sima.pdf",
+        "status": 200,
+        "ms": 193,
+        "titulo": null,
+        "servidor": "Apache",
+        "tipo": "application/pdf",
+        "antirrobo": [],
+        "tecnologia": [],
+        "tem_json_ld": false,
+        "arquivos_de_dados": [],
+        "enderecos_de_dados": [],
+        "inicio_do_texto": "%PDF-1.5 %µµµµ 1 0 obj >>> endobj 2 0 obj > endobj 3 0 obj > endobj 4 0 obj >/ExtGState >/XObject >/ProcSet[/PDF/Text/ImageB/ImageC/ImageI] >>/Annots[ 11 0 R 12 0 R] /MediaBox[ 0 0 595.2 841.8] /Contents 5 0 R/Group >/Tabs/S/StructParents 0>> endobj 5 0 obj > stream xí[ÜFvÇß\u0005è;\u0010û4½ðÈ\"Y$Å\"3#=4ÒFÊÂÞ ØÐ¨)ÛKCm ® ¸éø\u0006T\u001b5¬ÃQ÷û-uQD×hÏ#©8À£Ã{&n\u0003\u00173NÄ¹\u000føìÆÛXoíÚÍÓMgûápRÙ?ªk þ Öb^nzwÊc:·zèM¹÷'9k;",
+        "dados_embutidos": {
+          "json_ld_tipos": [],
+          "produtos_json_ld": [],
+          "estados_embutidos": {},
+          "outros_json_em_script": [],
+          "meta_preco": []
+        }
+      }
+    ],
+    "scripts": [
+      {
+        "url": "https://www.portal.ceasadf.com.br/shared/scripts/scripts.min.js",
+        "enderecos": [],
+        "qlik": null
+      },
+      {
+        "url": "https://www.portal.ceasadf.com.br/shared/scripts/highcharts.js",
+        "enderecos": [],
+        "qlik": null
+      },
+      {
+        "url": "https://www.portal.ceasadf.com.br/themes/portalweb/assets/scripts.min.js",
+        "enderecos": [],
+        "qlik": null
+      }
+    ],
     "temas": {
       "sitemaps_lidos": [],
       "candidatos": 0,
@@ -267,9 +363,10 @@
       {
         "url": "https://www.ipe.df.gov.br/",
         "status": 200,
-        "ms": 762,
+        "ms": 586,
         "titulo": "Instituto de Pesquisa e Estatística do Distrito Federal",
         "servidor": null,
+        "tipo": "text/html;charset=UTF-8",
         "antirrobo": [],
         "tecnologia": [],
         "tem_json_ld": false,
@@ -296,19 +393,19 @@
         "qlik": null
       },
       {
-        "url": "https://www.ipe.df.gov.br/combo?browserId=other&minifierType=js&languageId=pt_BR&t=1781128509309&/o/frontend-js-aui-web/aui/aui/aui-min.js&/o/frontend-js-aui-web/liferay/modules.js&/o/frontend-js-aui-web/liferay/aui_sandbox.js&/o/frontend-js-aui-web/aui/attribute-base/attribute-base-min.js&/o/frontend-js-aui-web/aui/attribute-complex/attribute-complex-min.js&/o/frontend-js-aui-web/aui/attribute-core/attribute-core-min.js&/o/frontend-js-aui-web/aui/attribute-observable/attribute-observable-min.js&/o/frontend-js-aui-web/aui/attribute-extras/attribute-extras-min.js&/o/frontend-js-aui-web/aui/event-custom-base/event-custom-base-min.js&/o/frontend-js-aui-web/aui/event-custom-complex/event-custom-complex-min.js&/o/frontend-js-aui-web/aui/oop/oop-min.js&/o/frontend-js-aui-web/aui/aui-base-lang/aui-base-lang-min.js&/o/frontend-js-aui-web/liferay/dependency.js&/o/frontend-js-aui-web/liferay/util.js&/o/oauth2-provider-web/js/liferay.js&/o/frontend-js-web/liferay/dom_task_runner.js&/o/frontend-js-web/liferay/events.js&/o/frontend-js-web/liferay/lazy_load.js&/o/frontend-js-web/liferay/liferay.js&/o/frontend-js-web/liferay/global.bundle.js&/o/frontend-js-web/liferay/portlet.js&/o/frontend-js-web/liferay/workflow.js",
+        "url": "https://www.ipe.df.gov.br/combo?browserId=other&minifierType=js&languageId=pt_BR&t=1743048005394&/o/frontend-js-aui-web/aui/aui/aui-min.js&/o/frontend-js-aui-web/liferay/modules.js&/o/frontend-js-aui-web/liferay/aui_sandbox.js&/o/frontend-js-aui-web/aui/attribute-base/attribute-base-min.js&/o/frontend-js-aui-web/aui/attribute-complex/attribute-complex-min.js&/o/frontend-js-aui-web/aui/attribute-core/attribute-core-min.js&/o/frontend-js-aui-web/aui/attribute-observable/attribute-observable-min.js&/o/frontend-js-aui-web/aui/attribute-extras/attribute-extras-min.js&/o/frontend-js-aui-web/aui/event-custom-base/event-custom-base-min.js&/o/frontend-js-aui-web/aui/event-custom-complex/event-custom-complex-min.js&/o/frontend-js-aui-web/aui/oop/oop-min.js&/o/frontend-js-aui-web/aui/aui-base-lang/aui-base-lang-min.js&/o/frontend-js-aui-web/liferay/dependency.js&/o/frontend-js-aui-web/liferay/util.js&/o/oauth2-provider-web/js/liferay.js&/o/frontend-js-web/liferay/dom_task_runner.js&/o/frontend-js-web/liferay/events.js&/o/frontend-js-web/liferay/lazy_load.js&/o/frontend-js-web/liferay/liferay.js&/o/frontend-js-web/liferay/global.bundle.js&/o/frontend-js-web/liferay/portlet.js&/o/frontend-js-web/liferay/workflow.js",
         "enderecos": [
           "/api/jsonws/invoke"
         ],
         "qlik": null
       },
       {
-        "url": "https://www.ipe.df.gov.br/combo?browserId=other&minifierType=js&languageId=pt_BR&t=1781128520696&/o/gdf-theme-contributor/js/gdf-contributor.js",
+        "url": "https://www.ipe.df.gov.br/combo?browserId=other&minifierType=js&languageId=pt_BR&t=1744657202260&/o/gdf-theme-contributor/js/gdf-contributor.js",
         "enderecos": [],
         "qlik": null
       },
       {
-        "url": "https://www.ipe.df.gov.br/o/gdf-secretarias-lf7_4-2026-theme/js/main.js?browserId=other&amp;minifierType=js&amp;languageId=pt_BR&amp;t=1790294790000",
+        "url": "https://www.ipe.df.gov.br/o/gdf-secretarias-lf7_4-2026-theme/js/main.js?browserId=other&amp;minifierType=js&amp;languageId=pt_BR&amp;t=1790294980000",
         "enderecos": [],
         "qlik": null
       }
@@ -361,6 +458,64 @@
       "paginas": []
     }
   },
+  "IPE-DF: Informações Estatísticas do DF": {
+    "robots": {
+      "status": 200,
+      "erro": null,
+      "conteudo": "<!doctype html>\r\n<html lang=\"pt-br\" data-beasties-container>\r\n\r\n<head>\r\n  <meta charset=\"utf-8\">\r\n  <title>InfoDF</title>\r\n  <base href=\"/\">\r\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\r\n  <meta name=\"google-site-verification\" content=\"ZBBsCIDQK-hTxoiICEStc6XMhzOFVvW2P97eCTMY0o0\">\r\n  <script src=\"assets/env.js\"></script>\r\n  <script>\r\n  var _paq = window._paq = window._paq || [];\r\n  _paq.push(['enableLinkTracking']);\r\n  (function() {\r\n    var u=\"//analytics.geact.ipe.df.gov.br/\";\r\n    _paq.push(['setTrackerUrl', u+'matomo.php']);\r\n    _paq.push(['setSiteId', '35']);\r\n    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];\r\n    g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);\r\n  })();\r\n</script>\r\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"/assets/favicon.ico\">\r\n<style>@font-face{font-family:Poppins;font-style:normal;font-weight:300;font-display:swap;src:url(https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLDz8Z11lFc-K.woff2) format(\"woff2\");unicode-range:U+0900-097F,U+1CD0-1CF9,U+200C-200D,U+20A8,U+20B9,U+20F0,U+25CC,U+A830-A839,U+A8E0-A8FF,U+11B00-11B09}@font-face{font-family:Poppins;font-style:normal;font-weight:300;font-display:swap;src:url(https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLDz8Z1JlFc-K.woff2) format(\"woff2\");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Poppins;font-style:normal;font-weight:300;font-display:swap;src:url(https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLDz8Z1xlFQ.woff2) format(\"woff2\");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:Poppins;font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/poppins/v24/pxiEyp8kv8JHgFVrJJbecmNE.woff2) format(\"woff2\");unicode-range:U+0900-097F,U+1CD0-1CF9,U+200C-200D,U+20A8,U+20B9,U+20F0,U+25CC,U+A830-A839,U+A8E0-A8FF,U+11B00-11B09}@font-face{font-family:Poppins;font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/poppins/v24/pxiEyp8kv8JHgFVrJJnecmNE.woff2) format(\"woff2\");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Poppins;font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/poppins/v24/pxiEyp8kv8JHgFVrJJfecg.woff2) format(\"woff2\");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:Poppins;font-style:normal;font-weight:500;font-display:swap;src:url(https://fonts.gstat",
+      "analise": null
+    },
+    "paginas": [
+      {
+        "url": "https://infodf.ipe.df.gov.br/",
+        "status": 200,
+        "ms": 146,
+        "titulo": "InfoDF",
+        "servidor": "cloudflare",
+        "tipo": "text/html",
+        "antirrobo": [
+          "cloudflare"
+        ],
+        "tecnologia": [],
+        "tem_json_ld": false,
+        "arquivos_de_dados": [],
+        "enderecos_de_dados": [],
+        "inicio_do_texto": "InfoDF var _paq = window._paq = window._paq || []; _paq.push(['enableLinkTracking']); (function() { var u=\"//analytics.geact.ipe.df.gov.br/\"; _paq.push(['setTrackerUrl', u+'matomo.php']); _paq.push(['setSiteId', '35']); var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s); })(); @font-face{font-family:",
+        "dados_embutidos": {
+          "json_ld_tipos": [],
+          "produtos_json_ld": [],
+          "estados_embutidos": {},
+          "outros_json_em_script": [],
+          "meta_preco": []
+        }
+      }
+    ],
+    "scripts": [
+      {
+        "url": "https://infodf.ipe.df.gov.br/assets/env.js",
+        "enderecos": [],
+        "qlik": null
+      },
+      {
+        "url": "https://infodf.ipe.df.gov.br/scripts-OT5MX4VX.js",
+        "enderecos": [],
+        "qlik": null
+      },
+      {
+        "url": "https://infodf.ipe.df.gov.br/main-A55ITAGP.js",
+        "enderecos": [
+          "/api/v1/refresh/"
+        ],
+        "qlik": null
+      }
+    ],
+    "temas": {
+      "sitemaps_lidos": [],
+      "candidatos": 0,
+      "exemplos": [],
+      "paginas": []
+    }
+  },
   "Dados abertos do DF": {
     "robots": {
       "status": 200,
@@ -372,9 +527,10 @@
       {
         "url": "https://dados.df.gov.br/",
         "status": 200,
-        "ms": 328,
+        "ms": 345,
         "titulo": "Início - Portal de Dados Abertos - GDF",
         "servidor": null,
+        "tipo": "text/html;charset=UTF-8",
         "antirrobo": [],
         "tecnologia": [],
         "tem_json_ld": false,
@@ -394,9 +550,10 @@
       {
         "url": "https://dados.df.gov.br/api/3/action/package_search?q=ceasa&rows=20",
         "status": 404,
-        "ms": 601,
+        "ms": 651,
         "titulo": "",
         "servidor": null,
+        "tipo": "text/html;charset=UTF-8",
         "antirrobo": [],
         "tecnologia": [],
         "tem_json_ld": false,
@@ -414,9 +571,10 @@
       {
         "url": "https://dados.df.gov.br/api/3/action/package_search?q=pre%C3%A7os&rows=20",
         "status": 404,
-        "ms": 164,
+        "ms": 157,
         "titulo": "",
         "servidor": null,
+        "tipo": "text/html;charset=UTF-8",
         "antirrobo": [],
         "tecnologia": [],
         "tem_json_ld": false,
@@ -439,19 +597,19 @@
         "qlik": null
       },
       {
-        "url": "https://dados.df.gov.br/combo?browserId=other&minifierType=js&languageId=pt_BR&t=1743048032465&/o/frontend-js-aui-web/aui/aui/aui-min.js&/o/frontend-js-aui-web/liferay/modules.js&/o/frontend-js-aui-web/liferay/aui_sandbox.js&/o/frontend-js-aui-web/aui/attribute-base/attribute-base-min.js&/o/frontend-js-aui-web/aui/attribute-complex/attribute-complex-min.js&/o/frontend-js-aui-web/aui/attribute-core/attribute-core-min.js&/o/frontend-js-aui-web/aui/attribute-observable/attribute-observable-min.js&/o/frontend-js-aui-web/aui/attribute-extras/attribute-extras-min.js&/o/frontend-js-aui-web/aui/event-custom-base/event-custom-base-min.js&/o/frontend-js-aui-web/aui/event-custom-complex/event-custom-complex-min.js&/o/frontend-js-aui-web/aui/oop/oop-min.js&/o/frontend-js-aui-web/aui/aui-base-lang/aui-base-lang-min.js&/o/frontend-js-aui-web/liferay/dependency.js&/o/frontend-js-aui-web/liferay/util.js&/o/oauth2-provider-web/js/liferay.js&/o/frontend-js-web/liferay/dom_task_runner.js&/o/frontend-js-web/liferay/events.js&/o/frontend-js-web/liferay/lazy_load.js&/o/frontend-js-web/liferay/liferay.js&/o/frontend-js-web/liferay/global.bundle.js&/o/frontend-js-web/liferay/portlet.js&/o/frontend-js-web/liferay/workflow.js",
+        "url": "https://dados.df.gov.br/combo?browserId=other&minifierType=js&languageId=pt_BR&t=1760660069001&/o/frontend-js-aui-web/aui/aui/aui-min.js&/o/frontend-js-aui-web/liferay/modules.js&/o/frontend-js-aui-web/liferay/aui_sandbox.js&/o/frontend-js-aui-web/aui/attribute-base/attribute-base-min.js&/o/frontend-js-aui-web/aui/attribute-complex/attribute-complex-min.js&/o/frontend-js-aui-web/aui/attribute-core/attribute-core-min.js&/o/frontend-js-aui-web/aui/attribute-observable/attribute-observable-min.js&/o/frontend-js-aui-web/aui/attribute-extras/attribute-extras-min.js&/o/frontend-js-aui-web/aui/event-custom-base/event-custom-base-min.js&/o/frontend-js-aui-web/aui/event-custom-complex/event-custom-complex-min.js&/o/frontend-js-aui-web/aui/oop/oop-min.js&/o/frontend-js-aui-web/aui/aui-base-lang/aui-base-lang-min.js&/o/frontend-js-aui-web/liferay/dependency.js&/o/frontend-js-aui-web/liferay/util.js&/o/oauth2-provider-web/js/liferay.js&/o/frontend-js-web/liferay/dom_task_runner.js&/o/frontend-js-web/liferay/events.js&/o/frontend-js-web/liferay/lazy_load.js&/o/frontend-js-web/liferay/liferay.js&/o/frontend-js-web/liferay/global.bundle.js&/o/frontend-js-web/liferay/portlet.js&/o/frontend-js-web/liferay/workflow.js",
         "enderecos": [
           "/api/jsonws/invoke"
         ],
         "qlik": null
       },
       {
-        "url": "https://dados.df.gov.br/o/contadores/js/main.CSQAnIYa.js?t=1790294778865",
+        "url": "https://dados.df.gov.br/o/contadores/js/main.CSQAnIYa.js?t=1790294779799",
         "enderecos": [],
         "qlik": null
       },
       {
-        "url": "https://dados.df.gov.br/o/mais-populares/js/main.BAEIoo2U.js?t=1790294779076",
+        "url": "https://dados.df.gov.br/o/mais-populares/js/main.BAEIoo2U.js?t=1790294779933",
         "enderecos": [],
         "qlik": null
       }
