@@ -3,8 +3,10 @@
 Usado para lojas cujo site não publica o código de barras (Big Box, Fort). As regras são conservadoras, porque um
 vínculo errado mostraria o preço de outro produto:
   1. o tamanho precisa ser igual (500 g = 0,5 kg); sem tamanho do lado da loja, não vincula;
-  2. a marca precisa bater quando os dois lados informam a marca;
-  3. o nome precisa ser parecido (palavras em comum, depois de expandir abreviações de atacado);
+  2. a marca precisa bater quando os dois lados informam a marca; quando só a loja informa, a marca precisa aparecer
+     no nome do candidato (sem isso, "Azeite Bertolli 500ml" casaria com um "Azeite extra virgem 500ml" qualquer);
+  3. o nome precisa ser parecido (palavras em comum, depois de expandir abreviações de atacado e tirar palavras de
+     embalagem); se todas as palavras do nome mais curto (3 ou mais) estão no mais longo, conta como parecido;
   4. sem empate: se o segundo melhor candidato estiver perto do primeiro, não vincula.
 Todo preço vinculado sai com metodo="vinculo-nome", o nome original da loja e o link, para quem quiser conferir.
 """
@@ -20,6 +22,7 @@ from .causas import embalagem
 
 LIMIAR = 0.8  # semelhança mínima (subiu de 0,6 após conferir vínculos reais com sabor ou variante errados)
 MARGEM = 0.1  # distância mínima para o segundo melhor
+CONTIDO = 0.85  # nota de quando um nome está inteiro dentro do outro (3+ palavras): "Arroz Brilhante Tipo 1 5kg"
 
 # abreviações comuns em nomes de atacado ("BEB.CERV.IMPERIO 350ML LT")
 ABREVIACOES = {
@@ -31,7 +34,9 @@ ABREVIACOES = {
     "arr": "arroz", "feij": "feijao", "car": "carioca", "acuc": "acucar", "refin": "refinado", "cafe": "cafe",
 }
 VAZIAS = {"de", "da", "do", "das", "dos", "e", "com", "sem", "para", "em", "tipo", "pct", "pacote", "un", "und", "unid",
-          "cx", "caixa", "lata", "garrafa", "pet", "pote", "sache", "bandeja", "fardo", "kg", "g", "gr", "ml", "l", "lt"}
+          "cx", "caixa", "lata", "garrafa", "pet", "pote", "sache", "bandeja", "fardo", "kg", "g", "gr", "ml", "l", "lt",
+          # embalagem e chamada de oferta: não distinguem produto ("Frasco 1L", "Leve 12 Pague 11")
+          "frasco", "vidro", "pouch", "refil", "spray", "unidade", "unidades", "leve", "pague", "atacado"}
 
 
 # palavras que distinguem variantes: se aparece só de um lado, são produtos diferentes (sabor, ingrediente, versão)
@@ -110,9 +115,15 @@ class Catalogo:
                 continue  # tamanho diferente: produto diferente
             if marca_tk and marca_cat and not (marca_tk & marca_cat):
                 continue  # marcas diferentes
+            if marca_tk and not (marca_tk & tk_cat):
+                continue  # a loja diz a marca, e ela não está no candidato
             if (tk ^ tk_cat) & DISTINTIVAS:
                 continue  # um lado tem sabor/ingrediente/variante que o outro não tem
-            notas.append((semelhanca(tk, tk_cat), ean, nome_cat))
+            nota = semelhanca(tk, tk_cat)
+            comuns_ = len(tk & tk_cat)
+            if comuns_ >= 3 and comuns_ == min(len(tk), len(tk_cat)):
+                nota = max(nota, CONTIDO)
+            notas.append((nota, ean, nome_cat))
         if not notas:
             return None
         notas.sort(reverse=True)

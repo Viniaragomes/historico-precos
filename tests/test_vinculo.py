@@ -47,6 +47,22 @@ if __name__ == "__main__":
     unittest.main()
 
 
+class TestRegrasNovas(unittest.TestCase):
+    def test_marca_da_loja_precisa_estar_no_candidato(self):
+        cat = Catalogo([("7890000000011", "Azeite de Oliva Extra Virgem 500 ml", None)])
+        self.assertIsNone(cat.vincular("Azeite de Oliva Extra Virgem Bertolli 500ml", "Bertolli"))
+
+    def test_nome_contido_no_outro(self):
+        cat = Catalogo([("7896006716112", "ARROZ BRILHANTE TIPO 1 5KG", None)])
+        v = cat.vincular("Arroz Branco Tipo 1 Brilhante Pacote 5Kg", "Brilhante")
+        self.assertEqual(v.ean, "7896006716112")
+
+    def test_embalagem_nao_atrapalha(self):
+        cat = Catalogo([("7891024000017", "Ype Amaciante Concentrado Essencial 1L", None)])
+        v = cat.vincular("Amaciante de Roupa Concentrado Essencial Ypê Frasco 1L", "Ypê")
+        self.assertEqual(v.ean, "7891024000017")
+
+
 class TestCasosReais(unittest.TestCase):
     """Casos vistos no teste real de 21/10/2026 (Big Box x Open Food Facts)."""
 

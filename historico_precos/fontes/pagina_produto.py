@@ -8,7 +8,7 @@ marca e preço: é o que o Google lê. Aqui lemos o mesmo, respeitando o robots.
 from __future__ import annotations
 
 import re
-from datetime import date
+from datetime import date, timedelta
 from urllib.parse import urlsplit
 
 from ..modelo import PontoDePreco, Produto
@@ -138,6 +138,32 @@ def _dados_pagina(html: str) -> dict | None:
                 "sem_estoque": "OutOfStock" in str(ofertas.get("availability") or ""),
             }
     return None
+
+
+def revincular(banco, loja: dict, catalogo, dias: int = 30, hoje: date | None = None) -> dict:
+    """Refaz o vínculo das páginas já lidas e ainda sem código de barras, sem acessar o site de novo (útil quando a
+    referência cresce ou as regras melhoram). O preço entra com a data em que a página foi lida."""
+    con = banco.con
+    con.executescript(_ESQUEMA_LOJA)
+    desde = ((hoje or date.today()) - timedelta(days=dias)).isoformat()
+    usados = {e for (e,) in con.execute("SELECT ean FROM produtos_loja WHERE loja = ? AND ean IS NOT NULL", (loja["nome"],))}
+    resumo, pontos = {"sem_vinculo": 0, "vinculadas": 0, "precos": 0}, []
+    for url, nome, marca, preco, dia in list(con.execute(
+            "SELECT url, nome, marca, preco, data FROM produtos_loja WHERE loja = ? AND ean IS NULL AND nome IS NOT NULL "
+            "AND preco IS NOT NULL AND data >= ?", (loja["nome"], desde))):
+        resumo["sem_vinculo"] += 1
+        v = catalogo.vincular(nome, marca)
+        if not v or v.ean in usados:  # um código de barras só vale para um produto da mesma loja
+            continue
+        usados.add(v.ean)
+        con.execute("UPDATE produtos_loja SET ean=?, semelhanca=?, nome_catalogo=? WHERE url=?", (v.ean, v.semelhanca, v.nome_catalogo, url))
+        resumo["vinculadas"] += 1
+        pontos.append(PontoDePreco(ean=v.ean, preco=preco, data_observada=dia, fonte="pagina-produto", loja=loja["nome"],
+                                   cidade=loja.get("cidade"), url_origem=url, url_evidencia=url, metodo="vinculo-nome",
+                                   descricao=nome))
+    con.commit()
+    resumo["precos"] = banco.salvar_precos(pontos)
+    return resumo
 
 
 def catalogar_por_nome(nav: Navegador, banco, loja: dict, catalogo, limite: int = 1000, hoje: date | None = None, ate=None) -> dict:

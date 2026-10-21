@@ -455,6 +455,7 @@ def main(argv: list[str] | None = None) -> int:
     cn = sub.add_parser("catalogo-nome", help="lojas sem código de barras no site: lê páginas de produto em rodízio e vincula pelo nome")
     cn.add_argument("--minutos", type=float, default=60, help="tempo máximo por loja")
     cn.add_argument("--limite", type=int, default=5000, help="teto de páginas por loja")
+    cn.add_argument("--dicionario", default="dicionario.db.gz", help="dicionário de códigos do DF como referência extra (se existir)")
 
     cs = sub.add_parser("catalogo-sitemap", help="acha páginas de produto pelo sitemap das lojas (tipo 'sitemap') e lê nome, GTIN e preço")
     cs.add_argument("--termos", required=True, help="separados por vírgula, ex.: cafe,arroz (procurados no endereço da página)")
@@ -716,13 +717,24 @@ def main(argv: list[str] | None = None) -> int:
         from .fontes import pagina_produto
         from .vinculo import Catalogo
 
-        # referência: nomes do cadastro e os nomes com que as lojas com código de barras mostram cada produto
-        catalogo = Catalogo(list(banco.con.execute(
+        from .encartes_ocr import abrir_dicionario
+
+        # referência: nomes do cadastro, os nomes com que as lojas com código de barras mostram cada produto e as
+        # descrições das notas fiscais do DF (dicionário de códigos: 163 mil códigos de barras)
+        referencia = list(banco.con.execute(
             "SELECT ean, nome, marca FROM produtos WHERE nome IS NOT NULL "
             "UNION SELECT DISTINCT x.ean, x.descricao, p.marca FROM precos x LEFT JOIN produtos p USING (ean) "
-            "WHERE x.descricao IS NOT NULL AND x.metodo <> 'vinculo-nome'")))
-        print(f"Catálogo de referência: {len(catalogo.itens)} produtos com código de barras e tamanho no nome.")
+            "WHERE x.descricao IS NOT NULL AND x.metodo <> 'vinculo-nome'"))
+        dic = abrir_dicionario(args.dicionario) if args.dicionario else None
+        if dic:
+            referencia += list(dic.execute("SELECT ean, descricao, NULL FROM mapa_df_dicionario WHERE descricao IS NOT NULL"))
+        catalogo = Catalogo(referencia)
+        print(f"Catálogo de referência: {len(catalogo.itens)} nomes com código de barras e tamanho"
+              + (" (inclui o dicionário de códigos do DF)." if dic else " (sem o dicionário de códigos)."))
         for loja in [l for l in carregar_lojas(args.lojas) if l.get("tipo") == "sitemap" and l.get("vinculo") == "nome"]:
+            rv = pagina_produto.revincular(banco, loja, catalogo)
+            print(f"{loja['nome']}: refeito o vínculo das páginas já lidas: {rv['vinculadas']} de {rv['sem_vinculo']} ligadas agora, "
+                  f"{rv['precos']} preço(s) novo(s).")
             fim = time.monotonic() + args.minutos * 60
             r = pagina_produto.catalogar_por_nome(nav, banco, loja, catalogo, args.limite, ate=lambda fim=fim: time.monotonic() > fim)
             total = banco.con.execute("SELECT COUNT(*), SUM(ean IS NOT NULL), SUM(lido_em IS NOT NULL) FROM produtos_loja WHERE loja = ?",
