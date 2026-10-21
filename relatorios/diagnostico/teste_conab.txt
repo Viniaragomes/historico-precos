@@ -1,32 +1,23 @@
 3 planilha(s) no gov.br, 3 lida(s) agora, 8297 preço(s) mensais gravados.
   Alface    Ceasa/GO - Goiânia       2026-06 R$ 6.41/kg  -2.3%
   Alface    Ceagesp - São Paulo      2026-08 R$ 3.23/kg  -29.6%
-  Alface    Ceasa/DF - Brasília      2024-10 R$ 5.56/kg  +0.0%
   Batata    Ceasa/GO - Goiânia       2026-06 R$ 3.41/kg  -12.5%
   Batata    Ceagesp - São Paulo      2026-08 R$ 2.77/kg  -12.5%
-  Batata    Ceasa/DF - Brasília      2024-07 R$ 7.41/kg  +9.1%
   Cebola    Ceasa/GO - Goiânia       2026-06 R$ 4.39/kg  +4.4%
   Cebola    Ceagesp - São Paulo      2026-08 R$ 3.91/kg  -7.7%
-  Cebola    Ceasa/DF - Brasília      2024-07 R$ 6.66/kg  -11.3%
   Cenoura   Ceasa/GO - Goiânia       2026-06 R$ 4.30/kg  +2.4%
   Cenoura   Ceagesp - São Paulo      2026-08 R$ 4.32/kg  +10.9%
-  Cenoura   Ceasa/DF - Brasília      2024-07 R$ 4.48/kg  -41.2%
   Tomate    Ceasa/GO - Goiânia       2026-06 R$ 5.52/kg  -13.9%
   Tomate    Ceagesp - São Paulo      2026-08 R$ 4.43/kg  +38.6%
-  Tomate    Ceasa/DF - Brasília      2024-07 R$ 3.43/kg  -53.4%
   Banana    Ceasa/GO - Goiânia       2026-06 R$ 4.21/kg  +2.2%
   Banana    Ceagesp - São Paulo      2026-08 R$ 4.26/kg  +4.1%
   Banana    Ceasa/DF - Brasília      2026-08 R$ 2.74/kg  +0.0%
   Laranja   Ceasa/GO - Goiânia       2026-06 R$ 2.06/kg  -7.4%
   Laranja   Ceagesp - São Paulo      2026-08 R$ 2.07/kg  +2.2%
-  Laranja   Ceasa/DF - Brasília      2024-10 R$ 8.64/kg  +12.0%
   Maçã      Ceasa/GO - Goiânia       2026-06 R$ 6.35/kg  -4.9%
   Maçã      Ceagesp - São Paulo      2026-08 R$ 6.99/kg  +3.3%
-  Maçã      Ceasa/DF - Brasília      2024-07 R$ 11.39/kg  +26.2%
   Mamão     Ceasa/GO - Goiânia       2026-06 R$ 5.05/kg  +8.4%
   Mamão     Ceagesp - São Paulo      2026-08 R$ 4.66/kg  -23.2%
-  Mamão     Ceasa/DF - Brasília      2024-10 R$ 7.20/kg  +35.5%
   Melancia  Ceasa/GO - Goiânia       2026-06 R$ 2.71/kg  -31.3%
   Melancia  Ceagesp - São Paulo      2026-08 R$ 2.46/kg  -9.5%
-  Melancia  Ceasa/DF - Brasília      2024-10 R$ 4.57/kg  +2.9%
-Exportado em /tmp/tmpqh5sauy4/conab.json
+Exportado em /tmp/tmp564pqc6l/conab.json
