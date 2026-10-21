@@ -1,0 +1,14 @@
+Encarte(post='https://donafazbem.com.br/folheto/ofertas/', titulo='DONA Festival Carrinho Cheio 19 a 21 10 2026', mercado='Dona', publicado='2026-10-01', validade_fim='2026-10-21', imagens=[], pdf='https://donafazbem.com.br/wp-content/uploads/2026/10/DONA-Festival-Carrinho-Cheio-19-a-21-10-2026.pdf')
+baixado: 1688947 bytes
+Traceback (most recent call last):
+  File "/home/runner/work/historico-precos/historico-precos/ferramentas/diagnostico_pdf_dona.py", line 23, in <module>
+    print(subprocess.run(["pdfinfo", str(arq)], capture_output=True, text=True).stdout)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/subprocess.py", line 548, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/subprocess.py", line 1955, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'pdfinfo'
