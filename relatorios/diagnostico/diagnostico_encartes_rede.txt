@@ -1,0 +1,7 @@
+encartesdf.com.br -> [('AF_INET', '147.79.88.80'), ('AF_INET6', '2a02:4780:13:1702:0:2ee7:8267:7')]
+  curl -4 200 147.79.88.80 
+  curl -6 000  curl: (7) Failed to connect to encartesdf.com.br port 443 after 0 ms: Couldn't connect to server
+www.encartesdf.com.br -> [('AF_INET', '147.79.88.80'), ('AF_INET6', '2a02:4780:13:1702:0:2ee7:8267:7')]
+  curl -4 200 147.79.88.80 
+  curl -6 000  curl: (7) Failed to connect to www.encartesdf.com.br port 443 after 0 ms: Couldn't connect to server
+DNS Google: {"Status":0,"TC":false,"RD":true,"RA":true,"AD":false,"CD":false,"Question":[{"name":"encartesdf.com.br.","type":1}],"Answer":[{"name":"encartesdf.com.br.","type":1,"TTL":1800,"data":"147.79.88.80"}],"Comment":"Response from 162.159.25.42."} 
