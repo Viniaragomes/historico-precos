@@ -9,9 +9,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from historico_precos import encartes_ocr  # noqa: E402
 
 subprocess.run(["git", "fetch", "-q", "origin", "dados"], check=False)
-with open("precos_dados.db", "wb") as f:
-    r = subprocess.run(["git", "show", "origin/dados:precos.db"], stdout=f)
-print("git show:", r.returncode, Path("precos_dados.db").stat().st_size, "bytes")
+from historico_precos.ramo_dados import recuperar  # noqa: E402
+
+print("recuperado:", recuperar("precos_dados.db"), Path("precos_dados.db").stat().st_size, "bytes")
 con = sqlite3.connect("precos_dados.db")
 for t in ["produtos", "precos", "produtos_loja"]:
     try:

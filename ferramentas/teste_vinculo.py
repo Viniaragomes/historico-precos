@@ -7,9 +7,12 @@ import sys
 import tempfile
 
 with tempfile.TemporaryDirectory() as d:
-    subprocess.run(["git", "fetch", "-q", "origin", "dados"], check=True)
-    with open(f"{d}/c.db", "wb") as f:
-        f.write(subprocess.run(["git", "show", "origin/dados:precos.db"], capture_output=True, check=True).stdout)
+    from pathlib import Path
+
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+    from historico_precos.ramo_dados import recuperar
+
+    recuperar(f"{d}/c.db")
     subprocess.run([sys.executable, "-m", "historico_precos", "--banco", f"{d}/c.db", "referencia-off"], check=False)
     subprocess.run([sys.executable, "-m", "historico_precos", "--banco", f"{d}/c.db", "catalogo-nome", "--minutos", "8", "--limite", "150"], check=False)
     con = sqlite3.connect(f"{d}/c.db")

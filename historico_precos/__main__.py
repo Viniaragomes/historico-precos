@@ -491,6 +491,10 @@ def main(argv: list[str] | None = None) -> int:
     ec.add_argument("dicionario", help="dicionario.db ou dicionario.db.gz")
     ec.add_argument("--saida", default="site/dados/codigos")
 
+    rb = sub.add_parser("banco", help="recupera ou comprime o banco guardado no ramo 'dados'")
+    rb.add_argument("acao", choices=["recuperar", "comprimir"])
+    rb.add_argument("--saida", help="comprimir: arquivo .gz de destino")
+
     sv = sub.add_parser("servir", help="abre o app no computador em http://localhost:8000")
     sv.add_argument("--porta", type=int, default=8000)
     sv.add_argument("--pasta", default="site")
@@ -499,6 +503,18 @@ def main(argv: list[str] | None = None) -> int:
     logging.basicConfig(level=logging.INFO if args.verbose else logging.WARNING, format="%(message)s")
     if args.comando == "servir":
         return _servir(args)
+    if args.comando == "banco":
+        from . import ramo_dados
+
+        if args.acao == "recuperar":
+            if ramo_dados.recuperar(args.banco):
+                print(f"Banco recuperado: {Path(args.banco).stat().st_size / 2**20:.1f} MB")
+            else:
+                print("Ainda não há banco no ramo 'dados': começa vazio.")
+            return 0
+        tamanho = ramo_dados.comprimir(args.banco, args.saida or f"{args.banco}.gz")
+        print(f"Banco {Path(args.banco).stat().st_size / 2**20:.1f} MB, comprimido {tamanho / 2**20:.1f} MB")
+        return 0
     if args.comando == "conferencia-impostos":
         from .conferencia import gerar
 

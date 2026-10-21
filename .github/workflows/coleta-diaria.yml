@@ -28,14 +28,7 @@ jobs:
           python-version: "3.12"
 
       - name: Recuperar o banco do ramo "dados"
-        run: |
-          if git ls-remote --exit-code --heads origin dados >/dev/null; then
-            git fetch origin dados:dados
-            git show dados:precos.db > precos.db
-            echo "Banco recuperado: $(du -h precos.db | cut -f1)"
-          else
-            echo "Primeira execução: banco novo."
-          fi
+        run: python -m historico_precos banco recuperar
 
       - name: Cupons fiscais enviados pelo app (preço de prateleira em qualquer mercado)
         continue-on-error: true
@@ -155,7 +148,7 @@ jobs:
         if: always()
         run: |
           test -s precos.db || { echo "Sem banco para guardar."; exit 0; }
-          echo "Banco: $(du -h precos.db | cut -f1)"
+          python -m historico_precos banco comprimir --saida precos.db.gz
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           # parte da versão mais nova do ramo (o workflow do dicionário também grava nele durante a coleta)
@@ -165,9 +158,10 @@ jobs:
           else
             git worktree add --orphan -b dados /tmp/dados
           fi
-          cp precos.db /tmp/dados/precos.db
+          cp precos.db.gz /tmp/dados/precos.db.gz
           cd /tmp/dados
-          git add precos.db
+          git rm -q --ignore-unmatch precos.db
+          git add precos.db.gz
           git commit -q -m "Coleta $(date -u +%F)" || exit 0
           for i in 1 2 3 4 5; do
             git fetch -q origin dados && git rebase -q origin/dados && git push origin HEAD:dados && exit 0

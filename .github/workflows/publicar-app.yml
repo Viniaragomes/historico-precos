@@ -29,9 +29,7 @@ jobs:
           python-version: "3.12"
       - name: Dados já coletados
         run: |
-          if git ls-remote --exit-code --heads origin dados >/dev/null; then
-            git fetch origin dados:dados
-            git show dados:precos.db > precos.db
+          if git ls-remote --exit-code --heads origin dados >/dev/null && python -m historico_precos banco recuperar | tee /dev/stderr | grep -q recuperado; then
             python -m historico_precos exportar --saida site/dados --sem-causas
           else
             echo "Ainda não há coleta completa: o app sai sem lista de produtos."
