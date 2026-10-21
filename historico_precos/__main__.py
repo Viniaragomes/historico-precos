@@ -540,12 +540,17 @@ def main(argv: list[str] | None = None) -> int:
             for t in e.trechos[:3]:
                 print(f"      R$ {t.preco:>7.2f}  {t.texto}")
         print(f"{len(encartes)} encarte(s) vigente(s), {sum(len(e.trechos) for e in encartes)} trecho(s) com preço.")
+        comparacoes = encartes_ocr.comparar_mercados(encartes)
+        print(f"{len(comparacoes)} produto(s) anunciado(s) em 2 ou mais mercados:")
+        for c in comparacoes[:10]:
+            print(f"  {c['produto']}: " + " · ".join(f"{o['mercado']} R$ {o['p']:.2f}" for o in c["ofertas"]))
         if args.exportar:
             Path(args.exportar).parent.mkdir(parents=True, exist_ok=True)
             Path(args.exportar).write_text(json.dumps({
                 "fonte": "encartesdf.com.br (encartes publicados pelos mercados), texto lido por Tesseract",
                 "aviso": "Leitura automática da imagem: pode errar. Confira sempre no encarte.",
-                "atualizado_em": agora_iso(), "encartes": encartes_ocr.para_json(encartes)}, ensure_ascii=False), encoding="utf-8")
+                "atualizado_em": agora_iso(), "encartes": encartes_ocr.para_json(encartes),
+                "comparacoes": comparacoes}, ensure_ascii=False), encoding="utf-8")
             print(f"Exportado em {args.exportar}")
         return 0
     if args.comando == "conab":

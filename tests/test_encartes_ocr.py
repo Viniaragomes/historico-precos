@@ -89,6 +89,22 @@ class TestPlausivel(unittest.TestCase):
         self.assertTrue(encartes_ocr.conhecido("Picanha Bovina", vocab))
 
 
+class TestComparar(unittest.TestCase):
+    def test_agrupa_mesmo_produto_entre_mercados(self):
+        T, E = encartes_ocr.Trecho, encartes_ocr.EncarteLido
+        a = E("Dia a Dia", "https://a", "2026-10-20", "2026-10-25", [], "https://a.pdf",
+              trechos=[T("BANANA NANICA", 2.49), T("LEITE ITAMBÉ INTEGRAL 1L", 4.79), T("CAFÉ PILÃO 500g", 14.98)])
+        b = E("Super Big", "https://b", "2026-10-20", "2026-10-22", [],
+              trechos=[T("BANANA NANICA", 4.99), T("LEITE ITAMBÉ DESNATADO 1L", 4.59), T("Café Pilão Tradicional 500g", 15.49)])
+        c = E("Tatico", "https://c", "2026-10-20", None, [],
+              trechos=[T("LEITE PIRACANJUBA INTEGRAL 1L", 4.39), T("CAFÉ PILÃO 250g", 8.99)])
+        comp = encartes_ocr.comparar_mercados([a, b, c])
+        resumo = {x["produto"]: [(o["mercado"], o["p"]) for o in x["ofertas"]] for x in comp}
+        self.assertEqual(resumo, {"BANANA NANICA": [("Dia a Dia", 2.49), ("Super Big", 4.99)],
+                                  "CAFÉ PILÃO 500g": [("Dia a Dia", 14.98), ("Super Big", 15.49)]})
+        self.assertEqual(comp[0]["produto"], "BANANA NANICA")  # maior diferença primeiro
+
+
 class NavFalso:
     def __init__(self, json=None, texto=None):
         self.json, self.texto = json, texto

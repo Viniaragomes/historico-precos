@@ -316,6 +316,55 @@ def ler_encartes(nav: Navegador, dias: int = 4, hoje: date | None = None, max_im
     return saida
 
 
+def _mesmo_produto(a: tuple, b: tuple) -> bool:
+    """Dois trechos de encarte são o mesmo produto? Mesmas regras de fundo do vínculo por nome: tamanho igual,
+    nenhuma palavra de variante (sabor, integral/desnatado) só de um lado e nomes parecidos. Sem tamanho
+    (hortifrúti por kg), só quando as palavras são praticamente as mesmas."""
+    from .vinculo import DISTINTIVAS, semelhanca
+
+    (tka, qa), (tkb, qb) = a, b
+    if not tka or not tkb or (tka ^ tkb) & DISTINTIVAS:
+        return False
+    if (qa is None) != (qb is None) or (qa and (qa[1] != qb[1] or abs(qa[0] - qb[0]) > 1e-6)):
+        return False
+    j = semelhanca(tka, tkb)
+    if qa is None:
+        return j >= 0.8 and len(tka & tkb) >= 2
+    comuns = len(tka & tkb)
+    return j >= 0.6 or (comuns >= 2 and comuns == min(len(tka), len(tkb)))
+
+
+def comparar_mercados(encartes: list[EncarteLido]) -> list[dict]:
+    """Agrupa o mesmo produto anunciado em encartes de mercados diferentes e põe os preços lado a lado.
+    Fica só o que aparece em 2 ou mais mercados; de cada mercado, o menor preço. Mais diferença primeiro."""
+    from .causas.embalagem import quantidade
+    from .vinculo import tokens
+
+    grupos: list[dict] = []
+    for e in encartes:
+        for t in e.trechos:
+            chave = (tokens(t.texto), quantidade(t.texto))
+            g = next((g for g in grupos if _mesmo_produto(g["chave"], chave)), None)
+            if g is None:
+                g = {"chave": chave, "ofertas": {}}
+                grupos.append(g)
+            atual = g["ofertas"].get(e.mercado)
+            if atual is None or t.preco < atual["p"]:
+                g["ofertas"][e.mercado] = {"mercado": e.mercado, "p": t.preco, "t": t.texto, "validade_fim": e.validade_fim,
+                                           "link": e.pdf or e.post, "pdf": bool(e.pdf)}
+    saida = []
+    for g in grupos:
+        ofertas = sorted(g["ofertas"].values(), key=lambda o: o["p"])
+        if len(ofertas) < 2:
+            continue
+        # nome do grupo: o texto vindo de PDF (lido sem erro) ou o mais curto
+        nome = min(ofertas, key=lambda o: (not o["pdf"], len(o["t"])))["t"]
+        barato, caro = ofertas[0]["p"], ofertas[-1]["p"]
+        saida.append({"produto": nome, "ofertas": ofertas, "diferenca": round(caro - barato, 2),
+                      "diferenca_pct": round((caro / barato - 1) * 100, 1) if barato else None})
+    return sorted(saida, key=lambda c: -(c["diferenca_pct"] or 0))
+
+
 def para_json(encartes: list[EncarteLido]) -> list[dict]:
     return [{**{k: v for k, v in asdict(e).items() if k != "trechos"},
              "trechos": [{"t": t.texto, "p": t.preco} for t in e.trechos]} for e in encartes]

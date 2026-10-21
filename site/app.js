@@ -3,7 +3,7 @@ import { calcular, categoria } from "./impostos.js";
 import { confiancaPreco, nivelPorPontos, precoSugerido, utilidade, chavePreco, chaveCausa, PONTOS, NIVEIS as NIVEIS_COMUNIDADE } from "./confianca.js";
 import { criarComunidade, consentimento, ErroComunidade, TIPOS_REPORTE } from "./comunidade.js";
 
-const VERSAO_APP = "v25"; // igual à VERSAO do sw.js
+const VERSAO_APP = "v26"; // igual à VERSAO do sw.js
 
 const conteudo = document.getElementById("conteudo");
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
@@ -628,6 +628,36 @@ function cartaoEncartes(...nomes) {
   return cartao;
 }
 
+// mesmo produto em encartes de mercados diferentes, do mais barato ao mais caro (agrupado na coleta)
+function blocoComparacoes(d) {
+  const hoje = new Date().toISOString().slice(0, 10);
+  const grupos = (d.comparacoes || []).map((c) => ({ ...c, ofertas: c.ofertas.filter((o) => !o.validade_fim || o.validade_fim >= hoje) }))
+    .filter((c) => c.ofertas.length >= 2);
+  if (!grupos.length) return null;
+  const item = (c) => {
+    const [barato, caro] = [c.ofertas[0], c.ofertas.at(-1)];
+    const dif = caro.p - barato.p;
+    return el("details", { class: "comp-encarte" },
+      el("summary", {},
+        el("span", { class: "nome" }, nomeLegivel(c.produto),
+          el("small", {}, `${c.ofertas.length} mercados · mais barato no ${barato.mercado}`)),
+        el("span", { class: "direita" }, el("span", { class: "valor" }, brl.format(barato.p)),
+          dif > 0.004 ? el("span", { class: "etiqueta baixa" }, `até ${brl.format(dif)} a menos`) : null)),
+      el("ul", { class: "lista-comp" }, c.ofertas.map((o, i) => el("li", { class: "linha-comp" },
+        el("div", { class: "linha-comp-topo" },
+          el("span", { class: "nome" }, o.mercado, i === 0 ? el("span", { class: "etiqueta melhor" }, "Mais barato") : null),
+          el("span", { class: "valor" }, brl.format(o.p))),
+        el("div", { class: "dif-media" }, `lido: “${o.t}” · `, o.validade_fim ? `até ${dataBR(o.validade_fim)} · ` : "",
+          el("a", { href: o.link, target: "_blank", rel: "noopener" }, "ver encarte"))))));
+  };
+  return el("div", { class: "comparacoes-encarte" },
+    el("h3", {}, "Mesmo produto, mercados diferentes"),
+    el("p", { class: "sub" }, "Produtos anunciados em mais de um encarte vigente. Maior diferença de preço primeiro; toque para ver todos os mercados."),
+    ...grupos.slice(0, 5).map(item),
+    grupos.length > 5 ? el("details", { class: "expansivel" },
+      el("summary", {}, `Ver os ${grupos.length} produtos comparados`, icone("seta")), ...grupos.slice(5).map(item)) : null);
+}
+
 function secaoEncartes() {
   const secao = el("div", { hidden: true });
   encartes().then((d) => {
@@ -654,6 +684,7 @@ function secaoEncartes() {
         el("p", { class: "sub" }, `${d.encartes.length} ${d.encartes.length === 1 ? "encarte vigente" : "encartes vigentes"} de mercados do DF, `,
           "dos sites dos próprios mercados e do encartesdf.com.br. Procure um produto:"),
         campo, resultado,
+        blocoComparacoes(d),
         el("details", { class: "expansivel" },
           el("summary", {}, "Ver todos os encartes", icone("seta")),
           el("ul", { class: "lista lista-atacado" }, porMercado.map((e) => el("li", { class: "linha-atacado" },
@@ -1098,7 +1129,9 @@ async function codigoDF(ean) {
 // "CAFE TORRADO PILAO 500G" -> "Cafe Torrado Pilao 500g" (as notas fiscais vêm em maiúsculas)
 function nomeLegivel(t) {
   if (!t) return null;
-  if (t !== t.toUpperCase()) return t;
+  const letras = t.replace(/[^A-Za-zÀ-ú]/g, "");
+  // nome "gritado" (quase tudo maiúsculo, como nas notas e encartes): "CAFÉ PILÃO 500g" vira "Café Pilão 500g"
+  if (letras.replace(/[^a-zà-ú]/g, "").length > letras.length * 0.2) return t;
   return t.toLowerCase().replace(/(^|\s)([a-zà-ú])/g, (m, a, b) => a + b.toUpperCase())
     .replace(/(\d)(Kg|G|Ml|L|Un)\b/g, (m, n, u) => n + u.toLowerCase());
 }

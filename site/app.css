@@ -582,3 +582,16 @@ details.recolhido[open] > summary .ic { transform: rotate(90deg); }
 details.recolhido > .cartao { box-shadow: none; background: none; border: 0; border-radius: 0; padding: 0; margin: 18px 0 0; animation: none; }
 details.recolhido > .cartao + .cartao { border-top: 1px solid var(--linha); padding-top: 18px; }
 details.recolhido > .cartao:first-of-type > h2 { display: none; }
+
+/* ---------- encartes: mesmo produto em mercados diferentes ---------- */
+.comparacoes-encarte { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--linha); }
+.comparacoes-encarte h3 { font-size: 16px; font-weight: 750; margin: 0 0 4px; }
+details.comp-encarte { border-top: 1px solid var(--linha); }
+details.comp-encarte:first-of-type { border-top: 0; }
+details.comp-encarte > summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 0; }
+details.comp-encarte > summary::-webkit-details-marker { display: none; }
+details.comp-encarte > summary .nome { font-weight: 650; font-size: 15px; display: flex; flex-direction: column; min-width: 0; }
+details.comp-encarte > summary .nome small { font-weight: 500; font-size: 12.5px; color: var(--texto-3); }
+details.comp-encarte > summary .direita { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex: none; }
+details.comp-encarte > summary .valor { font-weight: 800; font-size: 17px; }
+details.comp-encarte[open] > summary { padding-bottom: 4px; }
