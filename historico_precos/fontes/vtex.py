@@ -100,10 +100,11 @@ def _folhas(nos: list, caminho: str = "/") -> list[tuple[str, str]]:
     return saida
 
 
-def catalogo(nav: Navegador, loja: dict, max_paginas: int | None = None):
-    """Percorre o catálogo inteiro da loja pela API pública, categoria por categoria.
+def catalogo(nav: Navegador, loja: dict, max_paginas: int | None = None, inicio: int = 0, ate=None, progresso=None):
+    """Percorre o catálogo da loja pela API pública, categoria por categoria, a partir da categoria `inicio`.
 
     Gera (Produto, [PontoDePreco]) para cada produto com EAN. Preço da região do CEP da loja, quando configurado.
+    `ate()` diz se o tempo da rodada acabou; `progresso(i, total)` guarda a próxima categoria (rodízio entre dias).
     """
     from ..modelo import Produto
 
@@ -113,7 +114,13 @@ def catalogo(nav: Navegador, loja: dict, max_paginas: int | None = None):
     folhas = _folhas(arvore if isinstance(arvore, list) else [])
     vistos: set[str] = set()
     paginas = 0
-    for caminho, _nome in folhas:
+    inicio = inicio if 0 <= inicio < len(folhas) else 0
+    for indice in range(inicio, len(folhas)):
+        caminho, _nome = folhas[indice]
+        if (ate and ate()) or (max_paginas is not None and paginas >= max_paginas):
+            return
+        if progresso:
+            progresso(indice, len(folhas))
         for de in range(0, LIMITE_API, POR_PAGINA):
             if max_paginas is not None and paginas >= max_paginas:
                 return
@@ -133,6 +140,8 @@ def catalogo(nav: Navegador, loja: dict, max_paginas: int | None = None):
                                   fonte=f"catálogo {loja['nome']}"), [ponto]
             if len(produtos) < POR_PAGINA:
                 break
+    if progresso and folhas:
+        progresso(len(folhas), len(folhas))  # volta ao começo na próxima rodada
 
 
 def eh_vtex(nav: Navegador, dominio: str) -> bool:

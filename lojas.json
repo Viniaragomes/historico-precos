@@ -71,6 +71,28 @@
       "padrao_produto": "/p$",
       "ativa": true,
       "verificacao": "Cópias arquivadas no Internet Archive das páginas de produto achadas no sitemap da loja. Serve para o histórico."
+    },
+    {
+      "nome": "Big Box",
+      "dominio": "bigboxdelivery.com.br",
+      "cidade": "Brasília",
+      "tipo": "sitemap",
+      "vinculo": "nome",
+      "sitemap": "https://bigboxdelivery.com.br/sitemap.xml",
+      "padrao_produto": "/p/",
+      "ativa": true,
+      "verificacao": "Em 21/10/2026: robots.txt libera /p/ (páginas de produto) e indica o sitemap (13.413 produtos); cada página traz nome, marca e preço em JSON-LD, sem código de barras. Vínculo pelo nome. Com navegador, o Cloudflare pede verificação: não usamos navegador aqui; se a leitura simples for recusada, o robô para."
+    },
+    {
+      "nome": "Fort Atacadista",
+      "dominio": "fortatacadista.com.br",
+      "cidade": null,
+      "tipo": "sitemap",
+      "vinculo": "nome",
+      "sitemap": "https://fortatacadista.com.br/sitemap.xml",
+      "padrao_produto": "/produtos/",
+      "ativa": true,
+      "verificacao": "Em 21/10/2026: robots.txt libera /produtos/ e indica o sitemap (11.908 produtos); JSON-LD com nome, marca e preço; o 'gtin' publicado é código interno (7 dígitos), por isso o vínculo é pelo nome. A rede tem lojas em vários estados: o preço do site não é marcado como de Brasília."
     }
   ]
 }

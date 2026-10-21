@@ -18,7 +18,7 @@ concurrency:
 jobs:
   coleta:
     runs-on: ubuntu-latest
-    timeout-minutes: 240
+    timeout-minutes: 330
     steps:
       - uses: actions/checkout@v4
         with:
@@ -48,6 +48,16 @@ jobs:
           # Wayback só aos domingos; nos outros dias, só o preço de hoje
           if [ "$(date -u +%u)" = "7" ]; then EXTRA=""; else EXTRA="--sem-wayback"; fi
           python -m historico_precos buscar-lista "$LISTA" $EXTRA
+
+      - name: Catálogo completo das lojas VTEX (rodízio, 35 min por loja)
+        continue-on-error: true
+        timeout-minutes: 80
+        run: python -m historico_precos catalogo-vtex --minutos 35
+
+      - name: Lojas sem código de barras no site, vínculo pelo nome (rodízio, 35 min por loja)
+        continue-on-error: true
+        timeout-minutes: 80
+        run: python -m historico_precos catalogo-nome --minutos 35
 
       - name: Monitor de leis (segundas-feiras)
         continue-on-error: true

@@ -75,3 +75,44 @@ class TestPaginaProduto(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestVinculoPorNome(unittest.TestCase):
+    def test_le_vincula_e_respeita_bloqueio(self):
+        from historico_precos.vinculo import Catalogo
+
+        def pagina_sem_gtin(nome, marca, preco):
+            ld = {"@context": "https://schema.org", "@type": "Product", "name": nome, "brand": {"@type": "Brand", "name": marca},
+                  "sku": "8227963", "offers": {"@type": "Offer", "price": preco, "priceCurrency": "BRL", "availability": "https://schema.org/InStock"}}
+            return f'<script type="application/ld+json">{json.dumps(ld)}</script>'
+
+        sitemap = ("<urlset><url><loc>https://mercado.df/p/cafe-3c-500</loc></url><url><loc>https://mercado.df/p/cafe-3c-1kg</loc></url>"
+                   "<url><loc>https://mercado.df/p/sem-par</loc></url></urlset>")
+        fake = Fake([("https://mercado.df/robots.txt", (200, "User-agent: *\nAllow: /")),
+                     ("https://mercado.df/sitemap.xml", (200, sitemap)),
+                     ("https://mercado.df/p/cafe-3c-500", (200, pagina_sem_gtin("Café 3 Corações Tradicional 500g", "3 Corações", "18.90"))),
+                     ("https://mercado.df/p/cafe-3c-1kg", (200, pagina_sem_gtin("Café 3 Corações Tradicional 1kg", "3 Corações", "35.90"))),
+                     ("https://mercado.df/p/sem-par", (200, pagina_sem_gtin("Vela Aromática 200g", "Casa", "9.90")))])
+        banco = Banco(os.path.join(tempfile.mkdtemp(), "t.db"))
+        catalogo = Catalogo([("7896005800027", "Café Torrado e Moído 3 Corações Tradicional 500g", "3 Corações")])
+        loja = {"nome": "Mercado DF", "sitemap": "https://mercado.df/sitemap.xml", "padrao_produto": "/p/", "cidade": "Brasília"}
+        r = pagina_produto.catalogar_por_nome(nav_com(fake), banco, loja, catalogo, hoje=date(2026, 10, 21))
+        self.assertEqual((r["novas_no_sitemap"], r["lidas"], r["com_preco"], r["vinculadas"], r["precos"]), (3, 3, 3, 1, 1))
+        ponto = banco.precos("7896005800027")[0]
+        self.assertEqual((ponto.loja, ponto.preco, ponto.metodo, ponto.descricao), ("Mercado DF", 18.9, "vinculo-nome", "Café 3 Corações Tradicional 500g"))
+        # rodízio: na próxima rodada, nada novo no sitemap e as páginas são relidas
+        r2 = pagina_produto.catalogar_por_nome(nav_com(fake), banco, loja, catalogo, limite=1, hoje=date(2026, 10, 22))
+        self.assertEqual((r2["novas_no_sitemap"], r2["lidas"]), (0, 1))
+
+    def test_para_depois_de_recusas_seguidas(self):
+        from historico_precos.vinculo import Catalogo
+
+        urls = "".join(f"<url><loc>https://bloqueia.df/p/{i}</loc></url>" for i in range(10))
+        fake = Fake([("https://bloqueia.df/robots.txt", (200, "User-agent: *\nAllow: /")),
+                     ("https://bloqueia.df/sitemap.xml", (200, f"<urlset>{urls}</urlset>")),
+                     ("https://bloqueia.df/p/", (403, "Attention Required"))])
+        banco = Banco(os.path.join(tempfile.mkdtemp(), "t.db"))
+        loja = {"nome": "Bloqueia", "sitemap": "https://bloqueia.df/sitemap.xml", "padrao_produto": "/p/"}
+        r = pagina_produto.catalogar_por_nome(nav_com(fake), banco, loja, Catalogo([]))
+        self.assertIn("paramos", r["parou"])
+        self.assertEqual(sum(1 for u in fake.acessos if "/p/" in u), 5)

@@ -418,6 +418,11 @@ def main(argv: list[str] | None = None) -> int:
 
     cv = sub.add_parser("catalogo-vtex", help="lê o catálogo inteiro das lojas VTEX ativas (todas as categorias) e grava o preço de hoje")
     cv.add_argument("--max-paginas", type=int, help="teto de páginas de 50 produtos por loja (para testes)")
+    cv.add_argument("--minutos", type=float, help="tempo máximo por loja; a próxima rodada continua de onde parou")
+
+    cn = sub.add_parser("catalogo-nome", help="lojas sem código de barras no site: lê páginas de produto em rodízio e vincula pelo nome")
+    cn.add_argument("--minutos", type=float, default=60, help="tempo máximo por loja")
+    cn.add_argument("--limite", type=int, default=5000, help="teto de páginas por loja")
 
     cs = sub.add_parser("catalogo-sitemap", help="acha páginas de produto pelo sitemap das lojas (tipo 'sitemap') e lê nome, GTIN e preço")
     cs.add_argument("--termos", required=True, help="separados por vírgula, ex.: cafe,arroz (procurados no endereço da página)")
@@ -515,9 +520,20 @@ def main(argv: list[str] | None = None) -> int:
     if args.comando == "catalogo-vtex":
         from .fontes import vtex
 
+        import time
+
+        banco.con.execute("CREATE TABLE IF NOT EXISTS catalogo_progresso (loja TEXT PRIMARY KEY, proxima INTEGER, total INTEGER, em TEXT)")
         for loja in [l for l in carregar_lojas(args.lojas) if l.get("tipo", "vtex") == "vtex"]:
             produtos, pontos, lote = 0, 0, []
-            for produto, pts in vtex.catalogo(nav, loja, args.max_paginas):
+            linha = banco.con.execute("SELECT proxima FROM catalogo_progresso WHERE loja = ?", (loja["nome"],)).fetchone()
+            fim = time.monotonic() + args.minutos * 60 if args.minutos else None
+            estado = {"i": linha[0] if linha else 0, "total": 0}
+
+            def progresso(i, total, estado=estado):
+                estado.update(i=0 if i >= total else i, total=total)
+
+            for produto, pts in vtex.catalogo(nav, loja, args.max_paginas, inicio=estado["i"],
+                                              ate=(lambda: time.monotonic() > fim) if fim else None, progresso=progresso):
                 produtos += 1
                 if not banco.produto(produto.ean):
                     banco.salvar_produto(produto)
@@ -526,12 +542,33 @@ def main(argv: list[str] | None = None) -> int:
                     pontos += banco.salvar_precos(lote)
                     lote = []
             pontos += banco.salvar_precos(lote)
-            print(f"{loja['nome']}: {produtos} produto(s) com código de barras no catálogo, {pontos} preço(s) novo(s) gravado(s).")
+            banco.con.execute("INSERT OR REPLACE INTO catalogo_progresso VALUES (?, ?, ?, datetime('now'))",
+                              (loja["nome"], estado["i"], estado["total"]))
+            banco.con.commit()
+            onde = f"próxima rodada começa na categoria {estado['i'] + 1} de {estado['total']}" if estado["total"] else "sem categorias"
+            print(f"{loja['nome']}: {produtos} produto(s) com código de barras, {pontos} preço(s) novo(s); {onde}.")
+        return 0
+    if args.comando == "catalogo-nome":
+        import time
+
+        from .fontes import pagina_produto
+        from .vinculo import Catalogo
+
+        catalogo = Catalogo(list(banco.con.execute("SELECT ean, nome, marca FROM produtos WHERE nome IS NOT NULL")))
+        print(f"Catálogo de referência: {len(catalogo.itens)} produtos com código de barras e tamanho no nome.")
+        for loja in [l for l in carregar_lojas(args.lojas) if l.get("tipo") == "sitemap" and l.get("vinculo") == "nome"]:
+            fim = time.monotonic() + args.minutos * 60
+            r = pagina_produto.catalogar_por_nome(nav, banco, loja, catalogo, args.limite, ate=lambda fim=fim: time.monotonic() > fim)
+            total = banco.con.execute("SELECT COUNT(*), SUM(ean IS NOT NULL), SUM(lido_em IS NOT NULL) FROM produtos_loja WHERE loja = ?",
+                                      (loja["nome"],)).fetchone()
+            print(f"{loja['nome']}: {r['lidas']} página(s) lida(s) agora, {r['com_preco']} com preço, {r['vinculadas']} vinculada(s), "
+                  f"{r['precos']} preço(s) novo(s). Catálogo da loja: {total[0]} produtos, {total[2] or 0} já lidos, "
+                  f"{total[1] or 0} vinculados. {r.get('parou') or ''}")
         return 0
     if args.comando == "catalogo-sitemap":
         from .fontes import pagina_produto
 
-        for loja in [l for l in carregar_lojas(args.lojas) if l.get("tipo") == "sitemap"]:
+        for loja in [l for l in carregar_lojas(args.lojas) if l.get("tipo") == "sitemap" and l.get("vinculo") != "nome"]:
             arquivo = [loja["arquivo"]] if loja.get("arquivo") else []
             for termo in [t.strip() for t in args.termos.split(",") if t.strip()]:
                 r = pagina_produto.catalogar(nav, banco, loja, [termo], limite=args.limite, lojas_arquivo=arquivo)

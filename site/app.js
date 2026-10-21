@@ -888,7 +888,9 @@ function cartaoOndeComprar({ p, votos, atualizar }) {
         el("div", { class: "nome" }, o.loja,
           i === 0 && p.ofertas.length > 1 ? el("span", { class: "etiqueta melhor" }, "Mais barato") : null,
           o.em_promocao ? el("span", { class: "etiqueta promo" }, "Promoção") : null),
-        el("div", { class: "detalhe" }, `${idade(o.data)} · `, el("a", { href: o.evidencia, target: "_blank", rel: "noopener" }, "ver fonte"))),
+        el("div", { class: "detalhe" }, `${idade(o.data)} · `, el("a", { href: o.evidencia, target: "_blank", rel: "noopener" }, "ver fonte")),
+        o.metodo === "vinculo-nome" ? el("div", { class: "detalhe aviso-vinculo" },
+          `Vinculado pelo nome (a loja não publica o código de barras): “${o.descricao || "?"}”. Confira o tamanho.`) : null),
       el("div", { class: "direita" },
         el("div", { class: "valor" }, brl.format(o.preco)),
         el("div", { class: "diferenca" }, i === 0

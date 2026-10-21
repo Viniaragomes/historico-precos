@@ -20,6 +20,8 @@ class Oferta:
     evidencia: str
     diferenca_rs: float = 0.0  # em relação à mais barata
     diferenca_pct: float = 0.0
+    metodo: str = ""  # vinculo-nome = loja sem código de barras, ligada pelo nome
+    descricao: str | None = None  # nome do produto como a loja mostra
 
     @property
     def em_promocao(self) -> bool:
@@ -69,7 +71,8 @@ def comparar(
     validas, ignoradas = [], []
     for p in ultimo.values():
         dias = (hoje - date.fromisoformat(p.data_observada)).days
-        oferta = Oferta(p.loja, p.preco, p.preco_de, p.data_observada, dias, p.fonte, p.cidade, p.url_evidencia)
+        oferta = Oferta(p.loja, p.preco, p.preco_de, p.data_observada, dias, p.fonte, p.cidade, p.url_evidencia,
+                        metodo=p.metodo, descricao=p.descricao)
         (validas if dias <= max_dias else ignoradas).append(oferta)
 
     validas.sort(key=lambda o: (o.preco, o.dias))

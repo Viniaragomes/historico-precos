@@ -89,3 +89,107 @@ def catalogar(nav: Navegador, banco, loja: dict, termos: list[str], limite: int 
             pontos.append(ponto)
     resumo["precos"] = banco.salvar_precos(pontos)
     return resumo
+
+
+# ---------------- lojas sem código de barras no site: vínculo por nome ----------------
+
+_ESQUEMA_LOJA = """
+CREATE TABLE IF NOT EXISTS produtos_loja (
+    loja TEXT NOT NULL, url TEXT PRIMARY KEY, nome TEXT, marca TEXT, preco REAL, data TEXT,
+    ean TEXT, semelhanca REAL, nome_catalogo TEXT, lido_em TEXT
+);
+CREATE INDEX IF NOT EXISTS produtos_loja_ean ON produtos_loja (ean);
+"""
+
+
+def ean_valido(codigo: str) -> bool:
+    """Confere o dígito verificador de EAN-8, UPC-12, EAN-13 e GTIN-14."""
+    if not re.fullmatch(r"\d{8}|\d{12,14}", codigo or ""):
+        return False
+    corpo, dv = codigo[:-1], int(codigo[-1])
+    soma = sum(int(d) * (3 if i % 2 == 0 else 1) for i, d in enumerate(reversed(corpo)))
+    return (10 - soma % 10) % 10 == dv
+
+
+def _dados_pagina(html: str) -> dict | None:
+    """Nome, marca, preço, GTIN e estoque do JSON-LD de produto."""
+    import json
+
+    for bloco in re.findall(r'<script[^>]*type=["\']application/ld\+json["\'][^>]*>(.*?)</script>', html or "", re.S | re.I):
+        try:
+            dado = json.loads(bloco.strip())
+        except json.JSONDecodeError:
+            continue
+        for obj in (dado if isinstance(dado, list) else [dado] + (dado.get("@graph", []) if isinstance(dado, dict) else [])):
+            if not isinstance(obj, dict) or "Product" not in (obj.get("@type") if isinstance(obj.get("@type"), list) else [obj.get("@type")]):
+                continue
+            ofertas = obj.get("offers") or {}
+            ofertas = ofertas[0] if isinstance(ofertas, list) and ofertas else ofertas
+            if isinstance(ofertas, dict) and isinstance(ofertas.get("offers"), list) and ofertas["offers"]:
+                ofertas = ofertas["offers"][0]
+            ofertas = ofertas if isinstance(ofertas, dict) else {}
+            marca = obj.get("brand")
+            from ..extratores import para_float
+
+            return {
+                "nome": obj.get("name"), "marca": marca.get("name") if isinstance(marca, dict) else marca,
+                "gtin": str(obj.get("gtin13") or obj.get("gtin") or obj.get("gtin14") or obj.get("gtin12") or obj.get("gtin8") or ""),
+                "preco": para_float(ofertas.get("price") or ofertas.get("lowPrice")),
+                "sem_estoque": "OutOfStock" in str(ofertas.get("availability") or ""),
+            }
+    return None
+
+
+def catalogar_por_nome(nav: Navegador, banco, loja: dict, catalogo, limite: int = 1000, hoje: date | None = None, ate=None) -> dict:
+    """Lê, em rodízio, até `limite` páginas de produto da loja (as nunca lidas primeiro, depois as mais antigas)
+    e vincula cada uma a um EAN pelo nome. Preço só entra quando o vínculo passa nas regras de `vinculo`."""
+    from ..modelo import agora_iso
+
+    con = banco.con
+    con.executescript(_ESQUEMA_LOJA)
+    dia = (hoje or date.today()).isoformat()
+    conhecidas = {u for (u,) in con.execute("SELECT url FROM produtos_loja WHERE loja = ?", (loja["nome"],))}
+    novas = [u for u in urls_do_sitemap(nav, loja["sitemap"], loja.get("padrao_produto", r"/p/")) if u not in conhecidas]
+    con.executemany("INSERT OR IGNORE INTO produtos_loja (loja, url) VALUES (?, ?)", [(loja["nome"], u) for u in novas])
+    con.commit()
+    fila = [u for (u,) in con.execute("SELECT url FROM produtos_loja WHERE loja = ? ORDER BY lido_em IS NOT NULL, lido_em LIMIT ?",
+                                      (loja["nome"], limite))]
+    resumo = {"novas_no_sitemap": len(novas), "lidas": 0, "com_preco": 0, "vinculadas": 0, "precos": 0, "bloqueios": 0}
+    pontos = []
+    for url in fila:
+        if ate and ate():
+            resumo["parou"] = "tempo da rodada acabou; a próxima continua de onde parou"
+            break
+        html = nav.get_texto(url)
+        if html is None:
+            ultimo = nav.registro[-1] if nav.registro else {}
+            if ultimo.get("status") in (403, 429, -1):
+                resumo["bloqueios"] += 1
+                if resumo["bloqueios"] >= 5:
+                    resumo["parou"] = f"o site recusou {resumo['bloqueios']} acessos seguidos (HTTP {ultimo.get('status')}); paramos"
+                    break
+            continue
+        resumo["bloqueios"] = 0
+        resumo["lidas"] += 1
+        d = _dados_pagina(html) or {}
+        ean, nota, nome_cat = None, None, None
+        if ean_valido(re.sub(r"\D", "", d.get("gtin") or "")):
+            ean, nota = re.sub(r"\D", "", d["gtin"]), 1.0
+        elif d.get("nome"):
+            v = catalogo.vincular(d["nome"], d.get("marca"))
+            if v:
+                ean, nota, nome_cat = v.ean, v.semelhanca, v.nome_catalogo
+        con.execute("UPDATE produtos_loja SET nome=?, marca=?, preco=?, data=?, ean=?, semelhanca=?, nome_catalogo=?, lido_em=? WHERE url=?",
+                    (d.get("nome"), d.get("marca"), d.get("preco"), dia, ean, nota, nome_cat, agora_iso(), url))
+        if d.get("preco") and not d.get("sem_estoque"):
+            resumo["com_preco"] += 1
+            if ean:
+                resumo["vinculadas"] += 1
+                pontos.append(PontoDePreco(
+                    ean=ean, preco=d["preco"], data_observada=dia, fonte="pagina-produto", loja=loja["nome"],
+                    cidade=loja.get("cidade"), url_origem=url, url_evidencia=url,
+                    metodo="json-ld" if nota == 1.0 else "vinculo-nome", descricao=d.get("nome"),
+                ))
+    con.commit()
+    resumo["precos"] = banco.salvar_precos(pontos)
+    return resumo
