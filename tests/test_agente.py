@@ -303,3 +303,19 @@ class TestCatalogoVtex(unittest.TestCase):
         self.assertIn("7890000000099", eans)
         self.assertEqual(itens[0][1][0].loja, "Loja")
         self.assertEqual(len(list(vtex.catalogo(nav_com(fake), loja, max_paginas=1))), 50)
+
+
+class TestDevagar(unittest.TestCase):
+    def test_429_espera_cada_vez_mais_e_passa_a_ir_devagar(self):
+        respostas = iter([(429, ""), (429, ""), (200, "ok")])
+        esperas = []
+
+        def abrir(url, dados=None):
+            if url.endswith("/robots.txt"):
+                return 200, "User-agent: *\nAllow: /"
+            return next(respostas)
+
+        nav = Navegador(intervalo=0, abrir=abrir, dormir=esperas.append)
+        self.assertEqual(nav.get_texto("https://loja.com.br/api/x"), "ok")
+        self.assertEqual([e for e in esperas if e >= 30], [30.0, 60.0])  # recuo crescente
+        self.assertGreaterEqual(nav._intervalo_do("loja.com.br"), 4.0)  # e o site passa a ser acessado mais devagar

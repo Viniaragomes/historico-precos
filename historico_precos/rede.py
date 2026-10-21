@@ -43,6 +43,8 @@ class Navegador:
         # registro de cada requisição, para diagnosticar fontes que falham
         self.registro: list[dict] = []
         self._ultimo_acesso: dict[str, float] = {}
+        self._lento: dict[str, float] = {}  # sites que pediram para ir mais devagar (HTTP 429)
+        self._retry_after: dict[str, float] = {}
         self._robots: dict[str, RobotFileParser | None] = {}
         # guarda cookies de sessão entre requisições (painéis em PHP costumam exigir)
         self._opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(http.cookiejar.CookieJar()))
@@ -85,6 +87,11 @@ class Navegador:
                 corpo = self._decodificar(e.read()[:2000], None)
             except Exception:
                 corpo = ""
+            if e.code == 429:
+                try:
+                    self._retry_after[urlsplit(url).netloc] = float((e.headers or {}).get("Retry-After") or "")
+                except ValueError:
+                    pass
             self._anotar(url, e.code, f"HTTP {e.code} {e.reason}", corpo)
             return e.code, ""
         except (urllib.error.URLError, TimeoutError, ConnectionError) as e:
@@ -97,7 +104,8 @@ class Navegador:
                               "trecho": " ".join(trecho.split())[:300]})
 
     # sites que pedem mais espaço entre consultas do que o padrão
-    INTERVALO_MINIMO = {"api.gdeltproject.org": 6.0, "mercado.carrefour.com.br": 3.0}
+    INTERVALO_MINIMO = {"api.gdeltproject.org": 6.0, "mercado.carrefour.com.br": 3.0, "www.atacadao.com.br": 3.0,
+                        "www.obahortifruti.com.br": 3.0}
 
     def _intervalo_do(self, host: str) -> float:
         """O maior entre: o padrão, o mínimo conhecido do site e o Crawl-delay que o robots.txt pede."""
@@ -108,7 +116,7 @@ class Navegador:
                     atraso = float(rp.crawl_delay(self.user_agent) or 0)
                 except (TypeError, ValueError):
                     atraso = 0.0
-        return max(self.intervalo, self.INTERVALO_MINIMO.get(host, 0.0), atraso)
+        return max(self.intervalo, self.INTERVALO_MINIMO.get(host, 0.0), atraso, self._lento.get(host, 0.0))
 
     def _esperar_vez(self, host: str) -> None:
         ultimo = self._ultimo_acesso.get(host)
@@ -171,14 +179,26 @@ class Navegador:
             self._anotar(url, -1, "robots.txt não permite", "")
             return None
         host = urlsplit(url).netloc
-        for tentativa in range(tentativas):
+        tentativa = 0
+        while tentativa < tentativas:
             self._esperar_vez(host)
             status, texto = self._abrir(url) if dados is None else self._abrir(url, dados)
             if 200 <= status < 300:  # a VTEX responde 206 (conteúdo parcial) em buscas paginadas
                 return texto
+            # 429 = o site pediu para ir mais devagar: espera o que ele pedir (Retry-After) ou recua cada vez mais,
+            # e passa a espaçar todos os acessos a esse site (o dobro do intervalo, até 30 s)
+            if status == 429:
+                self._lento[host] = min(30.0, max(self._lento.get(host, 0.0), self._intervalo_do(host)) * 2 or 4.0)
+                if tentativa + 1 < max(tentativas, 4):
+                    pedido = self._retry_after.pop(host, None)
+                    self._dormir(min(300.0, pedido if pedido is not None else 30.0 * (tentativa + 1)))
+                    tentativas = max(tentativas, 4)
+                    tentativa += 1
+                    continue
             # 0 = falha de rede (tempo esgotado, TLS): o Internet Archive costuma oscilar; vale tentar de novo
-            if status in (0, 429, 502, 503, 504) and tentativa + 1 < tentativas:
+            elif status in (0, 502, 503, 504) and tentativa + 1 < tentativas:
                 self._dormir(max(self.intervalo * 5, self._intervalo_do(host) * 2))
+                tentativa += 1
                 continue
             log.info("HTTP %s em %s", status, url)
             if not self.registro or self.registro[-1]["url"] != url[:300]:

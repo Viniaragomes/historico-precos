@@ -1,4 +1,4 @@
-"""Teste real: catálogo do Atacadão pela API pública, 20 páginas (até 1.000 produtos), em banco temporário."""
+"""Teste real: catálogo do Atacadão pela API pública, 10 páginas por loja (até 500 produtos), em banco temporário."""
 
 import subprocess
 import sys
@@ -7,7 +7,7 @@ import time
 
 with tempfile.TemporaryDirectory() as d:
     inicio = time.monotonic()
-    subprocess.run([sys.executable, "-m", "historico_precos", "--banco", f"{d}/c.db", "catalogo-vtex", "--max-paginas", "20"], check=False)
+    subprocess.run([sys.executable, "-m", "historico_precos", "--banco", f"{d}/c.db", "catalogo-vtex", "--max-paginas", "10"], check=False)
     print(f"tempo: {time.monotonic() - inicio:.0f} s")
     import sqlite3
     con = sqlite3.connect(f"{d}/c.db")

@@ -30,6 +30,15 @@
       "cep": "70040010"
     },
     {
+      "nome": "Oba Hortifruti",
+      "dominio": "www.obahortifruti.com.br",
+      "cidade": "Brasília",
+      "tipo": "vtex",
+      "ativa": true,
+      "cep": "70040010",
+      "verificacao": "Em 21/10/2026: VTEX, catálogo público com código de barras e preço; o robots.txt não existe (404), então nada é proibido. Preço regionalizado pelo CEP quando a loja atende a região."
+    },
+    {
       "nome": "Pão de Açúcar",
       "dominio": "www.paodeacucar.com",
       "cidade": "Brasília",
