@@ -61,6 +61,7 @@ class TestConab(unittest.TestCase):
         con = sqlite3.connect(":memory:")
         con.executescript(conab_prohort._ESQUEMA)
         con.executemany("INSERT INTO conab_prohort VALUES (?, ?, ?, ?, 'u', 'agora')", linhas)
+        con.execute("INSERT INTO conab_prohort VALUES ('Tomate', 'Ceasa/DF - Brasília', '2024-07', 3.43, 'u', 'agora')")
         s = conab_prohort.series(con)
-        self.assertEqual(len(s), 1)
+        self.assertEqual(len(s), 1)  # a série do DF parada em 2024 não entra
         self.assertEqual((s[0]["ceasa"], s[0]["ultimo"]["mes"], s[0]["variacao_pct"]), ("Ceasa/GO - Goiânia", "2026-09", 10.0))

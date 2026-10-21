@@ -93,12 +93,17 @@ def coletar(nav: Navegador, con, anos: list[int] | None = None, so_novas: bool =
 def series(con, ceasas: tuple[str, ...] = ("Ceasa/GO - Goiânia", "Ceagesp - São Paulo", "Ceasa/DF - Brasília")) -> list[dict]:
     """Uma série mensal por produto e Ceasa, com a variação do último mês contra o anterior."""
     con.executescript(_ESQUEMA)
+    mais_novo = (con.execute("SELECT MAX(mes) FROM conab_prohort").fetchone() or [None])[0]
+    if not mais_novo:
+        return []
+    a, m = (int(x) for x in mais_novo.split("-"))
+    corte = f"{a - (1 if m <= 6 else 0)}-{(m - 6 - 1) % 12 + 1:02d}"  # série parada há mais de 6 meses não entra
     saida = []
     for produto in PRODUTOS:
         for ceasa in ceasas:
             pts = [{"mes": m, "preco_kg": v, "evidencia": u} for m, v, u in con.execute(
                 "SELECT mes, preco_kg, planilha FROM conab_prohort WHERE produto = ? AND ceasa = ? ORDER BY mes", (produto, ceasa))]
-            if not pts:
+            if not pts or pts[-1]["mes"] < corte:
                 continue
             var = round((pts[-1]["preco_kg"] / pts[-2]["preco_kg"] - 1) * 100, 1) if len(pts) >= 2 else None
             saida.append({"produto": produto, "ceasa": ceasa, "serie": pts, "ultimo": pts[-1], "variacao_pct": var})
