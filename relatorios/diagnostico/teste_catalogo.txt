@@ -1,0 +1,3 @@
+Atacadão: 0 produto(s) com código de barras no catálogo, 0 preço(s) novo(s) gravado(s).
+tempo: 25 s
+produtos: 0 | preços: 0
