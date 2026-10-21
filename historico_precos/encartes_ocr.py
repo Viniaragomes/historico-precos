@@ -113,6 +113,30 @@ def trechos_das_linhas(linhas: list[dict]) -> list[Trecho]:
     return trechos
 
 
+def vocabulario(con) -> set[str]:
+    """Palavras (sem acento, 3+ letras) dos nomes de produtos que já conhecemos: catálogos das lojas, Open Food Facts,
+    descrições de preços. Serve para descartar leitura de imagem que parece palavra mas não é ("posta sesaos")."""
+    from .vinculo import normalizar
+
+    palavras: set[str] = set()
+    consultas = ["SELECT nome FROM produtos", "SELECT marca FROM produtos", "SELECT DISTINCT descricao FROM precos",
+                 "SELECT nome FROM produtos_loja"]
+    for sql in consultas:
+        try:
+            for (nome,) in con.execute(sql):
+                palavras.update(w for w in re.findall(r"[a-z]{3,}", normalizar(nome)))
+        except Exception:  # tabela ainda não existe neste banco
+            continue
+    return palavras
+
+
+def conhecido(texto: str, vocab: set[str]) -> bool:
+    from .vinculo import normalizar
+
+    ws = re.findall(r"[a-z]{3,}", normalizar(texto))
+    return bool(ws) and sum(w in vocab for w in ws) / len(ws) >= 0.6
+
+
 def ocr(caminho: Path) -> list[Trecho]:
     tsv = subprocess.run(["tesseract", str(caminho), "stdout", "-l", "por", "--psm", "11", "tsv"],
                          capture_output=True, text=True, timeout=120).stdout
@@ -154,8 +178,11 @@ def paginas_do_pdf(caminho: Path, max_paginas: int = 8) -> list[Path]:
     return sorted(caminho.parent.glob(caminho.stem + "-*.png"))
 
 
-def ler_encartes(nav: Navegador, dias: int = 4, hoje: date | None = None, max_imagens: int = 120) -> list[EncarteLido]:
-    """Encartes vigentes (validade de hoje em diante): do encartesdf.com.br e dos sites dos próprios mercados."""
+def ler_encartes(nav: Navegador, dias: int = 4, hoje: date | None = None, max_imagens: int = 120,
+                 vocab: set[str] | None = None) -> list[EncarteLido]:
+    """Encartes vigentes (validade de hoje em diante): do encartesdf.com.br e dos sites dos próprios mercados.
+    Com `vocab` (palavras de nomes conhecidos, ao menos 5 mil), trechos lidos de imagem só ficam se forem nome de produto."""
+    filtrar = vocab is not None and len(vocab) >= 5000
     hoje = hoje or date.today()
     saida, lidas = [], 0
     try:
@@ -178,7 +205,8 @@ def ler_encartes(nav: Navegador, dias: int = 4, hoje: date | None = None, max_im
                     if len(lido.trechos) < 3 and not e.imagens and tesseract_disponivel():
                         for pagina in paginas_do_pdf(arq):
                             lidas += 1
-                            lido.trechos += ocr(_preparar(pagina.read_bytes(), pasta, f"{n}-{pagina.stem}.png"))
+                            lido.trechos += [t for t in ocr(_preparar(pagina.read_bytes(), pasta, f"{n}-{pagina.stem}.png"))
+                                             if not filtrar or conhecido(t.texto, vocab)]
             if len(lido.trechos) < 3:
                 lido.trechos = []
                 for i, url in enumerate(e.imagens):
@@ -188,7 +216,8 @@ def ler_encartes(nav: Navegador, dias: int = 4, hoje: date | None = None, max_im
                     if not dados:
                         continue
                     lidas += 1
-                    lido.trechos += ocr(_preparar(dados, pasta, f"{n}-{i}{Path(url.split('?')[0]).suffix or '.img'}"))
+                    lido.trechos += [t for t in ocr(_preparar(dados, pasta, f"{n}-{i}{Path(url.split('?')[0]).suffix or '.img'}"))
+                                     if not filtrar or conhecido(t.texto, vocab)]
             saida.append(lido)
     return saida
 

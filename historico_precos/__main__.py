@@ -514,7 +514,9 @@ def main(argv: list[str] | None = None) -> int:
 
         if not encartes_ocr.tesseract_disponivel():
             print("Tesseract não instalado (apt install tesseract-ocr tesseract-ocr-por): só a lista de encartes sai.")
-        encartes = encartes_ocr.ler_encartes(nav, dias=args.dias, max_imagens=args.max_imagens)
+        vocab = encartes_ocr.vocabulario(banco.con)
+        print(f"Vocabulário de nomes de produtos: {len(vocab)} palavras" + ("" if len(vocab) >= 5000 else " (pouco: sem filtro)"))
+        encartes = encartes_ocr.ler_encartes(nav, dias=args.dias, max_imagens=args.max_imagens, vocab=vocab)
         for e in encartes:
             print(f"  {e.mercado:<28} até {e.validade_fim or '?':<10} {len(e.imagens):>2} imagem(ns) {len(e.trechos):>4} trecho(s) com preço")
             for t in e.trechos[:3]:

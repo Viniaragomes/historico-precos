@@ -51,6 +51,21 @@ class TestOCR(unittest.TestCase):
                          [("AÇÚCAR UNIÃO REFINADO 1kg", 4.49), ("FEIJÃO KICALDO CARIOCA 1kg", 7.99)])
 
 
+class TestVocabulario(unittest.TestCase):
+    def test_descarta_palavra_inventada(self):
+        import sqlite3
+
+        con = sqlite3.connect(":memory:")
+        con.execute("CREATE TABLE produtos (ean, nome, marca, quantidade, fonte)")
+        con.executemany("INSERT INTO produtos VALUES (?,?,?,?,?)", [("1", "Asa de frango Sadia 1kg", "Sadia", "", ""),
+                                                                    ("2", "Sabonete Dove Original 90g", "Dove", "", "")])
+        vocab = encartes_ocr.vocabulario(con)
+        self.assertTrue(encartes_ocr.conhecido("ASA DE FRANGO SADIA", vocab))
+        self.assertTrue(encartes_ocr.conhecido("Sabonete Dove original", vocab))
+        self.assertFalse(encartes_ocr.conhecido("asa alma ad", vocab))
+        self.assertFalse(encartes_ocr.conhecido("posta sesaos", vocab))
+
+
 class NavFalso:
     def __init__(self, json=None, texto=None):
         self.json, self.texto = json, texto
