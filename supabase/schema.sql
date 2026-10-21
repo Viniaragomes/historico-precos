@@ -204,6 +204,14 @@ end $$;
 revoke all on function public.enviar_cupom(text) from public;
 grant execute on function public.enviar_cupom(text) to anon, authenticated;
 
+-- resultado da busca na hora (função buscar-codigo), guardado por 6 horas; só a função lê e grava
+create table public.busca_cache (
+  ean text primary key check (ean ~ '^[0-9]{8,14}$'),
+  resultado jsonb not null,
+  buscado_em timestamptz not null default now()
+);
+alter table public.busca_cache enable row level security;
+
 -- ---------- limite de contribuições e pontos ----------
 
 create or replace function public.antes_de_votar() returns trigger

@@ -704,6 +704,29 @@ function cartaoPrecosComunidade(ean, nome) {
 }
 
 // código desconhecido: pede a inclusão (uma vez por aparelho e por dia); a coleta diária procura em todas as fontes
+// busca na hora (só com a comunidade online): consulta as lojas no momento do escaneamento
+function cartaoBuscaNaHora(ean) {
+  const cartao = el("section", { class: "cartao entrar entrar-2", hidden: true }, el("h2", {}, "Encontrado agora nas lojas"));
+  (async () => {
+    const com = await comunidade();
+    if (com.modo !== "online") return;
+    cartao.hidden = false;
+    const status = el("p", { class: "sub" }, "Procurando nas lojas…");
+    cartao.append(status);
+    const r = await com.buscarAgora(ean);
+    if (!r?.ofertas?.length) {
+      status.textContent = r ? "Nenhuma loja com catálogo online tem este código agora. Ele entrou na lista da próxima coleta." : "Não deu para procurar agora.";
+      return;
+    }
+    status.textContent = `Consulta de ${idade(r.buscado_em)}.`;
+    cartao.append(el("ul", { class: "lista lista-atacado" }, r.ofertas.map((o) => el("li", { class: "linha-atacado" },
+      el("span", { class: "nome" }, o.loja, el("small", {}, o.nome || "")),
+      el("span", { class: "valor" }, brl.format(o.preco)),
+      el("a", { href: o.link || o.evidencia, target: "_blank", rel: "noopener", class: "etiqueta neutra" }, "fonte")))));
+  })();
+  return cartao;
+}
+
 function cartaoPedido(ean) {
   const texto = el("p", { class: "sub", style: "margin:0" }, "Registrando o pedido…");
   const cartao = el("section", { class: "cartao entrar entrar-2" }, el("h2", {}, "Pedido de inclusão"), texto);
@@ -902,6 +925,7 @@ async function telaNaoAcompanhado(ean, aberto, tabela) {
         el("p", { class: "onde entrar" }, "Pedimos a inclusão e você pode informar o preço que viu."),
       ]),
     el("div", { class: "folha" },
+      cartaoBuscaNaHora(ean),
       cartaoPrecosComunidade(ean, nome),
       dic ? cartaoCompraDicionario(dic) : null,
       nome ? cartaoParecidos(nome, ean) : null,

@@ -89,6 +89,7 @@ export class ComunidadeLocal {
   }
   async pedirCodigo() { return { registrado: false }; } // só a comunidade online leva o pedido à coleta
   async enviarCupom() { return { registrado: false }; }
+  async buscarAgora() { return null; }
   async sugerirEvidencia({ ean, chave, url, descricao }) {
     const d = this._ler();
     d.evidencias.push({ id: d.proximoId++, ean, chave, url: validarUrl(url), descricao: (descricao || "").slice(0, 500), status: "pendente", nivel: null, criado_em: new Date().toISOString() });
@@ -218,6 +219,14 @@ export class ComunidadeSupabase {
     if (error?.message?.includes("limite")) throw new ErroComunidade("Muitas contribuições em pouco tempo. Tente de novo mais tarde.");
     if (error) throw new ErroComunidade("Não foi possível registrar agora.");
     return { ganho: PONTOS.corrigir };
+  }
+  // busca na hora nas lojas (função buscar-codigo no Supabase); sem login
+  async buscarAgora(ean) {
+    try {
+      const r = await fetch(`${this.url.replace(/\/$/, "")}/functions/v1/buscar-codigo?ean=${encodeURIComponent(ean)}`,
+        { headers: { apikey: this.chave, Authorization: `Bearer ${this.chave}` } });
+      return r.ok ? await r.json() : null;
+    } catch { return null; }
   }
   // cupom fiscal: o link vai para uma tabela fechada; só a coleta lê, extrai os preços e apaga o link
   async enviarCupom(link) {
