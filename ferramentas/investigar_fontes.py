@@ -52,6 +52,7 @@ ALVOS = {
     "Conab Portal de Informações (downloads)": ["https://portaldeinformacoes.conab.gov.br/download-arquivos.html"],
     "ANP (preço do diesel, frete)": ["https://www.gov.br/anp/pt-br/assuntos/precos-e-defesa-da-concorrencia/precos/levantamento-de-precos-de-combustiveis-ultimas-semanas-pesquisadas"],
     "IPE-DF (índices do DF)": ["https://www.ipe.df.gov.br/"],
+    "IPE-DF: Informações Estatísticas do DF": ["https://infodf.ipe.df.gov.br/"],
     "Dados abertos do DF": ["https://dados.df.gov.br/", "https://dados.df.gov.br/api/3/action/package_search?q=ceasa&rows=20",
                             "https://dados.df.gov.br/api/3/action/package_search?q=pre%C3%A7os&rows=20"],
 }
@@ -355,12 +356,13 @@ def analisar(resposta: dict) -> dict:
 
 # sites que, em 20/10/2026, recusaram os servidores do GitHub (fora do Brasil): rodar de uma conexão no Brasil
 # a Conab ("403 - Acesso proibido") e o DOU (conexão encerrada) recusaram também a partir do Brasil: ficam de fora
-SO_DO_BRASIL = ["CEASA-DF Portal de Serviços (preços)", "CEASA-DF (atacado de hortifrúti)", "IPE-DF (índices do DF)", "Dados abertos do DF", "Confaz (convênios ICMS)"]
+SO_DO_BRASIL = ["IPE-DF: Informações Estatísticas do DF", "CEASA-DF Portal de Serviços (preços)", "CEASA-DF (atacado de hortifrúti)", "IPE-DF (índices do DF)", "Dados abertos do DF", "Confaz (convênios ICMS)"]
 
 # o que procurar em cada site (no sitemap e nos links da página inicial)
 TEMAS = {
     "CEASA-DF Portal de Serviços (preços)": ["sima", "preco", "cotac", "boletim"],
     "CEASA-DF (atacado de hortifrúti)": ["cotac", "preco", "boletim", "mercado", "estatistic", "informativo", "prohort"],
+    "IPE-DF: Informações Estatísticas do DF": ["preco", "inflac", "ipca", "cesta", "custo", "indice", "consumo", "abastec", "agro"],
     "IPE-DF (índices do DF)": ["icdf", "preco", "cesta", "inflac", "ipca", "custo", "indice", "atacado"],
     "Dados abertos do DF": ["preco", "ceasa", "cesta", "abastecimento", "nota-fiscal", "nfe", "ipe"],
     "Confaz (convênios ICMS)": ["convenio", "2026"],
