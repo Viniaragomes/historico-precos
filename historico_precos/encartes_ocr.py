@@ -242,15 +242,18 @@ def palavras_do_tsv(tsv: str) -> list[tuple]:
     return saida
 
 
-def ocr_linhas(caminho: Path, estilizados: bool = True) -> list[dict]:
+def ocr_linhas(caminho: Path, estilizados: bool = True, cor: bool = False) -> list[dict]:
     """Linhas lidas pelo Tesseract + preços estilizados (centavos pequenos no alto, letra branca em etiqueta colorida)
     lidos à parte. A linha original que caiu em cima de um preço estilizado ("14º") sai, para não virar nome."""
-    # leitura principal em tons de cinza (é como o Tesseract rende mais); a imagem colorida fica para achar etiquetas
+    # leitura principal em tons de cinza ou em cores (cada encarte rende mais com uma delas); etiquetas pela cor
     cinza = caminho.with_name(caminho.stem + "-cinza.png")
     try:
         from PIL import Image
 
-        Image.open(caminho).convert("L").save(cinza)
+        if cor:
+            cinza = caminho
+        else:
+            Image.open(caminho).convert("L").save(cinza)
     except Exception:
         cinza = caminho
     tsv = subprocess.run(["tesseract", str(cinza), "stdout", "-l", "por", "--psm", "11", "tsv"],
@@ -312,7 +315,15 @@ def paginas_do_pdf(caminho: Path, max_paginas: int = 8) -> list[Path]:
 
 
 def _ler_imagem(lido: EncarteLido, linhas: list[dict], vocab: set[str] | None, filtrar: bool) -> None:
-    lido.trechos += [t for t in trechos_das_linhas(linhas) if plausivel(t) and (not filtrar or conhecido(t.texto, vocab))]
+    from .vinculo import semelhanca, tokens
+
+    for t in trechos_das_linhas(linhas):
+        if not plausivel(t) or (filtrar and not conhecido(t.texto, vocab)):
+            continue
+        # a mesma oferta lida nas duas passadas (cinza e cores) entra uma vez só
+        if any(abs(x.preco - t.preco) < 0.005 and semelhanca(tokens(x.texto), tokens(t.texto)) >= 0.5 for x in lido.trechos):
+            continue
+        lido.trechos.append(t)
     if filtrar:  # sem vocabulário, nome sem preço seria mais lixo que informação
         com_preco = {t.texto for t in lido.trechos}
         lido.nomes += [n for n in nomes_das_linhas(linhas, vocab) if n not in com_preco and n not in lido.nomes][:300]
@@ -346,7 +357,8 @@ def ler_encartes(nav: Navegador, dias: int = 4, hoje: date | None = None, max_im
                         for pagina in paginas_do_pdf(arq):
                             lidas += 1
                             png = _preparar(pagina.read_bytes(), pasta, f"{n}-{pagina.stem}.png")
-                            _ler_imagem(lido, ocr_linhas(png), vocab, filtrar)
+                            for cor in (False, True):
+                                _ler_imagem(lido, ocr_linhas(png, estilizados=not cor, cor=cor), vocab, filtrar)
             if len(lido.trechos) < 3 and not lido.nomes:
                 lido.trechos = []
                 for i, url in enumerate(e.imagens):
@@ -356,8 +368,9 @@ def ler_encartes(nav: Navegador, dias: int = 4, hoje: date | None = None, max_im
                     if not dados:
                         continue
                     lidas += 1
-                    _ler_imagem(lido, ocr_linhas(_preparar(dados, pasta, f"{n}-{i}{Path(url.split('?')[0]).suffix or '.img'}")),
-                                vocab, filtrar)
+                    png = _preparar(dados, pasta, f"{n}-{i}{Path(url.split('?')[0]).suffix or '.img'}")
+                    for cor in (False, True):  # estilizados só na 1ª passada: a 2ª serve para o texto comum
+                        _ler_imagem(lido, ocr_linhas(png, estilizados=not cor, cor=cor), vocab, filtrar)
             saida.append(lido)
     return saida
 
