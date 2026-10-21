@@ -635,18 +635,19 @@ function blocoComparacoes(d) {
     .filter((c) => c.ofertas.length >= 2);
   if (!grupos.length) return null;
   const item = (c) => {
-    const [barato, caro] = [c.ofertas[0], c.ofertas.at(-1)];
+    const comPreco = c.ofertas.filter((o) => o.p != null);
+    const [barato, caro] = [comPreco[0], comPreco.at(-1)];
     const dif = caro.p - barato.p;
     return el("details", { class: "comp-encarte" },
       el("summary", {},
         el("span", { class: "nome" }, nomeLegivel(c.produto),
-          el("small", {}, `${c.ofertas.length} mercados · mais barato no ${barato.mercado}`)),
+          el("small", {}, `${c.ofertas.length} mercados · ` + (comPreco.length > 1 ? `mais barato no ${barato.mercado}` : `preço lido só no ${barato.mercado}`))),
         el("span", { class: "direita" }, el("span", { class: "valor" }, brl.format(barato.p)),
           dif > 0.004 ? el("span", { class: "etiqueta baixa" }, `até ${brl.format(dif)} a menos`) : null)),
       el("ul", { class: "lista-comp" }, c.ofertas.map((o, i) => el("li", { class: "linha-comp" },
         el("div", { class: "linha-comp-topo" },
-          el("span", { class: "nome" }, o.mercado, i === 0 ? el("span", { class: "etiqueta melhor" }, "Mais barato") : null),
-          el("span", { class: "valor" }, brl.format(o.p))),
+          el("span", { class: "nome" }, o.mercado, i === 0 && comPreco.length > 1 ? el("span", { class: "etiqueta melhor" }, "Mais barato") : null),
+          o.p != null ? el("span", { class: "valor" }, brl.format(o.p)) : el("span", { class: "dif-media" }, "preço no encarte")),
         el("div", { class: "dif-media" }, `lido: “${o.t}” · `, o.validade_fim ? `até ${dataBR(o.validade_fim)} · ` : "",
           el("a", { href: o.link, target: "_blank", rel: "noopener" }, "ver encarte"))))));
   };

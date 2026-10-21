@@ -10,4 +10,4 @@ print(d["atualizado_em"], len(d["encartes"]), "encartes;", len(c), "produtos em 
 for x in c:
     print(f"\n{x['produto']}  (diferença R$ {x['diferenca']:.2f}, {x['diferenca_pct']}%)")
     for o in x["ofertas"]:
-        print(f"   R$ {o['p']:>7.2f}  {o['mercado']:<30} lido: {o['t']}")
+        print(f"   {'R$ %7.2f' % o['p'] if o['p'] is not None else '(sem preço)':>11}  {o['mercado']:<30} lido: {o['t']}")

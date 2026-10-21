@@ -104,6 +104,14 @@ class TestComparar(unittest.TestCase):
                                   "CAFÉ PILÃO 500g": [("Dia a Dia", 14.98), ("Super Big", 15.49)]})
         self.assertEqual(comp[0]["produto"], "BANANA NANICA")  # maior diferença primeiro
 
+    def test_nome_sem_preco_entra_como_tambem_anunciado(self):
+        T, E = encartes_ocr.Trecho, encartes_ocr.EncarteLido
+        a = E("Dia a Dia", "https://a", "2026-10-20", None, [], trechos=[T("CAFÉ PILÃO 500g", 14.98)])
+        b = E("Dona", "https://b", "2026-10-20", None, [], nomes=["Café Pilão Tradicional 500g"])
+        (c,) = encartes_ocr.comparar_mercados([a, b])
+        self.assertEqual([(o["mercado"], o["p"]) for o in c["ofertas"]], [("Dia a Dia", 14.98), ("Dona", None)])
+        self.assertEqual(c["diferenca"], 0)
+
 
 class NavFalso:
     def __init__(self, json=None, texto=None):

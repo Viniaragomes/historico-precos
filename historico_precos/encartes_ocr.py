@@ -336,7 +336,8 @@ def _mesmo_produto(a: tuple, b: tuple) -> bool:
 
 def comparar_mercados(encartes: list[EncarteLido]) -> list[dict]:
     """Agrupa o mesmo produto anunciado em encartes de mercados diferentes e põe os preços lado a lado.
-    Fica só o que aparece em 2 ou mais mercados; de cada mercado, o menor preço. Mais diferença primeiro."""
+    Fica só o que aparece em 2 ou mais mercados; de cada mercado, o menor preço. Mais diferença primeiro. Mercado em que
+    só o nome foi lido entra sem preço ("preço no encarte"), para a pessoa saber que lá também está em oferta."""
     from .causas.embalagem import quantidade
     from .vinculo import tokens
 
@@ -352,14 +353,23 @@ def comparar_mercados(encartes: list[EncarteLido]) -> list[dict]:
             if atual is None or t.preco < atual["p"]:
                 g["ofertas"][e.mercado] = {"mercado": e.mercado, "p": t.preco, "t": t.texto, "validade_fim": e.validade_fim,
                                            "link": e.pdf or e.post, "pdf": bool(e.pdf)}
+    # nome lido sem preço (preço estilizado): entra como "também anunciado aqui", só em produto que já tem preço lido
+    for e in encartes:
+        for nome in e.nomes:
+            chave = (tokens(nome), quantidade(nome))
+            g = next((g for g in grupos if _mesmo_produto(g["chave"], chave)), None)
+            if g is not None and e.mercado not in g["ofertas"]:
+                g["ofertas"][e.mercado] = {"mercado": e.mercado, "p": None, "t": nome, "validade_fim": e.validade_fim,
+                                           "link": e.pdf or e.post, "pdf": bool(e.pdf)}
     saida = []
     for g in grupos:
-        ofertas = sorted(g["ofertas"].values(), key=lambda o: o["p"])
+        ofertas = sorted(g["ofertas"].values(), key=lambda o: (o["p"] is None, o["p"] or 0))
         if len(ofertas) < 2:
             continue
+        com_preco = [o for o in ofertas if o["p"] is not None]
         # nome do grupo: o texto vindo de PDF (lido sem erro) ou o mais curto
-        nome = min(ofertas, key=lambda o: (not o["pdf"], len(o["t"])))["t"]
-        barato, caro = ofertas[0]["p"], ofertas[-1]["p"]
+        nome = min(com_preco, key=lambda o: (not o["pdf"], len(o["t"])))["t"]
+        barato, caro = com_preco[0]["p"], com_preco[-1]["p"]
         saida.append({"produto": nome, "ofertas": ofertas, "diferenca": round(caro - barato, 2),
                       "diferenca_pct": round((caro / barato - 1) * 100, 1) if barato else None})
     return sorted(saida, key=lambda c: -(c["diferenca_pct"] or 0))
