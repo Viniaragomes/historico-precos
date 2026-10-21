@@ -3,19 +3,71 @@ produtos 60
 precos 37
 produtos_loja no such table: produtos_loja
 fontes de produtos: [(None, 60)]
-vocabulário: 58346 ['aaa', 'aaaa', 'aaac', 'aab', 'aac', 'aaf', 'aai', 'aaj', 'aal', 'aang', 'aaqac', 'aar', 'aaron', 'aas', 'aaucar', 'aba', 'abac', 'abaca', 'abacate', 'abacax', 'abacaxi', 'abacaxicopo', 'abacquer', 'abad', 'abadia', 'abaf', 'abafador', 'abaixador', 'abaixo', 'abajur']
-posta sesaos False
-asa alma ad True
-Dove origina True
-CLUBE NENE es True
-Leite Longa Vida Piracanjuba True
-TOMATE GRAPE True
-BANANA NANICA True
-pérola | tao 5kg as True
-EXCLUSIVA LTRA as True
-a TioJoão Tio False
-urífica brilho False
-sao CEE e porre True
-mimo Seeção False
-Filé de Tilápia Copacol True
-Picanha Bovina Minerva Peça a Vácuo True
+
+mínimo 5 vocabulário: 19291
+   posta sesaos False
+   asa alma ad True
+   Dove origina True
+   CLUBE NENE es True
+   Leite Longa Vida Piracanjuba True
+   TOMATE GRAPE True
+   BANANA NANICA False
+   pérola | tao 5kg as True
+   EXCLUSIVA LTRA as False
+   a TioJoão Tio False
+   urífica brilho False
+   sao CEE e porre False
+   mimo Seeção False
+   Filé de Tilápia Copacol True
+   Picanha Bovina Minerva Peça a Vácuo True
+
+mínimo 20 vocabulário: 7636
+   posta sesaos False
+   asa alma ad True
+   Dove origina False
+   CLUBE NENE es False
+   Leite Longa Vida Piracanjuba True
+   TOMATE GRAPE True
+   BANANA NANICA False
+   pérola | tao 5kg as True
+   EXCLUSIVA LTRA as False
+   a TioJoão Tio False
+   urífica brilho False
+   sao CEE e porre False
+   mimo Seeção False
+   Filé de Tilápia Copacol True
+   Picanha Bovina Minerva Peça a Vácuo True
+
+mínimo 50 vocabulário: 3798
+   posta sesaos False
+   asa alma ad True
+   Dove origina False
+   CLUBE NENE es False
+   Leite Longa Vida Piracanjuba True
+   TOMATE GRAPE False
+   BANANA NANICA False
+   pérola | tao 5kg as True
+   EXCLUSIVA LTRA as False
+   a TioJoão Tio False
+   urífica brilho False
+   sao CEE e porre False
+   mimo Seeção False
+   Filé de Tilápia Copacol True
+   Picanha Bovina Minerva Peça a Vácuo True
+
+mínimo 100 vocabulário: 2101
+   posta sesaos False
+   asa alma ad True
+   Dove origina False
+   CLUBE NENE es False
+   Leite Longa Vida Piracanjuba True
+   TOMATE GRAPE False
+   BANANA NANICA False
+   pérola | tao 5kg as True
+   EXCLUSIVA LTRA as False
+   a TioJoão Tio False
+   urífica brilho False
+   sao CEE e porre False
+   mimo Seeção False
+   Filé de Tilápia Copacol False
+   Picanha Bovina Minerva Peça a Vácuo False
