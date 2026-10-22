@@ -1,0 +1,8 @@
+produtos no índice: 508 | com preço: 506
+lojas do menor preço: [('Big Box', 271), ('Fort Atacadista', 197), ('Atacadão', 37), ('Oba Hortifruti', 1)]
+encartes: ('2026-10-21T20:27:31+00:00', 20, 'encartes', 156, 'preços', 11, 'comparações')
+dicionário: {'fonte': 'Mapa de Preços do DF (Secretaria de Economia): notas fiscais entre empresas emitidas no DF, últimos 3 meses', 'evidencia': 'https://paineis.fazenda.df.gov.br/mapadeprecos/', 'atualizado_em': '2026-10-21T12:26:33+00:00', 'codigos': 163175}
+ceasa-df.json ('2026-10-21T20:21:16+00:00', 172, 'séries')
+conab.json ('2026-10-21T20:21:22+00:00', 21, 'séries')
+versão publicada: "v26"
+Supabase ligado: False
