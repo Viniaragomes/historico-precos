@@ -46,7 +46,10 @@ jobs:
         continue-on-error: true
         timeout-minutes: 40
         run: |
-          sudo apt-get install -y -qq tesseract-ocr tesseract-ocr-por poppler-utils > /dev/null
+          # se a leitura de hoje falhar, o app fica com os encartes já publicados (em vez de ficar sem nenhum)
+          mkdir -p site/dados
+          curl -sf https://viniaragomes.github.io/historico-precos/dados/encartes.json -o site/dados/encartes.json || true
+          sudo apt-get update -qq > /dev/null && sudo apt-get install -y -qq tesseract-ocr tesseract-ocr-por poppler-utils > /dev/null
           pip install -q pillow
           git fetch -q origin dados || true
           git show origin/dados:dicionario.db.gz > dicionario.db.gz 2>/dev/null || rm -f dicionario.db.gz
