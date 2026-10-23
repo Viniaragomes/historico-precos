@@ -1,109 +1,192 @@
-Vocabulário de nomes de produtos: 8189 palavras
-  Atacadão Dia a Dia           até 2026-10-21  1 imagem(ns)    5 trecho(s) com preço
-      R$    1.29  TOMATE GRAPE
-      R$    2.49  BANANA NANICA
-      R$    2.49  BETERRABA
-  Atacadão Dia a Dia           até 2026-10-21  8 imagem(ns)   31 trecho(s) com preço
-      R$    8.90  IOGURTE BATAVO PENSE ZERO BANDEJA SABORES 510G
-      R$    8.29  REQUEIJÃO CREMOSO TRADICIONAL BATAVO 200G
-      R$    6.49  LEITE FERMENTADO BOB ESPONJA SABORES 480G
-  Dona                         até 2026-10-21  0 imagem(ns)   24 trecho(s) com preço
-      R$   89.90  sa Picanha Bovina Minerva Pul Peça a Vácuo
-      R$   29.99  AR e A A ei Costela Suína Sadia em Fatias Congelada
-      R$   19.99  Filé de Coxa e Sobrecoxa de Frango com Pele Super Frango Resfriado
-  Assaí Atacadista             até 2026-10-22  1 imagem(ns)   25 trecho(s) com preço
-      R$   16.90  CARNE BOVINA MOÍDA CONGELADA FRIBOL EMBALAGEM 500g
-      R$   34.90  LAGARTO BOVINO RESFRIADO FRIBOI PREÇO POR QUILO NA PEÇA
-      R$   14.50  CONGELADA FRIBOL EMBALAGEM 500g
-  Supermercado Brandão         até 2026-10-21  2 imagem(ns)    0 trecho(s) com preço
-  Bevia Atacadista             até 2026-10-21  1 imagem(ns)    0 trecho(s) com preço
-  Atacadão Dia a Dia           até 2026-10-21  1 imagem(ns)    1 trecho(s) com preço
-      R$    7.99  mimo
+falha ao baixar https://encartesdf.com.br/wp-content/uploads/2026/10/Tabloide-de-Ofertas-Primor-22-10-2026-1.webp: HTTP Error 404: Not Found
+falha ao baixar https://encartesdf.com.br/wp-content/uploads/2026/10/Tabloide-de-Ofertas-Primor-22-10-2026-2.webp: HTTP Error 404: Not Found
+Vocabulário de nomes de produtos: 8225 palavras
+Triangulação: 59 de 273 anúncios com preço ligados a código de barras (34 a um código só); 157 nomes sem preço ligados.
+  Atacadão Dia a Dia           até 2026-10-28  4 imagem(ns)   41 trecho(s) com preço
+      R$    1.69  FLOCÃO DE MILHO GUARÁ 400G
+      R$    6.79  FEIJÃO CARIOCA DA MAMÃE 1KG
+      R$   13.79  AÇÚCAR CRISTAL SUPER BRANCA 5KG
+  Dona                         até ?           0 imagem(ns)   40 trecho(s) com preço
+      R$    6.99  Maçã Pacote lkg
+      R$   16.99  Melão Caipira ou Orange
+      R$    2.99  Ameixa Bandeja 500g “19 Sempre
+  Cristal Supermercado         até 2026-10-26  2 imagem(ns)    1 trecho(s) com preço
+      R$    2.19  Cerveja Itaipava
+  Supermercado Superbom        até 2026-10-25  2 imagem(ns)   10 trecho(s) com preço
+      R$    3.49  ÓLEO DE SOJA
+      R$    3.19  MACARRÃO INSTANTÂNEO RENATA
+      R$    4.17  WAFER BIS
+  Supermercado União           até 2026-10-26  1 imagem(ns)    3 trecho(s) com preço
+      R$   10.99  AÇUCAR CRISTAL Ra
+      R$   10.99  AÇAI ORIGEM TODA HORA 1L mesmas
+      R$    6.99  FILE DE PEITO MOIDO COPACOL 400G Crea
+  Supermercado Mega Box        até 2026-10-23  3 imagem(ns)    2 trecho(s) com preço
+      R$   32.59  Peito bovino - KG
+      R$    9.98  Salame Italiano Seara 100g
+  Varejão da Fartura           até 2026-10-25  2 imagem(ns)    1 trecho(s) com preço
+      R$    3.99  MAMÃO FORMOSA Ressalva 9,99KG
+  Supermercado Mais Econômico  até 2026-10-23  2 imagem(ns)    8 trecho(s) com preço
+      R$   24.98  3 MS PEITO BOVINO
+      R$   14.98  CARNE DE SOL DE PRIMEIRA
+      R$   15.98  DE PRIMEIRA COXINHA DA ASA
+  Costa Atacadão               até 2026-10-25  2 imagem(ns)   32 trecho(s) com preço
+      R$   11.99  ARROZ BRILHANTE TIPO 1 - 5KG
+      R$   11.99  emisraL SEMI OU DESNATADO. PIRACANJUBA TP 1
+      R$   11.99  CAFÉ SANTACLARA] RR CAFÉ EXI
+  Supermercado Super Big       até 2026-10-27  2 imagem(ns)    1 trecho(s) com preço
+      R$    1.99  da Mid ORIGINAL
+  Supermercado Primor          até 2026-10-29  2 imagem(ns)    0 trecho(s) com preço
+  Atacarejo Bonamix            até 2026-10-26  7 imagem(ns)    6 trecho(s) com preço
+      R$    6.09  pelo Ao) uti
+      R$    3.39  — Piracanjuba” creme de leite 200g
+      R$    7.99  Talheres Premium Prafesta pct 50un master
+  Atacadista Super Adega       até 2026-10-25  9 imagem(ns)    0 trecho(s) com preço
+  Atacadista Super Adega       até 2026-10-25 10 imagem(ns)    0 trecho(s) com preço
+  Supercei Supermercado        até 2026-10-27  2 imagem(ns)   13 trecho(s) com preço
+      R$    4.69  Stella Artois lata - 350ml
+      R$    1.49  Taguatinga, Samambaia, Riacho Fundo e Gama
+      R$    9.95  Biscoito Cookies Renata - 40g Ee
+  Bevia Atacadista             até 2026-10-27  2 imagem(ns)   10 trecho(s) com preço
+      R$   16.95  Manteiga Itambé Com Sal - 500 g
+      R$    1.29  OFE Cerveja Amstel lata - 350 ml
+      R$    6.99  8 Barra Protein ET Integralmedica - 45 9
+  Supermercado União           até 2026-10-23  1 imagem(ns)    0 trecho(s) com preço
+  Supermercado Brandão         até 2026-10-31  1 imagem(ns)    2 trecho(s) com preço
+      R$   14.99  SAFIRA cor tu
+      R$    3.99  MISTURA PARA BOLO ITALAC 400G | al
+  Assaí Atacadista             até 2026-10-26  4 imagem(ns)   69 trecho(s) com preço
+      R$    3.59  LAGER AMSTEL LATA 269ML
+      R$   42.59  CERVEJA PILSEN ITAIPAVA LATA 269ML
+      R$   12.79  CERVEJA PURO MALTE PETRA LATA 269ML
+  Supermercado Ideal           até 2026-10-25  2 imagem(ns)    0 trecho(s) com preço
+  Atacadão Dia a Dia           até 2026-10-28  4 imagem(ns)    9 trecho(s) com preço
+      R$    3.99  Yoki PR NATURAL
+      R$    3.99  voa NATURAL E
+      R$    2.49  Predilecta, milho
   Supermercado Ultrabox        até 2026-10-25  2 imagem(ns)    5 trecho(s) com preço
       R$    2.48  Em» ANTARCTICA PILSEN
       R$   12.98  pérola | tao 5kg as
       R$   67.45  98 PACOTE 2,5KG
-  Supermercado Ultrabox        até 2026-10-22  7 imagem(ns)   10 trecho(s) com preço
-      R$    5.98  eite Fermentado Chamyto Tradicional
-      R$    0.98  Láctea UHT Mocoquinha Chocolate
-      R$    6.98  logurte Com Polpa Nestlé Ninho 3 Sabores
   Supermercado Ultrabox        até 2026-10-26 10 imagem(ns)   14 trecho(s) com preço
       R$   10.98  Toalhas Umedecidas Bebê Casademãe Com 100 unidades
       R$    4.58  Gel Dental Infantil Casademãe
       R$    2.98  Escova Dental Infantil Casademãe Pocoyo
-  Supermercado Mineirão        até 2026-10-21  1 imagem(ns)    2 trecho(s) com preço
-      R$    3.99  MELÃO AMARELO OU MAMÃO FORMOSA
-      R$    6.98  UVA CRIMSON
-  Supermercado Superbom        até 2026-10-22  2 imagem(ns)    5 trecho(s) com preço
-      R$   25.90  ALHO A GRANEL
-      R$    4.15  A ALHO A GRANEL KG =
-      R$    2.13  fx FARINHA DE TRIGO
   Supermercado Mais Econômico  até 2026-10-26  5 imagem(ns)    0 trecho(s) com preço
-  Supermercado Super Big       até 2026-10-21  1 imagem(ns)    9 trecho(s) com preço
-      R$    3.49  LARANJA
-      R$    3.99  BATATA DOCE
-      R$    1.99  COUVE INTEIRA
-  Supermercado Planeta         até 2026-10-21  1 imagem(ns)    4 trecho(s) com preço
-      R$    4.99  MILHO BDJ C/5UN
-      R$    0.99  PIMENTA DE CHEIRO BDJ Ae
-      R$    4.99  TOMATE KG
-  Supermercado União           até 2026-10-22  1 imagem(ns)    1 trecho(s) com preço
-      R$    7.49  COPACOL 400g Copacol Copacol
-  Cristal Supermercado         até 2026-10-21  1 imagem(ns)    1 trecho(s) com preço
-      R$    6.99  Vitória
-  Fort Atacadista              até 2026-10-22  4 imagem(ns)   11 trecho(s) com preço
-      R$    6.98  Margarina Qualy = Pote 500g
-      R$   17.99  CM Suco Aurora 1,5 Litros
-      R$    8.49  Cereal Matinal Nescau 270g
-  Supermercado Tatico          até 2026-10-25  7 imagem(ns)    9 trecho(s) com preço
-      R$    6.99  Minuano
-      R$   14.99  W rito campo raça
-      R$    5.99  PLUS
-  Supermercado Bistecão        até 2026-10-22  2 imagem(ns)    1 trecho(s) com preço
-      R$   41.56  CHOCOLATE KIT KAT
-20 encarte(s) vigente(s), 158 trecho(s) com preço.
+  Supermercado Tatico          até 2026-10-25  7 imagem(ns)    6 trecho(s) com preço
+      R$   14.99  rito campo raça
+      R$    2.99  MORTADELA TIPO BOLOGNA. pe
+      R$   14.99  GOLD PARA us
+25 encarte(s) vigente(s), 273 trecho(s) com preço.
 Exportado em encartes_teste.json
-10 produto(s) anunciado(s) em 2 ou mais mercados:
-  BANANA NANICA: Atacadão Dia a Dia R$ 2.49 · Supermercado Super Big R$ 4.99 · Supermercado Brandão (preço no encarte) · Supermercado Mineirão (preço no encarte) · Supermercado Planeta (preço no encarte)
-  Filé de Tilápia: Dona R$ 44.99 · Fort Atacadista (preço no encarte)
-  Banana Prata: Supermercado Ultrabox R$ 3.98 · Dona (preço no encarte) · Assaí Atacadista (preço no encarte) · Supermercado Brandão (preço no encarte) · Supermercado Mineirão (preço no encarte) · Supermercado Superbom (preço no encarte) · Supermercado Planeta (preço no encarte)
-  UVA CRIMSON: Supermercado Mineirão R$ 6.98 · Assaí Atacadista (preço no encarte) · Supermercado Superbom (preço no encarte)
-  A ALHO A GRANEL KG =: Supermercado Superbom R$ 4.15 · Assaí Atacadista (preço no encarte) · Supermercado Ultrabox (preço no encarte)
-  BATATA DOCE: Supermercado Super Big R$ 3.99 · Supermercado Brandão (preço no encarte)
-  ABOBORA JAPONESA: Supermercado Super Big R$ 3.99 · Assaí Atacadista (preço no encarte) · Supermercado Brandão (preço no encarte) · Bevia Atacadista (preço no encarte) · Supermercado Superbom (preço no encarte)
-  MELAO AMARELO: Supermercado Super Big R$ 4.99 · Assaí Atacadista (preço no encarte)
-  MAMÃO FORMOSA KG: Supermercado Planeta R$ 4.99 · Supermercado Mineirão (preço no encarte) · Supermercado Superbom (preço no encarte)
-  Lava roupas: Fort Atacadista R$ 9.99 · Supermercado Bistecão (preço no encarte)
+21 produto(s) anunciado(s) em 2 ou mais mercados:
+  CERVEJA PURO MALTE AMSTEL LATA 269ML: Atacadão Dia a Dia R$ 2.89 · Assaí Atacadista R$ 12.79
+  CREME DE LEITE PIRACANJUBA TP 200G: Costa Atacadão R$ 2.49 · Atacarejo Bonamix R$ 3.39
+  FLOCÃO DE MILHO GUARÁ 400G: Atacadão Dia a Dia R$ 1.69 · Supermercado Super Big (preço no encarte)
+  CERVEJA BRAHMA CHOPP LATA 269ML: Atacadão Dia a Dia R$ 2.59 · Supermercado Super Big (preço no encarte)
+  Cerveja Itaipava: Cristal Supermercado R$ 2.19 · Supermercado Superbom (preço no encarte) · Costa Atacadão (preço no encarte)
+  Peito bovino - KG: Supermercado Mega Box R$ 32.59 · Supermercado Mais Econômico (preço no encarte)
+  SABÃO EM PÓ TIXAN YPÉ PRIMAVERA 2,2KG: Costa Atacadão R$ 19.89 · Supermercado Super Big (preço no encarte)
+  COXÃO MOLE BOVINO KG: Costa Atacadão R$ 39.99 · Supermercado Superbom (preço no encarte) · Supermercado Ultrabox (preço no encarte)
+  FILÉ DE TILÁPIA SEARA 600G: Costa Atacadão R$ 28.99 · Supermercado Mega Box (preço no encarte)
+  MARGARINA QUALY C/ SAL 500G: Costa Atacadão R$ 6.89 · Supermercado Super Big (preço no encarte) · Supermercado Mais Econômico (preço no encarte)
 
-tempo: 508s
-preços lidos: 158 {'Atacadão Dia a Dia': 37, 'Supermercado Ultrabox': 29, 'Assaí Atacadista': 25, 'Dona': 24, 'Fort Atacadista': 11, 'Supermercado Super Big': 9, 'Supermercado Tatico': 9, 'Supermercado Superbom': 5, 'Supermercado Planeta': 4, 'Supermercado Mineirão': 2, 'Supermercado União': 1, 'Cristal Supermercado': 1, 'Supermercado Bistecão': 1, 'Supermercado Brandão': 0, 'Bevia Atacadista': 0, 'Supermercado Mais Econômico': 0}
-comparações: 10 | com preço em 2+ mercados: 1
-  BANANA NANICA | Atacadão Dia a Dia 2.49 · Supermercado Super Big 4.99 · Supermercado Brandão - · Supermercado Mineirão - · Supermercado Planeta -
-  Filé de Tilápia | Dona 44.99 · Fort Atacadista -
-  Banana Prata | Supermercado Ultrabox 3.98 · Dona - · Assaí Atacadista - · Supermercado Brandão - · Supermercado Mineirão - · Supermercado Superbom - · Supermercado Planeta -
-  UVA CRIMSON | Supermercado Mineirão 6.98 · Assaí Atacadista - · Supermercado Superbom -
-  A ALHO A GRANEL KG = | Supermercado Superbom 4.15 · Assaí Atacadista - · Supermercado Ultrabox -
-  BATATA DOCE | Supermercado Super Big 3.99 · Supermercado Brandão -
-  ABOBORA JAPONESA | Supermercado Super Big 3.99 · Assaí Atacadista - · Supermercado Brandão - · Bevia Atacadista - · Supermercado Superbom -
-  MELAO AMARELO | Supermercado Super Big 4.99 · Assaí Atacadista -
-  MAMÃO FORMOSA KG | Supermercado Planeta 4.99 · Supermercado Mineirão - · Supermercado Superbom -
-  Lava roupas | Fort Atacadista 9.99 · Supermercado Bistecão -
+tempo: 820s
+preços lidos: 273 {'Assaí Atacadista': 69, 'Atacadão Dia a Dia': 50, 'Dona': 40, 'Costa Atacadão': 32, 'Supermercado Ultrabox': 19, 'Supercei Supermercado': 13, 'Supermercado Superbom': 10, 'Bevia Atacadista': 10, 'Supermercado Mais Econômico': 8, 'Atacarejo Bonamix': 6, 'Supermercado Tatico': 6, 'Supermercado União': 3, 'Supermercado Mega Box': 2, 'Supermercado Brandão': 2, 'Cristal Supermercado': 1, 'Varejão da Fartura': 1, 'Supermercado Super Big': 1, 'Supermercado Primor': 0, 'Atacadista Super Adega': 0, 'Supermercado Ideal': 0}
+comparações: 21 | com preço em 2+ mercados: 3
+  CERVEJA PURO MALTE AMSTEL LATA 269ML | Atacadão Dia a Dia 2.89 · Assaí Atacadista 12.79
+  CREME DE LEITE PIRACANJUBA TP 200G | Costa Atacadão 2.49 · Atacarejo Bonamix 3.39
+  FLOCÃO DE MILHO GUARÁ 400G | Atacadão Dia a Dia 1.69 · Supermercado Super Big -
+  CERVEJA BRAHMA CHOPP LATA 269ML | Atacadão Dia a Dia 2.59 · Supermercado Super Big -
+  Cerveja Itaipava | Cristal Supermercado 2.19 · Supermercado Superbom - · Costa Atacadão -
+  Peito bovino - KG | Supermercado Mega Box 32.59 · Supermercado Mais Econômico -
+  SABÃO EM PÓ TIXAN YPÉ PRIMAVERA 2,2KG | Costa Atacadão 19.89 · Supermercado Super Big -
+  COXÃO MOLE BOVINO KG | Costa Atacadão 39.99 · Supermercado Superbom - · Supermercado Ultrabox -
+  FILÉ DE TILÁPIA SEARA 600G | Costa Atacadão 28.99 · Supermercado Mega Box -
+  MARGARINA QUALY C/ SAL 500G | Costa Atacadão 6.89 · Supermercado Super Big - · Supermercado Mais Econômico -
+  Stella Artois lata - 350ml | Supercei Supermercado 4.69 · Assaí Atacadista - · Supermercado Ultrabox -
+  BATATA LISA | Supercei Supermercado 4.99 · Bevia Atacadista -
+  Rabada Bovina Congelada - Kg | Supercei Supermercado 14.95 · Bevia Atacadista 14.95
+  OFE Cerveja Amstel lata - 350 ml | Bevia Atacadista 1.29 · Supercei Supermercado -
+  Granola Mais Nutri Piracanjuba - 250 ml Natural - 1 Kg | Bevia Atacadista 9.95 · Supercei Supermercado -
 
 amostra de preços lidos por mercado:
-  Atacadão Dia a Dia [('TOMATE GRAPE', 1.29), ('BANANA NANICA', 2.49), ('BETERRABA', 2.49), ('UVA VERDE FRUTAYA SEM SEMENTE OU UVA PRETA BR', 7.49), ('OVOS BRANCOS MANTIQUEIRA OU EMAPE TIPO EXTRA ', 12.79)]
-  Atacadão Dia a Dia [('IOGURTE BATAVO PENSE ZERO BANDEJA SABORES 510', 8.9), ('REQUEIJÃO CREMOSO TRADICIONAL BATAVO 200G', 8.29), ('LEITE FERMENTADO BOB ESPONJA SABORES 480G', 6.49), ('NUGGETS TRADICIONAIS AURORA 2KG', 32.89), ('BISCOITO WAFER DIA A DIA SABORES 73G', 1.49), ('BISCOITO CREAM CRACKER DIA A DIA 300G', 3.79), ('EXCETO ÁGUAS CLARAS, GUARÁ E RIACHO FUNDO CRE', 2.29), ('6 , \ue035 cada CREME CULINÁRIO TRIANGULO 200G', 1.59)]
-  Dona [('sa Picanha Bovina Minerva Pul Peça a Vácuo', 89.9), ('AR e A A ei Costela Suína Sadia em Fatias Con', 29.99), ('Filé de Coxa e Sobrecoxa de Frango com Pele S', 19.99), ('Filé de Tilápia', 44.99), ('cu Café 3 Corações Torrado e Moído Tradiciona', 32.99), ('Alimento Almond Breeze Sabores g', 19.99), ('Piracanjuba IL “Integral, Desnatado ou Semide', 6.19), ('vi su a Zespri Uva Thompson Bandeja 500g', 15.49)]
-  Assaí Atacadista [('CARNE BOVINA MOÍDA CONGELADA FRIBOL EMBALAGEM', 16.9), ('LAGARTO BOVINO RESFRIADO FRIBOI PREÇO POR QUI', 34.9), ('CONGELADA FRIBOL EMBALAGEM 500g', 14.5), ('RESFRIADO COPACOL quito ix', 8.99), ('BATATA-DOCE ROSADA', 2.95), ('ABACATE', 2.99), ('CONGELADO SEARA BANDEJA', 14.49), ('EMPANADO DE FRANGO EM sea mona', 14.9)]
-  Atacadão Dia a Dia [('mimo', 7.99)]
+  Atacadão Dia a Dia [('FLOCÃO DE MILHO GUARÁ 400G', 1.69), ('FEIJÃO CARIOCA DA MAMÃE 1KG', 6.79), ('AÇÚCAR CRISTAL SUPER BRANCA 5KG', 13.79), ('kg LINGUIÇA TIPO CALABRESA GROSSA FRICÓ 400G', 8.49), ('BISCOITO RECHEADO DIA A DIA SABORES 73G', 1.15), ('BISCOITO MAIZENA DIA A DIA 300G', 4.29), ('DETERGENTE LÍQUIDO OESTE FRAGRÂNCIAS 500ML', 1.79), ('kg BEBIDA LÁCTEA PULSI SABORES 480G', 3.49)]
+  Dona [('Maçã Pacote lkg', 6.99), ('Melão Caipira ou Orange', 16.99), ('Ameixa Bandeja 500g “19 Sempre', 2.99), ('Mexerica Verona empre DONA', 2.99), ('Carne de Sol Bovina DONA', 59.99), ('Picanha Bovina Friboi Maturatta Peça a Vácuo', 9.9), ('Filé de Peito de Frango Resfriado', 23.99), ('Filé de Coxa e Sobrecoxa de Batata Bem Brasil', 21.99)]
+  Cristal Supermercado [('Cerveja Itaipava', 2.19)]
+  Supermercado Superbom [('ÓLEO DE SOJA', 3.49), ('MACARRÃO INSTANTÂNEO RENATA', 3.19), ('WAFER BIS', 4.17), ('AVEIA APTI', 7.19), ('SUCO NATURAL ONE MISTO UVA, PERA E MAÇÃ', 5.19), ('WAFER BIS', 4.19), ('Via BISCOITO MANA SETE CAPAS', 1.99), ('REPOLHO VERDE', 2.19)]
+  Supermercado União [('AÇUCAR CRISTAL Ra', 10.99), ('AÇAI ORIGEM TODA HORA 1L mesmas', 10.99), ('FILE DE PEITO MOIDO COPACOL 400G Crea', 6.99)]
+  Supermercado Mega Box [('Peito bovino - KG', 32.59), ('Salame Italiano Seara 100g', 9.98)]
+  Varejão da Fartura [('MAMÃO FORMOSA Ressalva 9,99KG', 3.99)]
+  Supermercado Mais Econômico [('3 MS PEITO BOVINO', 24.98), ('CARNE DE SOL DE PRIMEIRA', 14.98), ('DE PRIMEIRA COXINHA DA ASA', 15.98), ('98 KG ACÉM COM OSSO', 43.98), ('PATINHO BOVINO', 36.98), ('98 KG CONTRA FILÉ', 49.98), ('KG PALETA FINA', 56.98), ('KG ALCATRA COM NHA', 48.98)]
+  Costa Atacadão [('ARROZ BRILHANTE TIPO 1 - 5KG', 11.99), ('emisraL SEMI OU DESNATADO. PIRACANJUBA TP 1', 11.99), ('CAFÉ SANTACLARA] RR CAFÉ EXI', 11.99), ('SABÃO EM PÓ TIXAN YPÉ PRIMAVERA 2,2KG', 19.89), ('500 AMACIANTE CONCENTRADO, DOWNY 500ML - FRAG', 9.99), ('ACÉM BOVINO SEM OSSO KG', 29.89), ('COXÃO MOLE BOVINO KG', 39.99), ('PASSARINHO AURORA TEMPERO CASEIRO 700G', 6.99)]
+  Supermercado Super Big [('da Mid ORIGINAL', 1.99)]
+  Atacarejo Bonamix [('pelo Ao) uti', 6.09), ('— Piracanjuba” creme de leite 200g', 3.39), ('Talheres Premium Prafesta pct 50un master', 7.99), ('Qualy Quo o', 6.99), ('tis COZIDA CONGELADA DESHADO', 31.99), ('Lar Linguiça de Frango', 0.99)]
+  Supercei Supermercado [('Stella Artois lata - 350ml', 4.69), ('Taguatinga, Samambaia, Riacho Fundo e Gama', 1.49), ('Biscoito Cookies Renata - 40g Ee', 9.95), ('16,5 Linguiça Suína Seara - Kg', 6.95), ('Barra Protein Crisp Integralmedica - 459', 6.99), ('Biscoito Recheado Renata - 1129', 12.95), ('Mistura para Bolo Fleischmann Escura 400g /39', 9.95), ('BATATA LISA', 4.99)]
+  Bevia Atacadista [('Manteiga Itambé Com Sal - 500 g', 16.95), ('OFE Cerveja Amstel lata - 350 ml', 1.29), ('8 Barra Protein ET Integralmedica - 45 9', 6.99), ('Granola Mais Nutri Piracanjuba - 250 ml Natur', 9.95), ('Biscoito Pres Renata - 1129 gets', 12.95), ('pera', 4.99), ('Rabada Bovina congelada - Kg', 14.95), ('Suisse Morango imbinho - 320 g', 9.95)]
+  Supermercado Brandão [('SAFIRA cor tu', 14.99), ('MISTURA PARA BOLO ITALAC 400G | al', 3.99)]
+  Assaí Atacadista [('LAGER AMSTEL LATA 269ML', 3.59), ('CERVEJA PILSEN ITAIPAVA LATA 269ML', 42.59), ('CERVEJA PURO MALTE PETRA LATA 269ML', 12.79), ('CERVEJA PURO MALTE PETRA LATA 350ML', 3.49), ('CERVEJA PILSEN ITAIPAVA LATA 269ML “Rs', 1.99), ('MALTE PETRA LATA 269ML ADA “Rs', 2.29), ('MALTE PETRA LATA 350ML CADA', 2.89), ('NTO REFRIGERANTE EANTA SABORES', 8.29)]
+  Atacadão Dia a Dia [('Yoki PR NATURAL', 3.99), ('voa NATURAL E', 3.99), ('Predilecta, milho', 2.49), ('AMSTEL E LAGER E LAGER as', 9.89), ('POLVILHO DOCE DA MAMÃE OU DO ZÉ 1KG E', 9.39), ('Maionese Maionese cas', 4.99), ('BISCOITO RECHEADO SABOR CHOCOLATE PASSATEMPO ', 2.49), ('CLASSIC TIPOS 750ML te Cassie À Classic', 24.99)]
   Supermercado Ultrabox [('Em» ANTARCTICA PILSEN', 2.48), ('pérola | tao 5kg as', 12.98), ('98 PACOTE 2,5KG', 67.45), ('R$0,8 CAIXA 36 UNIDADES', 31.68), ('48 PACOTE 5KG', 47.4)]
-  Supermercado Ultrabox [('eite Fermentado Chamyto Tradicional', 5.98), ('Láctea UHT Mocoquinha Chocolate', 0.98), ('logurte Com Polpa Nestlé Ninho 3 Sabores', 6.98), ('Coca-Cola Original', 12.98), ('Coxão Mole Bovi Peça ou pedaço Kg', 42.98), ('Pemil ou Paleta Suína à Pururuca', 13.98), ('Ovos Brancos Grandes Bandeja 30 unidades', 2.98), ('ilé de Tilápia Congelado Outubro Rosa', 29.98)]
   Supermercado Ultrabox [('Toalhas Umedecidas Bebê Casademãe Com 100 uni', 10.98), ('Gel Dental Infantil Casademãe', 4.58), ('Escova Dental Infantil Casademãe Pocoyo', 2.98), ("Casademãe Com Pontas de Algodão 75 unidades '", 1.98), ('Batata Palito Congelada Casademãe', 10.98), ('Batata Palito Congelada Casademãe', 19.98), ('6 Farinha de Rosca Casademãe', 4.19), ('Molho de Alho Cremoso Com Ervas Casademãe', 10.98)]
-  Supermercado Mineirão [('MELÃO AMARELO OU MAMÃO FORMOSA', 3.99), ('UVA CRIMSON', 6.98)]
-  Supermercado Superbom [('ALHO A GRANEL', 25.9), ('A ALHO A GRANEL KG =', 4.15), ('fx FARINHA DE TRIGO', 2.13), ('PE BISCOITO DE POLVILHO BARBIERI', 8.99), ('e TIRINHAS OU CHICKEN DE FRANGO SUPER FRANGO', 1.29)]
-  Supermercado Super Big [('LARANJA', 3.49), ('BATATA DOCE', 3.99), ('COUVE INTEIRA', 1.99), ('CHEIRO VERDE', 2.49), ('BANANA NANICA', 4.99), ('ABOBORA JAPONESA', 3.99), ('ABACAXI', 5.99), ('MAMÃO', 3.99)]
-  Supermercado Planeta [('MILHO BDJ C/5UN', 4.99), ('PIMENTA DE CHEIRO BDJ Ae', 0.99), ('TOMATE KG', 4.99), ('MAMÃO FORMOSA KG', 4.99)]
-  Supermercado União [('COPACOL 400g Copacol Copacol', 7.49)]
-  Cristal Supermercado [('Vitória', 6.99)]
-  Fort Atacadista [('Margarina Qualy = Pote 500g', 6.98), ('CM Suco Aurora 1,5 Litros', 17.99), ('Cereal Matinal Nescau 270g', 8.49), ('Copacal Filé de Tilápia', 36.9), ('Line o Gal opte Perdigão', 12.98), ('anado de Frango SIA Seara 300g Sabores', 6.98), ('Ice Smirnoff Red Long Neck 275ml Clubo', 6.99), ('Dental', 7.99)]
-  Supermercado Tatico [('Minuano', 6.99), ('W rito campo raça', 14.99), ('PLUS', 5.99), ('MORTADELA TIPO BOLOGNA. pe', 2.99), ('GOLD PARA us', 14.99), ('ARROZ ARROZ', 24.99), ('Arborio Arborio comer', 18.99), ('Arbório E', 10.99)]
-  Supermercado Bistecão [('CHOCOLATE KIT KAT', 41.56)]
+  Supermercado Tatico [('rito campo raça', 14.99), ('MORTADELA TIPO BOLOGNA. pe', 2.99), ('GOLD PARA us', 14.99), ('ARROZ ARROZ', 24.99), ('Arborio Arborio comer', 18.99), ('14 CESTA BÁSICA Hu', 50.99)]
+
+triangulação (anúncio -> códigos compatíveis):
+  Atacadão Dia a Dia     R$   1.69  FLOCÃO DE MILHO GUARÁ 400G                         -> 1 código(s) ['7896711600058']
+  Atacadão Dia a Dia     R$   6.79  FEIJÃO CARIOCA DA MAMÃE 1KG                        -> 1 código(s) ['7896916200046']
+  Atacadão Dia a Dia     R$  13.79  AÇÚCAR CRISTAL SUPER BRANCA 5KG                    -> 1 código(s) ['7898202756824']
+  Atacadão Dia a Dia     R$   8.49  kg LINGUIÇA TIPO CALABRESA GROSSA FRICÓ 400G       -> 1 código(s) ['7898916326566']
+  Atacadão Dia a Dia     R$   4.29  BISCOITO MAIZENA DIA A DIA 300G                    -> 1 código(s) ['7898594711371']
+  Atacadão Dia a Dia     R$   6.89  WAFFLE TRADICIONAL CONGELADO WAAW 210G             -> 2 código(s) ['7896074603673', '7896074607107']
+  Atacadão Dia a Dia     R$  13.89  PÃO PARA HAMBÚRGUER PULLMAN GRAND BURGER TIPOS 420 -> 1 código(s) ['7896002304153']
+  Atacadão Dia a Dia     R$  13.89  PÃO DE FORMA INTEGRAL PULLMAN TIPOS 500G           -> 1 código(s) ['7896002366267']
+  Atacadão Dia a Dia     R$   1.19  MOLHO DE TOMATE PREDILECTA SACHÊ 300G              -> 1 código(s) ['7896292333000']
+  Atacadão Dia a Dia     R$   2.49  MILHO VERDE PREDILECTA LATA 170G                   -> 1 código(s) ['7896292340503']
+  Atacadão Dia a Dia     R$   2.49  BISCOITO RECHEADO SABOR CHOCOLATE PASSATEMPO 130G  -> 4 código(s) ['7896085076183', '7897353900254', '7891000241363']
+  Atacadão Dia a Dia     R$   2.49  CERVEJA PILSEN ANTARCTICA SUBZERO LATA 350ML       -> 1 código(s) ['7891991002141']
+  Atacadão Dia a Dia     R$   2.59  CERVEJA BRAHMA CHOPP LATA 269ML                    -> 1 código(s) ['7891149103270']
+  Atacadão Dia a Dia     R$   2.89  CERVEJA PURO MALTE AMSTEL LATA 269ML               -> 8 código(s) ['7896045505319', '7896045506415', '7896045506316']
+  Atacadão Dia a Dia     R$   2.89  CERVEJA PURO MALTE SPATEN LATA 269ML               -> 8 código(s) ['7891991303347', '7896045505319', '7896045506415']
+  Atacadão Dia a Dia     R$  31.90  VINHO PORTUGUÊS JULIA FLORISTA TINTO 750ML         -> 3 código(s) ['5601996546340', '5601996202314', '5601996300300']
+  Atacadão Dia a Dia     R$   2.69  ÁGUA SANITÁRIA OESTE 1 LITRO                       -> 1 código(s) ['7898247330751']
+  Dona                   R$  29.99  Queijo Mandaká Mussarela Fatiado 400g              -> 4 código(s) ['0618231386031', '7896114100902', '7898340990289']
+  Dona                   R$  25.99  Bebida de Aveia Nude Orgânica Sabores 1L           -> 1 código(s) ['7898994939764']
+  Dona                   R$  59.99  Vinho Argentino Jardin de Pecados Malbec 750ml     -> 1 código(s) ['7798413540086']
+  Supermercado Mega Box  R$   9.98  Salame Italiano Seara 100g                         -> 1 código(s) ['7894904555659']
+  Costa Atacadão         R$  11.99  ARROZ BRILHANTE TIPO 1 - 5KG                       -> 1 código(s) ['7896800777777']
+  Costa Atacadão         R$  19.89  SABÃO EM PÓ TIXAN YPÉ PRIMAVERA 2,2KG              -> 1 código(s) ['7896098906750']
+  Costa Atacadão         R$  12.99  DE FRANGO FINA COPACOL CONGELADA 700G              -> 1 código(s) ['7891527072501']
+  Costa Atacadão         R$  28.99  FILÉ DE TILÁPIA SEARA 600G                         -> 2 código(s) ['7894904255030', '7894904611355']
+  Costa Atacadão         R$   6.89  MARGARINA QUALY C/ SAL 500G                        -> 4 código(s) ['7891515520632', '7891515520656', '7893000084360']
+  Costa Atacadão         R$   8.69  CREMOSO TIROLEZ 200G                               -> 1 código(s) ['7896030518751']
+  Costa Atacadão         R$   0.99  BEBIDA LÁCTEA UHT SHOWKINHO CHOCOLATE TP 200ML     -> 9 código(s) ['7891000023167', '7894321242521', '7896256602111']
+  Costa Atacadão         R$   2.49  CREME DE LEITE PIRACANJUBA TP 200G                 -> 5 código(s) ['7890002007236', '7898215151784', '7898215151975']
+  Costa Atacadão         R$  10.99  BOMBOM GAROTO SORTIDO 220G                         -> 1 código(s) ['7891000457092']
+  Costa Atacadão         R$   2.99  BISCOITO RECHEADO NEGRESCO 90G SABORES             -> 2 código(s) ['7891000376768', '7891000376805']
+  Costa Atacadão         R$   4.99  COLGATE MÁXIMA PROTEÇÃO ANTICARIES 90G             -> 2 código(s) ['7891024134702', '7509546679143']
+  Costa Atacadão         R$   1.99  DESODORANTE AEROSSOL MONANGE 150ML - FRAGRÂNCIAS   -> 1 código(s) ['7896235353911']
+  Atacarejo Bonamix      R$   3.39  — Piracanjuba” creme de leite 200g                 -> 5 código(s) ['7890002007236', '7898215151784', '7898215151975']
+  Supercei Supermercado  R$   4.69  Stella Artois lata - 350ml                         -> 4 código(s) ['7891991306492', '7891991016230', '7891991306485']
+  Supercei Supermercado  R$   9.95  Mistura para Bolo Fleischmann Escura 400g /390g /3 -> 1 código(s) ['7897309408599']
+  Supercei Supermercado  R$   9.95  Petit Suisse Morango Chambinho - 320g              -> 7 código(s) ['7891000103937', '7891025109891', '7891097011580']
+  Bevia Atacadista       R$  16.95  Manteiga Itambé Com Sal - 500 g                    -> 1 código(s) ['7896051135425']
+  Supermercado Brandão   R$   3.99  MISTURA PARA BOLO ITALAC 400G | al                 -> 8 código(s) ['7898080641588', '7898080641618', '7898080642172']
+  Assaí Atacadista       R$   3.59  LAGER AMSTEL LATA 269ML                            -> 1 código(s) ['7896045506422']
+  Assaí Atacadista       R$  42.59  CERVEJA PILSEN ITAIPAVA LATA 269ML                 -> 1 código(s) ['7897395040437']
+  Assaí Atacadista       R$  12.79  CERVEJA PURO MALTE PETRA LATA 269ML                -> 8 código(s) ['7897395099299', '7896045505319', '7896045506415']
+  Assaí Atacadista       R$   3.49  CERVEJA PURO MALTE PETRA LATA 350ML                -> 10 código(s) ['7897395099336', '7896045506064', '7896045506934']
+  Assaí Atacadista       R$   1.99  CERVEJA PILSEN ITAIPAVA LATA 269ML “Rs             -> 1 código(s) ['7897395040437']
+  Assaí Atacadista       R$  23.59  LAGER AMSTEL LATA 269ML                            -> 1 código(s) ['7896045506422']
+  Assaí Atacadista       R$   2.89  CERVEJA PURO MALTE PETRA LATA 350ML “Rs            -> 1 código(s) ['7897395099336']
+  Assaí Atacadista       R$  12.90  LINGUIÇA SUÍNA CONGELADA SADIA PACOTE 700G         -> 1 código(s) ['7891515594312']
+  Assaí Atacadista       R$   3.99  PRESUNTO E QUEIJO STEAK PERDIGÃO PACOTE 100G       -> 2 código(s) ['7591515477133', '7891515474133']
+  Assaí Atacadista       R$  22.90  LOÇÃO HIDRATANTE NEUTROGENA TIPOS FRASCO 400ML     -> 1 código(s) ['4006000159799']
+  Assaí Atacadista       R$   9.90  FRANGO NUGGETS SADIA SABORES PACOTE 300G           -> 3 código(s) ['7893000949270', '7893000949355', '7893000949430']
+  Assaí Atacadista       R$   6.99  LINGUIÇA FININHA DEFUMADA SADIA PACOTE 215G        -> 4 código(s) ['7891515606831', '18997813', '7891515616311']
+  Assaí Atacadista       R$  13.90  INTEGRAL INSTANTÂNEO ITAMBÉ LATA 380G              -> 1 código(s) ['7896051130284']
+  Assaí Atacadista       R$  24.90  LONGO FINO TIPO 1 URBANO PACOTE 5KG                -> 2 código(s) ['7893500020158', '7896493140223']
+  Assaí Atacadista       R$  17.90  ARROZ ARBÓRIO TIPO 1 URBANO PACOTE 1KG             -> 2 código(s) ['7896038357017', '7896196063164']
+  Assaí Atacadista       R$   9.90  KETCHUP SUPREME HELLMANN'S FRASCO 390G             -> 1 código(s) ['7891150100237']
+  Assaí Atacadista       R$  17.90  MAIONESE HELLMANN'S PACK 2X500G                    -> 2 código(s) ['7891150107359', '7891150075474']
+  Assaí Atacadista       R$  19.79  LONGO FINO TIPO 1 TIO URBANO PACOTE 5KG            -> 1 código(s) ['7893500020158']
+  Assaí Atacadista       R$   2.99  BISCOITO TORTINHAS MARILAN SABORES PACOTE 140G     -> 4 código(s) ['7896003738810', '7896003738797', '7896003738834']
+  Assaí Atacadista       R$  25.90  REFORÇADO PARA LIXO EMBALIXO PACOTE 110L           -> 1 código(s) ['7898226511768']
