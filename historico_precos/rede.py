@@ -45,6 +45,10 @@ class Navegador:
         self._ultimo_acesso: dict[str, float] = {}
         self._lento: dict[str, float] = {}  # sites que pediram para ir mais devagar (HTTP 429)
         self._retry_after: dict[str, float] = {}
+        # site que recusou com 429 muitas vezes seguidas, mesmo com as esperas: desiste dele até o fim da rodada
+        # (a VTEX recusa tudo que vem dos servidores do GitHub; insistir só queimava o tempo das outras lojas)
+        self._recusas_seguidas: dict[str, int] = {}
+        self.desistidos: set[str] = set()
         self._robots: dict[str, RobotFileParser | None] = {}
         # guarda cookies de sessão entre requisições (painéis em PHP costumam exigir)
         self._opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(http.cookiejar.CookieJar()))
@@ -171,6 +175,8 @@ class Navegador:
                 log.warning("falha ao baixar %s: %s", url, e)
         return None
 
+    DESISTIR_APOS = 6  # recusas 429 seguidas (com as esperas entre elas) para desistir do site na rodada
+
     # sites lentos ganham mais tentativas e mais tempo para responder
     TENTATIVAS_EXTRA = {"web.archive.org": 2, "www.confaz.fazenda.gov.br": 2, "encartesdf.com.br": 4}
     TEMPO_LIMITE = {"www.confaz.fazenda.gov.br": 90.0, "encartesdf.com.br": 40.0}
@@ -192,15 +198,25 @@ class Navegador:
             self._anotar(url, -1, "robots.txt não permite", "")
             return None
         host = urlsplit(url).netloc
+        if host in self.desistidos:
+            self._anotar(url, 429, "site recusou acessos seguidos nesta rodada; não tentamos de novo", "")
+            return None
         tentativa = 0
         while tentativa < tentativas:
             self._esperar_vez(host)
             status, texto = self._abrir(url) if dados is None else self._abrir(url, dados)
             if 200 <= status < 300:  # a VTEX responde 206 (conteúdo parcial) em buscas paginadas
+                self._recusas_seguidas[host] = 0
                 return texto
             # 429 = o site pediu para ir mais devagar: espera o que ele pedir (Retry-After) ou recua cada vez mais,
             # e passa a espaçar todos os acessos a esse site (o dobro do intervalo, até 30 s)
             if status == 429:
+                self._recusas_seguidas[host] = self._recusas_seguidas.get(host, 0) + 1
+                if self._recusas_seguidas[host] >= self.DESISTIR_APOS:
+                    self.desistidos.add(host)
+                    log.warning("%s recusou %d acessos seguidos (HTTP 429): desistimos dele nesta rodada", host, self.DESISTIR_APOS)
+                    self._anotar(url, status, "HTTP 429 seguidos: desistimos do site nesta rodada", texto[:300])
+                    return None
                 self._lento[host] = min(30.0, max(self._lento.get(host, 0.0), self._intervalo_do(host)) * 2 or 4.0)
                 if tentativa + 1 < max(tentativas, 4):
                     pedido = self._retry_after.pop(host, None)

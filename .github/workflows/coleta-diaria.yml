@@ -69,13 +69,13 @@ jobs:
           N=$(python -c "import sqlite3;print(sqlite3.connect('precos.db').execute(\"SELECT COUNT(*) FROM produtos WHERE fonte='Open Food Facts'\").fetchone()[0])" 2>/dev/null || echo 0)
           if [ "$(date -u +%u)" = "7" ] || [ "$N" -lt 1000 ]; then python -m historico_precos referencia-off; fi
 
-      - name: Lojas sem código de barras no site, vínculo pelo nome (rodízio, 35 min por loja)
+      - name: Lojas sem código de barras no site, vínculo pelo nome (rodízio, 60 min por loja)
         continue-on-error: true
-        timeout-minutes: 80
+        timeout-minutes: 140
         run: |
           git fetch -q origin dados || true
           git show origin/dados:dicionario.db.gz > dicionario.db.gz 2>/dev/null || rm -f dicionario.db.gz
-          python -m historico_precos catalogo-nome --minutos 35
+          python -m historico_precos catalogo-nome --minutos 60
 
       - name: Monitor de leis (segundas-feiras)
         continue-on-error: true

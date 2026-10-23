@@ -321,6 +321,23 @@ class TestDevagar(unittest.TestCase):
         self.assertGreaterEqual(nav._intervalo_do("loja.com.br"), 4.0)  # e o site passa a ser acessado mais devagar
 
 
+    def test_desiste_do_site_apos_recusas_seguidas(self):
+        chamadas = []
+
+        def abrir(url, dados=None):
+            if url.endswith("/robots.txt"):
+                return 200, "User-agent: *\nAllow: /"
+            chamadas.append(url)
+            return (200, "ok") if "outra" in url else (429, "Too Many Requests")
+
+        nav = Navegador(intervalo=0, abrir=abrir, dormir=lambda s: None)
+        for i in range(4):
+            self.assertIsNone(nav.get_texto(f"https://bloqueada.com.br/api/{i}"))
+        self.assertIn("bloqueada.com.br", nav.desistidos)
+        self.assertEqual(len(chamadas), Navegador.DESISTIR_APOS)  # depois disso, nem tenta
+        self.assertEqual(nav.get_texto("https://outra.com.br/x"), "ok")  # os outros sites seguem normais
+
+
 class TestExportacaoOFF(unittest.TestCase):
     def test_so_produtos_do_brasil_com_nome(self):
         import gzip
