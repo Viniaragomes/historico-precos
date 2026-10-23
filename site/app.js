@@ -3,7 +3,7 @@ import { calcular, categoria } from "./impostos.js";
 import { confiancaPreco, nivelPorPontos, precoSugerido, utilidade, chavePreco, chaveCausa, PONTOS, NIVEIS as NIVEIS_COMUNIDADE } from "./confianca.js";
 import { criarComunidade, consentimento, ErroComunidade, TIPOS_REPORTE } from "./comunidade.js";
 
-const VERSAO_APP = "v26"; // igual à VERSAO do sw.js
+const VERSAO_APP = "v27"; // igual à VERSAO do sw.js
 
 const conteudo = document.getElementById("conteudo");
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
@@ -847,6 +847,7 @@ function painelDePrecos({ ean, p, nomes, referencia, votos = [], atualizarVotos 
   estado.site = (p?.ofertas || []).map((o) => ({
     lugar: o.loja, tipo: "site", preco: o.preco, data: o.data, link: o.evidencia, oferta: o,
     detalhe: o.metodo === "vinculo-nome" ? `Vinculado pelo nome: “${o.descricao || "?"}”. Confira o tamanho.` : null,
+    aviso: o.aviso || null,
     promo: o.em_promocao, preco_de: o.preco_de,
   }));
   const ouvintes = [];
@@ -926,6 +927,7 @@ function cartaoOndeEncontrar(painel) {
               el("div", { class: "detalhe" }, [quando(l), l.detalhe].filter(Boolean).join(" · "),
                 l.link ? [" · ", el("a", { href: l.link, target: "_blank", rel: "noopener" }, t === "encarte" ? "ver encarte" : "ver fonte")] : null)),
             l.preco == null ? el("div", { class: "direita" }, el("div", { class: "diferenca" }, "preço no encarte")) : null),
+          l.aviso ? el("div", { class: "detalhe aviso-vinculo" }, `⚠ Confira: ${l.aviso}`) : null,
           t === "site" && painel.p ? linhaConfianca(painel.p, l.oferta, painel.votos, painel.atualizarVotos) : null)))),
       porTipo("encarte").length ? el("p", { class: "minusculo", style: "margin:10px 0 0" }, AVISO_ENCARTE) : null,
       painel.p?.ofertas_antigas?.length ? el("p", { class: "minusculo", style: "margin:10px 0 0" }, "Preços antigos, fora da conta: ",
@@ -955,6 +957,7 @@ function cartaoComparativo(painel) {
       return el("li", { class: "linha-comp" },
         el("div", { class: "linha-comp-topo" },
           el("span", { class: "nome" }, l.lugar, el("small", {}, ` ${TIPO_LUGAR[l.tipo].rotulo}`),
+            l.aviso ? el("span", { class: "etiqueta promo", title: l.aviso }, "conferir") : null,
             i === 0 && lista.length > 1 ? el("span", { class: "etiqueta melhor" }, "Mais barato") : null),
           el("span", { class: "valor" }, brl.format(l.preco))),
         barra(l.preco, i === 0 && lista.length > 1 ? "barato" : ""),

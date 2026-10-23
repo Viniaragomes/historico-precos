@@ -30,6 +30,8 @@ jobs:
       - name: Dados já coletados
         run: |
           if git ls-remote --exit-code --heads origin dados >/dev/null && python -m historico_precos banco recuperar | tee /dev/stderr | grep -q recuperado; then
+            # dicionário: preço de compra no DF como referência da checagem de qualidade
+            git show origin/dados:dicionario.db.gz > dicionario.db.gz 2>/dev/null || rm -f dicionario.db.gz
             python -m historico_precos exportar --saida site/dados --sem-causas
           else
             echo "Ainda não há coleta completa: o app sai sem lista de produtos."

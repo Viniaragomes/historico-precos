@@ -482,11 +482,14 @@ def main(argv: list[str] | None = None) -> int:
 
     q = sub.add_parser("qualidade", help="lista preços suspeitos (todos os produtos ou um EAN)")
     q.add_argument("ean", nargs="?")
+    q.add_argument("--dicionario", default="dicionario.db.gz", help="preço de compra no DF como referência (se existir)")
 
     ex = sub.add_parser("exportar", help="gera os arquivos JSON que o app lê")
     ex.add_argument("--saida", default="site/dados")
     ex.add_argument("--sem-causas", action="store_true", help="não consulta IBGE/Banco Central (mais rápido)")
     ex.add_argument("--com-noticias", action="store_true", help="inclui notícias (GDELT) nas causas")
+    ex.add_argument("--dicionario", default="dicionario.db.gz",
+                    help="dicionário de códigos do DF: preço de compra como referência da checagem de qualidade (se existir)")
 
     ec = sub.add_parser("exportar-codigos", help="divide o dicionário de códigos em arquivos por prefixo, para o app")
     ec.add_argument("dicionario", help="dicionario.db ou dicionario.db.gz")
@@ -739,8 +742,8 @@ def main(argv: list[str] | None = None) -> int:
               + (" (inclui o dicionário de códigos do DF)." if dic else " (sem o dicionário de códigos)."))
         for loja in [l for l in carregar_lojas(args.lojas) if l.get("tipo") == "sitemap" and l.get("vinculo") == "nome"]:
             rv = pagina_produto.revincular(banco, loja, catalogo)
-            print(f"{loja['nome']}: refeito o vínculo das páginas já lidas: {rv['vinculadas']} de {rv['sem_vinculo']} ligadas agora, "
-                  f"{rv['precos']} preço(s) novo(s).")
+            print(f"{loja['nome']}: {rv['desfeitos']} vínculo(s) antigo(s) desfeito(s) pelas regras atuais; refeito o vínculo das "
+                  f"páginas já lidas: {rv['vinculadas']} de {rv['sem_vinculo']} ligadas agora, {rv['precos']} preço(s) novo(s).")
             fim = time.monotonic() + args.minutos * 60
             r = pagina_produto.catalogar_por_nome(nav, banco, loja, catalogo, args.limite, ate=lambda fim=fim: time.monotonic() > fim)
             total = banco.con.execute("SELECT COUNT(*), SUM(ean IS NOT NULL), SUM(lido_em IS NOT NULL) FROM produtos_loja WHERE loja = ?",
@@ -807,10 +810,13 @@ def main(argv: list[str] | None = None) -> int:
             return 1
         return 0
     if args.comando == "qualidade":
+        from .exportar import custos_do_dicionario
+
+        custos = custos_do_dicionario(args.dicionario)
         eans = [args.ean] if args.ean else [l[0] for l in banco.con.execute("SELECT DISTINCT ean FROM precos ORDER BY ean")]
         total = 0
         for ean in eans:
-            for a in avaliar_qualidade(banco.precos(ean)):
+            for a in avaliar_qualidade(banco.precos(ean), custos.get(ean)):
                 total += 1
                 print(f"[{a.severidade.upper():8}] {a.ean} {a.loja:<20} {a.data} R$ {a.preco:>8.2f}  {a.tipo}: {a.mensagem}")
                 print(f"           fonte: {a.evidencia}")
@@ -824,7 +830,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     if args.comando == "exportar":
         causas = None if args.sem_causas else AgenteCausas(nav, banco, usar_noticias=args.com_noticias)
-        n = exportar_app(banco, Path(args.saida), causas)
+        n = exportar_app(banco, Path(args.saida), causas, dicionario=args.dicionario)
         print(f"{n} produto(s) exportado(s) para {args.saida}")
         return 0
     if args.comando == "viabilidade":

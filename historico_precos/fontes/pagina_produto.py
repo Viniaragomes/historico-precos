@@ -141,13 +141,23 @@ def _dados_pagina(html: str) -> dict | None:
 
 
 def revincular(banco, loja: dict, catalogo, dias: int = 30, hoje: date | None = None) -> dict:
-    """Refaz o vínculo das páginas já lidas e ainda sem código de barras, sem acessar o site de novo (útil quando a
-    referência cresce ou as regras melhoram). O preço entra com a data em que a página foi lida."""
+    """Revalida os vínculos já feitos e refaz o das páginas já lidas e ainda sem código de barras, sem acessar o site
+    de novo (útil quando a referência cresce ou as regras melhoram). O preço entra com a data em que a página foi lida."""
     con = banco.con
     con.executescript(_ESQUEMA_LOJA)
     desde = ((hoje or date.today()) - timedelta(days=dias)).isoformat()
+    resumo, pontos = {"sem_vinculo": 0, "vinculadas": 0, "precos": 0, "desfeitos": 0}, []
+    # 1) vínculos antigos que as regras atuais não aceitam mais (ex.: arroz preto ligado a arroz integral) são desfeitos,
+    #    e os preços que vieram deles saem do banco
+    for url, nome, marca, ean in list(con.execute(
+            "SELECT url, nome, marca, ean FROM produtos_loja WHERE loja = ? AND ean IS NOT NULL AND nome IS NOT NULL "
+            "AND semelhanca < 1", (loja["nome"],))):
+        if catalogo.compativel(nome, marca, ean) or not catalogo.por_ean.get(ean):
+            continue  # par ainda válido (ou código fora da referência desta rodada: não há como julgar)
+        con.execute("UPDATE produtos_loja SET ean=NULL, semelhanca=NULL, nome_catalogo=NULL WHERE url=?", (url,))
+        con.execute("DELETE FROM precos WHERE ean=? AND loja=? AND url_origem=? AND metodo='vinculo-nome'", (ean, loja["nome"], url))
+        resumo["desfeitos"] += 1
     usados = {e for (e,) in con.execute("SELECT ean FROM produtos_loja WHERE loja = ? AND ean IS NOT NULL", (loja["nome"],))}
-    resumo, pontos = {"sem_vinculo": 0, "vinculadas": 0, "precos": 0}, []
     for url, nome, marca, preco, dia in list(con.execute(
             "SELECT url, nome, marca, preco, data FROM produtos_loja WHERE loja = ? AND ean IS NULL AND nome IS NOT NULL "
             "AND preco IS NOT NULL AND data >= ?", (loja["nome"], desde))):

@@ -67,3 +67,20 @@ class TestQualidade(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestReferenciaECruzamento(unittest.TestCase):
+    def test_muito_acima_do_custo_vira_aviso_sem_bloquear(self):
+        limpos, alertas = limpar([p(33.99, "2026-10-21", descricao="Arroz Preto 500g")], custo=4.31)
+        self.assertEqual(tipos(alertas), [("longe_do_custo", AVISO, "2026-10-21")])
+        self.assertEqual(len(limpos), 1)
+
+    def test_abaixo_do_custo_nao_alerta(self):
+        # nas notas entre empresas a caixa costuma vir como "unidade": barra de cereal a R$ 13,49
+        self.assertEqual(avaliar([p(1.69, "2026-10-21", descricao="Barra de Cereal 20g")], custo=13.49), [])
+
+    def test_duas_lojas_com_diferenca_grande(self):
+        alertas = avaliar([p(5.0, "2026-10-20", loja="A"), p(19.9, "2026-10-21", loja="B")])
+        self.assertEqual(sorted(a.loja for a in alertas if a.tipo == "diferenca_entre_lojas"), ["A", "B"])
+        self.assertTrue(all(a.severidade == AVISO for a in alertas))
+

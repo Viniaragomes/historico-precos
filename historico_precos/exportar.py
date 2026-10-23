@@ -37,9 +37,29 @@ def compra_df(banco: Banco, ean: str, dias: int = 90) -> dict | None:
             "aviso": AVISO_COMPRA}
 
 
-def dados_do_produto(banco: Banco, ean: str, causas: AgenteCausas | None, hoje: date | None = None) -> dict | None:
-    pontos, alertas = limpar(banco.precos(ean))
+UNIDADE_SIMPLES = ("UN", "UND", "UNID", "UNIDADE", "PC", "PÇ", "PECA", "PEÇA")
+
+
+def custos_do_dicionario(caminho) -> dict[str, float]:
+    """Preço de compra por unidade (mediana das notas fiscais entre empresas no DF) de cada código do dicionário."""
+    from .encartes_ocr import abrir_dicionario
+
+    con = abrir_dicionario(caminho) if caminho else None
+    if con is None:
+        return {}
+    custos: dict[str, tuple[int, float]] = {}
+    for ean, unidade, mediana, notas in con.execute("SELECT ean, unidade, mediana, notas FROM mapa_df_dicionario"):
+        if mediana and (unidade or "UN").strip().upper() in UNIDADE_SIMPLES and notas > custos.get(ean, (0, 0))[0]:
+            custos[ean] = (notas, mediana)
+    return {e: m for e, (_, m) in custos.items()}
+
+
+def dados_do_produto(banco: Banco, ean: str, causas: AgenteCausas | None, hoje: date | None = None,
+                     custo: float | None = None) -> dict | None:
     compra = compra_df(banco, ean)
+    if compra and (compra.get("unidade") or "UN").strip().upper() in UNIDADE_SIMPLES and compra.get("serie"):
+        custo = compra["serie"][-1]["mediana"]  # o painel do dia vale mais que o dicionário (3 meses)
+    pontos, alertas = limpar(banco.precos(ean), custo)
     if not pontos and not compra:
         return None
     produto = banco.produto(ean) or Produto(ean)
@@ -61,10 +81,15 @@ def dados_do_produto(banco: Banco, ean: str, causas: AgenteCausas | None, hoje: 
         mudancas = [{**asdict(m), "variacao_pct": round(m.variacao_pct, 2), "evidencias": []}
                     for m in detectar_mudancas(pontos)]
 
+    avisos = {(a.loja, a.data, round(a.preco, 2)): a.mensagem for a in alertas if a.severidade == AVISO_QUALIDADE}
+
     def oferta(o):
         d = asdict(o)
         d.pop("dias")  # o app calcula a idade na hora, a partir da data
         d["em_promocao"] = o.em_promocao
+        aviso = avisos.get((o.loja, o.data, round(o.preco, 2)))
+        if aviso:
+            d["aviso"] = aviso  # o app mostra "confira" na linha da loja
         return d
 
     return {
@@ -90,8 +115,9 @@ def dados_do_produto(banco: Banco, ean: str, causas: AgenteCausas | None, hoje: 
     }
 
 
-def exportar(banco: Banco, pasta: Path, causas: AgenteCausas | None = None) -> int:
+def exportar(banco: Banco, pasta: Path, causas: AgenteCausas | None = None, dicionario=None) -> int:
     pasta.mkdir(parents=True, exist_ok=True)
+    custos = custos_do_dicionario(dicionario)
     eans = [l[0] for l in banco.con.execute("SELECT DISTINCT ean FROM precos ORDER BY ean")]
     try:
         eans = sorted(set(eans) | {l[0] for l in banco.con.execute("SELECT DISTINCT ean FROM mapa_df_nfe")})
@@ -99,7 +125,7 @@ def exportar(banco: Banco, pasta: Path, causas: AgenteCausas | None = None) -> i
         pass
     indice = []
     for ean in eans:
-        dado = dados_do_produto(banco, ean, causas)
+        dado = dados_do_produto(banco, ean, causas, custo=custos.get(ean))
         if dado is None:
             continue
         (pasta / f"{ean}.json").write_text(json.dumps(dado, ensure_ascii=False), encoding="utf-8")

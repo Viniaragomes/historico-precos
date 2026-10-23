@@ -48,6 +48,7 @@ alho ervas pimenta picante apimentado defumado ovo ovos atum sardinha salmao cam
 integral desnatado semidesnatado zero diet light lactose glutem gluten organico sem acucar adocado
 tradicional extra forte suave intenso descafeinado expresso gourmet premium
 original classic classico cappuccino mocha
+preto vermelho arborio arboreo basmati parboilizado cateto jasmim
 """.split()) - {"gourmet", "premium", "original", "classic", "classico", "tradicional"}  # marketing, não variante
 
 
@@ -84,6 +85,7 @@ class Catalogo:
     def __init__(self, itens: list[tuple[str, str, str | None]]):
         self.itens = []
         self.indice: dict[str, list[int]] = defaultdict(list)
+        self.por_ean: dict[str, list[int]] = defaultdict(list)
         for ean, nome, marca in itens:
             if not nome:
                 continue
@@ -95,6 +97,34 @@ class Catalogo:
             self.itens.append((ean, nome, tokens(marca), qtd, tk))
             for t in tk:
                 self.indice[t].append(i)
+            self.por_ean[ean].append(i)
+
+    def _nota(self, tk: set[str], marca_tk: set[str], qtd: tuple, i: int) -> float | None:
+        """Nota do candidato i, ou None se ele viola alguma regra (tamanho, marca, variante)."""
+        _ean, _nome_cat, marca_cat, qtd_cat, tk_cat = self.itens[i]
+        if qtd_cat[1] != qtd[1] or abs(qtd_cat[0] - qtd[0]) > 1e-6:
+            return None  # tamanho diferente: produto diferente
+        if marca_tk and marca_cat and not (marca_tk & marca_cat):
+            return None  # marcas diferentes
+        if marca_tk and not (marca_tk & tk_cat):
+            return None  # a loja diz a marca, e ela não está no candidato
+        if (tk ^ tk_cat) & DISTINTIVAS:
+            return None  # um lado tem sabor/ingrediente/variante que o outro não tem
+        nota = semelhanca(tk, tk_cat)
+        comuns = len(tk & tk_cat)
+        if comuns >= 3 and comuns == min(len(tk), len(tk_cat)):
+            nota = max(nota, CONTIDO)
+        return nota
+
+    def compativel(self, nome: str, marca: str | None, ean: str) -> bool:
+        """O par (nome da loja, código) ainda passa nas regras? Serve para revalidar vínculos antigos: empate com
+        outro código do mesmo produto não desfaz o vínculo; tamanho, marca ou variante diferente desfaz."""
+        qtd = embalagem.quantidade(nome)
+        if not qtd:
+            return False
+        tk = tokens(nome) | tokens(marca)
+        notas = [self._nota(tk, tokens(marca), qtd, i) for i in self.por_ean.get(ean, ())]
+        return any(n is not None and n >= LIMIAR for n in notas)
 
     def vincular(self, nome: str, marca: str | None = None) -> Vinculo | None:
         qtd = embalagem.quantidade(nome)
@@ -110,20 +140,9 @@ class Catalogo:
         for i, comuns in contagem.items():
             if comuns < 2:
                 continue
-            ean, nome_cat, marca_cat, qtd_cat, tk_cat = self.itens[i]
-            if qtd_cat[1] != qtd[1] or abs(qtd_cat[0] - qtd[0]) > 1e-6:
-                continue  # tamanho diferente: produto diferente
-            if marca_tk and marca_cat and not (marca_tk & marca_cat):
-                continue  # marcas diferentes
-            if marca_tk and not (marca_tk & tk_cat):
-                continue  # a loja diz a marca, e ela não está no candidato
-            if (tk ^ tk_cat) & DISTINTIVAS:
-                continue  # um lado tem sabor/ingrediente/variante que o outro não tem
-            nota = semelhanca(tk, tk_cat)
-            comuns_ = len(tk & tk_cat)
-            if comuns_ >= 3 and comuns_ == min(len(tk), len(tk_cat)):
-                nota = max(nota, CONTIDO)
-            notas.append((nota, ean, nome_cat))
+            nota = self._nota(tk, marca_tk, qtd, i)
+            if nota is not None:
+                notas.append((nota, self.itens[i][0], self.itens[i][1]))
         if not notas:
             return None
         notas.sort(reverse=True)

@@ -63,6 +63,14 @@ class TestRegrasNovas(unittest.TestCase):
         self.assertEqual(v.ean, "7891024000017")
 
 
+class TestRevalidacao(unittest.TestCase):
+    def test_empate_com_outro_codigo_nao_desfaz_mas_variante_desfaz(self):
+        cat = Catalogo([("7891000000017", "Arroz Integral Tio João Tipo 1 500g", "Tio João"),
+                        ("7891000000024", "Arroz Integral Tio Joao Tipo 1 500g Pacote", "Tio João")])
+        self.assertTrue(cat.compativel("Arroz Integral Tio João Tipo 1 500g", "Tio João", "7891000000017"))
+        self.assertFalse(cat.compativel("Arroz Preto Integral Tio João Tipo 1 500g", "Tio João", "7891000000017"))
+
+
 class TestCasosReais(unittest.TestCase):
     """Casos vistos no teste real de 21/10/2026 (Big Box x Open Food Facts)."""
 
