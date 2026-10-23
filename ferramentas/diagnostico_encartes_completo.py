@@ -28,3 +28,10 @@ print("\namostra de preços lidos por mercado:")
 for e in d["encartes"]:
     if e["trechos"]:
         print(" ", e["mercado"], [(t["t"][:45], t["p"]) for t in e["trechos"][:8]])
+
+print("\ntriangulação (anúncio -> códigos compatíveis):")
+for e in d["encartes"]:
+    for t in e["trechos"]:
+        if t.get("e"):
+            print(f"  {e['mercado'][:22]:<22} R$ {t['p']:>6.2f}  {t['t'][:50]:<50} -> {len(t['e'])} código(s) {t['e'][:3]}")
+

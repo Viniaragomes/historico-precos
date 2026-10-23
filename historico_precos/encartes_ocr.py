@@ -60,6 +60,7 @@ def nome_da_rede(mercado: str) -> str:
 class Trecho:
     texto: str
     preco: float
+    eans: list[str] = field(default_factory=list)  # códigos de barras compatíveis com o anúncio (triangulação)
 
 
 @dataclass
@@ -73,6 +74,7 @@ class EncarteLido:
     titulo: str = ""
     trechos: list[Trecho] = field(default_factory=list)
     nomes: list[str] = field(default_factory=list)  # produtos cujo nome foi lido, mas o preço não (preço estilizado)
+    nomes_eans: dict[str, list[str]] = field(default_factory=dict)  # códigos compatíveis de cada nome lido sem preço
 
 
 def tesseract_disponivel() -> bool:
@@ -387,13 +389,32 @@ def ler_encartes(nav: Navegador, dias: int = 4, hoje: date | None = None, max_im
     return saida
 
 
+def triangular(encartes: list[EncarteLido], catalogo) -> dict:
+    """Liga cada anúncio lido aos códigos de barras compatíveis, cruzando o texto do encarte com todos os nomes que
+    cada código tem (cadastro aberto, notas fiscais do DF, sites das lojas). Devolve um resumo para o log."""
+    resumo = {"anuncios": 0, "com_codigo": 0, "um_codigo": 0}
+    for e in encartes:
+        for t in e.trechos:
+            t.eans = [ean for ean, _c, _n in catalogo.compativeis(t.texto)]
+            resumo["anuncios"] += 1
+            resumo["com_codigo"] += bool(t.eans)
+            resumo["um_codigo"] += len(t.eans) == 1
+        for nome in e.nomes:
+            eans = [ean for ean, _c, _n in catalogo.compativeis(nome)]
+            if eans:
+                e.nomes_eans[nome] = eans
+    return resumo
+
+
 def _mesmo_produto(a: tuple, b: tuple) -> bool:
     """Dois trechos de encarte são o mesmo produto? Mesmas regras de fundo do vínculo por nome: tamanho igual,
     nenhuma palavra de variante (sabor, integral/desnatado) só de um lado e nomes parecidos. Sem tamanho
     (hortifrúti por kg), só quando as palavras são praticamente as mesmas."""
     from .vinculo import DISTINTIVAS, semelhanca
 
-    (tka, qa), (tkb, qb) = a, b
+    (tka, qa, ea), (tkb, qb, eb) = a, b
+    if ea and eb:
+        return bool(set(ea) & set(eb))  # os dois anúncios apontam para o mesmo código de barras
     if not tka or not tkb or (tka ^ tkb) & DISTINTIVAS:
         return False
     if (qa is None) != (qb is None) or (qa and (qa[1] != qb[1] or abs(qa[0] - qb[0]) > 1e-6)):
@@ -415,11 +436,12 @@ def comparar_mercados(encartes: list[EncarteLido]) -> list[dict]:
     grupos: list[dict] = []
     for e in encartes:
         for t in e.trechos:
-            chave = (tokens(t.texto), quantidade(t.texto))
+            chave = (tokens(t.texto), quantidade(t.texto), t.eans)
             g = next((g for g in grupos if _mesmo_produto(g["chave"], chave)), None)
             if g is None:
-                g = {"chave": chave, "ofertas": {}}
+                g = {"chave": chave, "ofertas": {}, "eans": set()}
                 grupos.append(g)
+            g["eans"].update(t.eans)
             atual = g["ofertas"].get(e.mercado)
             if atual is None or t.preco < atual["p"]:
                 g["ofertas"][e.mercado] = {"mercado": e.mercado, "p": t.preco, "t": t.texto, "validade_fim": e.validade_fim,
@@ -427,8 +449,10 @@ def comparar_mercados(encartes: list[EncarteLido]) -> list[dict]:
     # nome lido sem preço (preço estilizado): entra como "também anunciado aqui", só em produto que já tem preço lido
     for e in encartes:
         for nome in e.nomes:
-            chave = (tokens(nome), quantidade(nome))
+            chave = (tokens(nome), quantidade(nome), e.nomes_eans.get(nome, []))
             g = next((g for g in grupos if _mesmo_produto(g["chave"], chave)), None)
+            if g is not None:
+                g["eans"].update(e.nomes_eans.get(nome, []))
             if g is not None and e.mercado not in g["ofertas"]:
                 g["ofertas"][e.mercado] = {"mercado": e.mercado, "p": None, "t": nome, "validade_fim": e.validade_fim,
                                            "link": e.pdf or e.post, "pdf": bool(e.pdf)}
@@ -441,11 +465,12 @@ def comparar_mercados(encartes: list[EncarteLido]) -> list[dict]:
         # nome do grupo: o texto vindo de PDF (lido sem erro) ou o mais curto
         nome = min(com_preco, key=lambda o: (not o["pdf"], len(o["t"])))["t"]
         barato, caro = com_preco[0]["p"], com_preco[-1]["p"]
-        saida.append({"produto": nome, "ofertas": ofertas, "diferenca": round(caro - barato, 2),
+        saida.append({"produto": nome, "ofertas": ofertas, "eans": sorted(g["eans"])[:30], "diferenca": round(caro - barato, 2),
                       "diferenca_pct": round((caro / barato - 1) * 100, 1) if barato else None})
     return sorted(saida, key=lambda c: -(c["diferenca_pct"] or 0))
 
 
 def para_json(encartes: list[EncarteLido]) -> list[dict]:
     return [{**{k: v for k, v in asdict(e).items() if k != "trechos"},
-             "trechos": [{"t": t.texto, "p": t.preco} for t in e.trechos]} for e in encartes]
+             "trechos": [{"t": t.texto, "p": t.preco, **({"e": t.eans} if t.eans else {})} for t in e.trechos]}
+            for e in encartes]

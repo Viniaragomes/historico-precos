@@ -22,6 +22,7 @@ from .causas import embalagem
 
 LIMIAR = 0.8  # semelhança mínima (subiu de 0,6 após conferir vínculos reais com sabor ou variante errados)
 MARGEM = 0.1  # distância mínima para o segundo melhor
+RARA = 300  # palavra que aparece em até tantos nomes de referência: marca ou submarca, não palavra genérica
 CONTIDO = 0.85  # nota de quando um nome está inteiro dentro do outro (3+ palavras): "Arroz Brilhante Tipo 1 5kg"
 
 # abreviações comuns em nomes de atacado ("BEB.CERV.IMPERIO 350ML LT")
@@ -153,3 +154,49 @@ class Catalogo:
         if outro and melhor[0] - outro[0] < MARGEM:
             return None  # ambíguo: dois produtos diferentes quase iguais
         return Vinculo(melhor[1], round(melhor[0], 3), melhor[2])
+
+    def compativeis(self, texto: str, limite: int = 30) -> list[tuple[str, float, str]]:
+        """Códigos de barras que um anúncio de encarte pode estar oferecendo: (ean, cobertura, nome de referência).
+
+        Anúncio costuma ser mais curto que o cadastro ("NESCAU 370G" x "Achocolatado em Pó Nescau 2.0 Lata 370g"),
+        então a medida é a cobertura: quanto das palavras do anúncio está no nome de referência (75% ou mais). O
+        tamanho tem de ser igual, e variante escrita no anúncio (sabor, integral, zero) tem de estar no candidato.
+        Variante que o anúncio não escreve não exclui: o encarte pode valer para várias ("sabores"). Mais de `limite`
+        códigos possíveis = anúncio vago demais para afirmar qualquer coisa: devolve vazio."""
+        qtd = embalagem.quantidade(texto)
+        tk = tokens(texto)
+        # anúncio de uma palavra só ("NESCAU 370G") vale se a palavra for rara (marca), não genérica ("ARROZ 5KG")
+        if not qtd or not tk or (len(tk) == 1 and len(self.indice.get(next(iter(tk)), ())) > RARA):
+            return []
+        contagem: dict[int, int] = defaultdict(int)
+        for t in tk:
+            for i in self.indice.get(t, ()):
+                contagem[i] += 1
+        melhores: dict[str, tuple[float, str]] = {}
+        for i, comuns in contagem.items():
+            if comuns < min(2, len(tk)):
+                continue
+            ean, nome_cat, _marca, qtd_cat, tk_cat = self.itens[i]
+            if qtd_cat[1] != qtd[1] or abs(qtd_cat[0] - qtd[0]) > 1e-6:
+                continue
+            if (tk & DISTINTIVAS) - tk_cat:
+                continue  # o anúncio diz uma variante que o candidato não tem
+            cobertura = len(tk & tk_cat) / len(tk)
+            if cobertura >= 0.75 and cobertura > melhores.get(ean, (0, ""))[0]:
+                melhores[ean] = (cobertura, nome_cat)
+        if not melhores or len(melhores) > limite:
+            return []
+        return sorted(((e, round(c, 2), n) for e, (c, n) in melhores.items()), key=lambda x: -x[1])
+
+
+def montar_catalogo(con, dicionario=None) -> "Catalogo":
+    """Referência de nomes com código de barras: cadastro (Open Food Facts e afins), nomes que as lojas com código
+    mostram e, se houver, as descrições das notas fiscais do DF (dicionário de códigos)."""
+    referencia = list(con.execute(
+        "SELECT ean, nome, marca FROM produtos WHERE nome IS NOT NULL "
+        "UNION SELECT DISTINCT x.ean, x.descricao, p.marca FROM precos x LEFT JOIN produtos p USING (ean) "
+        "WHERE x.descricao IS NOT NULL AND x.metodo <> 'vinculo-nome'"))
+    if dicionario is not None:
+        referencia += list(dicionario.execute("SELECT ean, descricao, NULL FROM mapa_df_dicionario WHERE descricao IS NOT NULL"))
+    return Catalogo(referencia)
+

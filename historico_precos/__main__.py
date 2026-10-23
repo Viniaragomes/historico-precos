@@ -535,9 +535,16 @@ def main(argv: list[str] | None = None) -> int:
 
         if not encartes_ocr.tesseract_disponivel():
             print("Tesseract não instalado (apt install tesseract-ocr tesseract-ocr-por): só a lista de encartes sai.")
-        vocab = encartes_ocr.vocabulario(banco.con, *filter(None, [encartes_ocr.abrir_dicionario(args.dicionario)]))
+        from .vinculo import montar_catalogo
+
+        dic = encartes_ocr.abrir_dicionario(args.dicionario)
+        vocab = encartes_ocr.vocabulario(banco.con, *filter(None, [dic]))
         print(f"Vocabulário de nomes de produtos: {len(vocab)} palavras" + ("" if len(vocab) >= 5000 else " (pouco: sem filtro)"))
         encartes = encartes_ocr.ler_encartes(nav, dias=args.dias, max_imagens=args.max_imagens, vocab=vocab)
+        # triangulação: cada anúncio ganha os códigos de barras compatíveis (cadastro + notas do DF + sites das lojas)
+        tri = encartes_ocr.triangular(encartes, montar_catalogo(banco.con, dic))
+        print(f"Triangulação: {tri['com_codigo']} de {tri['anuncios']} anúncios com preço ligados a código de barras "
+              f"({tri['um_codigo']} a um código só); {sum(len(e.nomes_eans) for e in encartes)} nomes sem preço ligados.")
         for e in encartes:
             print(f"  {e.mercado:<28} até {e.validade_fim or '?':<10} {len(e.imagens):>2} imagem(ns) {len(e.trechos):>4} trecho(s) com preço")
             for t in e.trechos[:3]:
@@ -723,21 +730,14 @@ def main(argv: list[str] | None = None) -> int:
     if args.comando == "catalogo-nome":
         import time
 
-        from .fontes import pagina_produto
-        from .vinculo import Catalogo
-
         from .encartes_ocr import abrir_dicionario
+        from .fontes import pagina_produto
+        from .vinculo import montar_catalogo
 
         # referência: nomes do cadastro, os nomes com que as lojas com código de barras mostram cada produto e as
         # descrições das notas fiscais do DF (dicionário de códigos: 163 mil códigos de barras)
-        referencia = list(banco.con.execute(
-            "SELECT ean, nome, marca FROM produtos WHERE nome IS NOT NULL "
-            "UNION SELECT DISTINCT x.ean, x.descricao, p.marca FROM precos x LEFT JOIN produtos p USING (ean) "
-            "WHERE x.descricao IS NOT NULL AND x.metodo <> 'vinculo-nome'"))
         dic = abrir_dicionario(args.dicionario) if args.dicionario else None
-        if dic:
-            referencia += list(dic.execute("SELECT ean, descricao, NULL FROM mapa_df_dicionario WHERE descricao IS NOT NULL"))
-        catalogo = Catalogo(referencia)
+        catalogo = montar_catalogo(banco.con, dic)
         print(f"Catálogo de referência: {len(catalogo.itens)} nomes com código de barras e tamanho"
               + (" (inclui o dicionário de códigos do DF)." if dic else " (sem o dicionário de códigos)."))
         for loja in [l for l in carregar_lojas(args.lojas) if l.get("tipo") == "sitemap" and l.get("vinculo") == "nome"]:

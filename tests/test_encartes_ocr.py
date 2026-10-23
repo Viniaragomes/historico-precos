@@ -155,6 +155,24 @@ class TestLimpeza(unittest.TestCase):
         self.assertEqual(encartes_ocr.limpar_nome("Pé de frango Copacol"), "Pé de frango Copacol")
 
 
+class TestTriangulacao(unittest.TestCase):
+    def test_anuncios_diferentes_do_mesmo_codigo_se_juntam(self):
+        from historico_precos.vinculo import Catalogo
+
+        cat = Catalogo([("7891000100103", "Achocolatado em Pó Nescau 2.0 Lata 370g", "Nescau"),
+                        ("7891000100104", "Achocolatado em Pó Toddy Original Lata 370g", "Toddy")])
+        T, E = encartes_ocr.Trecho, encartes_ocr.EncarteLido
+        a = E("Dia a Dia", "https://a", "2026-10-20", None, [], trechos=[T("NESCAU 370G", 8.99)])
+        b = E("Tatico", "https://b", "2026-10-20", None, [], trechos=[T("ACHOCOLATADO NESCAU LATA 370G", 9.49)])
+        c = E("Fort", "https://c", "2026-10-20", None, [], trechos=[T("TODDY 370G", 8.49)])
+        encartes_ocr.triangular([a, b, c], cat)
+        self.assertEqual(a.trechos[0].eans, ["7891000100103"])
+        self.assertEqual(c.trechos[0].eans, ["7891000100104"])
+        (comp,) = encartes_ocr.comparar_mercados([a, b, c])  # Toddy fica de fora: outro produto, um mercado só
+        self.assertEqual([(o["mercado"], o["p"]) for o in comp["ofertas"]], [("Dia a Dia", 8.99), ("Tatico", 9.49)])
+        self.assertEqual(comp["eans"], ["7891000100103"])
+
+
 class TestRede(unittest.TestCase):
     def test_mesma_rede_com_outro_nome(self):
         self.assertEqual(encartes_ocr.nome_da_rede("Dia a Dia Atacadista"), "Atacadão Dia a Dia")
