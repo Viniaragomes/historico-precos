@@ -4,13 +4,18 @@
   traz, para cada tabloide, a região (DF), as lojas, o PDF, as imagens das páginas e a data em que a oferta sai do ar.
 - Dona: a página donafazbem.com.br/folheto/ofertas/ tem o link do PDF do folheto vigente; o nome do arquivo traz o
   período ("...-19-a-21-10-2026.pdf").
-robots.txt dos dois libera essas páginas.
+- Ultrabox: o WordPress do site (ultraboxatacado.com.br) publica as páginas do encarte como imagens na lista pública de
+  mídia (/wp-json/wp/v2/media), com grupo de lojas e data no nome ("ultrabox-rede-2026-11-07-pagina-1.jpeg").
+- Assaí DF: o site do Assaí recusa robôs; os folhetos "ofertas DF" diários são lidos no Portafolhetos
+  (portafolhetos.com.br), que os republica. O robots.txt de lá permite a página de cada folheto e proíbe a paginação
+  ("?page="); as imagens das páginas ficam num servidor de imagens que permite acesso, então são lidas direto de lá.
+robots.txt de todos libera esses caminhos (conferido em 08/11/2026).
 """
 
 from __future__ import annotations
 
 import re
-from datetime import date
+from datetime import date, timedelta
 from html import unescape
 
 from ..rede import Navegador
@@ -69,9 +74,77 @@ def dona(nav: Navegador) -> list[Encarte]:
     return saida
 
 
+ULTRABOX_MIDIA = "https://ultraboxatacado.com.br/wp-json/wp/v2/media?per_page=60&_fields=source_url,date"
+ULTRABOX_OFERTAS = "https://ultraboxatacado.com.br/ofertas/"
+_RE_ULTRABOX = re.compile(r"/ultrabox-([a-z0-9-]+?)-(\d{4})-(\d{2})-(\d{2})-pagina-(\d+)\.(?:jpe?g|png|webp)$", re.I)
+
+
+def ultrabox(nav: Navegador, hoje: date | None = None, dias: int = 6) -> list[Encarte]:
+    """Páginas de encarte publicadas nos últimos `dias`, agrupadas por grupo de lojas e data do nome do arquivo."""
+    hoje = hoje or date.today()
+    midia = nav.get_json(ULTRABOX_MIDIA)
+    grupos: dict[tuple[str, str], list[tuple[int, str]]] = {}
+    for m in midia if isinstance(midia, list) else []:
+        url = (m.get("source_url") or "").strip()
+        achado = _RE_ULTRABOX.search(url)
+        if not achado:
+            continue
+        grupo, a, mes, d, pagina = achado.groups()
+        try:
+            dia = date(int(a), int(mes), int(d))
+        except ValueError:
+            continue
+        if not (hoje - timedelta(days=dias) <= dia <= hoje + timedelta(days=7)):
+            continue
+        grupos.setdefault((grupo, dia.isoformat()), []).append((int(pagina), url))
+    return [Encarte(post=ULTRABOX_OFERTAS, titulo=f"Ultrabox {grupo.replace('-', ' ')} {dia}", mercado="Supermercado Ultrabox",
+                    publicado=dia, validade_fim=None, imagens=[u for _, u in sorted(set(paginas))])
+            for (grupo, dia), paginas in sorted(grupos.items())]
+
+
+PORTAFOLHETOS_ASSAI = "https://www.portafolhetos.com.br/assai-atacadista/"
+_RE_FOLHETO_DF = re.compile(r'href="(/assai-atacadista/[^"]*?ofertas-df-de-[a-z-]*?(\d{2})-(\d{2})-(\d{4})-(\d+)/)"')
+_RE_PAGINA_0 = re.compile(r"(https://na\.leafletscdn\.com/thumbor/[^\"'\s]+?/com\.br/data/\d+/\d+/)0\.jpg")
+
+
+def assai_df(nav: Navegador, hoje: date | None = None, paginas: int = 8) -> list[Encarte]:
+    """Folhetos "Assaí ofertas DF" de hoje em diante, republicados no Portafolhetos. Lê só a página principal de cada
+    folheto (a paginação "?page=" é proibida pelo robots.txt de lá) e as imagens das páginas, direto do servidor de imagens."""
+    hoje = hoje or date.today()
+    html = nav.get_texto(PORTAFOLHETOS_ASSAI) or ""
+    saida, vistos = [], set()
+    for caminho, d, mes, a, _id in _RE_FOLHETO_DF.findall(html):
+        if caminho in vistos:
+            continue
+        vistos.add(caminho)
+        try:
+            dia = date(int(a), int(mes), int(d))
+        except ValueError:
+            continue
+        if dia < hoje - timedelta(days=1):
+            continue
+        url = "https://www.portafolhetos.com.br" + caminho
+        pagina = nav.get_texto(url) or ""
+        base = _RE_PAGINA_0.search(pagina)
+        if not base:
+            continue
+        # validade: "válidas até 08/11/2026" quando a página diz; senão, o dia do folheto
+        fim = dia
+        for trecho in re.findall(r"v[áa]lid[oa]s?([^<\"]{0,80})", pagina):
+            for d_, m_, a_ in re.findall(r"(\d{2})/(\d{2})/(\d{4})", trecho):
+                try:
+                    fim = max(fim, date(int(a_), int(m_), int(d_)))
+                except ValueError:
+                    pass
+        saida.append(Encarte(post=url, titulo=f"Assaí ofertas DF de {dia.strftime('%d/%m/%Y')}", mercado="Assaí Atacadista",
+                             publicado=dia.isoformat(), validade_fim=fim.isoformat(),
+                             imagens=[f"{base.group(1)}{n}.jpg" for n in range(paginas)]))
+    return saida
+
+
 def todos(nav: Navegador) -> list[Encarte]:
     saida = []
-    for fonte in (dia_a_dia, dona):
+    for fonte in (dia_a_dia, dona, ultrabox, assai_df):
         try:
             saida += fonte(nav)
         except Exception as e:  # uma rede fora do ar não derruba as outras

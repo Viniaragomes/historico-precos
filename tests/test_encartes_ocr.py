@@ -173,6 +173,36 @@ class TestTriangulacao(unittest.TestCase):
         self.assertEqual(comp["eans"], ["7891000100103"])
 
 
+class TestFontesNovas(unittest.TestCase):
+    def test_ultrabox_agrupa_paginas_recentes(self):
+        from datetime import date
+
+        midia = [{"source_url": "https://ultraboxatacado.com.br/wp-content/uploads/2026/11/ultrabox-rede-2026-11-07-pagina-2.jpeg"},
+                 {"source_url": "https://ultraboxatacado.com.br/wp-content/uploads/2026/11/ultrabox-rede-2026-11-07-pagina-1.jpeg"},
+                 {"source_url": "https://ultraboxatacado.com.br/wp-content/uploads/2026/02/campanha-668-pagina-1-1.jpeg"},
+                 {"source_url": "https://ultraboxatacado.com.br/wp-content/uploads/2026/09/ultrabox-rede-2026-09-01-pagina-1.jpeg"}]
+        (e,) = folhetos_df.ultrabox(NavFalso(json=midia), hoje=date(2026, 11, 8))
+        self.assertEqual(e.mercado, "Supermercado Ultrabox")
+        self.assertEqual([u.rsplit("-", 1)[1] for u in e.imagens], ["1.jpeg", "2.jpeg"])
+
+    def test_assai_df_pelo_portafolhetos(self):
+        from datetime import date
+
+        lista = ('<a href="/assai-atacadista/assai-atacadista-ofertas-df-de-domingo-08-11-2026-481900/">'
+                 '<a href="/assai-atacadista/assai-atacadista-ofertas-df-de-segunda-feira-02-11-2026-479570/">'
+                 '<a href="/assai-atacadista/assai-atacadista-ofertas-de-quinta-feira-05-11-2026-481348/">')
+        folheto = ('"description":"Assaí ofertas válidas de 08/11/2026 até 10/11/2026" '
+                   '<img src="https://na.leafletscdn.com/thumbor/abc=/0x0/filters:format(webp)/com.br/data/7/481900/0.jpg">')
+
+        class Nav:
+            def get_texto(self, url):
+                return lista if url.endswith("/assai-atacadista/") else folheto
+
+        (e,) = folhetos_df.assai_df(Nav(), hoje=date(2026, 11, 8), paginas=3)
+        self.assertEqual((e.mercado, e.publicado, e.validade_fim), ("Assaí Atacadista", "2026-11-08", "2026-11-10"))
+        self.assertEqual(e.imagens[2], "https://na.leafletscdn.com/thumbor/abc=/0x0/filters:format(webp)/com.br/data/7/481900/2.jpg")
+
+
 class TestRede(unittest.TestCase):
     def test_mesma_rede_com_outro_nome(self):
         self.assertEqual(encartes_ocr.nome_da_rede("Dia a Dia Atacadista"), "Atacadão Dia a Dia")

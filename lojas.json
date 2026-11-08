@@ -93,6 +93,28 @@
       "padrao_produto": "/produtos/",
       "ativa": true,
       "verificacao": "Em 21/10/2026: robots.txt libera /produtos/ e indica o sitemap (11.908 produtos); JSON-LD com nome, marca e preço; o 'gtin' publicado é código interno (7 dígitos), por isso o vínculo é pelo nome. A rede tem lojas em vários estados: o preço do site não é marcado como de Brasília."
+    },
+    {
+      "nome": "Super Veneza Guará II",
+      "dominio": "superveneza.instabuy.app.br",
+      "cidade": "Brasília",
+      "tipo": "sitemap",
+      "vinculo": "nome",
+      "sitemap": "https://superveneza.instabuy.com.br/sitemap.xml",
+      "padrao_produto": "/p/",
+      "ativa": true,
+      "verificacao": "Em 08/11/2026: plataforma Instabuy (a mesma do Big Box). robots.txt libera tudo para robôs comuns, com Content-Signal search=yes, ai-train=no, use=reference (uso para busca e comparação, sem treino de IA). Sitemap com cerca de 14.400 endereços; cada página de produto traz nome, marca e preço em JSON-LD, sem código de barras. Vínculo pelo nome. Loja do Guará II; tratada como estabelecimento próprio (telefone diferente do site institucional)."
+    },
+    {
+      "nome": "Super Veneza Cruzeiro",
+      "dominio": "supervenezacruzeiro811.instabuy.app.br",
+      "cidade": "Brasília",
+      "tipo": "sitemap",
+      "vinculo": "nome",
+      "sitemap": "https://supervenezacruzeiro811.instabuy.com.br/sitemap.xml",
+      "padrao_produto": "/p/",
+      "ativa": true,
+      "verificacao": "Em 08/11/2026: plataforma Instabuy, mesmas regras do robots.txt do Guará II (search=yes, ai-train=no). Sitemap com cerca de 13.800 endereços; JSON-LD com nome, marca e preço, sem código de barras. Vínculo pelo nome. Loja do Cruzeiro (811)."
     }
   ]
 }
