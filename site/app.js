@@ -3,7 +3,7 @@ import { calcular, categoria } from "./impostos.js";
 import { confiancaPreco, nivelPorPontos, precoSugerido, utilidade, chavePreco, chaveCausa, PONTOS, NIVEIS as NIVEIS_COMUNIDADE } from "./confianca.js";
 import { criarComunidade, consentimento, ErroComunidade, TIPOS_REPORTE } from "./comunidade.js";
 
-const VERSAO_APP = "v28"; // igual à VERSAO do sw.js
+const VERSAO_APP = "v29"; // igual à VERSAO do sw.js
 
 const conteudo = document.getElementById("conteudo");
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
@@ -826,6 +826,7 @@ async function telaProduto(ean) {
     cartaoIdentificacao(ean, p, aberto),
     cartaoEncartesDoProduto(painel),
     cartaoComparativo(painel),
+    cartaoMenorPreco(ean),
     cartaoOndeEncontrar(painel),
     secaoHistorico(cartaoHistorico(p), cartaoCompraDF(p), cartaoCampo(p, tabela), cartaoCausas(contexto)),
     cartaoImpostos(tabela, [p.nome, aberto?.nome], p.ofertas[0]?.preco ?? null),
@@ -1049,6 +1050,34 @@ function cartaoComparativo(painel) {
         "Preço de encarte é lido automaticamente e pode ter erro; preço informado por pessoas só vira confirmado com 3 ou mais. Confira a fonte nos cartões acima.") : null);
   });
   return cartao;
+}
+
+// conferir no Menor Preço Brasil: app oficial (Receita do RS e Confaz; o DF participa) com o preço das notas fiscais de
+// consumidor em cada estabelecimento. Não tem dados abertos nem API pública: o app só leva a pessoa até lá, com o código copiado.
+const MENOR_PRECO_IOS = "https://apps.apple.com/br/app/id1483644418";
+const MENOR_PRECO_ANDROID = "https://play.google.com/store/search?q=Menor%20Pre%C3%A7o%20Brasil&c=apps";
+
+function cartaoMenorPreco(ean) {
+  const ios = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const aviso = el("p", { class: "minusculo", style: "margin:8px 0 0", hidden: true });
+  const abrir = async () => {
+    try {
+      await navigator.clipboard.writeText(ean);
+      aviso.textContent = `Código ${ean} copiado: cole na busca do Menor Preço Brasil.`;
+    } catch {
+      aviso.textContent = `Na busca do Menor Preço Brasil, digite o código ${ean}.`;
+    }
+    aviso.hidden = false;
+  };
+  return el("section", { class: "cartao entrar entrar-3" },
+    el("h2", {}, "Conferir no Menor Preço Brasil"),
+    el("p", { class: "sub" }, "App oficial e gratuito da Receita Estadual do RS, adotado pelo DF no Confaz. Mostra o preço das notas fiscais de consumidor ",
+      "em cada mercado, inclusive os que não têm site nem encarte. Pede login gov.br."),
+    el("a", { class: "botao-secundario-neutro", href: ios ? MENOR_PRECO_IOS : MENOR_PRECO_ANDROID, target: "_blank", rel: "noopener",
+      onclick: abrir }, "Abrir o Menor Preço Brasil"),
+    aviso,
+    el("p", { class: "minusculo", style: "margin:8px 0 0" },
+      "Esse app não tem dados abertos nem acesso automático, então os preços dele não entram aqui: você confere lá, no seu celular."));
 }
 
 // 3) histórico: recolhido, abre ao tocar (gráfico, preço de compra, campo e causas)
@@ -1299,6 +1328,7 @@ async function telaNaoAcompanhado(ean, aberto, tabela) {
       cartaoIdentificacao(ean, null, aberto),
       cartaoEncartesDoProduto(painel),
       cartaoComparativo(painel),
+      cartaoMenorPreco(ean),
       cartaoBuscaNaHora(ean),
       cartaoOndeEncontrar(painel),
       nome ? cartaoParecidos(nome, ean) : null,
