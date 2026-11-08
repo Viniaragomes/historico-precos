@@ -1,0 +1,83 @@
+
+===== https://www.uniaosupermercados.com robots: (True, 404, '')
+  /sitemap.xml: HTTP 404, 0 locs []
+  /sitemap_index.xml: HTTP 404, 0 locs []
+  /sitemaps/sitemap.xml: HTTP 404, 0 locs []
+  loja/cidade: [] | cidades: []
+
+===== https://supermercadobistecao.com robots: (True, 200, '# As a condition of accessing this website, you agree to abide by the following | # content signals: |  | # (a)  If a Content-Signal = yes, you may collect content for the corresponding | #      use. | # (b)  If a Content-Signal = no, you may not collect content for the | #      corresponding use. | # (c)  If the')
+  /sitemap.xml: HTTP 200, 0 locs []
+  /sitemap_index.xml: HTTP 200, 0 locs []
+  /sitemaps/sitemap.xml: HTTP 200, 0 locs []
+  loja/cidade: [] | cidades: ['Ceilândia', 'Samambaia', 'Ceilandia', 'Ceilandia', 'Ceilandia']
+
+===== https://www.fortatacadista.com.br robots: (True, 200, 'User-agent: * | Disallow: /admin | Disallow: /minha-conta | Disallow: /account/* | Disallow: /painel-do-cliente | Disallow: /carrinho | Disallow: /checkout | Disallow: /login | Disallow: /pedido | Disallow: /busca | Disallow: /search | Disallow: /embed/ | Disallow: /lojas | Disallow: /*?* | Allow: /categorias | Allow: /receitas | ')
+  /sitemap.xml: HTTP 200, 7172 locs ['https://fortatacadista.com.br', 'https://fortatacadista.com.br/categorias', 'https://fortatacadista.com.br/receitas']
+  loja/cidade: ['Fort Atacadista', 'Balneário Camboriu - 115', 'Fort Atacadista', 'FortCompactada400.png', 'Fort Compactada.png'] | cidades: []
+
+===== https://costaatacadao.com.br/ofertas/: HTTP 200, 53 imagens/pdf
+    https://costaatacadao.com.br/wp-content/uploads/2026/11/feed-festival-de-bebidas-e-churrasco-df_0000_01.png
+    https://costaatacadao.com.br/wp-content/uploads/2026/11/feed-festival-de-bebidas-e-churrasco-df_0001_02.png
+    https://costaatacadao.com.br/wp-content/uploads/2026/11/feed-festival-de-bebidas-e-churrasco-df_0002_03.png
+    https://costaatacadao.com.br/wp-content/uploads/2026/11/feed-festival-de-bebidas-e-churrasco-df_0003_04.png
+    https://costaatacadao.com.br/wp-content/uploads/2026/11/feed-festival-de-bebidas-e-churrasco-go-e-entorno_0000_01.png
+    https://costaatacadao.com.br/wp-content/uploads/2026/11/feed-festival-de-bebidas-e-churrasco-go-e-entorno_0001_02.png
+    https://costaatacadao.com.br/wp-content/uploads/2026/11/feed-festival-de-bebidas-e-churrasco-go-e-entorno_0002_03.png
+    https://costaatacadao.com.br/wp-content/uploads/2026/11/feed-festival-de-bebidas-e-churrasco-go-e-entorno_0003_04.png
+    https://costaatacadao.com.br/wp-content/uploads/2026/11/tabloide-digital-festival-do-bebe-df-01-scaled.png
+    https://costaatacadao.com.br/wp-content/uploads/2026/11/tabloide-digital-festival-do-bebe-df-02-scaled.png
+   cidades: ['Luziânia', 'Valparaíso']
+   validade: []
+
+===== https://primorsupermercado.com.br/ofertas/: HTTP 200, 53 imagens/pdf
+    http://primorsupermercado.com.br/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-26-at-07.12.05-1.jpeg
+    https://primorsupermercado.com.br/wp-content/uploads/2026/08/Copia-de-Fixo-LinkedIn-Article-Cover-Image-1-1024x307.png
+    https://primorsupermercado.com.br/wp-content/uploads/2026/08/Copia-de-Fixo-LinkedIn-Article-Cover-Image-1-1536x461.png
+    https://primorsupermercado.com.br/wp-content/uploads/2026/08/Copia-de-Fixo-LinkedIn-Article-Cover-Image-1-2048x614.png
+    https://primorsupermercado.com.br/wp-content/uploads/2026/08/Copia-de-Fixo-LinkedIn-Article-Cover-Image-1-300x90.png
+    https://primorsupermercado.com.br/wp-content/uploads/2026/08/Copia-de-Fixo-LinkedIn-Article-Cover-Image-1-768x230.png
+    https://primorsupermercado.com.br/wp-content/uploads/2026/08/Copia-de-Fixo-LinkedIn-Article-Cover-Image-1-scaled.png
+    https://primorsupermercado.com.br/wp-content/uploads/2026/08/Copia-de-Fixo-LinkedIn-Article-Cover-Image-3-1-1024x307.png
+    https://primorsupermercado.com.br/wp-content/uploads/2026/08/Copia-de-Fixo-LinkedIn-Article-Cover-Image-3-1-1536x461.png
+    https://primorsupermercado.com.br/wp-content/uploads/2026/08/Copia-de-Fixo-LinkedIn-Article-Cover-Image-3-1-300x90.png
+   cidades: []
+   validade: []
+
+===== https://melhoratacadista.com.br/tabloide/: HTTP 200, 4 imagens/pdf
+    https://melhoratacadista.com.br/wp-content/uploads/2021/02/Grupo-167.png
+    https://melhoratacadista.com.br/wp-content/uploads/2021/02/bg-tabloide-1.png
+    https://melhoratacadista.com.br/wp-content/uploads/2021/02/img-cartoes1.png
+    https://melhoratacadista.com.br/wp-content/uploads/2021/02/img-redes-sociais.png
+   cidades: ['Riacho Fundo']
+   validade: []
+
+===== https://melhoratacadista.com.br/tabloide/areal-guara-2-riacho-fundo-2/: HTTP 200, 3 imagens/pdf
+    https://melhoratacadista.com.br/wp-content/uploads/2021/02/Grupo-167.png
+    https://melhoratacadista.com.br/wp-content/uploads/2021/02/img-cartoes1.png
+    https://melhoratacadista.com.br/wp-content/uploads/2021/02/img-redes-sociais.png
+   cidades: ['Riacho Fundo']
+   validade: []
+
+===== https://www.varejaodafartura.com/ofertas: HTTP 200, 0 imagens/pdf
+   cidades: ['Brasilia', 'Taguatinga']
+   validade: []
+
+===== https://www.supermercadoscristal.com.br/encarte: HTTP 200, 11 imagens/pdf
+    https://www.supermercadoscristal.com.br/assets/images/uploads/arqs/bra_encarte/whatsapp-image-2026-03-31-at-17.jpeg
+    https://www.supermercadoscristal.com.br/assets/images/uploads/imgs/bra_encarte/bra_encartefotos/480x866/festival-de-carnes-26_08_2026-1-.jpg
+    https://www.supermercadoscristal.com.br/assets/images/uploads/imgs/bra_encarte/bra_encartefotos/480x866/hortalicas-22_07_2026.jpg
+    https://www.supermercadoscristal.com.br/assets/images/uploads/imgs/bra_encarte/bra_encartefotos/480x866/hortifruti-frutas-e-legumes-29_07_2026.jpg
+    https://www.supermercadoscristal.com.br/assets/images/uploads/imgs/bra_menu/33x33/26a924b14bb0ca68738e70abc10b5be0.png
+    https://www.supermercadoscristal.com.br/assets/images/uploads/imgs/bra_menu/33x33/62bee6f8241d209aa9a2e1da5c8fe038.png
+    https://www.supermercadoscristal.com.br/assets/images/uploads/imgs/bra_menu/33x33/ade2515a1b7b2c53441c3b1a4edfa10e.png
+    https://www.supermercadoscristal.com.br/assets/images/uploads/imgs/bra_menu/33x33/b2deb1419e8121ba36a1a864a62fef3a.png
+    https://www.supermercadoscristal.com.br/assets/images/uploads/imgs/bra_menu/33x33/eb74c4cae5efc852c9df28ecc6c192f6.png
+    https://www.supermercadoscristal.com.br/assets/images/uploads/imgs/bra_menu/33x33/img-topo.png
+   cidades: []
+   validade: []
+
+https://costaatacadao.com.br mídia recente: [('2026-11-08', 'banner-sorteio-luziania-nov-2027-mobile.jpeg'), ('2026-11-08', 'banner-sorteio-luziania-nov-2027-desktop.jpeg'), ('2026-11-06', 'tabloide-higiene-e-limpeza-a4-01.png')]
+
+https://primorsupermercado.com.br mídia recente: [('2026-11-07', 'WhatsApp-Image-2026-11-07-at-08.50.04.jpeg'), ('2026-11-06', 'WhatsApp-Image-2026-11-06-at-09.24.28.jpeg'), ('2026-11-06', 'WhatsApp-Image-2026-11-06-at-09.24.28-1.jpeg'), ('2026-11-06', 'WhatsApp-Image-2026-11-06-at-09.24.28-2.jpeg'), ('2026-11-06', 'WhatsApp-Image-2026-11-06-at-09.24.28-3.jpeg'), ('2026-11-06', 'd7f56563-c460-4d92-8333-0e85545d1358.jpeg'), ('2026-11-06', 'Sexta-do-Pao-06.11.2026-scaled.jpeg'), ('2026-11-04', 'Quarta-e-Quinta-Verde-04-11-2026-1-scaled.jpeg'), ('2026-11-04', 'Quarta-e-Quinta-Verde-04-11-2026-scaled.jpeg'), ('2026-11-03', 'WhatsApp-Image-2026-11-03-at-13.25.46.jpeg'), ('2026-11-03', 'WhatsApp-Image-2026-11-03-at-13.25.47.jpeg'), ('2026-11-03', 'WhatsApp-Image-2026-11-03-at-10.41.09.jpeg'), ('2026-11-03', 'Terca-da-Carne-03-11-2026-scaled.jpeg'), ('2026-10-31', 'WhatsApp-Image-2026-10-31-at-12.10.22.jpeg'), ('2026-10-30', '0eae4710-bc2c-4c33-888c-d2f4d75acda8.jpeg')]
+
+https://melhoratacadista.com.br mídia recente: [('2026-04-13', 'TABLOIDE-MELHOR-ATACADISTA2.jpg-2-1.jpeg'), ('2026-04-13', 'TABLOIDE-MELHOR-ATACADISTA.jpg-2-1.jpeg'), ('2026-04-13', 'TABLOIDE-MELHOR-ATACADISTA2.jpg-2.jpeg'), ('2026-04-13', 'TABLOIDE-MELHOR-ATACADISTA.jpg-2.jpeg'), ('2026-03-30', 'TABLOIDE-MELHOR-ATACADISTA2.jpg-1.jpeg'), ('2026-03-30', 'TABLOIDE-MELHOR-ATACADISTA.jpg-1.jpeg'), ('2026-03-16', 'TABLOIDE-MELHOR-ATACADISTA2.jpg.jpeg'), ('2026-03-16', 'TABLOIDE-MELHOR-ATACADISTA.jpg.jpeg'), ('2026-03-02', 'TABLOIDE-MELHOR-ATACADISTA2.jpg-4.jpeg'), ('2026-03-02', 'TABLOIDE-MELHOR-ATACADISTA.jpg-6.jpeg'), ('2026-02-16', 'TABLOIDE-MELHOR-ATACADISTA2.jpg-2.jpeg'), ('2026-02-16', 'TABLOIDE-MELHOR-ATACADISTA.jpg-3.jpeg'), ('2026-02-02', 'TABLOIDE-MELHOR-ATACADISTA2.jpg-scaled.jpeg'), ('2026-02-02', 'TABLOIDE-MELHOR-ATACADISTA.jpg-scaled.jpeg'), ('2026-01-19', 'TABLOIDE-MELHOR-ATACADISTA2-1-1-scaled.jpg')]
