@@ -456,6 +456,8 @@ def main(argv: list[str] | None = None) -> int:
     cn.add_argument("--minutos", type=float, default=60, help="tempo máximo por loja")
     cn.add_argument("--limite", type=int, default=5000, help="teto de páginas por loja")
     cn.add_argument("--minutos-total", type=float, help="tempo total da rodada, dividido igualmente entre as lojas")
+    cn.add_argument("--grupo", type=int, help="só a parte N das lojas (0, 1, ...), para ler em paralelo")
+    cn.add_argument("--grupos", type=int, help="em quantas partes as lojas são divididas")
     cn.add_argument("--dicionario", default="dicionario.db.gz", help="dicionário de códigos do DF como referência extra (se existir)")
 
     cs = sub.add_parser("catalogo-sitemap", help="acha páginas de produto pelo sitemap das lojas (tipo 'sitemap') e lê nome, GTIN e preço")
@@ -496,9 +498,12 @@ def main(argv: list[str] | None = None) -> int:
     ec.add_argument("dicionario", help="dicionario.db ou dicionario.db.gz")
     ec.add_argument("--saida", default="site/dados/codigos")
 
-    rb = sub.add_parser("banco", help="recupera ou comprime o banco guardado no ramo 'dados'")
-    rb.add_argument("acao", choices=["recuperar", "comprimir"])
+    rb = sub.add_parser("banco", help="recupera, comprime ou junta o banco guardado no ramo 'dados'")
+    rb.add_argument("acao", choices=["recuperar", "comprimir", "juntar"])
     rb.add_argument("--saida", help="comprimir: arquivo .gz de destino")
+    rb.add_argument("--de", help="juntar: banco de uma parte paralela da coleta das lojas")
+    rb.add_argument("--grupo", type=int, help="juntar: número da parte (0, 1, ...)")
+    rb.add_argument("--grupos", type=int, help="juntar: total de partes")
 
     sv = sub.add_parser("servir", help="abre o app no computador em http://localhost:8000")
     sv.add_argument("--porta", type=int, default=8000)
@@ -516,6 +521,12 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"Banco recuperado: {Path(args.banco).stat().st_size / 2**20:.1f} MB")
             else:
                 print("Ainda não há banco no ramo 'dados': começa vazio.")
+            return 0
+        if args.acao == "juntar":
+            lojas_nome = [l for l in carregar_lojas(args.lojas) if l.get("tipo") == "sitemap" and l.get("vinculo") == "nome"]
+            nomes = [l["nome"] for l in ramo_dados.lojas_do_grupo(lojas_nome, args.grupo, args.grupos)]
+            r = ramo_dados.juntar(args.banco, args.de, nomes)
+            print(f"Juntado de {args.de}: {', '.join(nomes)} ({r['paginas']} páginas, {r['precos']} preços).")
             return 0
         tamanho = ramo_dados.comprimir(args.banco, args.saida or f"{args.banco}.gz")
         print(f"Banco {Path(args.banco).stat().st_size / 2**20:.1f} MB, comprimido {tamanho / 2**20:.1f} MB")
@@ -743,7 +754,10 @@ def main(argv: list[str] | None = None) -> int:
         catalogo = montar_catalogo(banco.con, dic)
         print(f"Catálogo de referência: {len(catalogo.itens)} nomes com código de barras e tamanho"
               + (" (inclui o dicionário de códigos do DF)." if dic else " (sem o dicionário de códigos)."))
-        lojas_nome = [l for l in carregar_lojas(args.lojas) if l.get("tipo") == "sitemap" and l.get("vinculo") == "nome"]
+        from .ramo_dados import lojas_do_grupo
+
+        lojas_nome = lojas_do_grupo([l for l in carregar_lojas(args.lojas) if l.get("tipo") == "sitemap" and l.get("vinculo") == "nome"],
+                                    args.grupo, args.grupos)
         if args.minutos_total and lojas_nome:
             args.minutos = min(args.minutos, args.minutos_total / len(lojas_nome))
             print(f"{len(lojas_nome)} lojas: {args.minutos:.0f} minutos de leitura para cada uma nesta rodada.")
