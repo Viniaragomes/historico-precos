@@ -474,7 +474,7 @@ def main(argv: list[str] | None = None) -> int:
 
     ed = sub.add_parser("encartes-dia", help="encartes vigentes dos mercados do DF lidos com Tesseract (grátis, sem IA paga)")
     ed.add_argument("--dias", type=int, default=4, help="encartes publicados nestes últimos dias")
-    ed.add_argument("--max-imagens", type=int, default=120)
+    ed.add_argument("--max-imagens", type=int, default=150)
     ed.add_argument("--exportar", help="grava em JSON para o app (ex.: site/dados/encartes.json)")
     ed.add_argument("--dicionario", default="dicionario.db.gz", help="dicionário de códigos (vocabulário de nomes de produtos)")
 

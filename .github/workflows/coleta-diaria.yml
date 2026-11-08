@@ -124,7 +124,7 @@ jobs:
 
       - name: Encartes do dia (mercados do DF, leitura grátis com Tesseract)
         continue-on-error: true
-        timeout-minutes: 40
+        timeout-minutes: 55
         run: |
           # se a leitura de hoje falhar, o app fica com os encartes já publicados (em vez de ficar sem nenhum)
           mkdir -p site/dados

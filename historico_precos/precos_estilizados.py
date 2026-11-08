@@ -145,11 +145,34 @@ def linhas_de_preco(caminho: Path, palavras: list[tuple], max_regioes: int = 40)
     return saida
 
 
-def _ler_texto(img: Image.Image) -> str:
+def _precos_com_altura(img: Image.Image) -> list[tuple[float, float]]:
+    """Preços lidos no recorte, com a altura da letra: (altura, preço). Junta "14," + "98" quando o Tesseract separa."""
+    from .encartes_ocr import RE_PRECO
+
     with tempfile.NamedTemporaryFile(suffix=".png") as f:
         img.save(f.name)
-        r = subprocess.run(["tesseract", f.name, "stdout", "-l", "por", "--psm", "6"], capture_output=True, text=True, timeout=60)
-    return r.stdout
+        tsv = subprocess.run(["tesseract", f.name, "stdout", "-l", "por", "--psm", "6", "tsv"],
+                             capture_output=True, text=True, timeout=60).stdout
+    linhas: dict[tuple, list] = {}
+    for linha in tsv.splitlines()[1:]:
+        c = linha.split("\t")
+        if len(c) < 12 or not c[11].strip():
+            continue
+        try:
+            linhas.setdefault((c[2], c[3], c[4]), []).append((int(c[6]), int(c[9]), c[11]))
+        except ValueError:
+            continue
+    saida = []
+    for palavras in linhas.values():
+        palavras.sort()
+        texto = " ".join(p[2] for p in palavras)
+        for achado in RE_PRECO.finditer(texto):
+            preco = float(f"{achado.group(1)}.{achado.group(2)}")
+            # altura: a da palavra com os reais (a maior entre as que formam o preço)
+            alturas = [p[1] for p in palavras if achado.group(1) in p[2]]
+            if 0.2 <= preco <= 2000:
+                saida.append((max(alturas) if alturas else 0, preco))
+    return saida
 
 
 def preco_perto(img: Image.Image, caixa: dict, limite_baixo: float | None = None) -> float | None:
@@ -158,8 +181,6 @@ def preco_perto(img: Image.Image, caixa: dict, limite_baixo: float | None = None
 
     `caixa` é a área do nome (topo, base, esquerda, direita, altura_linha); `limite_baixo` é onde começa o próximo nome
     da mesma coluna, para não pegar o preço do produto de baixo."""
-    from .encartes_ocr import RE_PRECO
-
     h = max(10.0, float(caixa.get("altura_linha") or (caixa["base"] - caixa["topo"])))
     largura = caixa["direita"] - caixa["esquerda"]
     x0 = max(0, int(caixa["esquerda"] - 0.3 * largura))
@@ -174,9 +195,9 @@ def preco_perto(img: Image.Image, caixa: dict, limite_baixo: float | None = None
     if recorte.width < 600:  # o Tesseract lê melhor letras maiores
         f = 600 / recorte.width
         recorte = recorte.resize((600, max(1, int(recorte.height * f))))
-    for achado in RE_PRECO.finditer(_ler_texto(recorte.convert("L"))):
-        preco = float(f"{achado.group(1)}.{achado.group(2)}")
-        if 0.2 <= preco <= 2000:
-            return preco
+    # o preço da oferta é o de letra maior; os pequenos são "preço por unidade", "o quilo sai por" ou o preço "de"
+    achados = _precos_com_altura(recorte.convert("L"))
+    if achados:
+        return max(achados)[1]
     return preco_da_regiao(recorte)
 

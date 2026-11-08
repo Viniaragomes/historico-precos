@@ -333,6 +333,7 @@ def paginas_do_pdf(caminho: Path, max_paginas: int = 8) -> list[Path]:
     return sorted(caminho.parent.glob(caminho.stem + "-*.png"))
 
 
+MAX_PAGINAS_POR_ENCARTE = 4  # as primeiras páginas concentram as ofertas principais; o resto do teto vai para outros mercados
 MAX_NOMES_COM_PRECO_PERTO = 25  # por imagem: cada nome custa uma ou duas leituras extras de um recorte
 
 
@@ -391,7 +392,7 @@ def _precos_perto(imagem: Path, nomes: list[tuple[str, dict]]) -> list[tuple[str
     return saida
 
 
-def ler_encartes(nav: Navegador, dias: int = 4, hoje: date | None = None, max_imagens: int = 120,
+def ler_encartes(nav: Navegador, dias: int = 4, hoje: date | None = None, max_imagens: int = 150,
                  vocab: set[str] | None = None) -> list[EncarteLido]:
     """Encartes vigentes (validade de hoje em diante): do encartesdf.com.br e dos sites dos próprios mercados.
     Com `vocab` (palavras de nomes conhecidos, ao menos 5 mil), trechos lidos de imagem só ficam se forem nome de produto."""
@@ -403,6 +404,14 @@ def ler_encartes(nav: Navegador, dias: int = 4, hoje: date | None = None, max_im
     except Exception as e:
         print(f"lista de encartes: {e!r}")
         lista = folhetos_df.todos(nav)
+    # rodízio entre mercados: o 1º encarte de cada mercado antes do 2º de qualquer um, para o teto de imagens não ser
+    # gasto todo pelas primeiras fontes da lista
+    ordem: dict[str, int] = {}
+    posicao = []
+    for e in lista:
+        ordem[e.mercado] = ordem.get(e.mercado, -1) + 1
+        posicao.append(ordem[e.mercado])
+    lista = [e for _, _, e in sorted(zip(posicao, range(len(lista)), lista), key=lambda x: (x[0], x[1]))]
     with tempfile.TemporaryDirectory() as tmp:
         pasta = Path(tmp)
         for n, e in enumerate(lista):
@@ -423,7 +432,7 @@ def ler_encartes(nav: Navegador, dias: int = 4, hoje: date | None = None, max_im
                                 _ler_imagem(lido, ocr_linhas(png, cor=cor), vocab, filtrar, None if cor else png)
             if len(lido.trechos) < 3 and not lido.nomes:
                 lido.trechos = []
-                for i, url in enumerate(e.imagens):
+                for i, url in enumerate(e.imagens[:MAX_PAGINAS_POR_ENCARTE]):
                     if lidas >= max_imagens or not tesseract_disponivel():
                         break
                     dados = nav.get_bytes(url)
