@@ -1,0 +1,99 @@
+falha ao baixar https://na.leafletscdn.com/thumbor/_B96LnySxoNLtkvTgoCsa1s_-78=/0x0/filters:format(webp):quality(65)/com.br/data/7/481731/1.jpg: HTTP Error 400: Bad Request
+
+===== ultrabox: 8 encarte(s)
+  Ultrabox acougue 2026-11-04 | publicado 2026-11-04 | até None | 2 imagem(ns) | https://ultraboxatacado.com.br/ofertas/
+  Ultrabox aguas 1053 2026-11-04 | publicado 2026-11-04 | até None | 2 imagem(ns) | https://ultraboxatacado.com.br/ofertas/
+  Ultrabox casademae 2026-11-03 | publicado 2026-11-03 | até None | 4 imagem(ns) | https://ultraboxatacado.com.br/ofertas/
+  Ultrabox crm 2026-11-03 | publicado 2026-11-03 | até None | 4 imagem(ns) | https://ultraboxatacado.com.br/ofertas/
+  Ultrabox fitness 2026-11-05 | publicado 2026-11-05 | até None | 5 imagem(ns) | https://ultraboxatacado.com.br/ofertas/
+  Ultrabox ocidental 2026-11-07 | publicado 2026-11-07 | até None | 2 imagem(ns) | https://ultraboxatacado.com.br/ofertas/
+  Ultrabox rede 2026-11-07 | publicado 2026-11-07 | até None | 2 imagem(ns) | https://ultraboxatacado.com.br/ofertas/
+  Ultrabox sacolao 2026-11-04 | publicado 2026-11-04 | até None | 6 imagem(ns) | https://ultraboxatacado.com.br/ofertas/
+  imagem 0: 523373 bytes
+  imagem 1: 542955 bytes
+  lidos: 1 preço(s), 50 nome(s) sem preço
+     R$    1.51  Coquetel Alcoólico | Coca-Cola Original ou Zero Açúcar       códigos: 0
+
+===== assai_df: 1 encarte(s)
+  Assaí ofertas DF de 07/11/2026 | publicado 2026-11-07 | até 2026-11-08 | 8 imagem(ns) | https://www.portafolhetos.com.br/assai-atacadista/assai-atacadista-ofertas-df-de-sabado-07-11-2026-481731/
+  imagem 0: 334416 bytes
+  imagem 1: 0 bytes
+  lidos: 14 preço(s), 51 nome(s) sem preço
+     R$   56.99  ÓLEO DE E LIZA PET                                           códigos: 0
+     R$   13.90  AÇUCAR CRISTAL ECOÇÚCAR sKG                                  códigos: 0
+     R$   86.79  DONA DÊ PACOTE 1KG CADA                                      códigos: 0
+     R$   18.90  CAFÉ PILÃO TIPOS PACO                                        códigos: 0
+     R$   15.99  ALHO A GRANEL                                                códigos: 0
+     R$   11.99  OVOS VERMELHO HAPPY EGGS BANDEJA COM 20 UNIDADES             códigos: 0
+     R$   10.99  HAPPY EGGS BANDEJA COM 20 UNIDADES                           códigos: 0
+     R$    2.99  DE CERVEJA ANTARCTICA LATA 26944                             códigos: 0
+     R$   26.99  PÓ OMO TODO CICLO TAMANHO FAMILIA BAG                        códigos: 0
+     R$    5.99  ULTIMATE HEINEKEN LONG NECK 33004                            códigos: 0
+     R$    1.99  PARAFUSO OU PENA LIANE PACOTE 500G º                         códigos: 0
+     R$   46.99  pe Liza |Liza ÓLEO DE DE SOJA LIZA                           códigos: 0
+     R$    5.49  padre LILI PACOTE 1KG                                        códigos: 0
+     R$    4.69  BANANÃ. PRATA P Tunis                                        códigos: 0
+
+===== Super Veneza Guará II: {'novas_no_sitemap': 21281, 'lidas': 30, 'com_preco': 18, 'vinculadas': 6, 'precos': 6, 'bloqueios': 0}
+    ('100% Vegetal burger Seara Gourmet 310g', 26.49, None, None)
+    ('16 Cápsulas Cappuccino Bicafé Denso e Aveludado Para Máquina Dolce Gusto*', 12.59, None, None)
+    ('2Hot Pote 200G Uva V01', 116.99, '7899941201750', '2HOT POTE 200G UVA V01')
+    ('3 Potes C/ Tampa Jaguar', 9.99, None, None)
+    ('Protetor Diário sem Abas Carefree Proteção Pacote 15 Unidades', 9.49, None, None)
+    ('Protetor Diário sem Abas Carefree TodoDia Pacote 15 Unidades', 9.49, None, None)
+    ('Bebida Láctea UHT Chocolate Pirakids Caixa 200ml', 1.99, '7898215151807', 'Bebida Láctea Uht Chocolate Pirakids Caixa 200ml')
+    ('Achocolatado Pó Original Toddy Pote 750g + Econômica', 17.99, '7892840819170', 'ACHOCOLATADO EM PO TODDY 750G POTE')
+    ('AÇUCAR CRISTAL 5Kg', 17.99, None, None)
+    ('Açúcar Demerara União Naturais Pacote 1kg', 9.49, '7891910020065', 'Acucar Demerara Uniao Naturais Pacote 1kg')
+    ('Água CRYSTAl Com Gás 1,5L', 4.99, '7894900531015', 'Água Crystal C/Gás 1,5L')
+    ('Água Mineral Natural com Gás Indaiá Garrafa 500ml', 2.49, None, None)
+    ('Água Oxigenada FARMAX Cremosa 30 Volumes 90ml', 2.99, None, None)
+    ('Agua Oxigenada FARMAX Cremosa 20 Volumes 90ml', 2.99, None, None)
+    ('Agua Oxigenada FARMAX Cremosa 40 Volumes 90ml', 2.99, None, None)
+    ('Aguardente de Cana Adoçada Pitú Garrafa 965ml', 19.99, None, None)
+    ('ÁLCOOL GELÁLCOOL 450G 70ºINPM GEL', 10.49, None, None)
+    ('ÁLCOOL J.FERES 1LT 70ºINPM', 8.49, None, None)
+    ('ÁLCOOL ZUPP 440G 80º INPM GEL PARA QUEIMA LABAREDA', 11.99, None, None)
+    ('Algodão Hidrófilo Topz Caixa 50g', 3.99, '7891800668179', 'ALGODAO TOPZ HIDROFILO 50G ROLO UN')
+    ('Sopinha Carne, Legumes e Mandioquinha Naturnes Vidro 115g', 10.49, '7891000049068', 'Sopinha Carne, Legumes E Mandioquinha Naturnes Vidro 115g')
+    ('Sopinha Macarrão, Legumes e Peito de Frango Naturnes Vidro 115g', 9.99, '7891000049051', 'Sopinha Macarrão, Legumes E Peito De Frango Naturnes Vidro 115g')
+    ('Ampola de Tratamento Capilar Pantene Reconstrução Revitalizadora Caixa 3 Unidades 15ml Cada', 30.99, None, None)
+    ('Cerveja Lager Premium Puro Malte Amstel Lata 350ml', 3.69, None, None)
+    ('Apresuntado AURORA 200g', 9.99, None, None)
+    ('Arroz FLORA Tipo 1 5Kg', 22.99, None, None)
+    ('Arroz ITALIANAO 5Kg', 22.99, '7896665812033', 'ARROZ ITALIANAO 5kg')
+    ('Arroz Integral Tipo 1 Urbano Pacote 1kg', 8.99, None, None)
+    ('ASSADEIRA ALUMAX Nº01 RETANGULAR 20X30CM REF:2541', 37.99, None, None)
+    ('ASSADEIRA ALUMAX Nº02 RETANGULAR 20X30CM REF:2541', 46.99, None, None)
+
+===== Super Veneza Cruzeiro: {'novas_no_sitemap': 21305, 'lidas': 30, 'com_preco': 10, 'vinculadas': 0, 'precos': 0, 'bloqueios': 0}
+    ('16 Cápsulas Cappuccino Bicafé Denso e Aveludado Para Máquina Dolce Gusto*', 12.59, None, None)
+    ('2Hot Pote 200G Uva V01', 116.99, '7899941201750', '2HOT POTE 200G UVA V01')
+    ('3 Potes C/ Tampa Jaguar', 9.99, None, None)
+    ('AÇUCAR CRISTAL 5Kg', 17.99, None, None)
+    ('ÁLCOOL GELÁLCOOL 450G 70ºINPM GEL', 10.49, None, None)
+    ('ÁLCOOL J.FERES 1LT 70ºINPM', 8.49, None, None)
+    ('ÁLCOOL ZUPP 440G 80º INPM GEL PARA QUEIMA LABAREDA', 11.99, None, None)
+    ('Ampola de Tratamento Capilar Pantene Reconstrução Revitalizadora Caixa 3 Unidades 15ml Cada', 30.99, None, None)
+    ('ASSADEIRA ALUMAX Nº01 RETANGULAR 20X30CM REF:2541', 37.99, None, None)
+    ('ASSADEIRA ALUMAX Nº02 RETANGULAR 20X30CM REF:2541', 46.99, None, None)
+    ('ASSADEIRA ALUMAX Nº03 RETANGULAR 26X37CM REF:2543', 53.99, None, None)
+    ('ASSADEIRA ALUMAX Nº04 RETANGULAR 20X30CM REF:2541', 73.99, None, None)
+    ('ASSADEIRA REAL Nº02 RETA', 40.99, None, None)
+    ('ASSADEIRA REAL Nº03 RETA', 45.99, None, None)
+    ('ASSADEIRA REAL Nº05 RETA', 84.99, None, None)
+    ('Abacate', 2.79, None, None)
+    ('Abacate Manteiga', 10.49, None, None)
+    ('Abacaxi Descascado', 5.99, None, None)
+    ('Abacaxi Em Calda em Rodelas Olé 400G', 23.49, None, None)
+    ('Abacaxi Pérola Unidade', 8.99, None, None)
+    ('Abacaxi em Calda Rodelas Triangulo Mineiro Lata 400g', 24.99, None, None)
+    ('Abóbora Baiana', 2.79, None, None)
+    ('Abóbora Italia', 3.69, None, None)
+    ('Abóbora Japonesa inteira', 3.99, None, None)
+    ('Abóbora Japonesa Picada', 16.99, None, None)
+    ('Abóbora Japonesa/Quiabo/Jiló', 24.99, None, None)
+    ('Abóbora Japonesa / Vagem /Brócolis', 29.99, None, None)
+    ('Abóbora Japonesa e Brócolis', 24.99, None, None)
+    ('Abóbora Japonesa e Couve-Flor', 24.99, None, None)
+    ('Abóbora Japonesa e Quiabo', 24.99, None, None)
