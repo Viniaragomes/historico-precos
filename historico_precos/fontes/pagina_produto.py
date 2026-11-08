@@ -177,8 +177,9 @@ def revincular(banco, loja: dict, catalogo, dias: int = 30, hoje: date | None = 
 
 
 def catalogar_por_nome(nav: Navegador, banco, loja: dict, catalogo, limite: int = 1000, hoje: date | None = None, ate=None) -> dict:
-    """Lê, em rodízio, até `limite` páginas de produto da loja (as nunca lidas primeiro, depois as mais antigas)
-    e vincula cada uma a um EAN pelo nome. Preço só entra quando o vínculo passa nas regras de `vinculo`."""
+    """Lê, em rodízio, até `limite` páginas de produto da loja (primeiro as já ligadas a um código e não lidas hoje,
+    depois as nunca lidas, depois as mais antigas) e vincula cada uma a um EAN pelo nome. Preço só entra quando o
+    vínculo passa nas regras de `vinculo`."""
     from ..modelo import agora_iso
 
     con = banco.con
@@ -188,8 +189,11 @@ def catalogar_por_nome(nav: Navegador, banco, loja: dict, catalogo, limite: int 
     novas = [u for u in urls_do_sitemap(nav, loja["sitemap"], loja.get("padrao_produto", r"/p/")) if u not in conhecidas]
     con.executemany("INSERT OR IGNORE INTO produtos_loja (loja, url) VALUES (?, ?)", [(loja["nome"], u) for u in novas])
     con.commit()
-    fila = [u for (u,) in con.execute("SELECT url FROM produtos_loja WHERE loja = ? ORDER BY lido_em IS NOT NULL, lido_em LIMIT ?",
-                                      (loja["nome"], limite))]
+    # 1º os produtos já ligados a um código e não lidos hoje (são os que entram na comparação: o preço tem de ser do
+    # dia); 2º as páginas nunca lidas (descobrir produtos); 3º as lidas há mais tempo
+    fila = [u for (u,) in con.execute(
+        "SELECT url FROM produtos_loja WHERE loja = ? AND NOT (ean IS NOT NULL AND data = ?) "
+        "ORDER BY (ean IS NULL), lido_em IS NOT NULL, lido_em LIMIT ?", (loja["nome"], dia, limite))]
     resumo = {"novas_no_sitemap": len(novas), "lidas": 0, "com_preco": 0, "vinculadas": 0, "precos": 0, "bloqueios": 0}
     pontos = []
     for url in fila:

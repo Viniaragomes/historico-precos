@@ -103,6 +103,9 @@ class TestVinculoPorNome(unittest.TestCase):
         # rodízio: na próxima rodada, nada novo no sitemap e as páginas são relidas
         r2 = pagina_produto.catalogar_por_nome(nav_com(fake), banco, loja, catalogo, limite=1, hoje=date(2026, 10, 22))
         self.assertEqual((r2["novas_no_sitemap"], r2["lidas"]), (0, 1))
+        # com uma página por rodada, a primeira relida no dia seguinte é a do produto ligado a um código (preço do dia)
+        self.assertEqual([u for u in fake.acessos if "/p/" in u][-1], "https://mercado.df/p/cafe-3c-500")
+        self.assertEqual(banco.precos("7896005800027")[-1].data_observada, "2026-10-22")
 
     def test_para_depois_de_recusas_seguidas(self):
         from historico_precos.vinculo import Catalogo
