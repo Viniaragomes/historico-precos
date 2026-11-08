@@ -505,13 +505,26 @@ def referencia_das_lojas(con, dias: int = 30) -> dict[str, float]:
     return {e: median(v) for e, v in precos.items()}
 
 
+def unidade_venda(texto: str) -> str:
+    """"kg" para preço por quilo ("BANANA KG", "peça ou pedaço kg", "a granel"); "un" para unidade ou embalagem com
+    tamanho ("Arroz 5kg"). Mesma regra do app: preços de tipos diferentes não se comparam."""
+    from .vinculo import normalizar
+
+    t = normalizar(texto)
+    if re.search(r"\d\s*(kg|g|gr|ml|l|lt|litros?)\b", t):
+        return "un"
+    return "kg" if re.search(r"\b(kg|quilo|granel)\b|pedaco", t) else "un"
+
+
 def _mesmo_produto(a: tuple, b: tuple) -> bool:
     """Dois trechos de encarte são o mesmo produto? Mesmas regras de fundo do vínculo por nome: tamanho igual,
     nenhuma palavra de variante (sabor, integral/desnatado) só de um lado e nomes parecidos. Sem tamanho
     (hortifrúti por kg), só quando as palavras são praticamente as mesmas."""
     from .vinculo import DISTINTIVAS, semelhanca
 
-    (tka, qa, ea), (tkb, qb, eb) = a, b
+    (tka, qa, ea, ua), (tkb, qb, eb, ub) = a, b
+    if ua != ub:
+        return False  # um por quilo, outro por unidade: não se comparam
     if ea and eb:
         return bool(set(ea) & set(eb))  # os dois anúncios apontam para o mesmo código de barras
     if not tka or not tkb or (tka ^ tkb) & DISTINTIVAS:
@@ -535,7 +548,7 @@ def comparar_mercados(encartes: list[EncarteLido]) -> list[dict]:
     grupos: list[dict] = []
     for e in encartes:
         for t in e.trechos:
-            chave = (tokens(t.texto), quantidade(t.texto), t.eans)
+            chave = (tokens(t.texto), quantidade(t.texto), t.eans, unidade_venda(t.texto))
             g = next((g for g in grupos if _mesmo_produto(g["chave"], chave)), None)
             if g is None:
                 g = {"chave": chave, "ofertas": {}, "eans": set()}
@@ -548,7 +561,7 @@ def comparar_mercados(encartes: list[EncarteLido]) -> list[dict]:
     # nome lido sem preço (preço estilizado): entra como "também anunciado aqui", só em produto que já tem preço lido
     for e in encartes:
         for nome in e.nomes:
-            chave = (tokens(nome), quantidade(nome), e.nomes_eans.get(nome, []))
+            chave = (tokens(nome), quantidade(nome), e.nomes_eans.get(nome, []), unidade_venda(nome))
             g = next((g for g in grupos if _mesmo_produto(g["chave"], chave)), None)
             if g is not None:
                 g["eans"].update(e.nomes_eans.get(nome, []))

@@ -3,7 +3,7 @@ import { calcular, categoria } from "./impostos.js";
 import { confiancaPreco, nivelPorPontos, precoSugerido, utilidade, chavePreco, chaveCausa, PONTOS, NIVEIS as NIVEIS_COMUNIDADE } from "./confianca.js";
 import { criarComunidade, consentimento, ErroComunidade, TIPOS_REPORTE } from "./comunidade.js";
 
-const VERSAO_APP = "v29"; // igual à VERSAO do sw.js
+const VERSAO_APP = "v30"; // igual à VERSAO do sw.js
 
 const conteudo = document.getElementById("conteudo");
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
@@ -848,6 +848,16 @@ const TIPO_LUGAR = {
   comunidade: { rotulo: "informado por pessoas", classe: "neutra" },
 };
 
+// como o produto é vendido: "kg" (preço por quilo: "BANANA KG", "peça ou pedaço kg", "a granel") ou "un" (unidade ou
+// embalagem com tamanho: "Arroz 5kg", "Leite 1L"). Preços de tipos diferentes não entram na mesma comparação.
+function unidadeVenda(texto) {
+  const t = normalizar(texto || "");
+  if (/\d\s*(kg|g|gr|ml|l|lt|litros?)\b/.test(t)) return "un";
+  if (/\b(kg|quilo|granel)\b|pedaco/.test(t)) return "kg";
+  return "un";
+}
+const ROTULO_UNIDADE = { kg: "por kg", un: "por unidade" };
+
 // preços de prateleira de todas as fontes. Cada fonte chega no seu tempo; a cada chegada, a tela se redesenha.
 // referencia = preço de compra do comércio (notas entre empresas): aparece no comparativo, mas fica fora da média.
 function painelDePrecos({ ean, p, nomes, referencia, votos = [], atualizarVotos }) {
@@ -856,11 +866,18 @@ function painelDePrecos({ ean, p, nomes, referencia, votos = [], atualizarVotos 
     lugar: o.loja, tipo: "site", preco: o.preco, data: o.data, link: o.evidencia, oferta: o,
     detalhe: o.metodo === "vinculo-nome" ? `Vinculado pelo nome: “${o.descricao || "?"}”. Confira o tamanho.` : null,
     aviso: o.aviso || null,
-    promo: o.em_promocao, preco_de: o.preco_de,
+    promo: o.em_promocao, preco_de: o.preco_de, unidade: unidadeVenda(o.descricao || p?.nome),
   }));
   const ouvintes = [];
   const lugares = () => [...estado.site, ...estado.encarte, ...estado.comunidade];
-  const comPreco = () => lugares().filter((l) => l.preco != null);
+  const todosComPreco = () => lugares().filter((l) => l.preco != null);
+  // o tipo de venda mais comum entre os preços (empate: por unidade) define a comparação; o outro aparece à parte
+  const unidadePrincipal = () => {
+    const kg = todosComPreco().filter((l) => (l.unidade || "un") === "kg").length;
+    return kg > todosComPreco().length - kg ? "kg" : "un";
+  };
+  const comPreco = () => todosComPreco().filter((l) => (l.unidade || "un") === unidadePrincipal());
+  const outraUnidade = () => todosComPreco().filter((l) => (l.unidade || "un") !== unidadePrincipal());
   const resumo = () => {
     const xs = comPreco().map((l) => l.preco);
     if (!xs.length) return null;
@@ -868,7 +885,8 @@ function painelDePrecos({ ean, p, nomes, referencia, votos = [], atualizarVotos 
     return { media, min: Math.min(...xs), max: Math.max(...xs), n: xs.length, lugares: new Set(comPreco().map((l) => l.lugar)).size };
   };
   const avisar = () => ouvintes.forEach((f) => f());
-  const painel = { lugares, comPreco, resumo, referencia, p, ean, votos, atualizarVotos, ao: (f) => { ouvintes.push(f); f(); } };
+  const painel = { lugares, comPreco, outraUnidade, unidadePrincipal, resumo, referencia, p, ean, votos, atualizarVotos,
+    ao: (f) => { ouvintes.push(f); f(); } };
 
   encartes().then((d) => {
     const vistos = new Set();
@@ -884,7 +902,7 @@ function painelDePrecos({ ean, p, nomes, referencia, votos = [], atualizarVotos 
     painel.encartesVerificados = { encartes: d.encartes.length, mercados: new Set(d.encartes.map((e) => e.mercado)).size };
     estado.encarte = [...porCodigo, ...porNome]
       .map(({ e, t, precisao }) => ({ lugar: e.mercado, tipo: "encarte", preco: t.p, validade: e.validade_fim, data: e.publicado,
-        link: e.pdf || e.post, precisao, variantes: t.e?.length || 0, detalhe: `lido no encarte: “${t.t}”` }));
+        link: e.pdf || e.post, precisao, variantes: t.e?.length || 0, detalhe: `lido no encarte: “${t.t}”`, unidade: unidadeVenda(t.t) }));
     // mercado com preço lido no encarte não precisa repetir a linha "só o nome foi lido"
     const comPrecoLido = new Set(estado.encarte.filter((l) => l.preco != null).map((l) => l.lugar));
     estado.encarte = estado.encarte.filter((l) => l.preco != null || !comPrecoLido.has(l.lugar));
@@ -910,7 +928,7 @@ function resumoPreco(painel, semPreco) {
     if (!r) { preencher(caixa, ...[].concat(semPreco || [])); return; }
     const barato = painel.comPreco().reduce((a, b) => (b.preco < a.preco ? b : a));
     preencher(caixa, 
-      el("p", { class: "rotulo entrar" }, "Preço médio no DF"),
+      el("p", { class: "rotulo entrar" }, painel.unidadePrincipal() === "kg" ? "Preço médio no DF (por kg)" : "Preço médio no DF"),
       el("p", { class: "preco-hero entrar" }, brl.format(r.media)),
       el("p", { class: "onde entrar" }, r.n === 1 ? `1 preço encontrado, em ${barato.lugar}`
         : `média de ${r.n} preços em ${r.lugares} ${r.lugares === 1 ? "lugar" : "lugares"} · de ${brl.format(r.min)} a ${brl.format(r.max)}`),
@@ -1039,6 +1057,11 @@ function cartaoComparativo(painel) {
       el("p", { class: "sub" }, r ? (lista.length > 1 ? `Do mais barato ao mais caro. A linha vertical marca a média (${brl.format(r.media)}).`
         : "Só um preço encontrado até agora: quanto mais lugares, melhor a comparação.") : "Ainda sem preço de prateleira; abaixo, a referência de custo."),
       lista.length ? el("ul", { class: "lista-comp" }, lista.map(linha)) : null,
+      painel.outraUnidade().length ? el("div", { class: "linha-comp referencia" },
+        el("div", { class: "dif-media" }, `Vendido ${ROTULO_UNIDADE[painel.unidadePrincipal() === "kg" ? "un" : "kg"]} (fora da comparação, que é ${ROTULO_UNIDADE[painel.unidadePrincipal()]}):`),
+        ...painel.outraUnidade().sort((a, b) => a.preco - b.preco).map((l) => el("div", { class: "linha-comp-topo" },
+          el("span", { class: "nome" }, l.lugar, el("small", {}, ` ${TIPO_LUGAR[l.tipo].rotulo}`)),
+          el("span", { class: "valor" }, brl.format(l.preco))))) : null,
       ref ? el("div", { class: "linha-comp referencia" },
         el("div", { class: "linha-comp-topo" },
           el("span", { class: "nome" }, "Preço de compra do comércio", el("small", {}, ` ${ref.texto}`)),

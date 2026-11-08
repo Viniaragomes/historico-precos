@@ -270,6 +270,17 @@ class TestFiltrosDePreco(unittest.TestCase):
         self.assertEqual([t.preco for t in e.trechos], [12.98, 0.98])
 
 
+class TestUnidadeDeVenda(unittest.TestCase):
+    def test_kg_nao_compara_com_unidade(self):
+        T, E = encartes_ocr.Trecho, encartes_ocr.EncarteLido
+        a = E("A", "https://a", "2026-11-08", None, [], trechos=[T("BANANA NANICA KG", 4.99)])
+        b = E("B", "https://b", "2026-11-08", None, [], trechos=[T("BANANA NANICA", 2.49)])
+        c = E("C", "https://c", "2026-11-08", None, [], trechos=[T("BANANA NANICA KG", 5.49)])
+        (comp,) = encartes_ocr.comparar_mercados([a, b, c])
+        self.assertEqual([o["mercado"] for o in comp["ofertas"]], ["A", "C"])
+        self.assertEqual(encartes_ocr.unidade_venda("Arroz Camil 5kg"), "un")
+
+
 class TestRede(unittest.TestCase):
     def test_mesma_rede_com_outro_nome(self):
         self.assertEqual(encartes_ocr.nome_da_rede("Dia a Dia Atacadista"), "Atacadão Dia a Dia")
