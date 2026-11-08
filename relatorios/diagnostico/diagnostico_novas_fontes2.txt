@@ -1,0 +1,148 @@
+===== robots.txt completo (sem comentários) do Super Veneza e do domínio das páginas de produto
+
+https://superveneza.instabuy.com.br (HTTP 200):
+  User-agent: *
+  Content-Signal: search=yes,ai-train=no,use=reference
+  Allow: /
+  User-agent: Amazonbot
+  Disallow: /
+  User-agent: Applebot-Extended
+  Disallow: /
+  User-agent: Bytespider
+  Disallow: /
+  User-agent: CCBot
+  Disallow: /
+  User-agent: ClaudeBot
+  Disallow: /
+  User-agent: Diffbot
+  Disallow: /
+  User-agent: Google-Extended
+  Disallow: /
+  User-agent: GPTBot
+  Disallow: /
+  User-agent: omgili
+  Disallow: /
+  User-agent: anthropic-ai
+  Disallow: /
+  User-agent: Claude-Web
+  Disallow: /
+  User-agent: cohere-ai
+  Disallow: /
+  User-agent: MistralAI-Training
+  Disallow: /
+  User-agent: meta-externalagent
+  Disallow: /
+  User-agent: GoogleOther
+  Disallow: /
+  User-agent: Baiduspider
+  Disallow: /
+  User-agent: PetalBot
+  Disallow: /
+  User-agent: AwarioSmartBot
+  User-agent: AwarioRssBot
+  Disallow: /
+  produto permitido? True
+
+https://superveneza.instabuy.app.br (HTTP 200):
+  User-agent: *
+  Content-Signal: search=yes,ai-train=no,use=reference
+  Allow: /
+  User-agent: Amazonbot
+  Disallow: /
+  User-agent: Applebot-Extended
+  Disallow: /
+  User-agent: Bytespider
+  Disallow: /
+  User-agent: CCBot
+  Disallow: /
+  User-agent: ClaudeBot
+  Disallow: /
+  User-agent: Diffbot
+  Disallow: /
+  User-agent: Google-Extended
+  Disallow: /
+  User-agent: GPTBot
+  Disallow: /
+  User-agent: omgili
+  Disallow: /
+  User-agent: anthropic-ai
+  Disallow: /
+  User-agent: Claude-Web
+  Disallow: /
+  User-agent: cohere-ai
+  Disallow: /
+  User-agent: MistralAI-Training
+  Disallow: /
+  User-agent: meta-externalagent
+  Disallow: /
+  User-agent: GoogleOther
+  Disallow: /
+  User-agent: Baiduspider
+  Disallow: /
+  User-agent: PetalBot
+  Disallow: /
+  User-agent: AwarioSmartBot
+  User-agent: AwarioRssBot
+  Disallow: /
+  produto permitido? True
+
+https://bigboxdelivery.com.br (HTTP 200):
+  User-agent: *
+  Content-Signal: search=yes,ai-train=no,use=reference
+  Allow: /
+  User-agent: Amazonbot
+  Disallow: /
+  User-agent: Applebot-Extended
+  Disallow: /
+  User-agent: Bytespider
+  Disallow: /
+  User-agent: CCBot
+  Disallow: /
+  User-agent: ClaudeBot
+  Disallow: /
+  User-agent: Diffbot
+  Disallow: /
+  User-agent: Google-Extended
+  Disallow: /
+  User-agent: GPTBot
+  Disallow: /
+  User-agent: omgili
+  Disallow: /
+  User-agent: anthropic-ai
+  Disallow: /
+  User-agent: Claude-Web
+  Disallow: /
+  User-agent: cohere-ai
+  Disallow: /
+  User-agent: MistralAI-Training
+  Disallow: /
+  User-agent: meta-externalagent
+  Disallow: /
+  User-agent: GoogleOther
+  Disallow: /
+  User-agent: Baiduspider
+  Disallow: /
+  User-agent: PetalBot
+  Disallow: /
+  User-agent: AwarioSmartBot
+  User-agent: AwarioRssBot
+  Disallow: /
+  produto permitido? True
+
+===== Ultrabox /ofertas/
+HTTP 200 | permitido: True
+imagens/pdf: 91 ['https://ultraboxatacado.com.br/wp-content/litespeed/avatar/ea7c38acb2a9b9a489cd00cadc6aacbb.jpg', 'https://ultraboxatacado.com.br/wp-content/uploads/2026/02/campanha-668-pagina-1-1-666x1024.jpeg', 'https://ultraboxatacado.com.br/wp-content/uploads/2026/02/campanha-668-pagina-1-1.jpeg', 'https://ultraboxatacado.com.br/wp-content/uploads/2026/10/ultrabox-crm-2026-11-03-pagina-1-240x300.jpg', 'https://ultraboxatacado.com.br/wp-content/uploads/2026/10/ultrabox-crm-2026-11-03-pagina-1-768x960.jpg', 'https://ultraboxatacado.com.br/wp-content/uploads/2026/10/ultrabox-crm-2026-11-03-pagina-1-819x1024.jpg', 'https://ultraboxatacado.com.br/wp-content/uploads/2026/10/ultrabox-crm-2026-11-03-pagina-1.jpg', 'https://ultraboxatacado.com.br/wp-content/uploads/2026/10/ultrabox-crm-2026-11-03-pagina-2-240x300.jpg', 'https://ultraboxatacado.com.br/wp-content/uploads/2026/10/ultrabox-crm-2026-11-03-pagina-2-768x960.jpg', 'https://ultraboxatacado.com.br/wp-content/uploads/2026/10/ultrabox-crm-2026-11-03-pagina-2-819x1024.jpg', 'https://ultraboxatacado.com.br/wp-content/uploads/2026/10/ultrabox-crm-2026-11-03-pagina-2.jpg', 'https://ultraboxatacado.com.br/wp-content/uploads/2026/10/ultrabox-crm-2026-11-03-pagina-3-240x300.jpg', 'https://ultraboxatacado.com.br/wp-content/uploads/2026/10/ultrabox-crm-2026-11-03-pagina-3-768x960.jpg', 'https://ultraboxatacado.com.br/wp-content/uploads/2026/10/ultrabox-crm-2026-11-03-pagina-3-819x1024.jpg', 'https://ultraboxatacado.com.br/wp-content/uploads/2026/10/ultrabox-crm-2026-11-03-pagina-3.jpg']
+texto: Ofertas e Promoções de Atacado com Preços Imbatíveis | ULTRABOX Ir para o conteúdo Ofertas Lojas ULTRABOX Quem somos ULTRA Sustentável Contato SAC Whatsapp Dúvidas Frequentes Trabalhe Conosco Portal do Funcionário Portal do Fornecedor Ofertas Lojas ULTRABOX Quem somos ULTRA Sustentável Contato SAC Whatsapp Dúvidas Frequentes Trabalhe Conosco Portal do Funcionário Portal do Fornecedor Home Ofertas Lojas ULTRABOX Quem somos ULTRA Sustentável Contato SAC Whatsapp Dúvidas Frequentes Trabalhe Conosco Portal do Funcionário Portal do Fornecedor Promoções Aniversário 12 anos ULTRAClube Home Ofertas Lojas ULTRABOX Quem somos ULTRA Sustentável Contato SAC Whatsapp Dúvidas Frequentes Trabalhe Conosco Portal do Funcionário Portal do Fornecedor Promoções Aniversário 12 anos ULTRAClube ULTRAClube Oferta
+feed HTTP 200 ['Ultrabox', 'Ultrabox']
+/wp-json/wp/v2/pages?per_page=30&_fields=slug,link,modified HTTP 200 [{"modified":"2026-09-22T20:12:25","slug":"relatorio-de-transparencia-e-igualdade-salarial-de-mulheres-e-homens-2","link":"https:\/\/ultraboxatacado.com.br\/relatorio-de-transparencia-e-igualdade-salarial-de-mulheres-e-homens-2\/"},{"modified":"2026-02-23T10:48:14","slug":"teste-banner","link":"https:\/\/ultraboxatacado.com.br\/teste-banner\/"},{"modified":"2026-01-26T20:35:44","slug":"aviso-de-privacidade","link":"https:\/\/ultraboxatacado.com.br\/aviso-de-privacidade\/"},{"modified":"2026-01-08T16:48:34","slug":"aniversario-12-anos","link":"https:\/\/ultraboxatacado.com.br\/aniversario-12-an
+/wp-json/wp/v2/media?per_page=10&_fields=source_url,date HTTP 200 [{"date":"2026-11-06T23:48:54","source_url":"https:\/\/ultraboxatacado.com.br\/wp-content\/uploads\/2026\/11\/ultrabox-rede-2026-11-07-pagina-2.jpeg"},{"date":"2026-11-06T23:48:43","source_url":"https:\/\/ultraboxatacado.com.br\/wp-content\/uploads\/2026\/11\/ultrabox-rede-2026-11-07-pagina-1.jpeg"},{"date":"2026-11-06T19:01:47","source_url":"https:\/\/ultraboxatacado.com.br\/wp-content\/uploads\/2026\/11\/ultrabox-ocidental-2026-11-07-pagina-2.jpeg"},{"date":"2026-11-06T19:01:36","source_url":"https:\/\/ultraboxatacado.com.br\/wp-content\/uploads\/2026\/11\/ultrabox-ocidental-2026-11-07-pagin
+
+===== Portafolhetos: folheto Assaí DF
+folhetos DF na página da rede: ['/assai-atacadista/assai-atacadista-ofertas-df-de-quinta-feira-05-11-2026-481345/', '/assai-atacadista/assai-atacadista-ofertas-df-de-sabado-07-11-2026-481731/', '/assai-atacadista/assai-atacadista-ofertas-df-de-segunda-feira-02-11-2026-479570/', '/assai-atacadista/assai-atacadista-ofertas-df-de-sexta-feira-06-11-2026-481545/']
+permitido: True
+HTTP 200 | imagens: 6 ['https://na.leafletscdn.com/com.br/img/chrome-promo/kim-app-icon.png', 'https://na.leafletscdn.com/com.br/img/google-btns/google-play-badge-pt.png', 'https://na.leafletscdn.com/com.br/img/no-img.jpg', 'https://na.leafletscdn.com/com.br/img/shop/br/7/logo.png', 'https://na.leafletscdn.com/thumbor/3vYwmqwMlzpN6gSN6i3pQUtnmcg=/0x0/filters:format(webp):quality(65)/com.br/data/7/481545/0.jpg', 'https://www.portafolhetos.com.br/img/sd_logo/br.png']
+validade/datas: ['de 06/11/2026⏳ Descubra as promoções on-line!">', 'de 06/11/2026', 'de 06/11/2026","inLanguage":"pt-BR"},{"@type":"Articl', 'de 06/11/2026","description":"Assaí ofertas válidas e', 'de 06/11/2026","inLanguage":"pt-BR","isPartOf":{"@id"']
+páginas internas: ['/assai-atacadista/assai-atacadista-ofertas-df-de-sexta-feira-06-11-2026-481545/', '/assai-atacadista/assai-atacadista-ofertas-df-de-sexta-feira-06-11-2026-481545/?page=2', 'https://www.portafolhetos.com.br/assai-atacadista/assai-atacadista-ofertas-df-de-sexta-feira-06-11-2026-481545/']
+trecho: Ofertas Assaí Atacadista &gt;&gt; Assaí Atacadista ofertas - DF de 06/11/2026 Folhetos atuais sempre à mão Adicionar ao Chrome - Grátis Portafolhetos x Procura Portafolhetos Posição atual A localização falhou. Permita a geolocalização no seu navegador. Confirmar Ok À procura da posição... Pesquisar Entrar Registrar BLACK FRIDAY Novo Ofertas Supermercados Mostrar a categoriaff Akki Atacadista Angeloni Apoio Mineiro Arena Atacado Assaí Atacadista Atacadão Atakarejo Bahamas Mix Bahamas Supermercados Barbosa Supermercados Big Box Big Compra Big Supermercados Bistek Supermercados Boa Supermercados Bramil Supermercados Brasil Atacadista Bretas Calvo Atacadista Carrefour Carrefour Bairro Cercadão C
+  imagem https://na.leafletscdn.com/com.br/img/chrome-promo/kim-app-icon.png permitida: True
+  imagem https://na.leafletscdn.com/com.br/img/google-btns/google-play-badge-pt.png permitida: True
