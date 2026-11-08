@@ -1,9 +1,9 @@
 // Prova Preço: escaneia o código de barras e mostra onde está mais barato, o histórico e por que o preço mudou.
-import { calcular, categoria } from "./impostos.js";
+import { calcular, categoria, categoriaGeral, categoriaPorNcm } from "./impostos.js";
 import { confiancaPreco, nivelPorPontos, precoSugerido, utilidade, chavePreco, chaveCausa, PONTOS, NIVEIS as NIVEIS_COMUNIDADE } from "./confianca.js";
 import { criarComunidade, consentimento, ErroComunidade, TIPOS_REPORTE } from "./comunidade.js";
 
-const VERSAO_APP = "v30"; // igual à VERSAO do sw.js
+const VERSAO_APP = "v31"; // igual à VERSAO do sw.js
 
 const conteudo = document.getElementById("conteudo");
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
@@ -829,7 +829,7 @@ async function telaProduto(ean) {
     cartaoMenorPreco(ean),
     cartaoOndeEncontrar(painel),
     secaoHistorico(cartaoHistorico(p), cartaoCompraDF(p), cartaoCampo(p, tabela), cartaoCausas(contexto)),
-    cartaoImpostos(tabela, [p.nome, aberto?.nome], p.ofertas[0]?.preco ?? null),
+    cartaoImpostos(tabela, [p.nome, aberto?.nome], p.ofertas[0]?.preco ?? null, ean),
     cartaoInformar(painel, p.nome),
     cartaoReportar(ean),
     el("p", { class: "rodape-nota" }, p.aviso, ` Atualizado ${idade(p.atualizado_em)}.`)));
@@ -1313,7 +1313,7 @@ function cartaoDigiteNome(ean, tabela) {
     const nome = campo.value.trim();
     if (nome.length < 3) return;
     try { localStorage.setItem(`nome_${ean}`, nome); } catch { /* sem armazenamento */ }
-    resultado.replaceChildren(cartaoEncartes(nome), cartaoParecidos(nome, ean), cartaoImpostos(tabela, [nome], null));
+    resultado.replaceChildren(cartaoEncartes(nome), cartaoParecidos(nome, ean), cartaoImpostos(tabela, [nome], null, ean));
   };
   try { campo.value = localStorage.getItem(`nome_${ean}`) || ""; } catch { /* sem armazenamento */ }
   const cartao = el("section", { class: "cartao entrar entrar-2" },
@@ -1355,7 +1355,7 @@ async function telaNaoAcompanhado(ean, aberto, tabela) {
       cartaoBuscaNaHora(ean),
       cartaoOndeEncontrar(painel),
       nome ? cartaoParecidos(nome, ean) : null,
-      nome ? cartaoImpostos(tabela, [nome], null) : aberto?.falhou ? el("section", { class: "cartao entrar" },
+      nome || dic ? cartaoImpostos(tabela, [nome], null, ean) : aberto?.falhou ? el("section", { class: "cartao entrar" },
         el("h2", {}, "Não deu para consultar agora"),
         el("p", { class: "sub" }, "A base aberta de produtos não respondeu a tempo (internet lenta ou instável)."),
         el("button", { class: "botao-secundario-neutro", type: "button", onclick: () => telaProduto(ean) }, "Tentar de novo"))
@@ -1792,8 +1792,26 @@ function sugerirEvidencia(p, chave) {
     } }, "Enviar para conferência"));
 }
 
-function cartaoImpostos(tabela, nomes, precoInicial) {
+// categoria pelo nome na hora; se o código tiver NCM nas notas do DF, a categoria pelo NCM (mais precisa) ou a regra
+// geral (quando o nome não classificou) substitui
+function cartaoImpostos(tabela, nomes, precoInicial, ean) {
   const cartao = el("section", { class: "cartao entrar entrar-4" });
+  const porNome = tabela ? categoria(tabela, ...nomes) : null;
+  preencherImpostos(cartao, tabela, porNome, precoInicial);
+  if (tabela && ean) {
+    codigoDF(ean).then((d) => {
+      if (!d?.ncm) return;
+      const cat = categoriaPorNcm(tabela, d.ncm) || (porNome ? null : categoriaGeral(tabela, d.ncm));
+      if (cat && cat.id !== porNome?.id) {
+        cartao.replaceChildren();
+        preencherImpostos(cartao, tabela, cat, precoInicial, d.ncm);
+      }
+    });
+  }
+  return cartao;
+}
+
+function preencherImpostos(cartao, tabela, cat, precoInicial, ncm = null) {
   const cabecalho = el("div", { class: "cabecalho-impostos" },
     el("h2", {}, "Impostos no preço"), el("span", { class: "selo-breve" }, "ESTIMATIVA"));
   const seloConferido = (cat) => {
@@ -1804,10 +1822,9 @@ function cartaoImpostos(tabela, nomes, precoInicial) {
     cartao.append(cabecalho, el("p", { class: "sub", style: "margin:0" }, "Não foi possível carregar a tabela de impostos agora."));
     return cartao;
   }
-  const cat = categoria(tabela, ...nomes);
   if (!cat) {
     cartao.append(cabecalho, el("p", { class: "sub", style: "margin:0" },
-      "Ainda não sabemos classificar este produto para estimar os impostos. Por enquanto cobrimos itens da cesta básica e de higiene."));
+      "Ainda não sabemos classificar este produto para estimar os impostos: ele não está nas notas fiscais do DF nem nas categorias que cobrimos."));
     return cartao;
   }
 
@@ -1856,7 +1873,7 @@ function cartaoImpostos(tabela, nomes, precoInicial) {
         oninput: (ev) => { preco = parseFloat(ev.target.value.replace(/\./g, "").replace(",", ".")); desenhar(preco); } }))) : null;
 
   cartao.append(...[cabecalho,
-    el("p", { class: "sub" }, `Categoria: ${cat.nome}. ${precoInicial != null ? "Calculado sobre o menor preço de hoje." : ""}`),
+    el("p", { class: "sub" }, `Categoria: ${cat.nome}${ncm ? ` (pelo NCM ${ncm}, das notas fiscais do DF)` : ""}. ${precoInicial != null ? "Calculado sobre o menor preço de hoje." : ""}`),
     entradaPreco, resultado,
     cat.pendente ? el("p", { class: "pendente" }, icone("duvida"), el("span", {}, `A confirmar: ${cat.pendente}`)) : null,
     cat.conferencia?.conferido_em

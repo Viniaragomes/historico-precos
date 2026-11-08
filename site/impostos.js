@@ -10,6 +10,25 @@ export function categoria(tabela, ...textos) {
   return tabela.categorias.find((c) => c.palavras.some((p) => alvo.includes(normalizar(p).trimEnd()))) || null;
 }
 
+// pelo NCM (classificação fiscal do produto, vinda das notas do DF): a categoria com o prefixo mais longo que bate
+export function categoriaPorNcm(tabela, ncm) {
+  const n = String(ncm || "").replace(/\D/g, "");
+  if (n.length < 4) return null;
+  let melhor = null, tamanho = 0;
+  for (const c of tabela.categorias) {
+    for (const prefixo of c.ncm || []) {
+      if (n.startsWith(prefixo) && prefixo.length > tamanho) { melhor = c; tamanho = prefixo.length; }
+    }
+  }
+  return melhor;
+}
+
+// sem categoria específica, mas com NCM conhecido: regra geral, avisando que pode haver exceção para este NCM
+export function categoriaGeral(tabela, ncm) {
+  const geral = tabela.categorias.find((c) => c.id === "geral");
+  return geral ? { ...geral, pendente: `${geral.pendente} NCM ${ncm}.` } : null;
+}
+
 export function calcular(tabela, cat, preco) {
   const icmsRegra = tabela.regras.icms[cat.icms];
   const pisRegra = tabela.regras.pis_cofins[cat.pis_cofins];

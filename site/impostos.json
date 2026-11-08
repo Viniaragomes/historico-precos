@@ -34,60 +34,372 @@
     "aliquota-referencia": {
       "titulo": "Alíquota de referência IBS + CBS ainda não definida oficialmente; 26,5% é a estimativa usada na regulamentação (o Comitê Gestor trabalhou com 27,91%)",
       "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-08/governo-preve-arrecadar-r-636-bi-com-nova-cbs-em-2027"
+    },
+    "pis-cofins-monofasico": {
+      "titulo": "Lei 10.147/2000 (perfumaria e higiene) e Lei 13.097/2015 (bebidas frias): PIS/Cofins cobrado na indústria; alíquota zero na revenda ao consumidor",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l10147.htm"
     }
   },
   "regras": {
     "icms": {
-      "modal": {"carga": 20, "fonte": "df-modal"},
-      "cesta": {"carga": 7, "fonte": "df-cesta"}
+      "modal": {
+        "carga": 20,
+        "fonte": "df-modal"
+      },
+      "cesta": {
+        "carga": 7,
+        "fonte": "df-cesta"
+      }
     },
     "pis_cofins": {
-      "geral": {"aliquota": 9.25, "fonte": "pis-cofins-geral"},
-      "zero_12839": {"aliquota": 0, "fonte": "pis-cofins-zero-12839"},
-      "zero_10925": {"aliquota": 0, "fonte": "pis-cofins-zero-10925"},
-      "base_sem_icms": {"fonte": "stf-tema-69"}
+      "geral": {
+        "aliquota": 9.25,
+        "fonte": "pis-cofins-geral"
+      },
+      "zero_12839": {
+        "aliquota": 0,
+        "fonte": "pis-cofins-zero-12839"
+      },
+      "zero_10925": {
+        "aliquota": 0,
+        "fonte": "pis-cofins-zero-10925"
+      },
+      "base_sem_icms": {
+        "fonte": "stf-tema-69"
+      },
+      "monofasico": {
+        "aliquota": 0,
+        "fonte": "pis-cofins-monofasico"
+      }
     },
     "reforma": {
       "ano_completo": 2033,
       "aliquota_referencia": 26.5,
       "fonte_referencia": "aliquota-referencia",
       "regimes": {
-        "zero": {"reducao": 100, "fonte": "lc-214"},
-        "reduzida_60": {"reducao": 60, "fonte": "lc-214"},
-        "cheia": {"reducao": 0, "fonte": "lc-214"}
+        "zero": {
+          "reducao": 100,
+          "fonte": "lc-214"
+        },
+        "reduzida_60": {
+          "reducao": 60,
+          "fonte": "lc-214"
+        },
+        "cheia": {
+          "reducao": 0,
+          "fonte": "lc-214"
+        }
       }
     }
   },
   "categorias": [
-    {"id": "leite_condensado", "nome": "Leite condensado", "palavras": ["leite condensado"], "icms": "modal", "pis_cofins": "geral", "reforma": "cheia",
-     "pendente": "ICMS, PIS/Cofins e enquadramento na Reforma não confirmados para este item.", "conferencia": null},
-    {"id": "arroz", "nome": "Arroz", "palavras": ["arroz"], "icms": "cesta", "pis_cofins": "zero_10925", "reforma": "zero",
-     "pendente": "PIS/Cofins zero para arroz não confirmado no texto da Lei 10.925/2004.", "conferencia": null},
-    {"id": "feijao", "nome": "Feijão", "palavras": ["feijao"], "icms": "cesta", "pis_cofins": "zero_10925", "reforma": "zero",
-     "pendente": "Inciso da Lei 10.925/2004 para feijão não confirmado.", "conferencia": null},
-    {"id": "macarrao", "nome": "Macarrão", "palavras": ["macarrao", "espaguete", "massa de semola", "massa com ovos"], "icms": "cesta", "pis_cofins": "geral", "reforma": "zero",
-     "pendente": "A redução do ICMS cita o 'macarrão espaguete comum'; outros formatos podem ter carga diferente.", "conferencia": null},
-    {"id": "oleo_soja", "nome": "Óleo de soja", "palavras": ["oleo de soja"], "icms": "cesta", "pis_cofins": "zero_12839", "reforma": "reduzida_60",
-     "pendente": "Enquadramento na Reforma (redução de 60%) vem de fonte secundária.", "conferencia": null},
-    {"id": "farinha_trigo", "nome": "Farinha de trigo", "palavras": ["farinha de trigo"], "icms": "cesta", "pis_cofins": "zero_10925", "reforma": "zero", "pendente": null, "conferencia": null},
-    {"id": "farinha_mandioca", "nome": "Farinha de mandioca", "palavras": ["farinha de mandioca"], "icms": "cesta", "pis_cofins": "zero_10925", "reforma": "zero",
-     "pendente": "PIS/Cofins zero para farinha de mandioca não confirmado.", "conferencia": null},
-    {"id": "acucar", "nome": "Açúcar", "palavras": ["acucar"], "icms": "cesta", "pis_cofins": "zero_12839", "reforma": "zero", "pendente": null, "conferencia": null},
-    {"id": "cafe", "nome": "Café", "palavras": ["cafe torrado", "cafe moido", "cafe em po", "cafe soluvel", "cafe em graos", "cafe "], "icms": "modal", "pis_cofins": "zero_12839", "reforma": "zero",
-     "pendente": "Não confirmado se o café está na lista da cesta básica com ICMS reduzido no DF; usada a alíquota geral.", "conferencia": null},
-    {"id": "leite", "nome": "Leite", "palavras": ["leite longa vida", "leite integral", "leite desnatado", "leite semidesnatado", "leite uht", "leite em po"], "icms": "modal", "pis_cofins": "zero_10925", "reforma": "zero",
-     "pendente": "ICMS do leite no DF não confirmado; usada a alíquota geral.", "conferencia": null},
-    {"id": "manteiga", "nome": "Manteiga", "palavras": ["manteiga"], "icms": "modal", "pis_cofins": "zero_12839", "reforma": "zero",
-     "pendente": "ICMS da manteiga no DF não confirmado; usada a alíquota geral.", "conferencia": null},
-    {"id": "margarina", "nome": "Margarina", "palavras": ["margarina"], "icms": "modal", "pis_cofins": "zero_12839", "reforma": "zero",
-     "pendente": "ICMS e enquadramento na Reforma não confirmados.", "conferencia": null},
-    {"id": "carnes", "nome": "Carnes", "palavras": ["carne bovina", "contrafile", "alcatra", "patinho", "acem", "frango", "peito de frango", "coxa de frango", "carne suina", "linguica"], "icms": "modal", "pis_cofins": "zero_12839", "reforma": "zero",
-     "pendente": "ICMS das carnes no DF e enquadramento na Reforma (zero ou 60%) não confirmados.", "conferencia": null},
-    {"id": "papel_higienico", "nome": "Papel higiênico", "palavras": ["papel higienico"], "icms": "modal", "pis_cofins": "zero_12839", "reforma": "reduzida_60",
-     "pendente": "Enquadramento na Reforma (higiene pessoal com redução de 60%) não confirmado.", "conferencia": null},
-    {"id": "creme_dental", "nome": "Creme dental", "palavras": ["creme dental", "pasta de dente", "gel dental"], "icms": "modal", "pis_cofins": "zero_12839", "reforma": "reduzida_60",
-     "pendente": "Enquadramento na Reforma (higiene pessoal com redução de 60%) não confirmado.", "conferencia": null},
-    {"id": "sabonete", "nome": "Sabonete", "palavras": ["sabonete"], "icms": "modal", "pis_cofins": "zero_12839", "reforma": "reduzida_60",
-     "pendente": "Enquadramento na Reforma (higiene pessoal com redução de 60%) não confirmado.", "conferencia": null}
+    {
+      "id": "leite_condensado",
+      "nome": "Leite condensado",
+      "palavras": [
+        "leite condensado"
+      ],
+      "icms": "modal",
+      "pis_cofins": "geral",
+      "reforma": "cheia",
+      "pendente": "ICMS, PIS/Cofins e enquadramento na Reforma não confirmados para este item.",
+      "conferencia": null,
+      "ncm": [
+        "040299"
+      ]
+    },
+    {
+      "id": "arroz",
+      "nome": "Arroz",
+      "palavras": [
+        "arroz"
+      ],
+      "icms": "cesta",
+      "pis_cofins": "zero_10925",
+      "reforma": "zero",
+      "pendente": "PIS/Cofins zero para arroz não confirmado no texto da Lei 10.925/2004.",
+      "conferencia": null,
+      "ncm": [
+        "1006"
+      ]
+    },
+    {
+      "id": "feijao",
+      "nome": "Feijão",
+      "palavras": [
+        "feijao"
+      ],
+      "icms": "cesta",
+      "pis_cofins": "zero_10925",
+      "reforma": "zero",
+      "pendente": "Inciso da Lei 10.925/2004 para feijão não confirmado.",
+      "conferencia": null,
+      "ncm": [
+        "071333"
+      ]
+    },
+    {
+      "id": "macarrao",
+      "nome": "Macarrão",
+      "palavras": [
+        "macarrao",
+        "espaguete",
+        "massa de semola",
+        "massa com ovos"
+      ],
+      "icms": "cesta",
+      "pis_cofins": "geral",
+      "reforma": "zero",
+      "pendente": "A redução do ICMS cita o 'macarrão espaguete comum'; outros formatos podem ter carga diferente.",
+      "conferencia": null,
+      "ncm": [
+        "1902"
+      ]
+    },
+    {
+      "id": "oleo_soja",
+      "nome": "Óleo de soja",
+      "palavras": [
+        "oleo de soja"
+      ],
+      "icms": "cesta",
+      "pis_cofins": "zero_12839",
+      "reforma": "reduzida_60",
+      "pendente": "Enquadramento na Reforma (redução de 60%) vem de fonte secundária.",
+      "conferencia": null,
+      "ncm": [
+        "1507"
+      ]
+    },
+    {
+      "id": "farinha_trigo",
+      "nome": "Farinha de trigo",
+      "palavras": [
+        "farinha de trigo"
+      ],
+      "icms": "cesta",
+      "pis_cofins": "zero_10925",
+      "reforma": "zero",
+      "pendente": null,
+      "conferencia": null,
+      "ncm": [
+        "1101"
+      ]
+    },
+    {
+      "id": "farinha_mandioca",
+      "nome": "Farinha de mandioca",
+      "palavras": [
+        "farinha de mandioca"
+      ],
+      "icms": "cesta",
+      "pis_cofins": "zero_10925",
+      "reforma": "zero",
+      "pendente": "PIS/Cofins zero para farinha de mandioca não confirmado.",
+      "conferencia": null,
+      "ncm": [
+        "110620"
+      ]
+    },
+    {
+      "id": "acucar",
+      "nome": "Açúcar",
+      "palavras": [
+        "acucar"
+      ],
+      "icms": "cesta",
+      "pis_cofins": "zero_12839",
+      "reforma": "zero",
+      "pendente": null,
+      "conferencia": null,
+      "ncm": [
+        "1701"
+      ]
+    },
+    {
+      "id": "cafe",
+      "nome": "Café",
+      "palavras": [
+        "cafe torrado",
+        "cafe moido",
+        "cafe em po",
+        "cafe soluvel",
+        "cafe em graos",
+        "cafe "
+      ],
+      "icms": "modal",
+      "pis_cofins": "zero_12839",
+      "reforma": "zero",
+      "pendente": "Não confirmado se o café está na lista da cesta básica com ICMS reduzido no DF; usada a alíquota geral.",
+      "conferencia": null,
+      "ncm": [
+        "090121",
+        "090122"
+      ]
+    },
+    {
+      "id": "leite",
+      "nome": "Leite",
+      "palavras": [
+        "leite longa vida",
+        "leite integral",
+        "leite desnatado",
+        "leite semidesnatado",
+        "leite uht",
+        "leite em po"
+      ],
+      "icms": "modal",
+      "pis_cofins": "zero_10925",
+      "reforma": "zero",
+      "pendente": "ICMS do leite no DF não confirmado; usada a alíquota geral.",
+      "conferencia": null,
+      "ncm": [
+        "0401"
+      ]
+    },
+    {
+      "id": "manteiga",
+      "nome": "Manteiga",
+      "palavras": [
+        "manteiga"
+      ],
+      "icms": "modal",
+      "pis_cofins": "zero_12839",
+      "reforma": "zero",
+      "pendente": "ICMS da manteiga no DF não confirmado; usada a alíquota geral.",
+      "conferencia": null,
+      "ncm": [
+        "040510"
+      ]
+    },
+    {
+      "id": "margarina",
+      "nome": "Margarina",
+      "palavras": [
+        "margarina"
+      ],
+      "icms": "modal",
+      "pis_cofins": "zero_12839",
+      "reforma": "zero",
+      "pendente": "ICMS e enquadramento na Reforma não confirmados.",
+      "conferencia": null,
+      "ncm": [
+        "151710"
+      ]
+    },
+    {
+      "id": "carnes",
+      "nome": "Carnes",
+      "palavras": [
+        "carne bovina",
+        "contrafile",
+        "alcatra",
+        "patinho",
+        "acem",
+        "frango",
+        "peito de frango",
+        "coxa de frango",
+        "carne suina",
+        "linguica"
+      ],
+      "icms": "modal",
+      "pis_cofins": "zero_12839",
+      "reforma": "zero",
+      "pendente": "ICMS das carnes no DF e enquadramento na Reforma (zero ou 60%) não confirmados.",
+      "conferencia": null,
+      "ncm": [
+        "0201",
+        "0202"
+      ]
+    },
+    {
+      "id": "papel_higienico",
+      "nome": "Papel higiênico",
+      "palavras": [
+        "papel higienico"
+      ],
+      "icms": "modal",
+      "pis_cofins": "zero_12839",
+      "reforma": "reduzida_60",
+      "pendente": "Enquadramento na Reforma (higiene pessoal com redução de 60%) não confirmado.",
+      "conferencia": null,
+      "ncm": [
+        "481810"
+      ]
+    },
+    {
+      "id": "creme_dental",
+      "nome": "Creme dental",
+      "palavras": [
+        "creme dental",
+        "pasta de dente",
+        "gel dental"
+      ],
+      "icms": "modal",
+      "pis_cofins": "zero_12839",
+      "reforma": "reduzida_60",
+      "pendente": "Enquadramento na Reforma (higiene pessoal com redução de 60%) não confirmado.",
+      "conferencia": null,
+      "ncm": [
+        "330610"
+      ]
+    },
+    {
+      "id": "sabonete",
+      "nome": "Sabonete",
+      "palavras": [
+        "sabonete"
+      ],
+      "icms": "modal",
+      "pis_cofins": "zero_12839",
+      "reforma": "reduzida_60",
+      "pendente": "Enquadramento na Reforma (higiene pessoal com redução de 60%) não confirmado.",
+      "conferencia": null,
+      "ncm": [
+        "340111"
+      ]
+    },
+    {
+      "id": "bebidas_frias",
+      "nome": "Bebidas frias (água, refrigerante, cerveja)",
+      "palavras": [],
+      "ncm": [
+        "2201",
+        "2202",
+        "2203"
+      ],
+      "icms": "modal",
+      "pis_cofins": "monofasico",
+      "reforma": "cheia",
+      "pendente": "PIS/Cofins concentrado no fabricante (monofásico); ICMS com substituição tributária pode ter base diferente. Imposto Seletivo da Reforma não incluído.",
+      "conferencia": null
+    },
+    {
+      "id": "perfumaria_higiene",
+      "nome": "Perfumaria e higiene pessoal",
+      "palavras": [],
+      "ncm": [
+        "3303",
+        "3304",
+        "3305",
+        "3307"
+      ],
+      "icms": "modal",
+      "pis_cofins": "monofasico",
+      "reforma": "cheia",
+      "pendente": "PIS/Cofins concentrado no fabricante (monofásico). Alguns itens de higiene podem ter redução na Reforma (LC 214/2025, anexo de higiene e limpeza).",
+      "conferencia": null
+    },
+    {
+      "id": "geral",
+      "nome": "Regra geral",
+      "palavras": [],
+      "ncm": [],
+      "icms": "modal",
+      "pis_cofins": "geral",
+      "reforma": "cheia",
+      "pendente": "Estimado pela regra geral: este produto pode ter exceção (carga reduzida, isenção, substituição tributária ou PIS/Cofins monofásico) que ainda não verificamos.",
+      "conferencia": null
+    }
   ]
 }
