@@ -1,0 +1,50 @@
+
+===== https://superveneza.instabuy.com.br
+robots.txt: # As a condition of accessing this website, you agree to abide by the following | # content signals: |  | # (a)  If a Content-Signal = yes, you may collect content for the corresponding | #      use. | # (b)  If a Content-Signal = no, you may not collect content for the | #      corresponding use. | # (c)  If the website operator does not include a Content-Signal for a | #      corresponding use, the website oper
+  /sitemap.xml: HTTP 200, 14489 locs, exemplos ['https://superveneza.instabuy.app.br', 'https://superveneza.instabuy.app.br/departamentos', 'https://superveneza.instabuy.app.br/promocoes', 'https://superveneza.instabuy.app.br/blog']
+    produto https://superveneza.instabuy.app.br/p/100-Vegetal-burger-Seara-Gourmet-310g: HTTP 200; JSON-LD tipos ['Organization', 'Product', 'BreadcrumbList']
+      {"name": "100% Vegetal burger Seara Gourmet 310g", "brand": {"@type": "Brand", "name": "Seara Gourmet"}, "gtin13": null, "gtin": null, "sku": null, "offers": {"@type": "Offer", "price": 26.49, "priceCurrency": "BRL", "availability": "https://schema.org/OutOfStock"}}
+  home HTTP 200; preços no HTML 0; links /p/: ['/p/Abacate-Kg', '/p/Abacaxi-Perola-Unidade', '/p/Abobora-Italia-Kg']
+
+===== https://supervenezacruzeiro811.instabuy.com.br
+robots.txt: # As a condition of accessing this website, you agree to abide by the following | # content signals: |  | # (a)  If a Content-Signal = yes, you may collect content for the corresponding | #      use. | # (b)  If a Content-Signal = no, you may not collect content for the | #      corresponding use. | # (c)  If the website operator does not include a Content-Signal for a | #      corresponding use, the website oper
+  /sitemap.xml: HTTP 200, 13797 locs, exemplos ['https://supervenezacruzeiro811.instabuy.app.br', 'https://supervenezacruzeiro811.instabuy.app.br/departamentos', 'https://supervenezacruzeiro811.instabuy.app.br/promocoes', 'https://supervenezacruzeiro811.instabuy.app.br/blog']
+    produto https://supervenezacruzeiro811.instabuy.app.br/p/16-Capsulas-Cappuccino-Bicafe-Denso-e-Aveludado-Para-Maquina-Dolce-Gusto: HTTP 200; JSON-LD tipos ['Organization', 'Product', 'BreadcrumbList']
+      {"name": "16 Cápsulas Cappuccino Bicafé Denso e Aveludado Para Máquina Dolce Gusto*", "brand": null, "gtin13": null, "gtin": null, "sku": null, "offers": {"@type": "Offer", "price": 12.59, "priceCurrency": "BRL", "availability": "https://schema.org/OutOfStock"}}
+  home HTTP 200; preços no HTML 0; links /p/: ['/p/Abacate', '/p/Abacaxi-Perola-Unidade', '/p/Abobora-Italia-KG']
+
+===== https://bigboxdelivery.com.br
+robots.txt: # As a condition of accessing this website, you agree to abide by the following | # content signals: |  | # (a)  If a Content-Signal = yes, you may collect content for the corresponding | #      use. | # (b)  If a Content-Signal = no, you may not collect content for the | #      corresponding use. | # (c)  If the website operator does not include a Content-Signal for a | #      corresponding use, the website oper
+  /sitemap.xml: HTTP 200, 13802 locs, exemplos ['https://bigboxdelivery.com.br', 'https://bigboxdelivery.com.br/departamentos', 'https://bigboxdelivery.com.br/promocoes', 'https://bigboxdelivery.com.br/blog']
+    produto https://bigboxdelivery.com.br/p/3-Coracoes-Cafe-Cappuccino-400g: HTTP 200; JSON-LD tipos ['Organization', 'Product', 'BreadcrumbList']
+      {"name": "Cappuccino Solúvel Classic 3 Corações Pote 400g", "brand": {"@type": "Brand", "name": "3 Corações"}, "gtin13": null, "gtin": null, "sku": null, "offers": {"@type": "Offer", "price": 49.99, "priceCurrency": "BRL", "availability": "https://schema.org/InStock"}}
+  home HTTP 200; preços no HTML 0; links /p/: ['/p/5a539c6594e4297347a6563a', '/p/5a74908c94e42961b2887f7b', '/p/5e840aae37db7d70653df629']
+
+===== Ultrabox (VTEX?)
+  https://www.ultraboxatacado.com.br/api/catalog_system/pub/category/tree/1: HTTP 404 ''
+  https://www.ultraboxatacado.com.br/api/catalog_system/pub/products/search?_from=0&_to=2: HTTP 404 ''
+  https://www.ultraboxatacado.com.br/: HTTP 200 '<!doctype html><html lang="pt-BR" prefix="og: https://ogp.me/ns#"><head><script data-no-optimize="1">var litespeed_docref=sessionStorage.getItem("litespeed_docref");litespeed_docref&&(Object.defineProperty(document,"referrer",{get:function(){return litespeed_docref}}),sessionStorage.removeItem("lite'
+  links da home: ['http://200.194.172.4:8080/PortalDoFornecedor/', 'http://200.194.172.5:8089/pp/W_PWSX010.APW', 'https://bigbox.jobs.recrut.ai/ultrabox', 'https://galata.com.br/?source=ultrabox', 'https://gmpg.org/xfn/11', 'https://ultraboxatacado.com.br', 'https://ultraboxatacado.com.br/', 'https://ultraboxatacado.com.br/aniversario-12-anos/', 'https://ultraboxatacado.com.br/comments/feed/', 'https://ultraboxatacado.com.br/contato/', 'https://ultraboxatacado.com.br/feed/', 'https://ultraboxatacado.com.br/lojas/', 'https://ultraboxatacado.com.br/ofertas/', 'https://ultraboxatacado.com.br/quem-somos/', 'https://ultraboxatacado.com.br/relatorio-de-transparencia-e-igualdade-salarial-de-mulheres-e-homens-2/', 'https://ultraboxatacado.com.br/sustentabilidade/', 'https://ultraboxatacado.com.br/wp-content/uploads/2025/10/Favicon-96x96-1.png', 'https://ultraboxatacado.com.br/wp-content/uploads/2026/10/ultrabox-crm-2026-11-03-pagina-1.jpg', 'https://ultraboxatacado.com.br/wp-content/uploads/2026/10/ultrabox-crm-2026-11-03-pagina-2.jpg', 'https://ultraboxatacado.com.br/wp-content/uploads/2026/10/ultrabox-crm-2026-11-03-pagina-3.jpg', 'https://ultraboxatacado.com.br/wp-content/uploads/2026/10/ultrabox-crm-2026-11-03-pagina-4.jpg', 'https://ultraboxatacado.com.br/wp-content/uploads/2026/11/ultrabox-acougue-2026-11-04-pagina-1.jpeg', 'https://ultraboxatacado.com.br/wp-content/uploads/2026/11/ultrabox-acougue-2026-11-04-pagina-2.jpeg', 'https://ultraboxatacado.com.br/wp-content/uploads/2026/11/ultrabox-aguas-1053-2026-11-04-pagina-1.jpeg', 'https://ultraboxatacado.com.br/wp-content/uploads/2026/11/ultrabox-aguas-1053-2026-11-04-pagina-2.jpeg']
+  robots: # As a condition of accessing this website, you agree to abide by the following | # content signals: |  | # (a)  If a content-signal = yes, you may collect content for the corresponding | #      use. | # (b)  If a content-signal = no, you may not collect content for the | #      corresponding use. | # (c)  If the website operator does not include a content signal for a | #      corresponding use, the website oper
+
+===== Pão de Açúcar
+robots: User-Agent: * | Allow: /user/register | Disallow: /checkout | Disallow: /busca | Disallow: /user/ | Disallow: /modal/ | Disallow: /meu-desconto | Disallow: /meus-favoritos | Disallow: /user-info/ |  | 
+  sitemap HTTP 404, 0 locs, ex []
+  links /produto/ na home: []
+
+===== Tatico (WordPress)
+  /wp-json/wp/v2/pages?per_page=50&_fields=slug,link,title: HTTP 404 ''
+  /wp-json/wp/v2/media?per_page=10&_fields=source_url,date,mime_type: HTTP 404 ''
+  /wp-json/wp/v2/types: HTTP 404 ''
+  links com encarte/oferta/tabloide: []
+  pdfs: []
+
+===== Portafolhetos
+robots: Sitemap: https://www.portafolhetos.com.br/sitemap_index.xml |  | User-agent: * | Disallow: /api/ | Disallow: /site/ | Disallow: /exit/ | Disallow: /brochure/brochure-page/ | Disallow: */?login-token= | Disallow: */user-admin/* | Disallow: */nove-heslo/ | Disallow: */?page= | Disallow: */offers/* | Disallow: */detail/* | Disallow: */ajax/* | Disallow: /27957108/* | Disallow: /js/joined/bub.min.js |  | User-agent: AdsBot-Google | Disallow: |  | User-agent: Mediapartners-Google | Disallow:  |  | User-agent: meta-externalag
+  HTTP 200; pdfs: []
+  links de redes: ['/assai-atacadista/', '/assai-atacadista/assai-atacadista-ofertas-de-quinta-feira-05-11-2026-481348/', '/assai-atacadista/assai-atacadista-ofertas-df-de-quinta-feira-05-11-2026-481345/', '/assai-atacadista/assai-atacadista-ofertas-df-de-sabado-07-11-2026-481731/', '/assai-atacadista/assai-atacadista-ofertas-df-de-segunda-feira-02-11-2026-479570/', '/assai-atacadista/assai-atacadista-ofertas-df-de-sexta-feira-06-11-2026-481545/', '/atacadao/', '/atacadao/atacadao-black-november-de-terca-feira-03-11-2026-481031/', '/atacadao/atacadao-ofertas-df-de-quarta-feira-04-11-2026-481223/', '/atacadao/atacadao-ofertas-df-de-quarta-feira-04-11-2026-481225/', '/atacadao/atacadao-ofertas-df-de-quarta-feira-04-11-2026-481699/', '/atacadao/atacadao-ofertas-df-de-quinta-feira-05-11-2026-481280/', '/atacadao/atacadao-ofertas-df-de-quinta-feira-05-11-2026-481281/', '/atacadao/atacadao-ofertas-df-de-sabado-07-11-2026-481775/', '/big-box/']
+
+===== Kimbino Brasília
+robots: Sitemap: https://www.kimbino.com.br/sitemap_index.xml | User-agent: * | Disallow: /pesquisar/ | Disallow: /*/?section= | Disallow: /site/ | Disallow: /exit/ | Disallow: /ajax/ | Disallow: /api/ | Disallow: /_api/v2/leaflet/deals-brochures/* | Disallow: /oferta-especial/ | Disallow: */offers/* |  | User-agent: AdsBot-Google | Disallow: |  | User-agent: Mediapartners-Google | Disallow:  |  | User-agent: meta-externalagent | Disallow: /
+  HTTP 200; pdfs: []
+  links de redes: ['/assai-atacadista/', '/assai-atacadista/assai-atacadista-ofertas-de-quinta-feira-05-11-2026-6481348/', '/big-box/', '/carrefour-bairro/', '/carrefour/', '/carrefour/carrefour-black-friday-de-domingo-08-11-2026-6481808/', '/cidade/brasilia/', '/cidade/brasilia/carrefour/', '/cidade/brasilia/casas-bahia/', '/cidade/brasilia/categoria/beleza-saude/', '/cidade/brasilia/categoria/casa-jardim/', '/cidade/brasilia/categoria/eletronicos/', '/cidade/brasilia/categoria/outros/', '/cidade/brasilia/categoria/roupas-calcados-despor/', '/cidade/brasilia/categoria/supermercados/']
