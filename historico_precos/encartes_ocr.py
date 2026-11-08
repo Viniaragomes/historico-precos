@@ -157,11 +157,18 @@ HORTIFRUTI = set("""banana maca laranja limao tomate batata cebola alho cenoura 
 alface repolho pepino pimentao mamao melao melancia abacaxi manga uva goiaba tangerina mexerica pera mandioca""".split())
 
 
+# frases de preço por unidade ou por quilo ao lado do preço da oferta: o número lido não é o preço do produto
+RE_PRECO_UNITARIO = re.compile(r"sai\s+por|valor\s+unit|a\s+unidade|cada\s+unidade|o\s+quilo|nesta\s+embalagem|"
+                               r"este\s+conjunto|pre[çc]o\s+por\s+(?:kg|quilo|unidade)", re.I)
+
+
 def plausivel(t: Trecho) -> bool:
     """Preço lido de imagem que não pode ser verdade: hortifrúti acima de R$ 30, qualquer item acima de R$ 100 sem
     indicar volume (fardo, caixa, kit, cesta, 5 kg ou mais). Quase sempre é centavo colado no real ("1,99" + "2")."""
     from .vinculo import normalizar
 
+    if RE_PRECO_UNITARIO.search(t.texto):
+        return False
     nome = normalizar(t.texto)
     if HORTIFRUTI & set(nome.split()) and t.preco > 30:
         return False
@@ -461,6 +468,41 @@ def triangular(encartes: list[EncarteLido], catalogo) -> dict:
             if eans:
                 e.nomes_eans[nome] = eans
     return resumo
+
+
+ABAIXO_DA_LOJA = 0.4  # preço de encarte abaixo de 40% do preço das lojas para o mesmo código: leitura errada
+ACIMA_DA_LOJA = 2.5  # acima de 2,5 vezes: leitura errada ou outro produto
+
+
+def conferir_com_lojas(encartes: list[EncarteLido], referencia: dict[str, float]) -> int:
+    """Tira os preços de encarte muito longe do preço que as lojas mostram para os mesmos códigos (mediana dos
+    últimos 30 dias). Só vale para anúncios ligados a código; os outros seguem os filtros de sempre. Devolve quantos saíram."""
+    tirados = 0
+    for e in encartes:
+        mantidos = []
+        for t in e.trechos:
+            refs = sorted(referencia[x] for x in t.eans if x in referencia)
+            if refs:
+                ref = refs[len(refs) // 2]
+                if not (ABAIXO_DA_LOJA * ref <= t.preco <= ACIMA_DA_LOJA * ref):
+                    tirados += 1
+                    continue
+            mantidos.append(t)
+        e.trechos = mantidos
+    return tirados
+
+
+def referencia_das_lojas(con, dias: int = 30) -> dict[str, float]:
+    """Mediana do preço de cada código nas lojas (sites), nos últimos `dias`."""
+    from statistics import median
+
+    precos: dict[str, list[float]] = {}
+    try:
+        for ean, preco in con.execute("SELECT ean, preco FROM precos WHERE data_observada >= date('now', ?)", (f"-{dias} day",)):
+            precos.setdefault(ean, []).append(preco)
+    except Exception:
+        return {}
+    return {e: median(v) for e, v in precos.items()}
 
 
 def _mesmo_produto(a: tuple, b: tuple) -> bool:

@@ -544,6 +544,8 @@ def main(argv: list[str] | None = None) -> int:
         encartes = encartes_ocr.ler_encartes(nav, dias=args.dias, max_imagens=args.max_imagens, vocab=vocab)
         # triangulação: cada anúncio ganha os códigos de barras compatíveis (cadastro + notas do DF + sites das lojas)
         tri = encartes_ocr.triangular(encartes, montar_catalogo(banco.con, dic))
+        tirados = encartes_ocr.conferir_com_lojas(encartes, encartes_ocr.referencia_das_lojas(banco.con))
+        print(f"Conferência com o preço das lojas: {tirados} preço(s) de encarte descartado(s) por estar longe demais.")
         print(f"Triangulação: {tri['com_codigo']} de {tri['anuncios']} anúncios com preço ligados a código de barras "
               f"({tri['um_codigo']} a um código só); {sum(len(e.nomes_eans) for e in encartes)} nomes sem preço ligados.")
         for e in encartes:

@@ -253,6 +253,23 @@ class TestFontesNovas2(unittest.TestCase):
         self.assertEqual((e.mercado, e.publicado, len(e.imagens)), ("Supermercado Primor", "2026-11-07", 1))
 
 
+class TestFiltrosDePreco(unittest.TestCase):
+    def test_frase_de_preco_unitario(self):
+        T = encartes_ocr.Trecho
+        self.assertFalse(encartes_ocr.plausivel(T("Nesta embalagem, o quilo sai por", 49.9)))
+        self.assertFalse(encartes_ocr.plausivel(T("com 36 unidades. Valor unitário", 0.85)))
+        self.assertTrue(encartes_ocr.plausivel(T("Uva Thompson Bandeja 500g", 5.98)))
+
+    def test_conferencia_com_preco_das_lojas(self):
+        T, E = encartes_ocr.Trecho, encartes_ocr.EncarteLido
+        e = E("Ultrabox", "https://u", "2026-11-08", None, [], trechos=[
+            T("Amaciante Ypê 2L", 0.98, eans=["7896098900208"]),  # leitura errada: lojas cobram ~R$ 15
+            T("Amaciante Ypê 2L", 12.98, eans=["7896098900208"]),  # promoção plausível
+            T("Produto sem código", 0.98)])  # sem referência: segue os filtros de sempre
+        self.assertEqual(encartes_ocr.conferir_com_lojas([e], {"7896098900208": 15.49}), 1)
+        self.assertEqual([t.preco for t in e.trechos], [12.98, 0.98])
+
+
 class TestRede(unittest.TestCase):
     def test_mesma_rede_com_outro_nome(self):
         self.assertEqual(encartes_ocr.nome_da_rede("Dia a Dia Atacadista"), "Atacadão Dia a Dia")
