@@ -1,5 +1,5 @@
 Vocabulário de nomes de produtos: 7882 palavras
-Triangulação: 16 de 216 anúncios com preço ligados a código de barras (2 a um código só); 137 nomes sem preço ligados.
+Triangulação: 25 de 249 anúncios com preço ligados a código de barras (4 a um código só); 167 nomes sem preço ligados.
   Atacadão Dia a Dia           até 2026-11-09  2 imagem(ns)    2 trecho(s) com preço
       R$    3.49  CRACKER TRADICIONAL
       R$    9.81  CICLO OMO SACHE 2,2KG NESTA 800g SAI POR
@@ -9,32 +9,6 @@ Triangulação: 16 de 216 anúncios com preço ligados a código de barras (2 a 
       R$   12.99  Frango Resfriado Sempre DONA
   Supermercado Ultrabox        até ?           2 imagem(ns)    1 trecho(s) com preço
       R$    1.51  Coquetel Alcoólico | Coca-Cola Original ou Zero Açúcar
-  Supermercado Ultrabox        até ?           2 imagem(ns)    5 trecho(s) com preço
-      R$    1.35  Refrigerante Guaraná Y Suco de Uva Til Integral Hugo Pietro
-      R$    1.35  Integral Hugo Pietro
-      R$   49.90  98 PACOTE 5KG
-  Supermercado Ultrabox        até ?           4 imagem(ns)   11 trecho(s) com preço
-      R$    4.12  algadinho de Milho Assado Casademãe
-      R$    3.98  Polvilho Doce Casademãe
-      R$    2.98  Polvilho Doce
-  Supermercado Ultrabox        até ?           4 imagem(ns)    5 trecho(s) com preço
-      R$    1.38  Flocão de Milho
-      R$   15.99  Maizena Adoralle
-      R$    2.78  Fugini Ao Vapor
-  Supermercado Ultrabox        até ?           5 imagem(ns)    1 trecho(s) com preço
-      R$    0.98  Premium Sabores
-  Supermercado Ultrabox        até ?           2 imagem(ns)    9 trecho(s) com preço
-      R$   67.45  98 Pacote 2,5Kg
-      R$   10.98  ULTRA Claybom as
-      R$    1.35  Néctar Maguary Fruit
-  Supermercado Ultrabox        até ?           2 imagem(ns)   11 trecho(s) com preço
-      R$   92.98  CAFÉ DO ULTRA CLUBE
-      R$    9.98  Peça ou pe: Congelado Friato IQF Friato
-      R$   67.45  98 Pacote 2,5Kg
-  Supermercado Ultrabox        até ?           6 imagem(ns)   11 trecho(s) com preço
-      R$    3.98  Manga Palmer
-      R$    3.98  Melão Amarelo
-      R$    5.98  Uva Thompson
   Assaí Atacadista             até 2026-11-08  1 imagem(ns)   21 trecho(s) com preço
       R$   56.99  ÓLEO DE E LIZA PET
       R$   13.90  AÇUCAR CRISTAL ECOÇÚCAR sKG
@@ -42,26 +16,11 @@ Triangulação: 16 de 216 anúncios com preço ligados a código de barras (2 a 
   Costa Atacadão               até ?           4 imagem(ns)    2 trecho(s) com preço
       R$    6.89  STELLA ARTOIS ARTOIS
       R$    4.89  ULTRA ULTRA IMPERK
-  Costa Atacadão               até ?           2 imagem(ns)   13 trecho(s) com preço
-      R$    0.81  LEVE + PAGUE - TAMANHOS Nº TIRAS POLO
-      R$    1.25  ROUPINHA SUPREME CARE - TAMANHOS Nº TIRAS Paco ront
-      R$    0.62  MAGIC NOITE/ DIA - TAMANHOS
-  Costa Atacadão               até ?           4 imagem(ns)    5 trecho(s) com preço
-      R$   11.99  Creme de Seite Creme do Leito Cromo de
-      R$   19.89  PASTEL FRESCAS 'RESCAS
-      R$    0.85  somente a caixa com 36 unidades. Valor unitário
-  Supermercado Primor          até ?           6 imagem(ns)   19 trecho(s) com preço
+  Supermercado Primor          até ?           6 imagem(ns)   16 trecho(s) com preço
       R$   10.90  Pão Francês
       R$   16.90  Pão Integral
       R$   16.90  Pão Francês de
-  Supermercado Primor          até ?           1 imagem(ns)    1 trecho(s) com preço
-      R$   18.99  de Tilápia Empanada Copacol
   Supermercado Bistecão        até 2026-11-12  2 imagem(ns)    0 trecho(s) com preço
-  Supermercado Bistecão        até 2026-11-12  2 imagem(ns)    0 trecho(s) com preço
-  Supermercado Ultrabox        até 2026-11-08 16 imagem(ns)   14 trecho(s) com preço
-      R$   12.98  Bandeja 30 unidades
-      R$   31.98  Peça ou pedaço Kg
-      R$    1.75  175 litro
   Varejão da Fartura           até 2026-11-08  3 imagem(ns)    3 trecho(s) com preço
       R$   46.99  ax, COXÃO MOLE OU PATINHO ALCATRA OUCONTRA FILE
       R$   14.99  BISTECA SUINA
@@ -71,77 +30,136 @@ Triangulação: 16 de 216 anúncios com preço ligados a código de barras (2 a 
       R$    7.99  de Soja
       R$   12.99  Açúcar OFERTA Cristal
       R$    8.99  Óleo de Soja
-  Costa Atacadão               até 2026-11-08  2 imagem(ns)   17 trecho(s) com preço
-      R$   11.89  TORRADO STAND OU CAFÉ EXPORT 500G - TIPOS
-      R$   22.89  AZEITE EXTRA VIRGEM BORGES 500ML
-      R$   19.99  ARROZ ITALIANÃO TIPO 15KG
   Atacadão Dia a Dia           até 2026-11-09  2 imagem(ns)    2 trecho(s) com preço
       R$    3.49  CRACKER TRADICIONAL
       R$    9.81  CICLO OMO SACHE 2,2KG NESTA 800g SAI POR
   Atacadista Super Adega       até 2026-11-09 10 imagem(ns)    0 trecho(s) com preço
+  Supermercado Bellavia        até 2026-11-10  2 imagem(ns)    8 trecho(s) com preço
+      R$   52.99  ARCO DA TORRE
+      R$    1.15  logurte Natural Zero
+      R$    1.35  Suco de Uva
+  Supermercado Super Frota     até 2026-11-09  2 imagem(ns)    4 trecho(s) com preço
+      R$   13.19  POSTA DE TILÁPIA COPACOL PCT 800g AÇÚCAR CRISTAL REI
+      R$    1.31  1,5L SABORES
+      R$    1.79  no TRADIC tem
+  Supercei Supermercado        até 2026-11-10  2 imagem(ns)   11 trecho(s) com preço
+      R$    3.95  Feijão Carioca Kicaldo - 1Kg
+      R$    2.29  cada Pão de Mel Barion Chocolate ao Leite - 90g
+      R$   23.99  Retangular - 3,75L nd vao
+  Atacarejo Bonamix            até 2026-11-09  8 imagem(ns)    3 trecho(s) com preço
+      R$    2.89  DARK BRANCO-DARK as
+      R$   17.99  De RO HA TIPO ROLHA
+      R$   21.99  de Látex Luva
+  Supermercado Ultrabox        até ?           2 imagem(ns)    5 trecho(s) com preço
+      R$    1.35  Refrigerante Guaraná Y Suco de Uva Til Integral Hugo Pietro
+      R$    1.35  Integral Hugo Pietro
+      R$   49.90  98 PACOTE 5KG
+  Costa Atacadão               até ?           2 imagem(ns)   13 trecho(s) com preço
+      R$    0.81  LEVE + PAGUE - TAMANHOS Nº TIRAS POLO
+      R$    1.25  ROUPINHA SUPREME CARE - TAMANHOS Nº TIRAS Paco ront
+      R$    0.62  MAGIC NOITE/ DIA - TAMANHOS
+  Supermercado Primor          até ?           1 imagem(ns)    1 trecho(s) com preço
+      R$   18.99  de Tilápia Empanada Copacol
+  Supermercado Bistecão        até 2026-11-12  2 imagem(ns)    0 trecho(s) com preço
   Atacadista Super Adega       até 2026-11-08 10 imagem(ns)    0 trecho(s) com preço
+  Assaí Atacadista             até 2026-11-11  1 imagem(ns)   24 trecho(s) com preço
+      R$    4.99  BARRA PROTEÍNA SUPINO SABORES UNIDADE 30g
+      R$    2.79  AVEIA EM FLOCOS APTI CAIXETA 150G
+      R$   49.90  CREATINA MAX TITANIUM POTE 300g
+  Supermercado Ultrabox        até ?           4 imagem(ns)   11 trecho(s) com preço
+      R$    4.12  algadinho de Milho Assado Casademãe
+      R$    3.98  Polvilho Doce Casademãe
+      R$    2.98  Polvilho Doce
+  Costa Atacadão               até ?           4 imagem(ns)    5 trecho(s) com preço
+      R$   11.99  Creme de Seite Creme do Leito Cromo de
+      R$   19.89  PASTEL FRESCAS 'RESCAS
+      R$    0.85  somente a caixa com 36 unidades. Valor unitário
   Atacadista Super Adega       até 2026-11-08 10 imagem(ns)    0 trecho(s) com preço
+  Supermercado Ultrabox        até ?           4 imagem(ns)    5 trecho(s) com preço
+      R$    1.38  Flocão de Milho
+      R$   15.99  Maizena Adoralle
+      R$    2.78  Fugini Ao Vapor
+  Costa Atacadão               até 2026-11-08  2 imagem(ns)   17 trecho(s) com preço
+      R$   11.89  TORRADO STAND OU CAFÉ EXPORT 500G - TIPOS
+      R$   22.89  AZEITE EXTRA VIRGEM BORGES 500ML
+      R$   19.99  ARROZ ITALIANÃO TIPO 15KG
   Atacadista Super Adega       até 2026-11-08 10 imagem(ns)    0 trecho(s) com preço
-  Supermercado Bellavia        até 2026-11-10  2 imagem(ns)    0 trecho(s) com preço
-  Supermercado Super Frota     até 2026-11-09  2 imagem(ns)    0 trecho(s) com preço
-  Supercei Supermercado        até 2026-11-10  2 imagem(ns)    0 trecho(s) com preço
-  Assaí Atacadista             até 2026-11-11  1 imagem(ns)    0 trecho(s) com preço
-  Atacarejo Bonamix            até 2026-11-09  8 imagem(ns)    0 trecho(s) com preço
-33 encarte(s) vigente(s), 216 trecho(s) com preço.
+  Supermercado Ultrabox        até ?           5 imagem(ns)    0 trecho(s) com preço
+  Supermercado Ultrabox        até ?           2 imagem(ns)    9 trecho(s) com preço
+      R$   67.45  98 Pacote 2,5Kg
+      R$   10.98  ULTRA Claybom as
+      R$    1.35  Néctar Maguary Fruit
+  Supermercado Ultrabox        até ?           2 imagem(ns)   11 trecho(s) com preço
+      R$   92.98  CAFÉ DO ULTRA CLUBE
+      R$    9.98  Peça ou pe: Congelado Friato IQF Friato
+      R$   67.45  98 Pacote 2,5Kg
+  Supermercado Ultrabox        até ?           6 imagem(ns)    7 trecho(s) com preço
+      R$    3.98  Manga Palmer
+      R$    3.98  Melão Amarelo
+      R$    5.98  Uva Thompson
+  Supermercado Ultrabox        até 2026-11-08 16 imagem(ns)    5 trecho(s) com preço
+      R$   12.98  Bandeja 30 unidades
+      R$   31.98  Peça ou pedaço Kg
+      R$    1.75  175 litro
+33 encarte(s) vigente(s), 249 trecho(s) com preço.
 Exportado em encartes_teste.json
-15 produto(s) anunciado(s) em 2 ou mais mercados:
+23 produto(s) anunciado(s) em 2 ou mais mercados:
   OVOS BRANCOS C/ 30 UNIDADES: Supermercado Ultrabox R$ 3.98 · Costa Atacadão R$ 13.99
-  Frango Resfriado: Supermercado Ultrabox R$ 7.58 · Dona R$ 9.99
+  Creatina Max Titanium em: Dona R$ 94.90 · Assaí Atacadista (preço no encarte)
+  Frango Resfriado: Dona R$ 9.99 · Supermercado Ultrabox (preço no encarte)
   Peça a Vácuo: Dona R$ 89.90 · Supermercado Ultrabox (preço no encarte)
   Pure Gold Lata 350ml: Dona R$ 5.99 · Supermercado Ultrabox (preço no encarte) · Costa Atacadão (preço no encarte)
-  Polvilho Doce: Supermercado Ultrabox R$ 2.98 · Supermercado Indaiá (preço no encarte)
-  Flocão de Milho: Supermercado Ultrabox R$ 1.38 · Supermercado Bistecão (preço no encarte) · Supermercado Indaiá (preço no encarte)
-  Uva Thompson: Supermercado Ultrabox R$ 5.98 · Dona (preço no encarte)
-  Costelinha Suína: Supermercado Ultrabox R$ 17.98 · Supermercado Indaiá (preço no encarte)
-  ALHO A GRANEL: Assaí Atacadista R$ 15.99 · Supermercado Ultrabox (preço no encarte) · Varejão da Fartura (preço no encarte)
-  ARROZ BRANCO: Assaí Atacadista R$ 19.90 · Atacadista Super Adega (preço no encarte)
+  ALHO A GRANEL: Assaí Atacadista R$ 15.99 · Varejão da Fartura (preço no encarte) · Supermercado Ultrabox (preço no encarte)
+  AÇUCAR CRISTAL: Assaí Atacadista R$ 13.90 · Supermercado Super Frota (preço no encarte)
+  STELLA ARTOIS ARTOIS: Costa Atacadão R$ 6.89 · Supermercado Bellavia (preço no encarte)
+  Pão de Queijo: Supermercado Primor R$ 20.90 · Supermercado Bistecão (preço no encarte) · Supermercado Bellavia (preço no encarte)
+  PEITO BOVINO: Varejão da Fartura R$ 36.99 · Supermercado Indaiá (preço no encarte)
 
-tempo: 1074s
-preços lidos: 216 {'Supermercado Ultrabox': 68, 'Dona': 58, 'Costa Atacadão': 37, 'Assaí Atacadista': 21, 'Supermercado Primor': 20, 'Cristal Supermercado': 5, 'Atacadão Dia a Dia': 4, 'Varejão da Fartura': 3, 'Supermercado Bistecão': 0, 'Supermercado Indaiá': 0, 'Atacadista Super Adega': 0, 'Supermercado Bellavia': 0, 'Supermercado Super Frota': 0, 'Supercei Supermercado': 0, 'Atacarejo Bonamix': 0}
-comparações: 15 | com preço em 2+ mercados: 2
+tempo: 1009s
+preços lidos: 249 {'Dona': 58, 'Supermercado Ultrabox': 54, 'Assaí Atacadista': 45, 'Costa Atacadão': 37, 'Supermercado Primor': 17, 'Supercei Supermercado': 11, 'Supermercado Bellavia': 8, 'Cristal Supermercado': 5, 'Atacadão Dia a Dia': 4, 'Supermercado Super Frota': 4, 'Varejão da Fartura': 3, 'Atacarejo Bonamix': 3, 'Supermercado Bistecão': 0, 'Supermercado Indaiá': 0, 'Atacadista Super Adega': 0}
+comparações: 23 | com preço em 2+ mercados: 1
   OVOS BRANCOS C/ 30 UNIDADES | Supermercado Ultrabox 3.98 · Costa Atacadão 13.99
-  Frango Resfriado | Supermercado Ultrabox 7.58 · Dona 9.99
+  Creatina Max Titanium em | Dona 94.9 · Assaí Atacadista -
+  Frango Resfriado | Dona 9.99 · Supermercado Ultrabox -
   Peça a Vácuo | Dona 89.9 · Supermercado Ultrabox -
   Pure Gold Lata 350ml | Dona 5.99 · Supermercado Ultrabox - · Costa Atacadão -
-  Polvilho Doce | Supermercado Ultrabox 2.98 · Supermercado Indaiá -
-  Flocão de Milho | Supermercado Ultrabox 1.38 · Supermercado Bistecão - · Supermercado Indaiá -
-  Uva Thompson | Supermercado Ultrabox 5.98 · Dona -
-  Costelinha Suína | Supermercado Ultrabox 17.98 · Supermercado Indaiá -
-  ALHO A GRANEL | Assaí Atacadista 15.99 · Supermercado Ultrabox - · Varejão da Fartura -
-  ARROZ BRANCO | Assaí Atacadista 19.9 · Atacadista Super Adega -
-  Pão de Queijo | Supermercado Primor 20.9 · Supermercado Bistecão -
+  ALHO A GRANEL | Assaí Atacadista 15.99 · Varejão da Fartura - · Supermercado Ultrabox -
+  AÇUCAR CRISTAL | Assaí Atacadista 13.9 · Supermercado Super Frota -
+  STELLA ARTOIS ARTOIS | Costa Atacadão 6.89 · Supermercado Bellavia -
+  Pão de Queijo | Supermercado Primor 20.9 · Supermercado Bistecão - · Supermercado Bellavia -
   PEITO BOVINO | Varejão da Fartura 36.99 · Supermercado Indaiá -
-  Óleo de Soja | Cristal Supermercado 8.99 · Supermercado Ultrabox -
-  TORRADO STAND OU CAFÉ EXPORT 500G - TIPOS | Costa Atacadão 11.89 · Atacadista Super Adega -
-  CERVEJA HEINEKEN PURO MALTE LONG NECK 330ML | Costa Atacadão 0.99 · Supermercado Ultrabox -
+  Óleo de Soja | Cristal Supermercado 8.99 · Supermercado Bellavia - · Supercei Supermercado - · Supermercado Ultrabox -
+  Suco de Uva | Supermercado Bellavia 1.35 · Supermercado Bistecão - · Supercei Supermercado - · Costa Atacadão -
+  Azeite de Oliva Extra Virgem | Supermercado Bellavia 11.95 · Supercei Supermercado -
+  Assadeira de Alumínio & Facilita - Oval - 4L Retangular | Supermercado Bellavia 3.75 · Supercei Supermercado -
+  Feijão Carioca Kicaldo - 1Kg | Supercei Supermercado 3.95 · Costa Atacadão -
 
 amostra de preços lidos por mercado:
   Atacadão Dia a Dia [('CRACKER TRADICIONAL', 3.49), ('CICLO OMO SACHE 2,2KG NESTA 800g SAI POR', 9.81)]
   Dona [('Filé de Coxa e Sobrecoxa de Frango Resfriado', 19.99), ('Baby Beef Bovino Estância 92 Costela Suína Pe', 36.99), ('Frango Resfriado Sempre DONA', 12.99), ('13 Filezinho Sassami de Frango', 23.99), ('Lasanha Sadia Bolonhesa oo', 2.99), ('Biscoito 3 Queijos DONA Congelado aa', 19.99), ('Morango DONA Congelado 1,002kg', 24.99), ('Sorvete Bacio Di Latte Sabores oo', 55.9)]
   Supermercado Ultrabox [('Coquetel Alcoólico | Coca-Cola Original ou Ze', 1.51)]
-  Supermercado Ultrabox [('Refrigerante Guaraná Y Suco de Uva Til Integr', 1.35), ('Integral Hugo Pietro', 1.35), ('98 PACOTE 5KG', 49.9), ('Doce 28', 12.98), ('Nesta embalagem, o quilo sai por', 49.9)]
-  Supermercado Ultrabox [('algadinho de Milho Assado Casademãe', 4.12), ('Polvilho Doce Casademãe', 3.98), ('Polvilho Doce', 2.98), ('100g Salgadinho de Milho Assado Casademãe', 4.28), ('say Milho de Pipoca Para Casademãe Sabores', 2.98), ('Queijo Parmesão Casademáãe Ralado Fino', 4.98), ('Enc 65 Q Creme de Cebola', 3.98), ('Shampoo Casademãe Fragrâncias', 14.98)]
-  Supermercado Ultrabox [('Flocão de Milho', 1.38), ('Maizena Adoralle', 15.99), ('Fugini Ao Vapor', 2.78), ('Limpador Perfumado Oeste Fragrâncias', 5.19), ('Amaciante de Roupas Ypê Fragrâncias', 0.98)]
-  Supermercado Ultrabox [('Premium Sabores', 0.98)]
-  Supermercado Ultrabox [('98 Pacote 2,5Kg', 67.45), ('ULTRA Claybom as', 10.98), ('Néctar Maguary Fruit', 1.35), ('Sul Sabores', 1.35), ('Pacote 2,5Kg', 67.45), ('Caixa com 36 unidades', 28.08), ('ESTE CONJUNTO, A UNIDADE SAI POR', 6.67), ('Limpador Perfumado Casaflor Fragrâncias', 1.75)]
-  Supermercado Ultrabox [('CAFÉ DO ULTRA CLUBE', 92.98), ('Peça ou pe: Congelado Friato IQF Friato', 9.98), ('98 Pacote 2,5Kg', 67.45), ('ULTRA Claybom as', 10.98), ('Néctar Maguary Fruit', 1.35), ('Sul Sabores', 1.35), ('Pacote 2,5Kg', 67.45), ('Caixa com 36 unidades', 28.08)]
-  Supermercado Ultrabox [('Manga Palmer', 3.98), ('Melão Amarelo', 3.98), ('Uva Thompson', 5.98), ('ilé de Peito de Frango Congelado Superfrango', 7.98), ('Ovos Brancos Bandeja 30 unidades', 3.98), ('mil ou Paleta', 13.98), ('Costelinha Suína', 17.98), ('Açúcar Cristal Pérola ns', 12.92)]
   Assaí Atacadista [('ÓLEO DE E LIZA PET', 56.99), ('AÇUCAR CRISTAL ECOÇÚCAR sKG', 13.9), ('DONA DÊ PACOTE 1KG CADA', 86.79), ('CAFÉ PILÃO TIPOS PACO', 18.9), ('ALHO A GRANEL', 15.99), ('OVOS VERMELHO HAPPY EGGS BANDEJA COM 20 UNIDA', 11.99), ('HAPPY EGGS BANDEJA COM 20 UNIDADES', 10.99), ('DE CERVEJA ANTARCTICA LATA 26944', 2.99)]
   Costa Atacadão [('STELLA ARTOIS ARTOIS', 6.89), ('ULTRA ULTRA IMPERK', 4.89)]
-  Costa Atacadão [('LEVE + PAGUE - TAMANHOS Nº TIRAS POLO', 0.81), ('ROUPINHA SUPREME CARE - TAMANHOS Nº TIRAS Pac', 1.25), ('MAGIC NOITE/ DIA - TAMANHOS', 0.62), ('TRIPLA PROTEÇÃO MEGUINHA - TAMANHOS E', 0.92), ('Leve MAIS por MENOS', 0.81), ('Nº TIRAS POLO', 0.92), ('FRALDA DESCARTÁVEL PAMPERS', 1.0), ('Nº TIRAS Paco ront', 1.25)]
-  Costa Atacadão [('Creme de Seite Creme do Leito Cromo de', 11.99), ("PASTEL FRESCAS 'RESCAS", 19.89), ('somente a caixa com 36 unidades. Valor unitár', 0.85), ('com 36 unidades. Valor unitário', 0.85), ('MIX AMELIA 1L', 19.99)]
   Supermercado Primor [('Pão Francês', 10.9), ('Pão Integral', 16.9), ('Pão Francês de', 16.9), ('Pão Integral «', 16.3), ('Pão de Queijo', 20.9), ('Biscoito de Queijo', 20.9), ('Café Pilão', 18.99), ('Presunto Fatiado Aurora', 6.99)]
-  Supermercado Primor [('de Tilápia Empanada Copacol', 18.99)]
-  Supermercado Ultrabox [('Bandeja 30 unidades', 12.98), ('Peça ou pedaço Kg', 31.98), ('175 litro', 1.75), ('Larva Roupas Em Pó Geo Action', 15.19), ('SOft sã Soft sã Baby Soft', 17.59), ('Pão de Forma Bauducco', 6.21), ('Prato Tramontina Fi', 9.98), ('Margarina Claybom 390g ou Visconti 400g ComsS', 1.59)]
   Varejão da Fartura [('ax, COXÃO MOLE OU PATINHO ALCATRA OUCONTRA FI', 46.99), ('BISTECA SUINA', 14.99), ('PEITO BOVINO', 36.99)]
   Cristal Supermercado [('de Soja', 7.99), ('Açúcar OFERTA Cristal', 12.99), ('Óleo de Soja', 8.99), ('Óleo de Soja Pet 900ml', 7.19), ('Blue/Rosa Classic - 150ml OFERTA', 10.99)]
-  Costa Atacadão [('TORRADO STAND OU CAFÉ EXPORT 500G - TIPOS', 11.89), ('AZEITE EXTRA VIRGEM BORGES 500ML', 22.89), ('ARROZ ITALIANÃO TIPO 15KG', 19.99), ('OVOS BRANCOS C/ 30 UNIDADES', 13.99), ('Copacol COXÃO MOLE BOVINO KG', 39.99), ('SABÃO EM PÓ TIXAN YPÊ PRIMAVERA 2,2KG', 19.89), ('PEDAÇO PATINHO BOVINO KG', 38.99), ('CERVEJA HEINEKEN PURO MALTE LONG NECK 330ML', 0.99)]
   Atacadão Dia a Dia [('CRACKER TRADICIONAL', 3.49), ('CICLO OMO SACHE 2,2KG NESTA 800g SAI POR', 9.81)]
+  Supermercado Bellavia [('ARCO DA TORRE', 52.99), ('logurte Natural Zero', 1.15), ('Suco de Uva', 1.35), ('Barra Crisp Protein Integralmedica - 45 4', 11.99), ('Azeite de oliva Extra Virgem', 29.99), ('Assadeira de Alumínio & Facilita - Oval - 4L ', 3.75), ('Azeite de Oliva', 57.99), ('Azeite de Oliva Extra Virgem', 11.95)]
+  Supermercado Super Frota [('POSTA DE TILÁPIA COPACOL PCT 800g AÇÚCAR CRIS', 13.19), ('1,5L SABORES', 1.31), ('no TRADIC tem', 1.79), ('BOMBOM SORTIDO LACTA FAVORITOS CAIXA', 131.46)]
+  Supercei Supermercado [('Feijão Carioca Kicaldo - 1Kg', 3.95), ('cada Pão de Mel Barion Chocolate ao Leite - 9', 2.29), ('Retangular - 3,75L nd vao', 23.99), ('Margarina Delícia Com Sal - 500g', 8.95), ('Sorvete Nesilé Tradicional - 1,5L', 2.49), ('Copacol Linguiça Calabresa Nobre - a cada 100', 16.95), ('Integralmedica - 45g', 5.45), ('Maionese Quero pote - 4959', 0.95)]
+  Atacarejo Bonamix [('DARK BRANCO-DARK as', 2.89), ('De RO HA TIPO ROLHA', 17.99), ('de Látex Luva', 21.99)]
+  Supermercado Ultrabox [('Refrigerante Guaraná Y Suco de Uva Til Integr', 1.35), ('Integral Hugo Pietro', 1.35), ('98 PACOTE 5KG', 49.9), ('Doce 28', 12.98), ('Nesta embalagem, o quilo sai por', 49.9)]
+  Costa Atacadão [('LEVE + PAGUE - TAMANHOS Nº TIRAS POLO', 0.81), ('ROUPINHA SUPREME CARE - TAMANHOS Nº TIRAS Pac', 1.25), ('MAGIC NOITE/ DIA - TAMANHOS', 0.62), ('TRIPLA PROTEÇÃO MEGUINHA - TAMANHOS E', 0.92), ('Leve MAIS por MENOS', 1.14), ('Nº TIRAS POLO', 1.14), ('FRALDA DESCARTÁVEL PAMPERS', 1.0), ('Nº TIRAS Paco ront', 1.25)]
+  Supermercado Primor [('de Tilápia Empanada Copacol', 18.99)]
+  Assaí Atacadista [('BARRA PROTEÍNA SUPINO SABORES UNIDADE 30g', 4.99), ('AVEIA EM FLOCOS APTI CAIXETA 150G', 2.79), ('CREATINA MAX TITANIUM POTE 300g', 49.9), ('TITANIUM POTE 300g', 35.9), ('FILEZINHO DE EMPANADO ELADO COPACOL', 39.9), ('Eno GRANOLA ORIGINAL ERUTOS DA TERRA', 15.9), ('PÃO TIPO TORTILHA', 11.9), ('FILÉ DE TILÁPIA SONGEL] ADO COPACOL', 34.9)]
+  Supermercado Ultrabox [('algadinho de Milho Assado Casademãe', 4.12), ('Polvilho Doce Casademãe', 3.98), ('Polvilho Doce', 2.98), ('100g Salgadinho de Milho Assado Casademãe', 4.28), ('say Milho de Pipoca Para Casademãe Sabores', 2.98), ('Queijo Parmesão Casademáãe Ralado Fino', 4.98), ('Enc 65 Q Creme de Cebola', 3.98), ('Shampoo Casademãe Fragrâncias', 14.98)]
+  Costa Atacadão [('Creme de Seite Creme do Leito Cromo de', 11.99), ("PASTEL FRESCAS 'RESCAS", 19.89), ('somente a caixa com 36 unidades. Valor unitár', 0.85), ('com 36 unidades. Valor unitário', 0.85), ('MIX AMELIA 1L', 19.99)]
+  Supermercado Ultrabox [('Flocão de Milho', 1.38), ('Maizena Adoralle', 15.99), ('Fugini Ao Vapor', 2.78), ('Limpador Perfumado Oeste Fragrâncias', 5.19), ('Amaciante de Roupas Ypê Fragrâncias', 0.98)]
+  Costa Atacadão [('TORRADO STAND OU CAFÉ EXPORT 500G - TIPOS', 11.89), ('AZEITE EXTRA VIRGEM BORGES 500ML', 22.89), ('ARROZ ITALIANÃO TIPO 15KG', 19.99), ('OVOS BRANCOS C/ 30 UNIDADES', 13.99), ('Copacol COXÃO MOLE BOVINO KG', 39.99), ('SABÃO EM PÓ TIXAN YPÊ PRIMAVERA 2,2KG', 19.89), ('PEDAÇO PATINHO BOVINO KG', 38.99), ('CERVEJA HEINEKEN PURO MALTE LONG NECK 330ML', 0.99)]
+  Supermercado Ultrabox [('98 Pacote 2,5Kg', 67.45), ('ULTRA Claybom as', 10.98), ('Néctar Maguary Fruit', 1.35), ('Sul Sabores', 1.35), ('Pacote 2,5Kg', 67.45), ('Caixa com 36 unidades', 28.08), ('ESTE CONJUNTO, A UNIDADE SAI POR', 6.67), ('Limpador Perfumado Casaflor Fragrâncias', 1.75)]
+  Supermercado Ultrabox [('CAFÉ DO ULTRA CLUBE', 92.98), ('Peça ou pe: Congelado Friato IQF Friato', 9.98), ('98 Pacote 2,5Kg', 67.45), ('ULTRA Claybom as', 10.98), ('Néctar Maguary Fruit', 1.35), ('Sul Sabores', 1.35), ('Pacote 2,5Kg', 67.45), ('Caixa com 36 unidades', 28.08)]
+  Supermercado Ultrabox [('Manga Palmer', 3.98), ('Melão Amarelo', 3.98), ('Uva Thompson', 5.98), ('ilé de Peito de Frango Congelado Superfrango', 7.98), ('Ovos Brancos Bandeja 30 unidades', 3.98), ('mil ou Paleta', 13.98), ('Costelinha Suína', 17.98)]
+  Supermercado Ultrabox [('Bandeja 30 unidades', 12.98), ('Peça ou pedaço Kg', 31.98), ('175 litro', 1.75), ('Larva Roupas Em Pó Geo Action', 15.19), ('SOft sã Soft sã Baby Soft', 17.59)]
 
 triangulação (anúncio -> códigos compatíveis):
   Dona                   R$  24.95  Congelado 1,002kg                                  -> 2 código(s) ['7806740760371', '7898922719017']
@@ -151,10 +169,19 @@ triangulação (anúncio -> códigos compatíveis):
   Dona                   R$  49.99  Vero 750ml                                         -> 5 código(s) ['7896034302097', '7896034300598', '7896034303100']
   Dona                   R$   5.99  Pure Gold Lata 350ml                               -> 2 código(s) ['7891991306492', '7891991306485']
   Dona                   R$  42.90  coda Arroz Tio João Tipo 1 5kg                     -> 2 código(s) ['7893500018452', '7893500020158']
-  Costa Atacadão         R$  28.99  KIT VIDA MACIA LAVA ROUPA + AMACIANTE 1L           -> 3 código(s) ['7896040705332', '7896040707671', '7901219384574']
-  Costa Atacadão         R$  19.99  MIX AMELIA 1L                                      -> 3 código(s) ['7896096007688', '7896256601541', '7896096000962']
-  Supermercado Ultrabox  R$  18.78  — Café do Sítio Tradicional Almofada 500g          -> 4 código(s) ['7892222310523', '7896089012019', '7896759900059']
   Cristal Supermercado   R$   7.19  Óleo de Soja Pet 900ml                             -> 21 código(s) ['7891107101621', '7891737170790', '7895000327874']
+  Supercei Supermercado  R$   3.95  Feijão Carioca Kicaldo - 1Kg                       -> 2 código(s) ['7896116900029', '7897136400155']
+  Supercei Supermercado  R$   8.95  Margarina Delícia Com Sal - 500g                   -> 4 código(s) ['7891080112836', '7891080400070', '7891080400087']
+  Supercei Supermercado  R$   5.45  Integralmedica - 45g                               -> 3 código(s) ['7896311768325', '7896311773282', '7896311760862']
+  Supercei Supermercado  R$  18.95  Margarina Delícia Com Sal - 500g                   -> 4 código(s) ['7891080112836', '7891080400070', '7891080400087']
+  Costa Atacadão         R$  28.99  KIT VIDA MACIA LAVA ROUPA + AMACIANTE 1L           -> 3 código(s) ['7896040705332', '7896040707671', '7901219384574']
+  Assaí Atacadista       R$   4.99  BARRA PROTEÍNA SUPINO SABORES UNIDADE 30g          -> 1 código(s) ['7896798601818']
+  Assaí Atacadista       R$  49.90  CREATINA MAX TITANIUM POTE 300g                    -> 1 código(s) ['7898920041448']
+  Assaí Atacadista       R$  35.90  TITANIUM POTE 300g                                 -> 20 código(s) ['7899941201972', '7898920041448', '7898920041868']
+  Assaí Atacadista       R$  29.90  POWER ONE UNIDADE 1.005KG                          -> 2 código(s) ['7898939072617', '7898939072600']
+  Assaí Atacadista       R$  25.90  POWER ONE UNIDADE 1.005KG                          -> 2 código(s) ['7898939072617', '7898939072600']
+  Assaí Atacadista       R$  11.49  CREME DE RICOTA PRÉSIDENT LIGHT UNIDADE 380g       -> 3 código(s) ['7891097104367', '7896051168034', '7891097106002']
+  Costa Atacadão         R$  19.99  MIX AMELIA 1L                                      -> 3 código(s) ['7896096007688', '7896256601541', '7896096000962']
   Costa Atacadão         R$  19.89  SABÃO EM PÓ TIXAN YPÊ PRIMAVERA 2,2KG              -> 2 código(s) ['7896098909850', '7896098906750']
   Costa Atacadão         R$   0.99  CERVEJA HEINEKEN PURO MALTE LONG NECK 330ML        -> 3 código(s) ['000078936683', '7891991015462', '7897395001292']
   Costa Atacadão         R$  15.99  VINHO NACIONAL MIORANZA SUAVE TINTO 750ML          -> 4 código(s) ['7896589103019', '7896589104801', '7896589104825']
