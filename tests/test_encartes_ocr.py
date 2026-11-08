@@ -141,6 +141,30 @@ class TestPrecoEstilizado(unittest.TestCase):
         self.assertEqual(lidos, [("ARROZ CAMIL TIPO 1 5kg", 24.9), ("CAFÉ PILÃO 500g", 14.98)])
 
 
+@unittest.skipUnless(shutil.which("tesseract"), "sem tesseract")
+class TestPrecoPertoDoNome(unittest.TestCase):
+    def test_acha_preco_abaixo_do_nome(self):
+        import glob
+
+        from PIL import Image, ImageDraw, ImageFont
+
+        fontes = glob.glob("/usr/share/fonts/**/DejaVuSans-Bold.ttf", recursive=True)
+        if not fontes:
+            self.skipTest("sem fonte DejaVu")
+        img = Image.new("RGB", (900, 420), "white")
+        d = ImageDraw.Draw(img)
+        d.text((40, 40), "CAFÉ PILÃO TRADICIONAL 500g", fill="black", font=ImageFont.truetype(fontes[0], 40))
+        d.text((40, 270), "R$ 14,98", fill="red", font=ImageFont.truetype(fontes[0], 60))  # longe do nome
+        with tempfile.TemporaryDirectory() as tmp:
+            png = encartes_ocr._preparar(_bytes(img), Path(tmp), "e.jpg")
+            linhas = encartes_ocr.ocr_linhas(png, estilizados=False)
+            self.assertEqual(encartes_ocr.trechos_das_linhas(linhas), [])  # a página inteira não junta os dois
+            lido = encartes_ocr.EncarteLido("Mercado", "https://e", "2026-11-08", None, [])
+            encartes_ocr._ler_imagem(lido, linhas, {"cafe", "pilao", "tradicional"}, True, png)
+        self.assertEqual([(t.texto, t.preco) for t in lido.trechos], [("CAFÉ PILÃO TRADICIONAL 500g", 14.98)])
+        self.assertEqual(lido.nomes, [])
+
+
 def _bytes(img):
     import io
 

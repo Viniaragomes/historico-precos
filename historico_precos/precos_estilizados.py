@@ -143,3 +143,40 @@ def linhas_de_preco(caminho: Path, palavras: list[tuple], max_regioes: int = 40)
             saida.append({"texto": f"R$ {preco:.2f}".replace(".", ","), "pagina": 1, "topo": y0, "base": y1,
                           "esquerda": x0, "direita": x1, "estilizado": True})
     return saida
+
+
+def _ler_texto(img: Image.Image) -> str:
+    with tempfile.NamedTemporaryFile(suffix=".png") as f:
+        img.save(f.name)
+        r = subprocess.run(["tesseract", f.name, "stdout", "-l", "por", "--psm", "6"], capture_output=True, text=True, timeout=60)
+    return r.stdout
+
+
+def preco_perto(img: Image.Image, caixa: dict, limite_baixo: float | None = None) -> float | None:
+    """Preço logo abaixo ou ao lado de um nome de produto lido no encarte. Lê só esse pedaço da imagem: primeiro como
+    texto comum ("R$ 4,99"), depois como preço estilizado ("4" grande com "99" pequeno no alto).
+
+    `caixa` é a área do nome (topo, base, esquerda, direita, altura_linha); `limite_baixo` é onde começa o próximo nome
+    da mesma coluna, para não pegar o preço do produto de baixo."""
+    from .encartes_ocr import RE_PRECO
+
+    h = max(10.0, float(caixa.get("altura_linha") or (caixa["base"] - caixa["topo"])))
+    largura = caixa["direita"] - caixa["esquerda"]
+    x0 = max(0, int(caixa["esquerda"] - 0.3 * largura))
+    x1 = min(img.width, int(caixa["direita"] + 0.6 * largura))
+    y0 = max(0, int(caixa["topo"]))
+    y1 = min(img.height, int(caixa["base"] + 6 * h))
+    if limite_baixo is not None:
+        y1 = min(y1, int(limite_baixo))
+    if x1 - x0 < 20 or y1 - y0 < 20:
+        return None
+    recorte = img.crop((x0, y0, x1, y1))
+    if recorte.width < 600:  # o Tesseract lê melhor letras maiores
+        f = 600 / recorte.width
+        recorte = recorte.resize((600, max(1, int(recorte.height * f))))
+    for achado in RE_PRECO.finditer(_ler_texto(recorte.convert("L"))):
+        preco = float(f"{achado.group(1)}.{achado.group(2)}")
+        if 0.2 <= preco <= 2000:
+            return preco
+    return preco_da_regiao(recorte)
+

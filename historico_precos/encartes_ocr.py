@@ -215,28 +215,38 @@ def abrir_dicionario(caminho: str | Path):
     return sqlite3.connect(caminho)
 
 
-def nomes_das_linhas(linhas: list[dict], vocab: set[str]) -> list[str]:
-    """Linhas sem preço que são nome de produto conhecido; linhas seguidas na mesma coluna viram um nome só."""
-    nomes, atual, anterior = [], [], None
+def nomes_com_caixa(linhas: list[dict], vocab: set[str]) -> list[tuple[str, dict]]:
+    """Linhas sem preço que são nome de produto conhecido, com a caixa que ocupam na imagem; linhas seguidas na mesma
+    coluna viram um nome só."""
+    blocos, atual, anterior = [], [], None
     for l in linhas:
         junto = (anterior is not None and l["pagina"] == anterior["pagina"]
                  and 0 <= l["topo"] - anterior["base"] < 1.2 * max(1, l["base"] - l["topo"])
                  and min(l["direita"], anterior["direita"]) - max(l["esquerda"], anterior["esquerda"]) > 0)
         boa = not RE_PRECO.search(l["texto"]) and limpar_nome(l["texto"]) is not None
         if (not junto or not boa) and atual:
-            nomes.append(" ".join(atual))
+            blocos.append(atual)
             atual = []
         if boa:
-            atual.append(l["texto"])
+            atual.append(l)
         anterior = l
     if atual:
-        nomes.append(" ".join(atual))
-    saida = []
-    for n in nomes:
-        n = limpar_nome(n)
-        if n and len(n.split()) >= 2 and conhecido(n, vocab) and n not in saida:
-            saida.append(n)
+        blocos.append(atual)
+    saida, vistos = [], set()
+    for bloco in blocos:
+        n = limpar_nome(" ".join(l["texto"] for l in bloco))
+        if n and len(n.split()) >= 2 and conhecido(n, vocab) and n not in vistos:
+            vistos.add(n)
+            caixa = {"pagina": bloco[0]["pagina"], "topo": min(l["topo"] for l in bloco), "base": max(l["base"] for l in bloco),
+                     "esquerda": min(l["esquerda"] for l in bloco), "direita": max(l["direita"] for l in bloco),
+                     "altura_linha": max(l["base"] - l["topo"] for l in bloco)}
+            saida.append((n, caixa))
     return saida
+
+
+def nomes_das_linhas(linhas: list[dict], vocab: set[str]) -> list[str]:
+    """Linhas sem preço que são nome de produto conhecido; linhas seguidas na mesma coluna viram um nome só."""
+    return [n for n, _ in nomes_com_caixa(linhas, vocab)]
 
 
 def palavras_do_tsv(tsv: str) -> list[tuple]:
@@ -323,7 +333,11 @@ def paginas_do_pdf(caminho: Path, max_paginas: int = 8) -> list[Path]:
     return sorted(caminho.parent.glob(caminho.stem + "-*.png"))
 
 
-def _ler_imagem(lido: EncarteLido, linhas: list[dict], vocab: set[str] | None, filtrar: bool) -> None:
+MAX_NOMES_COM_PRECO_PERTO = 25  # por imagem: cada nome custa uma ou duas leituras extras de um recorte
+
+
+def _ler_imagem(lido: EncarteLido, linhas: list[dict], vocab: set[str] | None, filtrar: bool,
+                imagem: Path | None = None) -> None:
     from .vinculo import semelhanca, tokens
 
     from .vinculo import normalizar
@@ -340,7 +354,41 @@ def _ler_imagem(lido: EncarteLido, linhas: list[dict], vocab: set[str] | None, f
         lido.trechos.append(t)
     if filtrar:  # sem vocabulário, nome sem preço seria mais lixo que informação
         com_preco = {t.texto for t in lido.trechos}
-        lido.nomes += [n for n in nomes_das_linhas(linhas, vocab) if n not in com_preco and n not in lido.nomes][:300]
+        nomes = [(n, c) for n, c in nomes_com_caixa(linhas, vocab) if n not in com_preco]
+        # nome lido sem preço: procura o preço logo abaixo ou ao lado, lendo só aquele pedaço da imagem
+        if imagem is not None and nomes:
+            achados = _precos_perto(imagem, nomes[:MAX_NOMES_COM_PRECO_PERTO])
+            for n, preco in achados:
+                t = Trecho(n, preco)
+                if plausivel(t) and not any(abs(x.preco - preco) < 0.005 and x.texto == n for x in lido.trechos):
+                    lido.trechos.append(t)
+                    com_preco.add(n)
+        lido.nomes += [n for n, _ in nomes if n not in com_preco and n not in lido.nomes][:300]
+
+
+def _precos_perto(imagem: Path, nomes: list[tuple[str, dict]]) -> list[tuple[str, float]]:
+    try:
+        from PIL import Image
+
+        from .precos_estilizados import preco_perto
+
+        img = Image.open(imagem).convert("RGB")
+    except Exception as e:
+        print(f"preço perto do nome: {e!r}")
+        return []
+    saida = []
+    for n, caixa in nomes:
+        # o próximo nome abaixo, na mesma coluna, limita o recorte (para não pegar o preço do produto de baixo)
+        abaixo = [c["topo"] for _, c in nomes if c["topo"] > caixa["base"]
+                  and min(c["direita"], caixa["direita"]) - max(c["esquerda"], caixa["esquerda"]) > 0]
+        try:
+            preco = preco_perto(img, caixa, min(abaixo) if abaixo else None)
+        except Exception as e:
+            print(f"preço perto de {n!r}: {e!r}")
+            continue
+        if preco is not None:
+            saida.append((n, preco))
+    return saida
 
 
 def ler_encartes(nav: Navegador, dias: int = 4, hoje: date | None = None, max_imagens: int = 120,
@@ -372,7 +420,7 @@ def ler_encartes(nav: Navegador, dias: int = 4, hoje: date | None = None, max_im
                             lidas += 1
                             png = _preparar(pagina.read_bytes(), pasta, f"{n}-{pagina.stem}.png")
                             for cor in (False, True):
-                                _ler_imagem(lido, ocr_linhas(png, cor=cor), vocab, filtrar)
+                                _ler_imagem(lido, ocr_linhas(png, cor=cor), vocab, filtrar, None if cor else png)
             if len(lido.trechos) < 3 and not lido.nomes:
                 lido.trechos = []
                 for i, url in enumerate(e.imagens):
@@ -384,7 +432,7 @@ def ler_encartes(nav: Navegador, dias: int = 4, hoje: date | None = None, max_im
                     lidas += 1
                     png = _preparar(dados, pasta, f"{n}-{i}{Path(url.split('?')[0]).suffix or '.img'}")
                     for cor in (False, True):
-                        _ler_imagem(lido, ocr_linhas(png, cor=cor), vocab, filtrar)
+                        _ler_imagem(lido, ocr_linhas(png, cor=cor), vocab, filtrar, None if cor else png)
             saida.append(lido)
     return saida
 
