@@ -1,0 +1,84 @@
+
+https://www.uniaosupermercados.com -> HTTP 200  | robots 404 permite home: True | plataforma ['osuper'] | R$ no HTML: 0
+   ofertas: ['/promocoes', '/promocoes#inscrever', '/promocoes#promo-rede-9146', '/promocoes#promo-rede-9168'] pdfs: []
+
+https://supercei.com.br -> HTTP 0  | robots 0 permite home: True | plataforma - | R$ no HTML: 0 | erro URLError(SSLCertVerificationError(1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify 
+
+https://bellaviajardimbotanico.instabuy.com.br -> HTTP 200 https://bellaviajardimbotanico.instabuy.app.br/ | robots 200 permite home: True | sinal search=yes,ai-train=no,use=reference | plataforma ['Instabuy'] | R$ no HTML: 0
+   ofertas: ['/promocoes'] pdfs: []
+   sitemap: 9095 endereços, 8929 de produto (/p/)
+   produto: Abridor Asa Do Brasil De Lata E Garrafa Ref:691 6.45 | loja: 
+
+https://bellaviasupermercados.com.br -> HTTP 0  | robots 0 permite home: True | plataforma - | R$ no HTML: 0 | erro URLError(SSLCertVerificationError(1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify 
+
+https://supermercadobistecao.com -> HTTP 200  | robots 200 permite home: True | sinal search=yes,ai-train=no,use=reference | plataforma ['osuper'] | R$ no HTML: 0
+   ofertas: ['https://wa.me/5561996262773?text=Salve+nosso+n%C3%BAmero+para+receber+as+ofertas+semanais.'] pdfs: []
+
+https://www.supermercadoscristal.com.br -> HTTP 200  | robots 200 permite home: True | plataforma - | R$ no HTML: 0
+   ofertas: ['/encarte', 'https://www.supermercadoscristal.com.br/encarte'] pdfs: []
+   sitemap: 17 endereços, 0 de produto (/p/)
+
+https://www.varejaodafartura.com -> HTTP 200  | robots 200 permite home: True | plataforma - | R$ no HTML: 0
+   ofertas: ['/ofertas'] pdfs: []
+   sitemap: 10 endereços, 0 de produto (/p/)
+
+https://primorsupermercado.com.br -> HTTP 200  | robots 200 permite home: True | plataforma ['WordPress'] | R$ no HTML: 0
+   ofertas: ['https://primorsupermercado.com.br/ofertas/'] pdfs: []
+   mídia WP: [('2026-11-07', 'WhatsApp-Image-2026-11-07-at-08.50.04.jpeg'), ('2026-11-06', 'WhatsApp-Image-2026-11-06-at-09.24.28.jpeg'), ('2026-11-06', 'WhatsApp-Image-2026-11-06-at-09.24.28-1.jpeg'), ('2026-11-06', 'WhatsApp-Image-2026-11-06-at-09.24.28-2.jpeg'), ('2026-11-06', 'WhatsApp-Image-2026-11-06-at-09.24.28-3.jpeg'), ('2026-11-06', 'd7f56563-c460-4d92-8333-0e85545d1358.jpeg')]
+
+https://costaatacadao.com.br -> HTTP 200  | robots 200 permite home: True | plataforma ['WordPress'] | R$ no HTML: 0
+   ofertas: ['https://costaatacadao.com.br/ofertas/', 'https://costaatacadao.com.br/wp-content/uploads/2026/11/tabloide-digital-festival-do-bebe-df-01-scaled.png', 'https://costaatacadao.com.br/wp-content/uploads/2026/11/tabloide-digital-festival-do-bebe-df-02-scaled.png', 'https://costaatacadao.com.br/wp-content/uploads/2026/11/tabloide-digital-festival-do-bebe-go-e-entorno-01-scaled.png', 'https://costaatacadao.com.br/wp-content/uploads/2026/11/tabloide-digital-festival-do-bebe-go-e-entorno-02-scaled.png', 'https://costaatacadao.com.br/wp-content/uploads/2026/11/tabloide-food-df-01-scaled.png'] pdfs: []
+   mídia WP: [('2026-11-08', 'banner-sorteio-luziania-nov-2027-mobile.jpeg'), ('2026-11-08', 'banner-sorteio-luziania-nov-2027-desktop.jpeg')]
+   sitemap: 1 endereços, 0 de produto (/p/)
+
+https://www.supermercadocaprichoso.com.br -> HTTP 200  | robots 200 permite home: True | plataforma - | R$ no HTML: 0
+
+https://grupovivendas.com.br -> HTTP 0  | robots 0 permite home: True | plataforma - | R$ no HTML: 0 | erro URLError(gaierror(-5, 'No address associated with hostname'))
+
+https://melhoratacadista.com.br -> HTTP 200  | robots 200 permite home: True | plataforma ['WordPress'] | R$ no HTML: 0
+   ofertas: ['https://melhoratacadista.com.br/tabloide/', 'https://melhoratacadista.com.br/tabloide/areal-guara-2-riacho-fundo-2/'] pdfs: []
+   mídia WP: [('2026-04-13', 'TABLOIDE-MELHOR-ATACADISTA2.jpg-2-1.jpeg'), ('2026-04-13', 'TABLOIDE-MELHOR-ATACADISTA.jpg-2-1.jpeg'), ('2026-04-13', 'TABLOIDE-MELHOR-ATACADISTA2.jpg-2.jpeg'), ('2026-04-13', 'TABLOIDE-MELHOR-ATACADISTA.jpg-2.jpeg'), ('2026-03-30', 'TABLOIDE-MELHOR-ATACADISTA2.jpg-1.jpeg'), ('2026-03-30', 'TABLOIDE-MELHOR-ATACADISTA.jpg-1.jpeg')]
+   sitemap: 3 endereços, 0 de produto (/p/)
+
+https://bonamixatacarejo.com.br -> HTTP 0  | robots 0 permite home: True | plataforma - | R$ no HTML: 0 | erro URLError(gaierror(-3, 'Temporary failure in name resolution'))
+
+https://superdonadecasa.com.br -> HTTP 200 https://donafazbem.com.br/ | robots 404 permite home: True | plataforma ['Instabuy', 'WordPress'] | R$ no HTML: 0
+   ofertas: ['https://donafazbem.com.br/folheto/ofertas', 'https://donafazbem.com.br/ofertas', 'https://donafazbem.com.br/ofertas/'] pdfs: []
+
+https://donadecasasupermercados.com.br -> HTTP 200 https://donafazbem.com.br/ | robots 200 permite home: False | plataforma ['Instabuy', 'WordPress'] | R$ no HTML: 0
+   ofertas: ['https://donafazbem.com.br/folheto/ofertas', 'https://donafazbem.com.br/ofertas', 'https://donafazbem.com.br/ofertas/'] pdfs: []
+   mídia WP: [('2023-12-14', 'Selecao-Especial-14-a-17-12-2023.pdf'), ('2023-09-19', 'banner_manutencao.jpg'), ('2023-09-13', 'bg-dona-pagina-links.jpg'), ('2023-09-13', 'bg-dona-pagina-e-links.jpg'), ('2023-08-10', 'ofertas-dona-de-casa-whatsapp-df.png'), ('2023-07-18', 'whatsapp-dona-de-casa-supermercados.jpg')]
+
+https://mercadopontoalto.com.br -> HTTP 200  | robots 404 permite home: True | plataforma - | R$ no HTML: 0
+   ofertas: ['https://t.me/ofertaspontoalto'] pdfs: []
+
+https://www.extramercado.com.br -> HTTP 200  | robots 200 permite home: True | plataforma - | R$ no HTML: 0
+   ofertas: ['https://www.clubeextra.com.br/especial/oferta_feira?p=1'] pdfs: []
+
+https://www.clubeextra.com.br -> HTTP 200 https://www.extramercado.com.br/ | robots 200 permite home: True | plataforma - | R$ no HTML: 0
+   ofertas: ['https://www.clubeextra.com.br/especial/oferta_feira?p=1'] pdfs: []
+
+https://qi23.bigboxdelivery.com.br -> HTTP 200  | robots 200 permite home: True | sinal search=yes,ai-train=no,use=reference | plataforma ['Instabuy'] | R$ no HTML: 0
+   ofertas: ['/promocoes', '/promocoes-clube'] pdfs: []
+   sitemap: 9374 endereços, 9185 de produto (/p/)
+   produto: Abacaxi em Calda TRIANGULO 400g 22.99 | loja: Abacaxi em Calda TRIANGULO 400g
+
+https://105sudoeste.bigboxdelivery.com.br -> HTTP 200  | robots 200 permite home: True | sinal search=yes,ai-train=no,use=reference | plataforma ['Instabuy'] | R$ no HTML: 0
+   ofertas: ['/promocoes', '/promocoes-clube'] pdfs: []
+   sitemap: 9073 endereços, 8883 de produto (/p/)
+   produto: Abacaxi (Unidade) 12.99 | loja: Abacaxi (Unidade)
+
+https://lagosul.bigboxdelivery.com.br -> HTTP 200  | robots 200 permite home: True | sinal search=yes,ai-train=no,use=reference | plataforma ['Instabuy'] | R$ no HTML: 0
+   ofertas: ['/promocoes', '/promocoes-clube'] pdfs: []
+   sitemap: 9213 endereços, 9020 de produto (/p/)
+   produto: Abacaxi (Unidade) 12.99 | loja: Abacaxi (Unidade)
+
+https://loja.obahortifruti.com.br -> HTTP 200 https://www.obahortifruti.com.br/ | robots 404 permite home: True | plataforma ['VTEX'] | R$ no HTML: 0
+   sitemap: 10 endereços, 0 de produto (/p/)
+
+===== Big Box: mesmo produto em lojas diferentes (preço por loja?)
+  https://bigboxdelivery.com.br: HTTP 200 preço ['49.99'] loja ['BIG BOX Delivery - 402/403 Norte']
+  https://qi23.bigboxdelivery.com.br: HTTP 200 preço [] loja ['BIG BOX Delivery - Lago Sul Qi 23']
+  https://105sudoeste.bigboxdelivery.com.br: HTTP 200 preço [] loja ['BIG BOX Delivery - 105 Sudoeste']
+  https://lagosul.bigboxdelivery.com.br: HTTP 200 preço [] loja ['BIG BOX Delivery - Lago Sul (QI 11)']
+  subdomínios citados na home: []
