@@ -115,6 +115,50 @@
       "padrao_produto": "/p/",
       "ativa": true,
       "verificacao": "Em 08/11/2026: plataforma Instabuy, mesmas regras do robots.txt do Guará II (search=yes, ai-train=no). Sitemap com cerca de 13.800 endereços; JSON-LD com nome, marca e preço, sem código de barras. Vínculo pelo nome. Loja do Cruzeiro (811)."
+    },
+    {
+      "nome": "Bellavia Jardim Botânico",
+      "dominio": "bellaviajardimbotanico.instabuy.app.br",
+      "cidade": "Brasília",
+      "tipo": "sitemap",
+      "vinculo": "nome",
+      "sitemap": "https://bellaviajardimbotanico.instabuy.com.br/sitemap.xml",
+      "padrao_produto": "/p/",
+      "ativa": true,
+      "verificacao": "Em 08/11/2026: plataforma Instabuy (como Big Box e Super Veneza). robots.txt libera para robôs comuns, Content-Signal search=yes, ai-train=no, use=reference. Sitemap próprio da loja; páginas de produto com nome, marca e preço em JSON-LD, sem código de barras. Vínculo pelo nome. Cada loja é um estabelecimento: o preço pode variar entre lojas da mesma rede."
+    },
+    {
+      "nome": "Big Box Lago Sul QI 23",
+      "dominio": "qi23.bigboxdelivery.com.br",
+      "cidade": "Brasília",
+      "tipo": "sitemap",
+      "vinculo": "nome",
+      "sitemap": "https://qi23.bigboxdelivery.com.br/sitemap.xml",
+      "padrao_produto": "/p/",
+      "ativa": true,
+      "verificacao": "Em 08/11/2026: plataforma Instabuy (como Big Box e Super Veneza). robots.txt libera para robôs comuns, Content-Signal search=yes, ai-train=no, use=reference. Sitemap próprio da loja; páginas de produto com nome, marca e preço em JSON-LD, sem código de barras. Vínculo pelo nome. Cada loja é um estabelecimento: o preço pode variar entre lojas da mesma rede."
+    },
+    {
+      "nome": "Big Box 105 Sudoeste",
+      "dominio": "105sudoeste.bigboxdelivery.com.br",
+      "cidade": "Brasília",
+      "tipo": "sitemap",
+      "vinculo": "nome",
+      "sitemap": "https://105sudoeste.bigboxdelivery.com.br/sitemap.xml",
+      "padrao_produto": "/p/",
+      "ativa": true,
+      "verificacao": "Em 08/11/2026: plataforma Instabuy (como Big Box e Super Veneza). robots.txt libera para robôs comuns, Content-Signal search=yes, ai-train=no, use=reference. Sitemap próprio da loja; páginas de produto com nome, marca e preço em JSON-LD, sem código de barras. Vínculo pelo nome. Cada loja é um estabelecimento: o preço pode variar entre lojas da mesma rede."
+    },
+    {
+      "nome": "Big Box Lago Sul QI 11",
+      "dominio": "lagosul.bigboxdelivery.com.br",
+      "cidade": "Brasília",
+      "tipo": "sitemap",
+      "vinculo": "nome",
+      "sitemap": "https://lagosul.bigboxdelivery.com.br/sitemap.xml",
+      "padrao_produto": "/p/",
+      "ativa": true,
+      "verificacao": "Em 08/11/2026: plataforma Instabuy (como Big Box e Super Veneza). robots.txt libera para robôs comuns, Content-Signal search=yes, ai-train=no, use=reference. Sitemap próprio da loja; páginas de produto com nome, marca e preço em JSON-LD, sem código de barras. Vínculo pelo nome. Cada loja é um estabelecimento: o preço pode variar entre lojas da mesma rede."
     }
   ]
 }

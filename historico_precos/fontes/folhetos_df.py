@@ -9,6 +9,9 @@
 - Assaí DF: o site do Assaí recusa robôs; os folhetos "ofertas DF" diários são lidos no Portafolhetos
   (portafolhetos.com.br), que os republica. O robots.txt de lá permite a página de cada folheto e proíbe a paginação
   ("?page="); as imagens das páginas ficam num servidor de imagens que permite acesso, então são lidas direto de lá.
+- Costa Atacadão: a página de ofertas (costaatacadao.com.br/ofertas/) lista as imagens dos tabloides, com a região no
+  nome do arquivo ("...-df_0001_02.png" x "...-go-e-entorno..."); só entram os do DF.
+- Primor: o WordPress do site publica as imagens de ofertas do dia na lista pública de mídia ("WhatsApp-Image-2026-11-07...").
 robots.txt de todos libera esses caminhos (conferido em 08/11/2026).
 """
 
@@ -142,9 +145,52 @@ def assai_df(nav: Navegador, hoje: date | None = None) -> list[Encarte]:
     return saida
 
 
+COSTA_OFERTAS = "https://costaatacadao.com.br/ofertas/"
+_RE_COSTA = re.compile(r"https?://costaatacadao\.com\.br/wp-content/uploads/(\d{4})/(\d{2})/([a-z0-9-]+?-df)[-_]([0-9_-]+?)(?:-scaled)?\.(?:png|jpe?g|webp)", re.I)
+
+
+def costa_df(nav: Navegador, hoje: date | None = None) -> list[Encarte]:
+    """Tabloides do DF na página de ofertas do Costa Atacadão, agrupados pelo nome do tabloide (mês atual e anterior)."""
+    hoje = hoje or date.today()
+    html = nav.get_texto(COSTA_OFERTAS) or ""
+    meses = {(hoje.year, hoje.month), ((hoje.replace(day=1) - timedelta(days=1)).year, (hoje.replace(day=1) - timedelta(days=1)).month)}
+    grupos: dict[str, dict[str, str]] = {}
+    for achado in _RE_COSTA.finditer(html):
+        a, m, nome, pagina = achado.groups()
+        if (int(a), int(m)) not in meses:
+            continue
+        # a mesma página aparece em vários tamanhos: fica a primeira (maior) de cada número de página
+        grupos.setdefault(f"{a}-{m}|{nome}", {}).setdefault(pagina, achado.group(0))
+    return [Encarte(post=COSTA_OFERTAS, titulo=nome.replace("-", " ").strip(), mercado="Costa Atacadão",
+                    publicado=f"{chave.split('|')[0]}-01", validade_fim=None, imagens=[u for _, u in sorted(paginas.items())])
+            for chave, paginas in sorted(grupos.items()) for nome in [chave.split("|")[1]]]
+
+
+PRIMOR_MIDIA = "https://primorsupermercado.com.br/wp-json/wp/v2/media?per_page=40&_fields=source_url,date"
+
+
+def primor(nav: Navegador, hoje: date | None = None, dias: int = 3) -> list[Encarte]:
+    """Imagens de ofertas publicadas no site do Primor nos últimos `dias`, uma "edição" por dia de publicação."""
+    hoje = hoje or date.today()
+    midia = nav.get_json(PRIMOR_MIDIA)
+    por_dia: dict[str, list[str]] = {}
+    for m in midia if isinstance(midia, list) else []:
+        url, dia = m.get("source_url") or "", (m.get("date") or "")[:10]
+        if not re.search(r"\.(?:jpe?g|png|webp)$", url, re.I) or re.search(r"logo|banner|cover|linkedin", url, re.I):
+            continue
+        try:
+            if date.fromisoformat(dia) < hoje - timedelta(days=dias):
+                continue
+        except ValueError:
+            continue
+        por_dia.setdefault(dia, []).append(url)
+    return [Encarte(post="https://primorsupermercado.com.br/ofertas/", titulo=f"Primor ofertas {dia}", mercado="Supermercado Primor",
+                    publicado=dia, validade_fim=None, imagens=sorted(urls)) for dia, urls in sorted(por_dia.items())]
+
+
 def todos(nav: Navegador) -> list[Encarte]:
     saida = []
-    for fonte in (dia_a_dia, dona, ultrabox, assai_df):
+    for fonte in (dia_a_dia, dona, ultrabox, assai_df, costa_df, primor):
         try:
             saida += fonte(nav)
         except Exception as e:  # uma rede fora do ar não derruba as outras

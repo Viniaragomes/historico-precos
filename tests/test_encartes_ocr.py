@@ -203,6 +203,32 @@ class TestFontesNovas(unittest.TestCase):
         self.assertEqual(e.imagens, ["https://na.leafletscdn.com/thumbor/abc=/0x0/filters:format(webp)/com.br/data/7/481900/0.jpg"])
 
 
+class TestFontesNovas2(unittest.TestCase):
+    def test_costa_so_df_e_sem_tamanhos_repetidos(self):
+        from datetime import date
+
+        up = "https://costaatacadao.com.br/wp-content/uploads"
+        html = " ".join(f'<img src="{u}">' for u in [
+            f"{up}/2026/11/feed-festival-de-bebidas-e-churrasco-df_0000_01.png",
+            f"{up}/2026/11/feed-festival-de-bebidas-e-churrasco-df_0001_02.png",
+            f"{up}/2026/11/feed-festival-de-bebidas-e-churrasco-go-e-entorno_0000_01.png",
+            f"{up}/2026/11/tabloide-digital-festival-do-bebe-df-01-scaled.png",
+            f"{up}/2026/11/tabloide-digital-festival-do-bebe-df-01-scaled.png",
+            f"{up}/2026/03/tabloide-antigo-df-01.png"])
+        encartes = folhetos_df.costa_df(NavFalso(texto=html), hoje=date(2026, 11, 8))
+        self.assertEqual(sorted((e.titulo, len(e.imagens)) for e in encartes),
+                         [("feed festival de bebidas e churrasco df", 2), ("tabloide digital festival do bebe df", 1)])
+
+    def test_primor_ultimos_dias(self):
+        from datetime import date
+
+        midia = [{"date": "2026-11-07T08:50:00", "source_url": "https://primorsupermercado.com.br/wp-content/uploads/2026/11/WhatsApp-Image-2026-11-07-at-08.50.04.jpeg"},
+                 {"date": "2026-11-07T08:51:00", "source_url": "https://primorsupermercado.com.br/wp-content/uploads/2026/11/Copia-de-Fixo-LinkedIn-Article-Cover-Image-1.png"},
+                 {"date": "2026-10-01T08:00:00", "source_url": "https://primorsupermercado.com.br/wp-content/uploads/2026/10/WhatsApp-Image-2026-10-01.jpeg"}]
+        (e,) = folhetos_df.primor(NavFalso(json=midia), hoje=date(2026, 11, 8))
+        self.assertEqual((e.mercado, e.publicado, len(e.imagens)), ("Supermercado Primor", "2026-11-07", 1))
+
+
 class TestRede(unittest.TestCase):
     def test_mesma_rede_com_outro_nome(self):
         self.assertEqual(encartes_ocr.nome_da_rede("Dia a Dia Atacadista"), "Atacadão Dia a Dia")

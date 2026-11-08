@@ -455,6 +455,7 @@ def main(argv: list[str] | None = None) -> int:
     cn = sub.add_parser("catalogo-nome", help="lojas sem código de barras no site: lê páginas de produto em rodízio e vincula pelo nome")
     cn.add_argument("--minutos", type=float, default=60, help="tempo máximo por loja")
     cn.add_argument("--limite", type=int, default=5000, help="teto de páginas por loja")
+    cn.add_argument("--minutos-total", type=float, help="tempo total da rodada, dividido igualmente entre as lojas")
     cn.add_argument("--dicionario", default="dicionario.db.gz", help="dicionário de códigos do DF como referência extra (se existir)")
 
     cs = sub.add_parser("catalogo-sitemap", help="acha páginas de produto pelo sitemap das lojas (tipo 'sitemap') e lê nome, GTIN e preço")
@@ -740,7 +741,11 @@ def main(argv: list[str] | None = None) -> int:
         catalogo = montar_catalogo(banco.con, dic)
         print(f"Catálogo de referência: {len(catalogo.itens)} nomes com código de barras e tamanho"
               + (" (inclui o dicionário de códigos do DF)." if dic else " (sem o dicionário de códigos)."))
-        for loja in [l for l in carregar_lojas(args.lojas) if l.get("tipo") == "sitemap" and l.get("vinculo") == "nome"]:
+        lojas_nome = [l for l in carregar_lojas(args.lojas) if l.get("tipo") == "sitemap" and l.get("vinculo") == "nome"]
+        if args.minutos_total and lojas_nome:
+            args.minutos = min(args.minutos, args.minutos_total / len(lojas_nome))
+            print(f"{len(lojas_nome)} lojas: {args.minutos:.0f} minutos de leitura para cada uma nesta rodada.")
+        for loja in lojas_nome:
             rv = pagina_produto.revincular(banco, loja, catalogo)
             print(f"{loja['nome']}: {rv['desfeitos']} vínculo(s) antigo(s) desfeito(s) pelas regras atuais; refeito o vínculo das "
                   f"páginas já lidas: {rv['vinculadas']} de {rv['sem_vinculo']} ligadas agora, {rv['precos']} preço(s) novo(s).")
