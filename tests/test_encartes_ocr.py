@@ -198,9 +198,9 @@ class TestFontesNovas(unittest.TestCase):
             def get_texto(self, url):
                 return lista if url.endswith("/assai-atacadista/") else folheto
 
-        (e,) = folhetos_df.assai_df(Nav(), hoje=date(2026, 11, 8), paginas=3)
+        (e,) = folhetos_df.assai_df(Nav(), hoje=date(2026, 11, 8))
         self.assertEqual((e.mercado, e.publicado, e.validade_fim), ("Assaí Atacadista", "2026-11-08", "2026-11-10"))
-        self.assertEqual(e.imagens[2], "https://na.leafletscdn.com/thumbor/abc=/0x0/filters:format(webp)/com.br/data/7/481900/2.jpg")
+        self.assertEqual(e.imagens, ["https://na.leafletscdn.com/thumbor/abc=/0x0/filters:format(webp)/com.br/data/7/481900/0.jpg"])
 
 
 class TestRede(unittest.TestCase):

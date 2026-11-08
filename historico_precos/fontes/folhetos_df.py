@@ -107,9 +107,9 @@ _RE_FOLHETO_DF = re.compile(r'href="(/assai-atacadista/[^"]*?ofertas-df-de-[a-z-
 _RE_PAGINA_0 = re.compile(r"(https://na\.leafletscdn\.com/thumbor/[^\"'\s]+?/com\.br/data/\d+/\d+/)0\.jpg")
 
 
-def assai_df(nav: Navegador, hoje: date | None = None, paginas: int = 8) -> list[Encarte]:
+def assai_df(nav: Navegador, hoje: date | None = None) -> list[Encarte]:
     """Folhetos "Assaí ofertas DF" de hoje em diante, republicados no Portafolhetos. Lê só a página principal de cada
-    folheto (a paginação "?page=" é proibida pelo robots.txt de lá) e as imagens das páginas, direto do servidor de imagens."""
+    folheto (a paginação "?page=" é proibida pelo robots.txt de lá) e a imagem da capa, direto do servidor de imagens."""
     hoje = hoje or date.today()
     html = nav.get_texto(PORTAFOLHETOS_ASSAI) or ""
     saida, vistos = [], set()
@@ -136,9 +136,9 @@ def assai_df(nav: Navegador, hoje: date | None = None, paginas: int = 8) -> list
                     fim = max(fim, date(int(a_), int(m_), int(d_)))
                 except ValueError:
                     pass
+        # só a capa: cada página tem endereço assinado próprio (não dá para montar) e a paginação é proibida no robots.txt
         saida.append(Encarte(post=url, titulo=f"Assaí ofertas DF de {dia.strftime('%d/%m/%Y')}", mercado="Assaí Atacadista",
-                             publicado=dia.isoformat(), validade_fim=fim.isoformat(),
-                             imagens=[f"{base.group(1)}{n}.jpg" for n in range(paginas)]))
+                             publicado=dia.isoformat(), validade_fim=fim.isoformat(), imagens=[base.group(0)]))
     return saida
 
 
