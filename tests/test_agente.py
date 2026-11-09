@@ -169,6 +169,13 @@ class TestRobots(unittest.TestCase):
         fake = Fake([("https://site.com.br/robots.txt", (403, ""))])
         self.assertIsNone(nav_com(fake).get_texto("https://site.com.br/qualquer"))
 
+    def test_robots_fora_do_ar_desiste_depois_de_duas_falhas(self):
+        fake = Fake([("https://site.com.br/robots.txt", (0, ""))])
+        nav = nav_com(fake)
+        for _ in range(5):
+            self.assertFalse(nav.permitido("https://site.com.br/qualquer"))
+        self.assertEqual(fake.acessos.count("https://site.com.br/robots.txt"), 2)
+
     def test_sem_robots_libera(self):
         fake = Fake([("https://site.com.br/ok", (200, "oi"))])
         self.assertEqual(nav_com(fake).get_texto("https://site.com.br/ok"), "oi")

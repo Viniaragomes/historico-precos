@@ -50,6 +50,9 @@ class Navegador:
         self._recusas_seguidas: dict[str, int] = {}
         self.desistidos: set[str] = set()
         self._robots: dict[str, RobotFileParser | None] = {}
+        # falhas de rede ao ler o robots.txt: depois de FALHAS_ROBOTS seguidas, o site fica sem coleta até o fim
+        # da rodada (antes cada acesso tentava de novo e esperava o tempo-limite: 30 min perdidos com o IBGE fora)
+        self._falhas_robots: dict[str, int] = {}
         # guarda cookies de sessão entre requisições (painéis em PHP costumam exigir)
         self._opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(http.cookiejar.CookieJar()))
 
@@ -131,16 +134,21 @@ class Navegador:
                 self._dormir(falta)
         self._ultimo_acesso[host] = time.monotonic()
 
+    FALHAS_ROBOTS = 2
+
     def permitido(self, url: str) -> bool:
         if not self.respeitar_robots:
             return True
         partes = urlsplit(url)
         base = f"{partes.scheme}://{partes.netloc}"
         if base not in self._robots:
+            if self._falhas_robots.get(base, 0) >= self.FALHAS_ROBOTS:
+                return False
             self._esperar_vez(partes.netloc)
             status, texto = self._abrir(base + "/robots.txt")
             if status == 0:
-                # falha de rede: não dá para saber as regras; não coleta agora e pergunta de novo no próximo acesso
+                # falha de rede: não dá para saber as regras; não coleta agora e tenta de novo depois (até o limite)
+                self._falhas_robots[base] = self._falhas_robots.get(base, 0) + 1
                 return False
             if status in (401, 403):
                 # mesma convenção do urllib.robotparser: acesso negado ao robots = não coletar
