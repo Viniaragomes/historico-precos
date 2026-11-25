@@ -76,3 +76,17 @@ A Política de Privacidade e os Termos de Uso ainda têm **"[NOME DO RESPONSÁVE
 
 1. **Você:** ok para enxugar o histórico do banco no GitHub (item 1); nome e e-mail para os textos legais; recurso da LAI se ainda no prazo; chaves do Supabase.
 2. **Eu, em seguida:** filtros de preço dos encartes (item 2), comparação por unidade (item 3), impostos pelo NCM (item 4), coleta em paralelo e horário (item 5).
+
+---
+
+## Varredura de 25/11/2026
+
+| Achado | Situação |
+|---|---|
+| Coleta diária cancelada de 20 a 25/11 (exportação presa no IBGE lento) | **Corrigido**: limite de 15 min para as causas, `timeout` rígido e plano B sem causas |
+| Banco guardado corrompido em 24 e 25/11 (processo órfão gravando durante a cópia) | **Recuperado** (82.308 preços até 25/11; só a tabela do Mapa perdeu linhas, recarregada na coleta seguinte). Travas: cópia pelo SQLite com checagem de integridade; `recuperar` volta à última versão íntegra; parte paralela com defeito é pulada |
+| **Fort Atacadista recusa o robô (HTTP 403 do servidor) desde 14/11** | Bloqueio do próprio site; robots.txt continua permitindo. **Não contornamos.** Ficam os preços até 13/11, que vão envelhecendo. Caminhos: coleta pelo seu computador ou contato com o Fort |
+| Comparação entre encartes com diferenças absurdas no topo ("Zero Açúcar R$ 1,57 x R$ 9,98") | **Corrigido**: grupo com mais de 2,5x de diferença sai da comparação; no app, preço de encarte que não confere com as lojas fica fora da média (v32) |
+| Teste dos impostos falhando desde a classificação por NCM (ninguém rodava os testes do app) | **Corrigido**, e novo workflow "Testes" roda Python e app a cada envio |
+| Super Veneza: 21 mil páginas lidas, só 5% ligadas a código | Aberto: o vínculo por nome acerta pouco nesse site (nomes curtos); melhoria contínua |
+| CEASA parado em 19/11 | Consequência do cancelamento; volta com a coleta |
