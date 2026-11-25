@@ -1,0 +1,68 @@
+================================================================================
+https://fortatacadista.com.br/robots.txt -> 200
+  Content-Type: text/plain; charset=utf-8
+  Server: cloudflare
+  CF-RAY: a602de3c4efd572d-ATL
+User-agent: *
+Disallow: /admin
+Disallow: /minha-conta
+Disallow: /account/*
+Disallow: /painel-do-cliente
+Disallow: /carrinho
+Disallow: /checkout
+Disallow: /login
+Disallow: /pedido
+Disallow: /busca
+Disallow: /search
+Disallow: /embed/
+Disallow: /lojas
+Disallow: /*?*
+Allow: /categorias
+Allow: /receitas
+Allow: /conteudos
+Allow: /produtos/
+Allow: /listas/
+Allow: /*.css$
+Allow: /*.js$
+
+Sitemap: https://fortatacadista.com.br/sitemap.xml
+
+================================================================================
+https://fortatacadista.com.br/ -> 403
+  Content-Type: text/html
+  Server: cloudflare
+  CF-RAY: a602de3c9d66add8-ATL
+<html>
+<head><title>403 Forbidden</title></head>
+<body>
+<center><h1>403 Forbidden</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+
+================================================================================
+https://fortatacadista.com.br/sitemap.xml -> 403
+  Content-Type: text/html
+  Server: cloudflare
+  CF-RAY: a602de3e6865b055-ATL
+<html>
+<head><title>403 Forbidden</title></head>
+<body>
+<center><h1>403 Forbidden</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+
+================================================================================
+https://fortatacadista.com.br/produtos/7897383/molho-de-tomate-stella-doro-tradicional-sache-300g -> 403
+  Content-Type: text/html
+  Server: cloudflare
+  CF-RAY: a602de402f9dd608-ATL
+<html>
+<head><title>403 Forbidden</title></head>
+<body>
+<center><h1>403 Forbidden</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+
