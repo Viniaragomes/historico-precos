@@ -1,8 +1,8 @@
-produtos no índice: 6201 | com preço: 6026
-lojas do menor preço: [('Fort Atacadista', 1985), ('Oba Hortifruti', 1910), ('Big Box', 1323), ('Carrefour Mercado (site)', 363), ('Atacadão', 195), ('Bellavia Jardim Botânico', 120), ('Super Veneza Cruzeiro', 57), ('Big Box 105 Sudoeste', 30)]
-encartes: ('2026-11-08T21:36:28+00:00', 34, 'encartes', 240, 'preços', 20, 'comparações')
-dicionário: {'fonte': 'Mapa de Preços do DF (Secretaria de Economia): notas fiscais entre empresas emitidas no DF, últimos 3 meses', 'evidencia': 'https://paineis.fazenda.df.gov.br/mapadeprecos/', 'atualizado_em': '2026-11-07T11:18:56+00:00', 'codigos': 141468}
-ceasa-df.json ('2026-11-09T00:49:54+00:00', 172, 'séries')
-conab.json ('2026-11-09T00:49:57+00:00', 21, 'séries')
-versão publicada: "v31"
+produtos no índice: 8595 | com preço: 8208
+lojas do menor preço: [('Oba Hortifruti', 2719), ('Fort Atacadista', 1946), ('Big Box', 1070), ('Bellavia Jardim Botânico', 655), ('Atacadão', 604), ('Carrefour Mercado (site)', 535), ('Super Veneza Cruzeiro', 267), ('Super Veneza Guará II', 188)]
+encartes: ('2026-11-25T20:51:51+00:00', 36, 'encartes', 364, 'preços', 20, 'comparações')
+dicionário: {'fonte': 'Mapa de Preços do DF (Secretaria de Economia): notas fiscais entre empresas emitidas no DF, últimos 3 meses', 'evidencia': 'https://paineis.fazenda.df.gov.br/mapadeprecos/', 'atualizado_em': '2026-11-21T12:59:08+00:00', 'codigos': 165516}
+ceasa-df.json ('2026-11-25T20:33:32+00:00', 172, 'séries')
+conab.json ('2026-11-25T20:33:43+00:00', 21, 'séries')
+versão publicada: "v32"
 Supabase ligado: False
