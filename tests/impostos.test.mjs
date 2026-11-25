@@ -12,7 +12,8 @@ test("toda regra e toda fonte citada existem", () => {
     assert.ok(tabela.regras.icms[c.icms], `${c.id}: icms ${c.icms}`);
     assert.ok(tabela.regras.pis_cofins[c.pis_cofins], `${c.id}: pis ${c.pis_cofins}`);
     assert.ok(tabela.regras.reforma.regimes[c.reforma], `${c.id}: reforma ${c.reforma}`);
-    assert.ok(c.palavras.length, `${c.id}: sem palavras`);
+    // achada pelo nome (palavras) ou pela classificação fiscal (NCM); "geral" é a regra de reserva
+    assert.ok(c.palavras.length || c.ncm?.length || c.id === "geral", `${c.id}: sem palavras nem NCM`);
   }
   const usadas = JSON.stringify(tabela.regras).match(/"fonte(?:_referencia)?":"([^"]+)"/g)
     .map((m) => m.split(":")[1].replaceAll('"', ""));
