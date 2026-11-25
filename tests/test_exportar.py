@@ -54,6 +54,20 @@ class TestExportar(unittest.TestCase):
         produto = json.loads((pasta / f"{EAN}.json").read_text(encoding="utf-8"))
         self.assertEqual(produto["marca"], "Marca")
 
+    def test_causas_param_quando_passa_do_limite(self):
+        class Causas:
+            chamadas = 0
+
+            def explicar(self, ean, pontos=None):
+                Causas.chamadas += 1
+                return None, []
+
+        exportar(self.banco, Path(self.dir.name) / "d", Causas(), minutos_causas=1, relogio=lambda: 0)
+        self.assertEqual(Causas.chamadas, 1)  # dentro do limite: explica
+        tempos = iter([0])
+        exportar(self.banco, Path(self.dir.name) / "d", Causas(), minutos_causas=1, relogio=lambda: next(tempos, 10_000))
+        self.assertEqual(Causas.chamadas, 1)  # passou do limite: não explica mais
+
 
 if __name__ == "__main__":
     unittest.main()

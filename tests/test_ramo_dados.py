@@ -60,3 +60,37 @@ class TestJuntar(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestComprimir(unittest.TestCase):
+    def test_comprime_banco_bom(self):
+        import gzip
+        tmp = tempfile.mkdtemp()
+        db, gz = os.path.join(tmp, "p.db"), os.path.join(tmp, "p.db.gz")
+        con = sqlite3.connect(db)
+        con.execute("CREATE TABLE t (x)")
+        con.executemany("INSERT INTO t VALUES (?)", [(i,) for i in range(100)])
+        con.commit()
+        con.close()
+        self.assertGreater(ramo_dados.comprimir(db, gz), 0)
+        volta = os.path.join(tmp, "volta.db")
+        with open(volta, "wb") as f:
+            f.write(gzip.decompress(open(gz, "rb").read()))
+        self.assertEqual(sqlite3.connect(volta).execute("SELECT count(*) FROM t").fetchone()[0], 100)
+        self.assertFalse(os.path.exists(gz + ".copia.db"))
+
+    def test_recusa_banco_corrompido(self):
+        tmp = tempfile.mkdtemp()
+        db, gz = os.path.join(tmp, "p.db"), os.path.join(tmp, "p.db.gz")
+        con = sqlite3.connect(db)
+        con.execute("CREATE TABLE t (x TEXT)")
+        con.execute("CREATE INDEX i ON t (x)")
+        con.executemany("INSERT INTO t VALUES (?)", [(str(i) * 50,) for i in range(2000)])
+        con.commit()
+        con.close()
+        with open(db, "r+b") as f:  # estraga páginas do meio do arquivo
+            f.seek(4096 * 5)
+            f.write(b"\xff" * 4096 * 3)
+        with self.assertRaises(SystemExit):
+            ramo_dados.comprimir(db, gz)
+        self.assertFalse(os.path.exists(gz))

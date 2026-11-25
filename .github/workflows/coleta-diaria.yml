@@ -198,15 +198,16 @@ jobs:
       - name: Juntar as partes da coleta
         run: |
           ls -R partes 2>/dev/null | head -20 || true
-          if [ -s partes/banco-base/precos.db ]; then
+          if [ -s partes/banco-base/precos.db ] && python -c "import sys; from historico_precos.ramo_dados import integro; sys.exit(not integro('partes/banco-base/precos.db'))"; then
             cp partes/banco-base/precos.db precos.db
           else
-            echo "A parte base não terminou: parte do banco do ramo dados."
+            echo "A parte base não terminou (ou veio com defeito): parte do banco do ramo dados."
             python -m historico_precos banco recuperar
           fi
           for g in 0 1 2 3; do
             if [ -s "partes/banco-lojas-$g/precos.db" ]; then
-              python -m historico_precos banco juntar --de "partes/banco-lojas-$g/precos.db" --grupo "$g" --grupos 4
+              python -m historico_precos banco juntar --de "partes/banco-lojas-$g/precos.db" --grupo "$g" --grupos 4 \
+                || echo "Parte $g das lojas não entrou: fica a leitura anterior dessas lojas."
             else
               echo "Parte $g das lojas não terminou: fica a leitura anterior dessas lojas."
             fi
@@ -218,7 +219,13 @@ jobs:
         run: python -m historico_precos qualidade | tail -50
 
       - name: Gerar os dados do app
-        run: python -m historico_precos exportar --saida site/dados
+        # `timeout` mata o processo de verdade: em 20 a 25/11 a exportação travou em sites lentos (IBGE), o job foi
+        # cancelado e o Python órfão seguiu gravando no banco enquanto ele era guardado (saiu corrompido).
+        # Plano B: sem as explicações de causa, que são a única parte que depende de outros sites.
+        timeout-minutes: 50
+        run: |
+          timeout -k 30 30m python -m historico_precos exportar --saida site/dados \
+            || timeout -k 30 10m python -m historico_precos exportar --saida site/dados --sem-causas
 
       - name: CEASA-DF, preço no atacado (R$/kg do dia)
         continue-on-error: true

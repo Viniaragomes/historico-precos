@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import logging
+import time
 from dataclasses import asdict
 from datetime import date
 from pathlib import Path
@@ -115,8 +116,15 @@ def dados_do_produto(banco: Banco, ean: str, causas: AgenteCausas | None, hoje: 
     }
 
 
-def exportar(banco: Banco, pasta: Path, causas: AgenteCausas | None = None, dicionario=None) -> int:
+# tempo máximo gasto explicando causas (IBGE, Banco Central): com esses sites lentos ou fora do ar, a exportação
+# chegou a passar de 90 min e foi cancelada no meio. Passado o limite, o resto sai sem as explicações.
+MINUTOS_CAUSAS = 15
+
+
+def exportar(banco: Banco, pasta: Path, causas: AgenteCausas | None = None, dicionario=None,
+             minutos_causas: float = MINUTOS_CAUSAS, relogio=time.monotonic) -> int:
     pasta.mkdir(parents=True, exist_ok=True)
+    fim_causas = relogio() + minutos_causas * 60
     custos = custos_do_dicionario(dicionario)
     eans = [l[0] for l in banco.con.execute("SELECT DISTINCT ean FROM precos ORDER BY ean")]
     try:
@@ -125,6 +133,10 @@ def exportar(banco: Banco, pasta: Path, causas: AgenteCausas | None = None, dici
         pass
     indice = []
     for ean in eans:
+        if causas is not None and relogio() > fim_causas:
+            log.warning("Limite de %s min para as causas atingido: o resto sai sem explicação.", minutos_causas)
+            print(f"Limite de {minutos_causas:g} min para as causas atingido: o resto sai sem explicação.")
+            causas = None
         dado = dados_do_produto(banco, ean, causas, custo=custos.get(ean))
         if dado is None:
             continue
