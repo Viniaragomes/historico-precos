@@ -3,7 +3,7 @@ import { calcular, categoria, categoriaGeral, categoriaPorNcm } from "./impostos
 import { confiancaPreco, nivelPorPontos, precoSugerido, utilidade, chavePreco, chaveCausa, PONTOS, NIVEIS as NIVEIS_COMUNIDADE } from "./confianca.js";
 import { criarComunidade, consentimento, ErroComunidade, TIPOS_REPORTE } from "./comunidade.js";
 
-const VERSAO_APP = "v31"; // igual à VERSAO do sw.js
+const VERSAO_APP = "v32"; // igual à VERSAO do sw.js
 
 const conteudo = document.getElementById("conteudo");
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
@@ -903,6 +903,16 @@ function painelDePrecos({ ean, p, nomes, referencia, votos = [], atualizarVotos 
     estado.encarte = [...porCodigo, ...porNome]
       .map(({ e, t, precisao }) => ({ lugar: e.mercado, tipo: "encarte", preco: t.p, validade: e.validade_fim, data: e.publicado,
         link: e.pdf || e.post, precisao, variantes: t.e?.length || 0, detalhe: `lido no encarte: “${t.t}”`, unidade: unidadeVenda(t.t) }));
+    // preço lido no encarte muito longe do que as lojas cobram (menos de 40% ou mais de 2,5 vezes a mediana dos sites,
+    // mesma unidade de venda): quase sempre leitura errada; fica o anúncio, sem o preço entrar na média
+    const mediana = (xs) => { const o = [...xs].sort((a, b) => a - b); const m = o.length >> 1; return o.length % 2 ? o[m] : (o[m - 1] + o[m]) / 2; };
+    estado.encarte = estado.encarte.map((l) => {
+      const ref = estado.site.filter((x) => x.preco != null && (x.unidade || "un") === (l.unidade || "un")).map((x) => x.preco);
+      if (l.preco == null || !ref.length) return l;
+      const m = mediana(ref);
+      if (l.preco >= m * 0.4 && l.preco <= m * 2.5) return l;
+      return { ...l, preco: null, detalhe: `${l.detalhe} · o preço lido (${brl.format(l.preco)}) não confere com as lojas; confira no encarte` };
+    });
     // mercado com preço lido no encarte não precisa repetir a linha "só o nome foi lido"
     const comPrecoLido = new Set(estado.encarte.filter((l) => l.preco != null).map((l) => l.lugar));
     estado.encarte = estado.encarte.filter((l) => l.preco != null || !comPrecoLido.has(l.lugar));

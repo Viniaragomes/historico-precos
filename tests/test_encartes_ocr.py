@@ -280,6 +280,14 @@ class TestUnidadeDeVenda(unittest.TestCase):
         self.assertEqual([o["mercado"] for o in comp["ofertas"]], ["A", "C"])
         self.assertEqual(encartes_ocr.unidade_venda("Arroz Camil 5kg"), "un")
 
+    def test_diferenca_absurda_nao_vira_comparacao(self):
+        T, E = encartes_ocr.Trecho, encartes_ocr.EncarteLido
+        a = E("A", "https://a", "2026-11-08", None, [], trechos=[T("Refrigerante Coca-Cola Zero 2L", 1.57)])
+        b = E("B", "https://b", "2026-11-08", None, [], trechos=[T("Refrigerante Coca-Cola Zero 2L", 9.98)])
+        self.assertEqual(encartes_ocr.comparar_mercados([a, b]), [])
+        b.trechos[0].preco = 2.99
+        self.assertEqual(len(encartes_ocr.comparar_mercados([a, b])), 1)
+
 
 class TestRede(unittest.TestCase):
     def test_mesma_rede_com_outro_nome(self):

@@ -538,6 +538,9 @@ def _mesmo_produto(a: tuple, b: tuple) -> bool:
     return j >= 0.6 or (comuns >= 2 and comuns == min(len(tka), len(tkb)))
 
 
+FATOR_ENTRE_ENCARTES = 2.5
+
+
 def comparar_mercados(encartes: list[EncarteLido]) -> list[dict]:
     """Agrupa o mesmo produto anunciado em encartes de mercados diferentes e põe os preços lado a lado.
     Fica só o que aparece em 2 ou mais mercados; de cada mercado, o menor preço. Mais diferença primeiro. Mercado em que
@@ -577,6 +580,10 @@ def comparar_mercados(encartes: list[EncarteLido]) -> list[dict]:
         # nome do grupo: o texto vindo de PDF (lido sem erro) ou o mais curto
         nome = min(com_preco, key=lambda o: (not o["pdf"], len(o["t"])))["t"]
         barato, caro = com_preco[0]["p"], com_preco[-1]["p"]
+        if barato and caro / barato > FATOR_ENTRE_ENCARTES:
+            # "Zero Açúcar R$ 1,57 x R$ 9,98": quase sempre leitura errada ou produtos diferentes com nome parecido;
+            # como a lista mostra a maior diferença primeiro, esses erros iam justamente para o topo
+            continue
         saida.append({"produto": nome, "ofertas": ofertas, "eans": sorted(g["eans"])[:30], "diferenca": round(caro - barato, 2),
                       "diferenca_pct": round((caro / barato - 1) * 100, 1) if barato else None})
     return sorted(saida, key=lambda c: -(c["diferenca_pct"] or 0))
